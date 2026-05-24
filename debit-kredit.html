@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Debit & Kredit</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F4F1EC; --dark: #1A1A2E;
+    --debit: #E8572A; --kredit: #2E86AB;
+    --green: #27AE60; --purple: #8E44AD;
+    --yellow: #F4C542; --pink: #E91E8C;
+    --radius: 20px; --radius-sm: 12px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--dark); }
+
+  .hero {
+    background: var(--dark); padding: 60px 32px 52px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; width: 300px; height: 300px;
+    background: var(--debit); border-radius: 50%; opacity: 0.08;
+    top: -80px; right: -60px;
+  }
+  .hero::after {
+    content: ''; position: absolute; width: 200px; height: 200px;
+    background: var(--kredit); border-radius: 50%; opacity: 0.08;
+    bottom: -60px; left: 80px;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(232,87,42,0.15); border: 1px solid rgba(232,87,42,0.3);
+    color: #F0A080; font-size: 11px; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 6px 14px; border-radius: 99px; margin-bottom: 24px; position: relative;
+  }
+  .hero h1 {
+    font-family: 'Syne', sans-serif; font-size: 42px; font-weight: 800;
+    color: #fff; line-height: 1.1; margin-bottom: 16px; position: relative;
+  }
+  .hero h1 .d { color: var(--debit); }
+  .hero h1 .k { color: #60A5FA; }
+  .hero p { color: rgba(255,255,255,0.55); font-size: 15px; line-height: 1.7; max-width: 500px; position: relative; }
+
+  .dk-hero {
+    display: flex; gap: 16px; margin-top: 32px; flex-wrap: wrap; position: relative;
+  }
+  .dk-box {
+    flex: 1; min-width: 180px; border-radius: var(--radius-sm);
+    padding: 20px 24px; text-align: center;
+  }
+  .dk-box.d { background: var(--debit); }
+  .dk-box.k { background: var(--kredit); }
+  .dk-box-label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-bottom: 6px; }
+  .dk-box-main { font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800; color: #fff; margin-bottom: 4px; }
+  .dk-box-sub { font-size: 13px; color: rgba(255,255,255,0.7); }
+  .dk-eq { display: flex; align-items: center; font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: rgba(255,255,255,0.3); }
+
+  .content { max-width: 900px; margin: 0 auto; padding: 44px 24px 72px; }
+
+  .sec-label { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; margin-top: 44px; }
+  .sec-label-line { flex: 1; height: 2px; background: var(--dark); opacity: 0.08; border-radius: 2px; }
+  .sec-label-text { font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #888; white-space: nowrap; }
+
+  /* SALDO NORMAL TABLE */
+  .saldo-table {
+    width: 100%; border-collapse: collapse; background: white;
+    border-radius: var(--radius); overflow: hidden; border: 2px solid #EEE;
+  }
+  .saldo-table th {
+    background: var(--dark); color: rgba(255,255,255,0.7);
+    font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; padding: 14px 20px; text-align: left;
+  }
+  .saldo-table td { padding: 14px 20px; font-size: 14px; border-bottom: 1px solid #F5F5F5; vertical-align: middle; }
+  .saldo-table tr:last-child td { border-bottom: none; }
+  .saldo-table tr:hover td { background: #FAFAF8; }
+  .saldo-table td:first-child { font-weight: 600; }
+
+  .chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 13px; font-weight: 700; padding: 6px 14px; border-radius: 99px;
+  }
+  .chip.debit { background: rgba(232,87,42,0.12); color: var(--debit); }
+  .chip.kredit { background: rgba(46,134,171,0.12); color: var(--kredit); }
+
+  .row-stripe { background: #FAFAFA; }
+
+  /* T ACCOUNT */
+  .t-account-wrap { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+  .t-account {
+    background: white; border-radius: var(--radius);
+    border: 2px solid #EEE; overflow: hidden;
+  }
+  .t-account-header {
+    padding: 14px 20px; font-family: 'Syne', sans-serif;
+    font-size: 15px; font-weight: 700; text-align: center; color: #fff;
+  }
+  .t-account-body { display: grid; grid-template-columns: 1fr 1fr; }
+  .t-side { padding: 16px; }
+  .t-side.left { border-right: 2px solid #F0F0F0; }
+  .t-side-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px; }
+  .t-side.left .t-side-label { color: var(--debit); }
+  .t-side.right .t-side-label { color: var(--kredit); }
+  .t-row { font-size: 13px; color: #666; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+  .t-arrow { font-size: 14px; }
+  .t-arrow.up { color: var(--green); }
+  .t-arrow.down { color: var(--debit); }
+
+  /* CONTOH TRANSAKSI */
+  .transaksi-list { display: flex; flex-direction: column; gap: 16px; }
+  .transaksi-card {
+    background: white; border-radius: var(--radius);
+    border: 2px solid #EEE; overflow: hidden;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .transaksi-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+  .transaksi-header {
+    padding: 16px 20px; display: flex; align-items: center; gap: 12px;
+    border-bottom: 1px solid #F5F5F5;
+  }
+  .transaksi-num {
+    width: 32px; height: 32px; border-radius: 99px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: #fff;
+    flex-shrink: 0;
+  }
+  .transaksi-title { font-size: 14px; font-weight: 600; flex: 1; }
+  .transaksi-body { padding: 16px 20px; }
+  .jurnal-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .jurnal-row:last-child { margin-bottom: 0; }
+  .jurnal-akun { font-size: 13.5px; flex: 1; }
+  .jurnal-akun.kredit-akun { padding-left: 24px; color: #666; }
+  .jurnal-amount { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; }
+  .jurnal-amount.d { color: var(--debit); }
+  .jurnal-amount.k { color: var(--kredit); }
+  .alasan { margin-top: 12px; padding: 10px 14px; background: #F8F8F6; border-radius: 8px; font-size: 12.5px; color: #666; line-height: 1.6; }
+  .alasan strong { color: var(--dark); }
+
+  /* RUMUS BOX */
+  .rumus-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 600px) { .rumus-grid { grid-template-columns: 1fr; } .dk-eq { display: none; } }
+  .rumus-card {
+    border-radius: var(--radius); padding: 28px; text-align: center;
+  }
+  .rumus-card.d { background: rgba(232,87,42,0.08); border: 2px solid rgba(232,87,42,0.2); }
+  .rumus-card.k { background: rgba(46,134,171,0.08); border: 2px solid rgba(46,134,171,0.2); }
+  .rumus-card-title { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; margin-bottom: 12px; }
+  .rumus-card.d .rumus-card-title { color: var(--debit); }
+  .rumus-card.k .rumus-card-title { color: var(--kredit); }
+  .rumus-items { display: flex; flex-direction: column; gap: 8px; text-align: left; }
+  .rumus-item { display: flex; align-items: center; gap: 10px; font-size: 13.5px; }
+  .rumus-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .rumus-card.d .rumus-dot { background: var(--debit); }
+  .rumus-card.k .rumus-dot { background: var(--kredit); }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">Pengantar Akuntansi</div>
+  <h1><span class="d">Debit</span> &<br><span class="k">Kredit</span></h1>
+  <p>Lupakan dulu pengertian debit/kredit di perbankan. Di akuntansi, artinya beda — dan lebih simpel dari yang kamu kira!</p>
+  <div class="dk-hero">
+    <div class="dk-box d">
+      <div class="dk-box-label">Debit</div>
+      <div class="dk-box-main">KIRI</div>
+      <div class="dk-box-sub">Sisi kiri akun T</div>
+    </div>
+    <div class="dk-eq">=</div>
+    <div class="dk-box k">
+      <div class="dk-box-label">Kredit</div>
+      <div class="dk-box-main">KANAN</div>
+      <div class="dk-box-sub">Sisi kanan akun T</div>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- SALDO NORMAL -->
+  <div class="sec-label">
+    <div class="sec-label-line"></div>
+    <div class="sec-label-text">Saldo Normal Tiap Akun</div>
+    <div class="sec-label-line"></div>
+  </div>
+
+  <table class="saldo-table">
+    <thead>
+      <tr>
+        <th>Akun</th>
+        <th>Saldo Normal</th>
+        <th>Bertambah</th>
+        <th>Berkurang</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>🏦 Aset</td>
+        <td><span class="chip debit">Debit</span></td>
+        <td><span class="chip debit">Debit</span></td>
+        <td><span class="chip kredit">Kredit</span></td>
+      </tr>
+      <tr class="row-stripe">
+        <td>💳 Liabilitas</td>
+        <td><span class="chip kredit">Kredit</span></td>
+        <td><span class="chip kredit">Kredit</span></td>
+        <td><span class="chip debit">Debit</span></td>
+      </tr>
+      <tr>
+        <td>👑 Ekuitas/Modal</td>
+        <td><span class="chip kredit">Kredit</span></td>
+        <td><span class="chip kredit">Kredit</span></td>
+        <td><span class="chip debit">Debit</span></td>
+      </tr>
+      <tr class="row-stripe">
+        <td>💰 Pendapatan</td>
+        <td><span class="chip kredit">Kredit</span></td>
+        <td><span class="chip kredit">Kredit</span></td>
+        <td><span class="chip debit">Debit</span></td>
+      </tr>
+      <tr>
+        <td>📉 Beban</td>
+        <td><span class="chip debit">Debit</span></td>
+        <td><span class="chip debit">Debit</span></td>
+        <td><span class="chip kredit">Kredit</span></td>
+      </tr>
+      <tr class="row-stripe">
+        <td>🏧 Prive</td>
+        <td><span class="chip debit">Debit</span></td>
+        <td><span class="chip debit">Debit</span></td>
+        <td><span class="chip kredit">Kredit</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- RUMUS HAFALAN -->
+  <div class="sec-label">
+    <div class="sec-label-line"></div>
+    <div class="sec-label-text">Cara Gampang Hafal</div>
+    <div class="sec-label-line"></div>
+  </div>
+
+  <div class="rumus-grid">
+    <div class="rumus-card d">
+      <div class="rumus-card-title">DEBIT</div>
+      <div class="rumus-items">
+        <div class="rumus-item"><div class="rumus-dot"></div><div><strong>Aset</strong> bertambah</div></div>
+        <div class="rumus-item"><div class="rumus-dot"></div><div><strong>Beban</strong> bertambah</div></div>
+        <div class="rumus-item"><div class="rumus-dot"></div><div><strong>Prive</strong> bertambah</div></div>
+        <div class="rumus-item"><div class="rumus-dot"></div><div>Liabilitas berkurang</div></div>
+        <div class="rumus-item"><div class="rumus-dot"></div><div>Ekuitas berkurang</div></div>
+        <div class="rumus-item"><div class="rumus-dot"></div><div>Pendapatan berkurang</div></div>
+      </div>
+    </div>
+    <div class="rumus-card k">
+      <div class="rumus-card-title">KREDIT</div>
+      <div class="rumus-items">
+        <div class="rumus-item"><div class="rumus-dot"></div><div><strong>Liabilitas</strong> bertambah</div></div>
+        <div class="rumus-item"><div class="rumus-dot"></div><div><strong>Ekuitas</strong> bertambah</div></div>
+        <div class="rumus-item"><div class="rumus-dot"></div><div><strong>Pendapatan</strong> bertambah</div></div>
+        <div class="rumus-item"><div class="rumus-dot"></div><div>Aset berkurang</div></div>
+        <div class="rumus-item"><div class="rumus-dot"></div><div>Beban berkurang</div></div>
+        <div class="rumus-item"><div class="rumus-dot"></div><div>Prive berkurang</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- T ACCOUNT -->
+  <div class="sec-label">
+    <div class="sec-label-line"></div>
+    <div class="sec-label-text">Akun T — Visualisasi</div>
+    <div class="sec-label-line"></div>
+  </div>
+
+  <div class="t-account-wrap">
+    <div class="t-account">
+      <div class="t-account-header" style="background:var(--debit);">🏦 KAS (Aset)</div>
+      <div class="t-account-body">
+        <div class="t-side left">
+          <div class="t-side-label">Debit</div>
+          <div class="t-row"><span class="t-arrow up">↑</span> Bertambah</div>
+          <div class="t-row" style="color:#aaa;font-size:12px;">→ saldo normal di sini</div>
+        </div>
+        <div class="t-side right">
+          <div class="t-side-label">Kredit</div>
+          <div class="t-row"><span class="t-arrow down">↓</span> Berkurang</div>
+        </div>
+      </div>
+    </div>
+    <div class="t-account">
+      <div class="t-account-header" style="background:var(--kredit);">💳 UTANG USAHA (Liabilitas)</div>
+      <div class="t-account-body">
+        <div class="t-side left">
+          <div class="t-side-label">Debit</div>
+          <div class="t-row"><span class="t-arrow down">↓</span> Berkurang</div>
+        </div>
+        <div class="t-side right">
+          <div class="t-side-label">Kredit</div>
+          <div class="t-row"><span class="t-arrow up">↑</span> Bertambah</div>
+          <div class="t-row" style="color:#aaa;font-size:12px;">→ saldo normal di sini</div>
+        </div>
+      </div>
+    </div>
+    <div class="t-account">
+      <div class="t-account-header" style="background:var(--purple);">📉 BEBAN GAJI</div>
+      <div class="t-account-body">
+        <div class="t-side left">
+          <div class="t-side-label">Debit</div>
+          <div class="t-row"><span class="t-arrow up">↑</span> Bertambah</div>
+          <div class="t-row" style="color:#aaa;font-size:12px;">→ saldo normal di sini</div>
+        </div>
+        <div class="t-side right">
+          <div class="t-side-label">Kredit</div>
+          <div class="t-row"><span class="t-arrow down">↓</span> Berkurang</div>
+        </div>
+      </div>
+    </div>
+    <div class="t-account">
+      <div class="t-account-header" style="background:var(--green);">💰 PENDAPATAN JASA</div>
+      <div class="t-account-body">
+        <div class="t-side left">
+          <div class="t-side-label">Debit</div>
+          <div class="t-row"><span class="t-arrow down">↓</span> Berkurang</div>
+        </div>
+        <div class="t-side right">
+          <div class="t-side-label">Kredit</div>
+          <div class="t-row"><span class="t-arrow up">↑</span> Bertambah</div>
+          <div class="t-row" style="color:#aaa;font-size:12px;">→ saldo normal di sini</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTOH TRANSAKSI -->
+  <div class="sec-label">
+    <div class="sec-label-line"></div>
+    <div class="sec-label-text">Contoh Transaksi</div>
+    <div class="sec-label-line"></div>
+  </div>
+
+  <div class="transaksi-list">
+
+    <div class="transaksi-card">
+      <div class="transaksi-header">
+        <div class="transaksi-num" style="background:var(--debit);">1</div>
+        <div class="transaksi-title">Terima pendapatan jasa Rp2 juta tunai</div>
+      </div>
+      <div class="transaksi-body">
+        <div class="jurnal-row">
+          <span class="chip debit" style="font-size:11px;padding:4px 10px;">D</span>
+          <div class="jurnal-akun">Kas</div>
+          <div class="jurnal-amount d">Rp2.000.000</div>
+        </div>
+        <div class="jurnal-row">
+          <span class="chip kredit" style="font-size:11px;padding:4px 10px;">K</span>
+          <div class="jurnal-akun kredit-akun">Pendapatan Jasa</div>
+          <div class="jurnal-amount k">Rp2.000.000</div>
+        </div>
+        <div class="alasan">💡 <strong>Kas</strong> = Aset, nambah → <strong>Debit</strong> &nbsp;|&nbsp; <strong>Pendapatan</strong> nambah → <strong>Kredit</strong></div>
+      </div>
+    </div>
+
+    <div class="transaksi-card">
+      <div class="transaksi-header">
+        <div class="transaksi-num" style="background:var(--kredit);">2</div>
+        <div class="transaksi-title">Bayar gaji karyawan Rp1 juta</div>
+      </div>
+      <div class="transaksi-body">
+        <div class="jurnal-row">
+          <span class="chip debit" style="font-size:11px;padding:4px 10px;">D</span>
+          <div class="jurnal-akun">Beban Gaji</div>
+          <div class="jurnal-amount d">Rp1.000.000</div>
+        </div>
+        <div class="jurnal-row">
+          <span class="chip kredit" style="font-size:11px;padding:4px 10px;">K</span>
+          <div class="jurnal-akun kredit-akun">Kas</div>
+          <div class="jurnal-amount k">Rp1.000.000</div>
+        </div>
+        <div class="alasan">💡 <strong>Beban Gaji</strong> nambah → <strong>Debit</strong> &nbsp;|&nbsp; <strong>Kas</strong> = Aset, berkurang → <strong>Kredit</strong></div>
+      </div>
+    </div>
+
+    <div class="transaksi-card">
+      <div class="transaksi-header">
+        <div class="transaksi-num" style="background:var(--purple);">3</div>
+        <div class="transaksi-title">Beli perlengkapan Rp500 ribu tunai</div>
+      </div>
+      <div class="transaksi-body">
+        <div class="jurnal-row">
+          <span class="chip debit" style="font-size:11px;padding:4px 10px;">D</span>
+          <div class="jurnal-akun">Perlengkapan</div>
+          <div class="jurnal-amount d">Rp500.000</div>
+        </div>
+        <div class="jurnal-row">
+          <span class="chip kredit" style="font-size:11px;padding:4px 10px;">K</span>
+          <div class="jurnal-akun kredit-akun">Kas</div>
+          <div class="jurnal-amount k">Rp500.000</div>
+        </div>
+        <div class="alasan">💡 <strong>Perlengkapan</strong> = Aset, nambah → <strong>Debit</strong> &nbsp;|&nbsp; <strong>Kas</strong> = Aset, berkurang → <strong>Kredit</strong></div>
+      </div>
+    </div>
+
+    <div class="transaksi-card">
+      <div class="transaksi-header">
+        <div class="transaksi-num" style="background:var(--green);">4</div>
+        <div class="transaksi-title">Pinjam uang dari bank Rp5 juta</div>
+      </div>
+      <div class="transaksi-body">
+        <div class="jurnal-row">
+          <span class="chip debit" style="font-size:11px;padding:4px 10px;">D</span>
+          <div class="jurnal-akun">Kas</div>
+          <div class="jurnal-amount d">Rp5.000.000</div>
+        </div>
+        <div class="jurnal-row">
+          <span class="chip kredit" style="font-size:11px;padding:4px 10px;">K</span>
+          <div class="jurnal-akun kredit-akun">Utang Bank</div>
+          <div class="jurnal-amount k">Rp5.000.000</div>
+        </div>
+        <div class="alasan">💡 <strong>Kas</strong> = Aset, nambah → <strong>Debit</strong> &nbsp;|&nbsp; <strong>Utang Bank</strong> = Liabilitas, nambah → <strong>Kredit</strong></div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+</body>
+</html>

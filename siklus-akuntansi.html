@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Siklus Akuntansi Lengkap — Bersih Jaya</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,600;0,700;0,900;1,300;1,700&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0F0F13;
+  --surface: #16161C;
+  --surface2: #1E1E27;
+  --border: rgba(255,255,255,0.07);
+  --text: #E8E6F0;
+  --muted: #7B7A8E;
+  --accent: #F5A623;
+  --accent2: #7C6AF5;
+  --accent3: #3ECFB2;
+  --accent4: #F56B6B;
+  --accent5: #6BF5A0;
+  --radius: 16px;
+  --radius-sm: 10px;
+  --sidebar-w: 260px;
+  --mono: 'JetBrains Mono', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: var(--sidebar-w);
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  position: fixed; top: 0; left: 0; bottom: 0;
+  overflow-y: auto; z-index: 100;
+  display: flex; flex-direction: column;
+}
+.sidebar::-webkit-scrollbar { width: 4px; }
+.sidebar::-webkit-scrollbar-track { background: transparent; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+.sidebar-logo {
+  padding: 24px 20px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.sidebar-logo-title {
+  font-family: 'Fraunces', serif;
+  font-size: 18px; font-weight: 700; color: var(--accent);
+  line-height: 1.2; margin-bottom: 4px;
+}
+.sidebar-logo-sub {
+  font-size: 11px; color: var(--muted);
+  letter-spacing: 0.06em; text-transform: uppercase;
+}
+
+.sidebar-nav { padding: 16px 12px; flex: 1; }
+.nav-section-label {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--muted);
+  padding: 12px 8px 6px; display: block;
+}
+.nav-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 10px; border-radius: 8px;
+  text-decoration: none; color: var(--muted);
+  font-size: 13px; font-weight: 500;
+  transition: all 0.15s; margin-bottom: 2px;
+  cursor: pointer;
+}
+.nav-item:hover { background: var(--surface2); color: var(--text); }
+.nav-item.active { background: rgba(245,166,35,0.12); color: var(--accent); }
+.nav-num {
+  width: 22px; height: 22px; border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 700; flex-shrink: 0;
+  background: var(--surface2); color: var(--muted);
+  font-family: var(--mono);
+}
+.nav-item.active .nav-num { background: rgba(245,166,35,0.2); color: var(--accent); }
+
+/* MAIN */
+.main {
+  margin-left: var(--sidebar-w);
+  flex: 1; min-height: 100vh;
+}
+
+/* HERO */
+.hero {
+  padding: 80px 60px 64px;
+  background: linear-gradient(135deg, #0F0F13 0%, #16101F 50%, #0F1318 100%);
+  border-bottom: 1px solid var(--border);
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 70% 30%, rgba(124,106,245,0.15) 0%, transparent 60%),
+    radial-gradient(ellipse at 20% 80%, rgba(62,207,178,0.1) 0%, transparent 50%);
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 11px; color: var(--accent);
+  letter-spacing: 0.08em; text-transform: uppercase;
+  margin-bottom: 24px; position: relative;
+}
+.hero-eyebrow::before {
+  content: ''; width: 6px; height: 6px;
+  background: var(--accent); border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+.hero h1 {
+  font-family: 'Fraunces', serif;
+  font-size: 56px; font-weight: 900; line-height: 1.05;
+  color: var(--text); margin-bottom: 20px; position: relative;
+}
+.hero h1 em { color: var(--accent); font-style: italic; }
+.hero p {
+  font-size: 16px; color: var(--muted); line-height: 1.7;
+  max-width: 560px; position: relative;
+}
+
+.hero-steps {
+  display: flex; gap: 8px; margin-top: 40px;
+  flex-wrap: wrap; position: relative;
+}
+.hero-step {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 99px; padding: 6px 14px 6px 8px;
+  font-size: 12px; font-weight: 500; color: var(--muted);
+}
+.hero-step-num {
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--accent); color: var(--bg);
+  font-family: var(--mono); font-size: 10px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.hero-step-arrow { color: var(--border); font-size: 16px; }
+
+/* CONTENT */
+.content { max-width: 900px; margin: 0 auto; padding: 0 60px 100px; }
+
+/* SECTION */
+.section {
+  padding-top: 72px;
+  border-top: 1px solid var(--border);
+  margin-top: 72px;
+}
+.section:first-child { border-top: none; margin-top: 0; padding-top: 64px; }
+
+.section-header { margin-bottom: 36px; }
+.section-num {
+  font-family: var(--mono); font-size: 11px; color: var(--accent);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+}
+.section-num::after {
+  content: ''; flex: 1; max-width: 40px; height: 1px; background: var(--accent); opacity: 0.3;
+}
+.section-title {
+  font-family: 'Fraunces', serif;
+  font-size: 36px; font-weight: 700; line-height: 1.15;
+  color: var(--text); margin-bottom: 12px;
+}
+.section-desc { font-size: 15px; color: var(--muted); line-height: 1.7; }
+
+/* CARDS */
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 24px 0; }
+.cards-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin: 24px 0; }
+
+.card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 24px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover { border-color: rgba(255,255,255,0.15); transform: translateY(-2px); }
+.card-icon { font-size: 28px; margin-bottom: 14px; }
+.card-label {
+  font-family: var(--mono); font-size: 10px; color: var(--accent);
+  letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px;
+}
+.card-title { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 600; margin-bottom: 10px; color: var(--text); }
+.card-body { font-size: 13.5px; color: var(--muted); line-height: 1.7; }
+
+/* ACCENT COLORS */
+.c-orange { border-color: rgba(245,166,35,0.2); }
+.c-orange:hover { border-color: rgba(245,166,35,0.4); }
+.c-orange .card-label { color: var(--accent); }
+
+.c-purple { border-color: rgba(124,106,245,0.2); }
+.c-purple:hover { border-color: rgba(124,106,245,0.4); }
+.c-purple .card-label { color: var(--accent2); }
+
+.c-teal { border-color: rgba(62,207,178,0.2); }
+.c-teal:hover { border-color: rgba(62,207,178,0.4); }
+.c-teal .card-label { color: var(--accent3); }
+
+.c-red { border-color: rgba(245,107,107,0.2); }
+.c-red:hover { border-color: rgba(245,107,107,0.4); }
+.c-red .card-label { color: var(--accent4); }
+
+.c-green { border-color: rgba(107,245,160,0.2); }
+.c-green:hover { border-color: rgba(107,245,160,0.4); }
+.c-green .card-label { color: var(--accent5); }
+
+/* CALLOUT */
+.callout {
+  border-radius: var(--radius-sm); padding: 16px 20px;
+  margin: 16px 0; display: flex; gap: 12px; align-items: flex-start;
+  font-size: 13.5px; line-height: 1.7;
+}
+.callout-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+.callout.info { background: rgba(124,106,245,0.08); border: 1px solid rgba(124,106,245,0.2); color: #A89DF7; }
+.callout.warning { background: rgba(245,166,35,0.08); border: 1px solid rgba(245,166,35,0.2); color: #F5C87A; }
+.callout.success { background: rgba(62,207,178,0.08); border: 1px solid rgba(62,207,178,0.2); color: #6FDFC9; }
+.callout.danger { background: rgba(245,107,107,0.08); border: 1px solid rgba(245,107,107,0.2); color: #F79090; }
+
+/* TABLE */
+.table-wrap {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin: 20px 0;
+}
+table { width: 100%; border-collapse: collapse; }
+thead th {
+  background: var(--surface2); padding: 12px 16px;
+  font-family: var(--mono); font-size: 11px; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted); text-align: left; border-bottom: 1px solid var(--border);
+}
+tbody td {
+  padding: 11px 16px; font-size: 13px; color: var(--text);
+  border-bottom: 1px solid var(--border); vertical-align: middle;
+}
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover td { background: rgba(255,255,255,0.02); }
+.td-mono { font-family: var(--mono); font-size: 12px; }
+.td-muted { color: var(--muted); }
+.td-bold { font-weight: 600; }
+.td-total td { background: var(--surface2); font-weight: 700; border-top: 1px solid var(--border); }
+
+/* BADGE */
+.badge {
+  display: inline-flex; align-items: center;
+  font-family: var(--mono); font-size: 11px; font-weight: 600;
+  padding: 3px 10px; border-radius: 99px;
+}
+.badge-d { background: rgba(245,107,107,0.15); color: var(--accent4); }
+.badge-k { background: rgba(62,207,178,0.15); color: var(--accent3); }
+.badge-ok { background: rgba(107,245,160,0.15); color: var(--accent5); }
+.badge-no { background: rgba(245,107,107,0.15); color: var(--accent4); }
+
+/* JURNAL ENTRY */
+.jurnal-box {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); overflow: hidden; margin: 12px 0;
+}
+.jurnal-header {
+  background: var(--surface2); padding: 8px 16px;
+  font-family: var(--mono); font-size: 11px; color: var(--muted);
+  border-bottom: 1px solid var(--border);
+  display: flex; justify-content: space-between;
+}
+.jurnal-row {
+  display: flex; align-items: center; padding: 10px 16px;
+  border-bottom: 1px solid var(--border); gap: 12px;
+}
+.jurnal-row:last-child { border-bottom: none; }
+.jurnal-akun { flex: 1; font-size: 13px; }
+.jurnal-akun.indent { padding-left: 24px; color: var(--muted); }
+.jurnal-amount {
+  font-family: var(--mono); font-size: 13px; font-weight: 600;
+  min-width: 120px; text-align: right;
+}
+.jurnal-amount.d { color: var(--accent4); }
+.jurnal-amount.k { color: var(--accent3); }
+.jurnal-note {
+  padding: 8px 16px; font-size: 12px; color: var(--muted);
+  font-style: italic; border-top: 1px solid var(--border);
+  background: rgba(255,255,255,0.01);
+}
+
+/* HIGHLIGHT BOX */
+.highlight {
+  background: var(--surface2); border-radius: var(--radius-sm);
+  padding: 20px 24px; margin: 16px 0;
+  border-left: 3px solid var(--accent);
+}
+.highlight-title {
+  font-family: var(--mono); font-size: 11px; color: var(--accent);
+  letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px;
+}
+.highlight-body { font-size: 13.5px; color: var(--text); line-height: 1.7; }
+
+/* FORMULA */
+.formula {
+  display: flex; align-items: center; gap: 16px;
+  background: var(--surface2); border-radius: var(--radius-sm);
+  padding: 20px 24px; margin: 20px 0; flex-wrap: wrap;
+}
+.formula-part {
+  font-family: 'Fraunces', serif; font-size: 22px; font-weight: 700;
+  padding: 10px 20px; border-radius: 8px;
+}
+.formula-part.fp-orange { background: rgba(245,166,35,0.15); color: var(--accent); }
+.formula-part.fp-purple { background: rgba(124,106,245,0.15); color: var(--accent2); }
+.formula-part.fp-teal { background: rgba(62,207,178,0.15); color: var(--accent3); }
+.formula-op { font-family: var(--mono); font-size: 24px; font-weight: 700; color: var(--muted); }
+
+/* DIVIDER */
+.divider {
+  display: flex; align-items: center; gap: 12px; margin: 28px 0;
+}
+.divider-line { flex: 1; height: 1px; background: var(--border); }
+.divider-text { font-family: var(--mono); font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; white-space: nowrap; }
+
+/* STEP LIST */
+.step-list { display: flex; flex-direction: column; gap: 0; margin: 20px 0; }
+.step-item { display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--border); }
+.step-item:last-child { border-bottom: none; }
+.step-num {
+  width: 32px; height: 32px; border-radius: 8px;
+  background: rgba(245,166,35,0.15); color: var(--accent);
+  font-family: var(--mono); font-size: 13px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.step-content { flex: 1; }
+.step-title { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+.step-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+/* PROS CONS */
+.pro-con { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
+.pro-box { background: rgba(107,245,160,0.06); border: 1px solid rgba(107,245,160,0.15); border-radius: var(--radius-sm); padding: 16px; }
+.con-box { background: rgba(245,107,107,0.06); border: 1px solid rgba(245,107,107,0.15); border-radius: var(--radius-sm); padding: 16px; }
+.pro-con-title { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+.pro-box .pro-con-title { color: var(--accent5); }
+.con-box .pro-con-title { color: var(--accent4); }
+.pro-con-item { font-size: 13px; color: var(--muted); margin-bottom: 6px; display: flex; gap: 8px; }
+
+/* WORLD INFO */
+.world-box {
+  background: var(--surface2); border-radius: var(--radius);
+  padding: 24px; margin-top: 32px;
+  border: 1px solid rgba(124,106,245,0.2);
+}
+.world-title {
+  font-family: var(--mono); font-size: 11px; color: var(--accent2);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
+}
+.world-title::before { content: '💼'; font-size: 14px; }
+.world-item {
+  display: flex; gap: 12px; padding: 12px 0;
+  border-bottom: 1px solid var(--border); font-size: 13px;
+}
+.world-item:last-child { border-bottom: none; }
+.world-item-num {
+  font-family: var(--mono); font-size: 11px; color: var(--accent2);
+  flex-shrink: 0; width: 20px; padding-top: 1px;
+}
+.world-item-text { color: var(--muted); line-height: 1.6; }
+.world-item-text strong { color: var(--text); }
+
+/* PENYUSUTAN TABLE */
+.peny-table { width: 100%; border-collapse: collapse; }
+.peny-table th { background: var(--surface2); padding: 10px 14px; font-size: 12px; color: var(--muted); text-align: left; border-bottom: 1px solid var(--border); }
+.peny-table td { padding: 10px 14px; font-size: 13px; border-bottom: 1px solid var(--border); }
+.peny-table tr:last-child td { border-bottom: none; }
+
+/* KERTAS KERJA */
+.kk-wrap { overflow-x: auto; margin: 20px 0; }
+.kk-table { border-collapse: collapse; font-size: 12px; width: 100%; min-width: 800px; }
+.kk-table th { background: var(--surface2); padding: 8px 10px; color: var(--muted); font-family: var(--mono); font-size: 10px; text-align: center; border: 1px solid var(--border); white-space: nowrap; }
+.kk-table th.akun-col { text-align: left; min-width: 180px; }
+.kk-table td { padding: 8px 10px; border: 1px solid var(--border); text-align: right; font-family: var(--mono); font-size: 11px; color: var(--muted); }
+.kk-table td.akun-col { text-align: left; color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 12px; }
+.kk-table .group-header { background: var(--surface2); }
+.kk-table .group-header td { color: var(--accent); font-weight: 700; text-align: center; letter-spacing: 0.06em; font-size: 10px; text-transform: uppercase; }
+.kk-table .total-row td { background: var(--surface2); font-weight: 700; color: var(--text); border-top: 2px solid var(--border); }
+.kk-table .laba-row td { background: rgba(107,245,160,0.06); color: var(--accent5); font-weight: 700; }
+.kk-d { color: var(--accent4) !important; }
+.kk-k { color: var(--accent3) !important; }
+
+/* ALUR BOX */
+.alur-box {
+  background: var(--surface2); border-radius: var(--radius);
+  padding: 32px; margin: 24px 0;
+  border: 1px solid var(--border);
+}
+.alur-step {
+  display: flex; gap: 16px; align-items: flex-start; margin-bottom: 0;
+}
+.alur-left { display: flex; flex-direction: column; align-items: center; }
+.alur-circle {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(245,166,35,0.15); border: 2px solid var(--accent);
+  color: var(--accent); font-family: var(--mono); font-size: 13px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.alur-line {
+  width: 2px; flex: 1; min-height: 32px;
+  background: linear-gradient(to bottom, var(--accent), transparent);
+  margin: 4px 0; opacity: 0.3;
+}
+.alur-content { flex: 1; padding: 4px 0 32px; }
+.alur-title { font-weight: 600; font-size: 15px; margin-bottom: 4px; color: var(--text); }
+.alur-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+.alur-step:last-child .alur-line { display: none; }
+.alur-step:last-child .alur-content { padding-bottom: 0; }
+
+@media (max-width: 768px) {
+  .sidebar { transform: translateX(-100%); }
+  .main { margin-left: 0; }
+  .hero { padding: 40px 24px; }
+  .hero h1 { font-size: 36px; }
+  .content { padding: 0 24px 60px; }
+  .pro-con { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <div class="sidebar-logo-title">Siklus Akuntansi</div>
+    <div class="sidebar-logo-sub">Bersih Jaya · Jan 2025</div>
+  </div>
+  <div class="sidebar-nav">
+    <span class="nav-section-label">Materi</span>
+    <a class="nav-item active" href="#transaksi"><div class="nav-num">01</div>Transaksi</a>
+    <a class="nav-item" href="#jurnal"><div class="nav-num">02</div>Jurnal Umum</a>
+    <a class="nav-item" href="#buku-besar"><div class="nav-num">03</div>Buku Besar</a>
+    <a class="nav-item" href="#neraca-saldo"><div class="nav-num">04</div>Neraca Saldo</a>
+    <a class="nav-item" href="#penyesuaian"><div class="nav-num">05</div>Jurnal Penyesuaian</a>
+    <a class="nav-item" href="#ns-penyesuaian"><div class="nav-num">06</div>NS Setelah Penyesuaian</a>
+    <a class="nav-item" href="#laporan"><div class="nav-num">07</div>Laporan Keuangan</a>
+    <a class="nav-item" href="#penutup"><div class="nav-num">08</div>Jurnal Penutup</a>
+    <a class="nav-item" href="#ns-penutupan"><div class="nav-num">09</div>NS Setelah Penutupan</a>
+    <span class="nav-section-label">Opsional</span>
+    <a class="nav-item" href="#pembalik"><div class="nav-num">+1</div>Jurnal Pembalik</a>
+    <a class="nav-item" href="#kertas-kerja"><div class="nav-num">+2</div>Kertas Kerja</a>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="main">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Pengantar Akuntansi · Studi Kasus Bersih Jaya</div>
+  <h1>Siklus <em>Akuntansi</em><br>Lengkap</h1>
+  <p>Dari transaksi pertama sampai neraca saldo penutupan — semua langkah dijelaskan detail dengan contoh nyata yang konsisten.</p>
+  <div class="hero-steps">
+    <div class="hero-step"><div class="hero-step-num">1</div>Transaksi</div>
+    <div class="hero-step-arrow">→</div>
+    <div class="hero-step"><div class="hero-step-num">2</div>Jurnal</div>
+    <div class="hero-step-arrow">→</div>
+    <div class="hero-step"><div class="hero-step-num">3</div>Buku Besar</div>
+    <div class="hero-step-arrow">→</div>
+    <div class="hero-step"><div class="hero-step-num">4</div>Neraca Saldo</div>
+    <div class="hero-step-arrow">→</div>
+    <div class="hero-step"><div class="hero-step-num">5</div>Penyesuaian</div>
+    <div class="hero-step-arrow">→</div>
+    <div class="hero-step"><div class="hero-step-num">6</div>Laporan</div>
+    <div class="hero-step-arrow">→</div>
+    <div class="hero-step"><div class="hero-step-num">7</div>Penutupan</div>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- ① TRANSAKSI -->
+<section class="section" id="transaksi">
+  <div class="section-header">
+    <div class="section-num">01 — Transaksi</div>
+    <div class="section-title">Transaksi & Bukti Dokumen</div>
+    <div class="section-desc">Titik awal siklus akuntansi. Setiap kejadian ekonomi yang bisa diukur dengan uang dan punya bukti tertulis.</div>
+  </div>
+
+  <div class="callout info">
+    <div class="callout-icon">💡</div>
+    <div><strong>Definisi:</strong> Transaksi adalah kejadian ekonomi yang mempengaruhi posisi keuangan perusahaan, dapat diukur dengan uang, dan memiliki bukti tertulis.</div>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-text">Syarat Transaksi</div><div class="divider-line"></div></div>
+
+  <div class="cards">
+    <div class="card c-orange">
+      <div class="card-icon">💱</div>
+      <div class="card-label">Syarat 1</div>
+      <div class="card-title">Ada Pertukaran Nilai</div>
+      <div class="card-body">Harus ada pertukaran uang, barang, atau jasa antara dua pihak. Janji atau rencana bukan transaksi.</div>
+    </div>
+    <div class="card c-purple">
+      <div class="card-icon">💰</div>
+      <div class="card-label">Syarat 2</div>
+      <div class="card-title">Bisa Diukur Uang</div>
+      <div class="card-body">Harus punya nilai yang bisa dinyatakan dalam rupiah. Karyawan loyal tidak bisa dicatat karena tidak terukur.</div>
+    </div>
+    <div class="card c-teal">
+      <div class="card-icon">📄</div>
+      <div class="card-label">Syarat 3</div>
+      <div class="card-title">Ada Bukti Tertulis</div>
+      <div class="card-body">Wajib ada dokumen sumber (source document). Tanpa bukti, transaksi tidak boleh dicatat!</div>
+    </div>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-text">Jenis Transaksi</div><div class="divider-line"></div></div>
+
+  <div class="cards-2">
+    <div class="card c-orange">
+      <div class="card-label">Berdasarkan Pihak</div>
+      <div class="card-title">Internal vs Eksternal</div>
+      <div class="card-body">
+        <strong style="color:var(--accent)">Internal</strong> — terjadi di dalam perusahaan tanpa pihak luar. Contoh: penyusutan aset, pemakaian perlengkapan.<br><br>
+        <strong style="color:var(--accent)">Eksternal</strong> — melibatkan pihak luar. Contoh: jual beli, bayar utang, terima pembayaran.
+      </div>
+    </div>
+    <div class="card c-teal">
+      <div class="card-label">Berdasarkan Pembayaran</div>
+      <div class="card-title">Tunai vs Kredit</div>
+      <div class="card-body">
+        <strong style="color:var(--accent3)">Tunai</strong> — langsung dibayar saat transaksi terjadi.<br><br>
+        <strong style="color:var(--accent3)">Kredit</strong> — dibayar nanti, menimbulkan piutang atau utang.<br><br>
+        <strong style="color:var(--accent3)">Sebagian</strong> — bayar DP dulu, sisanya utang (jurnal majemuk).
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-text">Dokumen Sumber</div><div class="divider-line"></div></div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Dokumen</th><th>Fungsi</th><th>Dipakai Untuk</th></tr></thead>
+      <tbody>
+        <tr><td class="td-bold">Faktur (Invoice)</td><td class="td-muted">Bukti penjualan/pembelian kredit</td><td>Catat piutang atau utang</td></tr>
+        <tr><td class="td-bold">Kuitansi</td><td class="td-muted">Bukti pembayaran tunai</td><td>Catat penerimaan/pengeluaran kas</td></tr>
+        <tr><td class="td-bold">Nota</td><td class="td-muted">Bukti pembelian tunai</td><td>Catat pembelian barang tunai</td></tr>
+        <tr><td class="td-bold">Cek</td><td class="td-muted">Perintah bayar ke bank</td><td>Catat pengeluaran via bank</td></tr>
+        <tr><td class="td-bold">Bukti Kas Masuk</td><td class="td-muted">Internal — uang masuk kas</td><td>Catat penerimaan kas</td></tr>
+        <tr><td class="td-bold">Bukti Kas Keluar</td><td class="td-muted">Internal — uang keluar kas</td><td>Catat pengeluaran kas</td></tr>
+        <tr><td class="td-bold">Memo</td><td class="td-muted">Transaksi internal antar bagian</td><td>Penyesuaian internal</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="world-box">
+    <div class="world-title">Di Dunia Kerja</div>
+    <div class="world-item"><div class="world-item-num">1.</div><div class="world-item-text"><strong>Faktur hilang</strong> — transaksi tidak bisa dicatat sampai faktur ditemukan atau dibuat duplikatnya. Jangan asal catat tanpa bukti!</div></div>
+    <div class="world-item"><div class="world-item-num">2.</div><div class="world-item-text"><strong>Tanggal faktur vs tanggal terima barang beda</strong> — dicatat berdasarkan tanggal barang diterima, bukan tanggal faktur.</div></div>
+    <div class="world-item"><div class="world-item-num">3.</div><div class="world-item-text"><strong>Nominal tidak sesuai</strong> — harus dikonfirmasi ke pihak terkait sebelum dicatat. Jangan tebak-tebak!</div></div>
+    <div class="world-item"><div class="world-item-num">4.</div><div class="world-item-text"><strong>Double invoice</strong> — faktur yang sama diterima dua kali. Harus dicek dulu sebelum dicatat supaya tidak bayar dua kali.</div></div>
+  </div>
+</section>
+
+<!-- ② JURNAL -->
+<section class="section" id="jurnal">
+  <div class="section-header">
+    <div class="section-num">02 — Jurnal</div>
+    <div class="section-title">Jurnal Umum</div>
+    <div class="section-desc">Books of Original Entry — catatan pertama dan resmi setiap transaksi sebelum dipindahkan ke mana pun.</div>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-text">Jenis Jurnal</div><div class="divider-line"></div></div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Jurnal</th><th>Isi</th><th>Dipakai Di</th></tr></thead>
+      <tbody>
+        <tr><td class="td-bold" style="color:var(--accent)">Jurnal Umum</td><td class="td-muted">Semua transaksi yang tidak masuk jurnal khusus</td><td>Semua perusahaan</td></tr>
+        <tr><td class="td-bold">Jurnal Penjualan</td><td class="td-muted">Khusus penjualan kredit</td><td>Perusahaan dagang/besar</td></tr>
+        <tr><td class="td-bold">Jurnal Pembelian</td><td class="td-muted">Khusus pembelian kredit</td><td>Perusahaan dagang/besar</td></tr>
+        <tr><td class="td-bold">Jurnal Penerimaan Kas</td><td class="td-muted">Semua uang masuk</td><td>Perusahaan dagang/besar</td></tr>
+        <tr><td class="td-bold">Jurnal Pengeluaran Kas</td><td class="td-muted">Semua uang keluar</td><td>Perusahaan dagang/besar</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout info"><div class="callout-icon">📌</div><div>Di Pengantar Akuntansi kita fokus ke <strong>Jurnal Umum</strong> dulu. Jurnal Khusus dibahas di Akuntansi Menengah.</div></div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-text">Aturan Penulisan</div><div class="divider-line"></div></div>
+
+  <div class="step-list">
+    <div class="step-item"><div class="step-num">1</div><div class="step-content"><div class="step-title">Akun Debit ditulis duluan — rata kiri</div><div class="step-desc">Selalu tulis akun yang Debit lebih dulu sebelum akun Kredit.</div></div></div>
+    <div class="step-item"><div class="step-num">2</div><div class="step-content"><div class="step-title">Akun Kredit menjorok ke kanan</div><div class="step-desc">Akun Kredit ditulis setelah Debit, dengan indentasi sekitar 1-2 cm.</div></div></div>
+    <div class="step-item"><div class="step-num">3</div><div class="step-content"><div class="step-title">Keterangan transaksi dalam tanda kurung</div><div class="step-desc">Tulis penjelasan singkat transaksi di bawah nama akun. Sangat membantu di dunia kerja!</div></div></div>
+    <div class="step-item"><div class="step-num">4</div><div class="step-content"><div class="step-title">Total Debit harus = Total Kredit selalu</div><div class="step-desc">Ini aturan paling mutlak. Tidak boleh ada jurnal yang tidak balance.</div></div></div>
+    <div class="step-item"><div class="step-num">5</div><div class="step-content"><div class="step-title">Kolom Ref diisi saat posting ke Buku Besar</div><div class="step-desc">Selama belum diposting, kolom Ref dikosongkan.</div></div></div>
+    <div class="step-item"><div class="step-num">6</div><div class="step-content"><div class="step-title">Tidak boleh ditipex — pakai Jurnal Koreksi</div><div class="step-desc">Jurnal adalah dokumen resmi. Kesalahan diperbaiki dengan membuat jurnal koreksi baru.</div></div></div>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-text">Jurnal Koreksi</div><div class="divider-line"></div></div>
+
+  <div class="cards">
+    <div class="card c-red">
+      <div class="card-label">Cara 1</div>
+      <div class="card-title">Balik + Buat Baru</div>
+      <div class="card-body">Dipakai kalau <strong>akun salah</strong>. Balik jurnal yang salah dulu, lalu buat jurnal yang benar.</div>
+    </div>
+    <div class="card c-orange">
+      <div class="card-label">Cara 2</div>
+      <div class="card-title">Tambahin Selisih</div>
+      <div class="card-body">Dipakai kalau <strong>jumlah kurang</strong>. Buat jurnal baru sebesar selisihnya saja.</div>
+    </div>
+    <div class="card c-teal">
+      <div class="card-label">Cara 3</div>
+      <div class="card-title">Kurangin Selisih</div>
+      <div class="card-body">Dipakai kalau <strong>jumlah lebih</strong>. Buat jurnal kebalikan sebesar selisihnya.</div>
+    </div>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-text">Contoh Jurnal — Bersih Jaya Januari 2025</div><div class="divider-line"></div></div>
+
+  <div class="jurnal-box">
+    <div class="jurnal-header"><span>1 Januari — Setor Modal</span><span style="color:var(--accent5)">Balance ✓</span></div>
+    <div class="jurnal-row"><div class="jurnal-akun">Kas</div><div class="jurnal-amount d">Rp15.000.000</div><div class="jurnal-amount k">—</div></div>
+    <div class="jurnal-row"><div class="jurnal-akun indent">Modal</div><div class="jurnal-amount d">—</div><div class="jurnal-amount k">Rp15.000.000</div></div>
+    <div class="jurnal-note">(Pemilik setor modal awal tunai)</div>
+  </div>
+
+  <div class="jurnal-box">
+    <div class="jurnal-header"><span>2 Januari — Pinjam Bank</span><span style="color:var(--accent5)">Balance ✓</span></div>
+    <div class="jurnal-row"><div class="jurnal-akun">Kas</div><div class="jurnal-amount d">Rp5.000.000</div><div class="jurnal-amount k">—</div></div>
+    <div class="jurnal-row"><div class="jurnal-akun indent">Utang Bank</div><div class="jurnal-amount d">—</div><div class="jurnal-amount k">Rp5.000.000</div></div>
+    <div class="jurnal-note">(Pinjam uang bank)</div>
+  </div>
+
+  <div class="jurnal-box">
+    <div class="jurnal-header"><span>3 Januari — Beli Mesin (Jurnal Majemuk)</span><span style="color:var(--accent5)">Balance ✓</span></div>
+    <div class="jurnal-row"><div class="jurnal-akun">Mesin</div><div class="jurnal-amount d">Rp10.000.000</div><div class="jurnal-amount k">—</div></div>
+    <div class="jurnal-row"><div class="jurnal-akun indent">Kas</div><div class="jurnal-amount d">—</div><div class="jurnal-amount k">Rp6.000.000</div></div>
+    <div class="jurnal-row"><div class="jurnal-akun indent">Utang Usaha</div><div class="jurnal-amount d">—</div><div class="jurnal-amount k">Rp4.000.000</div></div>
+    <div class="jurnal-note">(Beli mesin, DP Rp6 juta sisanya utang)</div>
+  </div>
+
+  <div class="jurnal-box">
+    <div class="jurnal-header"><span>5 Januari — Beli Perlengkapan</span><span style="color:var(--accent5)">Balance ✓</span></div>
+    <div class="jurnal-row"><div class="jurnal-akun">Perlengkapan</div><div class="jurnal-amount d">Rp500.000</div><div class="jurnal-amount k">—</div></div>
+    <div class="jurnal-row"><div class="jurnal-akun indent">Kas</div><div class="jurnal-amount d">—</div><div class="jurnal-amount k">Rp500.000</div></div>
+    <div class="jurnal-note">(Beli perlengkapan tunai)</div>
+  </div>
+
+  <div class="jurnal-box">
+    <div class="jurnal-header"><span>7 Januari — Bayar Sewa 6 Bulan</span><span style="color:var(--accent5)">Balance ✓</span></div>
+    <div class="jurnal-row"><div class="jurnal-akun">Sewa Dibayar Dimuka</div><div class="jurnal-amount d">Rp3.000.000</div><div class="jurnal-amount k">—</div></div>
+    <div class="jurnal-row"><div class="jurnal-akun indent">Kas</div><div class="jurnal-amount d">—</div><div class="jurnal-amount k">Rp3.000.000</div></div>
+    <div class="jurnal-note">(Bayar sewa gedung 6 bulan Jan-Jun)</div>
+  </div>
+
+  <div class="jurnal-box">
+    <div class="jurnal-header"><span>10 Januari — Terima Pendapatan Tunai</span><span style="color:var(--accent5)">Balance ✓</span></div>
+    <div class="jurnal-row"><div class="jurnal-akun">Kas</div><div class="jurnal-amount d">Rp2.000.000</div><div class="jurnal-amount k">—</div></div>
+    <div class="jurnal-row"><div class="jurnal-akun indent">Pendapatan Jasa</div><div class="jurnal-amount d">—</div><div class="jurnal-amount k">Rp2.000.000</div></div>
+    <div class="jurnal-note">(Terima pembayaran jasa laundry tunai)</div>
+  </div>
+
+  <div class="jurnal-box">
+    <div class="jurnal-header"><span>12 Januari — Jasa Kredit (Piutang)</span><span style="color:var(--accent5)">Balance ✓</span></div>
+    <div class="jurnal-row"><div class="jurnal-akun">Piutang Usaha</div><div class="jurnal-amount d">Rp1.500.000</div><div class="jurnal-amount k">—</div></div>
+    <div class="jurnal-row"><div class="jurnal-akun indent">Pendapatan Jasa</div><div class="jurnal-amount d">—</div><div class="jurnal-amount k">Rp1.500.000</div></div>
+    <div class="jurnal-note">(Jasa selesai dikerjakan, belum dibayar pelanggan)</div>
+  </div>
+
+  <div class="jurnal-box">
+    <div class="jurnal-header"><span>15 Januari — Bayar Gaji</span><span style="color:var(--accent5)">Balance ✓</span></div>
+    <div class="jurnal-row"><div class="jurnal-akun">Beban Gaji</div><div class="jurnal-amount d">Rp1.000.000</div><div class="jurnal-amount k">—</div></div>
+    <div class="jurnal-row"><div class="jurnal-akun indent">Kas</div><div class="jurnal-amount d">—</div><div class="jurnal-amount k">Rp1.000.000</div></div>
+    <div class="jurnal-note">(Bayar gaji karyawan minggu 1-3)</div>
+  </div>
+
+  <div class="jurnal-box">
+    <div class="jurnal-header"><span>18 Januari — Terima Pelunasan Piutang</span><span style="color:var(--accent5)">Balance ✓</span></div>
+    <div class="jurnal-row"><div class="jurnal-akun">Kas</div><div class="jurnal-amount d">Rp1.500.000</div><div class="jurnal-amount k">—</div></div>
+    <div class="jurnal-row"><div class="jurnal-akun indent">Piutang Usaha</div><div class="jurnal-amount d">—</div><div class="jurnal-amount k">Rp1.500.000</div></div>
+    <div class="jurnal-note">(Pelanggan lunasi piutang dari transaksi 12 Jan)</div>
+  </div>
+
+  <div class="jurnal-box">
+    <div class="jurnal-header"><span>20 Januari — Terima Pendapatan Tunai</span><span style="color:var(--accent5)">Balance ✓</span></div>
+    <div class="jurnal-row"><div class="jurnal-akun">Kas</div><div class="jurnal-amount d">Rp1.500.000</div><div class="jurnal-amount k">—</div></div>
+    <div class="jurnal-row"><div class="jurnal-akun indent">Pendapatan Jasa</div><div class="jurnal-amount d">—</div><div class="jurnal-amount k">Rp1.500.000</div></div>
+    <div class="jurnal-note">(Terima pembayaran jasa laundry tunai)</div>
+  </div>
+
+  <div class="jurnal-box">
+    <div class="jurnal-header"><span>22 Januari — Bayar Sebagian Utang</span><span style="color:var(--accent5)">Balance ✓</span></div>
+    <div class="jurnal-row"><div class="jurnal-akun">Utang Usaha</div><div class="jurnal-amount d">Rp2.000.000</div><div class="jurnal-amount k">—</div></div>
+    <div class="jurnal-row"><div class="jurnal-akun indent">Kas</div><div class="jurnal-amount d">—</div><div class="jurnal-amount k">Rp2.000.000</div></div>
+    <div class="jurnal-note">(Bayar sebagian utang mesin)</div>
+  </div>
+
+  <div class="jurnal-box">
+    <div class="jurnal-header"><span>25 Januari — Bayar Listrik & Air</span><span style="color:var(--accent5)">Balance ✓</span></div>
+    <div class="jurnal-row"><div class="jurnal-akun">Beban Listrik & Air</div><div class="jurnal-amount d">Rp300.000</div><div class="jurnal-amount k">—</div></div>
+    <div class="jurnal-row"><div class="jurnal-akun indent">Kas</div><div class="jurnal-amount d">—</div><div class="jurnal-amount k">Rp300.000</div></div>
+    <div class="jurnal-note">(Bayar tagihan listrik & air bulan Januari)</div>
+  </div>
+
+  <div class="jurnal-box">
+    <div class="jurnal-header"><span>28 Januari — Prive</span><span style="color:var(--accent5)">Balance ✓</span></div>
+    <div class="jurnal-row"><div class="jurnal-akun">Prive</div><div class="jurnal-amount d">Rp500.000</div><div class="jurnal-amount k">—</div></div>
+    <div class="jurnal-row"><div class="jurnal-akun indent">Kas</div><div class="jurnal-amount d">—</div><div class="jurnal-amount k">Rp500.000</div></div>
+    <div class="jurnal-note">(Pemilik ambil uang untuk keperluan pribadi)</div>
+  </div>
+
+  <div class="world-box">
+    <div class="world-title">Di Dunia Kerja</div>
+    <div class="world-item"><div class="world-item-num">1.</div><div class="world-item-text"><strong>Nomor jurnal unik</strong> — setiap jurnal diberi nomor untuk pelacakan, contoh: JU-2025-001.</div></div>
+    <div class="world-item"><div class="world-item-num">2.</div><div class="world-item-text"><strong>Otorisasi</strong> — jurnal di atas nominal tertentu harus disetujui atasan sebelum diposting.</div></div>
+    <div class="world-item"><div class="world-item-num">3.</div><div class="world-item-text"><strong>Cut-off</strong> — transaksi harus dicatat di periode yang tepat. Faktur masuk 31 Jan tapi barang datang 2 Feb → dicatat Februari.</div></div>
+    <div class="world-item"><div class="world-item-num">4.</div><div class="world-item-text"><strong>Accrual basis</strong> — standar akuntansi mencatat transaksi saat <em>terjadi</em>, bukan saat kas berpindah. Makanya ada piutang & utang.</div></div>
+    <div class="world-item"><div class="world-item-num">5.</div><div class="world-item-text"><strong>Recurring journal</strong> — beban yang sama tiap bulan (sewa, gaji) bisa diset otomatis di software akuntansi.</div></div>
+  </div>
+</section>
+
+<!-- ③ BUKU BESAR -->
+<section class="section" id="buku-besar">
+  <div class="section-header">
+    <div class="section-num">03 — Buku Besar</div>
+    <div class="section-title">Buku Besar (General Ledger)</div>
+    <div class="section-desc">Kumpulan semua akun yang dikelompokkan per akun. Proses memindahkan dari jurnal ke buku besar disebut Posting.</div>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-text">Bentuk Buku Besar</div><div class="divider-line"></div></div>
+
+  <div class="cards">
+    <div class="card c-orange">
+      <div class="card-label">Bentuk 1</div>
+      <div class="card-title">Akun T</div>
+      <div class="card-body">Paling simpel. Sering dipakai untuk belajar dan analisis cepat. Debit kiri, Kredit kanan.</div>
+    </div>
+    <div class="card c-purple">
+      <div class="card-label">Bentuk 2</div>
+      <div class="card-title">Skontro (2 Kolom)</div>
+      <div class="card-body">Debit di kiri, Kredit di kanan. Saldo dihitung manual di akhir. Kurang praktis.</div>
+    </div>
+    <div class="card c-teal">
+      <div class="card-label">Bentuk 3 ⭐</div>
+      <div class="card-title">Staffel (3 Kolom)</div>
+      <div class="card-body">Ada kolom Debit, Kredit, dan Saldo. Saldo keliatan setiap saat. Paling umum di dunia kerja!</div>
+    </div>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-text">Chart of Accounts — Bersih Jaya</div><div class="divider-line"></div></div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Kode</th><th>Nama Akun</th><th>Kelompok</th></tr></thead>
+      <tbody>
+        <tr><td class="td-mono" style="color:var(--accent)">1101</td><td>Kas</td><td class="td-muted">Aset Lancar</td></tr>
+        <tr><td class="td-mono" style="color:var(--accent)">1102</td><td>Piutang Usaha</td><td class="td-muted">Aset Lancar</td></tr>
+        <tr><td class="td-mono" style="color:var(--accent)">1103</td><td>Perlengkapan</td><td class="td-muted">Aset Lancar</td></tr>
+        <tr><td class="td-mono" style="color:var(--accent)">1104</td><td>Sewa Dibayar Dimuka</td><td class="td-muted">Aset Lancar</td></tr>
+        <tr><td class="td-mono" style="color:var(--accent)">1201</td><td>Mesin</td><td class="td-muted">Aset Tetap</td></tr>
+        <tr><td class="td-mono" style="color:var(--accent)">1202</td><td>Akumulasi Penyusutan Mesin</td><td class="td-muted">Kontra Aset</td></tr>
+        <tr><td class="td-mono" style="color:var(--accent2)">2101</td><td>Utang Usaha</td><td class="td-muted">Liabilitas Jangka Pendek</td></tr>
+        <tr><td class="td-mono" style="color:var(--accent2)">2102</td><td>Utang Bank</td><td class="td-muted">Liabilitas Jangka Panjang</td></tr>
+        <tr><td class="td-mono" style="color:var(--accent2)">2103</td><td>Utang Gaji</td><td class="td-muted">Liabilitas Jangka Pendek</td></tr>
+        <tr><td class="td-mono" style="color:var(--accent2)">2104</td><td>Pendapatan Diterima Dimuka</td><td class="td-muted">Liabilitas Jangka Pendek</td></tr>
+        <tr><td class="td-mono" style="color:var(--accent3)">3101</td><td>Modal</td><td class="td-muted">Ekuitas</td></tr>
+        <tr><td class="td-mono" style="color:var(--accent3)">3102</td><td>Prive</td><td class="td-muted">Ekuitas</td></tr>
+        <tr><td class="td-mono" style="color:var(--accent5)">4101</td><td>Pendapatan Jasa</td><td class="td-muted">Pendapatan</td></tr>
+        <tr><td class="td-mono" style="color:var(--accent4)">5101</td><td>Beban Gaji</td><td class="td-muted">Beban</td></tr>
+        <tr><td class="td-mono" style="color:var(--accent4)">5102</td><td>Beban Listrik & Air</td><td class="td-muted">Beban</td></tr>
+        <tr><td class="td-mono" style="color:var(--accent4)">5103</td><td>Beban Perlengkapan</td><td class="td-muted">Beban</td></tr>
+        <tr><td class="td-mono" style="color:var(--accent4)">5104</td><td>Beban Sewa</td><td class="td-muted">Beban</td></tr>
+        <tr><td class="td-mono" style="color:var(--accent4)">5105</td><td>Beban Penyusutan Mesin</td><td class="td-muted">Beban</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-text">Hasil Posting — Bentuk Staffel</div><div class="divider-line"></div></div>
+
+  <div class="table-wrap">
+    <div style="padding:12px 16px;background:var(--surface2);font-family:var(--mono);font-size:11px;color:var(--accent);border-bottom:1px solid var(--border)">KAS (1101)</div>
+    <table>
+      <thead><tr><th>Tgl</th><th>Keterangan</th><th>Ref</th><th>Debit</th><th>Kredit</th><th>Saldo</th></tr></thead>
+      <tbody>
+        <tr><td>1/1</td><td>Setor Modal</td><td class="td-mono">JU-1</td><td class="td-mono" style="color:var(--accent4)">15.000.000</td><td>—</td><td class="td-mono td-bold">15.000.000</td></tr>
+        <tr><td>2/1</td><td>Utang Bank</td><td class="td-mono">JU-1</td><td class="td-mono" style="color:var(--accent4)">5.000.000</td><td>—</td><td class="td-mono td-bold">20.000.000</td></tr>
+        <tr><td>3/1</td><td>Beli Mesin</td><td class="td-mono">JU-1</td><td>—</td><td class="td-mono" style="color:var(--accent3)">6.000.000</td><td class="td-mono td-bold">14.000.000</td></tr>
+        <tr><td>5/1</td><td>Perlengkapan</td><td class="td-mono">JU-1</td><td>—</td><td class="td-mono" style="color:var(--accent3)">500.000</td><td class="td-mono td-bold">13.500.000</td></tr>
+        <tr><td>7/1</td><td>Sewa Dimuka</td><td class="td-mono">JU-1</td><td>—</td><td class="td-mono" style="color:var(--accent3)">3.000.000</td><td class="td-mono td-bold">10.500.000</td></tr>
+        <tr><td>10/1</td><td>Pendapatan</td><td class="td-mono">JU-1</td><td class="td-mono" style="color:var(--accent4)">2.000.000</td><td>—</td><td class="td-mono td-bold">12.500.000</td></tr>
+        <tr><td>15/1</td><td>Beban Gaji</td><td class="td-mono">JU-1</td><td>—</td><td class="td-mono" style="color:var(--accent3)">1.000.000</td><td class="td-mono td-bold">11.500.000</td></tr>
+        <tr><td>18/1</td><td>Pelunasan Piutang</td><td class="td-mono">JU-1</td><td class="td-mono" style="color:var(--accent4)">1.500.000</td><td>—</td><td class="td-mono td-bold">13.000.000</td></tr>
+        <tr><td>20/1</td><td>Pendapatan</td><td class="td-mono">JU-1</td><td class="td-mono" style="color:var(--accent4)">1.500.000</td><td>—</td><td class="td-mono td-bold">14.500.000</td></tr>
+        <tr><td>22/1</td><td>Bayar Utang</td><td class="td-mono">JU-1</td><td>—</td><td class="td-mono" style="color:var(--accent3)">2.000.000</td><td class="td-mono td-bold">12.500.000</td></tr>
+        <tr><td>25/1</td><td>Listrik & Air</td><td class="td-mono">JU-1</td><td>—</td><td class="td-mono" style="color:var(--accent3)">300.000</td><td class="td-mono td-bold">12.200.000</td></tr>
+        <tr><td>28/1</td><td>Prive</td><td class="td-mono">JU-1</td><td>—</td><td class="td-mono" style="color:var(--accent3)">500.000</td><td class="td-mono td-bold" style="color:var(--accent)">11.700.000</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="table-wrap">
+    <div style="padding:12px 16px;background:var(--surface2);font-family:var(--mono);font-size:11px;color:var(--accent);border-bottom:1px solid var(--border)">PENDAPATAN JASA (4101)</div>
+    <table>
+      <thead><tr><th>Tgl</th><th>Keterangan</th><th>Ref</th><th>Debit</th><th>Kredit</th><th>Saldo</th></tr></thead>
+      <tbody>
+        <tr><td>10/1</td><td>Jasa Tunai</td><td class="td-mono">JU-1</td><td>—</td><td class="td-mono" style="color:var(--accent3)">2.000.000</td><td class="td-mono td-bold">2.000.000</td></tr>
+        <tr><td>12/1</td><td>Jasa Piutang</td><td class="td-mono">JU-1</td><td>—</td><td class="td-mono" style="color:var(--accent3)">1.500.000</td><td class="td-mono td-bold">3.500.000</td></tr>
+        <tr><td>20/1</td><td>Jasa Tunai</td><td class="td-mono">JU-1</td><td>—</td><td class="td-mono" style="color:var(--accent3)">1.500.000</td><td class="td-mono td-bold" style="color:var(--accent)">5.000.000</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout info"><div class="callout-icon">📌</div><div>Akun lainnya (Piutang, Perlengkapan, Sewa Dimuka, Mesin, Utang, Modal, Prive, Beban) diposting dengan cara yang sama. Saldo akhir tiap akun akan dipakai di Neraca Saldo.</div></div>
+
+  <div class="world-box">
+    <div class="world-title">Di Dunia Kerja</div>
+    <div class="world-item"><div class="world-item-num">1.</div><div class="world-item-text"><strong>Subsidiary Ledger (Buku Pembantu)</strong> — untuk Piutang & Utang, ada buku pembantu per pelanggan/supplier. Total buku pembantu harus = saldo Buku Besar utama.</div></div>
+    <div class="world-item"><div class="world-item-num">2.</div><div class="world-item-text"><strong>Posting otomatis</strong> — di software (Accurate, SAP) posting terjadi otomatis saat jurnal disimpan. Tapi tetap harus dipahami konsepnya.</div></div>
+    <div class="world-item"><div class="world-item-num">3.</div><div class="world-item-text"><strong>Saldo negatif</strong> — kalau saldo akun Aset jadi minus (kredit), itu tanda ada masalah. Harus segera ditelusuri!</div></div>
+    <div class="world-item"><div class="world-item-num">4.</div><div class="world-item-text"><strong>Locking periode</strong> — periode yang sudah selesai di-lock supaya tidak bisa diedit sembarangan. Koreksi harus minta izin supervisor.</div></div>
+  </div>
+</section>
+
+<!-- ④ NERACA SALDO -->
+<section class="section" id="neraca-saldo">
+  <div class="section-header">
+    <div class="section-num">04 — Neraca Saldo</div>
+    <div class="section-title">Neraca Saldo (Trial Balance)</div>
+    <div class="section-desc">Daftar semua akun beserta saldonya — dibuat untuk memastikan total Debit = total Kredit sebelum lanjut ke penyesuaian.</div>
+  </div>
+
+  <div class="table-wrap">
+    <div style="padding:12px 16px;background:var(--surface2);font-family:var(--mono);font-size:11px;color:var(--muted);border-bottom:1px solid var(--border)">BERSIH JAYA — NERACA SALDO — Per 31 Januari 2025 (Sebelum Penyesuaian)</div>
+    <table>
+      <thead><tr><th>No.</th><th>Nama Akun</th><th>Debit</th><th>Kredit</th></tr></thead>
+      <tbody>
+        <tr><td class="td-mono">1101</td><td>Kas</td><td class="td-mono" style="color:var(--accent4)">11.700.000</td><td>—</td></tr>
+        <tr><td class="td-mono">1102</td><td>Piutang Usaha</td><td class="td-mono" style="color:var(--accent4)">0</td><td>—</td></tr>
+        <tr><td class="td-mono">1103</td><td>Perlengkapan</td><td class="td-mono" style="color:var(--accent4)">500.000</td><td>—</td></tr>
+        <tr><td class="td-mono">1104</td><td>Sewa Dibayar Dimuka</td><td class="td-mono" style="color:var(--accent4)">3.000.000</td><td>—</td></tr>
+        <tr><td class="td-mono">1201</td><td>Mesin</td><td class="td-mono" style="color:var(--accent4)">10.000.000</td><td>—</td></tr>
+        <tr><td class="td-mono">2101</td><td>Utang Usaha</td><td>—</td><td class="td-mono" style="color:var(--accent3)">2.000.000</td></tr>
+        <tr><td class="td-mono">2102</td><td>Utang Bank</td><td>—</td><td class="td-mono" style="color:var(--accent3)">5.000.000</td></tr>
+        <tr><td class="td-mono">3101</td><td>Modal</td><td>—</td><td class="td-mono" style="color:var(--accent3)">15.000.000</td></tr>
+        <tr><td class="td-mono">3102</td><td>Prive</td><td class="td-mono" style="color:var(--accent4)">500.000</td><td>—</td></tr>
+        <tr><td class="td-mono">4101</td><td>Pendapatan Jasa</td><td>—</td><td class="td-mono" style="color:var(--accent3)">5.000.000</td></tr>
+        <tr><td class="td-mono">5101</td><td>Beban Gaji</td><td class="td-mono" style="color:var(--accent4)">1.000.000</td><td>—</td></tr>
+        <tr><td class="td-mono">5102</td><td>Beban Listrik & Air</td><td class="td-mono" style="color:var(--accent4)">300.000</td><td>—</td></tr>
+        <tr class="td-total"><td></td><td class="td-bold">TOTAL</td><td class="td-mono td-bold" style="color:var(--accent5)">27.000.000</td><td class="td-mono td-bold" style="color:var(--accent5)">27.000.000</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout success"><div class="callout-icon">✅</div><div>Total Debit = Total Kredit = Rp27.000.000 — Neraca Saldo seimbang!</div></div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-text">Kalau Tidak Seimbang</div><div class="divider-line"></div></div>
+
+  <div class="highlight">
+    <div class="highlight-title">Tips Detektif Selisih</div>
+    <div class="highlight-body">
+      <strong>Selisih ÷ 2 = bulat</strong> → kemungkinan ada angka yang salah sisi (harusnya Debit masuk Kredit)<br>
+      <strong>Selisih ÷ 9 = bulat</strong> → kemungkinan transposition error (angka ketuker, misal 540 jadi 450)<br>
+      <strong>Selisih = saldo akun tertentu</strong> → kemungkinan akun itu terlewat dimasukkan
+    </div>
+  </div>
+
+  <div class="callout warning"><div class="callout-icon">⚠️</div><div><strong>Neraca Saldo seimbang bukan berarti bebas kesalahan!</strong> Salah akun tapi jumlah benar, transaksi tidak dicatat sama sekali, atau transaksi dicatat dua kali — semua tidak terdeteksi neraca saldo!</div></div>
+
+  <div class="world-box">
+    <div class="world-title">Di Dunia Kerja</div>
+    <div class="world-item"><div class="world-item-num">1.</div><div class="world-item-text"><strong>Daily trial balance</strong> — perusahaan besar membuat neraca saldo setiap hari, bukan hanya akhir bulan.</div></div>
+    <div class="world-item"><div class="world-item-num">2.</div><div class="world-item-text"><strong>Saldo abnormal</strong> — akun Aset bersaldo Kredit, atau akun Liabilitas bersaldo Debit = tanda bahaya, harus segera ditelusuri.</div></div>
+    <div class="world-item"><div class="world-item-num">3.</div><div class="world-item-text"><strong>Neraca saldo bukan laporan keuangan</strong> — ini alat pengecekan internal saja. Tidak diserahkan ke investor atau bank.</div></div>
+  </div>
+</section>
+
+<!-- ⑤ JURNAL PENYESUAIAN -->
+<section class="section" id="penyesuaian">
+  <div class="section-header">
+    <div class="section-num">05 — Jurnal Penyesuaian</div>
+    <div class="section-title">Jurnal Penyesuaian (Adjusting Entries)</div>
+    <div class="section-desc">Jurnal yang dibuat di akhir periode untuk memastikan semua pendapatan dan beban dicatat di periode yang tepat — sesuai prinsip Accrual dan Matching.</div>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-text">6 Jenis Penyesuaian</div><div class="divider-line"></div></div>
+
+  <!-- 1. Perlengkapan -->
+  <div class="highlight">
+    <div class="highlight-title">1. Perlengkapan Terpakai</div>
+    <div class="highlight-body">Rumus: <strong>Beban Perlengkapan = Saldo Perlengkapan − Sisa Perlengkapan</strong><br>Bersih Jaya: Rp500.000 − Rp200.000 = <strong>Rp300.000</strong></div>
+  </div>
+  <div class="jurnal-box">
+    <div class="jurnal-header"><span>31 Januari — Penyesuaian Perlengkapan</span></div>
+    <div class="jurnal-row"><div class="jurnal-akun">Beban Perlengkapan</div><div class="jurnal-amount d">Rp300.000</div><div class="jurnal-amount k">—</div></div>
+    <div class="jurnal-row"><div class="jurnal-akun indent">Perlengkapan</div><div class="jurnal-amount d">—</div><div class="jurnal-amount k">Rp300.000</div></div>
+  </div>
+
+  <!-- 2. Beban Dibayar Dimuka -->
+  <div class="highlight">
+    <div class="highlight-title">2. Beban Dibayar Dimuka</div>
+    <div class="highlight-body">Rumus: <strong>Beban = Total Bayar ÷ Jumlah Periode × Periode Terpakai</strong><br>Bersih Jaya: Rp3.000.000 ÷ 6 bulan × 1 bulan = <strong>Rp500.000</strong></div>
+  </div>
+  <div class="jurnal-box">
+    <div class="jurnal-header"><span>31 Januari — Penyesuaian Sewa</span></div>
+    <div class="jurnal-row"><div class="jurnal-akun">Beban Sewa</div><div class="jurnal-amount d">Rp500.000</div><div class="jurnal-amount k">—</div></div>
+    <div class="jurnal-row"><div class="jurnal-akun indent">Sewa Dibayar Dimuka</div><div class="jurnal-amount d">—</div><div class="jurnal-amount k">Rp500.000</div></div>
+  </div>
+
+  <!-- 3. Accrued Expense -->
+  <div class="highlight">
+    <div class="highlight-title">3. Beban Masih Harus Dibayar (Accrued Expense)</div>
+    <div class="highlight-body">Beban sudah terjadi tapi belum dibayar dan belum dicatat. Bersih Jaya: gaji minggu terakhir Januari = <strong>Rp600.000</strong></div>
+  </div>
+  <div class="jurnal-box">
+    <div class="jurnal-header"><span>31 Januari — Accrued Gaji</span></div>
+    <div class="jurnal-row"><div class="jurnal-akun">Beban Gaji</div><div class="jurnal-amount d">Rp600.000</div><div class="jurnal-amount k">—</div></div>
+    <div class="jurnal-row"><div class="jurnal-akun indent">Utang Gaji</div><div class="jurnal-amount d">—</div><div class="jurnal-amount k">Rp600.000</div></div>
+  </div>
+
+  <!-- 4. Accrued Revenue -->
+  <div class="highlight">
+    <div class="highlight-title">4. Pendapatan Masih Harus Diterima (Accrued Revenue)</div>
+    <div class="highlight-body">Jasa sudah dikerjakan tapi belum dibayar dan belum dicatat. Bersih Jaya: jasa akhir Januari = <strong>Rp800.000</strong></div>
+  </div>
+  <div class="jurnal-box">
+    <div class="jurnal-header"><span>31 Januari — Accrued Revenue</span></div>
+    <div class="jurnal-row"><div class="jurnal-akun">Piutang Usaha</div><div class="jurnal-amount d">Rp800.000</div><div class="jurnal-amount k">—</div></div>
+    <div class="jurnal-row"><div class="jurnal-akun indent">Pendapatan Jasa</div><div class="jurnal-amount d">—</div><div class="jurnal-amount k">Rp800.000</div></div>
+  </div>
+
+  <!-- 5. Unearned Revenue -->
+  <div class="highlight">
+    <div class="highlight-title">5. Pendapatan Diterima Dimuka (Unearned Revenue)</div>
+    <div class="highlight-body">Terima uang dulu tapi belum dikerjakan — dicatat liabilitas. Bersih Jaya: langganan 3 bulan Rp1.500.000, sudah dikerjakan 1 bulan = <strong>Rp500.000</strong> jadi pendapatan.</div>
+  </div>
+  <div class="jurnal-box">
+    <div class="jurnal-header"><span>Saat terima uang</span></div>
+    <div class="jurnal-row"><div class="jurnal-akun">Kas</div><div class="jurnal-amount d">Rp1.500.000</div><div class="jurnal-amount k">—</div></div>
+    <div class="jurnal-row"><div class="jurnal-akun indent">Pendapatan Diterima Dimuka</div><div class="jurnal-amount d">—</div><div class="jurnal-amount k">Rp1.500.000</div></div>
+  </div>
+  <div class="jurnal-box">
+    <div class="jurnal-header"><span>31 Januari — Penyesuaian Unearned Revenue</span></div>
+    <div class="jurnal-row"><div class="jurnal-akun">Pendapatan Diterima Dimuka</div><div class="jurnal-amount d">Rp500.000</div><div class="jurnal-amount k">—</div></div>
+    <div class="jurnal-row"><div class="jurnal-akun indent">Pendapatan Jasa</div><div class="jurnal-amount d">—</div><div class="jurnal-amount k">Rp500.000</div></div>
+  </div>
+
+  <!-- 6. Penyusutan -->
+  <div class="highlight">
+    <div class="highlight-title">6. Penyusutan Aset Tetap (Depreciation)</div>
+    <div class="highlight-body">Aset tetap nilainya turun seiring waktu. Ada 3 metode. Bersih Jaya pakai <strong>Garis Lurus</strong>:<br>Mesin Rp10.000.000, nilai sisa Rp1.000.000, umur 5 tahun<br>Penyusutan/bulan = (10.000.000 − 1.000.000) ÷ 5 ÷ 12 = <strong>Rp150.000</strong></div>
+  </div>
+
+  <div class="cards">
+    <div class="card c-orange">
+      <div class="card-label">Metode 1</div>
+      <div class="card-title">Garis Lurus</div>
+      <div class="card-body">Penyusutan sama setiap tahun.<br><br><strong>= (Harga − Nilai Sisa) ÷ Umur</strong></div>
+    </div>
+    <div class="card c-purple">
+      <div class="card-label">Metode 2</div>
+      <div class="card-title">Saldo Menurun</div>
+      <div class="card-body">Lebih besar di awal, makin kecil.<br><br><strong>= Nilai Buku × Tarif</strong><br>Tarif = 1 ÷ Umur × 2</div>
+    </div>
+    <div class="card c-teal">
+      <div class="card-label">Metode 3</div>
+      <div class="card-title">Satuan Produksi</div>
+      <div class="card-body">Berdasarkan pemakaian aktual.<br><br><strong>= (H−NS) ÷ Kapasitas × Pemakaian</strong></div>
+    </div>
+  </div>
+
+  <div class="jurnal-box">
+    <div class="jurnal-header"><span>31 Januari — Penyusutan Mesin</span></div>
+    <div class="jurnal-row"><div class="jurnal-akun">Beban Penyusutan Mesin</div><div class="jurnal-amount d">Rp150.000</div><div class="jurnal-amount k">—</div></div>
+    <div class="jurnal-row"><div class="jurnal-akun indent">Akumulasi Penyusutan Mesin</div><div class="jurnal-amount d">—</div><div class="jurnal-amount k">Rp150.000</div></div>
+  </div>
+
+  <div class="callout info"><div class="callout-icon">📌</div><div><strong>Akumulasi Penyusutan</strong> adalah akun kontra aset — saldo normalnya Kredit — nilainya terus bertambah tiap periode. <strong>Nilai Buku</strong> = Harga Perolehan − Akumulasi Penyusutan. <strong>Tanah tidak disusutkan!</strong></div></div>
+
+  <div class="world-box">
+    <div class="world-title">Di Dunia Kerja</div>
+    <div class="world-item"><div class="world-item-num">1.</div><div class="world-item-text"><strong>Recurring adjustments</strong> — perusahaan punya daftar tetap akun yang selalu disesuaikan tiap bulan.</div></div>
+    <div class="world-item"><div class="world-item-num">2.</div><div class="world-item-text"><strong>Penyesuaian pajak</strong> — selain penyesuaian akuntansi, ada penyesuaian khusus untuk laporan pajak yang nilainya bisa berbeda dari PSAK.</div></div>
+    <div class="world-item"><div class="world-item-num">3.</div><div class="world-item-text"><strong>Koreksi vs Penyesuaian</strong> — koreksi memperbaiki kesalahan, penyesuaian bukan kesalahan — memang belum waktunya dicatat.</div></div>
+    <div class="world-item"><div class="world-item-num">4.</div><div class="world-item-text"><strong>Estimasi piutang tak tertagih</strong> — beberapa penyesuaian butuh estimasi yang harus reasonable dan konsisten tiap periode.</div></div>
+  </div>
+</section>
+
+<!-- ⑥ NS SETELAH PENYESUAIAN -->
+<section class="section" id="ns-penyesuaian">
+  <div class="section-header">
+    <div class="section-num">06 — NS Setelah Penyesuaian</div>
+    <div class="section-title">Neraca Saldo Setelah Penyesuaian</div>
+    <div class="section-desc">Neraca saldo yang sudah diupdate setelah semua jurnal penyesuaian diposting. Ini yang jadi dasar pembuatan laporan keuangan.</div>
+  </div>
+
+  <div class="table-wrap">
+    <div style="padding:12px 16px;background:var(--surface2);font-family:var(--mono);font-size:11px;color:var(--muted);border-bottom:1px solid var(--border)">BERSIH JAYA — NERACA SALDO SETELAH PENYESUAIAN — Per 31 Januari 2025</div>
+    <table>
+      <thead><tr><th>No.</th><th>Nama Akun</th><th>Debit</th><th>Kredit</th></tr></thead>
+      <tbody>
+        <tr><td class="td-mono">1101</td><td>Kas</td><td class="td-mono" style="color:var(--accent4)">11.700.000</td><td>—</td></tr>
+        <tr><td class="td-mono">1102</td><td>Piutang Usaha</td><td class="td-mono" style="color:var(--accent4)">800.000</td><td>—</td></tr>
+        <tr><td class="td-mono">1103</td><td>Perlengkapan</td><td class="td-mono" style="color:var(--accent4)">200.000</td><td>—</td></tr>
+        <tr><td class="td-mono">1104</td><td>Sewa Dibayar Dimuka</td><td class="td-mono" style="color:var(--accent4)">2.500.000</td><td>—</td></tr>
+        <tr><td class="td-mono">1201</td><td>Mesin</td><td class="td-mono" style="color:var(--accent4)">10.000.000</td><td>—</td></tr>
+        <tr><td class="td-mono">1202</td><td>Akum. Penyusutan Mesin</td><td>—</td><td class="td-mono" style="color:var(--accent3)">150.000</td></tr>
+        <tr><td class="td-mono">2101</td><td>Utang Usaha</td><td>—</td><td class="td-mono" style="color:var(--accent3)">2.000.000</td></tr>
+        <tr><td class="td-mono">2102</td><td>Utang Bank</td><td>—</td><td class="td-mono" style="color:var(--accent3)">5.000.000</td></tr>
+        <tr><td class="td-mono">2103</td><td>Utang Gaji</td><td>—</td><td class="td-mono" style="color:var(--accent3)">600.000</td></tr>
+        <tr><td class="td-mono">2104</td><td>Pendapatan Diterima Dimuka</td><td>—</td><td class="td-mono" style="color:var(--accent3)">1.000.000</td></tr>
+        <tr><td class="td-mono">3101</td><td>Modal</td><td>—</td><td class="td-mono" style="color:var(--accent3)">15.000.000</td></tr>
+        <tr><td class="td-mono">3102</td><td>Prive</td><td class="td-mono" style="color:var(--accent4)">500.000</td><td>—</td></tr>
+        <tr><td class="td-mono">4101</td><td>Pendapatan Jasa</td><td>—</td><td class="td-mono" style="color:var(--accent3)">5.800.000</td></tr>
+        <tr><td class="td-mono">5101</td><td>Beban Gaji</td><td class="td-mono" style="color:var(--accent4)">1.600.000</td><td>—</td></tr>
+        <tr><td class="td-mono">5102</td><td>Beban Listrik & Air</td><td class="td-mono" style="color:var(--accent4)">300.000</td><td>—</td></tr>
+        <tr><td class="td-mono">5103</td><td>Beban Perlengkapan</td><td class="td-mono" style="color:var(--accent4)">300.000</td><td>—</td></tr>
+        <tr><td class="td-mono">5104</td><td>Beban Sewa</td><td class="td-mono" style="color:var(--accent4)">500.000</td><td>—</td></tr>
+        <tr><td class="td-mono">5105</td><td>Beban Penyusutan Mesin</td><td class="td-mono" style="color:var(--accent4)">150.000</td><td>—</td></tr>
+        <tr class="td-total"><td></td><td class="td-bold">TOTAL</td><td class="td-mono td-bold" style="color:var(--accent5)">28.550.000</td><td class="td-mono td-bold" style="color:var(--accent5)">28.550.000</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout success"><div class="callout-icon">✅</div><div>Total Debit = Total Kredit = Rp28.550.000 — Seimbang! Siap dibuat Laporan Keuangan.</div></div>
+</section>
+
+<!-- ⑦ LAPORAN KEUANGAN -->
+<section class="section" id="laporan">
+  <div class="section-header">
+    <div class="section-num">07 — Laporan Keuangan</div>
+    <div class="section-title">Laporan Keuangan (Financial Statements)</div>
+    <div class="section-desc">Hasil akhir siklus akuntansi. Dibuat berurutan — hasilnya saling nyambung satu sama lain.</div>
+  </div>
+
+  <div class="callout warning"><div class="callout-icon">⚠️</div><div><strong>Urutan wajib:</strong> Laba Rugi → Perubahan Ekuitas → Neraca → Arus Kas. Tidak boleh dibalik karena hasilnya saling tergantung!</div></div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-text">1. Laporan Laba Rugi</div><div class="divider-line"></div></div>
+
+  <div class="table-wrap">
+    <div style="padding:16px;background:var(--surface2);text-align:center;border-bottom:1px solid var(--border)">
+      <div style="font-family:'Fraunces',serif;font-size:16px;color:var(--text)">BERSIH JAYA</div>
+      <div style="font-size:13px;color:var(--muted)">LAPORAN LABA RUGI</div>
+      <div style="font-size:12px;color:var(--muted)">Untuk Periode Yang Berakhir 31 Januari 2025</div>
+    </div>
+    <table>
+      <tbody>
+        <tr><td class="td-bold" style="color:var(--accent)">PENDAPATAN</td><td></td></tr>
+        <tr><td style="padding-left:32px">Pendapatan Jasa</td><td class="td-mono" style="text-align:right">Rp5.800.000</td></tr>
+        <tr><td class="td-bold" style="padding-left:16px">Total Pendapatan</td><td class="td-mono td-bold" style="text-align:right">Rp5.800.000</td></tr>
+        <tr><td class="td-bold" style="color:var(--accent4)">BEBAN OPERASIONAL</td><td></td></tr>
+        <tr><td style="padding-left:32px">Beban Gaji</td><td class="td-mono" style="text-align:right">Rp1.600.000</td></tr>
+        <tr><td style="padding-left:32px">Beban Sewa</td><td class="td-mono" style="text-align:right">Rp500.000</td></tr>
+        <tr><td style="padding-left:32px">Beban Listrik & Air</td><td class="td-mono" style="text-align:right">Rp300.000</td></tr>
+        <tr><td style="padding-left:32px">Beban Perlengkapan</td><td class="td-mono" style="text-align:right">Rp300.000</td></tr>
+        <tr><td style="padding-left:32px">Beban Penyusutan Mesin</td><td class="td-mono" style="text-align:right">Rp150.000</td></tr>
+        <tr><td class="td-bold" style="padding-left:16px">Total Beban</td><td class="td-mono td-bold" style="text-align:right">(Rp2.850.000)</td></tr>
+        <tr class="td-total"><td class="td-bold" style="color:var(--accent5)">LABA BERSIH</td><td class="td-mono td-bold" style="text-align:right;color:var(--accent5)">Rp2.950.000</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-text">2. Laporan Perubahan Ekuitas</div><div class="divider-line"></div></div>
+  <div class="table-wrap">
+    <div style="padding:16px;background:var(--surface2);text-align:center;border-bottom:1px solid var(--border)">
+      <div style="font-family:'Fraunces',serif;font-size:16px;color:var(--text)">BERSIH JAYA</div>
+      <div style="font-size:13px;color:var(--muted)">LAPORAN PERUBAHAN EKUITAS</div>
+      <div style="font-size:12px;color:var(--muted)">Untuk Periode Yang Berakhir 31 Januari 2025</div>
+    </div>
+    <table><tbody>
+      <tr><td>Modal Awal (1 Januari 2025)</td><td class="td-mono" style="text-align:right">Rp15.000.000</td></tr>
+      <tr><td style="padding-left:24px">+ Laba Bersih</td><td class="td-mono" style="text-align:right;color:var(--accent5)">Rp2.950.000</td></tr>
+      <tr><td style="padding-left:24px">− Prive</td><td class="td-mono" style="text-align:right;color:var(--accent4)">(Rp500.000)</td></tr>
+      <tr class="td-total"><td class="td-bold" style="color:var(--accent)">Modal Akhir (31 Januari 2025)</td><td class="td-mono td-bold" style="text-align:right;color:var(--accent)">Rp17.450.000</td></tr>
+    </tbody></table>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-text">3. Neraca</div><div class="divider-line"></div></div>
+  <div class="table-wrap">
+    <div style="padding:16px;background:var(--surface2);text-align:center;border-bottom:1px solid var(--border)">
+      <div style="font-family:'Fraunces',serif;font-size:16px;color:var(--text)">BERSIH JAYA</div>
+      <div style="font-size:13px;color:var(--muted)">NERACA</div>
+      <div style="font-size:12px;color:var(--muted)">Per 31 Januari 2025</div>
+    </div>
+    <table><tbody>
+      <tr><td class="td-bold" style="color:var(--accent)">ASET</td><td></td></tr>
+      <tr><td style="padding-left:16px" class="td-bold">Aset Lancar:</td><td></td></tr>
+      <tr><td style="padding-left:32px">Kas</td><td class="td-mono" style="text-align:right">Rp11.700.000</td></tr>
+      <tr><td style="padding-left:32px">Piutang Usaha</td><td class="td-mono" style="text-align:right">Rp800.000</td></tr>
+      <tr><td style="padding-left:32px">Perlengkapan</td><td class="td-mono" style="text-align:right">Rp200.000</td></tr>
+      <tr><td style="padding-left:32px">Sewa Dibayar Dimuka</td><td class="td-mono" style="text-align:right">Rp2.500.000</td></tr>
+      <tr><td style="padding-left:16px" class="td-bold">Total Aset Lancar</td><td class="td-mono td-bold" style="text-align:right">Rp15.200.000</td></tr>
+      <tr><td style="padding-left:16px" class="td-bold">Aset Tetap:</td><td></td></tr>
+      <tr><td style="padding-left:32px">Mesin</td><td class="td-mono" style="text-align:right">Rp10.000.000</td></tr>
+      <tr><td style="padding-left:32px">Akum. Penyusutan Mesin</td><td class="td-mono" style="text-align:right;color:var(--accent4)">(Rp150.000)</td></tr>
+      <tr><td style="padding-left:16px" class="td-bold">Mesin Neto</td><td class="td-mono td-bold" style="text-align:right">Rp9.850.000</td></tr>
+      <tr class="td-total"><td class="td-bold" style="color:var(--accent)">TOTAL ASET</td><td class="td-mono td-bold" style="text-align:right;color:var(--accent)">Rp25.050.000</td></tr>
+      <tr><td class="td-bold" style="color:var(--accent2)">LIABILITAS</td><td></td></tr>
+      <tr><td style="padding-left:32px">Utang Usaha</td><td class="td-mono" style="text-align:right">Rp2.000.000</td></tr>
+      <tr><td style="padding-left:32px">Utang Gaji</td><td class="td-mono" style="text-align:right">Rp600.000</td></tr>
+      <tr><td style="padding-left:32px">Pendapatan Diterima Dimuka</td><td class="td-mono" style="text-align:right">Rp1.000.000</td></tr>
+      <tr><td style="padding-left:32px">Utang Bank</td><td class="td-mono" style="text-align:right">Rp5.000.000</td></tr>
+      <tr class="td-total"><td class="td-bold">Total Liabilitas</td><td class="td-mono td-bold" style="text-align:right">Rp8.600.000</td></tr>
+      <tr><td class="td-bold" style="color:var(--accent3)">EKUITAS</td><td></td></tr>
+      <tr><td style="padding-left:32px">Modal</td><td class="td-mono" style="text-align:right">Rp17.450.000</td></tr>
+      <tr class="td-total"><td class="td-bold" style="color:var(--accent5)">TOTAL LIABILITAS + EKUITAS</td><td class="td-mono td-bold" style="text-align:right;color:var(--accent5)">Rp26.050.000</td></tr>
+    </tbody></table>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-text">4. Laporan Arus Kas</div><div class="divider-line"></div></div>
+  <div class="table-wrap">
+    <div style="padding:16px;background:var(--surface2);text-align:center;border-bottom:1px solid var(--border)">
+      <div style="font-family:'Fraunces',serif;font-size:16px;color:var(--text)">BERSIH JAYA</div>
+      <div style="font-size:13px;color:var(--muted)">LAPORAN ARUS KAS</div>
+      <div style="font-size:12px;color:var(--muted)">Untuk Periode Yang Berakhir 31 Januari 2025</div>
+    </div>
+    <table><tbody>
+      <tr><td class="td-bold" style="color:var(--accent)">AKTIVITAS OPERASIONAL</td><td></td></tr>
+      <tr><td style="padding-left:24px">Penerimaan dari pelanggan</td><td class="td-mono" style="text-align:right;color:var(--accent5)">Rp6.300.000</td></tr>
+      <tr><td style="padding-left:24px">Pembayaran gaji</td><td class="td-mono" style="text-align:right;color:var(--accent4)">(Rp1.000.000)</td></tr>
+      <tr><td style="padding-left:24px">Pembayaran listrik & air</td><td class="td-mono" style="text-align:right;color:var(--accent4)">(Rp300.000)</td></tr>
+      <tr><td style="padding-left:24px">Pembayaran sewa</td><td class="td-mono" style="text-align:right;color:var(--accent4)">(Rp3.000.000)</td></tr>
+      <tr><td class="td-bold">Kas Bersih dari Operasional</td><td class="td-mono td-bold" style="text-align:right">Rp2.000.000</td></tr>
+      <tr><td class="td-bold" style="color:var(--accent2)">AKTIVITAS INVESTASI</td><td></td></tr>
+      <tr><td style="padding-left:24px">Pembelian mesin</td><td class="td-mono" style="text-align:right;color:var(--accent4)">(Rp6.000.000)</td></tr>
+      <tr><td style="padding-left:24px">Pembelian perlengkapan</td><td class="td-mono" style="text-align:right;color:var(--accent4)">(Rp500.000)</td></tr>
+      <tr><td class="td-bold">Kas Bersih dari Investasi</td><td class="td-mono td-bold" style="text-align:right;color:var(--accent4)">(Rp6.500.000)</td></tr>
+      <tr><td class="td-bold" style="color:var(--accent3)">AKTIVITAS PENDANAAN</td><td></td></tr>
+      <tr><td style="padding-left:24px">Setor modal</td><td class="td-mono" style="text-align:right;color:var(--accent5)">Rp15.000.000</td></tr>
+      <tr><td style="padding-left:24px">Pinjam bank</td><td class="td-mono" style="text-align:right;color:var(--accent5)">Rp5.000.000</td></tr>
+      <tr><td style="padding-left:24px">Bayar utang mesin</td><td class="td-mono" style="text-align:right;color:var(--accent4)">(Rp2.000.000)</td></tr>
+      <tr><td style="padding-left:24px">Prive</td><td class="td-mono" style="text-align:right;color:var(--accent4)">(Rp500.000)</td></tr>
+      <tr><td class="td-bold">Kas Bersih dari Pendanaan</td><td class="td-mono td-bold" style="text-align:right">Rp17.500.000</td></tr>
+      <tr class="td-total"><td class="td-bold" style="color:var(--accent5)">Kas Akhir Periode</td><td class="td-mono td-bold" style="text-align:right;color:var(--accent5)">Rp13.000.000</td></tr>
+    </tbody></table>
+  </div>
+
+  <div class="world-box">
+    <div class="world-title">Di Dunia Kerja</div>
+    <div class="world-item"><div class="world-item-num">1.</div><div class="world-item-text"><strong>Heading wajib lengkap</strong> — nama perusahaan, nama laporan, periode. Kalau salah satu tidak ada, laporan dianggap tidak lengkap.</div></div>
+    <div class="world-item"><div class="world-item-num">2.</div><div class="world-item-text"><strong>CALK</strong> — Catatan atas Laporan Keuangan wajib ada di laporan resmi. Isinya penjelasan detail tiap akun dan kebijakan akuntansi.</div></div>
+    <div class="world-item"><div class="world-item-num">3.</div><div class="world-item-text"><strong>Laporan komparatif</strong> — laporan resmi menampilkan 2 periode berdampingan untuk perbandingan.</div></div>
+    <div class="world-item"><div class="world-item-num">4.</div><div class="world-item-text"><strong>Audit wajib</strong> — perusahaan publik wajib diaudit KAP. Deadline ke OJK: 90 hari setelah tahun buku berakhir.</div></div>
+  </div>
+</section>
+
+<!-- ⑧ JURNAL PENUTUP -->
+<section class="section" id="penutup">
+  <div class="section-header">
+    <div class="section-num">08 — Jurnal Penutup</div>
+    <div class="section-title">Jurnal Penutup (Closing Entries)</div>
+    <div class="section-desc">Menutup semua akun nominal supaya saldonya nol dan siap mulai dari awal di periode berikutnya.</div>
+  </div>
+
+  <div class="callout info"><div class="callout-icon">💡</div><div>Ibaratnya papan skor — setiap babak baru direset ke nol. Kalau tidak ditutup, saldo Januari nyambung ke Februari dan laporan jadi kacau!</div></div>
+
+  <div class="jurnal-box">
+    <div class="jurnal-header"><span>Langkah 1 — Tutup Pendapatan ke Ikhtisar L/R</span></div>
+    <div class="jurnal-row"><div class="jurnal-akun">Pendapatan Jasa</div><div class="jurnal-amount d">Rp5.800.000</div><div class="jurnal-amount k">—</div></div>
+    <div class="jurnal-row"><div class="jurnal-akun indent">Ikhtisar Laba Rugi</div><div class="jurnal-amount d">—</div><div class="jurnal-amount k">Rp5.800.000</div></div>
+    <div class="jurnal-note">Saldo Pendapatan = Rp0 ✓</div>
+  </div>
+
+  <div class="jurnal-box">
+    <div class="jurnal-header"><span>Langkah 2 — Tutup Beban ke Ikhtisar L/R</span></div>
+    <div class="jurnal-row"><div class="jurnal-akun">Ikhtisar Laba Rugi</div><div class="jurnal-amount d">Rp2.850.000</div><div class="jurnal-amount k">—</div></div>
+    <div class="jurnal-row"><div class="jurnal-akun indent">Beban Gaji</div><div class="jurnal-amount d">—</div><div class="jurnal-amount k">Rp1.600.000</div></div>
+    <div class="jurnal-row"><div class="jurnal-akun indent">Beban Sewa</div><div class="jurnal-amount d">—</div><div class="jurnal-amount k">Rp500.000</div></div>
+    <div class="jurnal-row"><div class="jurnal-akun indent">Beban Listrik & Air</div><div class="jurnal-amount d">—</div><div class="jurnal-amount k">Rp300.000</div></div>
+    <div class="jurnal-row"><div class="jurnal-akun indent">Beban Perlengkapan</div><div class="jurnal-amount d">—</div><div class="jurnal-amount k">Rp300.000</div></div>
+    <div class="jurnal-row"><div class="jurnal-akun indent">Beban Penyusutan Mesin</div><div class="jurnal-amount d">—</div><div class="jurnal-amount k">Rp150.000</div></div>
+    <div class="jurnal-note">Semua Beban = Rp0 ✓ | Ikhtisar L/R saldo = Rp2.950.000 (Kredit) = LABA</div>
+  </div>
+
+  <div class="jurnal-box">
+    <div class="jurnal-header"><span>Langkah 3 — Tutup Ikhtisar L/R ke Modal</span></div>
+    <div class="jurnal-row"><div class="jurnal-akun">Ikhtisar Laba Rugi</div><div class="jurnal-amount d">Rp2.950.000</div><div class="jurnal-amount k">—</div></div>
+    <div class="jurnal-row"><div class="jurnal-akun indent">Modal</div><div class="jurnal-amount d">—</div><div class="jurnal-amount k">Rp2.950.000</div></div>
+  </div>
+
+  <div class="jurnal-box">
+    <div class="jurnal-header"><span>Langkah 4 — Tutup Prive ke Modal</span></div>
+    <div class="jurnal-row"><div class="jurnal-akun">Modal</div><div class="jurnal-amount d">Rp500.000</div><div class="jurnal-amount k">—</div></div>
+    <div class="jurnal-row"><div class="jurnal-akun indent">Prive</div><div class="jurnal-amount d">—</div><div class="jurnal-amount k">Rp500.000</div></div>
+    <div class="jurnal-note">Modal Akhir = 15.000.000 + 2.950.000 − 500.000 = Rp17.450.000 ✓</div>
+  </div>
+
+  <div class="world-box">
+    <div class="world-title">Di Dunia Kerja</div>
+    <div class="world-item"><div class="world-item-num">1.</div><div class="world-item-text"><strong>Jurnal penutup dibuat SETELAH laporan keuangan selesai</strong> — laporan butuh saldo akun nominal yang masih lengkap.</div></div>
+    <div class="world-item"><div class="world-item-num">2.</div><div class="world-item-text"><strong>Year End Closing</strong> — di software akuntansi proses ini otomatis. Setelah itu periode di-lock.</div></div>
+    <div class="world-item"><div class="world-item-num">3.</div><div class="world-item-text"><strong>Dividen di PT</strong> — untuk Perseroan Terbatas, yang ditutup bukan Prive tapi Dividen. Modal jadi Retained Earnings.</div></div>
+  </div>
+</section>
+
+<!-- ⑨ NS SETELAH PENUTUPAN -->
+<section class="section" id="ns-penutupan">
+  <div class="section-header">
+    <div class="section-num">09 — NS Setelah Penutupan</div>
+    <div class="section-title">Neraca Saldo Setelah Penutupan</div>
+    <div class="section-desc">Langkah terakhir siklus akuntansi. Hanya berisi akun riil. Ini jadi saldo awal periode berikutnya.</div>
+  </div>
+
+  <div class="table-wrap">
+    <div style="padding:12px 16px;background:var(--surface2);font-family:var(--mono);font-size:11px;color:var(--muted);border-bottom:1px solid var(--border)">BERSIH JAYA — NS SETELAH PENUTUPAN — Per 31 Januari 2025</div>
+    <table>
+      <thead><tr><th>No.</th><th>Nama Akun</th><th>Debit</th><th>Kredit</th></tr></thead>
+      <tbody>
+        <tr><td class="td-mono">1101</td><td>Kas</td><td class="td-mono" style="color:var(--accent4)">11.700.000</td><td>—</td></tr>
+        <tr><td class="td-mono">1102</td><td>Piutang Usaha</td><td class="td-mono" style="color:var(--accent4)">800.000</td><td>—</td></tr>
+        <tr><td class="td-mono">1103</td><td>Perlengkapan</td><td class="td-mono" style="color:var(--accent4)">200.000</td><td>—</td></tr>
+        <tr><td class="td-mono">1104</td><td>Sewa Dibayar Dimuka</td><td class="td-mono" style="color:var(--accent4)">2.500.000</td><td>—</td></tr>
+        <tr><td class="td-mono">1201</td><td>Mesin</td><td class="td-mono" style="color:var(--accent4)">10.000.000</td><td>—</td></tr>
+        <tr><td class="td-mono">1202</td><td>Akum. Penyusutan Mesin</td><td>—</td><td class="td-mono" style="color:var(--accent3)">150.000</td></tr>
+        <tr><td class="td-mono">2101</td><td>Utang Usaha</td><td>—</td><td class="td-mono" style="color:var(--accent3)">2.000.000</td></tr>
+        <tr><td class="td-mono">2102</td><td>Utang Bank</td><td>—</td><td class="td-mono" style="color:var(--accent3)">5.000.000</td></tr>
+        <tr><td class="td-mono">2103</td><td>Utang Gaji</td><td>—</td><td class="td-mono" style="color:var(--accent3)">600.000</td></tr>
+        <tr><td class="td-mono">2104</td><td>Pendapatan Diterima Dimuka</td><td>—</td><td class="td-mono" style="color:var(--accent3)">1.000.000</td></tr>
+        <tr><td class="td-mono">3101</td><td>Modal</td><td>—</td><td class="td-mono" style="color:var(--accent3)">17.450.000</td></tr>
+        <tr class="td-total"><td></td><td class="td-bold">TOTAL</td><td class="td-mono td-bold" style="color:var(--accent5)">25.200.000</td><td class="td-mono td-bold" style="color:var(--accent5)">25.200.000</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout success"><div class="callout-icon">✅</div><div>Seimbang! Akun nominal sudah nol semua. Siklus akuntansi Januari 2025 selesai! 🎉</div></div>
+</section>
+
+<!-- +1 JURNAL PEMBALIK -->
+<section class="section" id="pembalik">
+  <div class="section-header">
+    <div class="section-num">+1 — Opsional</div>
+    <div class="section-title">Jurnal Pembalik (Reversing Entries)</div>
+    <div class="section-desc">Dibuat di awal periode baru — kebalikan dari jurnal penyesuaian tertentu — supaya tidak terjadi double counting.</div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Jurnal Penyesuaian</th><th>Perlu Dibalik?</th><th>Alasan</th></tr></thead>
+      <tbody>
+        <tr><td>Beban Masih Harus Dibayar</td><td><span class="badge badge-ok">✓ Ya</span></td><td class="td-muted">Supaya saat bayar tidak double catat</td></tr>
+        <tr><td>Pendapatan Masih Harus Diterima</td><td><span class="badge badge-ok">✓ Ya</span></td><td class="td-muted">Supaya saat terima tidak double catat</td></tr>
+        <tr><td>Perlengkapan Terpakai</td><td><span class="badge badge-no">✗ Tidak</span></td><td class="td-muted">Sudah final</td></tr>
+        <tr><td>Beban Dibayar Dimuka</td><td><span class="badge badge-no">✗ Tidak</span></td><td class="td-muted">Sudah final</td></tr>
+        <tr><td>Pendapatan Diterima Dimuka</td><td><span class="badge badge-no">✗ Tidak</span></td><td class="td-muted">Sudah final</td></tr>
+        <tr><td>Penyusutan</td><td><span class="badge badge-no">✗ Tidak</span></td><td class="td-muted">Sudah final</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="jurnal-box">
+    <div class="jurnal-header"><span>31 Januari — Jurnal Penyesuaian (Accrued Gaji)</span></div>
+    <div class="jurnal-row"><div class="jurnal-akun">Beban Gaji</div><div class="jurnal-amount d">Rp600.000</div><div class="jurnal-amount k">—</div></div>
+    <div class="jurnal-row"><div class="jurnal-akun indent">Utang Gaji</div><div class="jurnal-amount d">—</div><div class="jurnal-amount k">Rp600.000</div></div>
+  </div>
+
+  <div class="jurnal-box">
+    <div class="jurnal-header"><span>1 Februari — Jurnal Pembalik</span></div>
+    <div class="jurnal-row"><div class="jurnal-akun">Utang Gaji</div><div class="jurnal-amount d">Rp600.000</div><div class="jurnal-amount k">—</div></div>
+    <div class="jurnal-row"><div class="jurnal-akun indent">Beban Gaji</div><div class="jurnal-amount d">—</div><div class="jurnal-amount k">Rp600.000</div></div>
+  </div>
+
+  <div class="jurnal-box">
+    <div class="jurnal-header"><span>Februari — Bayar Gaji Total Rp1.600.000</span></div>
+    <div class="jurnal-row"><div class="jurnal-akun">Beban Gaji</div><div class="jurnal-amount d">Rp1.600.000</div><div class="jurnal-amount k">—</div></div>
+    <div class="jurnal-row"><div class="jurnal-akun indent">Kas</div><div class="jurnal-amount d">—</div><div class="jurnal-amount k">Rp1.600.000</div></div>
+    <div class="jurnal-note">Beban Gaji Februari neto = Rp1.000.000 ✓ (Rp600.000 sudah periode Januari)</div>
+  </div>
+</section>
+
+<!-- +2 KERTAS KERJA -->
+<section class="section" id="kertas-kerja">
+  <div class="section-header">
+    <div class="section-num">+2 — Opsional</div>
+    <div class="section-title">Kertas Kerja (Worksheet)</div>
+    <div class="section-desc">Alat bantu internal yang merangkum seluruh proses dari Neraca Saldo sampai Laporan Keuangan dalam satu tabel besar.</div>
+  </div>
+
+  <div class="callout info"><div class="callout-icon">📌</div><div>Bukan laporan resmi — ini alat bantu akuntan saja. Yang diserahkan ke manajemen tetap laporan keuangan formal.</div></div>
+
+  <div class="kk-wrap">
+    <table class="kk-table">
+      <thead>
+        <tr>
+          <th class="akun-col" rowspan="2">Nama Akun</th>
+          <th colspan="2">Neraca Saldo</th>
+          <th colspan="2">Penyesuaian</th>
+          <th colspan="2">NS Stlh Penyesuaian</th>
+          <th colspan="2">Laba Rugi</th>
+          <th colspan="2">Neraca</th>
+        </tr>
+        <tr><th>D</th><th>K</th><th>D</th><th>K</th><th>D</th><th>K</th><th>D</th><th>K</th><th>D</th><th>K</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="akun-col">Kas</td><td class="kk-d">11.700</td><td>—</td><td>—</td><td>—</td><td class="kk-d">11.700</td><td>—</td><td>—</td><td>—</td><td class="kk-d">11.700</td><td>—</td></tr>
+        <tr><td class="akun-col">Piutang Usaha</td><td>—</td><td>—</td><td class="kk-d">800</td><td>—</td><td class="kk-d">800</td><td>—</td><td>—</td><td>—</td><td class="kk-d">800</td><td>—</td></tr>
+        <tr><td class="akun-col">Perlengkapan</td><td class="kk-d">500</td><td>—</td><td>—</td><td class="kk-k">300</td><td class="kk-d">200</td><td>—</td><td>—</td><td>—</td><td class="kk-d">200</td><td>—</td></tr>
+        <tr><td class="akun-col">Sewa Dibayar Dimuka</td><td class="kk-d">3.000</td><td>—</td><td>—</td><td class="kk-k">500</td><td class="kk-d">2.500</td><td>—</td><td>—</td><td>—</td><td class="kk-d">2.500</td><td>—</td></tr>
+        <tr><td class="akun-col">Mesin</td><td class="kk-d">10.000</td><td>—</td><td>—</td><td>—</td><td class="kk-d">10.000</td><td>—</td><td>—</td><td>—</td><td class="kk-d">10.000</td><td>—</td></tr>
+        <tr><td class="akun-col">Akum. Peny. Mesin</td><td>—</td><td>—</td><td>—</td><td class="kk-k">150</td><td>—</td><td class="kk-k">150</td><td>—</td><td>—</td><td>—</td><td class="kk-k">150</td></tr>
+        <tr><td class="akun-col">Utang Usaha</td><td>—</td><td class="kk-k">2.000</td><td>—</td><td>—</td><td>—</td><td class="kk-k">2.000</td><td>—</td><td>—</td><td>—</td><td class="kk-k">2.000</td></tr>
+        <tr><td class="akun-col">Utang Bank</td><td>—</td><td class="kk-k">5.000</td><td>—</td><td>—</td><td>—</td><td class="kk-k">5.000</td><td>—</td><td>—</td><td>—</td><td class="kk-k">5.000</td></tr>
+        <tr><td class="akun-col">Utang Gaji</td><td>—</td><td>—</td><td>—</td><td class="kk-k">600</td><td>—</td><td class="kk-k">600</td><td>—</td><td>—</td><td>—</td><td class="kk-k">600</td></tr>
+        <tr><td class="akun-col">Pend. Diterima Dimuka</td><td>—</td><td>—</td><td>—</td><td class="kk-k">1.000</td><td>—</td><td class="kk-k">1.000</td><td>—</td><td>—</td><td>—</td><td class="kk-k">1.000</td></tr>
+        <tr><td class="akun-col">Modal</td><td>—</td><td class="kk-k">15.000</td><td>—</td><td>—</td><td>—</td><td class="kk-k">15.000</td><td>—</td><td>—</td><td>—</td><td class="kk-k">15.000</td></tr>
+        <tr><td class="akun-col">Prive</td><td class="kk-d">500</td><td>—</td><td>—</td><td>—</td><td class="kk-d">500</td><td>—</td><td>—</td><td>—</td><td class="kk-d">500</td><td>—</td></tr>
+        <tr><td class="akun-col">Pendapatan Jasa</td><td>—</td><td class="kk-k">5.000</td><td>—</td><td class="kk-k">800</td><td>—</td><td class="kk-k">5.800</td><td>—</td><td class="kk-k">5.800</td><td>—</td><td>—</td></tr>
+        <tr><td class="akun-col">Beban Gaji</td><td class="kk-d">1.000</td><td>—</td><td class="kk-d">600</td><td>—</td><td class="kk-d">1.600</td><td>—</td><td class="kk-d">1.600</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td class="akun-col">Beban Listrik & Air</td><td class="kk-d">300</td><td>—</td><td>—</td><td>—</td><td class="kk-d">300</td><td>—</td><td class="kk-d">300</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td class="akun-col">Beban Perlengkapan</td><td>—</td><td>—</td><td class="kk-d">300</td><td>—</td><td class="kk-d">300</td><td>—</td><td class="kk-d">300</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td class="akun-col">Beban Sewa</td><td>—</td><td>—</td><td class="kk-d">500</td><td>—</td><td class="kk-d">500</td><td>—</td><td class="kk-d">500</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td class="akun-col">Beban Penyusutan</td><td>—</td><td>—</td><td class="kk-d">150</td><td>—</td><td class="kk-d">150</td><td>—</td><td class="kk-d">150</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr class="total-row"><td class="akun-col">TOTAL</td><td class="kk-d">27.000</td><td class="kk-k">27.000</td><td class="kk-d">2.350</td><td class="kk-k">2.350</td><td class="kk-d">28.550</td><td class="kk-k">28.550</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr class="laba-row"><td class="akun-col">LABA BERSIH</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>2.950</td><td>—</td><td>—</td><td>2.950</td></tr>
+        <tr class="total-row"><td class="akun-col">TOTAL AKHIR</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="kk-d">5.800</td><td class="kk-k">5.800</td><td class="kk-d">25.700</td><td class="kk-k">25.700</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout success"><div class="callout-icon">✅</div><div>Laba Rugi balance (5.800 = 5.800) dan Neraca balance (25.700 = 25.700). Laba Bersih = Rp2.950.000! 🎉</div></div>
+</section>
+
+</div>
+</main>
+
+<script>
+const sections = document.querySelectorAll('.section');
+const navItems = document.querySelectorAll('.nav-item');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      navItems.forEach(item => {
+        item.classList.toggle('active', item.getAttribute('href') === '#' + id);
+      });
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px' });
+sections.forEach(s => observer.observe(s));
+navItems.forEach(item => {
+  item.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(item.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+</script>
+</body>
+</html>
