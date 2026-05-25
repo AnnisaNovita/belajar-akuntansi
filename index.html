@@ -1,988 +1,1119 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Belajar Akuntansi & Pajak — by Annisa Novita Ardana</title>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #0f172a;
-      --glass-bg: rgba(30, 41, 59, 0.45);
-      --glass-border: rgba(255, 255, 255, 0.08);
-      --glass-highlight: rgba(255, 255, 255, 0.15);
-      --text: #f8fafc;
-      --text-muted: #94a3b8;
-      
-      --pink: #ff3d9a;
-      --purple: #a855f7;
-      --blue: #3b82f6;
-      --green: #10b981;
-      --yellow: #fbbf24;
-      --orange: #ff6b35;
-      
-      --radius: 24px;
-      --radius-sm: 14px;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Belajar Akuntansi & Pajak — by Annisa Novita Ardana</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0f172a;
+        --glass-bg: rgba(30, 41, 59, 0.45);
+        --glass-border: rgba(255, 255, 255, 0.08);
+        --glass-highlight: rgba(255, 255, 255, 0.15);
+        --text: #f8fafc;
+        --text-muted: #94a3b8;
 
-    /* LIGHT THEME */
-    body.light-theme {
-      --bg: #fff8f0;
-      --glass-bg: rgba(255, 255, 255, 0.65);
-      --glass-border: rgba(0, 0, 0, 0.06);
-      --glass-highlight: rgba(255, 255, 255, 0.85);
-      --text: #1e293b;
-      --text-muted: #64748b;
-    }
+        --pink: #ff3d9a;
+        --purple: #a855f7;
+        --blue: #3b82f6;
+        --green: #10b981;
+        --yellow: #fbbf24;
+        --orange: #ff6b35;
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: "DM Sans", sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      overflow-x: hidden;
-      transition: background-color 0.3s ease, color 0.3s ease;
-      position: relative;
-    }
-
-    /* Background Neon Blobs */
-    .blob {
-      position: absolute;
-      border-radius: 50%;
-      pointer-events: none;
-      filter: blur(80px);
-      opacity: 0.25;
-      z-index: 0;
-      animation: float 20s infinite alternate;
-    }
-    .blob-1 {
-      width: 450px;
-      height: 450px;
-      background: var(--pink);
-      top: -150px;
-      right: -80px;
-    }
-    .blob-2 {
-      width: 320px;
-      height: 320px;
-      background: var(--purple);
-      bottom: 20%;
-      left: -80px;
-      animation-delay: -5s;
-    }
-    .blob-3 {
-      width: 350px;
-      height: 350px;
-      background: var(--blue);
-      top: 40%;
-      right: 10%;
-      animation-delay: -10s;
-    }
-
-    @keyframes float {
-      0% { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(50px, 80px) scale(1.1); }
-    }
-
-    /* HEADER & LIGHT/DARK TOGGLE */
-    header {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 30px 24px 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: relative;
-      z-index: 10;
-    }
-    .header-logo {
-      font-family: "Syne", sans-serif;
-      font-weight: 800;
-      font-size: 18px;
-      color: var(--text);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    
-    .theme-toggle-btn {
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      color: var(--text);
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      transition: transform 0.2s, background-color 0.2s;
-    }
-    .theme-toggle-btn:hover {
-      transform: scale(1.08);
-      background: var(--glass-highlight);
-    }
-
-    /* HERO */
-    .hero {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 40px 24px;
-      position: relative;
-      z-index: 10;
-      text-align: center;
-    }
-    
-    .hero-glass {
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-radius: var(--radius);
-      padding: 48px 32px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .hero-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255, 61, 154, 0.15);
-      border: 1.5px solid rgba(255, 61, 154, 0.3);
-      color: var(--pink);
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      padding: 7px 18px;
-      border-radius: 99px;
-      margin-bottom: 24px;
-      font-family: "Syne", sans-serif;
-    }
-    body.light-theme .hero-tag {
-      background: rgba(255, 61, 154, 0.1);
-      color: #e11d48;
-    }
-
-    .hero h1 {
-      font-family: "Syne", sans-serif;
-      font-size: clamp(30px, 6vw, 52px);
-      font-weight: 800;
-      line-height: 1.15;
-      margin-bottom: 16px;
-      color: #fff;
-    }
-    body.light-theme .hero h1 {
-      color: #1e293b;
-    }
-    .hero h1 .hi-1 { color: var(--yellow); }
-    .hero h1 .hi-2 { color: #a5f3fc; }
-    body.light-theme .hero h1 .hi-2 { color: var(--blue); }
-
-    .hero p {
-      color: var(--text-muted);
-      font-size: 15px;
-      line-height: 1.7;
-      max-width: 580px;
-      margin-bottom: 32px;
-    }
-
-    /* AUTHOR CARD */
-    .author-card {
-      display: inline-flex;
-      align-items: center;
-      gap: 14px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--glass-border);
-      border-radius: 99px;
-      padding: 8px 18px 8px 8px;
-      margin-bottom: 32px;
-    }
-    body.light-theme .author-card {
-      background: rgba(0, 0, 0, 0.03);
-    }
-    .author-avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--pink), var(--purple));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: "Syne", sans-serif;
-      font-size: 15px;
-      font-weight: 800;
-      color: #fff;
-    }
-    .author-info {
-      display: flex;
-      flex-direction: column;
-      text-align: left;
-      gap: 1px;
-    }
-    .author-name {
-      font-family: "Syne", sans-serif;
-      font-size: 13.5px;
-      font-weight: 700;
-      color: var(--text);
-    }
-    .author-role {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    /* STATS */
-    .hero-stats {
-      display: flex;
-      gap: 28px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .stat {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-    .stat-num {
-      font-family: "Syne", sans-serif;
-      font-size: 32px;
-      font-weight: 800;
-      background: linear-gradient(135deg, var(--yellow), var(--orange));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .stat-label {
-      font-size: 12px;
-      color: var(--text-muted);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      font-weight: 700;
-    }
-
-    /* MAIN CONTENT */
-    .content {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 0 24px 80px;
-      position: relative;
-      z-index: 10;
-    }
-
-    /* SEARCH & FILTER AREA */
-    .controls-panel {
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-radius: var(--radius);
-      padding: 24px;
-      margin-bottom: 40px;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    
-    .search-wrapper {
-      position: relative;
-      display: flex;
-      align-items: center;
-    }
-    .search-icon {
-      position: absolute;
-      left: 18px;
-      font-size: 18px;
-      pointer-events: none;
-    }
-    .search-input {
-      width: 100%;
-      background: rgba(0, 0, 0, 0.2);
-      border: 1.5px solid var(--glass-border);
-      border-radius: var(--radius-sm);
-      padding: 14px 18px 14px 50px;
-      color: #fff;
-      font-size: 15px;
-      font-family: inherit;
-      outline: none;
-      transition: border-color 0.2s, background-color 0.2s;
-    }
-    body.light-theme .search-input {
-      background: rgba(255, 255, 255, 0.85);
-      color: #1e293b;
-    }
-    .search-input:focus {
-      border-color: var(--pink);
-      background: rgba(0, 0, 0, 0.3);
-    }
-    body.light-theme .search-input:focus {
-      background: #fff;
-    }
-
-    .filter-wrapper {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    .filter-pill {
-      background: rgba(0, 0, 0, 0.12);
-      border: 1px solid var(--glass-border);
-      color: var(--text-muted);
-      padding: 10px 18px;
-      border-radius: 99px;
-      font-family: "Syne", sans-serif;
-      font-weight: 700;
-      font-size: 12.5px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    body.light-theme .filter-pill {
-      background: rgba(255, 255, 255, 0.5);
-    }
-    .filter-pill:hover {
-      color: var(--text);
-      background: var(--glass-highlight);
-    }
-    .filter-pill.active {
-      background: var(--pink);
-      color: #fff;
-      border-color: transparent;
-      box-shadow: 0 4px 12px rgba(255, 61, 154, 0.25);
-    }
-
-    .section-title {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-    .sec-line {
-      flex: 1;
-      height: 1.5px;
-      background: var(--glass-border);
-    }
-    .sec-text {
-      font-family: "Syne", sans-serif;
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-
-    /* GRID FOR MATERIALS */
-    .materi-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 20px;
-      margin-bottom: 48px;
-    }
-
-    .materi-card {
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-radius: var(--radius);
-      padding: 24px;
-      text-decoration: none;
-      color: var(--text);
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
-    }
-    .materi-card::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 5px;
-      background: var(--c, var(--orange));
-    }
-    .materi-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-      border-color: var(--c, var(--orange));
-    }
-
-    .card-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 14px;
-    }
-    .card-emoji { font-size: 36px; line-height: 1; }
-    .card-badge {
-      font-family: "Syne", sans-serif;
-      font-weight: 800;
-      font-size: 9.5px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 4px 10px;
-      border-radius: 99px;
-      background: var(--c, var(--orange));
-      color: #fff;
-    }
-
-    .card-title {
-      font-family: "Syne", sans-serif;
-      font-weight: 800;
-      font-size: 17.5px;
-      line-height: 1.35;
-      margin-bottom: 10px;
-    }
-    .card-desc {
-      font-size: 13px;
-      color: var(--text-muted);
-      line-height: 1.6;
-      margin-bottom: 16px;
-      flex: 1;
-    }
-
-    .card-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 18px;
-    }
-    .card-tag {
-      font-size: 10.5px;
-      font-weight: 700;
-      padding: 3px 9px;
-      border-radius: 99px;
-      background: color-mix(in srgb, var(--c, var(--orange)) 12%, transparent);
-      color: var(--c, var(--orange));
-      border: 1px solid color-mix(in srgb, var(--c, var(--orange)) 25%, transparent);
-    }
-
-    .card-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: 14px;
-      border-top: 1px dashed var(--glass-border);
-    }
-    .card-type {
-      font-family: "Syne", sans-serif;
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-    .card-arrow {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: var(--c, var(--orange));
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 15px;
-      font-weight: 700;
-      box-shadow: 0 4px 10px color-mix(in srgb, var(--c, var(--orange)) 30%, transparent);
-      transition: transform 0.2s;
-    }
-    .materi-card:hover .card-arrow {
-      transform: translate(3px, -3px);
-    }
-
-    /* KUIS BANNER */
-    .kuis-banner {
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-radius: var(--radius);
-      padding: 36px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 24px;
-      flex-wrap: wrap;
-      text-decoration: none;
-      color: var(--text);
-      margin-bottom: 40px;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.25s, border-color 0.25s;
-    }
-    .kuis-banner::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; bottom: 0; width: 6px;
-      background: linear-gradient(to bottom, var(--pink), var(--purple));
-    }
-    .kuis-banner:hover {
-      transform: translateY(-4px);
-      border-color: var(--pink);
-    }
-    .kuis-banner-inner {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .kuis-tag {
-      background: rgba(255, 61, 154, 0.12);
-      border: 1px solid rgba(255, 61, 154, 0.25);
-      color: var(--pink);
-      font-size: 10.5px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      padding: 4px 12px;
-      border-radius: 99px;
-      width: fit-content;
-      font-family: "Syne", sans-serif;
-    }
-    .kuis-title {
-      font-family: "Syne", sans-serif;
-      font-weight: 800;
-      font-size: 24px;
-    }
-    .kuis-desc {
-      font-size: 13.5px;
-      color: var(--text-muted);
-      line-height: 1.6;
-      max-width: 420px;
-    }
-    .kuis-btn {
-      background: var(--pink);
-      color: #fff;
-      font-family: "Syne", sans-serif;
-      font-weight: 800;
-      font-size: 13.5px;
-      padding: 14px 28px;
-      border-radius: 99px;
-      box-shadow: 0 6px 16px rgba(255, 61, 154, 0.3);
-      transition: transform 0.2s;
-    }
-    .kuis-banner:hover .kuis-btn {
-      transform: scale(1.05);
-    }
-
-    /* TOOLS BANNER */
-    .tools-banner {
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-radius: var(--radius);
-      padding: 36px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 24px;
-      flex-wrap: wrap;
-      text-decoration: none;
-      color: var(--text);
-      margin-bottom: 48px;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.25s, border-color 0.25s;
-    }
-    .tools-banner::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; bottom: 0; width: 6px;
-      background: linear-gradient(to bottom, var(--blue), var(--green));
-    }
-    .tools-banner:hover {
-      transform: translateY(-4px);
-      border-color: var(--blue);
-    }
-    .tools-btn {
-      background: var(--blue);
-      color: #fff;
-      font-family: "Syne", sans-serif;
-      font-weight: 800;
-      font-size: 13.5px;
-      padding: 14px 28px;
-      border-radius: 99px;
-      box-shadow: 0 6px 16px rgba(59, 130, 246, 0.3);
-      transition: transform 0.2s;
-    }
-    .tools-banner:hover .tools-btn {
-      transform: scale(1.05);
-    }
-
-    /* EXCEL DOWNLOAD CARD SPECIAL */
-    .excel-card {
-      border-color: color-mix(in srgb, var(--c, var(--pink)) 30%, transparent);
-    }
-    .excel-download-btn {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      text-decoration: none;
-      background: color-mix(in srgb, var(--c, var(--pink)) 15%, transparent);
-      color: var(--c, var(--pink));
-      font-family: "Syne", sans-serif;
-      font-weight: 800;
-      font-size: 12px;
-      padding: 8px 16px;
-      border-radius: var(--radius-sm);
-      border: 1px solid color-mix(in srgb, var(--c, var(--pink)) 35%, transparent);
-      transition: all 0.2s;
-    }
-    .excel-card:hover .excel-download-btn {
-      background: var(--c, var(--pink));
-      color: #fff;
-      border-color: transparent;
-      box-shadow: 0 4px 12px color-mix(in srgb, var(--c, var(--pink)) 20%, transparent);
-    }
-
-    /* STUDY GUIDE */
-    .guide-box {
-      background: var(--glass-bg);
-      border: 1.5px dashed var(--glass-border);
-      border-radius: var(--radius);
-      padding: 32px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    }
-    .guide-title {
-      font-family: "Syne", sans-serif;
-      font-weight: 800;
-      font-size: 16px;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .guide-steps {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
-    }
-    @media (min-width: 768px) {
-      .guide-steps {
-        grid-template-columns: 1fr 1fr;
+        --radius: 24px;
+        --radius-sm: 14px;
       }
-    }
-    .g-step {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      padding: 12px;
-    }
-    .g-num {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--purple), var(--blue));
-      color: #fff;
-      font-family: "Syne", sans-serif;
-      font-size: 13px;
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-    .g-text {
-      font-size: 13.5px;
-      line-height: 1.6;
-      color: var(--text-muted);
-    }
 
-    /* FOOTER */
-    footer {
-      border-top: 1px solid var(--glass-border);
-      background: #090d16;
-      padding: 40px 24px;
-      text-align: center;
-      position: relative;
-      z-index: 10;
-    }
-    body.light-theme footer {
-      background: #fff8f0;
-    }
-    .footer-name {
-      font-family: "Syne", sans-serif;
-      font-weight: 800;
-      font-size: 16px;
-      background: linear-gradient(135deg, var(--yellow), var(--pink), var(--purple));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 6px;
-    }
-    .footer-sub {
-      font-size: 12.5px;
-      color: var(--text-muted);
-    }
-    .footer-sub a {
-      color: var(--text);
-      text-decoration: none;
-      font-weight: 500;
-    }
-    .footer-dots {
-      display: flex;
-      justify-content: center;
-      gap: 6px;
-      margin-top: 16px;
-    }
-    .footer-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-    }
-  </style>
-</head>
-<body>
+      /* LIGHT THEME */
+      body.light-theme {
+        --bg: #fff8f0;
+        --glass-bg: rgba(255, 255, 255, 0.65);
+        --glass-border: rgba(0, 0, 0, 0.06);
+        --glass-highlight: rgba(255, 255, 255, 0.85);
+        --text: #1e293b;
+        --text-muted: #64748b;
+      }
 
-  <!-- Background blobs -->
-  <div class="blob blob-1"></div>
-  <div class="blob blob-2"></div>
-  <div class="blob blob-3"></div>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-  <!-- HEADER -->
-  <header>
-    <a href="index.html" class="header-logo">
-      <span style="font-size:24px;">⚖️</span>
-      <span style="font-weight:800; font-family:'Syne', sans-serif;">Belajar Akuntansi</span>
-    </a>
-    <div style="display:flex; gap:12px; align-items:center;">
-      <button class="theme-toggle-btn" onclick="toggleTheme()" id="theme-btn" title="Ganti Tema">🌓</button>
-    </div>
-  </header>
+      body {
+        font-family: "DM Sans", sans-serif;
+        background-color: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        overflow-x: hidden;
+        transition:
+          background-color 0.3s ease,
+          color 0.3s ease;
+        position: relative;
+      }
 
-  <!-- HERO SECTION -->
-  <section class="hero">
-    <div class="hero-glass">
-      <div class="hero-tag">Aesthetic Study Hub</div>
-      <h1>Akuntansi & Pajak itu<br><span class="hi-1">seru</span> &amp; <span class="hi-2">mudah!</span></h1>
-      <p>Kumpulan materi perkuliahan dasar akuntansi, siklus pembukuan, perpajakan Indonesia, kalkulator interaktif, dan lembar kerja latihan Excel mandiri.</p>
-      
-      <!-- Pembuat Konten -->
-      <div class="author-card">
-        <div class="author-avatar">AN</div>
-        <div class="author-info">
-          <div class="author-name">Annisa Novita Ardana</div>
-          <div class="author-role">Pembuat Konten &amp; Kurator Materi</div>
-        </div>
+      /* Background Neon Blobs */
+      .blob {
+        position: absolute;
+        border-radius: 50%;
+        pointer-events: none;
+        filter: blur(80px);
+        opacity: 0.25;
+        z-index: 0;
+        animation: float 20s infinite alternate;
+      }
+      .blob-1 {
+        width: 450px;
+        height: 450px;
+        background: var(--pink);
+        top: -150px;
+        right: -80px;
+      }
+      .blob-2 {
+        width: 320px;
+        height: 320px;
+        background: var(--purple);
+        bottom: 20%;
+        left: -80px;
+        animation-delay: -5s;
+      }
+      .blob-3 {
+        width: 350px;
+        height: 350px;
+        background: var(--blue);
+        top: 40%;
+        right: 10%;
+        animation-delay: -10s;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translate(0, 0) scale(1);
+        }
+        100% {
+          transform: translate(50px, 80px) scale(1.1);
+        }
+      }
+
+      /* HEADER & LIGHT/DARK TOGGLE */
+      header {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 30px 24px 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        z-index: 10;
+      }
+      .header-logo {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 18px;
+        color: var(--text);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .theme-toggle-btn {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        color: var(--text);
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        transition:
+          transform 0.2s,
+          background-color 0.2s;
+      }
+      .theme-toggle-btn:hover {
+        transform: scale(1.08);
+        background: var(--glass-highlight);
+      }
+
+      /* HERO */
+      .hero {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 40px 24px;
+        position: relative;
+        z-index: 10;
+        text-align: center;
+      }
+
+      .hero-glass {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-radius: var(--radius);
+        padding: 48px 32px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .hero-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 61, 154, 0.15);
+        border: 1.5px solid rgba(255, 61, 154, 0.3);
+        color: var(--pink);
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 7px 18px;
+        border-radius: 99px;
+        margin-bottom: 24px;
+        font-family: "Syne", sans-serif;
+      }
+      body.light-theme .hero-tag {
+        background: rgba(255, 61, 154, 0.1);
+        color: #e11d48;
+      }
+
+      .hero h1 {
+        font-family: "Syne", sans-serif;
+        font-size: clamp(30px, 6vw, 52px);
+        font-weight: 800;
+        line-height: 1.15;
+        margin-bottom: 16px;
+        color: #fff;
+      }
+      body.light-theme .hero h1 {
+        color: #1e293b;
+      }
+      .hero h1 .hi-1 {
+        color: var(--yellow);
+      }
+      .hero h1 .hi-2 {
+        color: #a5f3fc;
+      }
+      body.light-theme .hero h1 .hi-2 {
+        color: var(--blue);
+      }
+
+      .hero p {
+        color: var(--text-muted);
+        font-size: 15px;
+        line-height: 1.7;
+        max-width: 580px;
+        margin-bottom: 32px;
+      }
+
+      /* AUTHOR CARD */
+      .author-card {
+        display: inline-flex;
+        align-items: center;
+        gap: 14px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--glass-border);
+        border-radius: 99px;
+        padding: 8px 18px 8px 8px;
+        margin-bottom: 32px;
+      }
+      body.light-theme .author-card {
+        background: rgba(0, 0, 0, 0.03);
+      }
+      .author-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--pink), var(--purple));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Syne", sans-serif;
+        font-size: 15px;
+        font-weight: 800;
+        color: #fff;
+      }
+      .author-info {
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        gap: 1px;
+      }
+      .author-name {
+        font-family: "Syne", sans-serif;
+        font-size: 13.5px;
+        font-weight: 700;
+        color: var(--text);
+      }
+      .author-role {
+        font-size: 11px;
+        color: var(--text-muted);
+      }
+
+      /* STATS */
+      .hero-stats {
+        display: flex;
+        gap: 28px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .stat {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+      .stat-num {
+        font-family: "Syne", sans-serif;
+        font-size: 32px;
+        font-weight: 800;
+        background: linear-gradient(135deg, var(--yellow), var(--orange));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .stat-label {
+        font-size: 12px;
+        color: var(--text-muted);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+
+      /* MAIN CONTENT */
+      .content {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 24px 80px;
+        position: relative;
+        z-index: 10;
+      }
+
+      /* SEARCH & FILTER AREA */
+      .controls-panel {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-radius: var(--radius);
+        padding: 24px;
+        margin-bottom: 40px;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .search-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+      .search-icon {
+        position: absolute;
+        left: 18px;
+        font-size: 18px;
+        pointer-events: none;
+      }
+      .search-input {
+        width: 100%;
+        background: rgba(0, 0, 0, 0.2);
+        border: 1.5px solid var(--glass-border);
+        border-radius: var(--radius-sm);
+        padding: 14px 18px 14px 50px;
+        color: #fff;
+        font-size: 15px;
+        font-family: inherit;
+        outline: none;
+        transition:
+          border-color 0.2s,
+          background-color 0.2s;
+      }
+      body.light-theme .search-input {
+        background: rgba(255, 255, 255, 0.85);
+        color: #1e293b;
+      }
+      .search-input:focus {
+        border-color: var(--pink);
+        background: rgba(0, 0, 0, 0.3);
+      }
+      body.light-theme .search-input:focus {
+        background: #fff;
+      }
+
+      .filter-wrapper {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .filter-pill {
+        background: rgba(0, 0, 0, 0.12);
+        border: 1px solid var(--glass-border);
+        color: var(--text-muted);
+        padding: 10px 18px;
+        border-radius: 99px;
+        font-family: "Syne", sans-serif;
+        font-weight: 700;
+        font-size: 12.5px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      body.light-theme .filter-pill {
+        background: rgba(255, 255, 255, 0.5);
+      }
+      .filter-pill:hover {
+        color: var(--text);
+        background: var(--glass-highlight);
+      }
+      .filter-pill.active {
+        background: var(--pink);
+        color: #fff;
+        border-color: transparent;
+        box-shadow: 0 4px 12px rgba(255, 61, 154, 0.25);
+      }
+
+      .section-title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 24px;
+      }
+      .sec-line {
+        flex: 1;
+        height: 1.5px;
+        background: var(--glass-border);
+      }
+      .sec-text {
+        font-family: "Syne", sans-serif;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+      }
+
+      /* GRID FOR MATERIALS */
+      .materi-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
+        margin-bottom: 48px;
+      }
+
+      .materi-card {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-radius: var(--radius);
+        padding: 24px;
+        text-decoration: none;
+        color: var(--text);
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+        transition:
+          transform 0.25s,
+          box-shadow 0.25s,
+          border-color 0.25s;
+      }
+      .materi-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: var(--c, var(--orange));
+      }
+      .materi-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        border-color: var(--c, var(--orange));
+      }
+
+      .card-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 14px;
+      }
+      .card-emoji {
+        font-size: 36px;
+        line-height: 1;
+      }
+      .card-badge {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 9.5px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 4px 10px;
+        border-radius: 99px;
+        background: var(--c, var(--orange));
+        color: #fff;
+      }
+
+      .card-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 17.5px;
+        line-height: 1.35;
+        margin-bottom: 10px;
+      }
+      .card-desc {
+        font-size: 13px;
+        color: var(--text-muted);
+        line-height: 1.6;
+        margin-bottom: 16px;
+        flex: 1;
+      }
+
+      .card-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-bottom: 18px;
+      }
+      .card-tag {
+        font-size: 10.5px;
+        font-weight: 700;
+        padding: 3px 9px;
+        border-radius: 99px;
+        background: color-mix(
+          in srgb,
+          var(--c, var(--orange)) 12%,
+          transparent
+        );
+        color: var(--c, var(--orange));
+        border: 1px solid
+          color-mix(in srgb, var(--c, var(--orange)) 25%, transparent);
+      }
+
+      .card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 14px;
+        border-top: 1px dashed var(--glass-border);
+      }
+      .card-type {
+        font-family: "Syne", sans-serif;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+      }
+      .card-arrow {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: var(--c, var(--orange));
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 15px;
+        font-weight: 700;
+        box-shadow: 0 4px 10px
+          color-mix(in srgb, var(--c, var(--orange)) 30%, transparent);
+        transition: transform 0.2s;
+      }
+      .materi-card:hover .card-arrow {
+        transform: translate(3px, -3px);
+      }
+
+      /* KUIS BANNER */
+      .kuis-banner {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-radius: var(--radius);
+        padding: 36px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 24px;
+        flex-wrap: wrap;
+        text-decoration: none;
+        color: var(--text);
+        margin-bottom: 40px;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+        position: relative;
+        overflow: hidden;
+        transition:
+          transform 0.25s,
+          border-color 0.25s;
+      }
+      .kuis-banner::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 6px;
+        background: linear-gradient(to bottom, var(--pink), var(--purple));
+      }
+      .kuis-banner:hover {
+        transform: translateY(-4px);
+        border-color: var(--pink);
+      }
+      .kuis-banner-inner {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .kuis-tag {
+        background: rgba(255, 61, 154, 0.12);
+        border: 1px solid rgba(255, 61, 154, 0.25);
+        color: var(--pink);
+        font-size: 10.5px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        padding: 4px 12px;
+        border-radius: 99px;
+        width: fit-content;
+        font-family: "Syne", sans-serif;
+      }
+      .kuis-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 24px;
+      }
+      .kuis-desc {
+        font-size: 13.5px;
+        color: var(--text-muted);
+        line-height: 1.6;
+        max-width: 420px;
+      }
+      .kuis-btn {
+        background: var(--pink);
+        color: #fff;
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 13.5px;
+        padding: 14px 28px;
+        border-radius: 99px;
+        box-shadow: 0 6px 16px rgba(255, 61, 154, 0.3);
+        transition: transform 0.2s;
+      }
+      .kuis-banner:hover .kuis-btn {
+        transform: scale(1.05);
+      }
+
+      /* TOOLS BANNER */
+      .tools-banner {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-radius: var(--radius);
+        padding: 36px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 24px;
+        flex-wrap: wrap;
+        text-decoration: none;
+        color: var(--text);
+        margin-bottom: 48px;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+        position: relative;
+        overflow: hidden;
+        transition:
+          transform 0.25s,
+          border-color 0.25s;
+      }
+      .tools-banner::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 6px;
+        background: linear-gradient(to bottom, var(--blue), var(--green));
+      }
+      .tools-banner:hover {
+        transform: translateY(-4px);
+        border-color: var(--blue);
+      }
+      .tools-btn {
+        background: var(--blue);
+        color: #fff;
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 13.5px;
+        padding: 14px 28px;
+        border-radius: 99px;
+        box-shadow: 0 6px 16px rgba(59, 130, 246, 0.3);
+        transition: transform 0.2s;
+      }
+      .tools-banner:hover .tools-btn {
+        transform: scale(1.05);
+      }
+
+      /* EXCEL DOWNLOAD CARD SPECIAL */
+      .excel-card {
+        border-color: color-mix(
+          in srgb,
+          var(--c, var(--pink)) 30%,
+          transparent
+        );
+      }
+      .excel-download-btn {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        text-decoration: none;
+        background: color-mix(in srgb, var(--c, var(--pink)) 15%, transparent);
+        color: var(--c, var(--pink));
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 12px;
+        padding: 8px 16px;
+        border-radius: var(--radius-sm);
+        border: 1px solid
+          color-mix(in srgb, var(--c, var(--pink)) 35%, transparent);
+        transition: all 0.2s;
+      }
+      .excel-card:hover .excel-download-btn {
+        background: var(--c, var(--pink));
+        color: #fff;
+        border-color: transparent;
+        box-shadow: 0 4px 12px
+          color-mix(in srgb, var(--c, var(--pink)) 20%, transparent);
+      }
+
+      /* STUDY GUIDE */
+      .guide-box {
+        background: var(--glass-bg);
+        border: 1.5px dashed var(--glass-border);
+        border-radius: var(--radius);
+        padding: 32px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      }
+      .guide-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 16px;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .guide-steps {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      @media (min-width: 768px) {
+        .guide-steps {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      .g-step {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 12px;
+      }
+      .g-num {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--purple), var(--blue));
+        color: #fff;
+        font-family: "Syne", sans-serif;
+        font-size: 13px;
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+      .g-text {
+        font-size: 13.5px;
+        line-height: 1.6;
+        color: var(--text-muted);
+      }
+
+      /* FOOTER */
+      footer {
+        border-top: 1px solid var(--glass-border);
+        background: #090d16;
+        padding: 40px 24px;
+        text-align: center;
+        position: relative;
+        z-index: 10;
+      }
+      body.light-theme footer {
+        background: #fff8f0;
+      }
+      .footer-name {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 16px;
+        background: linear-gradient(
+          135deg,
+          var(--yellow),
+          var(--pink),
+          var(--purple)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 6px;
+      }
+      .footer-sub {
+        font-size: 12.5px;
+        color: var(--text-muted);
+      }
+      .footer-sub a {
+        color: var(--text);
+        text-decoration: none;
+        font-weight: 500;
+      }
+      .footer-dots {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        margin-top: 16px;
+      }
+      .footer-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Background blobs -->
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <!-- HEADER -->
+    <header>
+      <a href="index.html" class="header-logo">
+        <span style="font-size: 24px">⚖️</span>
+        <span
+          style="font-weight: 800; font-family: &quot;Syne&quot;, sans-serif"
+          >Belajar Akuntansi</span
+        >
+      </a>
+      <div style="display: flex; gap: 12px; align-items: center">
+        <button
+          class="theme-toggle-btn"
+          onclick="toggleTheme()"
+          id="theme-btn"
+          title="Ganti Tema"
+        >
+          🌓
+        </button>
       </div>
+    </header>
 
-      <!-- Stats -->
-      <div class="hero-stats">
-        <div class="stat">
-          <div class="stat-num" id="stat-materi">5</div>
-          <div class="stat-label">Materi Bab</div>
-        </div>
-        <div class="stat" style="margin: 0 24px;">
-          <div class="stat-num" id="stat-latihan">2</div>
-          <div class="stat-label">File Latihan</div>
-        </div>
-        <div class="stat">
-          <div class="stat-num">50</div>
-          <div class="stat-label">Kuis Interaktif</div>
-        </div>
-      </div>
-    </div>
-  </section>
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <div class="hero-glass">
+        <div class="hero-tag">Study Hub</div>
+        <h1>
+          Akuntansi & Pajak itu<br /><span class="hi-1">seru</span> &amp;
+          <span class="hi-2">mudah!</span>
+        </h1>
+        <p>
+          Kumpulan materi perkuliahan Akuntansi, Perpajakan Indonesia,
+          Kalkulator interaktif, dan lembar kerja latihan Excel mandiri.
+        </p>
 
-  <!-- CONTENT SECTION -->
-  <main class="content">
+        <!-- Pembuat Konten -->
+        <div class="author-card">
+          <div class="author-avatar">AN</div>
+          <div class="author-info">
+            <div class="author-name">Annisa Novita Ardana</div>
+            <div class="author-role">Pembuat Konten &amp; Kurator Materi</div>
+          </div>
+        </div>
 
-    <!-- SEARCH & FILTER PANEL -->
-    <section class="controls-panel">
-      <div class="search-wrapper">
-        <span class="search-icon">🔍</span>
-        <input type="text" id="search-bar" class="search-input" placeholder="Cari judul materi, tag, topik perpajakan, atau lembar Excel..." onkeyup="filterItems()">
-      </div>
-      <div class="filter-wrapper">
-        <button class="filter-pill active" onclick="setFilter('all', this)">🌈 Semua Konten</button>
-        <button class="filter-pill" onclick="setFilter('akuntansi', this)">📖 Teori Akuntansi</button>
-        <button class="filter-pill" onclick="setFilter('pajak', this)">🧾 Perpajakan Indonesia</button>
-        <button class="filter-pill" onclick="setFilter('excel', this)">📊 Lembar Latihan Excel</button>
+        <!-- Stats -->
+        <div class="hero-stats">
+          <div class="stat">
+            <div class="stat-num" id="stat-materi">5</div>
+            <div class="stat-label">Materi Bab</div>
+          </div>
+          <div class="stat" style="margin: 0 24px">
+            <div class="stat-num" id="stat-latihan">2</div>
+            <div class="stat-label">File Latihan</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">50</div>
+            <div class="stat-label">Kuis Interaktif</div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- MATERI SEKSI -->
-    <div class="section-title">
-      <div class="sec-line"></div>
-      <div class="sec-text" id="sec-materi-title">📖 Ringkasan Materi Pelajaran</div>
-      <div class="sec-line"></div>
-    </div>
+    <!-- CONTENT SECTION -->
+    <main class="content">
+      <!-- SEARCH & FILTER PANEL -->
+      <section class="controls-panel">
+        <div class="search-wrapper">
+          <span class="search-icon">🔍</span>
+          <input
+            type="text"
+            id="search-bar"
+            class="search-input"
+            placeholder="Cari judul materi, tag, topik perpajakan, atau lembar Excel..."
+            onkeyup="filterItems()"
+          />
+        </div>
+        <div class="filter-wrapper">
+          <button class="filter-pill active" onclick="setFilter('all', this)">
+            🌈 Semua Konten
+          </button>
+          <button class="filter-pill" onclick="setFilter('akuntansi', this)">
+            📖 Teori Akuntansi
+          </button>
+          <button class="filter-pill" onclick="setFilter('pajak', this)">
+            🧾 Perpajakan Indonesia
+          </button>
+          <button class="filter-pill" onclick="setFilter('excel', this)">
+            📊 Lembar Latihan Excel
+          </button>
+        </div>
+      </section>
 
-    <!-- Dynamic Material Grid -->
-    <div class="materi-grid" id="materi-container">
-      <p style="text-align:center; grid-column:1/-1; color:var(--text-muted);">Sedang mengambil data materi...</p>
-    </div>
-
-    <!-- EXCEL SEKSI -->
-    <div class="section-title" id="sec-excel-title-wrapper">
-      <div class="sec-line"></div>
-      <div class="sec-text">📊 Unduh Latihan Mandiri (Excel)</div>
-      <div class="sec-line"></div>
-    </div>
-
-    <!-- Dynamic Excel Downloads Grid -->
-    <div class="materi-grid" id="excel-container">
-      <p style="text-align:center; grid-column:1/-1; color:var(--text-muted);">Sedang mengambil data file latihan...</p>
-    </div>
-
-    <!-- TOOLS BANNER LINK -->
-    <div class="section-title">
-      <div class="sec-line"></div>
-      <div class="sec-text">🛍️ Alat Hitung Praktis</div>
-      <div class="sec-line"></div>
-    </div>
-    
-    <a href="kalkulator.html" class="tools-banner">
-      <div class="kuis-banner-inner">
-        <div class="kuis-tag" style="background:rgba(59, 130, 246, 0.12); color:var(--blue); border-color:rgba(59, 130, 246, 0.25);">⚡ Hitung Otomatis</div>
-        <div class="kuis-title">Pusat Kalkulator Finansial</div>
-        <div class="kuis-desc">Gunakan kalkulator PPh 21 TER, PPN 11%/12%, Depresiasi Aktiva, BEP, dan Simulasi Persamaan Dasar Akuntansi interaktif.</div>
+      <!-- MATERI SEKSI -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text" id="sec-materi-title">
+          📖 Ringkasan Materi Pelajaran
+        </div>
+        <div class="sec-line"></div>
       </div>
-      <div class="tools-btn">Buka Kalkulator →</div>
-    </a>
 
-    <!-- QUIZ BANNER -->
-    <div class="section-title">
-      <div class="sec-line"></div>
-      <div class="sec-text">⚡ Uji Pemahaman Otak</div>
-      <div class="sec-line"></div>
-    </div>
-
-    <a href="kuis_akuntansi_50soal.html" class="kuis-banner">
-      <div class="kuis-banner-inner">
-        <div class="kuis-tag">🎯 Latihan Soal</div>
-        <div class="kuis-title">Evaluasi Kuis Akuntansi — 50 Soal</div>
-        <div class="kuis-desc">Tersedia dalam 2 sesi evaluasi. Jawab soal, dapatkan pembahasan mendalam, dan lihat tingkat penguasaan konsepmu!</div>
+      <!-- Dynamic Material Grid -->
+      <div class="materi-grid" id="materi-container">
+        <p
+          style="
+            text-align: center;
+            grid-column: 1/-1;
+            color: var(--text-muted);
+          "
+        >
+          Sedang mengambil data materi...
+        </p>
       </div>
-      <div class="kuis-btn">Mulai Kuis Sekarang →</div>
-    </a>
 
-    <!-- STUDY GUIDE -->
-    <div class="guide-box">
-      <div class="guide-title">✏️ Cara Belajar Cepat &amp; Fun by Annisa</div>
-      <div class="guide-steps">
-        <div class="g-step">
-          <div class="g-num">1</div>
-          <div class="g-text">
-            <strong>Kuasai Konsep PDA:</strong> Selalu ingat keseimbangan <em>Aset = Utang + Modal</em> sebelum melangkah ke penjurnalan.
+      <!-- EXCEL SEKSI -->
+      <div class="section-title" id="sec-excel-title-wrapper">
+        <div class="sec-line"></div>
+        <div class="sec-text">📊 Unduh Latihan Mandiri (Excel)</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <!-- Dynamic Excel Downloads Grid -->
+      <div class="materi-grid" id="excel-container">
+        <p
+          style="
+            text-align: center;
+            grid-column: 1/-1;
+            color: var(--text-muted);
+          "
+        >
+          Sedang mengambil data file latihan...
+        </p>
+      </div>
+
+      <!-- TOOLS BANNER LINK -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">🛍️ Alat Hitung Praktis</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <a href="kalkulator.html" class="tools-banner">
+        <div class="kuis-banner-inner">
+          <div
+            class="kuis-tag"
+            style="
+              background: rgba(59, 130, 246, 0.12);
+              color: var(--blue);
+              border-color: rgba(59, 130, 246, 0.25);
+            "
+          >
+            ⚡ Hitung Otomatis
+          </div>
+          <div class="kuis-title">Pusat Kalkulator Finansial</div>
+          <div class="kuis-desc">
+            Gunakan kalkulator PPh 21 TER, PPN 11%/12%, Depresiasi Aktiva, BEP,
+            dan Simulasi Persamaan Dasar Akuntansi interaktif.
           </div>
         </div>
-        <div class="g-step">
-          <div class="g-num">2</div>
-          <div class="g-text">
-            <strong>Bermain Angka:</strong> Gunakan simulator <em>Sandbox PDA</em> untuk melatih feeling pembukuan berpasangan (*double-entry*).
+        <div class="tools-btn">Buka Kalkulator →</div>
+      </a>
+
+      <!-- QUIZ BANNER -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">⚡ Uji Pemahaman Otak</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <a href="kuis_akuntansi_50soal.html" class="kuis-banner">
+        <div class="kuis-banner-inner">
+          <div class="kuis-tag">🎯 Latihan Soal</div>
+          <div class="kuis-title">Evaluasi Kuis Akuntansi — 50 Soal</div>
+          <div class="kuis-desc">
+            Tersedia dalam 2 sesi evaluasi. Jawab soal, dapatkan pembahasan
+            mendalam, dan lihat tingkat penguasaan konsepmu!
           </div>
         </div>
-        <div class="g-step">
-          <div class="g-num">3</div>
-          <div class="g-text">
-            <strong>Latihan Mandiri Offline:</strong> Unduh berkas Excel siklus akuntansi di atas, kerjakan, lalu diskusikan jika hasilnya tidak seimbang (*balance*).
+        <div class="kuis-btn">Mulai Kuis Sekarang →</div>
+      </a>
+
+      <!-- STUDY GUIDE -->
+      <div class="guide-box">
+        <div class="guide-title">✏️ Cara Belajar Cepat &amp; Fun by Annisa</div>
+        <div class="guide-steps">
+          <div class="g-step">
+            <div class="g-num">1</div>
+            <div class="g-text">
+              <strong>Kuasai Materi:</strong> Baca materi, lalu coba jelaskan
+              ulang pakai bahasa sederhana
+            </div>
           </div>
-        </div>
-        <div class="g-step">
-          <div class="g-num">4</div>
-          <div class="g-text">
-            <strong>Asah Otak Instan:</strong> Kerjakan Kuis 50 Soal minimal seminggu sekali untuk mengunci ingatan teoritis Kakak!
+          <div class="g-step">
+            <div class="g-num">2</div>
+            <div class="g-text">
+              <strong>Buat Catatan:</strong> Catat bagian mana yang kamu bingung
+              atau lupa
+            </div>
+          </div>
+          <div class="g-step">
+            <div class="g-num">3</div>
+            <div class="g-text">
+              <strong>Latihan Mandiri:</strong> Unduh berkas latihan di atas,
+              kerjakan, lalu diskusikan jika hasilnya tidak balance
+            </div>
+          </div>
+          <div class="g-step">
+            <div class="g-num">4</div>
+            <div class="g-text">
+              <strong>Asah Otak:</strong> Kerjakan Kuis Soal minimal seminggu
+              sekali untuk mengunci ingatan teoritis Kakak!
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </main>
+    </main>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-name">Annisa Novita Ardana</div>
-    <div class="footer-sub">Belajar Akuntansi &amp; Perpajakan &nbsp;·&nbsp; Dibuat dengan Cinta &amp; Estetika 🌸</div>
-    <div class="footer-dots">
-      <div class="footer-dot" style="background:#ff6b35"></div>
-      <div class="footer-dot" style="background:#ff3d9a"></div>
-      <div class="footer-dot" style="background:#a855f7"></div>
-      <div class="footer-dot" style="background:#3b82f6"></div>
-      <div class="footer-dot" style="background:#10b981"></div>
-      <div class="footer-dot" style="background:#fbbf24"></div>
-    </div>
-  </footer>
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-name">Annisa Novita Ardana</div>
+      <div class="footer-sub">
+        Belajar Akuntansi &amp; Perpajakan &nbsp;·&nbsp; Dibuat dengan Cinta
+        &amp; Estetika 🌸
+      </div>
+      <div class="footer-dots">
+        <div class="footer-dot" style="background: #ff6b35"></div>
+        <div class="footer-dot" style="background: #ff3d9a"></div>
+        <div class="footer-dot" style="background: #a855f7"></div>
+        <div class="footer-dot" style="background: #3b82f6"></div>
+        <div class="footer-dot" style="background: #10b981"></div>
+        <div class="footer-dot" style="background: #fbbf24"></div>
+      </div>
+    </footer>
 
-  <script>
-    // Global Datastore State
-    let dbMateri = [];
-    let dbExcel = [];
-    let activeFilter = 'all';
+    <script>
+      // Global Datastore State
+      let dbMateri = [];
+      let dbExcel = [];
+      let activeFilter = "all";
 
-    // THEME HANDLING
-    const body = document.body;
-    if (localStorage.getItem("theme") === "light") {
-      body.classList.add("light-theme");
-    }
-
-    function toggleTheme() {
-      body.classList.toggle("light-theme");
-      if (body.classList.contains("light-theme")) {
-        localStorage.setItem("theme", "light");
-      } else {
-        localStorage.setItem("theme", "dark");
+      // THEME HANDLING
+      const body = document.body;
+      if (localStorage.getItem("theme") === "light") {
+        body.classList.add("light-theme");
       }
-    }
 
-    // LOAD JSON DATA
-    fetch("materi.json")
-      .then(res => res.json())
-      .then(data => {
-        dbMateri = data.materi || [];
-        dbExcel = data.latihan_excel || [];
-        
-        // Update stats
-        document.getElementById("stat-materi").textContent = dbMateri.length;
-        document.getElementById("stat-latihan").textContent = dbExcel.length;
-        
-        renderContent();
-      })
-      .catch(err => {
-        console.error("Gagal memuat materi.json:", err);
-        document.getElementById("materi-container").innerHTML = `<p style="color:var(--orange);text-align:center;grid-column:1/-1;">Gagal mengambil database materi. Harap jalankan menggunakan server lokal atau deploy.</p>`;
-      });
+      function toggleTheme() {
+        body.classList.toggle("light-theme");
+        if (body.classList.contains("light-theme")) {
+          localStorage.setItem("theme", "light");
+        } else {
+          localStorage.setItem("theme", "dark");
+        }
+      }
 
-    // RENDER CONTENT CARDS
-    function renderContent() {
-      const searchVal = document.getElementById("search-bar").value.toLowerCase().trim();
-      const mContainer = document.getElementById("materi-container");
-      const eContainer = document.getElementById("excel-container");
-      
-      mContainer.innerHTML = "";
-      eContainer.innerHTML = "";
+      // LOAD JSON DATA
+      fetch("materi.json")
+        .then((res) => res.json())
+        .then((data) => {
+          dbMateri = data.materi || [];
+          dbExcel = data.latihan_excel || [];
 
-      // 1. FILTER MATERI
-      const filteredMateri = dbMateri.filter(m => {
-        const matchesCategory = (activeFilter === 'all' || activeFilter === 'akuntansi' && m.kategori === 'akuntansi' || activeFilter === 'pajak' && m.kategori === 'pajak');
-        const matchesSearch = !searchVal || m.judul.toLowerCase().includes(searchVal) || m.deskripsi.toLowerCase().includes(searchVal) || m.tags.some(t => t.toLowerCase().includes(searchVal));
-        return matchesCategory && matchesSearch;
-      });
+          // Update stats
+          document.getElementById("stat-materi").textContent = dbMateri.length;
+          document.getElementById("stat-latihan").textContent = dbExcel.length;
 
-      if (filteredMateri.length === 0) {
-        mContainer.innerHTML = `<p style="grid-column:1/-1;text-align:center;color:var(--text-muted);font-size:14px;padding:20px 0;">Tidak ada materi yang cocok dengan pencarian Anda.</p>`;
-      } else {
-        filteredMateri.forEach(m => {
-          // Check if link points to custom url or dynamic viewer
-          const finalUrl = m.url ? m.url : `materi-viewer.html?id=${m.id}`;
-          
-          mContainer.innerHTML += `
+          renderContent();
+        })
+        .catch((err) => {
+          console.error("Gagal memuat materi.json:", err);
+          document.getElementById("materi-container").innerHTML =
+            `<p style="color:var(--orange);text-align:center;grid-column:1/-1;">Gagal mengambil database materi. Harap jalankan menggunakan server lokal atau deploy.</p>`;
+        });
+
+      // RENDER CONTENT CARDS
+      function renderContent() {
+        const searchVal = document
+          .getElementById("search-bar")
+          .value.toLowerCase()
+          .trim();
+        const mContainer = document.getElementById("materi-container");
+        const eContainer = document.getElementById("excel-container");
+
+        mContainer.innerHTML = "";
+        eContainer.innerHTML = "";
+
+        // 1. FILTER MATERI
+        const filteredMateri = dbMateri.filter((m) => {
+          const matchesCategory =
+            activeFilter === "all" ||
+            (activeFilter === "akuntansi" && m.kategori === "akuntansi") ||
+            (activeFilter === "pajak" && m.kategori === "pajak");
+          const matchesSearch =
+            !searchVal ||
+            m.judul.toLowerCase().includes(searchVal) ||
+            m.deskripsi.toLowerCase().includes(searchVal) ||
+            m.tags.some((t) => t.toLowerCase().includes(searchVal));
+          return matchesCategory && matchesSearch;
+        });
+
+        if (filteredMateri.length === 0) {
+          mContainer.innerHTML = `<p style="grid-column:1/-1;text-align:center;color:var(--text-muted);font-size:14px;padding:20px 0;">Tidak ada materi yang cocok dengan pencarian Anda.</p>`;
+        } else {
+          filteredMateri.forEach((m) => {
+            // Check if link points to custom url or dynamic viewer
+            const finalUrl = m.url ? m.url : `materi-viewer.html?id=${m.id}`;
+
+            mContainer.innerHTML += `
             <a class="materi-card" href="${finalUrl}" style="--c: ${m.warna}">
               <div class="card-top">
                 <div class="card-emoji">${m.emoji}</div>
@@ -991,38 +1122,45 @@
               <div class="card-title">${m.judul}</div>
               <div class="card-desc">${m.deskripsi}</div>
               <div class="card-tags">
-                ${m.tags.map(t => `<span class="card-tag">${t}</span>`).join("")}
+                ${m.tags.map((t) => `<span class="card-tag">${t}</span>`).join("")}
               </div>
               <div class="card-footer">
-                <span class="card-type">${m.kategori === 'akuntansi' ? 'Materi Akuntansi' : 'Materi Perpajakan'}</span>
+                <span class="card-type">${m.kategori === "akuntansi" ? "Materi Akuntansi" : "Materi Perpajakan"}</span>
                 <div class="card-arrow">→</div>
               </div>
             </a>
           `;
+          });
+        }
+
+        // 2. FILTER EXCEL
+        const filteredExcel = dbExcel.filter((e) => {
+          const matchesCategory =
+            activeFilter === "all" || activeFilter === "excel";
+          const matchesSearch =
+            !searchVal ||
+            e.judul.toLowerCase().includes(searchVal) ||
+            e.deskripsi.toLowerCase().includes(searchVal) ||
+            e.tags.some((t) => t.toLowerCase().includes(searchVal));
+          return matchesCategory && matchesSearch;
         });
-      }
 
-      // 2. FILTER EXCEL
-      const filteredExcel = dbExcel.filter(e => {
-        const matchesCategory = (activeFilter === 'all' || activeFilter === 'excel');
-        const matchesSearch = !searchVal || e.judul.toLowerCase().includes(searchVal) || e.deskripsi.toLowerCase().includes(searchVal) || e.tags.some(t => t.toLowerCase().includes(searchVal));
-        return matchesCategory && matchesSearch;
-      });
-
-      // Show/Hide Excel section wrapper based on filter
-      const excelTitleWrapper = document.getElementById("sec-excel-title-wrapper");
-      if (activeFilter === 'akuntansi' || activeFilter === 'pajak') {
-        excelTitleWrapper.style.display = 'none';
-        eContainer.style.display = 'none';
-      } else {
-        excelTitleWrapper.style.display = 'flex';
-        eContainer.style.display = 'grid';
-        
-        if (filteredExcel.length === 0) {
-          eContainer.innerHTML = `<p style="grid-column:1/-1;text-align:center;color:var(--text-muted);font-size:14px;padding:20px 0;">Tidak ada berkas Excel yang cocok.</p>`;
+        // Show/Hide Excel section wrapper based on filter
+        const excelTitleWrapper = document.getElementById(
+          "sec-excel-title-wrapper",
+        );
+        if (activeFilter === "akuntansi" || activeFilter === "pajak") {
+          excelTitleWrapper.style.display = "none";
+          eContainer.style.display = "none";
         } else {
-          filteredExcel.forEach(e => {
-            eContainer.innerHTML += `
+          excelTitleWrapper.style.display = "flex";
+          eContainer.style.display = "grid";
+
+          if (filteredExcel.length === 0) {
+            eContainer.innerHTML = `<p style="grid-column:1/-1;text-align:center;color:var(--text-muted);font-size:14px;padding:20px 0;">Tidak ada berkas Excel yang cocok.</p>`;
+          } else {
+            filteredExcel.forEach((e) => {
+              eContainer.innerHTML += `
               <div class="materi-card excel-card" style="--c: ${e.warna}">
                 <div class="card-top">
                   <div class="card-emoji">${e.emoji}</div>
@@ -1031,7 +1169,7 @@
                 <div class="card-title">${e.judul}</div>
                 <div class="card-desc">${e.deskripsi}</div>
                 <div class="card-tags">
-                  ${e.tags.map(t => `<span class="card-tag">${t}</span>`).join("")}
+                  ${e.tags.map((t) => `<span class="card-tag">${t}</span>`).join("")}
                 </div>
                 <div class="card-footer">
                   <span class="card-type">Template Excel</span>
@@ -1042,31 +1180,36 @@
                 </div>
               </div>
             `;
-          });
+            });
+          }
         }
       }
-    }
 
-    // SET ACTIVE FILTER PILL
-    function setFilter(filterType, btnEl) {
-      activeFilter = filterType;
-      document.querySelectorAll(".filter-pill").forEach(p => p.classList.remove("active"));
-      btnEl.classList.add("active");
-      
-      // Update section titles for materials
-      const matTitleEl = document.getElementById("sec-materi-title");
-      if (filterType === 'all') matTitleEl.textContent = "📖 Ringkasan Materi Pelajaran";
-      else if (filterType === 'akuntansi') matTitleEl.textContent = "📖 Teori Akuntansi Dasar";
-      else if (filterType === 'pajak') matTitleEl.textContent = "🧾 Materi Hukum & Tarif Pajak";
-      else matTitleEl.textContent = "📖 Materi Pelajaran Terkait";
+      // SET ACTIVE FILTER PILL
+      function setFilter(filterType, btnEl) {
+        activeFilter = filterType;
+        document
+          .querySelectorAll(".filter-pill")
+          .forEach((p) => p.classList.remove("active"));
+        btnEl.classList.add("active");
 
-      renderContent();
-    }
+        // Update section titles for materials
+        const matTitleEl = document.getElementById("sec-materi-title");
+        if (filterType === "all")
+          matTitleEl.textContent = "📖 Ringkasan Materi Pelajaran";
+        else if (filterType === "akuntansi")
+          matTitleEl.textContent = "📖 Teori Akuntansi Dasar";
+        else if (filterType === "pajak")
+          matTitleEl.textContent = "🧾 Materi Hukum & Tarif Pajak";
+        else matTitleEl.textContent = "📖 Materi Pelajaran Terkait";
 
-    // TRIGGER KEY PRESS FILTER
-    function filterItems() {
-      renderContent();
-    }
-  </script>
-</body>
+        renderContent();
+      }
+
+      // TRIGGER KEY PRESS FILTER
+      function filterItems() {
+        renderContent();
+      }
+    </script>
+  </body>
 </html>
