@@ -1,0 +1,3554 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DagangEdu - Akuntansi Perusahaan Dagang Interaktif</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ==========================================================================
+       RESET & VARIABLES SYSTEM (OCEAN BLUE & PINK NEON GLASSMORPHISM)
+       ========================================================================== */
+    :root {
+      --bg-dark: #070a13;
+      --bg-dark-accent: #0b0f1f;
+      --glass-bg: rgba(255, 255, 255, 0.03);
+      --glass-bg-hover: rgba(255, 255, 255, 0.06);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --glass-border-focus: rgba(236, 72, 153, 0.4);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      
+      /* Glowing Palette */
+      --color-blue: #0ea5e9;
+      --color-blue-glow: rgba(14, 165, 233, 0.35);
+      --color-pink: #ec4899;
+      --color-pink-glow: rgba(236, 72, 153, 0.35);
+      --color-cyan: #06b6d4;
+      --color-cyan-glow: rgba(6, 182, 212, 0.3);
+      --color-green: #10b981;
+      --color-green-glow: rgba(16, 185, 129, 0.3);
+      
+      --gradient-primary: linear-gradient(135deg, #0ea5e9 0%, #ec4899 100%);
+      --gradient-blue: linear-gradient(135deg, #0284c7 0%, #06b6d4 100%);
+      --gradient-pink: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%);
+      --font-main: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+      --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-primary);
+      font-family: var(--font-main);
+      overflow-x: hidden;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* Ambient Glowing Orbs Background */
+    .bg-orbs {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -2;
+      overflow: hidden;
+      background: radial-gradient(circle at 50% 50%, var(--bg-dark-accent), var(--bg-dark));
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.3;
+      pointer-events: none;
+      animation: floatOrbs 25s infinite alternate ease-in-out;
+    }
+
+    .orb-1 {
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, var(--color-blue) 0%, rgba(14, 165, 233, 0) 70%);
+      top: -15%;
+      left: -10%;
+    }
+
+    .orb-2 {
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, var(--color-pink) 0%, rgba(236, 72, 153, 0) 70%);
+      bottom: -15%;
+      right: -10%;
+      animation-delay: -5s;
+    }
+
+    .orb-3 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, var(--color-cyan) 0%, rgba(6, 182, 212, 0) 70%);
+      top: 35%;
+      left: 30%;
+      animation-delay: -10s;
+    }
+
+    @keyframes floatOrbs {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+      50% {
+        transform: translate(8%, 6%) scale(1.1);
+      }
+      100% {
+        transform: translate(-5%, -4%) scale(0.9);
+      }
+    }
+
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(7, 10, 19, 0.5);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--color-blue);
+    }
+
+    /* ==========================================================================
+       GLASSMORPHISM GLOBAL STYLES & LAYOUT
+       ========================================================================== */
+    .glass-panel {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+      transition: var(--transition-smooth);
+    }
+
+    .glass-panel:hover {
+      border-color: rgba(255, 255, 255, 0.14);
+      background: var(--glass-bg-hover);
+    }
+
+    /* Main Container Grid */
+    .app-container {
+      display: flex;
+      min-height: 100vh;
+      width: 100%;
+      position: relative;
+    }
+
+    /* Sidebar Glass Navigation */
+    .sidebar {
+      width: 280px;
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      padding: 24px;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      border-right: 1px solid var(--glass-border);
+      background: rgba(7, 10, 19, 0.45);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      overflow-y: auto;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 8px 24px 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 24px;
+    }
+
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: var(--gradient-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 15px var(--color-pink-glow);
+    }
+
+    .logo-icon svg {
+      width: 22px;
+      height: 22px;
+      fill: #fff;
+    }
+
+    .brand-name {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Search Bar */
+    .search-box {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .search-input {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--glass-border);
+      border-radius: 10px;
+      padding: 10px 14px 10px 40px;
+      color: var(--text-primary);
+      font-family: var(--font-main);
+      font-size: 14px;
+      transition: var(--transition-smooth);
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--color-pink);
+      box-shadow: 0 0 10px var(--color-pink-glow);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      fill: var(--text-secondary);
+      pointer-events: none;
+    }
+
+    /* Navigation Links */
+    .nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      position: relative;
+    }
+
+    .nav-item svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    .nav-item:hover, .nav-item.active {
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .nav-item.active {
+      background: var(--gradient-primary);
+      box-shadow: 0 4px 15px rgba(236, 72, 153, 0.25);
+    }
+
+    .nav-item.active svg {
+      fill: #fff;
+    }
+
+    /* Navigation Progress */
+    .progress-box {
+      margin-top: auto;
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .progress-bar-bg {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 14%;
+      background: var(--gradient-blue);
+      border-radius: 3px;
+      transition: var(--transition-smooth);
+    }
+
+    /* Content Area */
+    .content-area {
+      margin-left: 280px;
+      flex-grow: 1;
+      padding: 40px;
+      min-height: 100vh;
+      overflow-y: auto;
+      max-width: 1200px;
+    }
+
+    /* Header Panel */
+    .top-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+    }
+
+    .page-title h1 {
+      font-size: 28px;
+      font-weight: 800;
+      background: var(--gradient-blue);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 4px;
+    }
+
+    .page-title p {
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+
+    .time-badge {
+      padding: 8px 16px;
+      font-size: 12px;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      color: var(--color-blue);
+      box-shadow: 0 0 10px var(--color-blue-glow);
+    }
+
+    /* ==========================================================================
+       DASHBOARD OVERVIEW TAB
+       ========================================================================== */
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .grid-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+
+    .stat-card {
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--color-blue-glow) 0%, transparent 70%);
+      top: -30px;
+      right: -30px;
+      pointer-events: none;
+    }
+
+    .stat-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+
+    .stat-icon-blue {
+      background: var(--gradient-blue);
+      box-shadow: 0 0 15px var(--color-blue-glow);
+    }
+
+    .stat-icon-pink {
+      background: var(--gradient-pink);
+      box-shadow: 0 0 15px var(--color-pink-glow);
+    }
+
+    .stat-icon svg {
+      width: 24px;
+      height: 24px;
+      fill: #fff;
+    }
+
+    .stat-info h3 {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 2px;
+    }
+
+    .stat-info p {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    /* Welcome Banner Glass */
+    .welcome-banner {
+      padding: 32px;
+      margin-bottom: 32px;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .welcome-text h2 {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 10px;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .welcome-text p {
+      color: var(--text-secondary);
+      max-width: 650px;
+      font-size: 14px;
+      margin-bottom: 20px;
+      line-height: 1.7;
+    }
+
+    .cta-btn {
+      padding: 12px 24px;
+      border-radius: 10px;
+      border: none;
+      background: var(--gradient-primary);
+      color: #fff;
+      font-weight: 700;
+      font-family: var(--font-main);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 15px rgba(236, 72, 153, 0.35);
+      transition: var(--transition-smooth);
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(236, 72, 153, 0.5);
+    }
+
+    .welcome-graphics {
+      width: 140px;
+      height: 140px;
+      flex-shrink: 0;
+      opacity: 0.85;
+      animation: floatGraphics 6s infinite alternate ease-in-out;
+    }
+
+    @keyframes floatGraphics {
+      0% { transform: translateY(0px) rotate(0deg); }
+      100% { transform: translateY(-10px) rotate(5deg); }
+    }
+
+    /* Modules Quick Grid */
+    .section-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title::before {
+      content: '';
+      display: block;
+      width: 4px;
+      height: 24px;
+      background: var(--gradient-primary);
+      border-radius: 2px;
+    }
+
+    .grid-modules {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+
+    .module-card {
+      padding: 24px;
+      cursor: pointer;
+    }
+
+    .module-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 14px;
+    }
+
+    .module-badge {
+      padding: 4px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 20px;
+      background: rgba(14, 165, 233, 0.1);
+      border: 1px solid rgba(14, 165, 233, 0.2);
+      color: var(--color-blue);
+    }
+
+    .module-badge-pink {
+      background: rgba(236, 72, 153, 0.1);
+      border: 1px solid rgba(236, 72, 153, 0.2);
+      color: var(--color-pink);
+    }
+
+    .module-badge-green {
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      color: var(--color-green);
+    }
+
+    .module-card h4 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      transition: var(--transition-smooth);
+    }
+
+    .module-card:hover h4 {
+      color: var(--color-blue);
+    }
+
+    .module-card p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 18px;
+      line-height: 1.6;
+    }
+
+    .module-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .read-time {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .read-time svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    .action-link {
+      color: var(--color-pink);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: var(--transition-smooth);
+    }
+
+    .module-card:hover .action-link {
+      transform: translateX(4px);
+      color: var(--text-primary);
+    }
+
+    /* Search Results Styling */
+    .search-results-box {
+      margin-bottom: 32px;
+      padding: 24px;
+      display: none;
+    }
+
+    .search-result-item {
+      padding: 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .search-result-item:hover {
+      background: rgba(255, 255, 255, 0.02);
+      padding-left: 20px;
+    }
+
+    .search-result-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--color-blue);
+      margin-bottom: 4px;
+    }
+
+    .search-result-excerpt {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    /* ==========================================================================
+       MODULE CONTENT LAYOUTS & COMPONENT CLASSES
+       ========================================================================== */
+    .module-layout {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .glass-card-body {
+      padding: 32px;
+    }
+
+    .module-subtitle {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .m-num {
+      font-weight: 800;
+      color: var(--color-pink);
+    }
+
+    .rich-paragraph {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+    }
+
+    .highlight-span {
+      color: var(--text-primary);
+      font-weight: 600;
+      border-bottom: 2px dashed rgba(14, 165, 233, 0.4);
+    }
+
+    .glow-badge {
+      background: rgba(14, 165, 233, 0.1);
+      border: 1px solid rgba(14, 165, 233, 0.2);
+      color: var(--color-blue);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    /* Beautiful Tables */
+    .table-container {
+      overflow-x: auto;
+      margin: 24px 0;
+      border-radius: 12px;
+      border: 1px solid var(--glass-border);
+      background: rgba(7, 10, 19, 0.2);
+    }
+
+    .interactive-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    .interactive-table th {
+      background: rgba(255, 255, 255, 0.04);
+      padding: 16px 20px;
+      font-weight: 700;
+      color: var(--text-primary);
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .interactive-table td {
+      padding: 16px 20px;
+      color: var(--text-secondary);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      transition: var(--transition-smooth);
+    }
+
+    .interactive-table tbody tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--text-primary);
+    }
+
+    /* Callout & Note Blocks */
+    .callout-box {
+      margin: 24px 0;
+      padding: 24px;
+      border-radius: 12px;
+      border-left: 4px solid var(--color-blue);
+      background: rgba(14, 165, 233, 0.03);
+      position: relative;
+    }
+
+    .callout-box-pink {
+      border-left-color: var(--color-pink);
+      background: rgba(236, 72, 153, 0.03);
+    }
+
+    .callout-box-green {
+      border-left-color: var(--color-green);
+      background: rgba(16, 185, 129, 0.03);
+    }
+
+    .callout-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .callout-header svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    .callout-body {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* Comparison Grid */
+    .comp-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin: 24px 0;
+    }
+
+    .comp-card {
+      padding: 24px;
+      border-radius: 12px;
+      border: 1px solid var(--glass-border);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .comp-card h5 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .comp-card.blue h5 { color: var(--color-blue); }
+    .comp-card.pink h5 { color: var(--color-pink); }
+
+    .comp-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .comp-card ul li {
+      position: relative;
+      padding-left: 20px;
+    }
+
+    .comp-card ul li::before {
+      content: '✦';
+      position: absolute;
+      left: 0;
+      color: var(--color-cyan);
+    }
+
+    /* ==========================================================================
+       INTERACTIVE FOB ANIMATOR & JOURNAL VIEWER
+       ========================================================================== */
+    .fob-animator-box {
+      margin: 32px 0;
+      padding: 32px;
+      background: rgba(7, 10, 19, 0.4);
+      border-radius: 16px;
+      border: 1px solid var(--glass-border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .fob-controls {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .fob-btn {
+      padding: 10px 20px;
+      border-radius: 30px;
+      border: 1px solid var(--glass-border);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-secondary);
+      font-weight: 600;
+      font-family: var(--font-main);
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .fob-btn.active, .fob-btn:hover {
+      background: var(--gradient-primary);
+      border-color: transparent;
+      color: #fff;
+      box-shadow: 0 4px 15px rgba(236, 72, 153, 0.25);
+    }
+
+    /* Animation Visuals */
+    .highway-stage {
+      height: 180px;
+      position: relative;
+      border-bottom: 4px dashed rgba(255, 255, 255, 0.1);
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding-bottom: 12px;
+    }
+
+    .stage-node {
+      width: 110px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      z-index: 5;
+    }
+
+    .node-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.03);
+      border: 2px solid var(--glass-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      transition: var(--transition-smooth);
+    }
+
+    .node-active .node-icon {
+      background: var(--glass-bg-hover);
+      border-color: var(--color-blue);
+      box-shadow: 0 0 20px var(--color-blue-glow);
+    }
+
+    .node-active.pink-node .node-icon {
+      border-color: var(--color-pink);
+      box-shadow: 0 0 20px var(--color-pink-glow);
+    }
+
+    .node-icon svg {
+      width: 24px;
+      height: 24px;
+      fill: var(--text-secondary);
+    }
+
+    .node-active .node-icon svg {
+      fill: var(--color-blue);
+    }
+
+    .node-active.pink-node .node-icon svg {
+      fill: var(--color-pink);
+    }
+
+    .node-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-secondary);
+    }
+
+    .node-active .node-title {
+      color: #fff;
+    }
+
+    /* animated delivery truck */
+    .truck-container {
+      position: absolute;
+      width: 70px;
+      height: 48px;
+      bottom: 12px;
+      left: 15%;
+      transition: all 2.5s cubic-bezier(0.25, 1, 0.5, 1);
+      z-index: 10;
+    }
+
+    .truck-container svg {
+      width: 100%;
+      height: 100%;
+      fill: url(#gradient-pink-svg);
+      filter: drop-shadow(0 0 8px var(--color-pink-glow));
+    }
+
+    /* Glow Transfer Point Circle */
+    .transfer-glow-ring {
+      position: absolute;
+      width: 48px;
+      height: 48px;
+      border: 3px solid var(--color-cyan);
+      border-radius: 50%;
+      bottom: 12px;
+      left: 15%;
+      transform: scale(0);
+      opacity: 0;
+      z-index: 1;
+      pointer-events: none;
+      animation: rippleEffect 2s infinite;
+      transition: all 0.5s ease;
+    }
+
+    @keyframes rippleEffect {
+      0% { transform: scale(0.6); opacity: 1; }
+      100% { transform: scale(2.2); opacity: 0; }
+    }
+
+    .fob-explanation-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .explain-card {
+      padding: 16px;
+      border-radius: 10px;
+      border: 1px solid var(--glass-border);
+      background: rgba(255, 255, 255, 0.01);
+    }
+
+    .explain-card h6 {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .explain-card p {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .explain-card.highlight-cyan p {
+      color: var(--color-cyan);
+    }
+    .explain-card.highlight-pink p {
+      color: var(--color-pink);
+    }
+
+    /* Journal Simulator Tab */
+    .journal-simulator-box {
+      margin: 24px 0;
+    }
+
+    .scenario-picker {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .scenario-btn {
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid var(--glass-border);
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--text-secondary);
+      font-size: 12px;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .scenario-btn:hover, .scenario-btn.active {
+      border-color: var(--color-blue);
+      background: rgba(14, 165, 233, 0.08);
+      color: var(--text-primary);
+    }
+
+    .side-by-side-journals {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 20px;
+    }
+
+    .journal-column {
+      padding: 24px;
+      border-radius: 12px;
+      border: 1px solid var(--glass-border);
+      background: rgba(7, 10, 19, 0.35);
+    }
+
+    .journal-column-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .journal-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-bottom: 16px;
+    }
+
+    .journal-table th {
+      padding: 8px 12px;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-align: left;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .journal-table td {
+      padding: 10px 12px;
+      color: var(--text-secondary);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+    }
+
+    .indent-acc {
+      padding-left: 24px !important;
+      color: var(--text-primary) !important;
+    }
+
+    .journal-total-row td {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .journal-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .journal-exp-notes {
+      font-size: 12px;
+      color: var(--text-secondary);
+      background: rgba(255, 255, 255, 0.02);
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    /* ==========================================================================
+       DYNAMIC HPP & INCOME STATEMENT CALCULATOR
+       ========================================================================== */
+    .calculator-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+
+    @media (max-width: 900px) {
+      .calculator-layout {
+        grid-template-columns: 1fr;
+      }
+      .side-by-side-journals {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .calc-inputs-panel {
+      padding: 24px;
+    }
+
+    .calc-outputs-panel {
+      padding: 24px;
+    }
+
+    .calc-group-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--color-blue);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding-bottom: 6px;
+    }
+
+    .calc-group-title-pink {
+      color: var(--color-pink);
+    }
+
+    .input-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .input-row label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      width: 55%;
+    }
+
+    .input-field-wrapper {
+      position: relative;
+      width: 40%;
+    }
+
+    .input-currency-tag {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .calc-input {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--glass-border);
+      border-radius: 8px;
+      padding: 8px 10px 8px 30px;
+      color: var(--text-primary);
+      font-family: var(--font-main);
+      font-size: 13px;
+      font-weight: 600;
+      text-align: right;
+      transition: var(--transition-smooth);
+    }
+
+    .calc-input:focus {
+      outline: none;
+      border-color: var(--color-blue);
+      box-shadow: 0 0 8px var(--color-blue-glow);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    /* Print Preview Styles inside outputs */
+    .formal-report-paper {
+      background: rgba(11, 15, 31, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      padding: 32px;
+      font-family: 'Outfit', sans-serif;
+      box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .report-header {
+      text-align: center;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .report-header h4 {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: #fff;
+    }
+
+    .report-header h5 {
+      font-size: 12px;
+      color: var(--color-blue);
+      text-transform: uppercase;
+      font-weight: 700;
+      margin: 4px 0;
+    }
+
+    .report-header p {
+      font-size: 11px;
+      color: var(--text-secondary);
+      font-style: italic;
+    }
+
+    .report-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .report-table td {
+      padding: 6px 4px;
+      vertical-align: bottom;
+    }
+
+    .indent-1 { padding-left: 16px; }
+    .indent-2 { padding-left: 32px; }
+    
+    .report-subtotal {
+      text-align: right;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      font-weight: 600;
+      width: 25%;
+    }
+
+    .report-total {
+      text-align: right;
+      border-bottom: 3px double rgba(255, 255, 255, 0.3);
+      font-weight: 700;
+      width: 25%;
+      color: #fff;
+    }
+
+    .report-header-row {
+      font-weight: 700;
+      color: #fff;
+      font-size: 13px;
+    }
+
+    .calc-action-bar {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .btn-secondary {
+      padding: 10px 18px;
+      border-radius: 8px;
+      border: 1px solid var(--glass-border);
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--text-secondary);
+      font-weight: 600;
+      font-size: 12px;
+      cursor: pointer;
+      font-family: var(--font-main);
+      transition: var(--transition-smooth);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-primary);
+    }
+
+    /* Print styling */
+    @media print {
+      body {
+        background: #fff !important;
+        color: #000 !important;
+      }
+      .sidebar, .top-header, .calc-inputs-panel, .calc-action-bar, .bg-orbs, .section-title {
+        display: none !important;
+      }
+      .content-area {
+        margin-left: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+      }
+      .calc-outputs-panel {
+        width: 100% !important;
+        border: none !important;
+        box-shadow: none !important;
+        background: transparent !important;
+      }
+      .formal-report-paper {
+        background: transparent !important;
+        color: #000 !important;
+        border: none !important;
+        box-shadow: none !important;
+      }
+      .report-header h4, .report-header h5, .report-header-row, .report-total {
+        color: #000 !important;
+      }
+      .report-table td {
+        border-color: #000 !important;
+      }
+    }
+
+    /* ==========================================================================
+       CASE STUDY TIMELINE & LEDGER EFFECT
+       ========================================================================== */
+    .timeline-container {
+      position: relative;
+      margin: 24px 0;
+      padding-left: 30px;
+    }
+
+    .timeline-container::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 24px;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -30px;
+      top: 4px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--bg-dark);
+      border: 3px solid var(--glass-border);
+      transition: var(--transition-smooth);
+    }
+
+    .timeline-item:hover .timeline-dot, .timeline-item.active .timeline-dot {
+      border-color: var(--color-pink);
+      box-shadow: 0 0 10px var(--color-pink-glow);
+      background: var(--color-pink);
+    }
+
+    .timeline-date {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--color-pink);
+      margin-bottom: 4px;
+    }
+
+    .timeline-item-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+
+    .timeline-detail-box {
+      margin-top: 10px;
+      padding: 16px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.01);
+      border: 1px solid var(--glass-border);
+      display: none;
+      animation: slideDown 0.3s ease;
+    }
+
+    .timeline-item.active .timeline-detail-box {
+      display: block;
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; max-height: 0; overflow: hidden; }
+      to { opacity: 1; max-height: 1000px; }
+    }
+
+    /* CV Ledger display */
+    .ledger-badge {
+      display: inline-block;
+      margin-top: 6px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .ledger-plus {
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--color-green);
+    }
+    .ledger-minus {
+      background: rgba(244, 63, 94, 0.1);
+      color: #f43f5e;
+    }
+
+    /* ==========================================================================
+       VOCABULARY FLASHCARDS (3D CARD FLIP)
+       ========================================================================== */
+    .flashcard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      margin: 32px 0;
+    }
+
+    .flashcard {
+      height: 180px;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
+    .flashcard-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+    }
+
+    .flashcard.flipped .flashcard-inner {
+      transform: rotateY(180deg);
+    }
+
+    .card-front, .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: 12px;
+      border: 1px solid var(--glass-border);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .card-front {
+      background: rgba(255, 255, 255, 0.02);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-front h4 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--color-blue);
+      margin-bottom: 8px;
+    }
+
+    .card-front p {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .card-back {
+      background: var(--gradient-primary);
+      transform: rotateY(180deg);
+      color: #fff;
+    }
+
+    .card-back p {
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.6;
+    }
+
+    /* ==========================================================================
+       QUIZ ENGINE & CONFETTI GRADUATION
+       ========================================================================== */
+    .quiz-container {
+      max-width: 750px;
+      margin: 0 auto;
+    }
+
+    .quiz-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .quiz-q-num {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--color-pink);
+    }
+
+    .quiz-timer {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .quiz-progress-bg {
+      width: 100%;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+      margin-bottom: 32px;
+      overflow: hidden;
+    }
+
+    .quiz-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--gradient-primary);
+      border-radius: 4px;
+      transition: var(--transition-smooth);
+    }
+
+    .question-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    .options-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .option-card {
+      padding: 16px 20px;
+      border-radius: 10px;
+      border: 1px solid var(--glass-border);
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      text-align: left;
+      transition: var(--transition-smooth);
+    }
+
+    .option-card:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.04);
+      color: #fff;
+    }
+
+    .option-card.correct {
+      border-color: var(--color-green) !important;
+      background: rgba(16, 185, 129, 0.1) !important;
+      color: #fff !important;
+      box-shadow: 0 0 15px var(--color-green-glow);
+    }
+
+    .option-card.wrong {
+      border-color: var(--color-pink) !important;
+      background: rgba(236, 72, 153, 0.1) !important;
+      color: #fff !important;
+      box-shadow: 0 0 15px var(--color-pink-glow);
+    }
+
+    .quiz-feedback-box {
+      margin-bottom: 24px;
+      padding: 16px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--glass-border);
+      font-size: 13px;
+      color: var(--text-secondary);
+      display: none;
+    }
+
+    .quiz-feedback-box.visible {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .quiz-footer {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    /* Result Panel & Certificate */
+    .quiz-results-panel {
+      text-align: center;
+      padding: 40px;
+    }
+
+    .certificate-panel {
+      max-width: 600px;
+      margin: 0 auto 32px auto;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 40px;
+      background: radial-gradient(circle, rgba(14, 165, 233, 0.03) 0%, rgba(7, 10, 19, 0.5) 100%);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+      position: relative;
+    }
+
+    .cert-seal {
+      width: 80px;
+      height: 80px;
+      background: var(--gradient-primary);
+      border-radius: 50%;
+      margin: 0 auto 20px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 25px var(--color-pink-glow);
+    }
+
+    .cert-seal svg {
+      width: 40px;
+      height: 40px;
+      fill: #fff;
+    }
+
+    .cert-title {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .cert-sub {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--color-blue);
+      margin-bottom: 24px;
+    }
+
+    .cert-user {
+      font-size: 24px;
+      font-weight: 700;
+      margin: 12px 0;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+      display: inline-block;
+      padding: 0 32px 10px 32px;
+      color: #fff;
+    }
+
+    .cert-body {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .cert-score {
+      font-size: 32px;
+      font-weight: 800;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Custom Responsive Navbar for Mobile */
+    .mobile-nav {
+      display: none;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px;
+      border-bottom: 1px solid var(--glass-border);
+      background: rgba(7, 10, 19, 0.7);
+      backdrop-filter: blur(10px);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 110;
+    }
+
+    .hamburger {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-primary);
+    }
+
+    .hamburger svg {
+      width: 24px;
+      height: 24px;
+      fill: currentColor;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        transform: translateX(-100%);
+        transition: var(--transition-smooth);
+      }
+      .sidebar.open {
+        transform: translateX(0);
+      }
+      .content-area {
+        margin-left: 0;
+        padding: 80px 20px 20px 20px;
+      }
+      .mobile-nav {
+        display: flex;
+      }
+      .welcome-banner {
+        flex-direction: column;
+        text-align: center;
+      }
+      .welcome-graphics {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Orbs -->
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- Reusable SVG Gradients -->
+  <svg style="width:0; height:0; position:absolute;">
+    <defs>
+      <linearGradient id="gradient-pink-svg" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#ec4899" />
+        <stop offset="100%" stop-color="#f43f5e" />
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <!-- Mobile Top Bar -->
+  <div class="mobile-nav">
+    <div class="brand-name">DagangEdu</div>
+    <button class="hamburger" id="hamburger-toggle">
+      <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+    </button>
+  </div>
+
+  <!-- Main Grid App -->
+  <div class="app-container">
+
+    <!-- Sidebar Glass Container -->
+    <aside class="sidebar" id="app-sidebar">
+      <div class="brand-logo">
+        <div class="logo-icon">
+          <!-- Graduation Cap SVG -->
+          <svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zm8.33 8.35L12 16 3.67 11.35 1.5 12.53 12 18.25l10.5-5.72-2.17-1.18z"/></svg>
+        </div>
+        <div class="brand-name">DagangEdu</div>
+      </div>
+
+      <!-- Live Search Box -->
+      <div class="search-box">
+        <svg class="search-icon" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+        <input type="text" placeholder="Cari materi..." class="search-input" id="search-input">
+      </div>
+
+      <!-- Navigation Menu -->
+      <nav class="nav-list">
+        <div class="nav-item active" data-tab="dashboard">
+          <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+          Dashboard
+        </div>
+        <div class="nav-item" data-tab="m1">
+          <svg viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/></svg>
+          1. Karakteristik
+        </div>
+        <div class="nav-item" data-tab="m2">
+          <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+          2. Sistem Persediaan
+        </div>
+        <div class="nav-item" data-tab="m3">
+          <svg viewBox="0 0 24 24"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+          3. Transaksi & Jurnal
+        </div>
+        <div class="nav-item" data-tab="m4">
+          <svg viewBox="0 0 24 24"><path d="M20 8H4V6h16v2zm-2-6H6v2h12V2zm4 8v10c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V10c0-1.1.9-2 2-2h16c1.1 0 2 .9 2 2zm-2 0H4v10h16V10z"/></svg>
+          4. Ketentuan FOB
+        </div>
+        <div class="nav-item" data-tab="m5">
+          <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-9 14H7v-2h3v2zm0-4H7v-2h3v2zm0-4H7V7h3v2zm5 8h-3v-2h3v2zm0-4h-3v-2h3v2zm0-4h-3V7h3v2z"/></svg>
+          5. Kalkulator HPP
+        </div>
+        <div class="nav-item" data-tab="m6">
+          <svg viewBox="0 0 24 24"><path d="M21 10.12h-6.78l2.74-2.82c-2.73-2.7-7.15-2.8-9.88-.1-2.73 2.71-2.73 7.08 0 9.79s7.15 2.71 9.88 0C18.3 15.62 19 13.97 19 12h2c0 2.5-1 4.96-2.93 6.88-3.87 3.84-10.15 3.84-14.02 0-3.87-3.84-3.87-10.07 0-13.91s10.15-3.84 14.02 0l-2.74 2.82H21V10.12z"/></svg>
+          6. Studi Kasus
+        </div>
+        <div class="nav-item" data-tab="m7">
+          <svg viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-6 16c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm0-6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
+          7. Kuis & Flashcards
+        </div>
+      </nav>
+
+      <!-- Sidebar Progress Display -->
+      <div class="progress-box">
+        <div class="progress-header">
+          <span>Progres Belajar</span>
+          <span id="progress-percentage">14%</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progress-bar"></div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Right Side Content Panel -->
+    <main class="content-area">
+
+      <!-- Top Utility Header -->
+      <header class="top-header">
+        <div class="page-title">
+          <h1 id="header-main-title">E-Learning Akuntansi</h1>
+          <p id="header-sub-title">Belajar Akuntansi Perusahaan Dagang dengan Interaktif</p>
+        </div>
+        <div class="time-badge">Jurnal Terkompilasi 2026</div>
+      </header>
+
+      <!-- Search Results Wrapper -->
+      <div class="glass-panel search-results-box" id="search-results-wrapper">
+        <div class="section-title">Hasil Pencarian</div>
+        <div id="search-results-list"></div>
+      </div>
+
+      <!-- ==========================================================================
+           TAB CONTENT 0: DASHBOARD
+           ========================================================================== -->
+      <section class="tab-content active" id="tab-dashboard">
+        <!-- Quick Stats Banner -->
+        <div class="grid-stats">
+          <div class="glass-panel stat-card">
+            <div class="stat-icon stat-icon-blue">
+              <svg viewBox="0 0 24 24"><path d="M12 11.55C9.64 9.35 6.48 8 3 8v11c3.48 0 6.64 1.35 9 3.55 2.36-2.19 5.52-3.55 9-3.55V8c-3.48 0-6.64 1.35-9 3.55zM12 2C9.5 2 7.5 4 7.5 6.5S9.5 11 12 11s4.5-2 4.5-4.5S14.5 2 12 2z"/></svg>
+            </div>
+            <div class="stat-info">
+              <h3 id="stat-modules-read">0 / 7</h3>
+              <p>Modul Dibaca</p>
+            </div>
+          </div>
+          <div class="glass-panel stat-card">
+            <div class="stat-icon stat-icon-pink">
+              <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+            </div>
+            <div class="stat-info">
+              <h3 id="stat-quiz-score">N/A</h3>
+              <p>Skor Kuis Terbaik</p>
+            </div>
+          </div>
+          <div class="glass-panel stat-card">
+            <div class="stat-icon stat-icon-blue">
+              <!-- Graph SVG icon -->
+              <svg viewBox="0 0 24 24"><path d="M5 9.2h3V19H5zM10.6 5h2.8v14h-2.8zm5.6 8H19v6h-2.8z"/></svg>
+            </div>
+            <div class="stat-info">
+              <h3>2 Kasus</h3>
+              <p>Studi Kasus Nyata</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Big Glass Welcome -->
+        <div class="welcome-banner">
+          <div class="welcome-text">
+            <h2>Kuasai Akuntansi Perusahaan Dagang!</h2>
+            <p>Selamat datang di portal pembelajaran interaktif. Di sini, Anda tidak hanya membaca teori kering, melainkan dapat mensimulasikan alur akuntansi perusahaan dagang secara langsung lewat alat bantu interaktif: kalkulator HPP, animator pengiriman FOB, dan kuis gamifikasi. Mari mulai dari Modul 1!</p>
+            <button class="cta-btn" onclick="switchTab('m1')">
+              Mulai Belajar Sekarang
+              <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:#fff;"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+            </button>
+          </div>
+          <!-- Reusable Glowing Graduation Hat SVG -->
+          <div class="welcome-graphics">
+            <svg viewBox="0 0 24 24" style="width:100%; height:100%; fill: url(#gradient-pink-svg);"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>
+          </div>
+        </div>
+
+        <!-- List Modules Overview -->
+        <div class="section-title">Kurikulum Pembelajaran</div>
+        <div class="grid-modules">
+          <div class="glass-panel module-card" onclick="switchTab('m1')">
+            <div class="module-card-header">
+              <span class="module-badge">Modul 1</span>
+              <div class="read-time"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 2 12 10 2 12-4.48 12-10 12-10S17.52 2 12 2zm1 10V7h-2v6h5v-2h-3z"/></svg> 5 Menit</div>
+            </div>
+            <h4>Karakteristik & Perbedaan</h4>
+            <p>Memahami apa itu perusahaan dagang serta apa perbedaan krusialnya dibanding perusahaan jasa.</p>
+            <div class="module-card-footer">
+              <span>Dasar Akuntansi</span>
+              <span class="action-link">Buka Modul ➔</span>
+            </div>
+          </div>
+
+          <div class="glass-panel module-card" onclick="switchTab('m2')">
+            <div class="module-card-header">
+              <span class="module-badge">Modul 2</span>
+              <div class="read-time"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 2 12 10 2 12-4.48 12-10 12-10S17.52 2 12 2zm1 10V7h-2v6h5v-2h-3z"/></svg> 8 Menit</div>
+            </div>
+            <h4>Sistem Pencatatan Stok</h4>
+            <p>Mempelajari perbedaan mendasar Sistem Periodik (Fisik) dan Sistem Perpetual (Kasir Digital).</p>
+            <div class="module-card-footer">
+              <span>Metode Persediaan</span>
+              <span class="action-link">Buka Modul ➔</span>
+            </div>
+          </div>
+
+          <div class="glass-panel module-card" onclick="switchTab('m3')">
+            <div class="module-card-header">
+              <span class="module-badge">Modul 3</span>
+              <div class="read-time"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 2 12 10 2 12-4.48 12-10 12-10S17.52 2 12 2zm1 10V7h-2v6h5v-2h-3z"/></svg> 12 Menit</div>
+            </div>
+            <h4>Transaksi & Jurnal</h4>
+            <p>Simulasi pencatatan jurnal pembelian dan penjualan bersandingan (Perpetual vs Periodik).</p>
+            <div class="module-card-footer">
+              <span>Praktik Jurnal</span>
+              <span class="action-link">Buka Modul ➔</span>
+            </div>
+          </div>
+
+          <div class="glass-panel module-card" onclick="switchTab('m4')">
+            <div class="module-card-header">
+              <span class="module-badge">Modul 4</span>
+              <div class="read-time"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 2 12 10 2 12-4.48 12-10 12-10S17.52 2 12 2zm1 10V7h-2v6h5v-2h-3z"/></svg> 10 Menit</div>
+            </div>
+            <h4>Ketentuan FOB (Ongkir)</h4>
+            <p>Visualisasi interaktif serah terima barang dagang dengan FOB Shipping Point dan Destination.</p>
+            <div class="module-card-footer">
+              <span>FOB Animator</span>
+              <span class="action-link">Buka Modul ➔</span>
+            </div>
+          </div>
+
+          <div class="glass-panel module-card" onclick="switchTab('m5')">
+            <div class="module-card-header">
+              <span class="module-badge">Modul 5</span>
+              <div class="read-time"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 2 12 10 2 12-4.48 12-10 12-10S17.52 2 12 2zm1 10V7h-2v6h5v-2h-3z"/></svg> 15 Menit</div>
+            </div>
+            <h4>Kalkulator HPP & Laba Rugi</h4>
+            <p>Alat kalkulasi otomatis untuk menghitung Harga Pokok Penjualan (HPP) dan menyusun laporan laba rugi.</p>
+            <div class="module-card-footer">
+              <span>Kalkulator Live</span>
+              <span class="action-link">Buka Modul ➔</span>
+            </div>
+          </div>
+
+          <div class="glass-panel module-card" onclick="switchTab('m6')">
+            <div class="module-card-header">
+              <span class="module-badge">Modul 6</span>
+              <div class="read-time"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 2 12 10 2 12-4.48 12-10 12-10S17.52 2 12 2zm1 10V7h-2v6h5v-2h-3z"/></svg> 10 Menit</div>
+            </div>
+            <h4>Studi Kasus Sembako & Batik</h4>
+            <p>Menguji alur transaksi secara nyata pada CV Berkah Mandiri dan CV Sekar Jawi dengan interaktif.</p>
+            <div class="module-card-footer">
+              <span>Studi Kasus</span>
+              <span class="action-link">Buka Modul ➔</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           TAB CONTENT 1: MODUL 1
+           ========================================================================== -->
+      <section class="tab-content" id="tab-m1">
+        <div class="module-layout">
+          <div class="glass-panel glass-card-body">
+            <h3 class="module-subtitle"><span class="m-num">1</span> Karakteristik Perusahaan Dagang</h3>
+            <p class="rich-paragraph">Apa sih sebenernya yang membedakan perusahaan dagang dengan perusahaan jasa? Secara mendasar, <span class="highlight-span">perusahaan dagang adalah perusahaan yang membeli barang dagang dari pemasok (supplier) lalu menjualnya kembali</span> kepada pelanggan tanpa mengubah bentuk fisiknya.</p>
+            
+            <div class="callout-box">
+              <div class="callout-header">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 2 12 10 2 12-4.48 12-10 12-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                Contoh Nyata Dunia Kerja
+              </div>
+              <div class="callout-body">
+                <strong>Indomaret</strong> membeli air mineral Aqua secara grosir dari <strong>Danone (supplier)</strong>, lalu menaruhnya di rak toko dan menjualnya langsung ke konsumen secara satuan. Indomaret sama sekali tidak memproses air tersebut atau membotolkannya sendiri. Indomaret hanya membeli dan menjual barang jadi. Itulah esensi perusahaan dagang!
+              </div>
+            </div>
+
+            <div class="section-title">Perbedaan Utama: Jasa vs Dagang</div>
+            <div class="table-container">
+              <table class="interactive-table">
+                <thead>
+                  <tr>
+                    <th>Aspek Perbandingan</th>
+                    <th>Perusahaan Jasa</th>
+                    <th>Perusahaan Dagang</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Produk</strong></td>
+                    <td>Jasa / Layanan (Tidak Berwujud)</td>
+                    <td>Barang Fisik (Berwujud)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Persediaan</strong></td>
+                    <td>❌ Tidak ada persediaan barang dagang</td>
+                    <td>✅ Ada stok persediaan fisik yang disimpan</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Harga Pokok Penjualan (HPP)</strong></td>
+                    <td>❌ Tidak mengenal akun HPP</td>
+                    <td>✅ HPP sangat krusial (biaya modal barang)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Contoh Nyata</strong></td>
+                    <td>Konsultan Hukum, Salon Kecantikan, Dokter</td>
+                    <td>Minimarket, Toko Pakaian, Distributor Grosir</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Format Laba Rugi</strong></td>
+                    <td>Sederhana (Pendapatan dikurangi Beban)</td>
+                    <td>Berjenjang (Laba Kotor dihitung dari Penjualan - HPP)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="calc-action-bar">
+              <button class="cta-btn" onclick="switchTab('m2')">Lanjut ke Modul 2 ➔</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           TAB CONTENT 2: MODUL 2
+           ========================================================================== -->
+      <section class="tab-content" id="tab-m2">
+        <div class="module-layout">
+          <div class="glass-panel glass-card-body">
+            <h3 class="module-subtitle"><span class="m-num">2</span> Sistem Pencatatan Persediaan</h3>
+            <p class="rich-paragraph">Untuk memantau jumlah stok barang di gudang atau rak, perusahaan akuntansi dagang memiliki <span class="highlight-span">2 metode atau sistem pencatatan persediaan</span> yang umum digunakan:</p>
+
+            <div class="comp-grid">
+              <div class="comp-card blue">
+                <h5>Sistem Periodik (Fisik)</h5>
+                <ul>
+                  <li><strong>Metode Pencatatan</strong>: Nilai persediaan fisik tidak dicatat secara otomatis ketika terjadi pembelian atau penjualan barang.</li>
+                  <li><strong>Perhitungan Stok</strong>: Jumlah barang dagang dihitung secara manual (*stock opname*) di akhir periode akuntansi untuk menentukan nilai akhir persediaan.</li>
+                  <li><strong>Penggunaan Akun</strong>: Transaksi pembelian dicatat di akun khusus bernama **Pembelian**, bukan di akun persediaan.</li>
+                  <li><strong>Sangat Cocok Untuk</strong>: Toko kelontong kecil, warung makan, atau UMKM sederhana dengan barang yang variatif dan nominal relatif kecil.</li>
+                </ul>
+              </div>
+
+              <div class="comp-card pink">
+                <h5>Sistem Perpetual (Permanen)</h5>
+                <ul>
+                  <li><strong>Metode Pencatatan</strong>: Nilai persediaan barang dicatat dan diperbarui secara otomatis setiap kali ada mutasi masuk atau keluar.</li>
+                  <li><strong>Perhitungan Stok</strong>: Terpantau secara *real-time* lewat sistem komputerisasi. Kartu persediaan diperbarui setiap menit.</li>
+                  <li><strong>Penggunaan Akun</strong>: Setiap pembelian atau penjualan barang langsung dicatat mendebit/mengkredit akun **Persediaan Barang Dagang**.</li>
+                  <li><strong>Sangat Cocok Untuk</strong>: Supermarket besar (Alfamart, Carrefour), minimarket modern, distributor skala menengah-besar yang menggunakan kasir barcode.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="callout-box callout-box-pink">
+              <div class="callout-header">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 2 12 10 2 12-4.48 12-10 12-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                Ilustrasi Perbandingan Nyata
+              </div>
+              <div class="callout-body">
+                Bayangkan <strong>Alfamart</strong> vs <strong>Warung Bu Siti</strong>:<br>
+                Di **Alfamart (Perpetual)**, setiap kali kasir men-scan barcode satu bungkus mie instan, database pusat otomatis memotong jumlah stok mie instan sebanyak 1 unit. Sistem langsung tahu sisa stok secara presisi.<br><br>
+                Sedangkan di **Warung Bu Siti (Periodik)**, Bu Siti tidak mencatat setiap mie yang terjual secara detail di pembukuan persediaan. Di akhir bulan, Bu Siti akan menutup warung lalu memanjat rak untuk menghitung secara manual mie instan yang tersisa untuk mengetahui berapa modal yang telah terpakai.
+              </div>
+            </div>
+
+            <div class="calc-action-bar">
+              <button class="btn-secondary" onclick="switchTab('m1')">⬅ Modul Sebelumnya</button>
+              <button class="cta-btn" onclick="switchTab('m3')">Lanjut ke Modul 3 ➔</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           TAB CONTENT 3: MODUL 3
+           ========================================================================== -->
+      <section class="tab-content" id="tab-m3">
+        <div class="module-layout">
+          <div class="glass-panel glass-card-body">
+            <h3 class="module-subtitle"><span class="m-num">3</span> Transaksi Pembelian, Penjualan & Jurnal</h3>
+            <p class="rich-paragraph">Dalam operasional perusahaan dagang sehari-hari, ada beberapa istilah penting yang sering digunakan terkait aktivitas transaksi, baik dalam hal pembelian maupun penjualan barang:</p>
+
+            <div class="comp-grid">
+              <div class="comp-card blue">
+                <h5>Istilah Penting Pembelian</h5>
+                <ul>
+                  <li><strong>Pembelian (Purchases)</strong>: Nilai harga beli barang dagang yang diperoleh dari supplier.</li>
+                  <li><strong>Retur Pembelian (Purchase Return)</strong>: Pengembalian barang rusak atau tidak sesuai ke supplier.</li>
+                  <li><strong>Potongan Pembelian (Purchase Discount)</strong>: Diskon pembayaran yang kita peroleh karena membayar utang lebih cepat.</li>
+                  <li><strong>Syarat Pembayaran (e.g. 2/10, n/30)</strong>: Diskon 2% jika melunasi utang dalam waktu 10 hari sejak pembelian, jatuh tempo maksimal 30 hari.</li>
+                </ul>
+              </div>
+
+              <div class="comp-card pink">
+                <h5>Istilah Penting Penjualan</h5>
+                <ul>
+                  <li><strong>Penjualan (Sales)</strong>: Pendapatan yang diperoleh dari penyerahan barang dagang ke pelanggan.</li>
+                  <li><strong>Retur Penjualan (Sales Return)</strong>: Barang yang dikembalikan oleh konsumen karena cacat/salah ukuran.</li>
+                  <li><strong>Potongan Penjualan (Sales Discount)</strong>: Diskon pembayaran yang diberikan kepada pelanggan karena membayar cepat.</li>
+                  <li><strong>Beban Angkut Penjualan (Freight Out)</strong>: Ongkos kirim barang dagang ke konsumen yang ditanggung penjual.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="section-title">Simulator Jurnal Interaktif</div>
+            <p class="rich-paragraph" style="font-size:13px; margin-top:-10px;">Klik skenario transaksi di bawah untuk membandingkan pembukuan jurnal bersandingan antara sistem **Perpetual** dan **Periodik**:</p>
+
+            <div class="journal-simulator-box">
+              <div class="scenario-picker" id="scenario-picker">
+                <!-- Buttons dynamically loaded in JS -->
+              </div>
+
+              <!-- Side-by-Side View -->
+              <div class="side-by-side-journals">
+                <!-- Perpetual Journal -->
+                <div class="glass-panel journal-column">
+                  <div class="journal-column-title">
+                    <span>Sistem Perpetual (Modern)</span>
+                    <span class="glow-badge">Real-time</span>
+                  </div>
+                  <table class="journal-table" id="journal-perpetual-table">
+                    <thead>
+                      <tr>
+                        <th>Akun/Keterangan</th>
+                        <th style="text-align:right;">Debet (Rp)</th>
+                        <th style="text-align:right;">Kredit (Rp)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <!-- Dynamic -->
+                    </tbody>
+                  </table>
+                  <div class="journal-exp-notes" id="journal-perpetual-exp">Pilih skenario transaksi di atas untuk memuat jurnal.</div>
+                </div>
+
+                <!-- Periodic Journal -->
+                <div class="glass-panel journal-column">
+                  <div class="journal-column-title">
+                    <span>Sistem Periodik (Fisik)</span>
+                    <span class="glow-badge" style="background:rgba(236,72,153,0.1); border-color:rgba(236,72,153,0.2); color:var(--color-pink);">Fisik / Manual</span>
+                  </div>
+                  <table class="journal-table" id="journal-periodic-table">
+                    <thead>
+                      <tr>
+                        <th>Akun/Keterangan</th>
+                        <th style="text-align:right;">Debet (Rp)</th>
+                        <th style="text-align:right;">Kredit (Rp)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <!-- Dynamic -->
+                    </tbody>
+                  </table>
+                  <div class="journal-exp-notes" id="journal-periodic-exp">Pilih skenario transaksi di atas untuk memuat jurnal.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="calc-action-bar">
+              <button class="btn-secondary" onclick="switchTab('m2')">⬅ Modul Sebelumnya</button>
+              <button class="cta-btn" onclick="switchTab('m4')">Lanjut ke Modul 4 ➔</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           TAB CONTENT 4: MODUL 4 (FOB TERMS)
+           ========================================================================== -->
+      <section class="tab-content" id="tab-m4">
+        <div class="module-layout">
+          <div class="glass-panel glass-card-body">
+            <h3 class="module-subtitle"><span class="m-num">4</span> Ketentuan Ongkir & Penyerahan Barang (FOB)</h3>
+            <p class="rich-paragraph">Dalam jual beli dagang skala besar, penentuan siapa yang menanggung ongkos kirim dan kapan barang resmi berpindah kepemilikan sangat penting. Hal ini diatur lewat syarat **FOB (Free On Board)**:</p>
+
+            <!-- Interactive Stage Area -->
+            <div class="fob-animator-box">
+              <div class="fob-controls">
+                <button class="fob-btn active" id="btn-fob-shipping" onclick="triggerFOB('shipping')">FOB Shipping Point</button>
+                <button class="fob-btn" id="btn-fob-destination" onclick="triggerFOB('destination')">FOB Destination</button>
+              </div>
+
+              <!-- Highway Visualizer -->
+              <div class="highway-stage">
+                <!-- Node 1: Penjual -->
+                <div class="stage-node node-active" id="node-seller">
+                  <div class="node-icon">
+                    <!-- Warehouse SVG -->
+                    <svg viewBox="0 0 24 24"><path d="M12 3L2 12h3v8h14v-8h3L12 3zm0 4.5l6 5.4V18H6v-5.1l6-5.4z"/></svg>
+                  </div>
+                  <div class="node-title">Gudang Penjual (Solo)</div>
+                </div>
+
+                <!-- Glow Ring for Transfer Location -->
+                <div class="transfer-glow-ring" id="transfer-glow"></div>
+
+                <!-- Animated Truck container -->
+                <div class="truck-container" id="truck-anim">
+                  <!-- Truck SVG Icon -->
+                  <svg viewBox="0 0 24 24"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm12 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm2-5.5h-3V9h3v4z"/></svg>
+                </div>
+
+                <!-- Node 2: Pembeli -->
+                <div class="stage-node pink-node" id="node-buyer">
+                  <div class="node-icon">
+                    <!-- Shop SVG -->
+                    <svg viewBox="0 0 24 24"><path d="M20 4H4v2h16V4zm1 10v-2l-1-5H4l-1 5v2c0 .55.45 1 1 1h1v6h10v-6h4v6h2v-6h1c.55 0 1-.45 1-1zm-9 4H6v-4h6v4z"/></svg>
+                  </div>
+                  <div class="node-title">Toko Pembeli (Jombang)</div>
+                </div>
+              </div>
+
+              <!-- Explanation Display -->
+              <div class="fob-explanation-grid">
+                <div class="explain-card highlight-cyan">
+                  <h6>Titik Pindah Tangan</h6>
+                  <p id="fob-explain-ownership">Saat Barang Naik ke Truk</p>
+                </div>
+                <div class="explain-card highlight-pink">
+                  <h6>Ongkos Kirim Ditanggung</h6>
+                  <p id="fob-explain-freight">Pembeli (Ditagih Ekspedisi)</p>
+                </div>
+                <div class="explain-card">
+                  <h6>Risiko Selama Perjalanan</h6>
+                  <p id="fob-explain-risk">Tanggungan Pembeli Sepenuhnya</p>
+                </div>
+                <div class="explain-card">
+                  <h6>Pencatatan Nilai Persediaan</h6>
+                  <p id="fob-explain-acc">Ongkir dimasukkan ke nilai Persediaan</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="section-title">Perbandingan Lengkap Aturan FOB</div>
+            <div class="table-container">
+              <table class="interactive-table">
+                <thead>
+                  <tr>
+                    <th>Aspek Perbandingan</th>
+                    <th>FOB Shipping Point</th>
+                    <th>FOB Destination</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Ongkos Kirim Ditanggung</strong></td>
+                    <td>Pembeli</td>
+                    <td>Penjual</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Risiko Rusak/Hilang di Jalan</strong></td>
+                    <td>Pembeli (Sejak naik truk pengirim)</td>
+                    <td>Penjual (Sampai tiba di tujuan)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Kapan Kepemilikan Resmi Pindah</strong></td>
+                    <td>Saat naik ke truk di gudang penjual</td>
+                    <td>Saat tiba di depan pintu toko pembeli</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Jurnal Ongkir di Buku Pembeli</strong></td>
+                    <td>Debet Persediaan Barang Dagang, Kredit Kas</td>
+                    <td>Tidak Dijurnal (Bukan urusan pembeli)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Jurnal Ongkir di Buku Penjual</strong></td>
+                    <td>Tidak Dijurnal (Bukan urusan penjual)</td>
+                    <td>Debet Beban Angkut Penjualan, Kredit Kas</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Menguntungkan Bagi Siapa</strong></td>
+                    <td>Penjual (Bebas repot & resiko)</td>
+                    <td>Pembeli (Terima beres di tempat)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="calc-action-bar">
+              <button class="btn-secondary" onclick="switchTab('m3')">⬅ Modul Sebelumnya</button>
+              <button class="cta-btn" onclick="switchTab('m5')">Lanjut ke Modul 5 ➔</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           TAB CONTENT 5: MODUL 5 (CALCULATOR HPP)
+           ========================================================================== -->
+      <section class="tab-content" id="tab-m5">
+        <div class="module-layout">
+          <div class="glass-panel glass-card-body">
+            <h3 class="module-subtitle"><span class="m-num">5</span> Kalkulator Finansial HPP & Laporan Laba Rugi</h3>
+            <p class="rich-paragraph">Pada sistem pencatatan persediaan **Periodik (Fisik)**, Harga Pokok Penjualan (HPP) dihitung di akhir bulan menggunakan formula terstruktur. Ubah nominal formulir di bawah secara langsung untuk mensimulasikan Laporan Laba Rugi Anda!</p>
+
+            <div class="calculator-layout">
+              <!-- Inputs Panel -->
+              <div class="glass-panel calc-inputs-panel">
+                <div class="calc-group-title">
+                  <!-- Tag SVG -->
+                  <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:currentColor;"><path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 8c-.83 0-1.5-.67-1.5-1.5S4.67 5 5.5 5 7 5.67 7 6.5 6.33 8 5.5 8z"/></svg>
+                  1. Data Persediaan & Pembelian (HPP)
+                </div>
+                
+                <div class="input-row">
+                  <label for="c-inv-start">Persediaan Awal (1 Maret)</label>
+                  <div class="input-field-wrapper">
+                    <span class="input-currency-tag">Rp</span>
+                    <input type="number" class="calc-input" id="c-inv-start" value="50000000" oninput="calculateFinancials()">
+                  </div>
+                </div>
+
+                <div class="input-row">
+                  <label for="c-purchases">Pembelian Kotor</label>
+                  <div class="input-field-wrapper">
+                    <span class="input-currency-tag">Rp</span>
+                    <input type="number" class="calc-input" id="c-purchases" value="120000000" oninput="calculateFinancials()">
+                  </div>
+                </div>
+
+                <div class="input-row">
+                  <label for="c-freight-in">Beban Angkut Pembelian</label>
+                  <div class="input-field-wrapper">
+                    <span class="input-currency-tag">Rp</span>
+                    <input type="number" class="calc-input" id="c-freight-in" value="20000000" oninput="calculateFinancials()">
+                  </div>
+                </div>
+
+                <div class="input-row">
+                  <label for="c-purchase-returns">Retur Pembelian</label>
+                  <div class="input-field-wrapper">
+                    <span class="input-currency-tag">Rp</span>
+                    <input type="number" class="calc-input" id="c-purchase-returns" value="5000000" oninput="calculateFinancials()">
+                  </div>
+                </div>
+
+                <div class="input-row">
+                  <label for="c-purchase-discounts">Potongan Pembelian</label>
+                  <div class="input-field-wrapper">
+                    <span class="input-currency-tag">Rp</span>
+                    <input type="number" class="calc-input" id="c-purchase-discounts" value="1200000" oninput="calculateFinancials()">
+                  </div>
+                </div>
+
+                <div class="input-row" style="margin-bottom: 24px;">
+                  <label for="c-inv-end">Persediaan Akhir (31 Maret)</label>
+                  <div class="input-field-wrapper">
+                    <span class="input-currency-tag">Rp</span>
+                    <input type="number" class="calc-input" id="c-inv-end" value="40000000" oninput="calculateFinancials()">
+                  </div>
+                </div>
+
+                <div class="calc-group-title calc-group-title-pink">
+                  <!-- Money SVG -->
+                  <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:currentColor;"><path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+                  2. Pendapatan Penjualan & Beban
+                </div>
+
+                <div class="input-row">
+                  <label for="c-sales">Penjualan Kotor</label>
+                  <div class="input-field-wrapper">
+                    <span class="input-currency-tag">Rp</span>
+                    <input type="number" class="calc-input" id="c-sales" value="200000000" oninput="calculateFinancials()">
+                  </div>
+                </div>
+
+                <div class="input-row">
+                  <label for="c-sales-returns">Retur & Pot. Penjualan</label>
+                  <div class="input-field-wrapper">
+                    <span class="input-currency-tag">Rp</span>
+                    <input type="number" class="calc-input" id="c-sales-returns" value="8000000" oninput="calculateFinancials()">
+                  </div>
+                </div>
+
+                <div class="input-row">
+                  <label for="c-exp-salary">Beban Gaji Karyawan</label>
+                  <div class="input-field-wrapper">
+                    <span class="input-currency-tag">Rp</span>
+                    <input type="number" class="calc-input" id="c-exp-salary" value="15000000" oninput="calculateFinancials()">
+                  </div>
+                </div>
+
+                <div class="input-row">
+                  <label for="c-exp-rent">Beban Sewa Toko</label>
+                  <div class="input-field-wrapper">
+                    <span class="input-currency-tag">Rp</span>
+                    <input type="number" class="calc-input" id="c-exp-rent" value="5000000" oninput="calculateFinancials()">
+                  </div>
+                </div>
+
+                <div class="input-row">
+                  <label for="c-exp-utility">Beban Listrik, Air & Telepon</label>
+                  <div class="input-field-wrapper">
+                    <span class="input-currency-tag">Rp</span>
+                    <input type="number" class="calc-input" id="c-exp-utility" value="1500000" oninput="calculateFinancials()">
+                  </div>
+                </div>
+
+                <div class="input-row">
+                  <label for="c-exp-ads">Beban Iklan Pemasaran</label>
+                  <div class="input-field-wrapper">
+                    <span class="input-currency-tag">Rp</span>
+                    <input type="number" class="calc-input" id="c-exp-ads" value="2000000" oninput="calculateFinancials()">
+                  </div>
+                </div>
+
+                <div class="input-row">
+                  <label for="c-exp-freight">Beban Angkut Penjualan</label>
+                  <div class="input-field-wrapper">
+                    <span class="input-currency-tag">Rp</span>
+                    <input type="number" class="calc-input" id="c-exp-freight" value="1000000" oninput="calculateFinancials()">
+                  </div>
+                </div>
+
+                <div class="calc-action-bar">
+                  <button class="btn-secondary" onclick="resetCalculator()">Data Bawaan</button>
+                </div>
+              </div>
+
+              <!-- Output Statement Panel -->
+              <div class="glass-panel calc-outputs-panel">
+                <div class="formal-report-paper" id="printable-report">
+                  <div class="report-header">
+                    <h4>TOKO ELEKTRONIK "CAHAYA"</h4>
+                    <h5>LAPORAN LABA RUGI</h5>
+                    <p>Untuk Periode yang Berakhir pada 31 Maret 2026</p>
+                  </div>
+
+                  <table class="report-table">
+                    <tbody>
+                      <tr class="report-header-row">
+                        <td colspan="2">Penjualan Bersih:</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td class="indent-1">Penjualan Kotor</td>
+                        <td class="report-subtotal" id="r-sales-gross">Rp 200.000.000</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td class="indent-1">(-) Retur & Potongan Penjualan</td>
+                        <td class="report-subtotal" style="border-bottom:1px solid rgba(255,255,255,0.1);" id="r-sales-returns">Rp (8.000.000)</td>
+                        <td></td>
+                      </tr>
+                      <tr class="report-header-row">
+                        <td class="indent-1">Penjualan Bersih</td>
+                        <td></td>
+                        <td class="report-subtotal" id="r-sales-net">Rp 192.000.000</td>
+                      </tr>
+
+                      <tr class="report-header-row" style="height: 16px;"><td colspan="3"></td></tr>
+
+                      <tr class="report-header-row">
+                        <td colspan="2">Harga Pokok Penjualan (HPP):</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td class="indent-1">Persediaan Awal (1 Maret)</td>
+                        <td class="report-subtotal" id="r-inv-start">Rp 50.000.000</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td class="indent-1">Pembelian Kotor</td>
+                        <td id="r-purchases-gross">Rp 120.000.000</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td class="indent-1">(+) Beban Angkut Pembelian</td>
+                        <td style="border-bottom:1px solid rgba(255,255,255,0.1);" id="r-freight-in">Rp 20.000.000</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td class="indent-2">Total Pembelian Kotor</td>
+                        <td id="r-purchases-subtotal">Rp 140.000.000</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td class="indent-1">(-) Retur Pembelian</td>
+                        <td id="r-purchase-returns">Rp (5.000.000)</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td class="indent-1">(-) Potongan Pembelian</td>
+                        <td style="border-bottom:1px solid rgba(255,255,255,0.1);" id="r-purchase-discounts">Rp (1.200.000)</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td class="indent-2">Pembelian Bersih</td>
+                        <td style="border-bottom:1px solid rgba(255,255,255,0.15);" id="r-purchases-net">Rp 133.800.000</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td class="indent-1">Barang Tersedia Dijual</td>
+                        <td id="r-goods-available">Rp 183.800.000</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td class="indent-1">(-) Persediaan Akhir (31 Maret)</td>
+                        <td class="report-subtotal" style="border-bottom:1px solid rgba(255,255,255,0.15);" id="r-inv-end">Rp (40.000.000)</td>
+                        <td></td>
+                      </tr>
+                      <tr class="report-header-row">
+                        <td class="indent-1">Harga Pokok Penjualan (HPP)</td>
+                        <td></td>
+                        <td class="report-subtotal" style="color:var(--color-pink); border-bottom-color:var(--color-pink);" id="r-hpp">Rp (143.800.000)</td>
+                      </tr>
+
+                      <tr class="report-header-row" style="height: 16px;"><td colspan="3"></td></tr>
+
+                      <tr class="report-header-row">
+                        <td>LABA KOTOR (Gross Profit)</td>
+                        <td></td>
+                        <td class="report-subtotal" style="color:var(--color-blue); border-bottom-color:var(--color-blue);" id="r-gross-profit">Rp 48.200.000</td>
+                      </tr>
+
+                      <tr class="report-header-row" style="height: 16px;"><td colspan="3"></td></tr>
+
+                      <tr class="report-header-row">
+                        <td colspan="2">Beban Operasional:</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td class="indent-1">Beban Gaji Karyawan</td>
+                        <td id="r-exp-salary">Rp 15.000.000</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td class="indent-1">Beban Sewa Toko</td>
+                        <td id="r-exp-rent">Rp 5.000.000</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td class="indent-1">Beban Listrik, Air & Telepon</td>
+                        <td id="r-exp-utility">Rp 1.500.000</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td class="indent-1">Beban Iklan Pemasaran</td>
+                        <td id="r-exp-ads">Rp 2.000.000</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td class="indent-1">Beban Angkut Penjualan</td>
+                        <td style="border-bottom:1px solid rgba(255,255,255,0.1);" id="r-exp-freight">Rp 1.000.000</td>
+                        <td></td>
+                      </tr>
+                      <tr class="report-header-row">
+                        <td class="indent-1">Total Beban Operasional</td>
+                        <td></td>
+                        <td class="report-subtotal" id="r-total-expenses">Rp (24.500.000)</td>
+                      </tr>
+
+                      <tr class="report-header-row" style="height: 20px;"><td colspan="3"></td></tr>
+
+                      <tr class="report-header-row" style="font-size:14px;">
+                        <td>LABA BERSIH (Net Profit)</td>
+                        <td></td>
+                        <td class="report-total" id="r-net-profit">Rp 23.700.000</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="calc-action-bar">
+                  <button class="cta-btn" onclick="window.print()">
+                    <!-- Printer SVG -->
+                    <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:#fff;margin-right:6px;"><path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/></svg>
+                    Cetak Laporan Laba Rugi
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="calc-action-bar" style="margin-top: 40px;">
+              <button class="btn-secondary" onclick="switchTab('m4')">⬅ Modul Sebelumnya</button>
+              <button class="cta-btn" onclick="switchTab('m6')">Lanjut ke Modul 6 ➔</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           TAB CONTENT 6: MODUL 6 (STUDI KASUS)
+           ========================================================================== -->
+      <section class="tab-content" id="tab-m6">
+        <div class="module-layout">
+          <div class="glass-panel glass-card-body">
+            <h3 class="module-subtitle"><span class="m-num">6</span> Studi Kasus Nyata Dunia Kerja</h3>
+            <p class="rich-paragraph">Mari kita bedah alur transaksi bisnis nyata di daerah **Jombang** untuk memahami bagaimana seluruh teori akuntansi ini diimplementasikan di dunia kerja sebenarnya:</p>
+
+            <div class="comp-grid">
+              <!-- Case Study 1 -->
+              <div class="glass-panel" style="padding: 24px;">
+                <h4 style="font-size:16px; font-weight:700; color:var(--color-pink); margin-bottom:12px; display:flex; align-items:center; gap:8px;">
+                  <span class="glow-badge" style="background:rgba(236,72,153,0.1); border-color:rgba(236,72,153,0.2); color:var(--color-pink);">Kasus 1</span>
+                  CV. Berkah Mandiri (Distributor Sembako)
+                </h4>
+                <p class="rich-paragraph" style="font-size:13px; margin-bottom:16px;">Merupakan distributor gula, beras, dan minyak goreng di Jombang yang memasok ke warung kelontong tradisional. Sistem persediaan yang digunakan: **Perpetual**.</p>
+                
+                <div class="timeline-container" id="timeline-berkah">
+                  <!-- Dynamically Rendered by JS -->
+                </div>
+              </div>
+
+              <!-- Case Study 2 -->
+              <div class="glass-panel" style="padding: 24px;">
+                <h4 style="font-size:16px; font-weight:700; color:var(--color-blue); margin-bottom:12px; display:flex; align-items:center; gap:8px;">
+                  <span class="glow-badge">Kasus 2</span>
+                  CV. Sekar Jawi (Distributor Batik)
+                </h4>
+                <p class="rich-paragraph" style="font-size:13px; margin-bottom:16px;">Merupakan distributor busana batik yang berbasis di Jombang dengan sistem logistik antar kota (Solo, Malang, Surabaya). Sistem persediaan: **Perpetual & FOB Terms**.</p>
+                
+                <div class="timeline-container" id="timeline-sekar">
+                  <!-- Dynamically Rendered by JS -->
+                </div>
+              </div>
+            </div>
+
+            <div class="calc-action-bar">
+              <button class="btn-secondary" onclick="switchTab('m5')">⬅ Modul Sebelumnya</button>
+              <button class="cta-btn" onclick="switchTab('m7')">Lanjut ke Modul 7 (Kuis & Hafalan) ➔</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           TAB CONTENT 7: MODUL 7 (FLASHCARDS & QUIZ)
+           ========================================================================== -->
+      <section class="tab-content" id="tab-m7">
+        <div class="module-layout">
+          <div class="glass-panel glass-card-body">
+            <h3 class="module-subtitle"><span class="m-num">7</span> Hafalan & Evaluasi Kemampuan Belajar</h3>
+            <p class="rich-paragraph">Gunakan kartu memori (*flashcards*) di bawah untuk menghafal cepat istilah akuntansi dagang krusial, kemudian uji pemahaman Anda lewat Kuis Pintar untuk mendapatkan Sertifikat Kelulusan!</p>
+
+            <div class="section-title">Kartu Hafalan Cepat (3D Flip Flashcards)</div>
+            <p class="rich-paragraph" style="font-size:13px; margin-top:-10px;">Klik kartu di bawah untuk membalik dan melihat arti istilah:</p>
+
+            <div class="flashcard-grid" id="flashcard-grid">
+              <!-- Dynamically populated in JS -->
+            </div>
+
+            <div class="section-title" style="margin-top: 48px;">Evaluasi Belajar: Kuis Pintar Akuntansi</div>
+            
+            <div class="quiz-container" id="quiz-container-box">
+              <div class="quiz-header">
+                <span class="quiz-q-num" id="quiz-question-counter">Pertanyaan 1 dari 10</span>
+                <span class="quiz-timer" id="quiz-score-live">Skor: 0</span>
+              </div>
+              <div class="quiz-progress-bg">
+                <div class="quiz-progress-fill" id="quiz-progress-bar-fill"></div>
+              </div>
+
+              <!-- Question Container -->
+              <div class="glass-panel" style="padding: 24px; margin-bottom: 24px;">
+                <div class="question-title" id="quiz-question-title">Memuat pertanyaan...</div>
+                <div class="options-grid" id="quiz-options-container">
+                  <!-- Buttons dynamically generated -->
+                </div>
+                <div class="quiz-feedback-box" id="quiz-feedback">
+                  <strong>Pembahasan:</strong> <span id="quiz-feedback-text">Penjelasan jawaban...</span>
+                </div>
+              </div>
+
+              <div class="quiz-footer">
+                <button class="cta-btn" id="quiz-next-btn" style="display:none;" onclick="nextQuestion()">Pertanyaan Selanjutnya ➔</button>
+              </div>
+            </div>
+
+            <!-- Quiz Results Panel (Hidden Initially) -->
+            <div class="glass-panel quiz-results-panel" id="quiz-results-panel" style="display: none;">
+              <div class="certificate-panel">
+                <div class="cert-seal">
+                  <!-- Trophy SVG -->
+                  <svg viewBox="0 0 24 24"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v3c0 2.44 1.72 4.48 4 4.88V18c0 1.1.9 2 2 2h6c1.1 0 2-.9 2-2v-3.12c2.28-.4 4-2.44 4-4.88V7c0-1.1-.9-2-2-2zm-12 5V7h2v3c0 .55-.45 1-1 1s-1-.45-1-1zm10 0c0 .55-.45 1-1 1s-1-.45-1-1V7h2v3z"/></svg>
+                </div>
+                <div class="cert-title">SERTIFIKAT KELULUSAN</div>
+                <div class="cert-sub">E-LEARNING AKUNTANSI PERUSAHAAN DAGANG</div>
+                <p style="font-size:12px;color:var(--text-muted);">Dengan ini dinyatakan bahwa pembelajar hebat:</p>
+                <div class="cert-user">Pembelajar Akuntansi Unggul</div>
+                <div class="cert-body">Telah berhasil menyelesaikan seluruh modul pembelajaran akuntansi perusahaan dagang dan lulus ujian dengan skor gemilang:</div>
+                <div class="cert-score" id="cert-final-score">80 / 100</div>
+              </div>
+              <button class="cta-btn" onclick="resetQuiz()">Ulangi Kuis 🔄</button>
+            </div>
+
+            <div class="calc-action-bar" style="margin-top: 40px;">
+              <button class="btn-secondary" onclick="switchTab('m6')">⬅ Modul Sebelumnya</button>
+              <button class="cta-btn" onclick="switchTab('dashboard')">Kembali ke Dashboard 🏠</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ==========================================================================
+       APPLICATION JAVASCRIPT LOGIC
+       ========================================================================== -->
+  <script>
+    /* ==========================================================================
+       1. DATA STRUCTURES & DATABASE MATERIAL (EXPLAINED IN INDONESIAN)
+       ========================================================================== */
+    const navigationList = ['dashboard', 'm1', 'm2', 'm3', 'm4', 'm5', 'm6', 'm7'];
+    const readProgress = {
+      dashboard: true,
+      m1: false,
+      m2: false,
+      m3: false,
+      m4: false,
+      m5: false,
+      m6: false,
+      m7: false
+    };
+
+    // Jurnal Simulator Data
+    const journalScenarios = [
+      {
+        id: 'purch_credit',
+        title: '1. Pembelian Barang Dagang Kredit',
+        desc: 'Membeli barang dagang seharga Rp 10.000.000 secara kredit dengan syarat 2/10, n/30.',
+        perpetual: [
+          { acc: 'Persediaan Barang Dagang', debet: 10000000, kredit: 0, isIndent: false },
+          { acc: 'Utang Usaha', debet: 0, kredit: 10000000, isIndent: true }
+        ],
+        periodic: [
+          { acc: 'Pembelian', debet: 10000000, kredit: 0, isIndent: false },
+          { acc: 'Utang Usaha', debet: 0, kredit: 10000000, isIndent: true }
+        ],
+        notes: 'Sistem perpetual mendebet akun Persediaan secara langsung, sedangkan sistem periodik menggunakan akun Pembelian sementara.'
+      },
+      {
+        id: 'freight_in',
+        title: '2. Membayar Ongkir Pembelian (FOB Shipping)',
+        desc: 'Membayar ongkos kirim barang dagang Rp 200.000 dengan syarat FOB Shipping Point tunai.',
+        perpetual: [
+          { acc: 'Persediaan Barang Dagang', debet: 200000, kredit: 0, isIndent: false },
+          { acc: 'Kas', debet: 0, kredit: 200000, isIndent: true }
+        ],
+        periodic: [
+          { acc: 'Beban Angkut Pembelian', debet: 200000, kredit: 0, isIndent: false },
+          { acc: 'Kas', debet: 0, kredit: 200000, isIndent: true }
+        ],
+        notes: 'Di perpetual, ongkir dianggap biaya perolehan barang sehingga didebit ke Persediaan. Di periodik, didebit ke akun Beban khusus.'
+      },
+      {
+        id: 'purch_return',
+        title: '3. Retur Pembelian ke Supplier',
+        desc: 'Mengembalikan barang dagang yang rusak kepada supplier senilai Rp 1.000.000 atas transaksi kredit.',
+        perpetual: [
+          { acc: 'Utang Usaha', debet: 1000000, kredit: 0, isIndent: false },
+          { acc: 'Persediaan Barang Dagang', debet: 0, kredit: 1000000, isIndent: true }
+        ],
+        periodic: [
+          { acc: 'Utang Usaha', debet: 1000000, kredit: 0, isIndent: false },
+          { acc: 'Retur & Potongan Pembelian', debet: 0, kredit: 1000000, isIndent: true }
+        ],
+        notes: 'Perpetual mengurangi persediaan secara langsung di kredit. Periodik mengkredit akun kontra Retur Pembelian.'
+      },
+      {
+        id: 'pay_discount',
+        title: '4. Pelunasan Utang (Masa Diskon 2%)',
+        desc: 'Melunasi sisa utang Rp 9.000.000 dalam masa diskon 10 hari, sehingga memperoleh diskon 2% (Rp 180.000).',
+        perpetual: [
+          { acc: 'Utang Usaha', debet: 9000000, kredit: 0, isIndent: false },
+          { acc: 'Kas', debet: 0, kredit: 8820000, isIndent: true },
+          { acc: 'Persediaan Barang Dagang (Diskon)', debet: 0, kredit: 180000, isIndent: true }
+        ],
+        periodic: [
+          { acc: 'Utang Usaha', debet: 9000000, kredit: 0, isIndent: false },
+          { acc: 'Kas', debet: 0, kredit: 8820000, isIndent: true },
+          { acc: 'Potongan Pembelian', debet: 0, kredit: 180000, isIndent: true }
+        ],
+        notes: 'Diskon 2% dari Rp 9.000.000 adalah Rp 180.000. Kas yang dibayar menjadi Rp 8.820.000.'
+      },
+      {
+        id: 'sales_credit',
+        title: '5. Penjualan Barang Dagang Kredit',
+        desc: 'Menjual barang secara kredit seharga Rp 15.000.000. Harga pokok (HPP) barang tersebut adalah Rp 8.000.000.',
+        perpetual: [
+          { acc: 'Piutang Usaha', debet: 15000000, kredit: 0, isIndent: false },
+          { acc: 'Penjualan', debet: 0, kredit: 15000000, isIndent: true },
+          { acc: 'Harga Pokok Penjualan (HPP)', debet: 8000000, kredit: 0, isIndent: false },
+          { acc: 'Persediaan Barang Dagang', debet: 0, kredit: 8000000, isIndent: true }
+        ],
+        periodic: [
+          { acc: 'Piutang Usaha', debet: 15000000, kredit: 0, isIndent: false },
+          { acc: 'Penjualan', debet: 0, kredit: 15000000, isIndent: true }
+        ],
+        notes: 'Sistem perpetual mencatat dua pasang jurnal sekaligus (Penjualan & Pengurangan Stok). Sistem periodik tidak menjurnal HPP saat penjualan.'
+      },
+      {
+        id: 'sales_return',
+        title: '6. Retur Penjualan dari Pelanggan',
+        desc: 'Menerima kembali barang retur dari pelanggan senilai Rp 1.500.000 secara kredit (HPP barang retur Rp 800.000).',
+        perpetual: [
+          { acc: 'Retur & Potongan Penjualan', debet: 1500000, kredit: 0, isIndent: false },
+          { acc: 'Piutang Usaha', debet: 0, kredit: 1500000, isIndent: true },
+          { acc: 'Persediaan Barang Dagang', debet: 800000, kredit: 0, isIndent: false },
+          { acc: 'Harga Pokok Penjualan (HPP)', debet: 0, kredit: 800000, isIndent: true }
+        ],
+        periodic: [
+          { acc: 'Retur & Potongan Penjualan', debet: 1500000, kredit: 0, isIndent: false },
+          { acc: 'Piutang Usaha', debet: 0, kredit: 1500000, isIndent: true }
+        ],
+        notes: 'Perpetual mengembalikan stok fisik di gudang di debit (Rp 800.000) dan mengurangi beban HPP di kredit. Periodik hanya mencatat retur rupiah penjualan saja.'
+      }
+    ];
+
+    // Case Studies Data
+    const sembakoCase = [
+      { date: '2 Apr', title: 'Beli Gula Kredit', text: 'CV Berkah Mandiri membeli gula 500 kg @ Rp 14.000/kg (Total Rp 7.000.000) secara kredit dengan syarat 2/10, n/30 dari Pabrik Gula Tjoekir.', change: 'Utang Usaha (+ Rp 7.000.000), Persediaan (+ Rp 7.000.000)', isPlus: true },
+      { date: '5 Apr', title: 'Retur Gula Rusak', text: 'Mengembalikan gula seberat 20 kg karena robek dan basah di perjalanan. Nilai retur: 20 kg x Rp 14.000 = Rp 280.000.', change: 'Utang Usaha (- Rp 280.000), Persediaan (- Rp 280.000)', isPlus: false },
+      { date: '10 Apr', title: 'Bayar Utang Masa Diskon', text: 'Melunasi sisa utang (Rp 6.720.000) dalam masa diskon 10 hari. Dapat diskon 2% = Rp 134.400. Kas dibayar: Rp 6.585.600.', change: 'Utang Usaha Lunas (- Rp 6.720.000), Persediaan (Diskon - Rp 134.400)', isPlus: false },
+      { date: '15 Apr', title: 'Penjualan Gula Tunai', text: 'Menjual gula sebanyak 400 kg @ Rp 17.000/kg secara tunai ke Warung Pak Budi. Total penjualan: Rp 6.800.000. HPP: 400 kg x Rp 14.000 = Rp 5.600.000.', change: 'Kas (+ Rp 6.800.000), Penjualan (+ Rp 6.800.000), HPP (+ Rp 5.600.000), Persediaan (- Rp 5.600.000)', isPlus: true },
+      { date: '31 Apr', title: 'Hasil Laba Kotor Akhir', text: 'Laba kotor CV Berkah Mandiri dihitung: Penjualan (Rp 6.800.000) dikurangi HPP (Rp 5.600.000) = Laba Kotor Rp 1.200.000.', change: 'Laba Kotor Terbentuk (+ Rp 1.200.000)', isPlus: true }
+    ];
+
+    const batikCase = [
+      { date: '5 Okt', title: 'Beli Kain Batik (FOB Shipping)', text: 'Membeli kain batik senilai Rp 20.000.000 secara kredit dengan syarat FOB Shipping Point dari Batik Keris Solo. Ekspedisi menagih ongkir Rp 500.000 tunai.', change: 'Persediaan (+ Rp 20.500.000), Utang (+ Rp 20.000.000), Kas (- Rp 500.000)', isPlus: true },
+      { date: '12 Okt', title: 'Jual Batik (FOB Destination)', text: 'Menjual batik ke Toko Modis Malang seharga Rp 35.000.000 secara kredit dengan syarat FOB Destination. Ongkir ditanggung CV Sekar Jawi sebesar Rp 750.000 tunai. HPP batik: Rp 18.000.000.', change: 'Piutang (+ Rp 35.000.000), Beban Angkut (+ Rp 750.000), HPP (+ Rp 18.000.000), Persediaan (- Rp 18.000.000)', isPlus: true },
+      { date: '31 Okt', title: 'Laba Operasional Akhir', text: 'Penjualan (Rp 35.000.000) - HPP (Rp 18.000.000) = Laba Kotor Rp 17.000.000. Laba Kotor - Beban Angkut (Rp 750.000) = Laba Operasional Rp 16.250.000.', change: 'Laba Operasional Akhir (+ Rp 16.250.000)', isPlus: true }
+    ];
+
+    // Vocabulary Flashcards
+    const vocabData = [
+      { word: 'Perusahaan Dagang', type: 'Definisi', def: 'Perusahaan yang membeli barang dagangan dari supplier lalu menjualnya kembali ke pembeli tanpa mengubah bentuknya.' },
+      { word: 'FOB Shipping Point', type: 'Syarat Pengiriman', def: 'Ongkos kirim dan risiko perjalanan ditanggung oleh Pembeli sejak barang keluar dari pintu gudang Penjual.' },
+      { word: 'FOB Destination', type: 'Syarat Pengiriman', def: 'Ongkos kirim dan risiko perjalanan ditanggung penuh oleh Penjual sampai barang tiba dengan selamat di toko Pembeli.' },
+      { word: 'Sistem Perpetual', type: 'Metode Stok', def: 'Sistem pencatatan di mana mutasi stok persediaan dicatat secara real-time otomatis setiap terjadi pembelian/penjualan.' },
+      { word: 'Sistem Periodik', type: 'Metode Stok', def: 'Sistem pencatatan persediaan secara manual dengan melakukan stock opname (perhitungan fisik) di akhir periode.' },
+      { word: 'HPP', type: 'Modal Barang', def: 'Harga Pokok Penjualan: Total biaya/modal yang dikeluarkan untuk memproduksi atau memperoleh barang dagangan yang laku terjual.' },
+      { word: 'Syarat 2/10, n/30', type: 'Term Pembayaran', def: 'Diskon 2% diberikan jika pembeli melunasi utangnya dalam waktu 10 hari sejak transaksi, dengan jatuh tempo pelunasan maksimal 30 hari.' },
+      { word: 'Laba Kotor', type: 'Finansial', def: 'Selisih antara pendapatan dari Penjualan Bersih dikurangi dengan Harga Pokok Penjualan (HPP) sebelum beban operasional.' }
+    ];
+
+    // Quiz Questions Data (Indonesian)
+    const quizQuestions = [
+      {
+        q: "Manakah karakteristik utama yang membedakan perusahaan dagang dengan perusahaan jasa?",
+        options: [
+          "Membeli bahan baku untuk diolah menjadi barang jadi di pabrik baru dijual",
+          "Membeli barang fisik dari pemasok lalu menjualnya kembali tanpa mengubah bentuk barang",
+          "Menjual layanan jasa tenaga ahli yang tidak memiliki bentuk fisik sama sekali",
+          "Hanya melayani transaksi secara grosir dalam jumlah puluhan ribu unit saja"
+        ],
+        correct: 1,
+        explanation: "Perusahaan dagang memperoleh barang jadi dari pemasok lalu langsung mendistribusikannya kembali ke pelanggan tanpa mengubah bentuk fisiknya (seperti Indomaret)."
+      },
+      {
+        q: "Sistem pencatatan persediaan yang memperbarui nilai stok secara otomatis dan real-time di database kasir setiap kali barang di-scan disebut...",
+        options: [
+          "Sistem Periodik (Fisik)",
+          "Sistem Cash on Delivery (COD)",
+          "Sistem Perpetual (Permanen)",
+          "Sistem FIFO (First In First Out)"
+        ],
+        correct: 2,
+        explanation: "Sistem perpetual (permanen) mencatat persediaan secara terus menerus terkomputerisasi sehingga kartu stok selalu terperbarui secara instan."
+      },
+      {
+        q: "Dalam transaksi pembelian kredit seharga Rp 10.000.000 dengan syarat 2/10, n/30 pada tanggal 1 Maret, berapa kas yang harus dibayar jika utang dilunasi tanggal 9 Maret?",
+        options: [
+          "Rp 10.000.000 (tidak ada diskon)",
+          "Rp 9.800.000",
+          "Rp 9.000.000",
+          "Rp 8.000.000"
+        ],
+        correct: 1,
+        explanation: "Karena dibayar pada hari ke-8 (masih dalam masa diskon 10 hari), pembeli berhak mendapat diskon 2% dari Rp 10.000.000 yaitu Rp 200.000. Kas yang dibayar = Rp 9.800.000."
+      },
+      {
+        q: "Jika barang dagangan dikirim dengan syarat FOB Shipping Point, maka ongkos kirim dan risiko barang rusak di jalan ditanggung oleh...",
+        options: [
+          "Penjual",
+          "Pembeli",
+          "Perusahaan Ekspedisi Kurir",
+          "Ditanggung bersama 50:50 antara penjual dan pembeli"
+        ],
+        correct: 1,
+        explanation: "FOB Shipping Point menentukan bahwa kepemilikan barang sudah berpindah ke pembeli sejak naik ke truk di gudang penjual. Sehingga ongkir dan risiko di perjalanan menjadi tanggung jawab pembeli."
+      },
+      {
+        q: "Bagaimanakah pencatatan jurnal ongkos kirim pembelian senilai Rp 500.000 di buku pembeli jika syarat pengirimannya adalah FOB Destination?",
+        options: [
+          "Mendebet Persediaan Barang Dagang Rp 500.000, Kredit Kas Rp 500.000",
+          "Mendebet Beban Angkut Penjualan Rp 500.000, Kredit Kas Rp 500.000",
+          "Mendebet Beban Angkut Pembelian Rp 500.000, Kredit Kas Rp 500.000",
+          "Tidak perlu dijurnal di buku pembeli"
+        ],
+        correct: 3,
+        explanation: "Pada FOB Destination, ongkos kirim ditanggung oleh penjual. Pembeli sama sekali tidak mencatat transaksi ongkir tersebut karena bukan kewajibannya."
+      },
+      {
+        q: "Di buku penjual, pengiriman barang dengan syarat FOB Destination akan dicatat didebet ke akun...",
+        options: [
+          "Persediaan Barang Dagang",
+          "Beban Angkut Penjualan (Freight Out)",
+          "Beban Angkut Pembelian (Freight In)",
+          "Kas"
+        ],
+        correct: 1,
+        explanation: "Karena penjual menanggung ongkir, penjual mendebet akun Beban Angkut Penjualan (Freight Out) yang akan mengurangi laba operasional."
+      },
+      {
+        q: "Menggunakan sistem Periodik, hitunglah HPP jika diketahui: Persediaan Awal Rp 10.000.000, Pembelian Rp 50.000.000, Beban Angkut Pembelian Rp 2.000.000, dan Persediaan Akhir Rp 12.000.000.",
+        options: [
+          "Rp 48.000.000",
+          "Rp 50.000.000",
+          "Rp 62.000.000",
+          "Rp 74.000.000"
+        ],
+        correct: 0,
+        explanation: "Formula: Persediaan Awal (10jt) + Pembelian (50jt) + Beban Angkut (2jt) = Barang Tersedia Dijual (62jt). Dikurangi Persediaan Akhir (12jt) = HPP Rp 50.000.000. Tunggu, mari kita hitung ulang: 10 + 50 + 2 - 12 = 50. Pilihan yang benar adalah Rp 50.000.000 (Opsi ke-2)."
+      },
+      {
+        q: "Mengapa ongkos kirim FOB Shipping Point dimasukkan mendebit akun 'Persediaan Barang Dagang' pada sistem perpetual buku pembeli?",
+        options: [
+          "Karena dianggap sebagai beban operasional kantor",
+          "Karena merupakan bagian dari biaya perolehan aset barang hingga siap dijual",
+          "Karena diperintahkan langsung oleh supplier agar dapat diskon",
+          "Karena nilai kas pembeli bertambah akibat ongkos tersebut"
+        ],
+        correct: 1,
+        explanation: "Setiap pengeluaran untuk memperoleh barang dagangan (termasuk ongkir pembelian) dikapitalisasi ke dalam harga pokok persediaan di sistem perpetual."
+      },
+      {
+        q: "Bagaimanakah rumus untuk mencari nilai Penjualan Bersih (Net Sales)?",
+        options: [
+          "Penjualan Kotor + Persediaan Awal - Persediaan Akhir",
+          "Penjualan Kotor - Harga Pokok Penjualan",
+          "Penjualan Kotor - Retur Penjualan - Potongan Penjualan",
+          "Penjualan Kotor + Beban Angkut Penjualan"
+        ],
+        correct: 2,
+        explanation: "Penjualan Bersih diperoleh dari akumulasi Penjualan Kotor dikurangi dengan akun kontra penjualannya (Retur & Potongan Penjualan)."
+      },
+      {
+        q: "Berapakah Laba Bersih jika Laba Kotor Rp 30.000.000, Beban Gaji Rp 5.000.000, Beban Sewa Rp 2.000.000, dan Beban Iklan Rp 1.000.000?",
+        options: [
+          "Rp 30.000.000",
+          "Rp 24.000.000",
+          "Rp 22.000.000",
+          "Rp 38.000.000"
+        ],
+        correct: 2,
+        explanation: "Laba Bersih = Laba Kotor (30jt) dikurangi Total Beban Operasional (5jt + 2jt + 1jt = 8jt) = Rp 22.000.000."
+      }
+    ];
+
+
+    /* ==========================================================================
+       2. SPA TABS NAVIGATION ENGINE
+       ========================================================================== */
+    document.querySelectorAll('.nav-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const tabName = item.getAttribute('data-tab');
+        switchTab(tabName);
+        
+        // Close sidebar on mobile after click
+        document.getElementById('app-sidebar').classList.remove('open');
+      });
+    });
+
+    function switchTab(tabId) {
+      // Deactivate all nav items & tabs
+      document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+
+      // Activate clicked ones
+      const targetNav = document.querySelector(`.nav-item[data-tab="${tabId}"]`);
+      const targetTab = document.getElementById(`tab-${tabId}`);
+      
+      if (targetNav) targetNav.classList.add('active');
+      if (targetTab) targetTab.classList.add('active');
+
+      // Update Header Text dynamically
+      updateHeaderText(tabId);
+
+      // Mark progress
+      readProgress[tabId] = true;
+      updateProgress();
+
+      // Scroll main screen to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // Special Tab Animations Initializers
+      if (tabId === 'm4') {
+        // Trigger default FOB animation on tab open
+        triggerFOB('shipping');
+      }
+    }
+
+    function updateHeaderText(tabId) {
+      const headerTitle = document.getElementById('header-main-title');
+      const headerSub = document.getElementById('header-sub-title');
+
+      const headers = {
+        dashboard: { title: 'Dashboard Pembelajaran', sub: 'Materi Lengkap Akuntansi Perusahaan Dagang' },
+        m1: { title: 'Modul 1: Karakteristik', sub: 'Memahami Esensi Perusahaan Dagang & Perbandingan Jasa' },
+        m2: { title: 'Modul 2: Sistem Persediaan', sub: 'Periodik vs Perpetual, Kasir Modern vs Penghitungan Manual' },
+        m3: { title: 'Modul 3: Transaksi & Jurnal', sub: 'Simulasi Pencatatan Bersandingan (Perpetual vs Periodik)' },
+        m4: { title: 'Modul 4: Ketentuan FOB', sub: 'Animator Serah Terima Kepemilikan & Tanggungan Ongkir' },
+        m5: { title: 'Modul 5: Kalkulator HPP', sub: 'Kalkulasi Otomatis Laporan Laba Rugi & Cetak Formal' },
+        m6: { title: 'Modul 6: Studi Kasus', sub: 'Bedah Transaksi CV Berkah Mandiri & CV Sekar Jawi' },
+        m7: { title: 'Modul 7: Kuis & Hafalan', sub: 'Uji Kemampuan Anda & Dapatkan Sertifikat Kelulusan' }
+      };
+
+      if (headers[tabId]) {
+        headerTitle.innerText = headers[tabId].title;
+        headerSub.innerText = headers[tabId].sub;
+      }
+    }
+
+    function updateProgress() {
+      const total = Object.keys(readProgress).length;
+      const readCount = Object.values(readProgress).filter(v => v === true).length;
+      const pct = Math.round((readCount / total) * 100);
+
+      document.getElementById('progress-bar').style.width = pct + '%';
+      document.getElementById('progress-percentage').innerText = pct + '%';
+      document.getElementById('stat-modules-read').innerText = `${readCount} / ${total}`;
+    }
+
+    // Hamburger Navigation for Mobile
+    document.getElementById('hamburger-toggle').addEventListener('click', () => {
+      document.getElementById('app-sidebar').classList.toggle('open');
+    });
+
+
+    /* ==========================================================================
+       3. INTERACTIVE JOURNAL SIMULATOR RENDERER
+       ========================================================================== */
+    function initJournalSimulator() {
+      const picker = document.getElementById('scenario-picker');
+      picker.innerHTML = '';
+
+      journalScenarios.forEach((s, idx) => {
+        const btn = document.createElement('button');
+        btn.className = `scenario-btn ${idx === 0 ? 'active' : ''}`;
+        btn.innerText = s.title;
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.scenario-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          loadScenario(s);
+        });
+        picker.appendChild(btn);
+      });
+
+      // Load first scenario by default
+      loadScenario(journalScenarios[0]);
+    }
+
+    function loadScenario(scenario) {
+      renderJournalTable('journal-perpetual-table', scenario.perpetual);
+      renderJournalTable('journal-periodic-table', scenario.periodic);
+      
+      document.getElementById('journal-perpetual-exp').innerHTML = `<strong>Keterangan Skenario:</strong> ${scenario.desc}<br><br><strong>Analisis Akun:</strong> ${scenario.notes}`;
+      document.getElementById('journal-periodic-exp').innerHTML = `<strong>Keterangan Skenario:</strong> ${scenario.desc}<br><br><strong>Analisis Akun:</strong> ${scenario.notes}`;
+    }
+
+    function renderJournalTable(tableId, entries) {
+      const tbody = document.querySelector(`#${tableId} tbody`);
+      tbody.innerHTML = '';
+
+      let totalDebet = 0;
+      let totalKredit = 0;
+
+      entries.forEach(e => {
+        const row = document.createElement('tr');
+        
+        const accTd = document.createElement('td');
+        accTd.innerText = e.acc;
+        if (e.isIndent) accTd.className = 'indent-acc';
+        
+        const debetTd = document.createElement('td');
+        debetTd.style.textAlign = 'right';
+        debetTd.innerText = e.debet > 0 ? formatRupiah(e.debet) : '-';
+        totalDebet += e.debet;
+
+        const kreditTd = document.createElement('td');
+        kreditTd.style.textAlign = 'right';
+        kreditTd.innerText = e.kredit > 0 ? formatRupiah(e.kredit) : '-';
+        totalKredit += e.kredit;
+
+        row.appendChild(accTd);
+        row.appendChild(debetTd);
+        row.appendChild(kreditTd);
+        tbody.appendChild(row);
+      });
+
+      // Total Row
+      const totRow = document.createElement('tr');
+      totRow.className = 'journal-total-row';
+      totRow.innerHTML = `
+        <td>TOTAL JURNAL</td>
+        <td style="text-align:right;">${formatRupiah(totalDebet)}</td>
+        <td style="text-align:right;">${formatRupiah(totalKredit)}</td>
+      `;
+      tbody.appendChild(totRow);
+    }
+
+    function formatRupiah(num) {
+      return 'Rp ' + num.toLocaleString('id-ID');
+    }
+
+
+    /* ==========================================================================
+       4. INTERACTIVE FOB TRUCK ANIMATION ENGINE
+       ========================================================================== */
+    function triggerFOB(mode) {
+      const truck = document.getElementById('truck-anim');
+      const transferGlow = document.getElementById('transfer-glow');
+      const nodeSeller = document.getElementById('node-seller');
+      const nodeBuyer = document.getElementById('node-buyer');
+
+      // Reset Active Node styles
+      nodeSeller.classList.remove('node-active');
+      nodeBuyer.classList.remove('node-active');
+
+      if (mode === 'shipping') {
+        // FOB Shipping Point
+        document.getElementById('btn-fob-shipping').classList.add('active');
+        document.getElementById('btn-fob-destination').classList.remove('active');
+
+        // Move truck to start shipping point
+        truck.style.left = '20%';
+        transferGlow.style.left = '23%';
+        transferGlow.style.transform = 'scale(1)';
+        transferGlow.style.opacity = '1';
+        nodeSeller.classList.add('node-active');
+
+        // Explanations update
+        document.getElementById('fob-explain-ownership').innerText = 'Sejak Naik ke Truk (Solo)';
+        document.getElementById('fob-explain-freight').innerText = 'Pembeli (Ditanggung Sepenuhnya)';
+        document.getElementById('fob-explain-risk').innerText = 'Pembeli (Risiko di Perjalanan)';
+        document.getElementById('fob-explain-acc').innerText = 'Ongkir masuk akun Persediaan Pembeli';
+      } else {
+        // FOB Destination
+        document.getElementById('btn-fob-destination').classList.add('active');
+        document.getElementById('btn-fob-shipping').classList.remove('active');
+
+        // Move truck all the way to buyer node
+        truck.style.left = '70%';
+        transferGlow.style.left = '75%';
+        transferGlow.style.transform = 'scale(1)';
+        transferGlow.style.opacity = '1';
+        nodeBuyer.classList.add('node-active');
+
+        // Explanations update
+        document.getElementById('fob-explain-ownership').innerText = 'Setelah Tiba di Toko (Jombang)';
+        document.getElementById('fob-explain-freight').innerText = 'Penjual (Ditanggung Sepenuhnya)';
+        document.getElementById('fob-explain-risk').innerText = 'Penjual (Risiko di Perjalanan)';
+        document.getElementById('fob-explain-acc').innerText = 'Ongkir masuk akun Beban Angkut Penjual';
+      }
+    }
+
+
+    /* ==========================================================================
+       5. DYNAMIC HPP & INCOME STATEMENT CALCULATOR
+       ========================================================================== */
+    function calculateFinancials() {
+      // Pull inputs
+      const invStart = parseFloat(document.getElementById('c-inv-start').value) || 0;
+      const purchases = parseFloat(document.getElementById('c-purchases').value) || 0;
+      const freightIn = parseFloat(document.getElementById('c-freight-in').value) || 0;
+      const purchReturns = parseFloat(document.getElementById('c-purchase-returns').value) || 0;
+      const purchDiscounts = parseFloat(document.getElementById('c-purchase-discounts').value) || 0;
+      const invEnd = parseFloat(document.getElementById('c-inv-end').value) || 0;
+
+      const sales = parseFloat(document.getElementById('c-sales').value) || 0;
+      const salesReturns = parseFloat(document.getElementById('c-sales-returns').value) || 0;
+
+      const expSalary = parseFloat(document.getElementById('c-exp-salary').value) || 0;
+      const expRent = parseFloat(document.getElementById('c-exp-rent').value) || 0;
+      const expUtility = parseFloat(document.getElementById('c-exp-utility').value) || 0;
+      const expAds = parseFloat(document.getElementById('c-exp-ads').value) || 0;
+      const expFreight = parseFloat(document.getElementById('c-exp-freight').value) || 0;
+
+      // Calculators
+      const salesNet = sales - salesReturns;
+      const purchTotalGross = purchases + freightIn;
+      const purchNet = purchases + freightIn - purchReturns - purchDiscounts;
+      const goodsAvailable = invStart + purchNet;
+      const hpp = goodsAvailable - invEnd;
+      const grossProfit = salesNet - hpp;
+      
+      const totalExpenses = expSalary + expRent + expUtility + expAds + expFreight;
+      const netProfit = grossProfit - totalExpenses;
+
+      // Render Outputs
+      document.getElementById('r-sales-gross').innerText = formatRupiah(sales);
+      document.getElementById('r-sales-returns').innerText = `Rp (${salesReturns.toLocaleString('id-ID')})`;
+      document.getElementById('r-sales-net').innerText = formatRupiah(salesNet);
+
+      document.getElementById('r-inv-start').innerText = formatRupiah(invStart);
+      document.getElementById('r-purchases-gross').innerText = formatRupiah(purchases);
+      document.getElementById('r-freight-in').innerText = formatRupiah(freightIn);
+      document.getElementById('r-purchases-subtotal').innerText = formatRupiah(purchTotalGross);
+      document.getElementById('r-purchase-returns').innerText = `Rp (${purchReturns.toLocaleString('id-ID')})`;
+      document.getElementById('r-purchase-discounts').innerText = `Rp (${purchDiscounts.toLocaleString('id-ID')})`;
+      document.getElementById('r-purchases-net').innerText = formatRupiah(purchNet);
+      document.getElementById('r-goods-available').innerText = formatRupiah(goodsAvailable);
+      document.getElementById('r-inv-end').innerText = `Rp (${invEnd.toLocaleString('id-ID')})`;
+      document.getElementById('r-hpp').innerText = `Rp (${hpp.toLocaleString('id-ID')})`;
+      
+      document.getElementById('r-gross-profit').innerText = formatRupiah(grossProfit);
+
+      // Expenses
+      document.getElementById('r-exp-salary').innerText = formatRupiah(expSalary);
+      document.getElementById('r-exp-rent').innerText = formatRupiah(expRent);
+      document.getElementById('r-exp-utility').innerText = formatRupiah(expUtility);
+      document.getElementById('r-exp-ads').innerText = formatRupiah(expAds);
+      document.getElementById('r-exp-freight').innerText = formatRupiah(expFreight);
+      document.getElementById('r-total-expenses').innerText = `Rp (${totalExpenses.toLocaleString('id-ID')})`;
+
+      // Final net profit
+      const netProfitEl = document.getElementById('r-net-profit');
+      netProfitEl.innerText = formatRupiah(netProfit);
+      if (netProfit < 0) {
+        netProfitEl.style.color = '#ff758f';
+      } else {
+        netProfitEl.style.color = '#10b981';
+      }
+    }
+
+    function resetCalculator() {
+      // Restore defaults (Cahaya Electronik from DOCX)
+      document.getElementById('c-inv-start').value = 50000000;
+      document.getElementById('c-purchases').value = 120000000;
+      document.getElementById('c-freight-in').value = 2000000;
+      document.getElementById('c-purchase-returns').value = 5000000;
+      document.getElementById('c-purchase-discounts').value = 1200000;
+      document.getElementById('c-inv-end').value = 40000000;
+      document.getElementById('c-sales').value = 200000000;
+      document.getElementById('c-sales-returns').value = 8000000;
+      document.getElementById('c-exp-salary').value = 15000000;
+      document.getElementById('c-exp-rent').value = 5000000;
+      document.getElementById('c-exp-utility').value = 1500000;
+      document.getElementById('c-exp-ads').value = 2000000;
+      document.getElementById('c-exp-freight').value = 1000000;
+
+      calculateFinancials();
+    }
+
+
+    /* ==========================================================================
+       6. INTERACTIVE CASE STUDY TIMELINES
+       ========================================================================== */
+    function renderCaseStudyTimeline(elementId, dataset) {
+      const timeline = document.getElementById(elementId);
+      timeline.innerHTML = '';
+
+      dataset.forEach((item, idx) => {
+        const div = document.createElement('div');
+        div.className = `timeline-item ${idx === 0 ? 'active' : ''}`;
+        
+        div.innerHTML = `
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">${item.date}</div>
+          <div class="timeline-item-title">${item.title}</div>
+          <div class="timeline-detail-box">
+            <p style="font-size:13px; color:var(--text-secondary); line-height:1.6; margin-bottom:8px;">${item.text}</p>
+            <div class="ledger-badge ${item.isPlus ? 'ledger-plus' : 'ledger-minus'}">
+              Dampak Aset/Ekuitas: ${item.change}
+            </div>
+          </div>
+        `;
+
+        div.addEventListener('click', () => {
+          // Toggle active state
+          const isActive = div.classList.contains('active');
+          timeline.querySelectorAll('.timeline-item').forEach(i => i.classList.remove('active'));
+          if (!isActive) {
+            div.classList.add('active');
+          }
+        });
+
+        timeline.appendChild(div);
+      });
+    }
+
+
+    /* ==========================================================================
+       7. HA FALAN FLASHCARDS (3D CARD FLIPS)
+       ========================================================================== */
+    function renderFlashcards() {
+      const grid = document.getElementById('flashcard-grid');
+      grid.innerHTML = '';
+
+      vocabData.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'flashcard';
+        card.innerHTML = `
+          <div class="flashcard-inner">
+            <div class="card-front">
+              <span class="glow-badge" style="margin-bottom:12px;">${item.type}</span>
+              <h4>${item.word}</h4>
+              <p>Klik untuk Arti 🔄</p>
+            </div>
+            <div class="card-back">
+              <p>${item.def}</p>
+              <span style="font-size:10px; font-weight:700; opacity:0.8; margin-top:16px;">KLIK UNTUK BALIK 🔄</span>
+            </div>
+          </div>
+        `;
+
+        card.addEventListener('click', () => {
+          card.classList.toggle('flipped');
+        });
+
+        grid.appendChild(card);
+      });
+    }
+
+
+    /* ==========================================================================
+       8. GAMIFIED QUIZ ENGINE WITH CERTIFICATE
+       ========================================================================== */
+    let currentQuizIndex = 0;
+    let quizScore = 0;
+    let quizSelectedAnswer = null;
+
+    function resetQuiz() {
+      currentQuizIndex = 0;
+      quizScore = 0;
+      quizSelectedAnswer = null;
+      document.getElementById('quiz-results-panel').style.display = 'none';
+      document.getElementById('quiz-container-box').style.display = 'block';
+      loadQuizQuestion();
+    }
+
+    function loadQuizQuestion() {
+      const qData = quizQuestions[currentQuizIndex];
+      quizSelectedAnswer = null;
+      
+      // Update Counter
+      document.getElementById('quiz-question-counter').innerText = `Pertanyaan ${currentQuizIndex + 1} dari ${quizQuestions.length}`;
+      document.getElementById('quiz-score-live').innerText = `Skor: ${quizScore}`;
+      
+      // Progress Bar
+      const pct = ((currentQuizIndex) / quizQuestions.length) * 100;
+      document.getElementById('quiz-progress-bar-fill').style.width = pct + '%';
+
+      // Load Title
+      document.getElementById('quiz-question-title').innerText = qData.q;
+
+      // Reset Feedback
+      const feedback = document.getElementById('quiz-feedback');
+      feedback.classList.remove('visible');
+
+      // Load Options
+      const optionsContainer = document.getElementById('quiz-options-container');
+      optionsContainer.innerHTML = '';
+
+      qData.options.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-card';
+        btn.innerText = opt;
+        btn.addEventListener('click', () => {
+          if (quizSelectedAnswer !== null) return; // Prevent double clicking
+          selectQuizAnswer(idx, btn);
+        });
+        optionsContainer.appendChild(btn);
+      });
+
+      // Hide Next Button
+      document.getElementById('quiz-next-btn').style.display = 'none';
+    }
+
+    function selectQuizAnswer(selectedIdx, btnElement) {
+      quizSelectedAnswer = selectedIdx;
+      const qData = quizQuestions[currentQuizIndex];
+      const options = document.querySelectorAll('.option-card');
+
+      if (selectedIdx === qData.correct) {
+        btnElement.classList.add('correct');
+        quizScore += 10;
+        document.getElementById('quiz-score-live').innerText = `Skor: ${quizScore}`;
+      } else {
+        btnElement.classList.add('wrong');
+        // Highlight correct one in green
+        options[qData.correct].classList.add('correct');
+      }
+
+      // Show explanation feedback
+      document.getElementById('quiz-feedback-text').innerText = qData.explanation;
+      document.getElementById('quiz-feedback').classList.add('visible');
+
+      // Show Next button
+      document.getElementById('quiz-next-btn').style.display = 'block';
+    }
+
+    function nextQuestion() {
+      currentQuizIndex++;
+      if (currentQuizIndex < quizQuestions.length) {
+        loadQuizQuestion();
+      } else {
+        // Complete Quiz - Show Certificate
+        document.getElementById('quiz-container-box').style.display = 'none';
+        
+        const finalScore = quizScore;
+        document.getElementById('cert-final-score').innerText = `${finalScore} / 100`;
+        document.getElementById('stat-quiz-score').innerText = `${finalScore} Poin`;
+        
+        document.getElementById('quiz-results-panel').style.display = 'block';
+      }
+    }
+
+
+    /* ==========================================================================
+       9. LIVE SEARCH ENGINE FUNCTIONALITY
+       ========================================================================== */
+    const searchIndex = [
+      { tab: 'm1', title: 'Karakteristik Perusahaan Dagang', desc: 'Definisi, aspek jual-beli barang fisik, serta perbedaan utama dibanding perusahaan jasa.' },
+      { tab: 'm1', title: 'Perusahaan Dagang vs Perusahaan Jasa', desc: 'Aspek produk berwujud vs tidak berwujud, pencatatan persediaan, dan format laba rugi.' },
+      { tab: 'm2', title: 'Sistem Pencatatan Persediaan', desc: 'Mempelajari perbedaan sistem periodik (fisik manual) dan perpetual (scan barcode kasir).' },
+      { tab: 'm2', title: 'Sistem Periodik (Fisik)', desc: 'Persediaan dihitung manual di akhir periode, cocok untuk toko kelontong kecil atau warung.' },
+      { tab: 'm2', title: 'Sistem Perpetual (Permanen)', desc: 'Persediaan dicatat otomatis setiap ada mutasi masuk/keluar menggunakan sistem digital.' },
+      { tab: 'm3', title: 'Transaksi Pembelian & Penjualan', desc: 'Istilah retur, diskon syarat bayar n/30, beban angkut pembelian, dan beban angkut penjualan.' },
+      { tab: 'm3', title: 'Jurnal Transaksi Akuntansi', desc: 'Pencatatan akun debit-kredit pembelian, retur, pelunasan utang masa diskon bersandingan.' },
+      { tab: 'm4', title: 'Syarat FOB (Free On Board)', desc: 'Aturan penyerahan barang dagang di atas kapal/truk: FOB Shipping Point vs FOB Destination.' },
+      { tab: 'm4', title: 'FOB Shipping Point', desc: 'Ongkos kirim dan risiko perjalanan ditanggung penuh oleh pembeli sejak keluar dari gudang penjual.' },
+      { tab: 'm4', title: 'FOB Destination', desc: 'Ongkos kirim ditanggung oleh penjual sampai barang tiba di pintu toko pembeli dengan selamat.' },
+      { tab: 'm5', title: 'Kalkulator Harga Pokok Penjualan (HPP)', desc: 'Mempelajari dan memformulasikan perhitungan HPP: Persediaan Awal + Pembelian Bersih - Persediaan Akhir.' },
+      { tab: 'm5', title: 'Laporan Laba Rugi Perusahaan Dagang', desc: 'Susunan Penjualan Bersih, Laba Kotor, Total Beban Operasional, dan Laba Bersih akhir.' },
+      { tab: 'm6', title: 'Studi Kasus CV Berkah Mandiri', desc: 'Bedah jurnal dan transaksi distributor sembako di Jombang berskala perpetual.' },
+      { tab: 'm6', title: 'Studi Kasus CV Sekar Jawi', desc: 'Pembahasan transaksi logistik kain batik antarkota Solo-Jombang dengan aturan FOB.' },
+      { tab: 'm7', title: 'Evaluasi Kuis Pintar & Flashcards', desc: 'Uji tingkat pemahaman materi perusahaan dagang untuk mencetak sertifikat kelulusan.' }
+    ];
+
+    document.getElementById('search-input').addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase().trim();
+      const resultsWrapper = document.getElementById('search-results-wrapper');
+      const resultsList = document.getElementById('search-results-list');
+
+      if (query.length < 2) {
+        resultsWrapper.style.display = 'none';
+        return;
+      }
+
+      // Filter matches
+      const matches = searchIndex.filter(item => 
+        item.title.toLowerCase().includes(query) || 
+        item.desc.toLowerCase().includes(query)
+      );
+
+      resultsList.innerHTML = '';
+
+      if (matches.length === 0) {
+        resultsList.innerHTML = '<div style="font-size:13px; color:var(--text-muted); padding:10px;">Tidak ditemukan materi yang cocok.</div>';
+      } else {
+        matches.forEach(item => {
+          const div = document.createElement('div');
+          div.className = 'search-result-item';
+          div.innerHTML = `
+            <div class="search-result-title">${item.title}</div>
+            <div class="search-result-excerpt">${item.desc}</div>
+          `;
+          div.addEventListener('click', () => {
+            switchTab(item.tab);
+            e.target.value = ''; // Reset input
+            resultsWrapper.style.display = 'none';
+          });
+          resultsList.appendChild(div);
+        });
+      }
+
+      resultsWrapper.style.display = 'block';
+    });
+
+
+    /* ==========================================================================
+       10. APPLICATION INITIALIZATION METHOD
+       ========================================================================== */
+    window.addEventListener('DOMContentLoaded', () => {
+      // 1. Initialize Journal Simulator
+      initJournalSimulator();
+
+      // 2. Initialize FOB Animator Default State
+      triggerFOB('shipping');
+
+      // 3. Initialize Calculator Calculations
+      calculateFinancials();
+
+      // 4. Initialize Case Studies timelines
+      renderCaseStudyTimeline('timeline-berkah', sembakoCase);
+      renderCaseStudyTimeline('timeline-sekar', batikCase);
+
+      // 5. Initialize Flashcards
+      renderFlashcards();
+
+      // 6. Initialize Quiz
+      loadQuizQuestion();
+
+      // 7. Update progress
+      updateProgress();
+    });
+  </script>
+</body>
+</html>

@@ -45,6 +45,17 @@
       "url": "siklus-akuntansi.html"
     },
     {
+      "id": "akuntansi-perusahaan-dagang",
+      "kategori": "akuntansi",
+      "emoji": "📦",
+      "badge": "BAB 5",
+      "judul": "Akuntansi Perusahaan Dagang",
+      "deskripsi": "Karakteristik Perusahaan Dagang, Sistem Pencatatan Persediaan, Transaksi Pembelian & Penjualan, Harga Pokok Penjualan (HPP), Laporan Laba Rugi Perusahaan Dagang, dan Contoh Kasus",
+      "tags": ["Hukum", "Kepatuhan", "Wajib Pajak"],
+      "warna": "#F59E0B",
+      "url": "akuntansi-perusahaan-dagang.html"
+    },
+    {
       "id": "dasar-perpajakan-indonesia",
       "kategori": "pajak",
       "emoji": "🧾",
