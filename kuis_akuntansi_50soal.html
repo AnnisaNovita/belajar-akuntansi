@@ -1,496 +1,869 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kuis Akuntansi 50 Soal</title>
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{background:#0d1117;font-family:Georgia,serif;color:#e6edf3;min-height:100vh}
-.screen{display:none;min-height:100vh;align-items:center;justify-content:center;padding:16px}
-.screen.active{display:flex}
-/* HOME */
-.home-card{background:#161b22;border:1px solid #30363d;border-radius:20px;padding:48px 40px;max-width:480px;width:100%;text-align:center}
-.home-title{font-size:36px;font-weight:900;color:#f0f6fc;margin-bottom:8px}
-.home-sub{color:#8b949e;font-size:14px;margin-bottom:32px}
-.sesi-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px}
-.sesi-btn{background:#21262d;border:1.5px solid #30363d;border-radius:12px;padding:20px 16px;cursor:pointer;transition:.2s;color:#e6edf3;font-family:inherit}
-.sesi-btn:hover{border-color:#58a6ff;background:#1f2937}
-.sesi-btn .sesi-num{font-size:28px;font-weight:900;color:#58a6ff;display:block;margin-bottom:4px}
-.sesi-btn .sesi-label{font-size:12px;color:#8b949e}
-.start-all{background:#58a6ff;color:#000;border:none;border-radius:12px;padding:14px 32px;font-weight:700;font-size:15px;cursor:pointer;width:100%;font-family:inherit}
-/* QUIZ */
-.quiz-wrap{max-width:640px;width:100%}
-.quiz-topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
-.quiz-label{color:#8b949e;font-size:12px;font-family:monospace}
-.quiz-counter{color:#e6edf3;font-size:13px;font-weight:700}
-.progress-bar{height:4px;background:#21262d;border-radius:99px;margin-bottom:20px;overflow:hidden}
-.progress-fill{height:100%;background:linear-gradient(90deg,#58a6ff,#f78166);border-radius:99px;transition:width .3s}
-.q-card{background:#161b22;border:1px solid #30363d;border-radius:16px;padding:24px}
-.q-kat{display:inline-block;padding:3px 10px;border-radius:6px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px}
-.q-text{color:#e6edf3;font-size:15px;line-height:1.7;margin-bottom:20px}
-.choices{display:flex;flex-direction:column;gap:8px}
-.choice-btn{background:#0d1117;border:1.5px solid #30363d;border-radius:10px;padding:12px 14px;color:#8b949e;font-size:13.5px;text-align:left;cursor:pointer;display:flex;align-items:flex-start;gap:10px;transition:.15s;font-family:inherit;line-height:1.5}
-.choice-btn:hover:not(.locked){border-color:#58a6ff;color:#e6edf3}
-.choice-btn .badge{min-width:24px;height:24px;border-radius:6px;background:#21262d;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0;margin-top:1px}
-.choice-btn.correct{background:#3fb95015;border-color:#3fb950;color:#3fb950}
-.choice-btn.correct .badge{background:#3fb95033}
-.choice-btn.wrong{background:#f8514915;border-color:#f85149;color:#f85149}
-.choice-btn.wrong .badge{background:#f8514933}
-.choice-btn.locked{cursor:default}
-.feedback{margin-top:16px;background:#0d1117;border-radius:10px;padding:12px 14px}
-.feedback-title{font-weight:700;font-size:12px;margin-bottom:4px}
-.feedback-title.ok{color:#3fb950}
-.feedback-title.no{color:#f85149}
-.feedback-body{color:#8b949e;font-size:13px;line-height:1.6}
-.next-btn{margin-top:12px;width:100%;background:#58a6ff;color:#000;border:none;border-radius:12px;padding:15px;font-weight:700;font-size:15px;cursor:pointer;font-family:inherit}
-.live-score{text-align:center;margin-top:12px;color:#8b949e;font-size:12px}
-.live-score span{color:#58a6ff;font-weight:700}
-/* RESULT */
-.result-card{background:#161b22;border:1px solid #30363d;border-radius:20px;padding:40px 32px;max-width:500px;width:100%;text-align:center}
-.result-emoji{font-size:56px;margin-bottom:6px}
-.result-grade{font-size:72px;font-weight:900;line-height:1;font-family:Georgia,serif}
-.result-msg{color:#8b949e;font-size:14px;margin-top:4px;margin-bottom:24px}
-.result-score-box{background:#0d1117;border-radius:14px;padding:20px;margin-bottom:20px}
-.result-big{font-size:48px;font-weight:700;color:#e6edf3}
-.result-big span{font-size:24px;color:#8b949e}
-.result-pct{font-size:28px;font-weight:700;margin-top:6px}
-.kat-breakdown{text-align:left;margin-bottom:20px}
-.kat-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
-.kat-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
-.kat-name{flex:1;font-size:13px;color:#8b949e}
-.kat-score{font-size:13px;font-weight:700;color:#e6edf3}
-.kat-bar-bg{width:60px;height:6px;background:#21262d;border-radius:99px;overflow:hidden}
-.kat-bar-fill{height:100%;border-radius:99px}
-.dots-row{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin-bottom:24px}
-.dot-r{width:26px;height:26px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
-.dot-r.ok{background:#3fb95033;border:1.5px solid #3fb950;color:#3fb950}
-.dot-r.no{background:#f8514933;border:1.5px solid #f85149;color:#f85149}
-.result-btns{display:flex;gap:10px}
-.btn-outline{flex:1;background:#21262d;color:#e6edf3;border:none;border-radius:10px;padding:13px;font-weight:700;font-size:14px;cursor:pointer;font-family:inherit}
-.btn-primary{flex:1;background:#58a6ff;color:#000;border:none;border-radius:10px;padding:13px;font-weight:700;font-size:14px;cursor:pointer;font-family:inherit}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kuis Akuntansi 50 Soal — Belajar Akuntansi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --glass-bg: rgba(30, 41, 59, 0.45);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --glass-highlight: rgba(255, 255, 255, 0.15);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      
+      --pink: #ff3d9a;
+      --purple: #a855f7;
+      --blue: #3b82f6;
+      --green: #10b981;
+      --yellow: #fbbf24;
+      --orange: #ff6b35;
+      
+      --radius: 24px;
+      --radius-sm: 14px;
+    }
+
+    body.light-theme {
+      --bg: #fff8f0;
+      --glass-bg: rgba(255, 255, 255, 0.65);
+      --glass-border: rgba(0, 0, 0, 0.06);
+      --glass-highlight: rgba(255, 255, 255, 0.85);
+      --text: #1e293b;
+      --text-muted: #64748b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "DM Sans", sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      transition: background-color 0.3s, color 0.3s;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Glowing Blobs */
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(80px);
+      opacity: 0.22;
+      z-index: 0;
+    }
+    .blob-1 { width: 350px; height: 350px; background: var(--pink); top: -80px; right: -50px; }
+    .blob-2 { width: 300px; height: 300px; background: var(--purple); bottom: 10%; left: -60px; }
+
+    header {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 36px 24px 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 10;
+    }
+    .logo {
+      font-family: "Syne", sans-serif;
+      font-weight: 800;
+      font-size: 18px;
+      color: var(--text);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-btn {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      color: var(--text);
+      padding: 8px 18px;
+      border-radius: 99px;
+      font-family: "Syne", sans-serif;
+      font-weight: 700;
+      font-size: 12px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .nav-btn:hover { background: var(--glass-highlight); }
+
+    .screen {
+      display: none;
+      min-height: 80vh;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 24px 80px;
+      position: relative;
+      z-index: 10;
+    }
+    .screen.active { display: flex; }
+
+    /* HOME SCREEN */
+    .home-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: var(--radius);
+      padding: 44px;
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.18);
+    }
+    .home-emoji { font-size: 56px; margin-bottom: 12px; }
+    .home-title {
+      font-family: "Syne", sans-serif;
+      font-weight: 800;
+      font-size: 32px;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, var(--orange), var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .home-sub {
+      color: var(--text-muted);
+      font-size: 14.5px;
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+    .sesi-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .sesi-btn {
+      background: rgba(0, 0, 0, 0.2);
+      border: 1.5px solid var(--glass-border);
+      border-radius: var(--radius-sm);
+      padding: 20px 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: var(--text);
+      font-family: inherit;
+    }
+    body.light-theme .sesi-btn {
+      background: rgba(255, 255, 255, 0.6);
+    }
+    .sesi-btn:hover {
+      border-color: var(--pink);
+      background: rgba(255, 61, 154, 0.05);
+      transform: translateY(-2px);
+    }
+    .sesi-btn .sesi-num {
+      font-family: "Syne", sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--pink);
+      display: block;
+      margin-bottom: 4px;
+    }
+    .sesi-btn .sesi-label {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .start-all {
+      background: var(--pink);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      font-weight: 800;
+      font-size: 15px;
+      font-family: "Syne", sans-serif;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.2s;
+      box-shadow: 0 6px 20px rgba(255, 61, 154, 0.3);
+    }
+    .start-all:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(255, 61, 154, 0.45);
+    }
+
+    /* QUIZ SCREEN */
+    .quiz-wrap {
+      max-width: 680px;
+      width: 100%;
+    }
+    .quiz-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .quiz-label {
+      color: var(--text-muted);
+      font-size: 11px;
+      font-family: "Syne", sans-serif;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .quiz-counter {
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .progress-bar {
+      height: 6px;
+      background: var(--glass-bg);
+      border-radius: 99px;
+      margin-bottom: 24px;
+      overflow: hidden;
+      border: 1px solid var(--glass-border);
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--pink), var(--purple));
+      border-radius: 99px;
+      transition: width 0.3s ease;
+    }
+
+    .q-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
+    }
+    .q-kat {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-family: "Syne", sans-serif;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+    .q-text {
+      font-size: 16px;
+      line-height: 1.7;
+      margin-bottom: 24px;
+      font-weight: 500;
+    }
+
+    .choices {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .choice-btn {
+      background: rgba(0, 0, 0, 0.15);
+      border: 1.5px solid var(--glass-border);
+      border-radius: var(--radius-sm);
+      padding: 14px 18px;
+      color: var(--text-muted);
+      font-size: 14px;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      transition: all 0.15s;
+      font-family: inherit;
+      line-height: 1.6;
+    }
+    body.light-theme .choice-btn {
+      background: rgba(255, 255, 255, 0.5);
+    }
+    .choice-btn:hover:not(.locked) {
+      border-color: var(--pink);
+      color: var(--text);
+      background: rgba(255, 61, 154, 0.04);
+    }
+    .choice-btn .badge {
+      min-width: 26px;
+      height: 26px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 12px;
+      flex-shrink: 0;
+      margin-top: 2px;
+      color: var(--text);
+    }
+    body.light-theme .choice-btn .badge {
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    .choice-btn.correct {
+      background: rgba(16, 185, 129, 0.12) !important;
+      border-color: var(--green) !important;
+      color: var(--green) !important;
+    }
+    .choice-btn.correct .badge {
+      background: var(--green) !important;
+      color: #fff;
+    }
+    .choice-btn.wrong {
+      background: rgba(239, 68, 68, 0.12) !important;
+      border-color: var(--orange) !important;
+      color: var(--orange) !important;
+    }
+    .choice-btn.wrong .badge {
+      background: var(--orange) !important;
+      color: #fff;
+    }
+    .choice-btn.locked { cursor: default; }
+
+    /* EXPANDED FEEDBACK */
+    .feedback {
+      margin-top: 24px;
+      border-radius: var(--radius-sm);
+      padding: 18px 22px;
+      background: rgba(0, 0, 0, 0.18);
+      border: 1.5px solid var(--glass-border);
+      border-left: 5px solid transparent;
+      animation: slideDown 0.3s ease forwards;
+    }
+    body.light-theme .feedback {
+      background: rgba(255, 255, 255, 0.7);
+    }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .feedback-title {
+      font-family: "Syne", sans-serif;
+      font-weight: 800;
+      font-size: 13.5px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .feedback-title.ok { color: var(--green); }
+    .feedback-title.no { color: var(--orange); }
+    .feedback-body {
+      font-size: 13.5px;
+      line-height: 1.7;
+      color: var(--text);
+    }
+    .feedback-header-box {
+      font-family: "Syne", sans-serif;
+      font-weight: 700;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+
+    .next-btn {
+      margin-top: 16px;
+      width: 100%;
+      background: var(--pink);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      font-weight: 800;
+      font-size: 15px;
+      font-family: "Syne", sans-serif;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 6px 20px rgba(255, 61, 154, 0.25);
+    }
+    .next-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(255, 61, 154, 0.35);
+    }
+    .live-score {
+      text-align: center;
+      margin-top: 14px;
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .live-score span {
+      color: var(--pink);
+      font-weight: 700;
+    }
+
+    /* RESULT SCREEN */
+    .result-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: var(--radius);
+      padding: 44px 36px;
+      max-width: 520px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.18);
+    }
+    .result-emoji { font-size: 64px; margin-bottom: 10px; }
+    .result-grade {
+      font-family: "Syne", sans-serif;
+      font-size: 76px;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .result-msg {
+      color: var(--text);
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+    .result-score-box {
+      background: rgba(0, 0, 0, 0.15);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+    body.light-theme .result-score-box {
+      background: rgba(255, 255, 255, 0.5);
+    }
+    .result-big {
+      font-family: "Syne", sans-serif;
+      font-size: 42px;
+      font-weight: 800;
+      color: var(--text);
+    }
+    .result-big span {
+      font-size: 20px;
+      color: var(--text-muted);
+    }
+    .result-pct {
+      font-size: 24px;
+      font-weight: 800;
+      margin-top: 4px;
+    }
+
+    .kat-breakdown {
+      text-align: left;
+      margin-bottom: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .kat-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .kat-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .kat-name {
+      flex: 1;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+    .kat-score {
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .kat-bar-bg {
+      width: 70px;
+      height: 6px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    body.light-theme .kat-bar-bg {
+      background: rgba(0,0,0,0.06);
+    }
+    .kat-bar-fill { height: 100%; border-radius: 99px; }
+
+    .dots-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: center;
+      margin-bottom: 28px;
+    }
+    .dot-r {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 800;
+    }
+    .dot-r.ok {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1.5px solid var(--green);
+      color: var(--green);
+    }
+    .dot-r.no {
+      background: rgba(239, 68, 68, 0.12);
+      border: 1.5px solid var(--orange);
+      color: var(--orange);
+    }
+
+    .result-btns {
+      display: flex;
+      gap: 12px;
+    }
+    .btn-outline {
+      flex: 1;
+      background: var(--glass-bg);
+      border: 1.5px solid var(--glass-border);
+      color: var(--text);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      font-weight: 700;
+      font-size: 13.5px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+    .btn-outline:hover { background: var(--glass-highlight); }
+    
+    .btn-primary {
+      flex: 1;
+      background: var(--pink);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      font-weight: 700;
+      font-size: 13.5px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s;
+      box-shadow: 0 4px 14px rgba(255, 61, 154, 0.3);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(255, 61, 154, 0.45);
+    }
+  </style>
 </head>
 <body>
 
-<!-- HOME -->
-<div class="screen active" id="screen-home">
-  <div class="home-card">
-    <div class="home-title">Kuis Akuntansi</div>
-    <div class="home-sub">50 soal pilihan ganda · Pengantar & Menengah</div>
-    <div class="sesi-grid">
-      <button class="sesi-btn" onclick="startSesi(1)">
-        <span class="sesi-num">S1</span>
-        <span class="sesi-label">25 Soal Pertama</span>
-      </button>
-      <button class="sesi-btn" onclick="startSesi(2)">
-        <span class="sesi-num">S2</span>
-        <span class="sesi-label">25 Soal Kedua</span>
-      </button>
-    </div>
-    <button class="start-all" onclick="startSesi(0)">Mulai Semua 50 Soal →</button>
-  </div>
-</div>
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
 
-<!-- QUIZ -->
-<div class="screen" id="screen-quiz">
-  <div class="quiz-wrap">
-    <div class="quiz-topbar">
-      <div class="quiz-label" id="quiz-label">SESI 1</div>
-      <div class="quiz-counter" id="quiz-counter">1/25</div>
+  <!-- HEADER -->
+  <header>
+    <a href="index.html" class="logo">
+      <span style="font-size:24px;">🎯</span>
+      <span>Belajar Akuntansi</span>
+    </a>
+    <a href="index.html" class="nav-btn">← Kembali</a>
+  </header>
+
+  <!-- HOME SCREEN -->
+  <div class="screen active" id="screen-home">
+    <div class="home-card">
+      <div class="home-emoji">📝</div>
+      <h1 class="home-title">Kuis Evaluasi Akuntansi</h1>
+      <p class="home-sub">Uji wawasan pemahaman siklus akuntansi Kakak dan teman-teman dengan 50 Soal Pilihan Ganda berkualitas.</p>
+      
+      <div class="sesi-grid">
+        <button class="sesi-btn" onclick="startSesi(1)">
+          <span class="sesi-num">Sesi 1</span>
+          <span class="sesi-label">25 Soal Awal</span>
+        </button>
+        <button class="sesi-btn" onclick="startSesi(2)">
+          <span class="sesi-num">Sesi 2</span>
+          <span class="sesi-label">25 Soal Akhir</span>
+        </button>
+      </div>
+      <button class="start-all" onclick="startSesi(0)">Mulai Kuis 50 Soal Lengkap →</button>
     </div>
-    <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
-    <div class="q-card">
-      <div class="q-kat" id="q-kat"></div>
-      <div class="q-text" id="q-text"></div>
-      <div class="choices" id="choices"></div>
-      <div class="feedback" id="feedback" style="display:none">
-        <div class="feedback-title" id="feedback-title"></div>
-        <div class="feedback-body" id="feedback-body"></div>
+  </div>
+
+  <!-- QUIZ SCREEN -->
+  <div class="screen" id="screen-quiz">
+    <div class="quiz-wrap">
+      <div class="quiz-topbar">
+        <div class="quiz-label" id="quiz-label">Kuis Akuntansi</div>
+        <div class="quiz-counter" id="quiz-counter">1/25</div>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+      </div>
+      
+      <div class="q-card">
+        <div class="q-kat" id="q-kat" style="background:rgba(59, 130, 246, 0.1);color:var(--blue);">Pengantar</div>
+        <div class="q-text" id="q-text">Sedang memuat pertanyaan...</div>
+        
+        <div class="choices" id="choices">
+          <!-- Pilihan jawaban diisi via JS -->
+        </div>
+        
+        <!-- PEMBAHASAN DETIL -->
+        <div class="feedback" id="feedback" style="display: none;">
+          <div class="feedback-header-box">💡 Penjelasan / Cara Hitung:</div>
+          <div class="feedback-title" id="feedback-title">Koreksi Jawaban</div>
+          <div class="feedback-body" id="feedback-body">Pembahasan detail dari Annisa Novita Ardana.</div>
+        </div>
+      </div>
+      
+      <button class="next-btn" id="next-btn" style="display: none;" onclick="nextQ()">Lanjut Pertanyaan →</button>
+      <div class="live-score">Skor Saat Ini: <span id="live-score">0</span> Benar</div>
+    </div>
+  </div>
+
+  <!-- RESULT SCREEN -->
+  <div class="screen" id="screen-result">
+    <div class="result-card">
+      <div class="result-emoji" id="res-emoji">🏆</div>
+      <div class="result-grade" id="res-grade">A</div>
+      <div class="result-msg" id="res-msg">Luar biasa! Kakak Hebat Sekali!</div>
+      
+      <div class="result-score-box">
+        <div class="result-big" id="res-big">24<span>/25</span></div>
+        <div class="result-pct" id="res-pct">96%</div>
+      </div>
+      
+      <div class="kat-breakdown" id="kat-breakdown">
+        <!-- Skor per kategori dibikin via JS -->
+      </div>
+      
+      <div class="dots-row" id="dots-row">
+        <!-- Rincian benar/salah diletakkan di sini -->
+      </div>
+      
+      <div class="result-btns">
+        <button class="btn-outline" onclick="goHome()">← Menu Awal</button>
+        <button class="btn-primary" id="btn-next-sesi" style="display: none;" onclick="nextSesi()">Lanjut Sesi 2 →</button>
+        <button class="btn-outline" id="btn-retry" onclick="retry()">Ulangi Kuis 🔄</button>
       </div>
     </div>
-    <button class="next-btn" id="next-btn" style="display:none" onclick="nextQ()">Lanjut →</button>
-    <div class="live-score">Skor: <span id="live-score">0</span> benar</div>
   </div>
-</div>
-
-<!-- RESULT -->
-<div class="screen" id="screen-result">
-  <div class="result-card">
-    <div class="result-emoji" id="res-emoji">🏆</div>
-    <div class="result-grade" id="res-grade">A</div>
-    <div class="result-msg" id="res-msg"></div>
-    <div class="result-score-box">
-      <div class="result-big" id="res-big"></div>
-      <div class="result-pct" id="res-pct"></div>
-    </div>
-    <div class="kat-breakdown" id="kat-breakdown"></div>
-    <div class="dots-row" id="dots-row"></div>
-    <div class="result-btns">
-      <button class="btn-outline" onclick="goHome()">← Menu</button>
-      <button class="btn-primary" id="btn-next-sesi" style="display:none" onclick="nextSesi()">Sesi 2 →</button>
-      <button class="btn-outline" id="btn-retry" onclick="retry()">Ulangi</button>
-    </div>
-  </div>
-</div>
-
-<script>
-const KAT_COLOR = {
-  "Pengantar Akuntansi":"#58a6ff",
-  "Perusahaan Dagang":"#d29922",
-  "Jurnal Penyesuaian":"#bc8cff",
-  "Buku Besar":"#3fb950",
-  "Laporan Keuangan":"#f78166"
-};
-
-const ALL_Q = [
-  // ── SESI 1 ──────────────────────────────────────────────────────────────
-  {k:"Pengantar Akuntansi",s:"Akuntansi didefinisikan sebagai proses…",
-   p:["Mencatat, mengklasifikasikan, dan melaporkan transaksi keuangan","Mengelola uang perusahaan agar tidak rugi","Membuat anggaran dan rencana keuangan","Menghitung pajak yang harus dibayar"],
-   j:0,b:"Akuntansi adalah proses mengidentifikasi, mencatat, mengklasifikasikan, meringkas, dan melaporkan transaksi keuangan untuk pengambilan keputusan."},
-
-  {k:"Pengantar Akuntansi",s:"Konsep 'Going Concern' dalam akuntansi berarti…",
-   p:["Perusahaan akan terus beroperasi dalam jangka panjang","Semua transaksi harus dicatat tepat waktu","Laporan keuangan harus dibuat setiap bulan","Aset harus dinilai berdasarkan harga pasar"],
-   j:0,b:"Going Concern berasumsi perusahaan akan terus beroperasi jangka panjang dan tidak akan dilikuidasi dalam waktu dekat."},
-
-  {k:"Pengantar Akuntansi",s:"Manakah yang merupakan akun ASET TETAP?",
-   p:["Perlengkapan Toko","Persediaan Barang","Kendaraan","Piutang Usaha"],
-   j:2,b:"Kendaraan adalah aset tetap karena digunakan lebih dari satu periode. Perlengkapan, Persediaan, dan Piutang adalah aset lancar."},
-
-  {k:"Pengantar Akuntansi",s:"Jika Aset = Rp200jt dan Liabilitas = Rp75jt, maka Ekuitas adalah…",
-   p:["Rp275.000.000","Rp125.000.000","Rp75.000.000","Rp200.000.000"],
-   j:1,b:"Ekuitas = Aset − Liabilitas = Rp200jt − Rp75jt = Rp125jt."},
-
-  {k:"Pengantar Akuntansi",s:"Prinsip yang menyatakan pendapatan diakui saat diperoleh (bukan saat kas diterima) disebut…",
-   p:["Cash Basis","Accrual Basis","Cost Principle","Matching Principle"],
-   j:1,b:"Accrual Basis mengakui pendapatan saat diperoleh dan beban saat terjadi, tanpa memandang kapan kas diterima/dibayar."},
-
-  {k:"Pengantar Akuntansi",s:"Akun 'Akumulasi Penyusutan' termasuk jenis akun…",
-   p:["Aset Tetap","Beban","Contra Asset (pengurang aset)","Liabilitas"],
-   j:2,b:"Akumulasi Penyusutan adalah contra-asset — mengurangi nilai aset tetap. Saldo normalnya Kredit, berlawanan dengan aset tetap."},
-
-  {k:"Pengantar Akuntansi",s:"Membeli perlengkapan kantor Rp800.000 secara kredit. Jurnal yang benar adalah…",
-   p:["D: Kas 800rb | K: Perlengkapan 800rb","D: Beban Perlengkapan 800rb | K: Utang 800rb","D: Perlengkapan 800rb | K: Utang Usaha 800rb","D: Perlengkapan 800rb | K: Kas 800rb"],
-   j:2,b:"Beli perlengkapan kredit → Perlengkapan bertambah (D), Utang Usaha bertambah (K). Belum keluar kas."},
-
-  {k:"Pengantar Akuntansi",s:"Apa yang dimaksud dengan Neraca Saldo (Trial Balance)?",
-   p:["Laporan posisi keuangan (aset, utang, modal)","Daftar semua akun beserta saldonya untuk cek keseimbangan D=K","Laporan laba rugi ringkas","Rekap semua transaksi selama satu periode"],
-   j:1,b:"Neraca Saldo adalah daftar semua akun buku besar beserta saldonya untuk memverifikasi total Debet = total Kredit."},
-
-  {k:"Perusahaan Dagang",s:"Beban Angkut Pembelian dengan syarat FOB Shipping Point ditanggung oleh…",
-   p:["Penjual","Pembeli","Ekspedisi","Dibagi dua"],
-   j:1,b:"FOB Shipping Point = ongkos angkut ditanggung PEMBELI sejak barang meninggalkan gudang penjual."},
-
-  {k:"Perusahaan Dagang",s:"Syarat '3/7, n/30' artinya…",
-   p:["Diskon 7% jika bayar dalam 3 hari, jatuh tempo 30 hari","Diskon 3% jika bayar dalam 7 hari, jatuh tempo 30 hari","Diskon 3% jika bayar dalam 30 hari, jatuh tempo 7 hari","Denda 3% jika bayar lewat 7 hari"],
-   j:1,b:"3/7 = diskon 3% jika bayar dalam 7 hari. n/30 = jatuh tempo 30 hari tanpa diskon."},
-
-  {k:"Perusahaan Dagang",s:"Penjualan bersih dihitung dengan rumus…",
-   p:["Penjualan + Retur + Diskon","Penjualan − Retur Penjualan − Diskon Penjualan","Penjualan − HPP","Penjualan − Beban Operasional"],
-   j:1,b:"Penjualan Bersih = Penjualan − Retur Penjualan − Diskon Penjualan."},
-
-  {k:"Perusahaan Dagang",s:"Membeli barang Rp50jt + PPN 11% secara kredit. Berapa Utang Usaha yang dicatat?",
-   p:["Rp50.000.000","Rp55.000.000","Rp55.500.000","Rp50.550.000"],
-   j:2,b:"PPN = 11% × 50jt = 5,5jt. Total utang = 50jt + 5,5jt = Rp55.500.000."},
-
-  {k:"Perusahaan Dagang",s:"Laba Kotor perusahaan dagang dihitung dari…",
-   p:["Penjualan Bersih − Semua Beban","Penjualan Bersih − HPP","Penjualan − Beban Operasional","Pendapatan − Pajak"],
-   j:1,b:"Laba Kotor = Penjualan Bersih − HPP. Setelah itu dikurangi beban operasional untuk dapat Laba Bersih."},
-
-  {k:"Perusahaan Dagang",s:"Diskon penjualan dalam laporan laba rugi posisinya…",
-   p:["Ditambahkan ke penjualan","Dikurangkan dari penjualan","Masuk ke beban operasional","Masuk ke HPP"],
-   j:1,b:"Diskon Penjualan mengurangi pendapatan: Penjualan − Retur − Diskon = Penjualan Bersih."},
-
-  {k:"Jurnal Penyesuaian",s:"Perlengkapan awal Rp5jt, dibeli lagi Rp2jt, sisa akhir Rp3,5jt. Beban perlengkapan adalah…",
-   p:["Rp2.000.000","Rp3.500.000","Rp3.000.000","Rp5.000.000"],
-   j:1,b:"Beban = (5jt + 2jt) − 3,5jt = Rp3.500.000. Ini yang terpakai selama periode."},
-
-  {k:"Jurnal Penyesuaian",s:"Kendaraan Rp120jt, residu Rp20jt, umur 8 tahun. Penyusutan per bulan adalah…",
-   p:["Rp833.333","Rp1.041.667","Rp1.250.000","Rp1.000.000"],
-   j:1,b:"(120jt − 20jt) ÷ 8 tahun ÷ 12 bulan = 100jt ÷ 96 = Rp1.041.667 per bulan."},
-
-  {k:"Jurnal Penyesuaian",s:"Pendapatan diterima di muka Rp6jt untuk 3 bulan. Setelah 1 bulan, jurnal penyesuaiannya…",
-   p:["D: Pendapatan Diterima Dimuka 2jt | K: Pendapatan 2jt","D: Pendapatan 2jt | K: Kas 2jt","D: Kas 2jt | K: Pendapatan 2jt","D: Pendapatan Diterima Dimuka 6jt | K: Pendapatan 6jt"],
-   j:0,b:"6jt ÷ 3 bulan = 2jt per bulan. D: Pendapatan Diterima Dimuka 2jt | K: Pendapatan 2jt."},
-
-  {k:"Jurnal Penyesuaian",s:"Nilai buku aset tetap dihitung dengan…",
-   p:["Harga Perolehan + Akumulasi Penyusutan","Harga Perolehan − Akumulasi Penyusutan","Harga Pasar − Beban Penyusutan","Harga Perolehan × Tarif Penyusutan"],
-   j:1,b:"Nilai Buku = Harga Perolehan − Akumulasi Penyusutan. Makin lama dipakai, nilai buku makin kecil."},
 
-  {k:"Jurnal Penyesuaian",s:"Jurnal penyesuaian untuk sewa dibayar di muka yang sudah jatuh tempo adalah…",
-   p:["D: Sewa Dibayar Dimuka | K: Kas","D: Beban Sewa | K: Sewa Dibayar Dimuka","D: Beban Sewa | K: Kas","D: Sewa Dibayar Dimuka | K: Beban Sewa"],
-   j:1,b:"Bagian yang sudah jatuh tempo jadi beban: D: Beban Sewa | K: Sewa Dibayar Dimuka."},
-
-  {k:"Buku Besar",s:"Fungsi utama buku besar (ledger) adalah…",
-   p:["Mencatat transaksi secara kronologis","Mengelompokkan transaksi per akun","Membuat laporan keuangan","Menghitung pajak perusahaan"],
-   j:1,b:"Buku Besar mengelompokkan transaksi per akun. Jurnal = kronologis, Buku Besar = per akun."},
-
-  {k:"Buku Besar",s:"Saldo Kas: awal Rp50jt, total debet Rp30jt, total kredit Rp45jt. Saldo akhir kas adalah…",
-   p:["Rp35.000.000","Rp65.000.000","Rp25.000.000","Rp45.000.000"],
-   j:0,b:"Kas saldo normal Debet. Saldo akhir = 50jt + 30jt − 45jt = Rp35.000.000."},
-
-  {k:"Buku Besar",s:"Proses memindahkan data dari jurnal ke buku besar disebut…",
-   p:["Journalizing","Posting","Balancing","Closing"],
-   j:1,b:"Posting = proses memindahkan catatan jurnal ke akun-akun di buku besar."},
-
-  {k:"Laporan Keuangan",s:"Modal akhir dihitung dengan…",
-   p:["Modal Awal + Laba + Prive","Modal Awal + Setoran Modal + Laba Bersih − Prive","Modal Awal − Laba − Prive","Modal Awal + Pendapatan − Beban"],
-   j:1,b:"Modal Akhir = Modal Awal + Setoran Modal + Laba Bersih − Prive."},
-
-  {k:"Laporan Keuangan",s:"Dalam neraca, aset disajikan berdasarkan urutan…",
-   p:["Nilai terbesar ke terkecil","Abjad nama akun","Tingkat likuiditas (paling mudah dicairkan lebih dulu)","Tanggal perolehan"],
-   j:2,b:"Aset disusun dari paling likuid: Kas → Piutang → Persediaan → Peralatan → dst."},
-
-  {k:"Laporan Keuangan",s:"Prive dalam laporan keuangan berpengaruh pada…",
-   p:["Mengurangi pendapatan di L/R","Menambah beban di L/R","Mengurangi modal di Laporan Perubahan Modal","Menambah utang di Neraca"],
-   j:2,b:"Prive bukan beban perusahaan. Prive langsung mengurangi modal di Laporan Perubahan Modal."},
-
-  // ── SESI 2 ──────────────────────────────────────────────────────────────
-  {k:"Pengantar Akuntansi",s:"Manakah yang BUKAN karakteristik informasi akuntansi yang berkualitas?",
-   p:["Relevan","Dapat diandalkan (Reliable)","Menguntungkan pemilik","Dapat dibandingkan (Comparable)"],
-   j:2,b:"Karakteristik kualitatif: Relevan, Reliable, Comparable, Konsisten. 'Menguntungkan pemilik' bukan — akuntansi harus netral dan objektif."},
-
-  {k:"Pengantar Akuntansi",s:"Transaksi 'Pemilik menyetor modal tunai Rp50jt' dicatat sebagai…",
-   p:["D: Modal 50jt | K: Kas 50jt","D: Kas 50jt | K: Modal 50jt","D: Kas 50jt | K: Utang 50jt","D: Modal 50jt | K: Utang 50jt"],
-   j:1,b:"Pemilik setor modal → Kas perusahaan bertambah (D: Kas), Modal bertambah (K: Modal)."},
-
-  {k:"Pengantar Akuntansi",s:"Perbedaan utama perusahaan jasa, dagang, dan manufaktur adalah…",
-   p:["Besarnya modal yang digunakan","Ada tidaknya persediaan dan proses produksi","Jumlah karyawan yang dimiliki","Cara membayar pajak"],
-   j:1,b:"Jasa: tidak ada persediaan. Dagang: beli & jual barang jadi. Manufaktur: ubah bahan baku jadi barang jadi."},
-
-  {k:"Pengantar Akuntansi",s:"Manakah pernyataan yang BENAR tentang akun Prive?",
-   p:["Prive adalah beban perusahaan yang mengurangi laba","Prive adalah pengambilan pribadi pemilik yang mengurangi modal","Prive masuk ke laporan laba rugi sebagai beban","Prive menambah modal pemilik"],
-   j:1,b:"Prive = pengambilan pribadi pemilik. BUKAN beban, tidak masuk L/R, tapi mengurangi modal."},
-
-  {k:"Pengantar Akuntansi",s:"Jurnal penutup dibuat untuk…",
-   p:["Memperbaiki kesalahan jurnal sebelumnya","Menutup akun nominal agar saldonya nol di awal periode baru","Menutup akun riil di akhir tahun","Membuat neraca saldo awal"],
-   j:1,b:"Jurnal penutup menutup akun nominal (pendapatan, beban, prive) agar saldonya nol untuk periode berikutnya."},
-
-  {k:"Perusahaan Dagang",s:"CV Maju membeli barang Rp20jt syarat 2/10, n/30. Membayar hari ke-8. Berapa kas yang dikeluarkan?",
-   p:["Rp19.600.000","Rp20.000.000","Rp19.200.000","Rp20.400.000"],
-   j:0,b:"Bayar dalam 10 hari → dapat diskon 2%. Diskon = 2% × 20jt = 400rb. Kas = 20jt − 400rb = Rp19.600.000."},
-
-  {k:"Perusahaan Dagang",s:"PPN Masukan adalah…",
-   p:["PPN yang dipungut saat kita menjual barang","PPN yang kita bayar saat membeli barang dari supplier","PPN yang disetor ke kas negara","PPN atas jasa yang diterima"],
-   j:1,b:"PPN Masukan = pajak yang dibayar saat MEMBELI. PPN Keluaran = dipungut saat MENJUAL. Setor ke negara = Keluaran − Masukan."},
-
-  {k:"Perusahaan Dagang",s:"Persediaan awal Rp80jt, pembelian bersih Rp120jt, persediaan akhir Rp50jt. HPP adalah…",
-   p:["Rp150.000.000","Rp170.000.000","Rp200.000.000","Rp130.000.000"],
-   j:0,b:"HPP = Persediaan Awal + Pembelian Bersih − Persediaan Akhir = 80 + 120 − 50 = Rp150jt."},
-
-  {k:"Perusahaan Dagang",s:"Manakah yang MENAMBAH nilai pembelian bersih?",
-   p:["Diskon Pembelian","Retur Pembelian","Beban Angkut Pembelian","Potongan Harga"],
-   j:2,b:"Pembelian Bersih = Pembelian + Beban Angkut − Retur − Diskon. Hanya Beban Angkut yang menambah."},
-
-  {k:"Perusahaan Dagang",s:"Menjual barang Rp40jt + PPN 11% kredit. Total piutang yang dicatat adalah…",
-   p:["Rp40.000.000","Rp44.000.000","Rp44.400.000","Rp65.000.000"],
-   j:2,b:"PPN = 11% × 40jt = 4,4jt. Piutang = 40jt + 4,4jt = Rp44.400.000."},
-
-  {k:"Perusahaan Dagang",s:"Retur penjualan kredit Rp3jt + PPN 11%. Jurnal yang benar adalah…",
-   p:["D: Retur Penjualan 3jt & PPN Keluaran 330rb | K: Piutang 3.330.000","D: Kas 3.330.000 | K: Retur Penjualan 3jt & PPN 330rb","D: Piutang 3.330.000 | K: Retur Penjualan 3.330.000","D: Retur Penjualan 3jt | K: Piutang 3jt"],
-   j:0,b:"Retur penjualan kredit: D: Retur Penjualan + D: PPN Keluaran | K: Piutang Usaha (total termasuk PPN)."},
-
-  {k:"Jurnal Penyesuaian",s:"Iklan dibayar 1 Oktober Rp12jt untuk 6 bulan. Penyesuaian 31 Desember adalah…",
-   p:["D: Beban Iklan 6jt | K: Iklan Dibayar Dimuka 6jt","D: Beban Iklan 12jt | K: Iklan Dibayar Dimuka 12jt","D: Beban Iklan 2jt | K: Iklan Dibayar Dimuka 2jt","D: Iklan Dibayar Dimuka 6jt | K: Beban Iklan 6jt"],
-   j:0,b:"12jt ÷ 6 = 2jt/bln. Okt−Des = 3 bulan terpakai = 3 × 2jt = 6jt. D: Beban Iklan 6jt | K: Iklan Dibayar Dimuka 6jt."},
-
-  {k:"Jurnal Penyesuaian",s:"Peralatan dibeli 1 Juli Rp24jt, umur 4 tahun, residu Rp0. Nilai buku per 31 Desember adalah…",
-   p:["Rp21.000.000","Rp18.000.000","Rp22.500.000","Rp20.000.000"],
-   j:0,b:"Penyusutan/bln = 24jt ÷ 4 ÷ 12 = 500rb. Juli−Des = 6 bln × 500rb = 3jt. Nilai buku = 24jt − 3jt = Rp21jt."},
-
-  {k:"Jurnal Penyesuaian",s:"Manakah yang TIDAK memerlukan jurnal penyesuaian?",
-   p:["Beban gaji yang belum dibayar","Penyusutan aset tetap","Pembayaran utang usaha","Sewa dibayar di muka yang sudah jatuh tempo"],
-   j:2,b:"Pembayaran utang usaha sudah dicatat saat terjadi. Penyesuaian hanya untuk akrual, deferred, dan penyusutan."},
-
-  {k:"Jurnal Penyesuaian",s:"Beban bunga akrual Rp500rb yang belum dicatat. Jurnal penyesuaiannya…",
-   p:["D: Kas 500rb | K: Beban Bunga 500rb","D: Beban Bunga 500rb | K: Utang Bunga 500rb","D: Utang Bunga 500rb | K: Beban Bunga 500rb","D: Beban Bunga 500rb | K: Kas 500rb"],
-   j:1,b:"Akrual beban: biaya terjadi tapi belum dibayar. D: Beban Bunga | K: Utang Bunga."},
-
-  {k:"Buku Besar",s:"Akun Utang Usaha saldo kredit Rp15jt. Ada D: Rp10jt dan K: Rp8jt. Saldo akhir…",
-   p:["Rp13.000.000 (K)","Rp17.000.000 (K)","Rp13.000.000 (D)","Rp3.000.000 (K)"],
-   j:0,b:"Utang Usaha saldo normal Kredit. Saldo akhir = 15jt (K) + 8jt (K) − 10jt (D) = Rp13jt (K)."},
-
-  {k:"Buku Besar",s:"Manakah urutan siklus akuntansi yang benar?",
-   p:["Buku Besar → Jurnal → Neraca Saldo → Lap. Keuangan","Jurnal → Buku Besar → Neraca Saldo → Lap. Keuangan → Jurnal Penutup","Neraca Saldo → Jurnal → Buku Besar → Lap. Keuangan","Jurnal → Lap. Keuangan → Buku Besar → Neraca Saldo"],
-   j:1,b:"Siklus: Transaksi → Jurnal → Buku Besar → Neraca Saldo → Jurnal Penyesuaian → Neraca Saldo Disesuaikan → Lap. Keuangan → Jurnal Penutup."},
-
-  {k:"Laporan Keuangan",s:"Menerima pelunasan piutang dari pelanggan masuk ke aktivitas apa dalam laporan arus kas?",
-   p:["Investasi","Pendanaan","Operasi","Modal"],
-   j:2,b:"Aktivitas Operasi = arus kas dari kegiatan utama bisnis (penjualan, piutang, gaji, dll)."},
-
-  {k:"Laporan Keuangan",s:"Membeli peralatan baru dengan kas masuk ke aktivitas apa dalam laporan arus kas?",
-   p:["Operasi","Investasi (arus kas keluar)","Pendanaan","Tidak masuk laporan arus kas"],
-   j:1,b:"Membeli aset tetap = Aktivitas Investasi (kas keluar untuk investasi jangka panjang)."},
-
-  {k:"Laporan Keuangan",s:"Laba kotor Rp80jt, beban gaji Rp20jt, beban sewa Rp10jt, beban penyusutan Rp5jt. Laba bersih adalah…",
-   p:["Rp45.000.000","Rp55.000.000","Rp60.000.000","Rp35.000.000"],
-   j:0,b:"Laba Bersih = 80jt − (20jt + 10jt + 5jt) = 80jt − 35jt = Rp45.000.000."},
-
-  {k:"Laporan Keuangan",s:"Manakah yang BENAR tentang CaLK (Catatan atas Laporan Keuangan)?",
-   p:["CaLK adalah laporan opsional","CaLK hanya berisi tabel angka tambahan","CaLK adalah bagian integral laporan keuangan yang menjelaskan kebijakan & rincian akun","CaLK menggantikan laporan laba rugi"],
-   j:2,b:"CaLK adalah bagian tak terpisahkan dari laporan keuangan. Isinya: kebijakan akuntansi, rincian pos, informasi penting lainnya."},
-
-  {k:"Laporan Keuangan",s:"Modal awal Rp266jt, setoran Rp25jt, laba bersih Rp48jt, prive Rp5jt. Modal akhir adalah…",
-   p:["Rp334.000.000","Rp314.000.000","Rp339.000.000","Rp284.000.000"],
-   j:0,b:"Modal Akhir = 266 + 25 + 48 − 5 = Rp334.000.000."},
-
-  {k:"Perusahaan Dagang",s:"PPN Keluaran Rp18jt, PPN Masukan Rp13jt, Utang PPN awal Rp2jt. Kas yang disetor ke negara…",
-   p:["Rp5.000.000","Rp7.000.000","Rp3.000.000","Rp18.000.000"],
-   j:1,b:"PPN terutang = 18jt − 13jt = 5jt. Ditambah Utang PPN awal 2jt = total disetor Rp7jt."},
-
-  {k:"Pengantar Akuntansi",s:"Matching Principle dalam akuntansi berarti…",
-   p:["Aset harus selalu sama dengan liabilitas","Beban diakui pada periode yang sama dengan pendapatan yang dihasilkannya","Setiap debet harus ada kreditnya","Laporan keuangan dibuat setiap bulan"],
-   j:1,b:"Matching Principle: beban diakui bersamaan dengan pendapatan yang dihasilkan. Contoh: HPP diakui saat penjualan terjadi."},
-
-  {k:"Jurnal Penyesuaian",s:"Sewa Rp12jt untuk 2 bulan dicatat awal sebagai Beban Sewa Rp6jt. Penyesuaian 31 Maret yang diperlukan…",
-   p:["D: Sewa Dibayar Dimuka 6jt | K: Beban Sewa 6jt","D: Beban Sewa 6jt | K: Sewa Dibayar Dimuka 6jt","D: Beban Sewa 6jt | K: Kas 6jt","Tidak perlu penyesuaian"],
-   j:0,b:"Total 12jt untuk 2 bulan, baru dicatat 6jt. April belum jadi beban → koreksi: D: Sewa Dibayar Dimuka 6jt | K: Beban Sewa 6jt."},
-];
-
-// State
-let activeQ = [];
-let idx = 0, skor = 0, hasil = [], activeSesi = 0;
-
-function getKatColor(k){ return KAT_COLOR[k] || "#58a6ff"; }
-
-function goHome(){
-  showScreen("screen-home");
-  idx=0; skor=0; hasil=[]; activeQ=[];
-}
-
-function startSesi(s){
-  activeSesi = s;
-  if(s===0) activeQ = [...ALL_Q];
-  else if(s===1) activeQ = ALL_Q.slice(0,25);
-  else activeQ = ALL_Q.slice(25,50);
-  idx=0; skor=0; hasil=[];
-  showScreen("screen-quiz");
-  renderQ();
-}
-
-function nextSesi(){
-  startSesi(2);
-}
-
-function retry(){
-  idx=0; skor=0; hasil=[];
-  showScreen("screen-quiz");
-  renderQ();
-}
-
-function renderQ(){
-  const q = activeQ[idx];
-  const total = activeQ.length;
-  const label = activeSesi===0 ? "SEMUA 50 SOAL" : activeSesi===1 ? "SESI 1 · 25 SOAL" : "SESI 2 · 25 SOAL";
-  document.getElementById("quiz-label").textContent = label;
-  document.getElementById("quiz-counter").textContent = (idx+1)+"/"+total;
-  document.getElementById("progress-fill").style.width = (idx/total*100)+"%";
-
-  const kat = document.getElementById("q-kat");
-  kat.textContent = q.k;
-  kat.style.background = getKatColor(q.k)+"22";
-  kat.style.color = getKatColor(q.k);
-
-  document.getElementById("q-text").textContent = q.s;
-  document.getElementById("feedback").style.display="none";
-  document.getElementById("next-btn").style.display="none";
-  document.getElementById("live-score").parentElement.querySelector("span").textContent = skor;
-
-  const cc = document.getElementById("choices");
-  cc.innerHTML="";
-  q.p.forEach((p,i)=>{
-    const btn = document.createElement("button");
-    btn.className="choice-btn";
-    btn.innerHTML=`<span class="badge">${String.fromCharCode(65+i)}</span>${p}`;
-    btn.onclick=()=>answer(i);
-    cc.appendChild(btn);
-  });
-}
-
-function answer(i){
-  const q = activeQ[idx];
-  const btns = document.querySelectorAll(".choice-btn");
-  btns.forEach(b=>b.classList.add("locked"));
-  const benar = i===q.j;
-  if(benar) skor++;
-  hasil.push({benar, kat:q.k});
-  btns[q.j].classList.add("correct");
-  btns[q.j].querySelector(".badge").textContent="✓";
-  if(!benar){
-    btns[i].classList.add("wrong");
-    btns[i].querySelector(".badge").textContent="✗";
-  }
-  const fb = document.getElementById("feedback");
-  const fbt = document.getElementById("feedback-title");
-  const fbb = document.getElementById("feedback-body");
-  fb.style.display="block";
-  fb.style.borderLeft = "3px solid "+(benar?"#3fb950":"#f85149");
-  fbt.className="feedback-title "+(benar?"ok":"no");
-  fbt.textContent = benar ? "✓ Benar!" : "✗ Jawaban benar: "+String.fromCharCode(65+q.j);
-  fbb.textContent = q.b;
-  document.getElementById("next-btn").style.display="block";
-  document.getElementById("next-btn").textContent = idx+1>=activeQ.length ? "Lihat Hasil →" : "Lanjut →";
-  document.getElementById("live-score").parentElement.querySelector("span").textContent = skor;
-}
-
-function nextQ(){
-  if(idx+1>=activeQ.length){ showResult(); return; }
-  idx++;
-  renderQ();
-}
-
-function showResult(){
-  showScreen("screen-result");
-  const total = activeQ.length;
-  const pct = Math.round(skor/total*100);
-  const grade = pct>=80?"A":pct>=65?"B":pct>=50?"C":"D";
-  const gcolor = pct>=80?"#3fb950":pct>=65?"#d29922":"#f85149";
-  const emoji = pct>=80?"🏆":pct>=65?"🌟":pct>=50?"📖":"💡";
-  const msg = pct>=80?"Luar biasa! 🎉":pct>=65?"Bagus! Terus latihan 💪":pct>=50?"Lumayan, review materi ya 📚":"Yuk pelajari lagi! 😊";
-
-  document.getElementById("res-emoji").textContent=emoji;
-  const gEl = document.getElementById("res-grade");
-  gEl.textContent=grade; gEl.style.color=gcolor;
-  document.getElementById("res-msg").textContent=msg;
-  document.getElementById("res-big").innerHTML=skor+'<span>/'+total+'</span>';
-  const pEl=document.getElementById("res-pct");
-  pEl.textContent=pct+"%"; pEl.style.color=gcolor;
-
-  // Per kategori
-  const katMap={};
-  hasil.forEach(h=>{
-    if(!katMap[h.kat]) katMap[h.kat]={b:0,t:0};
-    katMap[h.kat].t++;
-    if(h.benar) katMap[h.kat].b++;
-  });
-  const kd=document.getElementById("kat-breakdown");
-  kd.innerHTML="";
-  Object.entries(katMap).forEach(([k,v])=>{
-    const pctk=Math.round(v.b/v.t*100);
-    kd.innerHTML+=`<div class="kat-row">
-      <div class="kat-dot" style="background:${getKatColor(k)}"></div>
-      <div class="kat-name">${k}</div>
-      <div class="kat-score">${v.b}/${v.t}</div>
-      <div class="kat-bar-bg"><div class="kat-bar-fill" style="width:${pctk}%;background:${getKatColor(k)}"></div></div>
-    </div>`;
-  });
-
-  // Dots
-  const dr=document.getElementById("dots-row");
-  dr.innerHTML="";
-  hasil.forEach((h,i)=>{
-    dr.innerHTML+=`<div class="dot-r ${h.benar?"ok":"no"}">${h.benar?"✓":"✗"}</div>`;
-  });
-
-  // Buttons
-  document.getElementById("btn-next-sesi").style.display = (activeSesi===1) ? "block" : "none";
-  document.getElementById("btn-retry").style.display = "block";
-}
-
-function showScreen(id){
-  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
-}
-</script>
+  <script>
+    // Theme Setup
+    if (localStorage.getItem("theme") === "light") {
+      document.body.classList.add("light-theme");
+    }
+
+    const KAT_COLOR = {
+      "Pengantar Akuntansi": "#ff6b35",
+      "Perusahaan Dagang": "#a855f7",
+      "Jurnal Penyesuaian": "#3b82f6",
+      "Buku Besar": "#10b981",
+      "Laporan Keuangan": "#ff3d9a",
+      "Perpajakan": "#F59E0B"
+    };
+
+    // State Variables
+    let ALL_Q = [];
+    let activeQ = [];
+    let idx = 0, skor = 0, hasil = [], activeSesi = 0;
+
+    function getKatColor(k) { return KAT_COLOR[k] || "#3b82f6"; }
+
+    // Fetch Database Soal Kuis
+    fetch("kuis.json")
+      .then(res => res.json())
+      .then(data => {
+        ALL_Q = data;
+      })
+      .catch(err => {
+        console.error("Gagal mengambil kuis.json, menggunakan fallback offline...", err);
+        // Fallback minimal agar tidak macet total saat dibuka luring langsung
+        ALL_Q = [
+          {
+            "k": "Pengantar Akuntansi",
+            "s": "Pondasi semua akuntansi didasari oleh persamaan dasar akuntansi, yaitu...",
+            "p": ["Aset = Liabilitas - Ekuitas", "Aset = Liabilitas + Ekuitas", "Ekuitas = Aset + Liabilitas", "Liabilitas = Aset + Ekuitas"],
+            "j": 1,
+            "b": "Persamaan dasar akuntansi yang benar dan seimbang adalah Aset = Liabilitas + Ekuitas."
+          }
+        ];
+      });
+
+    function goHome() {
+      showScreen("screen-home");
+      idx = 0; skor = 0; hasil = []; activeQ = [];
+    }
+
+    function startSesi(s) {
+      if (ALL_Q.length === 0) {
+        alert("Soal sedang diunduh, harap tunggu sedetik...");
+        return;
+      }
+      activeSesi = s;
+      if (s === 0) activeQ = [...ALL_Q];
+      else if (s === 1) activeQ = ALL_Q.slice(0, 25);
+      else activeQ = ALL_Q.slice(25, 50);
+
+      idx = 0; skor = 0; hasil = [];
+      showScreen("screen-quiz");
+      renderQ();
+    }
+
+    function nextSesi() {
+      startSesi(2);
+    }
+
+    function retry() {
+      idx = 0; skor = 0; hasil = [];
+      showScreen("screen-quiz");
+      renderQ();
+    }
+
+    function renderQ() {
+      const q = activeQ[idx];
+      const total = activeQ.length;
+      const label = activeSesi === 0 ? "SEMUA 50 SOAL LATIHAN" : activeSesi === 1 ? "SESI 1 · 25 SOAL AWAL" : "SESI 2 · 25 SOAL AKHIR";
+      
+      document.getElementById("quiz-label").textContent = label;
+      document.getElementById("quiz-counter").textContent = (idx + 1) + "/" + total;
+      document.getElementById("progress-fill").style.width = (idx / total * 100) + "%";
+
+      const kat = document.getElementById("q-kat");
+      kat.textContent = q.k;
+      kat.style.background = getKatColor(q.k) + "18";
+      kat.style.color = getKatColor(q.k);
+
+      document.getElementById("q-text").textContent = q.s;
+      document.getElementById("feedback").style.display = "none";
+      document.getElementById("next-btn").style.display = "none";
+      document.getElementById("live-score").textContent = skor;
+
+      const cc = document.getElementById("choices");
+      cc.innerHTML = "";
+      q.p.forEach((p, i) => {
+        const btn = document.createElement("button");
+        btn.className = "choice-btn";
+        btn.innerHTML = `<span class="badge">${String.fromCharCode(65 + i)}</span>${p}`;
+        btn.onclick = () => answer(i);
+        cc.appendChild(btn);
+      });
+    }
+
+    function answer(i) {
+      const q = activeQ[idx];
+      const btns = document.querySelectorAll(".choice-btn");
+      
+      // Lock choices
+      btns.forEach(b => b.classList.add("locked"));
+      
+      const benar = i === q.j;
+      if (benar) skor++;
+      
+      hasil.push({ benar, kat: q.k });
+      
+      // Visual feedback on buttons
+      btns[q.j].classList.add("correct");
+      btns[q.j].querySelector(".badge").textContent = "✓";
+      if (!benar) {
+        btns[i].classList.add("wrong");
+        btns[i].querySelector(".badge").textContent = "✗";
+      }
+
+      // Render Expanded Feedback Card
+      const fb = document.getElementById("feedback");
+      const fbt = document.getElementById("feedback-title");
+      const fbb = document.getElementById("feedback-body");
+      
+      fb.style.display = "block";
+      fb.style.borderLeftColor = benar ? "var(--green)" : "var(--orange)";
+      
+      fbt.className = "feedback-title " + (benar ? "ok" : "no");
+      fbt.textContent = benar ? "🎉 Jawabanmu Benar!" : "❌ Kurang Tepat. Jawaban yang Benar: Pilihan " + String.fromCharCode(65 + q.j);
+      
+      // Formatting Pembahasan text to look clean
+      fbb.innerHTML = q.b.replace(/\n/g, "<br>").replace(/\*(.*?)\*/g, "<strong>$1</strong>");
+
+      document.getElementById("next-btn").style.display = "block";
+      document.getElementById("next-btn").textContent = (idx + 1 >= activeQ.length) ? "Lihat Skor Evaluasi Akhir →" : "Lanjut Pertanyaan →";
+      document.getElementById("live-score").textContent = skor;
+    }
+
+    function nextQ() {
+      if (idx + 1 >= activeQ.length) {
+        showResult();
+        return;
+      }
+      idx++;
+      renderQ();
+    }
+
+    function showResult() {
+      showScreen("screen-result");
+      const total = activeQ.length;
+      const pct = Math.round(skor / total * 100);
+      
+      const grade = pct >= 80 ? "A" : pct >= 65 ? "B" : pct >= 50 ? "C" : "D";
+      const gcolor = pct >= 80 ? "var(--green)" : pct >= 65 ? "var(--yellow)" : "var(--orange)";
+      const emoji = pct >= 80 ? "🏆" : pct >= 65 ? "🌟" : pct >= 50 ? "📚" : "💡";
+      const msg = pct >= 80 ? "Luar biasa! Pemahamanmu matang 🎉" : pct >= 65 ? "Bagus! Pertahankan belajarmu 💪" : pct >= 50 ? "Lumayan! Pelajari lagi materinya ya 📖" : "Tetap semangat! Review bab teori lagi yuk 😊";
+
+      document.getElementById("res-emoji").textContent = emoji;
+      
+      const gEl = document.getElementById("res-grade");
+      gEl.textContent = grade;
+      gEl.style.color = gcolor;
+      
+      document.getElementById("res-msg").textContent = msg;
+      document.getElementById("res-big").innerHTML = skor + '<span>/' + total + '</span>';
+      
+      const pEl = document.getElementById("res-pct");
+      pEl.textContent = pct + "%";
+      pEl.style.color = gcolor;
+
+      // Group by Category
+      const katMap = {};
+      hasil.forEach(h => {
+        if (!katMap[h.kat]) katMap[h.kat] = { b: 0, t: 0 };
+        katMap[h.kat].t++;
+        if (h.benar) katMap[h.kat].b++;
+      });
+
+      const kd = document.getElementById("kat-breakdown");
+      kd.innerHTML = "";
+      Object.entries(katMap).forEach(([k, v]) => {
+        const pctk = Math.round(v.b / v.t * 100);
+        kd.innerHTML += `
+          <div class="kat-row">
+            <div class="kat-dot" style="background:${getKatColor(k)}"></div>
+            <div class="kat-name">${k}</div>
+            <div class="kat-score">${v.b}/${v.t}</div>
+            <div class="kat-bar-bg">
+              <div class="kat-bar-fill" style="width:${pctk}%;background:${getKatColor(k)}"></div>
+            </div>
+          </div>
+        `;
+      });
+
+      // Dots Breakdown
+      const dr = document.getElementById("dots-row");
+      dr.innerHTML = "";
+      hasil.forEach(h => {
+        dr.innerHTML += `<div class="dot-r ${h.benar ? 'ok' : 'no'}">${h.benar ? '✓' : '✗'}</div>`;
+      });
+
+      // Navigation Buttons inside Result Card
+      document.getElementById("btn-next-sesi").style.display = (activeSesi === 1) ? "block" : "none";
+    }
+
+    function showScreen(id) {
+      document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+      document.getElementById(id).classList.add("active");
+    }
+  </script>
 </body>
 </html>

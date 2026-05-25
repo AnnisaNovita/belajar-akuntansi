@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kalkulator Akuntansi & Pajak — Belajar Akuntansi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --glass-bg: rgba(30, 41, 59, 0.45);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --glass-highlight: rgba(255, 255, 255, 0.15);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      
+      --pink: #ff3d9a;
+      --purple: #a855f7;
+      --blue: #3b82f6;
+      --green: #10b981;
+      --yellow: #fbbf24;
+      --orange: #ff6b35;
+      
+      --radius: 24px;
+      --radius-sm: 14px;
+    }
+
+    /* LIGHT MODE */
+    body.light-theme {
+      --bg: #fff8f0;
+      --glass-bg: rgba(255, 255, 255, 0.6);
+      --glass-border: rgba(0, 0, 0, 0.06);
+      --glass-highlight: rgba(255, 255, 255, 0.8);
+      --text: #1e293b;
+      --text-muted: #64748b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "DM Sans", sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      position: relative;
+    }
+
+    /* Glowing Blobs */
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(80px);
+      opacity: 0.25;
+      z-index: 0;
+      animation: float 20s infinite alternate;
+    }
+    .blob-1 {
+      width: 400px;
+      height: 400px;
+      background: var(--pink);
+      top: -100px;
+      right: -50px;
+    }
+    .blob-2 {
+      width: 300px;
+      height: 300px;
+      background: var(--purple);
+      bottom: 10%;
+      left: -50px;
+      animation-delay: -5s;
+    }
+    .blob-3 {
+      width: 350px;
+      height: 350px;
+      background: var(--blue);
+      top: 40%;
+      right: 15%;
+      animation-delay: -10s;
+    }
+
+    @keyframes float {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(40px, 60px) scale(1.1); }
+    }
+
+    header {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 24px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 10;
+    }
+
+    .logo {
+      font-family: "Syne", sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      text-decoration: none;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo-emoji {
+      font-size: 28px;
+    }
+
+    .nav-btn {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: var(--text);
+      padding: 10px 20px;
+      border-radius: 99px;
+      font-family: "Syne", sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      text-decoration: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.2s, background-color 0.2s;
+    }
+    .nav-btn:hover {
+      transform: translateY(-2px);
+      background: var(--glass-highlight);
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px 24px 80px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .hero-sec {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .hero-sec h1 {
+      font-family: "Syne", sans-serif;
+      font-weight: 800;
+      font-size: clamp(28px, 5vw, 42px);
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, var(--orange), var(--purple), var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sec p {
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* TABS */
+    .tabs-wrapper {
+      overflow-x: auto;
+      padding-bottom: 10px;
+      margin-bottom: 30px;
+      display: flex;
+      justify-content: flex-start;
+      gap: 10px;
+    }
+    @media (min-width: 768px) {
+      .tabs-wrapper {
+        justify-content: center;
+      }
+    }
+    
+    .tab-btn {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: var(--text-muted);
+      padding: 12px 24px;
+      border-radius: 99px;
+      font-family: "Syne", sans-serif;
+      font-weight: 700;
+      font-size: 13.5px;
+      cursor: pointer;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+    .tab-btn:hover {
+      color: var(--text);
+      background: var(--glass-highlight);
+    }
+    .tab-btn.active {
+      color: #fff;
+      background: var(--c, var(--pink));
+      border-color: transparent;
+      box-shadow: 0 8px 20px color-mix(in srgb, var(--c, var(--pink)) 40%, transparent);
+    }
+
+    /* CALCULATOR CARDS */
+    .calc-container {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: var(--radius);
+      padding: 32px;
+      display: none;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+      animation: fadeIn 0.4s ease forwards;
+    }
+    .calc-container.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .calc-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+      border-bottom: 1.5px dashed var(--glass-border);
+      padding-bottom: 18px;
+    }
+    .calc-icon {
+      font-size: 40px;
+    }
+    .calc-title-group h2 {
+      font-family: "Syne", sans-serif;
+      font-weight: 800;
+      font-size: 22px;
+      margin-bottom: 4px;
+    }
+    .calc-title-group p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* GRID FOR INPUT & OUTPUT */
+    .calc-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    @media (min-width: 850px) {
+      .calc-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    /* INPUT PANEL */
+    .input-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .input-group label {
+      font-family: "Syne", sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .input-group select,
+    .input-group input {
+      background: rgba(0, 0, 0, 0.2);
+      border: 1.5px solid var(--glass-border);
+      border-radius: var(--radius-sm);
+      padding: 14px 18px;
+      color: #fff;
+      font-size: 15px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s, background-color 0.2s;
+    }
+    body.light-theme .input-group select,
+    body.light-theme .input-group input {
+      background: rgba(255, 255, 255, 0.7);
+      color: #1e293b;
+    }
+    .input-group select:focus,
+    .input-group input:focus {
+      border-color: var(--c, var(--pink));
+      background: rgba(0, 0, 0, 0.3);
+    }
+    body.light-theme .input-group select:focus,
+    body.light-theme .input-group input:focus {
+      background: #fff;
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 12px;
+      margin-top: 4px;
+    }
+    .radio-btn {
+      flex: 1;
+      position: relative;
+    }
+    .radio-btn input {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .radio-label {
+      display: block;
+      background: rgba(0, 0, 0, 0.15);
+      border: 1.5px solid var(--glass-border);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    body.light-theme .radio-label {
+      background: rgba(255, 255, 255, 0.4);
+    }
+    .radio-btn input:checked + .radio-label {
+      border-color: var(--c, var(--pink));
+      background: color-mix(in srgb, var(--c, var(--pink)) 15%, transparent);
+      color: var(--c, var(--pink));
+    }
+
+    .action-btn {
+      background: var(--c, var(--pink));
+      color: #fff;
+      border: none;
+      font-family: "Syne", sans-serif;
+      font-weight: 800;
+      font-size: 14.5px;
+      padding: 16px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 6px 20px color-mix(in srgb, var(--c, var(--pink)) 30%, transparent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .action-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px color-mix(in srgb, var(--c, var(--pink)) 45%, transparent);
+    }
+
+    /* OUTPUT PANEL */
+    .output-panel {
+      background: rgba(0, 0, 0, 0.15);
+      border: 1.5px solid var(--glass-border);
+      border-radius: var(--radius);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    body.light-theme .output-panel {
+      background: rgba(255, 255, 255, 0.35);
+    }
+
+    .output-title {
+      font-family: "Syne", sans-serif;
+      font-weight: 800;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--c, var(--pink));
+      margin-bottom: -4px;
+    }
+
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 12px;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.06);
+    }
+    body.light-theme .result-row {
+      border-bottom-color: rgba(0, 0, 0, 0.04);
+    }
+    .result-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    .result-label {
+      font-size: 13.5px;
+      color: var(--text-muted);
+    }
+    .result-val {
+      font-family: "Syne", sans-serif;
+      font-weight: 800;
+      font-size: 16px;
+    }
+    .result-val.highlight {
+      font-size: 22px;
+      color: var(--c, var(--pink));
+    }
+
+    .formula-alert {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      font-size: 12.5px;
+      line-height: 1.6;
+      color: var(--text-muted);
+    }
+    body.light-theme .formula-alert {
+      background: rgba(255, 255, 255, 0.7);
+    }
+    .formula-label {
+      font-family: "Syne", sans-serif;
+      font-weight: 800;
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--c, var(--pink));
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    /* SPECIAL TABLES FOR OUTPUT */
+    .dep-table-container {
+      overflow-x: auto;
+      max-height: 300px;
+      margin-top: 10px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--glass-border);
+    }
+    .dep-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      text-align: left;
+    }
+    .dep-table th {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 10px 14px;
+      font-weight: 700;
+      color: var(--text);
+      font-family: "Syne", sans-serif;
+      position: sticky;
+      top: 0;
+    }
+    body.light-theme .dep-table th {
+      background: rgba(0, 0, 0, 0.05);
+    }
+    .dep-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--glass-border);
+      color: var(--text-muted);
+    }
+    .dep-table tr:hover td {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    /* PDA SANDBOX SPECIAL STYLING */
+    .pda-board {
+      grid-column: 1 / -1 !important;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .pda-controls {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      background: rgba(0, 0, 0, 0.15);
+      border: 1.5px solid var(--glass-border);
+      border-radius: var(--radius-sm);
+      padding: 18px;
+    }
+    body.light-theme .pda-controls {
+      background: rgba(255, 255, 255, 0.5);
+    }
+    .pda-controls select,
+    .pda-controls input {
+      flex: 1;
+      min-width: 140px;
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--glass-border);
+      border-radius: 10px;
+      padding: 10px 14px;
+      color: #fff;
+      font-size: 13.5px;
+      font-family: inherit;
+      outline: none;
+    }
+    body.light-theme .pda-controls select,
+    body.light-theme .pda-controls input {
+      background: #fff;
+      color: #1e293b;
+    }
+    .pda-add-btn {
+      background: var(--green);
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-family: "Syne", sans-serif;
+      font-weight: 800;
+      font-size: 13px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pda-table-container {
+      overflow-x: auto;
+      border: 1.5px solid var(--glass-border);
+      border-radius: var(--radius-sm);
+    }
+    .pda-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+      min-width: 800px;
+    }
+    .pda-table th {
+      padding: 14px 16px;
+      text-align: center;
+      font-family: "Syne", sans-serif;
+      font-weight: 800;
+    }
+    .pda-table th.header-aset { background: rgba(255, 107, 53, 0.15); color: var(--orange); border-bottom: 2.5px solid var(--orange); }
+    .pda-table th.header-liab { background: rgba(59, 130, 246, 0.15); color: var(--blue); border-bottom: 2.5px solid var(--blue); }
+    .pda-table th.header-ekui { background: rgba(16, 185, 129, 0.15); color: var(--green); border-bottom: 2.5px solid var(--green); }
+    .pda-table th.sub-th {
+      background: rgba(0, 0, 0, 0.2);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 10px;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--glass-border);
+    }
+    body.light-theme .pda-table th.sub-th {
+      background: rgba(0, 0, 0, 0.03);
+    }
+    .pda-table td {
+      padding: 12px 14px;
+      text-align: center;
+      border-bottom: 1px solid var(--glass-border);
+    }
+    .pda-table td.trans-desc {
+      text-align: left;
+      font-weight: 500;
+      color: var(--text);
+    }
+    .pda-table tr.total-row {
+      background: rgba(255, 255, 255, 0.03);
+      font-weight: 700;
+    }
+    body.light-theme tr.total-row {
+      background: rgba(0, 0, 0, 0.02);
+    }
+    .pda-table tr.total-row td {
+      border-bottom: none;
+      border-top: 2px solid var(--glass-border);
+      color: var(--text);
+    }
+    .pda-del-btn {
+      background: none;
+      border: none;
+      color: var(--pink);
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .pda-balance-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1.5px solid rgba(16, 185, 129, 0.25);
+      border-radius: var(--radius-sm);
+      padding: 16px 24px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .pda-bal-label {
+      font-family: "Syne", sans-serif;
+      font-weight: 800;
+      font-size: 15px;
+      color: var(--green);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .pda-bal-val {
+      font-family: "Syne", sans-serif;
+      font-weight: 800;
+      font-size: 17px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
+  <!-- HEADER -->
+  <header>
+    <a href="index.html" class="logo">
+      <span class="logo-emoji">⚖️</span>
+      <span>Belajar Akuntansi</span>
+    </a>
+    <a href="index.html" class="nav-btn">
+      <span>← Kembali Ke Menu</span>
+    </a>
+  </header>
+
+  <!-- MAIN -->
+  <main>
+    <div class="hero-sec">
+      <h1>Kalkulator Keuangan & Pajak</h1>
+      <p>Alat hitung otomatis interaktif untuk menyimulasikan perhitungan pajak terutang, penyusutan aset, titik impas, dan persamaan dasar akuntansi.</p>
+    </div>
+
+    <!-- TABS -->
+    <div class="tabs-wrapper">
+      <button class="tab-btn active" onclick="switchTab(0, '#ff3d9a')" style="--c:#ff3d9a">🧾 PPh 21 TER</button>
+      <button class="tab-btn" onclick="switchTab(1, '#a855f7')" style="--c:#a855f7">🛍️ Kalkulator PPN</button>
+      <button class="tab-btn" onclick="switchTab(2, '#3b82f6')" style="--c:#3b82f6">📉 Depresiasi Aset</button>
+      <button class="tab-btn" onclick="switchTab(3, '#ff6b35')" style="--c:#ff6b35">🎯 Analisis BEP</button>
+      <button class="tab-btn" onclick="switchTab(4, '#10b981')" style="--c:#10b981">⚖️ Sandbox PDA</button>
+    </div>
+
+    <!-- 1. PPh 21 CALCULATOR -->
+    <div class="calc-container active" id="calc-pph" style="--c:#ff3d9a">
+      <div class="calc-header">
+        <div class="calc-icon">🧾</div>
+        <div class="calc-title-group">
+          <h2>Kalkulator Pajak Penghasilan (PPh Pasal 21)</h2>
+          <p>Simulasi perhitungan PPh 21 Karyawan menggunakan Tarif Efektif Rata-rata (TER) terbaru PP 58/2023.</p>
+        </div>
+      </div>
+      <div class="calc-grid">
+        <div class="input-panel">
+          <div class="input-group">
+            <label>Gaji Pokok & Tunjangan Bulanan (Rp)</label>
+            <input type="number" id="pph-gaji" placeholder="Contoh: 8500000" value="8500000">
+          </div>
+          <div class="input-group">
+            <label>Status PTKP (Penghasilan Tidak Kena Pajak)</label>
+            <select id="pph-ptkp">
+              <option value="TK0">TK/0 — Tidak Kawin, 0 Tanggungan (Rp54 Juta/Thn)</option>
+              <option value="TK1">TK/1 — Tidak Kawin, 1 Tanggungan (Rp58.5 Juta/Thn)</option>
+              <option value="TK2">TK/2 — Tidak Kawin, 2 Tanggungan (Rp63 Juta/Thn)</option>
+              <option value="TK3">TK/3 — Tidak Kawin, 3 Tanggungan (Rp67.5 Juta/Thn)</option>
+              <option value="K0">K/0 — Kawin, 0 Tanggungan (Rp58.5 Juta/Thn)</option>
+              <option value="K1">K/1 — Kawin, 1 Tanggungan (Rp63 Juta/Thn)</option>
+              <option value="K2">K/2 — Kawin, 2 Tanggungan (Rp67.5 Juta/Thn)</option>
+              <option value="K3">K/3 — Kawin, 3 Tanggungan (Rp72 Juta/Thn)</option>
+            </select>
+          </div>
+          <button class="action-btn" onclick="hitungPPh21()">Hitung PPh 21 →</button>
+        </div>
+        <div class="output-panel">
+          <div class="output-title">Hasil Perhitungan</div>
+          <div class="result-row">
+            <span class="result-label">Kategori TER Pajak</span>
+            <span class="result-val" id="pph-res-kat">-</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Persentase Tarif TER</span>
+            <span class="result-val" id="pph-res-tarif">0%</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Potongan PPh 21 per Bulan</span>
+            <span class="result-val highlight" id="pph-res-bulan">Rp0</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Estimasi PPh 21 Setahun</span>
+            <span class="result-val" id="pph-res-tahun">Rp0</span>
+          </div>
+          <div class="formula-alert">
+            <span class="formula-label">Catatan Aturan TER:</span>
+            * **Kategori A:** TK/0 (s.d 5.4jt 0%), TK/1 & K/0 (s.d 5.85jt 0%)<br>
+            * **Kategori B:** TK/2 & K/1 (s.d 6.3jt 0%), TK/3 & K/2 (s.d 6.75jt 0%)<br>
+            * **Kategori C:** K/3 (s.d 7.2jt 0%)<br>
+            Penghitungan di atas mengacu pada tarif bulanan PP 58/2023.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. PPN CALCULATOR -->
+    <div class="calc-container" id="calc-ppn" style="--c:#a855f7">
+      <div class="calc-header">
+        <div class="calc-icon">🛍️</div>
+        <div class="calc-title-group">
+          <h2>Kalkulator Pajak Pertambahan Nilai (PPN)</h2>
+          <p>Hitung nominal PPN terutang dari harga barang dengan opsi PPN Masukan/Keluaran atau Gross Up/Down.</p>
+        </div>
+      </div>
+      <div class="calc-grid">
+        <div class="input-panel">
+          <div class="input-group">
+            <label>Nominal Harga Transaksi (Rp)</label>
+            <input type="number" id="ppn-harga" placeholder="Contoh: 10000000" value="10000000">
+          </div>
+          <div class="input-group">
+            <label>Tarif PPN</label>
+            <div class="radio-group">
+              <div class="radio-btn">
+                <input type="radio" name="ppn-tarif" id="tarif-11" value="0.11" checked>
+                <label for="tarif-11" class="radio-label">PPN 11%</label>
+              </div>
+              <div class="radio-btn">
+                <input type="radio" name="ppn-tarif" id="tarif-12" value="0.12">
+                <label for="tarif-12" class="radio-label">PPN 12% (Baru)</label>
+              </div>
+            </div>
+          </div>
+          <div class="input-group">
+            <label>Kondisi Harga</label>
+            <div class="radio-group">
+              <div class="radio-btn">
+                <input type="radio" name="ppn-tipe" id="tipe-exclude" value="exclude" checked>
+                <label for="tipe-exclude" class="radio-label">Exclude PPN (Belum Termasuk Pajak)</label>
+              </div>
+              <div class="radio-btn">
+                <input type="radio" name="ppn-tipe" id="tipe-include" value="include">
+                <label for="tipe-include" class="radio-label">Include PPN (Sudah Termasuk Pajak)</label>
+              </div>
+            </div>
+          </div>
+          <button class="action-btn" onclick="hitungPPN()">Hitung PPN →</button>
+        </div>
+        <div class="output-panel">
+          <div class="output-title">Hasil Perhitungan PPN</div>
+          <div class="result-row">
+            <span class="result-label">Dasar Pengenaan Pajak (DPP)</span>
+            <span class="result-val" id="ppn-res-dpp">Rp0</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Nilai PPN Terutang</span>
+            <span class="result-val highlight" id="ppn-res-pajak">Rp0</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Total Harga Setelah Pajak</span>
+            <span class="result-val" id="ppn-res-total">Rp0</span>
+          </div>
+          <div class="formula-alert">
+            <span class="formula-label">Rumus PPN:</span>
+            * **Exclude:** PPN = Harga × Tarif &amp; Total = Harga + PPN<br>
+            * **Include:** DPP = Harga ÷ (1 + Tarif) &amp; PPN = DPP × Tarif.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. DEPRECIATION CALCULATOR -->
+    <div class="calc-container" id="calc-depresiasi" style="--c:#3b82f6">
+      <div class="calc-header">
+        <div class="calc-icon">📉</div>
+        <div class="calc-title-group">
+          <h2>Kalkulator Depresiasi & Penyusutan Aset</h2>
+          <p>Hitung beban penyusutan tahunan aktiva tetap berwujud dengan metode garis lurus atau saldo menurun.</p>
+        </div>
+      </div>
+      <div class="calc-grid">
+        <div class="input-panel">
+          <div class="input-group">
+            <label>Harga Perolehan Aset (Rp)</label>
+            <input type="number" id="dep-harga" placeholder="Contoh: 150000000" value="150000000">
+          </div>
+          <div class="input-group">
+            <label>Nilai Residu / Sisa Aset (Rp)</label>
+            <input type="number" id="dep-residu" placeholder="Contoh: 30000000" value="30000000">
+          </div>
+          <div class="input-group">
+            <label>Umur Ekonomis Manfaat Aset (Tahun)</label>
+            <input type="number" id="dep-umur" placeholder="Contoh: 8" value="8">
+          </div>
+          <div class="input-group">
+            <label>Metode Penyusutan</label>
+            <select id="dep-metode">
+              <option value="straight">Metode Garis Lurus (Straight Line)</option>
+              <option value="declining">Metode Saldo Menurun Ganda (Double Declining)</option>
+            </select>
+          </div>
+          <button class="action-btn" onclick="hitungPenyusutan()">Susun Tabel Penyusutan →</button>
+        </div>
+        <div class="output-panel">
+          <div class="output-title">Tabel Penyusutan Tahunan</div>
+          <div class="dep-table-container">
+            <table class="dep-table" id="dep-tabel-hasil">
+              <thead>
+                <tr>
+                  <th>Thn</th>
+                  <th>Beban (Rp)</th>
+                  <th>Akumulasi (Rp)</th>
+                  <th>Nilai Buku (Rp)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td colspan="4" style="text-align:center;">Masukkan input untuk melihat tabel</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="formula-alert">
+            <span class="formula-label">Rumus Beban Penyusutan:</span>
+            * **Garis Lurus:** (Harga Perolehan − Nilai Residu) ÷ Umur Ekonomis<br>
+            * **Saldo Menurun:** Nilai Buku Awal × (2 ÷ Umur Ekonomis)
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. BEP ANALYSIS -->
+    <div class="calc-container" id="calc-bep" style="--c:#ff6b35">
+      <div class="calc-header">
+        <div class="calc-icon">🎯</div>
+        <div class="calc-title-group">
+          <h2>Kalkulator Titik Impas (Break-Even Point)</h2>
+          <p>Menganalisis volume produksi minimum agar usaha tidak rugi (impas) dalam hitungan Unit maupun Rupiah.</p>
+        </div>
+      </div>
+      <div class="calc-grid">
+        <div class="input-panel">
+          <div class="input-group">
+            <label>Total Biaya Tetap / Fixed Cost (Rp)</label>
+            <input type="number" id="bep-fixed" placeholder="Contoh: 25000000" value="25000000">
+          </div>
+          <div class="input-group">
+            <label>Biaya Variabel per Unit / Variable Cost (Rp)</label>
+            <input type="number" id="bep-variable" placeholder="Contoh: 150000" value="150000">
+          </div>
+          <div class="input-group">
+            <label>Harga Jual per Unit / Price (Rp)</label>
+            <input type="number" id="bep-price" placeholder="Contoh: 250000" value="250000">
+          </div>
+          <button class="action-btn" onclick="hitungBEP()">Analisis BEP →</button>
+        </div>
+        <div class="output-panel">
+          <div class="output-title">Hasil Analisis BEP</div>
+          <div class="result-row">
+            <span class="result-label">Margin Kontribusi per Unit</span>
+            <span class="result-val" id="bep-res-margin">Rp0</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Titik Impas dalam Volume</span>
+            <span class="result-val highlight" id="bep-res-unit">0 Unit</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Titik Impas dalam Penjualan</span>
+            <span class="result-val highlight" id="bep-res-rp">Rp0</span>
+          </div>
+          <div class="formula-alert">
+            <span class="formula-label">Metodologi BEP:</span>
+            * **BEP Unit:** Biaya Tetap ÷ (Harga Jual − Biaya Variabel)<br>
+            * **BEP Rupiah:** Biaya Tetap ÷ (1 − (Biaya Variabel ÷ Harga Jual))
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. PDA SANDBOX -->
+    <div class="calc-container" id="calc-pda" style="--c:#10b981">
+      <div class="calc-header">
+        <div class="calc-icon">⚖️</div>
+        <div class="calc-title-group">
+          <h2>Sandbox Persamaan Dasar Akuntansi (PDA)</h2>
+          <p>Simulasi interaktif mencatat transaksi. Buktikan sendiri bahwa Aset = Liabilitas + Ekuitas selalu seimbang!</p>
+        </div>
+      </div>
+      <div class="pda-board">
+        <div class="pda-controls">
+          <input type="text" id="pda-trans" placeholder="Nama Transaksi (contoh: Setor Modal)" style="flex:2;">
+          <select id="pda-pos">
+            <option value="kas">Aset: Kas (Bertambah)</option>
+            <option value="kas_kurang">Aset: Kas (Berkurang)</option>
+            <option value="piutang">Aset: Piutang (Bertambah)</option>
+            <option value="piutang_kurang">Aset: Piutang (Berkurang)</option>
+            <option value="peralatan">Aset: Peralatan (Bertambah)</option>
+            <option value="utang">Liabilitas: Utang Usaha (Bertambah)</option>
+            <option value="utang_kurang">Liabilitas: Utang Usaha (Berkurang)</option>
+            <option value="modal">Ekuitas: Modal (Bertambah)</option>
+            <option value="modal_kurang">Ekuitas: Modal (Berkurang)</option>
+          </select>
+          <input type="number" id="pda-nominal" placeholder="Nominal (Rp)">
+          <button class="pda-add-btn" onclick="tambahTransaksiPDA()">+ Tambah Transaksi</button>
+        </div>
+
+        <div class="pda-table-container">
+          <table class="pda-table" id="pda-tabel">
+            <thead>
+              <tr>
+                <th rowspan="2" style="background:rgba(255,255,255,0.05);width:50px;">Aksi</th>
+                <th rowspan="2" style="background:rgba(255,255,255,0.05);text-align:left;min-width:180px;">Keterangan Transaksi</th>
+                <th colspan="3" class="header-aset">⚖️ ASET (Harta)</th>
+                <th class="header-liab">💳 LIABILITAS</th>
+                <th class="header-ekui">👑 EKUITAS</th>
+              </tr>
+              <tr>
+                <th class="sub-th">Kas</th>
+                <th class="sub-th">Piutang</th>
+                <th class="sub-th">Peralatan</th>
+                <th class="sub-th">Utang Usaha</th>
+                <th class="sub-th">Modal Pemilik</th>
+              </tr>
+            </thead>
+            <tbody id="pda-tbody">
+              <!-- Default Initial Balance -->
+              <tr>
+                <td>-</td>
+                <td class="trans-desc">Saldo Awal (Investasi Awal)</td>
+                <td style="color:var(--green)">+10.000.000</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td style="color:var(--green)">+10.000.000</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr class="total-row">
+                <td colspan="2" style="text-align:right;">SALDO TOTAL AKHIR:</td>
+                <td id="pda-tot-kas">Rp10.000.000</td>
+                <td id="pda-tot-piutang">Rp0</td>
+                <td id="pda-tot-peralatan">Rp0</td>
+                <td id="pda-tot-utang">Rp0</td>
+                <td id="pda-tot-modal">Rp10.000.000</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+
+        <div class="pda-balance-bar">
+          <div class="pda-bal-label">
+            <span>🔍 PEMBUKTIAN KESEIMBANGAN:</span>
+          </div>
+          <div class="pda-bal-val">
+            <span style="color:var(--orange);" id="pda-eval-aset">Rp10.000.000 (Aset)</span>
+            <span style="color:var(--text-muted);"> = </span>
+            <span style="color:var(--blue);" id="pda-eval-liab">Rp0 (Liabilitas)</span>
+            <span style="color:var(--text-muted);"> + </span>
+            <span style="color:var(--green);" id="pda-eval-ekui">Rp10.000.000 (Ekuitas)</span>
+          </div>
+          <div id="pda-bal-status" style="font-weight:800;color:var(--green)">✅ SEIMBANG (BALANCE)</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // THEME SETUP
+    if (localStorage.getItem("theme") === "light") {
+      document.body.classList.add("light-theme");
+    }
+
+    // SWITCH TABS
+    function switchTab(idx, color) {
+      document.querySelectorAll(".tab-btn").forEach((btn, i) => {
+        if(i === idx) {
+          btn.classList.add("active");
+        } else {
+          btn.classList.remove("active");
+        }
+      });
+      
+      document.querySelectorAll(".calc-container").forEach((cont, i) => {
+        if(i === idx) {
+          cont.classList.add("active");
+        } else {
+          cont.classList.remove("active");
+        }
+      });
+    }
+
+    // UTILITIES
+    function formatRupiah(num) {
+      return "Rp" + Math.round(num).toLocaleString("id-ID");
+    }
+
+    // 1. HITUNG PPh 21 TER PP 58/2023
+    function hitungPPh21() {
+      const gaji = parseFloat(document.getElementById("pph-gaji").value) || 0;
+      const ptkp = document.getElementById("pph-ptkp").value;
+
+      let kategori = "";
+      let tarif = 0;
+
+      // Determinasi Kategori PTKP
+      // Kategori A: TK/0, TK/1, K/0
+      // Kategori B: TK/2, TK/3, K/1, K/2
+      // Kategori C: K/3
+      if (ptkp === "TK0" || ptkp === "TK1" || ptkp === "K0") {
+        kategori = "Kategori A";
+        // Tarif TER Bulanan Kategori A
+        if (gaji <= 5400000) tarif = 0;
+        else if (gaji <= 5650000) tarif = 0.0025;
+        else if (gaji <= 5950000) tarif = 0.005;
+        else if (gaji <= 6300000) tarif = 0.0075;
+        else if (gaji <= 6750000) tarif = 0.01;
+        else if (gaji <= 7500000) tarif = 0.0125;
+        else if (gaji <= 8500000) tarif = 0.015;
+        else if (gaji <= 9600000) tarif = 0.02;
+        else if (gaji <= 10600000) tarif = 0.025;
+        else if (gaji <= 12200000) tarif = 0.03;
+        else if (gaji <= 13600000) tarif = 0.035;
+        else if (gaji <= 15100000) tarif = 0.04;
+        else if (gaji <= 18100000) tarif = 0.05;
+        else if (gaji <= 23100000) tarif = 0.06;
+        else if (gaji <= 30400000) tarif = 0.07;
+        else tarif = 0.09; // batas penyederhanaan kalkulator kuliah
+      } else if (ptkp === "TK2" || ptkp === "TK3" || ptkp === "K1" || ptkp === "K2") {
+        kategori = "Kategori B";
+        // Tarif TER Bulanan Kategori B
+        if (gaji <= 6200000) tarif = 0;
+        else if (gaji <= 6500000) tarif = 0.0025;
+        else if (gaji <= 6900000) tarif = 0.005;
+        else if (gaji <= 7300000) tarif = 0.0075;
+        else if (gaji <= 7800000) tarif = 0.01;
+        else if (gaji <= 8850000) tarif = 0.0125;
+        else if (gaji <= 9800000) tarif = 0.015;
+        else if (gaji <= 10900000) tarif = 0.02;
+        else if (gaji <= 11200000) tarif = 0.025;
+        else if (gaji <= 12600000) tarif = 0.03;
+        else if (gaji <= 14100000) tarif = 0.035;
+        else if (gaji <= 15550000) tarif = 0.04;
+        else if (gaji <= 19050000) tarif = 0.05;
+        else if (gaji <= 24300000) tarif = 0.06;
+        else if (gaji <= 31700000) tarif = 0.07;
+        else tarif = 0.09;
+      } else {
+        kategori = "Kategori C";
+        // Tarif TER Bulanan Kategori C
+        if (gaji <= 6600000) tarif = 0;
+        else if (gaji <= 6950000) tarif = 0.0025;
+        else if (gaji <= 7350000) tarif = 0.005;
+        else if (gaji <= 7800000) tarif = 0.0075;
+        else if (gaji <= 8350000) tarif = 0.01;
+        else if (gaji <= 9450000) tarif = 0.0125;
+        else if (gaji <= 10450000) tarif = 0.015;
+        else if (gaji <= 11350000) tarif = 0.02;
+        else if (gaji <= 12650000) tarif = 0.025;
+        else if (gaji <= 14050000) tarif = 0.03;
+        else if (gaji <= 15600000) tarif = 0.035;
+        else if (gaji <= 17050000) tarif = 0.04;
+        else if (gaji <= 20050000) tarif = 0.05;
+        else if (gaji <= 25200000) tarif = 0.06;
+        else if (gaji <= 32300000) tarif = 0.07;
+        else tarif = 0.09;
+      }
+
+      const pphBulan = gaji * tarif;
+      const pphTahun = pphBulan * 12;
+
+      document.getElementById("pph-res-kat").textContent = kategori + " (" + ptkp + ")";
+      document.getElementById("pph-res-tarif").textContent = (tarif * 100).toFixed(2) + "%";
+      document.getElementById("pph-res-bulan").textContent = formatRupiah(pphBulan);
+      document.getElementById("pph-res-tahun").textContent = formatRupiah(pphTahun);
+    }
+
+    // 2. HITUNG PPN (EXCLUDE / INCLUDE)
+    function hitungPPN() {
+      const harga = parseFloat(document.getElementById("ppn-harga").value) || 0;
+      const tarif = parseFloat(document.querySelector('input[name="ppn-tarif"]:checked').value);
+      const tipe = document.querySelector('input[name="ppn-tipe"]:checked').value;
+
+      let dpp = 0;
+      let ppn = 0;
+      let total = 0;
+
+      if (tipe === "exclude") {
+        dpp = harga;
+        ppn = harga * tarif;
+        total = dpp + ppn;
+      } else {
+        dpp = harga / (1 + tarif);
+        ppn = dpp * tarif;
+        total = harga;
+      }
+
+      document.getElementById("ppn-res-dpp").textContent = formatRupiah(dpp);
+      document.getElementById("ppn-res-pajak").textContent = formatRupiah(ppn);
+      document.getElementById("ppn-res-total").textContent = formatRupiah(total);
+    }
+
+    // 3. DEPRESIASI / PENYUSUTAN ASET
+    function hitungPenyusutan() {
+      const harga = parseFloat(document.getElementById("dep-harga").value) || 0;
+      const residu = parseFloat(document.getElementById("dep-residu").value) || 0;
+      const umur = parseInt(document.getElementById("dep-umur").value) || 1;
+      const metode = document.getElementById("dep-metode").value;
+
+      const tbody = document.getElementById("dep-tabel-hasil").querySelector("tbody");
+      tbody.innerHTML = "";
+
+      let akumulasiPenyusutan = 0;
+      let nilaiBuku = harga;
+
+      if (metode === "straight") {
+        const bebanTahunan = (harga - residu) / umur;
+        for (let i = 1; i <= umur; i++) {
+          akumulasiPenyusutan += bebanTahunan;
+          nilaiBuku -= bebanTahunan;
+          tbody.innerHTML += `
+            <tr>
+              <td>Thn ${i}</td>
+              <td>${formatRupiah(bebanTahunan)}</td>
+              <td>${formatRupiah(akumulasiPenyusutan)}</td>
+              <td>${formatRupiah(nilaiBuku)}</td>
+            </tr>
+          `;
+        }
+      } else {
+        const rate = 2 / umur; // Double declining rate
+        for (let i = 1; i <= umur; i++) {
+          let bebanTahunan = nilaiBuku * rate;
+          // Pastikan nilai buku akhir tidak di bawah nilai residu
+          if (nilaiBuku - bebanTahunan < residu) {
+            bebanTahunan = nilaiBuku - residu;
+          }
+          if (bebanTahunan < 0) bebanTahunan = 0;
+          akumulasiPenyusutan += bebanTahunan;
+          nilaiBuku -= bebanTahunan;
+          tbody.innerHTML += `
+            <tr>
+              <td>Thn ${i}</td>
+              <td>${formatRupiah(bebanTahunan)}</td>
+              <td>${formatRupiah(akumulasiPenyusutan)}</td>
+              <td>${formatRupiah(nilaiBuku)}</td>
+            </tr>
+          `;
+        }
+      }
+    }
+
+    // 4. HITUNG BREAK EVEN POINT (BEP)
+    function hitungBEP() {
+      const fixed = parseFloat(document.getElementById("bep-fixed").value) || 0;
+      const variable = parseFloat(document.getElementById("bep-variable").value) || 0;
+      const price = parseFloat(document.getElementById("bep-price").value) || 0;
+
+      const marginUnit = price - variable;
+      const bepUnit = marginUnit > 0 ? fixed / marginUnit : 0;
+      
+      const rasioKontribusi = price > 0 ? marginUnit / price : 0;
+      const bepRp = rasioKontribusi > 0 ? fixed / rasioKontribusi : 0;
+
+      document.getElementById("bep-res-margin").textContent = formatRupiah(marginUnit);
+      document.getElementById("bep-res-unit").textContent = Math.ceil(bepUnit).toLocaleString("id-ID") + " Unit";
+      document.getElementById("bep-res-rp").textContent = formatRupiah(bepRp);
+    }
+
+    // 5. SANDBOX PERSAMAAN DASAR AKUNTANSI (PDA)
+    let pdaTransactions = [
+      { Keterangan: "Saldo Awal (Investasi Awal)", kas: 10000000, piutang: 0, peralatan: 0, utang: 0, modal: 10000000 }
+    ];
+
+    function renderPDATable() {
+      const tbody = document.getElementById("pda-tbody");
+      tbody.innerHTML = "";
+
+      let totKas = 0, totPiutang = 0, totPeralatan = 0, totUtang = 0, totModal = 0;
+
+      pdaTransactions.forEach((t, index) => {
+        totKas += t.kas;
+        totPiutang += t.piutang;
+        totPeralatan += t.peralatan;
+        totUtang += t.utang;
+        totModal += t.modal;
+
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${index === 0 ? '-' : `<button class="pda-del-btn" onclick="hapusPDARow(${index})">🗑️</button>`}</td>
+          <td class="trans-desc">${t.Keterangan}</td>
+          <td style="${t.kas > 0 ? 'color:var(--green)' : t.kas < 0 ? 'color:var(--pink)' : ''}">${t.kas === 0 ? '0' : (t.kas > 0 ? '+' : '') + t.kas.toLocaleString("id-ID")}</td>
+          <td style="${t.piutang > 0 ? 'color:var(--green)' : t.piutang < 0 ? 'color:var(--pink)' : ''}">${t.piutang === 0 ? '0' : (t.piutang > 0 ? '+' : '') + t.piutang.toLocaleString("id-ID")}</td>
+          <td style="${t.peralatan > 0 ? 'color:var(--green)' : ''}">${t.peralatan === 0 ? '0' : '+' + t.peralatan.toLocaleString("id-ID")}</td>
+          <td style="${t.utang > 0 ? 'color:var(--green)' : t.utang < 0 ? 'color:var(--pink)' : ''}">${t.utang === 0 ? '0' : (t.utang > 0 ? '+' : '') + t.utang.toLocaleString("id-ID")}</td>
+          <td style="${t.modal > 0 ? 'color:var(--green)' : t.modal < 0 ? 'color:var(--pink)' : ''}">${t.modal === 0 ? '0' : (t.modal > 0 ? '+' : '') + t.modal.toLocaleString("id-ID")}</td>
+        `;
+        tbody.appendChild(row);
+      });
+
+      // Update total footer
+      document.getElementById("pda-tot-kas").textContent = formatRupiah(totKas);
+      document.getElementById("pda-tot-piutang").textContent = formatRupiah(totPiutang);
+      document.getElementById("pda-tot-peralatan").textContent = formatRupiah(totPeralatan);
+      document.getElementById("pda-tot-utang").textContent = formatRupiah(totUtang);
+      document.getElementById("pda-tot-modal").textContent = formatRupiah(totModal);
+
+      // Pembuktian Aset = Liabilitas + Ekuitas
+      const totalAset = totKas + totPiutang + totPeralatan;
+      const totalLiabilitasEkuitas = totUtang + totModal;
+
+      document.getElementById("pda-eval-aset").textContent = formatRupiah(totalAset) + " (Aset)";
+      document.getElementById("pda-eval-liab").textContent = formatRupiah(totUtang) + " (Liabilitas)";
+      document.getElementById("pda-eval-ekui").textContent = formatRupiah(totModal) + " (Ekuitas)";
+
+      const isBalanced = totalAset === totalLiabilitasEkuitas;
+      const statusEl = document.getElementById("pda-bal-status");
+      if (isBalanced) {
+        statusEl.textContent = "✅ SEIMBANG (BALANCE)";
+        statusEl.style.color = "var(--green)";
+      } else {
+        statusEl.textContent = "❌ TIDAK SEIMBANG";
+        statusEl.style.color = "var(--pink)";
+      }
+    }
+
+    function tambahTransaksiPDA() {
+      const desc = document.getElementById("pda-trans").value.trim();
+      const pos = document.getElementById("pda-pos").value;
+      const nominal = parseFloat(document.getElementById("pda-nominal").value) || 0;
+
+      if (!desc) {
+        alert("Harap masukkan nama keterangan transaksi!");
+        return;
+      }
+      if (nominal <= 0) {
+        alert("Harap masukkan nominal transaksi di atas 0!");
+        return;
+      }
+
+      let newT = { Keterangan: desc, kas: 0, piutang: 0, peralatan: 0, utang: 0, modal: 0 };
+
+      switch(pos) {
+        case "kas":
+          newT.kas = nominal;
+          break;
+        case "kas_kurang":
+          newT.kas = -nominal;
+          break;
+        case "piutang":
+          newT.piutang = nominal;
+          break;
+        case "piutang_kurang":
+          newT.piutang = -nominal;
+          break;
+        case "peralatan":
+          newT.peralatan = nominal;
+          break;
+        case "utang":
+          newT.utang = nominal;
+          break;
+        case "utang_kurang":
+          newT.utang = -nominal;
+          break;
+        case "modal":
+          newT.modal = nominal;
+          break;
+        case "modal_kurang":
+          newT.modal = -nominal;
+          break;
+      }
+
+      pdaTransactions.push(newT);
+      renderPDATable();
+
+      // Reset Form
+      document.getElementById("pda-trans").value = "";
+      document.getElementById("pda-nominal").value = "";
+    }
+
+    function hapusPDARow(idx) {
+      pdaTransactions.splice(idx, 1);
+      renderPDATable();
+    }
+
+    // RUN ON LOAD
+    hitungPPh21();
+    hitungPPN();
+    hitungPenyusutan();
+    hitungBEP();
+    renderPDATable();
+  </script>
+</body>
+</html>

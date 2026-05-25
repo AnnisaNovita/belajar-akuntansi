@@ -1,0 +1,81 @@
+{
+  "materi": [
+    {
+      "id": "persamaan-dasar-akuntansi",
+      "kategori": "akuntansi",
+      "emoji": "⚖️",
+      "badge": "Bab 1",
+      "judul": "Persamaan Dasar Akuntansi",
+      "deskripsi": "Pondasi semua ilmu akuntansi: Aset = Liabilitas + Ekuitas. Wajib paham ini dulu!",
+      "tags": ["Aset", "Liabilitas", "Ekuitas"],
+      "warna": "#ff6b35",
+      "url": "persamaan-dasar-akuntansi.html"
+    },
+    {
+      "id": "akun-akun-jenisnya",
+      "kategori": "akuntansi",
+      "emoji": "🗂️",
+      "badge": "Bab 2",
+      "judul": "Akun-Akun & Jenisnya",
+      "deskripsi": "Kenali semua jenis akun: riil vs nominal, aset sampai beban. Lengkap banget!",
+      "tags": ["Riil", "Nominal", "5 Kelompok"],
+      "warna": "#a855f7",
+      "url": "akun-akun-jenisnya.html"
+    },
+    {
+      "id": "debit-kredit",
+      "kategori": "akuntansi",
+      "emoji": "↔️",
+      "badge": "Bab 3",
+      "judul": "Debit & Kredit",
+      "deskripsi": "Cara kerja debit kredit untuk setiap jenis akun — pakai tabel T supaya gampang!",
+      "tags": ["Debit", "Kredit", "Tabel T"],
+      "warna": "#3b82f6",
+      "url": "debit-kredit.html"
+    },
+    {
+      "id": "siklus-akuntansi",
+      "kategori": "akuntansi",
+      "emoji": "🔄",
+      "badge": "Bab 4",
+      "judul": "Siklus Akuntansi Lengkap",
+      "deskripsi": "Dari transaksi → jurnal → buku besar → neraca saldo → laporan keuangan.",
+      "tags": ["Jurnal", "Buku Besar", "Laporan"],
+      "warna": "#10b981",
+      "url": "siklus-akuntansi.html"
+    },
+    {
+      "id": "dasar-perpajakan-indonesia",
+      "kategori": "pajak",
+      "emoji": "🧾",
+      "badge": "Pajak 1",
+      "judul": "Dasar Perpajakan Indonesia",
+      "deskripsi": "Kenali definisi pajak, jenis-jenis pajak pusat & daerah, serta asas pemungutan pajak di Indonesia.",
+      "tags": ["Pusat", "Daerah", "Asas"],
+      "warna": "#F59E0B",
+      "url": "dasar-perpajakan-indonesia.html"
+    }
+  ],
+  "latihan_excel": [
+    {
+      "id": "latihan-siklus-akuntansi-laundry",
+      "emoji": "🧺",
+      "judul": "Kasus Siklus Akuntansi Laundry Jaya",
+      "deskripsi": "Latihan transaksi lengkap jasa laundry mulai dari jurnal umum, buku besar, neraca saldo, penyesuaian, hingga laporan keuangan.",
+      "tags": ["Perusahaan Jasa", "Laundry", "Siklus Lengkap"],
+      "warna": "#ec4899",
+      "url": "latihan/latihan_siklus_akuntansi_laundry_jaya.xlsx",
+      "ukuran": "18 KB"
+    },
+    {
+      "id": "template-kertas-kerja-akuntansi",
+      "emoji": "📊",
+      "judul": "Template Kertas Kerja Akuntansi Otomatis",
+      "deskripsi": "Lembar kerja Excel kosong siap pakai dengan format tabel Jurnal Umum, Buku Besar Akun T, Neraca Saldo, dan Neraca Lajur 10 kolom.",
+      "tags": ["Template Kerja", "Tabel Akun T", "Neraca Lajur"],
+      "warna": "#06b6d4",
+      "url": "latihan/template_lembar_kerja_akuntansi.xlsx",
+      "ukuran": "25 KB"
+    }
+  ]
+}

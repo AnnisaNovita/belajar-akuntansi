@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Helper — Belajar Akuntansi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --glass-bg: rgba(30, 41, 59, 0.45);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --glass-highlight: rgba(255, 255, 255, 0.15);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      
+      --pink: #ff3d9a;
+      --purple: #a855f7;
+      --blue: #3b82f6;
+      --green: #10b981;
+      --yellow: #fbbf24;
+      --orange: #ff6b35;
+      
+      --radius: 24px;
+      --radius-sm: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "DM Sans", sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Glowing Blobs */
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(85px);
+      opacity: 0.22;
+      z-index: 0;
+    }
+    .blob-1 { width: 350px; height: 350px; background: var(--pink); top: -80px; right: -40px; }
+    .blob-2 { width: 300px; height: 300px; background: var(--purple); bottom: 10%; left: -60px; }
+
+    header {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 24px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 10;
+    }
+    .logo {
+      font-family: "Syne", sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      color: #fff;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-btn {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 99px;
+      font-family: "Syne", sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .nav-btn:hover { background: var(--glass-highlight); }
+
+    main {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px 24px 80px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .title-sec {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .title-sec h1 {
+      font-family: "Syne", sans-serif;
+      font-weight: 800;
+      font-size: 34px;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, var(--yellow), var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .title-sec p {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    /* Tabs */
+    .tab-nav {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+    .tab-btn {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      color: var(--text-muted);
+      padding: 12px 24px;
+      border-radius: 99px;
+      font-family: "Syne", sans-serif;
+      font-weight: 700;
+      font-size: 13.5px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+    .tab-btn.active {
+      color: #fff;
+      background: var(--c, var(--pink));
+      border-color: transparent;
+    }
+
+    .form-box {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      padding: 32px;
+      display: none;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.18);
+    }
+    .form-box.active { display: block; }
+
+    .sec-header {
+      font-family: "Syne", sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    @media (min-width: 700px) {
+      .form-grid { grid-template-columns: 1fr 1fr; }
+      .span-2 { grid-column: 1 / -1; }
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .field label {
+      font-family: "Syne", sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--text);
+    }
+    .field input, .field select, .field textarea {
+      background: rgba(0,0,0,0.25);
+      border: 1.5px solid var(--glass-border);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      color: #fff;
+      font-size: 14px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus {
+      border-color: var(--c, var(--pink));
+    }
+
+    .btn-gen {
+      background: var(--c, var(--pink));
+      color: #fff;
+      border: none;
+      font-family: "Syne", sans-serif;
+      font-weight: 800;
+      font-size: 14px;
+      padding: 14px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 10px;
+      transition: all 0.2s;
+    }
+    .btn-gen:hover { transform: translateY(-2px); opacity: 0.95; }
+
+    /* CODE OUTPUT */
+    .output-sec {
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .output-label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .output-label-row span {
+      font-family: "Syne", sans-serif;
+      font-weight: 800;
+      font-size: 13px;
+      color: var(--yellow);
+    }
+    .btn-copy {
+      background: rgba(251, 191, 36, 0.15);
+      border: 1px solid rgba(251, 191, 36, 0.3);
+      color: var(--yellow);
+      padding: 6px 14px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-copy:hover { background: rgba(251, 191, 36, 0.25); }
+
+    .code-area {
+      background: #090d16;
+      border: 1.5px solid var(--glass-border);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 13px;
+      color: #38bdf8;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-all;
+      min-height: 120px;
+    }
+    
+    .instruction-card {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      border-radius: var(--radius-sm);
+      padding: 16px 20px;
+      margin-top: 20px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #a7f3d0;
+    }
+    .instruction-card h4 {
+      font-family: "Syne", sans-serif;
+      font-weight: 800;
+      color: var(--green);
+      margin-bottom: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+
+  <header>
+    <a href="index.html" class="logo">
+      <span>🛠️ Admin Helper</span>
+    </a>
+    <a href="index.html" class="nav-btn">← Kembali</a>
+  </header>
+
+  <main>
+    <div class="title-sec">
+      <h1>Asisten Konten Belajar Akuntansi</h1>
+      <p>Buat dan tambahkan materi belajar baru, kuis, atau link unduhan berkas Excel tanpa merusak baris kode!</p>
+    </div>
+
+    <!-- TABS -->
+    <div class="tab-nav">
+      <button class="tab-btn active" onclick="switchTab(0, '#ff3d9a')" style="--c:#ff3d9a">📖 Tambah Materi</button>
+      <button class="tab-btn" onclick="switchTab(1, '#a855f7')" style="--c:#a855f7">📊 Tambah Excel Latihan</button>
+      <button class="tab-btn" onclick="switchTab(2, '#3b82f6')" style="--c:#3b82f6">🎯 Tambah Soal Kuis</button>
+    </div>
+
+    <!-- 1. FORM MATERI -->
+    <div class="form-box active" id="box-materi" style="--c:#ff3d9a">
+      <div class="sec-header">
+        <span>📖</span> Pembuat JSON Materi Baru
+      </div>
+      <div class="form-grid">
+        <div class="field">
+          <label>ID Materi (Hanya Huruf & Strip)</label>
+          <input type="text" id="m-id" placeholder="contoh: dasar-hukum-pajak" value="dasar-hukum-pajak">
+        </div>
+        <div class="field">
+          <label>Emoji Dekoratif</label>
+          <input type="text" id="m-emoji" placeholder="contoh: 🧾" value="🧾">
+        </div>
+        <div class="field">
+          <label>Pilih Kategori</label>
+          <select id="m-kategori">
+            <option value="akuntansi">Akuntansi</option>
+            <option value="pajak" selected>Perpajakan</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Teks Badge (Bab/Pajak ke-N)</label>
+          <input type="text" id="m-badge" placeholder="contoh: Pajak 2" value="Pajak 2">
+        </div>
+        <div class="field span-2">
+          <label>Judul Materi</label>
+          <input type="text" id="m-judul" placeholder="contoh: Pengantar Hukum Pajak" value="Pengantar Hukum Pajak">
+        </div>
+        <div class="field span-2">
+          <label>Deskripsi Singkat</label>
+          <input type="text" id="m-desc" placeholder="Tulis 1 kalimat penjelas..." value="Pelajari dasar-dasar hukum perpajakan, hak, serta kewajiban wajib pajak di Indonesia.">
+        </div>
+        <div class="field">
+          <label>Tag / Topik Utama (Pisahkan dengan koma)</label>
+          <input type="text" id="m-tags" placeholder="contoh: Hukum, Kepatuhan, Pajak" value="Hukum, Kepatuhan, Wajib Pajak">
+        </div>
+        <div class="field">
+          <label>Pilih Warna Kartu</label>
+          <select id="m-warna">
+            <option value="#ff6b35">Oranye (#ff6b35)</option>
+            <option value="#a855f7">Ungu (#a855f7)</option>
+            <option value="#3b82f6">Biru (#3b82f6)</option>
+            <option value="#10b981">Hijau (#10b981)</option>
+            <option value="#F59E0B" selected>Kuning Emas (#F59E0B)</option>
+            <option value="#ff3d9a">Pink (#ff3d9a)</option>
+          </select>
+        </div>
+        <div class="field span-2">
+          <label>Nama File HTML Materi (Url)</label>
+          <input type="text" id="m-url" placeholder="contoh: hukum-pajak.html" value="hukum-pajak.html">
+        </div>
+        <button class="btn-gen span-2" onclick="genMateri()">Hasilkan Kode JSON Materi →</button>
+      </div>
+    </div>
+
+    <!-- 2. FORM EXCEL LATIHAN -->
+    <div class="form-box" id="box-excel" style="--c:#a855f7">
+      <div class="sec-header">
+        <span>📊</span> Pembuat JSON Excel Unduhan Baru
+      </div>
+      <div class="form-grid">
+        <div class="field">
+          <label>ID Unduhan (Hanya Huruf & Strip)</label>
+          <input type="text" id="e-id" placeholder="contoh: latihan-jurnal-penyesuaian" value="latihan-jurnal-penyesuaian">
+        </div>
+        <div class="field">
+          <label>Emoji Dekoratif</label>
+          <input type="text" id="e-emoji" placeholder="contoh: 🧺" value="🧺">
+        </div>
+        <div class="field span-2">
+          <label>Judul Latihan Soal</label>
+          <input type="text" id="e-judul" placeholder="contoh: Kasus Jurnal Penyesuaian Salon Cantik" value="Kasus Jurnal Penyesuaian Salon Cantik">
+        </div>
+        <div class="field span-2">
+          <label>Deskripsi Kasus Soal</label>
+          <input type="text" id="e-desc" placeholder="Jelaskan mengenai siklus/transaksi di file ini..." value="Lembar kerja kosong & transaksi jurnal penyesuaian Salon Cantik untuk melatih ketelitian penyusutan dan beban akrual.">
+        </div>
+        <div class="field">
+          <label>Tag / Kata Kunci (Pisahkan dengan koma)</label>
+          <input type="text" id="e-tags" placeholder="contoh: Jurnal, Penyesuaian" value="Salon, Penyesuaian, Kertas Kerja">
+        </div>
+        <div class="field">
+          <label>Ukuran File (Contoh: 15 KB)</label>
+          <input type="text" id="e-size" placeholder="contoh: 18 KB" value="18 KB">
+        </div>
+        <div class="field">
+          <label>Warna Tema Kartu</label>
+          <select id="e-warna">
+            <option value="#ff6b35">Oranye</option>
+            <option value="#a855f7" selected>Ungu</option>
+            <option value="#3b82f6">Biru</option>
+            <option value="#10b981">Hijau</option>
+            <option value="#F59E0B">Kuning</option>
+            <option value="#ec4899">Pink</option>
+            <option value="#06b6d4">Cyan</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Link Berkas (Simpan di folder /latihan/)</label>
+          <input type="text" id="e-url" placeholder="contoh: latihan/jurnal_penyesuaian_salon.xlsx" value="latihan/jurnal_penyesuaian_salon.xlsx">
+        </div>
+        <button class="btn-gen span-2" onclick="genExcel()">Hasilkan Kode JSON Latihan Excel →</button>
+      </div>
+    </div>
+
+    <!-- 3. FORM SOAL KUIS -->
+    <div class="form-box" id="box-kuis" style="--c:#3b82f6">
+      <div class="sec-header">
+        <span>🎯</span> Pembuat JSON Soal Kuis Baru
+      </div>
+      <div class="form-grid">
+        <div class="field">
+          <label>Kategori Soal (Persis dengan yang sudah ada)</label>
+          <select id="q-kategori">
+            <option value="Pengantar Akuntansi">Pengantar Akuntansi</option>
+            <option value="Perusahaan Dagang">Perusahaan Dagang</option>
+            <option value="Jurnal Penyesuaian">Jurnal Penyesuaian</option>
+            <option value="Buku Besar">Buku Besar</option>
+            <option value="Laporan Keuangan">Laporan Keuangan</option>
+            <option value="Perpajakan">Perpajakan (Pajak)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Jawaban yang Benar</label>
+          <select id="q-correct">
+            <option value="0">Pilihan A</option>
+            <option value="1">Pilihan B</option>
+            <option value="2">Pilihan C</option>
+            <option value="3">Pilihan D</option>
+          </select>
+        </div>
+        <div class="field span-2">
+          <label>Pertanyaan Soal</label>
+          <textarea id="q-question" rows="3" placeholder="Tulis soal pertanyaan di sini..."></textarea>
+        </div>
+        <div class="field">
+          <label>Pilihan A</label>
+          <input type="text" id="q-p0" placeholder="Tulis jawaban pilihan A">
+        </div>
+        <div class="field">
+          <label>Pilihan B</label>
+          <input type="text" id="q-p1" placeholder="Tulis jawaban pilihan B">
+        </div>
+        <div class="field">
+          <label>Pilihan C</label>
+          <input type="text" id="q-p2" placeholder="Tulis jawaban pilihan C">
+        </div>
+        <div class="field">
+          <label>Pilihan D</label>
+          <input type="text" id="q-p3" placeholder="Tulis jawaban pilihan D">
+        </div>
+        <div class="field span-2">
+          <label>Teks Pembahasan Jawaban (Rinci & Jelas)</label>
+          <textarea id="q-explain" rows="3" placeholder="Jelaskan langkah pengerjaan atau rumus perhitungannya..."></textarea>
+        </div>
+        <button class="btn-gen span-2" onclick="genKuis()">Hasilkan Kode JSON Soal Kuis →</button>
+      </div>
+    </div>
+
+    <!-- CODE VIEW & INSTRUCTIONS -->
+    <div class="output-sec">
+      <div class="output-label-row">
+        <span>KODE JSON YANG DIHASILKAN (SIAP SALIN):</span>
+        <button class="btn-copy" onclick="copyCode()">Salin Kode 📋</button>
+      </div>
+      <div class="code-area" id="output-code">// Klik tombol "Hasilkan" di atas untuk memunculkan kode JSON di sini...</div>
+      
+      <div class="instruction-card" id="instruction-box">
+        <h4>💡 Cara Memasukkan Kode Ini Ke Proyek:</h4>
+        <ol style="margin-left: 20px; display: flex; flex-direction: column; gap: 8px; margin-top: 10px;">
+          <li>Klik tombol **"Hasilkan"** untuk memproses isian form di atas.</li>
+          <li>Klik tombol **"Salin Kode 📋"** untuk menyalin baris data JSON tersebut.</li>
+          <li>Buka file <strong style="color:#fff;">materi.json</strong> (atau <strong style="color:#fff;">kuis.json</strong> untuk kuis) menggunakan Visual Studio Code di komputer Kakak.</li>
+          <li>Tempel kode tersebut di baris paling bawah di dalam daftar yang sesuai. Jangan lupa tambahkan tanda koma (<code style="color:var(--pink)">,</code>) sebagai pembatas antardata!</li>
+          <li>Simpan, lalu lakukan **Push** atau upload perubahannya ke GitHub Kakak. Netlify akan otomatis memperbaruinya dalam hitungan detik!</li>
+        </ol>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // SWITCH TABS
+    let currentTab = 0;
+    function switchTab(idx, color) {
+      currentTab = idx;
+      document.body.style.setProperty('--c', color);
+      document.querySelectorAll(".tab-btn").forEach((btn, i) => {
+        if(i === idx) btn.classList.add("active");
+        else btn.classList.remove("active");
+      });
+      document.querySelectorAll(".form-box").forEach((box, i) => {
+        if(i === idx) box.classList.add("active");
+        else box.classList.remove("active");
+      });
+      
+      // Update instructions context
+      const instTitle = ["materi.json", "materi.json", "kuis.json"][idx];
+      const instTarget = ["daftar 'materi'", "daftar 'latihan_excel'", "seluruh daftar soal kuis"][idx];
+      document.getElementById("instruction-box").querySelector("strong").textContent = instTitle;
+      document.getElementById("instruction-box").querySelectorAll("li")[3].innerHTML = `Buka file <strong style="color:#fff;">${instTitle}</strong> menggunakan teks editor (VS Code) di komputer Kakak.`;
+      document.getElementById("instruction-box").querySelectorAll("li")[4].innerHTML = `Tempel kode tersebut ke dalam ${instTarget}. Pastikan tanda koma pembatas (<code style="color:var(--pink)">,</code>) terpasang dengan benar di antara baris objek!`;
+    }
+
+    // GENERATE MATERI
+    function genMateri() {
+      const id = document.getElementById("m-id").value.trim();
+      const emoji = document.getElementById("m-emoji").value.trim();
+      const kategori = document.getElementById("m-kategori").value;
+      const badge = document.getElementById("m-badge").value.trim();
+      const judul = document.getElementById("m-judul").value.trim();
+      const desc = document.getElementById("m-desc").value.trim();
+      const tags = document.getElementById("m-tags").value.split(",").map(t => t.trim()).filter(t => t.length > 0);
+      const warna = document.getElementById("m-warna").value;
+      const url = document.getElementById("m-url").value.trim();
+
+      const obj = { id, kategori, emoji, badge, judul, "deskripsi": desc, tags, "warna": warna, url };
+      document.getElementById("output-code").textContent = JSON.stringify(obj, null, 2) + ",";
+    }
+
+    // GENERATE EXCEL DOWNLOAD
+    function genExcel() {
+      const id = document.getElementById("e-id").value.trim();
+      const emoji = document.getElementById("e-emoji").value.trim();
+      const judul = document.getElementById("e-judul").value.trim();
+      const desc = document.getElementById("e-desc").value.trim();
+      const tags = document.getElementById("e-tags").value.split(",").map(t => t.trim()).filter(t => t.length > 0);
+      const size = document.getElementById("e-size").value.trim();
+      const warna = document.getElementById("e-warna").value;
+      const url = document.getElementById("e-url").value.trim();
+
+      const obj = { id, emoji, judul, "deskripsi": desc, tags, "warna": warna, url, "ukuran": size };
+      document.getElementById("output-code").textContent = JSON.stringify(obj, null, 2) + ",";
+    }
+
+    // GENERATE QUIZ
+    function genKuis() {
+      const kategori = document.getElementById("q-kategori").value;
+      const j = parseInt(document.getElementById("q-correct").value);
+      const question = document.getElementById("q-question").value.trim();
+      const p0 = document.getElementById("q-p0").value.trim();
+      const p1 = document.getElementById("q-p1").value.trim();
+      const p2 = document.getElementById("q-p2").value.trim();
+      const p3 = document.getElementById("q-p3").value.trim();
+      const explain = document.getElementById("q-explain").value.trim();
+
+      if (!question || !p0 || !p1 || !p2 || !p3 || !explain) {
+        alert("Semua kolom pertanyaan, pilihan A-D, dan pembahasan kuis wajib diisi!");
+        return;
+      }
+
+      const obj = {
+        "k": kategori,
+        "s": question,
+        "p": [p0, p1, p2, p3],
+        "j": j,
+        "b": explain
+      };
+      document.getElementById("output-code").textContent = JSON.stringify(obj, null, 2) + ",";
+    }
+
+    // COPY CODE
+    function copyCode() {
+      const code = document.getElementById("output-code").textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        alert("Berhasil menyalin kode JSON! Silakan buka file database proyek dan tempelkan.");
+      }).catch(err => {
+        alert("Gagal menyalin otomatis. Silakan blok tulisan kode di atas dan salin manual.");
+      });
+    }
+  </script>
+</body>
+</html>

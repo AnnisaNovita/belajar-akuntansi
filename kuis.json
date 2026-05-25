@@ -1,0 +1,602 @@
+[
+  {
+    "k": "Pengantar Akuntansi",
+    "s": "Akuntansi didefinisikan sebagai proses…",
+    "p": [
+      "Mencatat, mengklasifikasikan, dan melaporkan transaksi keuangan",
+      "Mengelola uang perusahaan agar tidak rugi",
+      "Membuat anggaran dan rencana keuangan",
+      "Menghitung pajak yang harus dibayar"
+    ],
+    "j": 0,
+    "b": "Akuntansi adalah proses mengidentifikasi, mencatat, mengklasifikasikan, meringkas, dan melaporkan transaksi keuangan untuk pengambilan keputusan."
+  },
+  {
+    "k": "Pengantar Akuntansi",
+    "s": "Konsep 'Going Concern' dalam akuntansi berarti…",
+    "p": [
+      "Perusahaan akan terus beroperasi dalam jangka panjang",
+      "Semua transaksi harus dicatat tepat waktu",
+      "Laporan keuangan harus dibuat setiap bulan",
+      "Aset harus dinilai berdasarkan harga pasar"
+    ],
+    "j": 0,
+    "b": "Going Concern berasumsi perusahaan akan terus beroperasi jangka panjang dan tidak akan dilikuidasi dalam waktu dekat."
+  },
+  {
+    "k": "Pengantar Akuntansi",
+    "s": "Manakah yang merupakan akun ASET TETAP?",
+    "p": [
+      "Perlengkapan Toko",
+      "Persediaan Barang",
+      "Kendaraan",
+      "Piutang Usaha"
+    ],
+    "j": 2,
+    "b": "Kendaraan adalah aset tetap karena digunakan lebih dari satu periode. Perlengkapan, Persediaan, dan Piutang adalah aset lancar."
+  },
+  {
+    "k": "Pengantar Akuntansi",
+    "s": "Jika Aset = Rp200jt dan Liabilitas = Rp75jt, maka Ekuitas adalah…",
+    "p": [
+      "Rp275.000.000",
+      "Rp125.000.000",
+      "Rp75.000.000",
+      "Rp200.000.000"
+    ],
+    "j": 1,
+    "b": "Ekuitas = Aset − Liabilitas = Rp200jt − Rp75jt = Rp125jt."
+  },
+  {
+    "k": "Pengantar Akuntansi",
+    "s": "Prinsip yang menyatakan pendapatan diakui saat diperoleh (bukan saat kas diterima) disebut…",
+    "p": [
+      "Cash Basis",
+      "Accrual Basis",
+      "Cost Principle",
+      "Matching Principle"
+    ],
+    "j": 1,
+    "b": "Accrual Basis mengakui pendapatan saat diperoleh dan beban saat terjadi, tanpa memandang kapan kas diterima/dibayar."
+  },
+  {
+    "k": "Pengantar Akuntansi",
+    "s": "Akun 'Akumulasi Penyusutan' termasuk jenis akun…",
+    "p": [
+      "Aset Tetap",
+      "Beban",
+      "Contra Asset (pengurang aset)",
+      "Liabilitas"
+    ],
+    "j": 2,
+    "b": "Akumulasi Penyusutan adalah contra-asset — mengurangi nilai aset tetap. Saldo normalnya Kredit, berlawanan dengan aset tetap."
+  },
+  {
+    "k": "Pengantar Akuntansi",
+    "s": "Membeli perlengkapan kantor Rp800.000 secara kredit. Jurnal yang benar adalah…",
+    "p": [
+      "D: Kas 800rb | K: Perlengkapan 800rb",
+      "D: Beban Perlengkapan 800rb | K: Utang 800rb",
+      "D: Perlengkapan 800rb | K: Utang Usaha 800rb",
+      "D: Perlengkapan 800rb | K: Kas 800rb"
+    ],
+    "j": 2,
+    "b": "Beli perlengkapan kredit → Perlengkapan bertambah (D), Utang Usaha bertambah (K). Belum keluar kas."
+  },
+  {
+    "k": "Pengantar Akuntansi",
+    "s": "Apa yang dimaksud dengan Neraca Saldo (Trial Balance)?",
+    "p": [
+      "Laporan posisi keuangan (aset, utang, modal)",
+      "Daftar semua akun beserta saldonya untuk cek keseimbangan D=K",
+      "Laporan laba rugi ringkas",
+      "Rekap semua transaksi selama satu periode"
+    ],
+    "j": 1,
+    "b": "Neraca Saldo adalah daftar semua akun buku besar beserta saldonya untuk memverifikasi total Debet = total Kredit."
+  },
+  {
+    "k": "Perusahaan Dagang",
+    "s": "Beban Angkut Pembelian dengan syarat FOB Shipping Point ditanggung oleh…",
+    "p": [
+      "Penjual",
+      "Pembeli",
+      "Ekspedisi",
+      "Dibagi dua"
+    ],
+    "j": 1,
+    "b": "FOB Shipping Point = ongkos angkut ditanggung PEMBELI sejak barang meninggalkan gudang penjual."
+  },
+  {
+    "k": "Perusahaan Dagang",
+    "s": "Syarat '3/7, n/30' artinya…",
+    "p": [
+      "Diskon 7% jika bayar dalam 3 hari, jatuh tempo 30 hari",
+      "Diskon 3% jika bayar dalam 7 hari, jatuh tempo 30 hari",
+      "Diskon 3% jika bayar dalam 30 hari, jatuh tempo 7 hari",
+      "Denda 3% jika bayar lewat 7 hari"
+    ],
+    "j": 1,
+    "b": "3/7 = diskon 3% jika bayar dalam 7 hari. n/30 = jatuh tempo 30 hari tanpa diskon."
+  },
+  {
+    "k": "Perusahaan Dagang",
+    "s": "Penjualan bersih dihitung dengan rumus…",
+    "p": [
+      "Penjualan + Retur + Diskon",
+      "Penjualan − Retur Penjualan − Diskon Penjualan",
+      "Penjualan − HPP",
+      "Penjualan − Beban Operasional"
+    ],
+    "j": 1,
+    "b": "Penjualan Bersih = Penjualan − Retur Penjualan − Diskon Penjualan."
+  },
+  {
+    "k": "Perusahaan Dagang",
+    "s": "Membeli barang Rp50jt + PPN 11% secara kredit. Berapa Utang Usaha yang dicatat?",
+    "p": [
+      "Rp50.000.000",
+      "Rp55.000.000",
+      "Rp55.500.000",
+      "Rp50.550.000"
+    ],
+    "j": 2,
+    "b": "PPN = 11% × 50jt = 5,5jt. Total utang = 50jt + 5,5jt = Rp55.500.000."
+  },
+  {
+    "k": "Perusahaan Dagang",
+    "s": "Laba Kotor perusahaan dagang dihitung dari…",
+    "p": [
+      "Penjualan Bersih − Semua Beban",
+      "Penjualan Bersih − HPP",
+      "Penjualan − Beban Operasional",
+      "Pendapatan − Pajak"
+    ],
+    "j": 1,
+    "b": "Laba Kotor = Penjualan Bersih − HPP. Setelah itu dikurangi beban operasional untuk dapat Laba Bersih."
+  },
+  {
+    "k": "Perusahaan Dagang",
+    "s": "Diskon penjualan dalam laporan laba rugi posisinya…",
+    "p": [
+      "Ditambahkan ke penjualan",
+      "Dikurangkan dari penjualan",
+      "Masuk ke beban operasional",
+      "Masuk ke HPP"
+    ],
+    "j": 1,
+    "b": "Diskon Penjualan mengurangi pendapatan: Penjualan − Retur − Diskon = Penjualan Bersih."
+  },
+  {
+    "k": "Jurnal Penyesuaian",
+    "s": "Perlengkapan awal Rp5jt, dibeli lagi Rp2jt, sisa akhir Rp3,5jt. Beban perlengkapan adalah…",
+    "p": [
+      "Rp2.000.000",
+      "Rp3.500.000",
+      "Rp3.000.000",
+      "Rp5.000.000"
+    ],
+    "j": 1,
+    "b": "Beban = (5jt + 2jt) − 3,5jt = Rp3.500.000. Ini yang terpakai selama periode."
+  },
+  {
+    "k": "Jurnal Penyesuaian",
+    "s": "Kendaraan Rp120jt, residu Rp20jt, umur 8 tahun. Penyusutan per bulan adalah…",
+    "p": [
+      "Rp833.333",
+      "Rp1.041.667",
+      "Rp1.250.000",
+      "Rp1.000.000"
+    ],
+    "j": 1,
+    "b": "(120jt − 20jt) ÷ 8 tahun ÷ 12 bulan = 100jt ÷ 96 = Rp1.041.667 per bulan."
+  },
+  {
+    "k": "Jurnal Penyesuaian",
+    "s": "Pendapatan diterima di muka Rp6jt untuk 3 bulan. Setelah 1 bulan, jurnal penyesuaiannya…",
+    "p": [
+      "D: Pendapatan Diterima Dimuka 2jt | K: Pendapatan 2jt",
+      "D: Pendapatan 2jt | K: Kas 2jt",
+      "D: Kas 2jt | K: Pendapatan 2jt",
+      "D: Pendapatan Diterima Dimuka 6jt | K: Pendapatan 6jt"
+    ],
+    "j": 0,
+    "b": "6jt ÷ 3 bulan = 2jt per bulan. D: Pendapatan Diterima Dimuka 2jt | K: Pendapatan 2jt."
+  },
+  {
+    "k": "Jurnal Penyesuaian",
+    "s": "Nilai buku aset tetap dihitung dengan…",
+    "p": [
+      "Harga Perolehan + Akumulasi Penyusutan",
+      "Harga Perolehan − Akumulasi Penyusutan",
+      "Harga Pasar − Beban Penyusutan",
+      "Harga Perolehan × Tarif Penyusutan"
+    ],
+    "j": 1,
+    "b": "Nilai Buku = Harga Perolehan − Akumulasi Penyusutan. Makin lama dipakai, nilai buku makin kecil."
+  },
+  {
+    "k": "Jurnal Penyesuaian",
+    "s": "Jurnal penyesuaian untuk sewa dibayar di muka yang sudah jatuh tempo adalah…",
+    "p": [
+      "D: Sewa Dibayar Dimuka | K: Kas",
+      "D: Beban Sewa | K: Sewa Dibayar Dimuka",
+      "D: Beban Sewa | K: Kas",
+      "D: Sewa Dibayar Dimuka | K: Beban Sewa"
+    ],
+    "j": 1,
+    "b": "Bagian yang sudah jatuh tempo jadi beban: D: Beban Sewa | K: Sewa Dibayar Dimuka."
+  },
+  {
+    "k": "Buku Besar",
+    "s": "Fungsi utama buku besar (ledger) adalah…",
+    "p": [
+      "Mencatat transaksi secara kronologis",
+      "Mengelompokkan transaksi per akun",
+      "Membuat laporan keuangan",
+      "Menghitung pajak perusahaan"
+    ],
+    "j": 1,
+    "b": "Buku Besar mengelompokkan transaksi per akun. Jurnal = kronologis, Buku Besar = per akun."
+  },
+  {
+    "k": "Buku Besar",
+    "s": "Saldo Kas: awal Rp50jt, total debet Rp30jt, total kredit Rp45jt. Saldo akhir kas adalah…",
+    "p": [
+      "Rp35.000.000",
+      "Rp65.000.000",
+      "Rp25.000.000",
+      "Rp45.000.000"
+    ],
+    "j": 0,
+    "b": "Kas saldo normal Debet. Saldo akhir = 50jt + 30jt − 45jt = Rp35.000.000."
+  },
+  {
+    "k": "Buku Besar",
+    "s": "Proses memindahkan data dari jurnal ke buku besar disebut…",
+    "p": [
+      "Journalizing",
+      "Posting",
+      "Balancing",
+      "Closing"
+    ],
+    "j": 1,
+    "b": "Posting = proses memindahkan catatan jurnal ke akun-akun di buku besar."
+  },
+  {
+    "k": "Laporan Keuangan",
+    "s": "Modal akhir dihitung dengan…",
+    "p": [
+      "Modal Awal + Laba + Prive",
+      "Modal Awal + Setoran Modal + Laba Bersih − Prive",
+      "Modal Awal − Laba − Prive",
+      "Modal Awal + Pendapatan − Beban"
+    ],
+    "j": 1,
+    "b": "Modal Akhir = Modal Awal + Setoran Modal + Laba Bersih − Prive."
+  },
+  {
+    "k": "Laporan Keuangan",
+    "s": "Dalam neraca, aset disajikan berdasarkan urutan…",
+    "p": [
+      "Nilai terbesar ke terkecil",
+      "Abjad nama akun",
+      "Tingkat likuiditas (paling mudah dicairkan lebih dulu)",
+      "Tanggal perolehan"
+    ],
+    "j": 2,
+    "b": "Aset disusun dari paling likuid: Kas → Piutang → Persediaan → Peralatan → dst."
+  },
+  {
+    "k": "Laporan Keuangan",
+    "s": "Prive dalam laporan keuangan berpengaruh pada…",
+    "p": [
+      "Mengurangi pendapatan di L/R",
+      "Menambah beban di L/R",
+      "Mengurangi modal di Laporan Perubahan Modal",
+      "Menambah utang di Neraca"
+    ],
+    "j": 2,
+    "b": "Prive bukan beban perusahaan. Prive langsung mengurangi modal di Laporan Perubahan Modal."
+  },
+  {
+    "k": "Pengantar Akuntansi",
+    "s": "Manakah yang BUKAN karakteristik informasi akuntansi yang berkualitas?",
+    "p": [
+      "Relevan",
+      "Dapat diandalkan (Reliable)",
+      "Menguntungkan pemilik",
+      "Dapat dibandingkan (Comparable)"
+    ],
+    "j": 2,
+    "b": "Karakteristik kualitatif: Relevan, Reliable, Comparable, Konsisten. 'Menguntungkan pemilik' bukan — akuntansi harus netral dan objektif."
+  },
+  {
+    "k": "Pengantar Akuntansi",
+    "s": "Transaksi 'Pemilik menyetor modal tunai Rp50jt' dicatat sebagai…",
+    "p": [
+      "D: Modal 50jt | K: Kas 50jt",
+      "D: Kas 50jt | K: Modal 50jt",
+      "D: Kas 50jt | K: Utang 50jt",
+      "D: Modal 50jt | K: Utang 50jt"
+    ],
+    "j": 1,
+    "b": "Pemilik setor modal → Kas perusahaan bertambah (D: Kas), Modal bertambah (K: Modal)."
+  },
+  {
+    "k": "Pengantar Akuntansi",
+    "s": "Perbedaan utama perusahaan jasa, dagang, dan manufaktur adalah…",
+    "p": [
+      "Besarnya modal yang digunakan",
+      "Ada tidaknya persediaan dan proses produksi",
+      "Jumlah karyawan yang dimiliki",
+      "Cara membayar pajak"
+    ],
+    "j": 1,
+    "b": "Jasa: tidak ada persediaan. Dagang: beli & jual barang jadi. Manufaktur: ubah bahan baku jadi barang jadi."
+  },
+  {
+    "k": "Pengantar Akuntansi",
+    "s": "Manakah pernyataan yang BENAR tentang akun Prive?",
+    "p": [
+      "Prive adalah beban perusahaan yang mengurangi laba",
+      "Prive adalah pengambilan pribadi pemilik yang mengurangi modal",
+      "Prive masuk ke laporan laba rugi sebagai beban",
+      "Prive menambah modal pemilik"
+    ],
+    "j": 1,
+    "b": "Prive = pengambilan pribadi pemilik. BUKAN beban, tidak masuk L/R, tapi mengurangi modal."
+  },
+  {
+    "k": "Pengantar Akuntansi",
+    "s": "Jurnal penutup dibuat untuk…",
+    "p": [
+      "Memperbaiki kesalahan jurnal sebelumnya",
+      "Menutup akun nominal agar saldonya nol di awal periode baru",
+      "Menutup akun riil di akhir tahun",
+      "Membuat neraca saldo awal"
+    ],
+    "j": 1,
+    "b": "Jurnal penutup menutup akun nominal (pendapatan, beban, prive) agar saldonya nol untuk periode berikutnya."
+  },
+  {
+    "k": "Perusahaan Dagang",
+    "s": "CV Maju membeli barang Rp20jt syarat 2/10, n/30. Membayar hari ke-8. Berapa kas yang dikeluarkan?",
+    "p": [
+      "Rp19.600.000",
+      "Rp20.000.000",
+      "Rp19.200.000",
+      "Rp20.400.000"
+    ],
+    "j": 0,
+    "b": "Bayar dalam 10 hari → dapat diskon 2%. Diskon = 2% × 20jt = 400rb. Kas = 20jt − 400rb = Rp19.600.000."
+  },
+  {
+    "k": "Perusahaan Dagang",
+    "s": "PPN Masukan adalah…",
+    "p": [
+      "PPN yang dipungut saat kita menjual barang",
+      "PPN yang kita bayar saat membeli barang dari supplier",
+      "PPN yang disetor ke kas negara",
+      "PPN atas jasa yang diterima"
+    ],
+    "j": 1,
+    "b": "PPN Masukan = pajak yang dibayar saat MEMBELI. PPN Keluaran = dipungut saat MENJUAL. Setor ke negara = Keluaran − Masukan."
+  },
+  {
+    "k": "Perusahaan Dagang",
+    "s": "Persediaan awal Rp80jt, pembelian bersih Rp120jt, persediaan akhir Rp50jt. HPP adalah…",
+    "p": [
+      "Rp150.000.000",
+      "Rp170.000.000",
+      "Rp200.000.000",
+      "Rp130.000.000"
+    ],
+    "j": 0,
+    "b": "HPP = Persediaan Awal + Pembelian Bersih − Persediaan Akhir = 80 + 120 − 50 = Rp150jt."
+  },
+  {
+    "k": "Perusahaan Dagang",
+    "s": "Manakah yang MENAMBAH nilai pembelian bersih?",
+    "p": [
+      "Diskon Pembelian",
+      "Retur Pembelian",
+      "Beban Angkut Pembelian",
+      "Potongan Harga"
+    ],
+    "j": 2,
+    "b": "Pembelian Bersih = Pembelian + Beban Angkut − Retur − Diskon. Hanya Beban Angkut yang menambah."
+  },
+  {
+    "k": "Perusahaan Dagang",
+    "s": "Menjual barang Rp40jt + PPN 11% kredit. Total piutang yang dicatat adalah…",
+    "p": [
+      "Rp40.000.000",
+      "Rp44.000.000",
+      "Rp44.400.000",
+      "Rp65.000.000"
+    ],
+    "j": 2,
+    "b": "PPN = 11% × 40jt = 4,4jt. Piutang = 40jt + 4,4jt = Rp44.400.000."
+  },
+  {
+    "k": "Perusahaan Dagang",
+    "s": "Retur penjualan kredit Rp3jt + PPN 11%. Jurnal yang benar adalah…",
+    "p": [
+      "D: Retur Penjualan 3jt & PPN Keluaran 330rb | K: Piutang 3.330.000",
+      "D: Kas 3.330.000 | K: Retur Penjualan 3jt & PPN 330rb",
+      "D: Piutang 3.330.000 | K: Retur Penjualan 3.330.000",
+      "D: Retur Penjualan 3jt | K: Piutang 3jt"
+    ],
+    "j": 0,
+    "b": "Retur penjualan kredit: D: Retur Penjualan + D: PPN Keluaran | K: Piutang Usaha (total termasuk PPN)."
+  },
+  {
+    "k": "Jurnal Penyesuaian",
+    "s": "Iklan dibayar 1 Oktober Rp12jt untuk 6 bulan. Penyesuaian 31 Desember adalah…",
+    "p": [
+      "D: Beban Iklan 6jt | K: Iklan Dibayar Dimuka 6jt",
+      "D: Beban Iklan 12jt | K: Iklan Dibayar Dimuka 12jt",
+      "D: Beban Iklan 2jt | K: Iklan Dibayar Dimuka 2jt",
+      "D: Iklan Dibayar Dimuka 6jt | K: Beban Iklan 6jt"
+    ],
+    "j": 0,
+    "b": "12jt ÷ 6 = 2jt/bln. Okt−Des = 3 bulan terpakai = 3 × 2jt = 6jt. D: Beban Iklan 6jt | K: Iklan Dibayar Dimuka 6jt."
+  },
+  {
+    "k": "Jurnal Penyesuaian",
+    "s": "Peralatan dibeli 1 Juli Rp24jt, umur 4 tahun, residu Rp0. Nilai buku per 31 Desember adalah…",
+    "p": [
+      "Rp21.000.000",
+      "Rp18.000.000",
+      "Rp22.500.000",
+      "Rp20.000.000"
+    ],
+    "j": 0,
+    "b": "Penyusutan/bln = 24jt ÷ 4 ÷ 12 = 500rb. Juli−Des = 6 bln × 500rb = 3jt. Nilai buku = 24jt − 3jt = Rp21jt."
+  },
+  {
+    "k": "Jurnal Penyesuaian",
+    "s": "Manakah yang TIDAK memerlukan jurnal penyesuaian?",
+    "p": [
+      "Beban gaji yang belum dibayar",
+      "Penyusutan aset tetap",
+      "Pembayaran utang usaha",
+      "Sewa dibayar di muka yang sudah jatuh tempo"
+    ],
+    "j": 2,
+    "b": "Pembayaran utang usaha sudah dicatat saat terjadi. Penyesuaian hanya untuk akrual, deferred, dan penyusutan."
+  },
+  {
+    "k": "Jurnal Penyesuaian",
+    "s": "Beban bunga akrual Rp500rb yang belum dicatat. Jurnal penyesuaiannya…",
+    "p": [
+      "D: Kas 500rb | K: Beban Bunga 500rb",
+      "D: Beban Bunga 500rb | K: Utang Bunga 500rb",
+      "D: Utang Bunga 500rb | K: Beban Bunga 500rb",
+      "D: Beban Bunga 500rb | K: Kas 500rb"
+    ],
+    "j": 1,
+    "b": "Akrual beban: biaya terjadi tapi belum dibayar. D: Beban Bunga | K: Utang Bunga."
+  },
+  {
+    "k": "Buku Besar",
+    "s": "Akun Utang Usaha saldo kredit Rp15jt. Ada D: Rp10jt dan K: Rp8jt. Saldo akhir…",
+    "p": [
+      "Rp13.000.000 (K)",
+      "Rp17.000.000 (K)",
+      "Rp13.000.000 (D)",
+      "Rp3.000.000 (K)"
+    ],
+    "j": 0,
+    "b": "Utang Usaha saldo normal Kredit. Saldo akhir = 15jt (K) + 8jt (K) − 10jt (D) = Rp13jt (K)."
+  },
+  {
+    "k": "Buku Besar",
+    "s": "Manakah urutan siklus akuntansi yang benar?",
+    "p": [
+      "Buku Besar → Jurnal → Neraca Saldo → Lap. Keuangan",
+      "Jurnal → Buku Besar → Neraca Saldo → Lap. Keuangan → Jurnal Penutup",
+      "Neraca Saldo → Jurnal → Buku Besar → Lap. Keuangan",
+      "Jurnal → Lap. Keuangan → Buku Besar → Neraca Saldo"
+    ],
+    "j": 1,
+    "b": "Siklus: Transaksi → Jurnal → Buku Besar → Neraca Saldo → Jurnal Penyesuaian → Neraca Saldo Disesuaikan → Lap. Keuangan → Jurnal Penutup."
+  },
+  {
+    "k": "Laporan Keuangan",
+    "s": "Menerima pelunasan piutang dari pelanggan masuk ke aktivitas apa dalam laporan arus kas?",
+    "p": [
+      "Investasi",
+      "Pendanaan",
+      "Operasi",
+      "Modal"
+    ],
+    "j": 2,
+    "b": "Aktivitas Operasi = arus kas dari kegiatan utama bisnis (penjualan, piutang, gaji, dll)."
+  },
+  {
+    "k": "Laporan Keuangan",
+    "s": "Membeli peralatan baru dengan kas masuk ke aktivitas apa dalam laporan arus kas?",
+    "p": [
+      "Operasi",
+      "Investasi (arus kas keluar)",
+      "Pendanaan",
+      "Tidak masuk laporan arus kas"
+    ],
+    "j": 1,
+    "b": "Membeli aset tetap = Aktivitas Investasi (kas keluar untuk investasi jangka panjang)."
+  },
+  {
+    "k": "Laporan Keuangan",
+    "s": "Laba kotor Rp80jt, beban gaji Rp20jt, beban sewa Rp10jt, beban penyusutan Rp5jt. Laba bersih adalah…",
+    "p": [
+      "Rp45.000.000",
+      "Rp55.000.000",
+      "Rp60.000.000",
+      "Rp35.000.000"
+    ],
+    "j": 0,
+    "b": "Laba Bersih = 80jt − (20jt + 10jt + 5jt) = 80jt − 35jt = Rp45.000.000."
+  },
+  {
+    "k": "Laporan Keuangan",
+    "s": "Manakah yang BENAR tentang CaLK (Catatan atas Laporan Keuangan)?",
+    "p": [
+      "CaLK adalah laporan opsional",
+      "CaLK hanya berisi tabel angka tambahan",
+      "CaLK adalah bagian integral laporan keuangan yang menjelaskan kebijakan & rincian akun",
+      "CaLK menggantikan laporan laba rugi"
+    ],
+    "j": 2,
+    "b": "CaLK adalah bagian tak terpisahkan dari laporan keuangan. Isinya: kebijakan akuntansi, rincian pos, informasi penting lainnya."
+  },
+  {
+    "k": "Laporan Keuangan",
+    "s": "Modal awal Rp266jt, setoran Rp25jt, laba bersih Rp48jt, prive Rp5jt. Modal akhir adalah…",
+    "p": [
+      "Rp334.000.000",
+      "Rp314.000.000",
+      "Rp339.000.000",
+      "Rp284.000.000"
+    ],
+    "j": 0,
+    "b": "Modal Akhir = 266 + 25 + 48 − 5 = Rp334.000.000."
+  },
+  {
+    "k": "Perusahaan Dagang",
+    "s": "PPN Keluaran Rp18jt, PPN Masukan Rp13jt, Utang PPN awal Rp2jt. Kas yang disetor ke negara…",
+    "p": [
+      "Rp5.000.000",
+      "Rp7.000.000",
+      "Rp3.000.000",
+      "Rp18.000.000"
+    ],
+    "j": 1,
+    "b": "PPN terutang = 18jt − 13jt = 5jt. Ditambah Utang PPN awal 2jt = total disetor Rp7jt."
+  },
+  {
+    "k": "Pengantar Akuntansi",
+    "s": "Matching Principle dalam akuntansi berarti…",
+    "p": [
+      "Aset harus selalu sama dengan liabilitas",
+      "Beban diakui pada periode yang sama dengan pendapatan yang dihasilkannya",
+      "Setiap debet harus ada kreditnya",
+      "Laporan keuangan dibuat setiap bulan"
+    ],
+    "j": 1,
+    "b": "Matching Principle: beban diakui bersamaan dengan pendapatan yang dihasilkan. Contoh: HPP diakui saat penjualan terjadi."
+  },
+  {
+    "k": "Jurnal Penyesuaian",
+    "s": "Sewa Rp12jt untuk 2 bulan dicatat awal sebagai Beban Sewa Rp6jt. Penyesuaian 31 Maret yang diperlukan…",
+    "p": [
+      "D: Sewa Dibayar Dimuka 6jt | K: Beban Sewa 6jt",
+      "D: Beban Sewa 6jt | K: Sewa Dibayar Dimuka 6jt",
+      "D: Beban Sewa 6jt | K: Kas 6jt",
+      "Tidak perlu penyesuaian"
+    ],
+    "j": 0,
+    "b": "Total 12jt untuk 2 bulan, baru dicatat 6jt. April belum jadi beban → koreksi: D: Sewa Dibayar Dimuka 6jt | K: Beban Sewa 6jt."
+  }
+]
