@@ -978,9 +978,13 @@
       <a href="kuis_akuntansi_50soal.html" class="kuis-banner">
         <div class="kuis-banner-inner">
           <div class="kuis-tag">🎯 Pusat Bank Kuis</div>
-          <div class="kuis-title">Pusat Bank Kuis Interaktif &amp; Evaluasi</div>
+          <div class="kuis-title">
+            Pusat Bank Kuis Interaktif &amp; Evaluasi
+          </div>
           <div class="kuis-desc">
-            Latih pemahamanmu per bab secara terfokus (6 bab lengkap) atau uji dirimu secara menyeluruh dengan kuis komprehensif 50 soal + pembahasan mendalam!
+            Latih pemahamanmu per bab secara terfokus (6 bab lengkap) atau uji
+            dirimu secara menyeluruh dengan kuis komprehensif 50 soal +
+            pembahasan mendalam!
           </div>
         </div>
         <div class="kuis-btn">Buka Bank Kuis →</div>
@@ -1084,7 +1088,8 @@
         .then((res) => res.json())
         .then((data) => {
           if (Array.isArray(data)) {
-            document.getElementById("stat-kuis-total").textContent = data.length;
+            document.getElementById("stat-kuis-total").textContent =
+              data.length;
           } else {
             document.getElementById("stat-kuis-total").textContent = "50+";
           }
@@ -1186,7 +1191,7 @@
                   ${e.tags.map((t) => `<span class="card-tag">${t}</span>`).join("")}
                 </div>
                 <div class="card-footer">
-                  <span class="card-type">Template Excel</span>
+                  <span class="card-type">Template Excel/Doc</span>
                   <a href="${e.url}" download class="excel-download-btn" style="--c: ${e.warna}">
                     <span>Download</span>
                     <span>📥</span>
