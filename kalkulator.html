@@ -622,6 +622,127 @@
       font-weight: 800;
       font-size: 17px;
     }
+
+    /* FORMAL REPORT PAPER (HPP Laba Rugi) */
+    .formal-report-paper {
+      background: rgba(11, 15, 31, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      padding: 24px;
+      font-family: 'DM Sans', sans-serif;
+      box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.4);
+    }
+    body.light-theme .formal-report-paper {
+      background: rgba(255, 255, 255, 0.85);
+      border-color: rgba(0, 0, 0, 0.08);
+      box-shadow: none;
+    }
+    .report-header {
+      text-align: center;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    }
+    body.light-theme .report-header {
+      border-bottom-color: rgba(0, 0, 0, 0.08);
+    }
+    .report-header h4 {
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: var(--text);
+    }
+    .report-header h5 {
+      font-size: 11px;
+      color: var(--orange);
+      text-transform: uppercase;
+      font-weight: 700;
+      margin: 4px 0;
+    }
+    .report-header p {
+      font-size: 10.5px;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+    .report-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+    }
+    .report-table td {
+      padding: 6px 4px;
+      vertical-align: bottom;
+      color: var(--text-muted);
+    }
+    .indent-1 { padding-left: 16px; }
+    .indent-2 { padding-left: 32px; }
+    .report-subtotal {
+      text-align: right;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      font-weight: 600;
+      width: 30%;
+      color: var(--text);
+    }
+    body.light-theme .report-subtotal {
+      border-bottom-color: rgba(0, 0, 0, 0.1);
+    }
+    .report-total {
+      text-align: right;
+      border-bottom: 3px double var(--text);
+      font-weight: 700;
+      width: 30%;
+      color: var(--text);
+    }
+    .report-header-row {
+      font-weight: 700;
+      color: var(--text);
+      font-size: 12.5px;
+    }
+    .calc-inputs-panel-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .calc-input-row-hpp {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    .calc-input-row-hpp label {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .calc-input-row-hpp input {
+      width: 130px;
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--glass-border);
+      border-radius: 6px;
+      padding: 8px 10px;
+      color: #fff;
+      font-size: 13px;
+      text-align: right;
+      outline: none;
+    }
+    body.light-theme .calc-input-row-hpp input {
+      background: #fff;
+      color: #1e293b;
+      border-color: rgba(0, 0, 0, 0.1);
+    }
+    .calc-input-row-hpp input:focus {
+      border-color: var(--orange);
+    }
+    .calc-group-title-hpp {
+      font-family: 'Syne', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--orange);
+      margin-top: 10px;
+      margin-bottom: 6px;
+      border-bottom: 1px solid var(--glass-border);
+      padding-bottom: 4px;
+    }
   </style>
 </head>
 <body>
@@ -975,6 +1096,313 @@
         </div>
       </div>
     </div>
+
+    <!-- 6. KALKULATOR HPP -->
+    <div class="calc-container" id="calc-hpp" style="--c:#ff6b35">
+      <div class="calc-header">
+        <div class="calc-icon">📦</div>
+        <div class="calc-title-group">
+          <h2>Kalkulator HPP & Laporan Laba Rugi Toko</h2>
+          <p>Hitung Harga Pokok Penjualan (HPP) dan susun Laporan Laba Rugi Toko secara formal dan otomatis.</p>
+        </div>
+      </div>
+      <div class="calc-grid">
+        <div class="input-panel">
+          <div class="calc-group-title-hpp">1. Data Persediaan & Pembelian (HPP)</div>
+          
+          <div class="calc-input-row-hpp">
+            <label for="hpp-inv-start">Persediaan Awal (Rp)</label>
+            <input type="number" id="hpp-inv-start" value="50000000" oninput="calculateHPP()">
+          </div>
+          <div class="calc-input-row-hpp">
+            <label for="hpp-purchases">Pembelian Kotor (Rp)</label>
+            <input type="number" id="hpp-purchases" value="120000000" oninput="calculateHPP()">
+          </div>
+          <div class="calc-input-row-hpp">
+            <label for="hpp-freight-in">Beban Angkut Pembelian (Rp)</label>
+            <input type="number" id="hpp-freight-in" value="20000000" oninput="calculateHPP()">
+          </div>
+          <div class="calc-input-row-hpp">
+            <label for="hpp-purchase-returns">Retur Pembelian (Rp)</label>
+            <input type="number" id="hpp-purchase-returns" value="5000000" oninput="calculateHPP()">
+          </div>
+          <div class="calc-input-row-hpp">
+            <label for="hpp-purchase-discounts">Potongan Pembelian (Rp)</label>
+            <input type="number" id="hpp-purchase-discounts" value="1200000" oninput="calculateHPP()">
+          </div>
+          <div class="calc-input-row-hpp">
+            <label for="hpp-inv-end">Persediaan Akhir (Rp)</label>
+            <input type="number" id="hpp-inv-end" value="40000000" oninput="calculateHPP()">
+          </div>
+
+          <div class="calc-group-title-hpp" style="color: var(--pink); border-bottom-color: rgba(255, 61, 154, 0.15);">2. Pendapatan Penjualan & Beban</div>
+          
+          <div class="calc-input-row-hpp">
+            <label for="hpp-sales">Penjualan Kotor (Rp)</label>
+            <input type="number" id="hpp-sales" value="200000000" oninput="calculateHPP()">
+          </div>
+          <div class="calc-input-row-hpp">
+            <label for="hpp-sales-returns">Retur & Potongan Penjualan (Rp)</label>
+            <input type="number" id="hpp-sales-returns" value="8000000" oninput="calculateHPP()">
+          </div>
+          <div class="calc-input-row-hpp">
+            <label for="hpp-exp-salary">Beban Gaji Karyawan (Rp)</label>
+            <input type="number" id="hpp-exp-salary" value="15000000" oninput="calculateHPP()">
+          </div>
+          <div class="calc-input-row-hpp">
+            <label for="hpp-exp-rent">Beban Sewa Toko (Rp)</label>
+            <input type="number" id="hpp-exp-rent" value="5000000" oninput="calculateHPP()">
+          </div>
+          <div class="calc-input-row-hpp">
+            <label for="hpp-exp-utility">Beban Listrik, Air & Telepon (Rp)</label>
+            <input type="number" id="hpp-exp-utility" value="1500000" oninput="calculateHPP()">
+          </div>
+          <div class="calc-input-row-hpp">
+            <label for="hpp-exp-ads">Beban Iklan Pemasaran (Rp)</label>
+            <input type="number" id="hpp-exp-ads" value="2000000" oninput="calculateHPP()">
+          </div>
+          <div class="calc-input-row-hpp">
+            <label for="hpp-exp-freight">Beban Angkut Penjualan (Rp)</label>
+            <input type="number" id="hpp-exp-freight" value="1000000" oninput="calculateHPP()">
+          </div>
+          
+          <button class="action-btn" onclick="resetHPPFields()" style="background: var(--orange); margin-top: 15px;">Data Bawaan 🔄</button>
+        </div>
+        
+        <div class="output-panel" style="padding: 10px; background: transparent; border: none;">
+          <div class="formal-report-paper">
+            <div class="report-header">
+              <h4>TOKO ELEKTRONIK "CAHAYA"</h4>
+              <h5>LAPORAN LABA RUGI</h5>
+              <p>Untuk Periode yang Berakhir pada 31 Maret 2026</p>
+            </div>
+            <table class="report-table">
+              <tbody>
+                <tr class="report-header-row">
+                  <td colspan="2">Penjualan Bersih:</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td class="indent-1">Penjualan Kotor</td>
+                  <td class="report-subtotal" id="hpp-r-sales-gross">Rp0</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td class="indent-1">(-) Retur & Potongan Penjualan</td>
+                  <td class="report-subtotal" id="hpp-r-sales-returns">Rp0</td>
+                  <td></td>
+                </tr>
+                <tr class="report-header-row">
+                  <td class="indent-1">Penjualan Bersih</td>
+                  <td></td>
+                  <td class="report-subtotal" id="hpp-r-sales-net">Rp0</td>
+                </tr>
+                <tr style="height: 12px;"><td colspan="3"></td></tr>
+                <tr class="report-header-row">
+                  <td colspan="2">Harga Pokok Penjualan (HPP):</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td class="indent-1">Persediaan Awal</td>
+                  <td class="report-subtotal" id="hpp-r-inv-start">Rp0</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td class="indent-1">Pembelian Kotor</td>
+                  <td id="hpp-r-purchases-gross">Rp0</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td class="indent-1">(+) Beban Angkut Pembelian</td>
+                  <td style="border-bottom:1px solid rgba(255,255,255,0.1);" id="hpp-r-freight-in">Rp0</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td class="indent-2">Total Pembelian Kotor</td>
+                  <td id="hpp-r-purchases-subtotal">Rp0</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td class="indent-1">(-) Retur Pembelian</td>
+                  <td id="hpp-r-purchase-returns">Rp0</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td class="indent-1">(-) Potongan Pembelian</td>
+                  <td style="border-bottom:1px solid rgba(255,255,255,0.1);" id="hpp-r-purchase-discounts">Rp0</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td class="indent-2">Pembelian Bersih</td>
+                  <td style="border-bottom:1px solid rgba(255,255,255,0.15);" id="hpp-r-purchases-net">Rp0</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td class="indent-1">Barang Tersedia Dijual</td>
+                  <td id="hpp-r-goods-available">Rp0</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td class="indent-1">(-) Persediaan Akhir</td>
+                  <td class="report-subtotal" style="border-bottom:1px solid rgba(255,255,255,0.15);" id="hpp-r-inv-end">Rp0</td>
+                  <td></td>
+                </tr>
+                <tr class="report-header-row">
+                  <td class="indent-1">Harga Pokok Penjualan (HPP)</td>
+                  <td></td>
+                  <td class="report-subtotal" style="color:var(--orange);" id="hpp-r-hpp">Rp0</td>
+                </tr>
+                <tr style="height: 12px;"><td colspan="3"></td></tr>
+                <tr class="report-header-row">
+                  <td>LABA KOTOR (Gross Profit)</td>
+                  <td></td>
+                  <td class="report-subtotal" style="color:var(--blue);" id="hpp-r-gross-profit">Rp0</td>
+                </tr>
+                <tr style="height: 12px;"><td colspan="3"></td></tr>
+                <tr class="report-header-row">
+                  <td colspan="2">Beban Operasional:</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td class="indent-1">Beban Gaji Karyawan</td>
+                  <td id="hpp-r-exp-salary">Rp0</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td class="indent-1">Beban Sewa Toko</td>
+                  <td id="hpp-r-exp-rent">Rp0</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td class="indent-1">Beban Listrik, Air & Telepon</td>
+                  <td id="hpp-r-exp-utility">Rp0</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td class="indent-1">Beban Iklan Pemasaran</td>
+                  <td id="hpp-r-exp-ads">Rp0</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td class="indent-1">Beban Angkut Penjualan</td>
+                  <td style="border-bottom:1px solid rgba(255,255,255,0.1);" id="hpp-r-exp-freight">Rp0</td>
+                  <td></td>
+                </tr>
+                <tr class="report-header-row">
+                  <td class="indent-1">Total Beban Operasional</td>
+                  <td></td>
+                  <td class="report-subtotal" id="hpp-r-total-expenses">Rp0</td>
+                </tr>
+                <tr style="height: 12px;"><td colspan="3"></td></tr>
+                <tr class="report-header-row" style="font-size:13px;">
+                  <td>LABA BERSIH (Net Profit)</td>
+                  <td></td>
+                  <td class="report-total" id="hpp-r-net-profit">Rp0</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. KALKULATOR KELAYAKAN INVESTASI -->
+    <div class="calc-container" id="calc-investasi" style="--c:#fbbf24">
+      <div class="calc-header">
+        <div class="calc-icon">📈</div>
+        <div class="calc-title-group">
+          <h2>Kalkulator Kelayakan Investasi (Capital Budgeting)</h2>
+          <p>Analisis profitabilitas dan kelayakan proyek investasi berdasarkan NPV, IRR, Payback Period, ROI, dan Profitability Index (PI).</p>
+        </div>
+      </div>
+      <div class="calc-grid">
+        <div class="input-panel">
+          <div class="input-group">
+            <label>Investasi Awal / Initial Capital Outflow (Rp)</label>
+            <input type="number" id="inv-capital" value="100000000" oninput="calculateInvestasi()">
+          </div>
+          <div class="input-group">
+            <label>Tingkat Diskonto Suku Bunga / Discount Rate (%)</label>
+            <input type="number" id="inv-rate" value="10" step="0.5" oninput="calculateInvestasi()">
+          </div>
+          
+          <div class="input-group">
+            <label>Aliran Kas Masuk Bersih Tahunan (Cash Inflow):</label>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px; margin-top: 4px;">
+              <div>
+                <label style="font-size: 11px; color: var(--text-muted); margin-bottom: 2px; display: block;">Tahun 1 (Rp)</label>
+                <input type="number" id="inv-cf1" value="30000000" style="padding: 10px; font-size:13px; width: 100%; text-align: right;" oninput="calculateInvestasi()">
+              </div>
+              <div>
+                <label style="font-size: 11px; color: var(--text-muted); margin-bottom: 2px; display: block;">Tahun 2 (Rp)</label>
+                <input type="number" id="inv-cf2" value="35000000" style="padding: 10px; font-size:13px; width: 100%; text-align: right;" oninput="calculateInvestasi()">
+              </div>
+              <div>
+                <label style="font-size: 11px; color: var(--text-muted); margin-bottom: 2px; display: block;">Tahun 3 (Rp)</label>
+                <input type="number" id="inv-cf3" value="40000000" style="padding: 10px; font-size:13px; width: 100%; text-align: right;" oninput="calculateInvestasi()">
+              </div>
+              <div>
+                <label style="font-size: 11px; color: var(--text-muted); margin-bottom: 2px; display: block;">Tahun 4 (Rp)</label>
+                <input type="number" id="inv-cf4" value="30000000" style="padding: 10px; font-size:13px; width: 100%; text-align: right;" oninput="calculateInvestasi()">
+              </div>
+              <div>
+                <label style="font-size: 11px; color: var(--text-muted); margin-bottom: 2px; display: block;">Tahun 5 (Rp)</label>
+                <input type="number" id="inv-cf5" value="25000000" style="padding: 10px; font-size:13px; width: 100%; text-align: right;" oninput="calculateInvestasi()">
+              </div>
+            </div>
+          </div>
+          
+          <button class="action-btn" onclick="resetInvestasiFields()" style="background: var(--yellow); color: #000; margin-top: 10px;">Data Bawaan 🔄</button>
+        </div>
+        
+        <div class="output-panel">
+          <div class="output-title">Hasil Evaluasi Kelayakan</div>
+          
+          <div class="result-row">
+            <span class="result-label">Net Present Value (NPV)</span>
+            <span class="result-val highlight" id="inv-res-npv">Rp0</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Internal Rate of Return (IRR)</span>
+            <span class="result-val highlight" style="color: var(--blue);" id="inv-res-irr">0.00%</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Payback Period (PP)</span>
+            <span class="result-val highlight" style="color: var(--orange);" id="inv-res-payback">-</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Return on Investment (ROI)</span>
+            <span class="result-val" id="inv-res-roi">0.00%</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Profitability Index (PI)</span>
+            <span class="result-val" id="inv-res-pi">0.00</span>
+          </div>
+          <div class="result-row" style="border-bottom: none; padding-bottom: 0;">
+            <span class="result-label">Kesimpulan Kelayakan</span>
+            <span class="result-val" id="inv-res-status" style="font-size: 18px; font-weight: 800; padding: 4px 12px; border-radius: 6px;">-</span>
+          </div>
+
+          <div style="font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 800; margin-top: 10px; margin-bottom: 2px;">TABEL PRESENT VALUE & AKUMULASI</div>
+          <div class="dep-table-container">
+            <table class="dep-table" id="inv-tabel-hasil">
+              <thead>
+                <tr>
+                  <th>Tahun</th>
+                  <th>Cash Inflow (Rp)</th>
+                  <th>DF (10.00%)</th>
+                  <th>Present Value (Rp)</th>
+                  <th>Kumulatif (Rp)</th>
+                </tr>
+              </thead>
+              <tbody id="inv-tbody">
+                <!-- Dinamis -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
 
   <script>
@@ -1301,6 +1729,243 @@
     hitungPenyusutan();
     hitungBEP();
     renderPDATable();
+    calculateHPP();
+    calculateInvestasi();
+
+    // 6. HPP & LABA RUGI CALCULATOR
+    function calculateHPP() {
+      const invStart = parseFloat(document.getElementById("hpp-inv-start").value) || 0;
+      const purchases = parseFloat(document.getElementById("hpp-purchases").value) || 0;
+      const freightIn = parseFloat(document.getElementById("hpp-freight-in").value) || 0;
+      const purReturns = parseFloat(document.getElementById("hpp-purchase-returns").value) || 0;
+      const purDiscounts = parseFloat(document.getElementById("hpp-purchase-discounts").value) || 0;
+      const invEnd = parseFloat(document.getElementById("hpp-inv-end").value) || 0;
+
+      const sales = parseFloat(document.getElementById("hpp-sales").value) || 0;
+      const salesReturns = parseFloat(document.getElementById("hpp-sales-returns").value) || 0;
+
+      const expSalary = parseFloat(document.getElementById("hpp-exp-salary").value) || 0;
+      const expRent = parseFloat(document.getElementById("hpp-exp-rent").value) || 0;
+      const expUtility = parseFloat(document.getElementById("hpp-exp-utility").value) || 0;
+      const expAds = parseFloat(document.getElementById("hpp-exp-ads").value) || 0;
+      const expFreight = parseFloat(document.getElementById("hpp-exp-freight").value) || 0;
+
+      // Net Sales
+      const netSales = sales - salesReturns;
+
+      // HPP
+      const totalPurchasesGross = purchases + freightIn;
+      const netPurchases = totalPurchasesGross - purReturns - purDiscounts;
+      const goodsAvailable = invStart + netPurchases;
+      const hpp = goodsAvailable - invEnd;
+
+      // Gross Profit & Net Profit
+      const grossProfit = netSales - hpp;
+      const totalExpenses = expSalary + expRent + expUtility + expAds + expFreight;
+      const netProfit = grossProfit - totalExpenses;
+
+      // Update Report elements
+      document.getElementById("hpp-r-sales-gross").textContent = formatRupiah(sales);
+      document.getElementById("hpp-r-sales-returns").textContent = formatRupiah(-salesReturns);
+      document.getElementById("hpp-r-sales-net").textContent = formatRupiah(netSales);
+
+      document.getElementById("hpp-r-inv-start").textContent = formatRupiah(invStart);
+      document.getElementById("hpp-r-purchases-gross").textContent = formatRupiah(purchases);
+      document.getElementById("hpp-r-freight-in").textContent = formatRupiah(freightIn);
+      document.getElementById("hpp-r-purchases-subtotal").textContent = formatRupiah(totalPurchasesGross);
+      document.getElementById("hpp-r-purchase-returns").textContent = formatRupiah(-purReturns);
+      document.getElementById("hpp-r-purchase-discounts").textContent = formatRupiah(-purDiscounts);
+      document.getElementById("hpp-r-purchases-net").textContent = formatRupiah(netPurchases);
+      document.getElementById("hpp-r-goods-available").textContent = formatRupiah(goodsAvailable);
+      document.getElementById("hpp-r-inv-end").textContent = formatRupiah(-invEnd);
+      document.getElementById("hpp-r-hpp").textContent = formatRupiah(-hpp);
+
+      document.getElementById("hpp-r-gross-profit").textContent = formatRupiah(grossProfit);
+
+      document.getElementById("hpp-r-exp-salary").textContent = formatRupiah(expSalary);
+      document.getElementById("hpp-r-exp-rent").textContent = formatRupiah(expRent);
+      document.getElementById("hpp-r-exp-utility").textContent = formatRupiah(expUtility);
+      document.getElementById("hpp-r-exp-ads").textContent = formatRupiah(expAds);
+      document.getElementById("hpp-r-exp-freight").textContent = formatRupiah(expFreight);
+      document.getElementById("hpp-r-total-expenses").textContent = formatRupiah(-totalExpenses);
+
+      document.getElementById("hpp-r-net-profit").textContent = formatRupiah(netProfit);
+    }
+
+    function resetHPPFields() {
+      document.getElementById("hpp-inv-start").value = 50000000;
+      document.getElementById("hpp-purchases").value = 120000000;
+      document.getElementById("hpp-freight-in").value = 20000000;
+      document.getElementById("hpp-purchase-returns").value = 5000000;
+      document.getElementById("hpp-purchase-discounts").value = 1200000;
+      document.getElementById("hpp-inv-end").value = 40000000;
+      document.getElementById("hpp-sales").value = 200000000;
+      document.getElementById("hpp-sales-returns").value = 8000000;
+      document.getElementById("hpp-exp-salary").value = 15000000;
+      document.getElementById("hpp-exp-rent").value = 5000000;
+      document.getElementById("hpp-exp-utility").value = 1500000;
+      document.getElementById("hpp-exp-ads").value = 2000000;
+      document.getElementById("hpp-exp-freight").value = 1000000;
+      calculateHPP();
+    }
+
+    // 7. KELAYAKAN INVESTASI CALCULATOR
+    function calculateInvestasi() {
+      const capital = parseFloat(document.getElementById("inv-capital").value) || 0;
+      const ratePct = parseFloat(document.getElementById("inv-rate").value) || 0;
+      const r = ratePct / 100;
+
+      const cf1 = parseFloat(document.getElementById("inv-cf1").value) || 0;
+      const cf2 = parseFloat(document.getElementById("inv-cf2").value) || 0;
+      const cf3 = parseFloat(document.getElementById("inv-cf3").value) || 0;
+      const cf4 = parseFloat(document.getElementById("inv-cf4").value) || 0;
+      const cf5 = parseFloat(document.getElementById("inv-cf5").value) || 0;
+      const cashflows = [cf1, cf2, cf3, cf4, cf5];
+
+      // Update table header DF label
+      const table = document.getElementById("inv-tabel-hasil");
+      const ths = table.querySelectorAll("thead th");
+      if (ths.length >= 3) {
+        ths[2].textContent = `DF (${ratePct.toFixed(2)}%)`;
+      }
+
+      // Calculations
+      let npv = -capital;
+      let totalPVInflow = 0;
+      let cumulativeInflow = 0;
+      let payback = -1;
+      let totalNominalInflow = 0;
+
+      const tbody = document.getElementById("inv-tbody");
+      tbody.innerHTML = "";
+
+      for (let t = 0; t < cashflows.length; t++) {
+        const year = t + 1;
+        const cf = cashflows[t];
+        totalNominalInflow += cf;
+
+        const df = 1 / Math.pow(1 + r, year);
+        const pv = cf * df;
+        npv += pv;
+        totalPVInflow += pv;
+
+        const prevCumulative = cumulativeInflow;
+        cumulativeInflow += cf;
+
+        if (cumulativeInflow >= capital && payback === -1) {
+          const fraction = (capital - prevCumulative) / cf;
+          payback = t + fraction;
+        }
+
+        tbody.innerHTML += `
+          <tr>
+            <td>Tahun ${year}</td>
+            <td>${formatRupiah(cf)}</td>
+            <td>${df.toFixed(4)}</td>
+            <td>${formatRupiah(pv)}</td>
+            <td>${formatRupiah(cumulativeInflow)}</td>
+          </tr>
+        `;
+      }
+
+      // ROI
+      const roi = capital > 0 ? ((totalNominalInflow - capital) / capital) * 100 : 0;
+
+      // Profitability Index (PI)
+      const pi = capital > 0 ? totalPVInflow / capital : 0;
+
+      // IRR solver
+      const irrVal = solveIRR(capital, cashflows);
+
+      // Display results
+      document.getElementById("inv-res-npv").textContent = formatRupiah(npv);
+      if (npv > 0) {
+        document.getElementById("inv-res-npv").style.color = "var(--green)";
+      } else {
+        document.getElementById("inv-res-npv").style.color = "var(--pink)";
+      }
+
+      // IRR text
+      if (irrVal !== null && !isNaN(irrVal)) {
+        if (irrVal <= -99) {
+          document.getElementById("inv-res-irr").textContent = "N/A (Terlalu Rendah)";
+        } else {
+          document.getElementById("inv-res-irr").textContent = irrVal.toFixed(2) + "%";
+        }
+      } else {
+        document.getElementById("inv-res-irr").textContent = "N/A";
+      }
+
+      // Payback Period text
+      if (payback !== -1) {
+        document.getElementById("inv-res-payback").textContent = payback.toFixed(2) + " Tahun";
+      } else {
+        document.getElementById("inv-res-payback").textContent = "> 5 Tahun (Belum Balik Modal)";
+      }
+
+      document.getElementById("inv-res-roi").textContent = roi.toFixed(2) + "%";
+      document.getElementById("inv-res-pi").textContent = pi.toFixed(2);
+
+      // Kesimpulan Kelayakan
+      const statusEl = document.getElementById("inv-res-status");
+      if (npv > 0) {
+        statusEl.textContent = "✅ LAYAK INVESTASI (NPV > 0)";
+        statusEl.style.color = "#fff";
+        statusEl.style.background = "var(--green)";
+      } else {
+        statusEl.textContent = "❌ TIDAK LAYAK (NPV ≤ 0)";
+        statusEl.style.color = "#fff";
+        statusEl.style.background = "var(--pink)";
+      }
+    }
+
+    function solveIRR(initialInv, cashflows) {
+      let low = -0.99;
+      let high = 5.0;
+      let maxIteration = 100;
+      let precision = 0.00001;
+      
+      // Check boundaries
+      let npvLow = -initialInv;
+      for (let t = 0; t < cashflows.length; t++) {
+        npvLow += cashflows[t] / Math.pow(1 + low, t + 1);
+      }
+      
+      if (npvLow < 0) {
+        return -99;
+      }
+
+      // Bisection search
+      for (let i = 0; i < maxIteration; i++) {
+        let mid = (low + high) / 2;
+        let npv = -initialInv;
+        for (let t = 0; t < cashflows.length; t++) {
+          npv += cashflows[t] / Math.pow(1 + mid, t + 1);
+        }
+        
+        if (Math.abs(npv) < precision) {
+          return mid * 100;
+        }
+        
+        if (npv > 0) {
+          low = mid;
+        } else {
+          high = mid;
+        }
+      }
+      return low * 100;
+    }
+
+    function resetInvestasiFields() {
+      document.getElementById("inv-capital").value = 100000000;
+      document.getElementById("inv-rate").value = 10;
+      document.getElementById("inv-cf1").value = 30000000;
+      document.getElementById("inv-cf2").value = 35000000;
+      document.getElementById("inv-cf3").value = 40000000;
+      document.getElementById("inv-cf4").value = 30000000;
+      document.getElementById("inv-cf5").value = 25000000;
+      calculateInvestasi();
+    }
   </script>
 </body>
 </html>

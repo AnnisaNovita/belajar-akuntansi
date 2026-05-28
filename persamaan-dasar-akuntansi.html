@@ -1,327 +1,1222 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Persamaan Dasar Akuntansi</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #F4F1EC;
-    --dark: #1A1A2E;
-    --accent: #E8572A;
-    --accent2: #2E86AB;
-    --accent3: #27AE60;
-    --accent4: #8E44AD;
-    --yellow: #F4C542;
-    --card: #FFFFFF;
-    --text: #1A1A2E;
-    --muted: #6B6B8A;
-    --radius: 20px;
-    --radius-sm: 12px;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Persamaan Dasar Akuntansi — Belajar Akuntansi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --glass-bg: rgba(30, 41, 59, 0.45);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --glass-highlight: rgba(255, 255, 255, 0.15);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+      --pink: #ff3d9a;
+      --purple: #a855f7;
+      --blue: #3b82f6;
+      --green: #10b981;
+      --yellow: #fbbf24;
+      --orange: #ff6b35;
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-  }
+      --radius: 24px;
+      --radius-sm: 14px;
+    }
 
-  .hero {
-    background: var(--dark);
-    padding: 60px 32px 52px;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero-bg-circle { position: absolute; border-radius: 50%; opacity: 0.07; }
-  .hero-bg-circle.c1 { width: 400px; height: 400px; background: var(--accent); top: -100px; right: -80px; }
-  .hero-bg-circle.c2 { width: 250px; height: 250px; background: var(--accent2); bottom: -80px; left: 40px; }
+    /* LIGHT THEME */
+    body.light-theme {
+      --bg: #fff8f0;
+      --glass-bg: rgba(255, 255, 255, 0.65);
+      --glass-border: rgba(0, 0, 0, 0.06);
+      --glass-highlight: rgba(255, 255, 255, 0.85);
+      --text: #1e293b;
+      --text-muted: #64748b;
+    }
 
-  .hero-tag {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(232,87,42,0.15); border: 1px solid rgba(232,87,42,0.3);
-    color: var(--accent); font-size: 11px; font-weight: 600;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    padding: 6px 14px; border-radius: 99px; margin-bottom: 24px; position: relative;
-  }
-  .hero-tag::before { content: '●'; font-size: 8px; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  .hero h1 {
-    font-family: 'Syne', sans-serif; font-size: 42px; font-weight: 800;
-    color: #fff; line-height: 1.1; position: relative; margin-bottom: 16px;
-  }
-  .hero h1 em { color: var(--accent); font-style: normal; }
-  .hero p { color: rgba(255,255,255,0.55); font-size: 15px; line-height: 1.7; max-width: 500px; position: relative; }
+    body {
+      font-family: "DM Sans", sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      position: relative;
+    }
 
-  .formula-hero { display: flex; align-items: center; gap: 12px; margin-top: 32px; flex-wrap: wrap; position: relative; }
-  .formula-box { padding: 14px 24px; border-radius: var(--radius-sm); font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; }
-  .formula-box.aset { background: var(--accent); color: #fff; }
-  .formula-box.liab { background: var(--accent2); color: #fff; }
-  .formula-box.ekuitas { background: var(--accent3); color: #fff; }
-  .formula-op { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 800; color: rgba(255,255,255,0.5); }
+    /* Background Neon Blobs */
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(80px);
+      opacity: 0.25;
+      z-index: 0;
+      animation: float 20s infinite alternate;
+    }
+    .blob-1 {
+      width: 450px;
+      height: 450px;
+      background: var(--pink);
+      top: -150px;
+      right: -80px;
+    }
+    .blob-2 {
+      width: 320px;
+      height: 320px;
+      background: var(--purple);
+      bottom: 20%;
+      left: -80px;
+      animation-delay: -5s;
+    }
+    .blob-3 {
+      width: 350px;
+      height: 350px;
+      background: var(--blue);
+      top: 40%;
+      right: 10%;
+      animation-delay: -10s;
+    }
 
-  .content { max-width: 860px; margin: 0 auto; padding: 44px 24px 72px; }
+    @keyframes float {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+      100% {
+        transform: translate(50px, 80px) scale(1.1);
+      }
+    }
 
-  .sec-label { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; margin-top: 40px; }
-  .sec-label-line { flex: 1; height: 2px; background: var(--dark); opacity: 0.08; border-radius: 2px; }
-  .sec-label-text { font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+    /* HEADER */
+    header {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 30px 24px 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 10;
+    }
+    .header-logo {
+      font-family: "Syne", sans-serif;
+      font-weight: 800;
+      font-size: 18px;
+      color: var(--text);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-  .cards-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
-  .cards-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+    .theme-toggle-btn {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: var(--text);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      transition: transform 0.2s, background-color 0.2s;
+    }
+    .theme-toggle-btn:hover {
+      transform: scale(1.08);
+      background: var(--glass-highlight);
+    }
 
-  .card {
-    background: var(--card); border-radius: var(--radius);
-    padding: 28px; border: 2px solid transparent;
-    transition: transform 0.18s, box-shadow 0.18s;
-    position: relative; overflow: hidden;
-  }
-  .card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.08); }
-  .card-accent-bar { position: absolute; top: 0; left: 0; right: 0; height: 4px; border-radius: var(--radius) var(--radius) 0 0; }
-  .card-icon { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 16px; }
-  .card-eyebrow { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
-  .card-title { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; margin-bottom: 10px; line-height: 1.3; }
-  .card-body { font-size: 13.5px; line-height: 1.7; color: #444; }
+    .back-btn {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: var(--text);
+      padding: 10px 20px;
+      border-radius: 99px;
+      font-family: "Syne", sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      text-decoration: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .back-btn:hover {
+      transform: translateY(-2px);
+      background: var(--glass-highlight);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
 
-  .list-items { margin-top: 14px; display: flex; flex-direction: column; gap: 8px; }
-  .list-item { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; line-height: 1.5; }
-  .list-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
-  .list-sub { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #999; margin: 10px 0 2px; }
-  .list-sub:first-child { margin-top: 0; }
+    /* HERO */
+    .hero {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 24px;
+      position: relative;
+      z-index: 10;
+      text-align: center;
+    }
 
-  .example-wrap {
-    background: var(--dark); border-radius: var(--radius);
-    padding: 32px; margin-top: 12px; position: relative; overflow: hidden;
-  }
-  .example-wrap::before {
-    content: ''; position: absolute; top: -60px; right: -60px;
-    width: 200px; height: 200px; border-radius: 50%;
-    background: var(--accent); opacity: 0.06;
-  }
-  .example-title { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; color: var(--accent); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 18px; }
-  .example-story { color: rgba(255,255,255,0.65); font-size: 14px; line-height: 1.8; margin-bottom: 24px; font-style: italic; }
+    .hero-glass {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: var(--radius);
+      padding: 48px 32px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-  .balance-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .balance-table { width: 100%; border-collapse: collapse; border-radius: var(--radius-sm); overflow: hidden; }
-  .balance-table th { padding: 12px 16px; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; text-align: left; }
-  .balance-table th.left { background: rgba(232,87,42,0.2); color: var(--accent); }
-  .balance-table th.right { background: rgba(46,134,171,0.2); color: var(--accent2); }
-  .balance-table td { padding: 10px 16px; font-size: 13.5px; color: rgba(255,255,255,0.8); border-bottom: 1px solid rgba(255,255,255,0.06); }
-  .balance-table tr:last-child td { border-bottom: none; }
-  .balance-table .total td { font-weight: 700; color: #fff; background: rgba(255,255,255,0.06); border-top: 1px solid rgba(255,255,255,0.15); font-size: 14px; }
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 107, 53, 0.15);
+      border: 1.5px solid rgba(255, 107, 53, 0.3);
+      color: var(--orange);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 7px 18px;
+      border-radius: 99px;
+      margin-bottom: 24px;
+      font-family: "Syne", sans-serif;
+    }
+    body.light-theme .hero-tag {
+      background: rgba(255, 107, 53, 0.1);
+      color: #ea580c;
+    }
 
-  .equal-sign { display: flex; align-items: center; justify-content: center; color: var(--yellow); font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800; margin: 20px 0 16px; }
-  .balance-check { display: flex; align-items: center; gap: 10px; background: rgba(39,174,96,0.15); border: 1px solid rgba(39,174,96,0.3); border-radius: var(--radius-sm); padding: 12px 16px; }
-  .balance-check span { color: var(--accent3); font-size: 13.5px; font-weight: 500; }
+    .hero h1 {
+      font-family: "Syne", sans-serif;
+      font-size: clamp(30px, 6vw, 52px);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      color: #fff;
+    }
+    body.light-theme .hero h1 {
+      color: #1e293b;
+    }
+    .hero h1 .hi-highlight {
+      color: var(--orange);
+    }
 
-  .effects-table { width: 100%; border-collapse: collapse; }
-  .effects-table th { background: var(--dark); color: rgba(255,255,255,0.7); font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 14px 20px; text-align: left; }
-  .effects-table td { padding: 13px 20px; font-size: 13.5px; border-bottom: 1px solid #F0EDE6; vertical-align: middle; }
-  .effects-table tr:last-child td { border-bottom: none; }
-  .effects-table tr:hover td { background: #FAFAF8; }
+    .hero p {
+      color: var(--text-muted);
+      font-size: 15px;
+      line-height: 1.7;
+      max-width: 580px;
+      margin-bottom: 32px;
+    }
 
-  .badge { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 99px; }
-  .badge.up { background: #ECFDF5; color: #059669; }
-  .badge.down { background: #FEF2F2; color: #DC2626; }
+    /* EQUATION LAYOUT */
+    .formula-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      width: 100%;
+      margin-top: 10px;
+    }
+    .formula-block {
+      background: rgba(0, 0, 0, 0.2);
+      border: 2px solid var(--glass-border);
+      border-radius: var(--radius-sm);
+      padding: 16px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 160px;
+      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+    }
+    body.light-theme .formula-block {
+      background: rgba(255, 255, 255, 0.85);
+    }
+    .formula-block:hover {
+      transform: translateY(-4px);
+    }
+    .block-aset {
+      border-color: var(--orange);
+      box-shadow: 0 8px 24px rgba(255, 107, 53, 0.12);
+    }
+    .block-aset:hover {
+      box-shadow: 0 12px 30px rgba(255, 107, 53, 0.25);
+    }
+    .block-liab {
+      border-color: var(--blue);
+      box-shadow: 0 8px 24px rgba(59, 130, 246, 0.12);
+    }
+    .block-liab:hover {
+      box-shadow: 0 12px 30px rgba(59, 130, 246, 0.25);
+    }
+    .block-ekuitas {
+      border-color: var(--green);
+      box-shadow: 0 8px 24px rgba(16, 185, 129, 0.12);
+    }
+    .block-ekuitas:hover {
+      box-shadow: 0 12px 30px rgba(16, 185, 129, 0.25);
+    }
 
-  .t-orange .card-accent-bar { background: var(--accent); }
-  .t-orange .card-icon { background: rgba(232,87,42,0.1); }
-  .t-orange .card-eyebrow { color: var(--accent); }
-  .t-orange .list-dot { background: var(--accent); }
-  .t-orange { border-color: rgba(232,87,42,0.12); }
+    .block-label {
+      font-family: "Syne", sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+    .block-aset .block-label { color: var(--orange); }
+    .block-liab .block-label { color: var(--blue); }
+    .block-ekuitas .block-label { color: var(--green); }
 
-  .t-blue .card-accent-bar { background: var(--accent2); }
-  .t-blue .card-icon { background: rgba(46,134,171,0.1); }
-  .t-blue .card-eyebrow { color: var(--accent2); }
-  .t-blue .list-dot { background: var(--accent2); }
-  .t-blue { border-color: rgba(46,134,171,0.12); }
+    .block-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
 
-  .t-green .card-accent-bar { background: var(--accent3); }
-  .t-green .card-icon { background: rgba(39,174,96,0.1); }
-  .t-green .card-eyebrow { color: var(--accent3); }
-  .t-green .list-dot { background: var(--accent3); }
-  .t-green { border-color: rgba(39,174,96,0.12); }
+    .formula-op {
+      font-family: "Syne", sans-serif;
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--text-muted);
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    }
+    body.light-theme .formula-op {
+      color: #1e293b;
+    }
 
-  .t-purple .card-accent-bar { background: var(--accent4); }
-  .t-purple .card-icon { background: rgba(142,68,173,0.1); }
-  .t-purple .card-eyebrow { color: var(--accent4); }
-  .t-purple .list-dot { background: var(--accent4); }
-  .t-purple { border-color: rgba(142,68,173,0.12); }
+    /* MAIN CONTENT */
+    .content {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+      position: relative;
+      z-index: 10;
+    }
 
-  .t-yellow .card-accent-bar { background: var(--yellow); }
-  .t-yellow .card-icon { background: rgba(244,197,66,0.15); }
-  .t-yellow .card-eyebrow { color: #B8860B; }
-  .t-yellow .list-dot { background: var(--yellow); }
-  .t-yellow { border-color: rgba(244,197,66,0.2); }
-</style>
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 48px;
+      margin-bottom: 24px;
+    }
+    .sec-line {
+      flex: 1;
+      height: 1.5px;
+      background: var(--glass-border);
+    }
+    .sec-text {
+      font-family: "Syne", sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* GRID FOR COMPONENTS */
+    .cards-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    .card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: var(--radius);
+      padding: 28px;
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+    }
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: var(--c, var(--orange));
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      border-color: var(--c, var(--orange));
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-sm);
+      background: color-mix(in srgb, var(--c) 15%, transparent);
+      color: var(--c);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 18px;
+      border: 1px solid color-mix(in srgb, var(--c) 30%, transparent);
+    }
+    .card-eyebrow {
+      font-family: "Syne", sans-serif;
+      font-weight: 800;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--c);
+      margin-bottom: 6px;
+    }
+    .card-title {
+      font-family: "Syne", sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      line-height: 1.35;
+      margin-bottom: 10px;
+    }
+    .card-body {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    /* Lists inside cards */
+    .list-items {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .list-sub {
+      font-family: "Syne", sans-serif;
+      font-weight: 800;
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 14px;
+      margin-bottom: 4px;
+      padding-bottom: 4px;
+      border-bottom: 1px dashed var(--glass-border);
+    }
+    .list-sub:first-child {
+      margin-top: 0;
+    }
+    .list-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .list-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--c);
+      flex-shrink: 0;
+      margin-top: 6px;
+      box-shadow: 0 0 8px var(--c);
+    }
+
+    /* STUDY CASE & TABLES */
+    .example-wrap {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+      margin-bottom: 40px;
+    }
+    .example-title {
+      font-family: "Syne", sans-serif;
+      font-weight: 800;
+      font-size: 16px;
+      color: var(--orange);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .example-story {
+      color: var(--text-muted);
+      font-size: 14.5px;
+      line-height: 1.7;
+      margin-bottom: 24px;
+      padding: 16px 20px;
+      border-left: 3px solid var(--orange);
+      background: rgba(255, 107, 53, 0.05);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    }
+    body.light-theme .example-story {
+      background: rgba(255, 107, 53, 0.02);
+    }
+
+    .balance-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+    @media (min-width: 768px) {
+      .balance-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .balance-table-wrap {
+      background: rgba(0, 0, 0, 0.15);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+    }
+    body.light-theme .balance-table-wrap {
+      background: rgba(255, 255, 255, 0.4);
+    }
+
+    .balance-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .balance-table th {
+      padding: 14px 18px;
+      font-family: "Syne", sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-align: left;
+    }
+    .balance-table th.left {
+      background: rgba(255, 107, 53, 0.12);
+      color: var(--orange);
+      border-bottom: 2px solid rgba(255, 107, 53, 0.3);
+    }
+    .balance-table th.right {
+      background: rgba(59, 130, 246, 0.12);
+      color: var(--blue);
+      border-bottom: 2px solid rgba(59, 130, 246, 0.3);
+    }
+    .balance-table td {
+      padding: 12px 18px;
+      font-size: 13.5px;
+      color: var(--text);
+      border-bottom: 1px solid var(--glass-border);
+    }
+    .balance-table tr:last-child td {
+      border-bottom: none;
+    }
+    .balance-table .total td {
+      font-weight: 800;
+      font-family: "Syne", sans-serif;
+      color: #fff;
+      background: rgba(255, 255, 255, 0.04);
+      border-top: 1px solid var(--glass-border);
+      font-size: 14px;
+    }
+    body.light-theme .balance-table .total td {
+      color: #1e293b;
+      background: rgba(0, 0, 0, 0.02);
+    }
+
+    .equal-sign-badge {
+      font-family: "Syne", sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      text-align: center;
+      color: var(--yellow);
+      margin: 24px 0 16px;
+      padding: 10px 20px;
+      background: rgba(251, 191, 36, 0.08);
+      border: 1px solid rgba(251, 191, 36, 0.2);
+      border-radius: 99px;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 0 15px rgba(251, 191, 36, 0.05);
+    }
+    .balance-check-alert {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1.5px solid rgba(16, 185, 129, 0.25);
+      border-radius: var(--radius-sm);
+      padding: 16px 20px;
+      color: var(--green);
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    /* TRANSACTION EFFECTS TABLE */
+    .effects-table-wrap {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+      margin-bottom: 40px;
+    }
+    .effects-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .effects-table th {
+      background: rgba(0, 0, 0, 0.25);
+      color: var(--text-muted);
+      font-family: "Syne", sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 16px 24px;
+      text-align: left;
+      border-bottom: 1.5px solid var(--glass-border);
+    }
+    body.light-theme .effects-table th {
+      background: rgba(255, 255, 255, 0.5);
+      color: #64748b;
+    }
+    .effects-table td {
+      padding: 14px 24px;
+      font-size: 14px;
+      border-bottom: 1px solid var(--glass-border);
+      color: var(--text);
+    }
+    .effects-table tr:last-child td {
+      border-bottom: none;
+    }
+    .effects-table tr:hover td {
+      background: rgba(255, 255, 255, 0.03);
+    }
+    body.light-theme .effects-table tr:hover td {
+      background: rgba(0, 0, 0, 0.01);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 99px;
+    }
+    .badge.up {
+      background: rgba(16, 185, 129, 0.12);
+      color: #10b981;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    body.light-theme .badge.up {
+      background: #ecfdf5;
+      color: #059669;
+    }
+    .badge.down {
+      background: rgba(239, 68, 68, 0.12);
+      color: #ef4444;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+    body.light-theme .badge.down {
+      background: #fef2f2;
+      color: #dc2626;
+    }
+
+    /* INTERACTIVE SIMULATOR */
+    .simulator-grid {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+      margin-bottom: 24px;
+    }
+    .sim-input-group {
+      flex: 1;
+      min-width: 200px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .sim-input-group label {
+      font-family: "Syne", sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--text);
+    }
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .currency-prefix {
+      position: absolute;
+      left: 14px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+    .input-wrapper input {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.2);
+      border: 1.5px solid var(--glass-border);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px 12px 42px;
+      color: #fff;
+      font-size: 15px;
+      font-family: inherit;
+      font-weight: 700;
+      outline: none;
+      transition: border-color 0.2s, background-color 0.2s;
+    }
+    body.light-theme .input-wrapper input {
+      background: rgba(255, 255, 255, 0.85);
+      color: #1e293b;
+    }
+    .input-wrapper input:focus {
+      border-color: var(--pink);
+      background: rgba(0, 0, 0, 0.3);
+    }
+    body.light-theme .input-wrapper input:focus {
+      background: #fff;
+    }
+    .sim-operator {
+      font-family: "Syne", sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--text-muted);
+      padding-top: 14px;
+    }
+    body.light-theme .sim-operator {
+      color: #1e293b;
+    }
+    .sim-note {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .sim-status-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-radius: var(--radius-sm);
+      padding: 16px 20px;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    .sim-status-box.balanced {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      color: #10b981;
+    }
+    .sim-status-box.unbalanced {
+      background: rgba(239, 68, 68, 0.08);
+      border: 1px solid rgba(239, 68, 68, 0.25);
+      color: #ef4444;
+    }
+    .sim-status-box.info {
+      background: rgba(59, 130, 246, 0.08);
+      border: 1px solid rgba(59, 130, 246, 0.25);
+      color: #3b82f6;
+    }
+
+    /* GOLDEN RULES / TWO CARDS */
+    .cards-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--glass-border);
+      background: #090d16;
+      padding: 40px 24px;
+      text-align: center;
+      position: relative;
+      z-index: 10;
+    }
+    body.light-theme footer {
+      background: #fff8f0;
+    }
+    .footer-name {
+      font-family: "Syne", sans-serif;
+      font-weight: 800;
+      font-size: 16px;
+      background: linear-gradient(135deg, var(--yellow), var(--pink), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 6px;
+    }
+    .footer-sub {
+      font-size: 12.5px;
+      color: var(--text-muted);
+    }
+    .footer-dots {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 16px;
+    }
+    .footer-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+  </style>
 </head>
 <body>
 
-<div class="hero">
-  <div class="hero-bg-circle c1"></div>
-  <div class="hero-bg-circle c2"></div>
-  <div class="hero-tag">Fondasi Akuntansi</div>
-  <h1>Persamaan Dasar<br><em>Akuntansi</em></h1>
-  <p>Semua pencatatan akuntansi berputar di satu persamaan ini. Pahami ini, pahami segalanya.</p>
-  <div class="formula-hero">
-    <div class="formula-box aset">ASET</div>
-    <div class="formula-op">=</div>
-    <div class="formula-box liab">LIABILITAS</div>
-    <div class="formula-op">+</div>
-    <div class="formula-box ekuitas">EKUITAS</div>
-  </div>
-</div>
+  <!-- Background blobs -->
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
 
-<div class="content">
+  <!-- HEADER -->
+  <header>
+    <a href="index.html" class="header-logo">
+      <span style="font-size: 24px">⚖️</span>
+      <span style="font-weight: 800; font-family: 'Syne', sans-serif">Belajar Akuntansi</span>
+    </a>
+    <div style="display: flex; gap: 12px; align-items: center">
+      <a href="index.html" class="back-btn">← Kembali</a>
+      <button class="theme-toggle-btn" onclick="toggleTheme()" id="theme-btn" title="Ganti Tema">🌓</button>
+    </div>
+  </header>
 
-  <div class="sec-label">
-    <div class="sec-label-line"></div>
-    <div class="sec-label-text">3 Komponen Utama</div>
-    <div class="sec-label-line"></div>
-  </div>
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-glass">
+      <div class="hero-tag">⚖️ Fondasi Utama</div>
+      <h1>Persamaan Dasar<br><span class="hi-highlight">Akuntansi</span></h1>
+      <p>Semua pencatatan transaksi keuangan berputar di satu persamaan matematis ini. Pahami fondasi ini, maka kamu akan menguasai seluruh konsep akuntansi!</p>
+      
+      <!-- Equation Layout -->
+      <div class="formula-wrap">
+        <div class="formula-block block-aset">
+          <span class="block-label">ASET</span>
+          <span class="block-sub">Harta / Kekayaan</span>
+        </div>
+        <div class="formula-op">=</div>
+        <div class="formula-block block-liab">
+          <span class="block-label">LIABILITAS</span>
+          <span class="block-sub">Utang / Kewajiban</span>
+        </div>
+        <div class="formula-op">+</div>
+        <div class="formula-block block-ekuitas">
+          <span class="block-label">EKUITAS</span>
+          <span class="block-sub">Modal Pemilik</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <div class="cards-3">
-    <div class="card t-orange">
-      <div class="card-accent-bar"></div>
-      <div class="card-icon">🏦</div>
-      <div class="card-eyebrow">Komponen 01</div>
-      <div class="card-title">Aset (Harta)</div>
-      <div class="card-body">Semua yang <strong>dimiliki</strong> perusahaan dan punya nilai ekonomis.</div>
-      <div class="list-items">
-        <div class="list-sub">Aset Lancar — &lt; 1 tahun</div>
-        <div class="list-item"><div class="list-dot"></div><div>Kas &amp; Setara Kas</div></div>
-        <div class="list-item"><div class="list-dot"></div><div>Piutang Usaha</div></div>
-        <div class="list-item"><div class="list-dot"></div><div>Persediaan Barang</div></div>
-        <div class="list-item"><div class="list-dot"></div><div>Perlengkapan</div></div>
-        <div class="list-item"><div class="list-dot"></div><div>Beban Dibayar Dimuka</div></div>
-        <div class="list-sub">Aset Tetap — &gt; 1 tahun</div>
-        <div class="list-item"><div class="list-dot"></div><div>Gedung &amp; Tanah</div></div>
-        <div class="list-item"><div class="list-dot"></div><div>Kendaraan &amp; Mesin</div></div>
+  <!-- CONTENT SECTION -->
+  <main class="content">
+
+    <!-- 3 COMPONENTS SECTION -->
+    <div class="section-title">
+      <div class="sec-line"></div>
+      <div class="sec-text">3 Komponen Utama</div>
+      <div class="sec-line"></div>
+    </div>
+
+    <div class="cards-3">
+      <!-- Card 1: Aset -->
+      <div class="card" style="--c: var(--orange);">
+        <div class="card-icon">🏦</div>
+        <div class="card-eyebrow">Komponen 01</div>
+        <div class="card-title">Aset (Harta)</div>
+        <div class="card-body">Semua yang <strong>dimiliki</strong> perusahaan dan memiliki nilai ekonomis di masa depan.</div>
+        <div class="list-items">
+          <div class="list-sub">Aset Lancar — &lt; 1 tahun</div>
+          <div class="list-item"><div class="list-dot"></div><div>Kas &amp; Setara Kas</div></div>
+          <div class="list-item"><div class="list-dot"></div><div>Piutang Usaha</div></div>
+          <div class="list-item"><div class="list-dot"></div><div>Persediaan Barang</div></div>
+          <div class="list-item"><div class="list-dot"></div><div>Perlengkapan</div></div>
+          <div class="list-item"><div class="list-dot"></div><div>Beban Dibayar Dimuka</div></div>
+          
+          <div class="list-sub">Aset Tetap — &gt; 1 tahun</div>
+          <div class="list-item"><div class="list-dot"></div><div>Gedung &amp; Tanah</div></div>
+          <div class="list-item"><div class="list-dot"></div><div>Kendaraan &amp; Mesin</div></div>
+        </div>
+      </div>
+
+      <!-- Card 2: Liabilitas -->
+      <div class="card" style="--c: var(--blue);">
+        <div class="card-icon">💳</div>
+        <div class="card-eyebrow">Komponen 02</div>
+        <div class="card-title">Liabilitas (Utang)</div>
+        <div class="card-body">Semua kewajiban keuangan yang <strong>wajib dibayar</strong> perusahaan ke pihak luar.</div>
+        <div class="list-items">
+          <div class="list-sub">Jangka Pendek — &lt; 1 tahun</div>
+          <div class="list-item"><div class="list-dot"></div><div>Utang Usaha</div></div>
+          <div class="list-item"><div class="list-dot"></div><div>Utang Gaji</div></div>
+          <div class="list-item"><div class="list-dot"></div><div>Utang Bank Jangka Pendek</div></div>
+          <div class="list-item"><div class="list-dot"></div><div>Pendapatan Diterima Dimuka</div></div>
+          
+          <div class="list-sub">Jangka Panjang — &gt; 1 tahun</div>
+          <div class="list-item"><div class="list-dot"></div><div>Utang Obligasi</div></div>
+          <div class="list-item"><div class="list-dot"></div><div>Utang Bank Jangka Panjang</div></div>
+        </div>
+      </div>
+
+      <!-- Card 3: Ekuitas -->
+      <div class="card" style="--c: var(--green);">
+        <div class="card-icon">👑</div>
+        <div class="card-eyebrow">Komponen 03</div>
+        <div class="card-title">Ekuitas (Modal)</div>
+        <div class="card-body">Hak sisa pemilik atas aset setelah dikurangi seluruh liabilitas.</div>
+        <div class="list-items">
+          <div class="list-sub">Penambah Ekuitas</div>
+          <div class="list-item"><div class="list-dot"></div><div>Setoran Modal Awal</div></div>
+          <div class="list-item"><div class="list-dot"></div><div>+ Laba Periode Berjalan</div></div>
+          <div class="list-item"><div class="list-dot"></div><div>+ Pendapatan Usaha</div></div>
+          
+          <div class="list-sub">Pengurang Ekuitas</div>
+          <div class="list-item"><div class="list-dot"></div><div>− Beban Operasional</div></div>
+          <div class="list-item"><div class="list-dot"></div><div>− Rugi Periode Berjalan</div></div>
+          <div class="list-item"><div class="list-dot"></div><div>− Prive (Ambil Uang Pribadi)</div></div>
+        </div>
+        <div style="margin-top:20px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 10px; padding:12px 14px; font-size:13px; font-weight:700; color:var(--green); text-align: center;">
+          Ekuitas = Aset − Liabilitas
+        </div>
       </div>
     </div>
 
-    <div class="card t-blue">
-      <div class="card-accent-bar"></div>
-      <div class="card-icon">💳</div>
-      <div class="card-eyebrow">Komponen 02</div>
-      <div class="card-title">Liabilitas (Utang)</div>
-      <div class="card-body">Semua yang <strong>wajib dibayar</strong> perusahaan ke pihak lain.</div>
-      <div class="list-items">
-        <div class="list-sub">Jangka Pendek — &lt; 1 tahun</div>
-        <div class="list-item"><div class="list-dot"></div><div>Utang Usaha</div></div>
-        <div class="list-item"><div class="list-dot"></div><div>Utang Gaji</div></div>
-        <div class="list-item"><div class="list-dot"></div><div>Utang Bank Jangka Pendek</div></div>
-        <div class="list-item"><div class="list-dot"></div><div>Pendapatan Diterima Dimuka</div></div>
-        <div class="list-sub">Jangka Panjang — &gt; 1 tahun</div>
-        <div class="list-item"><div class="list-dot"></div><div>Utang Obligasi</div></div>
-        <div class="list-item"><div class="list-dot"></div><div>Utang Bank Jangka Panjang</div></div>
+    <!-- INTERACTIVE SIMULATOR SECTION -->
+    <div class="section-title">
+      <div class="sec-line"></div>
+      <div class="sec-text">🧮 Simulator Interaktif</div>
+      <div class="sec-line"></div>
+    </div>
+
+    <div class="card" style="--c: var(--pink); margin-bottom: 48px; padding: 32px;">
+      <div class="card-icon">⚡</div>
+      <div class="card-eyebrow" style="color: var(--pink);">Fitur Belajar</div>
+      <div class="card-title">Simulator Persamaan Akuntansi</div>
+      <div class="card-desc">Masukkan nilai pada dua kolom apa saja untuk menghitung kolom ketiga secara otomatis. Buktikan sendiri bahwa persamaan ini selalu seimbang!</div>
+      
+      <div class="simulator-grid">
+        <div class="sim-input-group">
+          <label for="sim-aset">Aset (Harta) — Rp</label>
+          <div class="input-wrapper">
+            <span class="currency-prefix">Rp</span>
+            <input type="number" id="sim-aset" placeholder="Masukkan Aset..." oninput="calculateEquation('aset')">
+          </div>
+          <small class="sim-note">Aset Anda saat ini</small>
+        </div>
+
+        <div class="sim-operator">=</div>
+
+        <div class="sim-input-group">
+          <label for="sim-liab">Liabilitas (Utang) — Rp</label>
+          <div class="input-wrapper">
+            <span class="currency-prefix">Rp</span>
+            <input type="number" id="sim-liab" placeholder="Masukkan Liabilitas..." oninput="calculateEquation('liab')">
+          </div>
+          <small class="sim-note">Kewajiban pihak ketiga</small>
+        </div>
+
+        <div class="sim-operator">+</div>
+
+        <div class="sim-input-group">
+          <label for="sim-ekuitas">Ekuitas (Modal) — Rp</label>
+          <div class="input-wrapper">
+            <span class="currency-prefix">Rp</span>
+            <input type="number" id="sim-ekuitas" placeholder="Masukkan Ekuitas..." oninput="calculateEquation('ekuitas')">
+          </div>
+          <small class="sim-note">Hak pemilik usaha</small>
+        </div>
+      </div>
+
+      <!-- Live status panel -->
+      <div id="sim-status" class="sim-status-box balanced">
+        <span class="status-icon">⚖️</span>
+        <span id="sim-status-text">Masukkan angka pada input di atas untuk memulai simulasi interaktif.</span>
       </div>
     </div>
 
-    <div class="card t-green">
-      <div class="card-accent-bar"></div>
-      <div class="card-icon">👑</div>
-      <div class="card-eyebrow">Komponen 03</div>
-      <div class="card-title">Ekuitas (Modal)</div>
-      <div class="card-body">Hak pemilik atas aset setelah dikurangi liabilitas.</div>
-      <div class="list-items">
-        <div class="list-item"><div class="list-dot"></div><div>Modal awal pemilik</div></div>
-        <div class="list-item"><div class="list-dot"></div><div>+ Laba periode berjalan</div></div>
-        <div class="list-item"><div class="list-dot"></div><div>− Rugi periode berjalan</div></div>
-        <div class="list-item"><div class="list-dot"></div><div>− Prive (pengambilan pribadi)</div></div>
+    <!-- STUDY CASE SECTION -->
+    <div class="section-title">
+      <div class="sec-line"></div>
+      <div class="sec-text">Contoh Nyata</div>
+      <div class="sec-line"></div>
+    </div>
+
+    <div class="example-wrap">
+      <div class="example-title">📍 Studi Kasus — Usaha Laundry</div>
+      <div class="example-story">Kamu membuka usaha laundry. Modal dari uang pribadi sebesar Rp10 juta, dan kamu meminjam dari Bank sebesar Rp5 juta. Uang tersebut digunakan untuk membeli mesin laundry seharga Rp8 juta, dan sisanya Rp7 juta disimpan di kas usaha.</div>
+      
+      <div class="balance-grid">
+        <!-- Asset Table -->
+        <div class="balance-table-wrap">
+          <table class="balance-table">
+            <thead>
+              <tr>
+                <th class="left" colspan="2">🟠 ASET</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Kas</td>
+                <td style="text-align: right; font-weight: 500;">Rp7.000.000</td>
+              </tr>
+              <tr>
+                <td>Mesin Cuci</td>
+                <td style="text-align: right; font-weight: 500;">Rp8.000.000</td>
+              </tr>
+              <tr class="total">
+                <td>Total Aset</td>
+                <td style="text-align: right;">Rp15.000.000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Liabilities & Equity Table -->
+        <div class="balance-table-wrap">
+          <table class="balance-table">
+            <thead>
+              <tr>
+                <th class="right" colspan="2">🔵 LIABILITAS + EKUITAS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Utang Bank</td>
+                <td style="text-align: right; font-weight: 500;">Rp5.000.000</td>
+              </tr>
+              <tr>
+                <td>Modal Sendiri</td>
+                <td style="text-align: right; font-weight: 500;">Rp10.000.000</td>
+              </tr>
+              <tr class="total">
+                <td>Total L + E</td>
+                <td style="text-align: right;">Rp15.000.000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-      <div style="margin-top:16px;background:#ECFDF5;border-radius:10px;padding:12px 14px;font-size:13px;font-weight:600;color:#059669;">
-        Ekuitas = Aset − Liabilitas
+
+      <div class="equal-sign-badge">
+        15 Juta = 5 Juta + 10 Juta ✓
+      </div>
+
+      <div class="balance-check-alert">
+        <span>✅ <strong>Persamaan Seimbang!</strong> Nilai total Aset (Rp15 juta) terbukti sama persis dengan total Liabilitas + Ekuitas (Rp15 juta). Ini menunjukkan bahwa pencatatan akuntansi berjalan dengan benar.</span>
       </div>
     </div>
-  </div>
 
-  <div class="sec-label" style="margin-top:40px;">
-    <div class="sec-label-line"></div>
-    <div class="sec-label-text">Contoh Nyata</div>
-    <div class="sec-label-line"></div>
-  </div>
+    <!-- TRANSACTION EFFECTS SECTION -->
+    <div class="section-title">
+      <div class="sec-line"></div>
+      <div class="sec-text">Efek Setiap Transaksi</div>
+      <div class="sec-line"></div>
+    </div>
 
-  <div class="example-wrap">
-    <div class="example-title">📍 Studi Kasus — Usaha Laundry</div>
-    <div class="example-story">Kamu buka usaha laundry. Modal sendiri Rp10 juta, pinjam bank Rp5 juta. Uang itu dipakai beli mesin Rp8 juta, sisanya Rp7 juta ada di kas.</div>
-    <div class="balance-grid">
-      <table class="balance-table">
-        <thead><tr><th class="left" colspan="2">🟠 ASET</th></tr></thead>
+    <div class="effects-table-wrap">
+      <table class="effects-table">
+        <thead>
+          <tr>
+            <th>Jenis Transaksi Keuangan</th>
+            <th>Aset</th>
+            <th>Liabilitas</th>
+            <th>Ekuitas</th>
+          </tr>
+        </thead>
         <tbody>
-          <tr><td>Kas</td><td>Rp7.000.000</td></tr>
-          <tr><td>Mesin</td><td>Rp8.000.000</td></tr>
-          <tr class="total"><td>Total Aset</td><td>Rp15.000.000</td></tr>
+          <tr>
+            <td>Terima uang tunai dari pelanggan</td>
+            <td><span class="badge up">↑ Naik</span></td>
+            <td>—</td>
+            <td><span class="badge up">↑ Naik</span></td>
+          </tr>
+          <tr>
+            <td>Bayar utang usaha ke supplier</td>
+            <td><span class="badge down">↓ Turun</span></td>
+            <td><span class="badge down">↓ Turun</span></td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>Beli aset secara tunai (misal: beli laptop kas)</td>
+            <td><span class="badge up">↑</span> <span class="badge down">↓</span> <span style="font-size: 12px; color: var(--text-muted);">(Tukar Aset)</span></td>
+            <td>—</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>Bayar beban usaha (listrik, wifi, gaji karyawan)</td>
+            <td><span class="badge down">↓ Turun</span></td>
+            <td>—</td>
+            <td><span class="badge down">↓ Turun</span></td>
+          </tr>
+          <tr>
+            <td>Pinjam uang modal dari Bank</td>
+            <td><span class="badge up">↑ Naik</span></td>
+            <td><span class="badge up">↑ Naik</span></td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>Pemilik menyetorkan modal kas tambahan</td>
+            <td><span class="badge up">↑ Naik</span></td>
+            <td>—</td>
+            <td><span class="badge up">↑ Naik</span></td>
+          </tr>
+          <tr>
+            <td>Pemilik mengambil uang tunai pribadi (Prive)</td>
+            <td><span class="badge down">↓ Turun</span></td>
+            <td>—</td>
+            <td><span class="badge down">↓ Turun</span></td>
+          </tr>
         </tbody>
       </table>
-      <table class="balance-table">
-        <thead><tr><th class="right" colspan="2">🔵 LIABILITAS + EKUITAS</th></tr></thead>
-        <tbody>
-          <tr><td>Utang Bank</td><td>Rp5.000.000</td></tr>
-          <tr><td>Modal</td><td>Rp10.000.000</td></tr>
-          <tr class="total"><td>Total L + E</td><td>Rp15.000.000</td></tr>
-        </tbody>
-      </table>
     </div>
-    <div class="equal-sign">15 juta = 5 juta + 10 juta ✓</div>
-    <div class="balance-check">
-      <span>✅ Persamaan seimbang! Aset selalu sama dengan Liabilitas + Ekuitas — tanpa terkecuali.</span>
+
+    <!-- GOLDEN RULES SECTION -->
+    <div class="section-title">
+      <div class="sec-line"></div>
+      <div class="sec-text">Aturan Emas</div>
+      <div class="sec-line"></div>
     </div>
-  </div>
 
-  <div class="sec-label" style="margin-top:40px;">
-    <div class="sec-label-line"></div>
-    <div class="sec-label-text">Efek Setiap Transaksi</div>
-    <div class="sec-label-line"></div>
-  </div>
+    <div class="cards-2">
+      <!-- Card 1: Balance -->
+      <div class="card" style="--c: var(--yellow);">
+        <div class="card-icon">⚖️</div>
+        <div class="card-eyebrow">Aturan 01</div>
+        <div class="card-title">Wajib Selalu Seimbang</div>
+        <div class="card-body">Persamaan ini harus selalu seimbang dalam keadaan apapun. Setiap transaksi pasti mempengaruhi minimal 2 akun. Jika nilai total sisi kiri (Aset) tidak sama dengan sisi kanan (Liabilitas + Ekuitas), dipastikan terjadi kesalahan pencatatan!</div>
+      </div>
 
-  <div class="card" style="padding:0;overflow:hidden;border:2px solid #F0EDE6;">
-    <table class="effects-table">
-      <thead>
-        <tr>
-          <th>Transaksi</th>
-          <th>Aset</th>
-          <th>Liabilitas</th>
-          <th>Ekuitas</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>Terima uang dari pelanggan</td><td><span class="badge up">↑ Naik</span></td><td>—</td><td><span class="badge up">↑ Naik</span></td></tr>
-        <tr><td>Bayar utang ke supplier</td><td><span class="badge down">↓ Turun</span></td><td><span class="badge down">↓ Turun</span></td><td>—</td></tr>
-        <tr><td>Beli aset secara tunai</td><td><span class="badge up">↑</span> <span class="badge down">↓</span></td><td>—</td><td>—</td></tr>
-        <tr><td>Bayar beban (listrik, gaji, dll)</td><td><span class="badge down">↓ Turun</span></td><td>—</td><td><span class="badge down">↓ Turun</span></td></tr>
-        <tr><td>Pinjam uang dari bank</td><td><span class="badge up">↑ Naik</span></td><td><span class="badge up">↑ Naik</span></td><td>—</td></tr>
-        <tr><td>Pemilik setor modal tambahan</td><td><span class="badge up">↑ Naik</span></td><td>—</td><td><span class="badge up">↑ Naik</span></td></tr>
-        <tr><td>Pemilik ambil uang (Prive)</td><td><span class="badge down">↓ Turun</span></td><td>—</td><td><span class="badge down">↓ Turun</span></td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="sec-label" style="margin-top:40px;">
-    <div class="sec-label-line"></div>
-    <div class="sec-label-text">Aturan Emas</div>
-    <div class="sec-label-line"></div>
-  </div>
-
-  <div class="cards-2">
-    <div class="card t-yellow">
-      <div class="card-accent-bar"></div>
-      <div class="card-icon">⚖️</div>
-      <div class="card-eyebrow">Selalu Seimbang</div>
-      <div class="card-title">Persamaan harus selalu balance</div>
-      <div class="card-body">Setiap transaksi pasti mempengaruhi minimal 2 sisi — tapi persamaan tidak pernah goyah. Kalau tidak seimbang, ada yang salah catat!</div>
+      <!-- Card 2: Double Entry -->
+      <div class="card" style="--c: var(--purple);">
+        <div class="card-icon">🔄</div>
+        <div class="card-eyebrow">Aturan 02</div>
+        <div class="card-title">Sistem Double-Entry</div>
+        <div class="card-body">Inilah konsep dasar dari pencatatan berpasangan (double-entry system). Tidak ada perubahan di satu akun tanpa ada perubahan pengimbang di akun lainnya. Ini menjaga akurasi dan integritas data keuangan bisnis Anda.</div>
+      </div>
     </div>
-    <div class="card t-purple">
-      <div class="card-accent-bar"></div>
-      <div class="card-icon">🔄</div>
-      <div class="card-eyebrow">Double Entry</div>
-      <div class="card-title">Setiap transaksi punya 2 efek</div>
-      <div class="card-body">Inilah dasar dari sistem <strong>double-entry</strong> (pencatatan berpasangan) — setiap transaksi selalu punya 2 sisi yang saling mengimbangi.</div>
-    </div>
-  </div>
 
-</div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-name">Annisa Novita Ardana</div>
+    <div class="footer-sub">Belajar Akuntansi &amp; Perpajakan &nbsp;·&nbsp; Dibuat dengan Cinta &amp; Estetika 🌸</div>
+    <div class="footer-dots">
+      <div class="footer-dot" style="background: #ff6b35"></div>
+      <div class="footer-dot" style="background: #ff3d9a"></div>
+      <div class="footer-dot" style="background: #a855f7"></div>
+      <div class="footer-dot" style="background: #3b82f6"></div>
+      <div class="footer-dot" style="background: #10b981"></div>
+      <div class="footer-dot" style="background: #fbbf24"></div>
+    </div>
+  </footer>
+
+  <script>
+    // THEME HANDLING
+    const body = document.body;
+    if (localStorage.getItem("theme") === "light") {
+      body.classList.add("light-theme");
+    }
+
+    function toggleTheme() {
+      body.classList.toggle("light-theme");
+      if (body.classList.contains("light-theme")) {
+        localStorage.setItem("theme", "light");
+      } else {
+        localStorage.setItem("theme", "dark");
+      }
+    }
+
+    // INTERACTIVE SIMULATOR LOGIC
+    function calculateEquation(changedField) {
+      const asetInput = document.getElementById("sim-aset");
+      const liabInput = document.getElementById("sim-liab");
+      const ekuitasInput = document.getElementById("sim-ekuitas");
+      const statusBox = document.getElementById("sim-status");
+      const statusText = document.getElementById("sim-status-text");
+
+      const hasAset = asetInput.value !== "";
+      const hasLiab = liabInput.value !== "";
+      const hasEkuitas = ekuitasInput.value !== "";
+
+      let aset = parseFloat(asetInput.value) || 0;
+      let liab = parseFloat(liabInput.value) || 0;
+      let ekuitas = parseFloat(ekuitasInput.value) || 0;
+
+      const formatRp = (num) => new Intl.NumberFormat('id-ID').format(num);
+
+      if (hasAset && hasLiab && hasEkuitas) {
+        // If all three are filled, verify if they balance
+        if (Math.abs(aset - (liab + ekuitas)) < 0.01) {
+          statusBox.className = "sim-status-box balanced";
+          statusText.innerHTML = `<strong>Sempurna!</strong> Persamaan seimbang: Aset (Rp ${formatRp(aset)}) = Liabilitas (Rp ${formatRp(liab)}) + Ekuitas (Rp ${formatRp(ekuitas)}) ✅`;
+        } else {
+          statusBox.className = "sim-status-box unbalanced";
+          statusText.innerHTML = `<strong>Tidak Seimbang!</strong> Sisi Kiri (Aset: Rp ${formatRp(aset)}) ≠ Sisi Kanan (Liab + Eku: Rp ${formatRp(liab + ekuitas)}). Selisih: Rp ${formatRp(Math.abs(aset - (liab + ekuitas)))} ⚠️`;
+        }
+      } else if (hasAset && hasLiab && !hasEkuitas) {
+        // Calculate Equity
+        ekuitas = aset - liab;
+        ekuitasInput.placeholder = ekuitas >= 0 ? ekuitas : 0;
+        statusBox.className = "sim-status-box info";
+        statusText.innerHTML = `<strong>Ekuitas Terhitung Otomatis:</strong> Rp ${formatRp(ekuitas)} (Rumus: Ekuitas = Aset - Liabilitas)`;
+      } else if (hasAset && !hasLiab && hasEkuitas) {
+        // Calculate Liabilities
+        liab = aset - ekuitas;
+        liabInput.placeholder = liab >= 0 ? liab : 0;
+        statusBox.className = "sim-status-box info";
+        statusText.innerHTML = `<strong>Liabilitas Terhitung Otomatis:</strong> Rp ${formatRp(liab)} (Rumus: Liabilitas = Aset - Ekuitas)`;
+      } else if (!hasAset && hasLiab && hasEkuitas) {
+        // Calculate Assets
+        aset = liab + ekuitas;
+        asetInput.placeholder = aset;
+        statusBox.className = "sim-status-box info";
+        statusText.innerHTML = `<strong>Aset Terhitung Otomatis:</strong> Rp ${formatRp(aset)} (Rumus: Aset = Liabilitas + Ekuitas)`;
+      } else {
+        // Not enough inputs
+        statusBox.className = "sim-status-box balanced";
+        statusText.innerHTML = `Masukkan nilai pada dua kolom untuk menghitung kolom ketiga secara otomatis.`;
+      }
+    }
+  </script>
 </body>
 </html>

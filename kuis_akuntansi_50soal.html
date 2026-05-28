@@ -105,23 +105,30 @@
       padding: 20px 24px 80px;
       position: relative;
       z-index: 10;
+      opacity: 0;
+      transform: translateY(15px);
+      transition: opacity 0.35s ease, transform 0.35s ease;
     }
-    .screen.active { display: flex; }
+    .screen.active {
+      display: flex;
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-    /* HOME SCREEN */
+    /* HOME SCREEN / DASHBOARD BANK KUIS */
     .home-card {
       background: var(--glass-bg);
       border: 1px solid var(--glass-border);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border-radius: var(--radius);
-      padding: 44px;
-      max-width: 500px;
+      padding: 44px 36px;
+      max-width: 820px;
       width: 100%;
       text-align: center;
       box-shadow: 0 20px 45px rgba(0, 0, 0, 0.18);
     }
-    .home-emoji { font-size: 56px; margin-bottom: 12px; }
+    .home-emoji { font-size: 52px; margin-bottom: 12px; }
     .home-title {
       font-family: "Syne", sans-serif;
       font-weight: 800;
@@ -134,9 +141,122 @@
     }
     .home-sub {
       color: var(--text-muted);
-      font-size: 14.5px;
-      margin-bottom: 32px;
+      font-size: 14px;
+      margin-bottom: 24px;
       line-height: 1.6;
+      max-width: 580px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .section-subtitle {
+      font-family: "Syne", sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-subtitle::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--glass-border);
+    }
+
+    .sesi-section {
+      background: rgba(0, 0, 0, 0.15);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      margin-bottom: 28px;
+      text-align: left;
+    }
+    body.light-theme .sesi-section {
+      background: rgba(255, 255, 255, 0.35);
+    }
+
+    /* Grid for Bab cards */
+    .bab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+      text-align: left;
+      margin-bottom: 12px;
+    }
+
+    .bab-card {
+      background: rgba(0, 0, 0, 0.22);
+      border: 1.5px solid var(--glass-border);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      color: var(--text);
+      text-decoration: none;
+      min-height: 130px;
+    }
+    body.light-theme .bab-card {
+      background: rgba(255, 255, 255, 0.65);
+    }
+    .bab-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--c, var(--orange));
+      opacity: 0.8;
+    }
+    .bab-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--c);
+      background: color-mix(in srgb, var(--c) 6%, rgba(255, 255, 255, 0.03));
+      box-shadow: 0 12px 24px color-mix(in srgb, var(--c) 14%, transparent);
+    }
+    .bab-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .bab-emoji {
+      font-size: 24px;
+      line-height: 1;
+    }
+    .bab-count {
+      font-size: 9.5px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 99px;
+      background: color-mix(in srgb, var(--c) 20%, transparent);
+      color: var(--c);
+      border: 1px solid color-mix(in srgb, var(--c) 40%, transparent);
+      font-family: 'Syne', sans-serif;
+      letter-spacing: 0.03em;
+    }
+    .bab-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 14.5px;
+      font-weight: 800;
+      margin-bottom: 6px;
+      color: var(--text);
+      line-height: 1.3;
+    }
+    .bab-desc {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      line-height: 1.4;
+      flex: 1;
     }
     .sesi-grid {
       display: grid;
@@ -568,27 +688,103 @@
       <span style="font-size:24px;">🎯</span>
       <span>Belajar Akuntansi</span>
     </a>
-    <a href="index.html" class="nav-btn">← Kembali</a>
+    <a href="index.html" class="nav-btn" onclick="handleBackBtn(event)">← Kembali</a>
   </header>
 
   <!-- HOME SCREEN -->
   <div class="screen active" id="screen-home">
     <div class="home-card">
-      <div class="home-emoji">📝</div>
-      <h1 class="home-title">Kuis Evaluasi Akuntansi</h1>
-      <p class="home-sub">Uji wawasan pemahaman siklus akuntansi Kakak dan teman-teman dengan 50 Soal Pilihan Ganda berkualitas.</p>
+      <div class="home-emoji">🎯</div>
+      <h1 class="home-title">Pusat Bank Kuis Akuntansi</h1>
+      <p class="home-sub">Asah otakmu dengan latihan per bab materi secara spesifik, atau ambil kuis komprehensif 50 soal untuk menguji pemahaman menyeluruhmu.</p>
       
-      <div class="sesi-grid">
-        <button class="sesi-btn" onclick="startSesi(1)">
-          <span class="sesi-num">Sesi 1</span>
-          <span class="sesi-label">25 Soal Awal</span>
-        </button>
-        <button class="sesi-btn" onclick="startSesi(2)">
-          <span class="sesi-num">Sesi 2</span>
-          <span class="sesi-label">25 Soal Akhir</span>
-        </button>
+      <!-- SEKSI 1: LATIHAN PER BAB -->
+      <div class="section-subtitle">📖 Latihan Mandiri Per Bab (Topikal)</div>
+      <div class="bab-grid">
+        <!-- Bab 1-3 -->
+        <div class="bab-card" style="--c: var(--orange);" onclick="startKuisBab('Pengantar Akuntansi')">
+          <div class="bab-card-top">
+            <span class="bab-emoji">⚖️</span>
+            <span class="bab-count">15 Soal</span>
+          </div>
+          <div class="bab-title">Pengantar & Persamaan</div>
+          <div class="bab-desc">Bab 1, 2 & 3: Konsep dasar, jenis akun, persamaan dasar akuntansi, serta aturan debit kredit.</div>
+        </div>
+
+        <!-- Bab 4 (Buku Besar) -->
+        <div class="bab-card" style="--c: var(--green);" onclick="startKuisBab('Buku Besar')">
+          <div class="bab-card-top">
+            <span class="bab-emoji">🗂️</span>
+            <span class="bab-count">5 Soal</span>
+          </div>
+          <div class="bab-title">Posting & Buku Besar</div>
+          <div class="bab-desc">Bab 4: Proses pemindahan (posting) dari jurnal umum ke Buku Besar per akun secara teratur.</div>
+        </div>
+
+        <!-- Bab 4 (Penyesuaian) -->
+        <div class="bab-card" style="--c: var(--blue);" onclick="startKuisBab('Jurnal Penyesuaian')">
+          <div class="bab-card-top">
+            <span class="bab-emoji">🔄</span>
+            <span class="bab-count">10 Soal</span>
+          </div>
+          <div class="bab-title">Jurnal Penyesuaian</div>
+          <div class="bab-desc">Bab 4: Jurnal koreksi akhir periode untuk beban dibayar dimuka, depresiasi, dan akrual.</div>
+        </div>
+
+        <!-- Bab 4 (Laporan Keuangan) -->
+        <div class="bab-card" style="--c: var(--pink);" onclick="startKuisBab('Laporan Keuangan')">
+          <div class="bab-card-top">
+            <span class="bab-emoji">📊</span>
+            <span class="bab-count">5 Soal</span>
+          </div>
+          <div class="bab-title">Laporan Keuangan</div>
+          <div class="bab-desc">Bab 4: Penyusunan Laporan Laba Rugi, Laporan Perubahan Modal, Neraca, serta CaLK.</div>
+        </div>
+
+        <!-- Bab 5 -->
+        <div class="bab-card" style="--c: var(--yellow);" onclick="startKuisBab('Perusahaan Dagang')">
+          <div class="bab-card-top">
+            <span class="bab-emoji">📦</span>
+            <span class="bab-count">10 Soal</span>
+          </div>
+          <div class="bab-title">Perusahaan Dagang</div>
+          <div class="bab-desc">Bab 5: Karakteristik dagang, HPP, diskon termin 2/10, pencatatan persediaan, dan ongkos FOB.</div>
+        </div>
+
+        <!-- Bab 6 -->
+        <div class="bab-card" style="--c: var(--orange);" onclick="startKuisBab('Kas & Pengendalian Internal')">
+          <div class="bab-card-top">
+            <span class="bab-emoji">💰</span>
+            <span class="bab-count">15 Soal</span>
+          </div>
+          <div class="bab-title">Kas & Internal Control</div>
+          <div class="bab-desc">Bab 6: Prinsip pengendalian kas, pembuatan rekonsiliasi bank, dan sistem imprest kas kecil.</div>
+        </div>
       </div>
-      <button class="start-all" onclick="startSesi(0)">Mulai Kuis 50 Soal Lengkap →</button>
+
+      <!-- SEKSI 2: KUIS KOMPREHENSIF -->
+      <div class="section-subtitle" style="margin-top: 28px;">⚡ Evaluasi Komprehensif</div>
+      <div class="bab-card" style="--c: var(--pink); cursor: default; min-height: auto; margin-bottom: 14px; padding: 24px;">
+        <div class="bab-card-top">
+          <span class="bab-emoji">🏆</span>
+          <span class="bab-count">50 Soal</span>
+        </div>
+        <div class="bab-title" style="font-size: 18px; text-align: left;">50 Kuis Pengantar Akuntansi (Siklus Lengkap)</div>
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5; text-align: left;">
+          Uji dirimu secara menyeluruh dengan kuis komprehensif 50 soal yang mencakup seluruh materi dari awal hingga akhir siklus akuntansi perusahaan jasa. Soal disusun secara acak.
+        </p>
+        <div class="sesi-grid" style="margin-bottom: 0;">
+          <button class="sesi-btn" onclick="startSesi(1)">
+            <span class="sesi-num">Sesi 1</span>
+            <span class="sesi-label">25 Soal Bagian Awal</span>
+          </button>
+          <button class="sesi-btn" onclick="startSesi(2)">
+            <span class="sesi-num">Sesi 2</span>
+            <span class="sesi-label">25 Soal Bagian Akhir</span>
+          </button>
+        </div>
+      </div>
+      <button class="start-all" onclick="startSesi(0)" style="background: linear-gradient(135deg, var(--pink), var(--purple)); width: 100%;">Mulai Kuis 50 Soal Komprehensif Lengkap →</button>
     </div>
   </div>
 
@@ -670,15 +866,28 @@
     // State Variables
     let ALL_Q = [];
     let activeQ = [];
-    let idx = 0, skor = 0, hasil = [], activeSesi = 0;
+    let idx = 0, skor = 0, hasil = [], activeSesi = 0, activeCategory = "";
 
     function getKatColor(k) { return KAT_COLOR[k] || "#3b82f6"; }
+
+    // Check for query parameters on load
+    function checkUrlParams() {
+      const params = new URLSearchParams(window.location.search);
+      const babParam = params.get("bab");
+      if (babParam && ALL_Q.length > 0) {
+        const matched = ALL_Q.find(q => q.k.toLowerCase() === babParam.toLowerCase());
+        if (matched) {
+          startKuisBab(matched.k);
+        }
+      }
+    }
 
     // Fetch Database Soal Kuis
     fetch("kuis.json")
       .then(res => res.json())
       .then(data => {
         ALL_Q = data;
+        checkUrlParams();
       })
       .catch(err => {
         console.error("Gagal mengambil kuis.json, menggunakan fallback offline...", err);
@@ -692,11 +901,22 @@
             "b": "Persamaan dasar akuntansi yang benar dan seimbang adalah Aset = Liabilitas + Ekuitas."
           }
         ];
+        checkUrlParams();
       });
 
     function goHome() {
       showScreen("screen-home");
-      idx = 0; skor = 0; hasil = []; activeQ = [];
+      idx = 0; skor = 0; hasil = []; activeQ = []; activeCategory = "";
+    }
+
+    function handleBackBtn(e) {
+      if (e) e.preventDefault();
+      const currentActive = document.querySelector(".screen.active");
+      if (currentActive && currentActive.id !== "screen-home") {
+        goHome();
+      } else {
+        window.location.href = "index.html";
+      }
     }
 
     function startSesi(s) {
@@ -705,9 +925,24 @@
         return;
       }
       activeSesi = s;
+      activeCategory = "";
       if (s === 0) activeQ = [...ALL_Q];
       else if (s === 1) activeQ = ALL_Q.slice(0, 25);
       else activeQ = ALL_Q.slice(25, 50);
+
+      idx = 0; skor = 0; hasil = [];
+      showScreen("screen-quiz");
+      renderQ();
+    }
+
+    function startKuisBab(categoryName) {
+      if (ALL_Q.length === 0) {
+        alert("Soal sedang diunduh, harap tunggu sedetik...");
+        return;
+      }
+      activeSesi = -1; // Flag for Bab
+      activeCategory = categoryName;
+      activeQ = ALL_Q.filter(q => q.k === categoryName);
 
       idx = 0; skor = 0; hasil = [];
       showScreen("screen-quiz");
@@ -727,7 +962,17 @@
     function renderQ() {
       const q = activeQ[idx];
       const total = activeQ.length;
-      const label = activeSesi === 0 ? "SEMUA 50 SOAL LATIHAN" : activeSesi === 1 ? "SESI 1 · 25 SOAL AWAL" : "SESI 2 · 25 SOAL AKHIR";
+      
+      let label = "";
+      if (activeSesi === 0) {
+        label = "SEMUA 50 SOAL LATIHAN";
+      } else if (activeSesi === 1) {
+        label = "SESI 1 · 25 SOAL AWAL";
+      } else if (activeSesi === 2) {
+        label = "SESI 2 · 25 SOAL AKHIR";
+      } else {
+        label = `LATIHAN BAB · ${activeCategory.toUpperCase()}`;
+      }
       
       document.getElementById("quiz-label").textContent = label;
       document.getElementById("quiz-counter").textContent = (idx + 1) + "/" + total;
@@ -861,8 +1106,15 @@
     }
 
     function showScreen(id) {
-      document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
-      document.getElementById(id).classList.add("active");
+      document.querySelectorAll(".screen").forEach(s => {
+        s.classList.remove("active");
+        s.style.display = "none";
+      });
+      const target = document.getElementById(id);
+      target.style.display = "flex";
+      // Force reflow to enable transition animation
+      void target.offsetWidth;
+      target.classList.add("active");
     }
   </script>
 </body>

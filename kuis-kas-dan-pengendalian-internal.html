@@ -1,0 +1,824 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kuis Kas & Pengendalian Internal — Belajar Akuntansi</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0f172a;
+        --glass-bg: rgba(30, 41, 59, 0.45);
+        --glass-border: rgba(255, 255, 255, 0.08);
+        --glass-highlight: rgba(255, 255, 255, 0.15);
+        --text: #f8fafc;
+        --text-muted: #94a3b8;
+
+        --pink: #ff3d9a;
+        --purple: #a855f7;
+        --blue: #3b82f6;
+        --green: #10b981;
+        --yellow: #fbbf24;
+        --orange: #ff6b35;
+
+        --radius: 24px;
+        --radius-sm: 14px;
+      }
+
+      body.light-theme {
+        --bg: #fff8f0;
+        --glass-bg: rgba(255, 255, 255, 0.65);
+        --glass-border: rgba(0, 0, 0, 0.06);
+        --glass-highlight: rgba(255, 255, 255, 0.85);
+        --text: #1e293b;
+        --text-muted: #64748b;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "DM Sans", sans-serif;
+        background-color: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        transition:
+          background-color 0.3s,
+          color 0.3s;
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      .blob {
+        position: absolute;
+        border-radius: 50%;
+        pointer-events: none;
+        filter: blur(80px);
+        opacity: 0.22;
+        z-index: 0;
+      }
+      .blob-1 {
+        width: 350px;
+        height: 350px;
+        background: var(--pink);
+        top: -80px;
+        right: -50px;
+      }
+      .blob-2 {
+        width: 300px;
+        height: 300px;
+        background: var(--purple);
+        bottom: 10%;
+        left: -60px;
+      }
+
+      header {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 36px 24px 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        z-index: 10;
+      }
+      .logo {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 18px;
+        color: var(--text);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .nav-btn {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        color: var(--text);
+        padding: 8px 18px;
+        border-radius: 99px;
+        font-family: "Syne", sans-serif;
+        font-weight: 700;
+        font-size: 12px;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .nav-btn:hover {
+        background: var(--glass-highlight);
+      }
+
+      .screen {
+        display: none;
+        min-height: 80vh;
+        align-items: center;
+        justify-content: center;
+        padding: 20px 24px 80px;
+        position: relative;
+        z-index: 10;
+      }
+      .screen.active {
+        display: flex;
+      }
+
+      /* HOME SCREEN */
+      .home-card {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-radius: var(--radius);
+        padding: 44px;
+        max-width: 500px;
+        width: 100%;
+        text-align: center;
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.18);
+      }
+      .home-emoji {
+        font-size: 56px;
+        margin-bottom: 12px;
+      }
+      .home-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 32px;
+        margin-bottom: 8px;
+        background: linear-gradient(135deg, var(--orange), var(--pink));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .home-sub {
+        color: var(--text-muted);
+        font-size: 14.5px;
+        margin-bottom: 32px;
+        line-height: 1.6;
+      }
+      .start-btn {
+        background: var(--orange);
+        color: #fff;
+        border: none;
+        border-radius: var(--radius-sm);
+        padding: 16px;
+        font-weight: 800;
+        font-size: 15px;
+        font-family: "Syne", sans-serif;
+        cursor: pointer;
+        width: 100%;
+        transition: all 0.2s;
+        box-shadow: 0 6px 20px rgba(255, 107, 53, 0.3);
+      }
+      .start-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(255, 107, 53, 0.45);
+      }
+
+      /* QUIZ SCREEN */
+      .quiz-wrap {
+        max-width: 700px;
+        width: 100%;
+      }
+
+      .progress-bar {
+        width: 100%;
+        height: 6px;
+        background: var(--glass-bg);
+        border-radius: 99px;
+        margin-bottom: 24px;
+        overflow: hidden;
+        border: 1px solid var(--glass-border);
+      }
+      .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--orange), var(--pink));
+        width: 0%;
+        transition: width 0.3s ease;
+      }
+
+      .question-card {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-radius: var(--radius);
+        padding: 36px;
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+      }
+
+      .question-num {
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--orange);
+        margin-bottom: 12px;
+        font-family: "Syne", sans-serif;
+      }
+
+      .question-text {
+        font-family: "Syne", sans-serif;
+        font-size: 20px;
+        font-weight: 800;
+        line-height: 1.4;
+        margin-bottom: 28px;
+        color: var(--text);
+      }
+
+      .options {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .option-btn {
+        background: rgba(0, 0, 0, 0.15);
+        border: 2px solid var(--glass-border);
+        border-radius: var(--radius-sm);
+        padding: 16px 20px;
+        cursor: pointer;
+        text-align: left;
+        color: var(--text);
+        font-size: 14px;
+        transition: all 0.2s;
+        font-weight: 500;
+      }
+      body.light-theme .option-btn {
+        background: rgba(255, 255, 255, 0.6);
+      }
+      .option-btn:hover {
+        border-color: var(--orange);
+        background: rgba(255, 107, 53, 0.08);
+      }
+      .option-btn.selected {
+        border-color: var(--orange);
+        background: rgba(255, 107, 53, 0.15);
+        font-weight: 700;
+      }
+      .option-btn.correct {
+        border-color: var(--green);
+        background: rgba(16, 185, 129, 0.15);
+      }
+      .option-btn.wrong {
+        border-color: #ef4444;
+        background: rgba(239, 68, 68, 0.15);
+      }
+
+      .submit-btn {
+        background: var(--orange);
+        color: #fff;
+        border: none;
+        border-radius: var(--radius-sm);
+        padding: 14px 28px;
+        font-weight: 800;
+        font-size: 14px;
+        font-family: "Syne", sans-serif;
+        cursor: pointer;
+        width: 100%;
+        margin-top: 24px;
+        transition: all 0.2s;
+      }
+      .submit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 16px rgba(255, 107, 53, 0.3);
+      }
+      .submit-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      .explanation {
+        background: rgba(59, 130, 246, 0.08);
+        border: 1px solid rgba(59, 130, 246, 0.25);
+        border-radius: var(--radius-sm);
+        padding: 16px 20px;
+        margin-top: 20px;
+        color: var(--text);
+        font-size: 13.5px;
+        line-height: 1.6;
+        display: none;
+      }
+      .explanation.show {
+        display: block;
+        animation: slideIn 0.3s ease;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* RESULTS SCREEN */
+      .results-card {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-radius: var(--radius);
+        padding: 48px 36px;
+        max-width: 500px;
+        width: 100%;
+        text-align: center;
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.18);
+      }
+
+      .results-emoji {
+        font-size: 72px;
+        margin-bottom: 16px;
+      }
+
+      .results-title {
+        font-family: "Syne", sans-serif;
+        font-size: 32px;
+        font-weight: 800;
+        margin-bottom: 12px;
+        background: linear-gradient(135deg, var(--green), var(--orange));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .results-score {
+        font-size: 48px;
+        font-weight: 800;
+        font-family: "Syne", sans-serif;
+        color: var(--orange);
+        margin-bottom: 8px;
+      }
+
+      .results-sub {
+        color: var(--text-muted);
+        font-size: 14px;
+        margin-bottom: 24px;
+      }
+
+      .results-breakdown {
+        background: rgba(0, 0, 0, 0.15);
+        border-radius: var(--radius-sm);
+        padding: 20px;
+        margin-bottom: 24px;
+        text-align: center;
+      }
+      body.light-theme .results-breakdown {
+        background: rgba(255, 255, 255, 0.5);
+      }
+
+      .results-btn {
+        background: var(--orange);
+        color: #fff;
+        border: none;
+        border-radius: var(--radius-sm);
+        padding: 14px 28px;
+        font-weight: 800;
+        font-size: 14px;
+        font-family: "Syne", sans-serif;
+        cursor: pointer;
+        width: 100%;
+        transition: all 0.2s;
+        margin-bottom: 12px;
+        text-decoration: none;
+        display: inline-block;
+      }
+      .results-btn:hover {
+        transform: translateY(-2px);
+      }
+
+      .results-btn.secondary {
+        background: transparent;
+        border: 2px solid var(--orange);
+        color: var(--orange);
+      }
+
+      /* FOOTER */
+      footer {
+        border-top: 1px solid var(--glass-border);
+        background: #090d16;
+        padding: 30px 24px;
+        text-align: center;
+        position: relative;
+        z-index: 10;
+        margin-top: 60px;
+      }
+      body.light-theme footer {
+        background: #fff8f0;
+      }
+      .footer-sub {
+        font-size: 12px;
+        color: var(--text-muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+    <header>
+      <a href="index.html" class="logo">
+        <span style="font-size: 24px">💰</span>
+        <span
+          style="font-weight: 800; font-family: &quot;Syne&quot;, sans-serif"
+          >Belajar Akuntansi</span
+        >
+      </a>
+      <a href="kas-dan-pengendalian-internal.html" class="nav-btn"
+        >← Kembali ke Materi</a
+      >
+    </header>
+
+    <!-- HOME SCREEN -->
+    <div id="home-screen" class="screen active">
+      <div class="home-card">
+        <div class="home-emoji">💰</div>
+        <div class="home-title">Kuis Kas & Pengendalian Internal</div>
+        <div class="home-sub">
+          Uji pemahamanmu tentang kas, pengendalian internal, rekonsiliasi bank,
+          dan kas kecil. Bersiaplah untuk 15 soal menantang!
+        </div>
+        <button class="start-btn" onclick="startQuiz()">Mulai Kuis →</button>
+      </div>
+    </div>
+
+    <!-- QUIZ SCREEN -->
+    <div id="quiz-screen" class="screen">
+      <div class="quiz-wrap">
+        <div class="progress-bar">
+          <div id="progress-fill" class="progress-fill"></div>
+        </div>
+        <div class="question-card">
+          <div id="question-num" class="question-num">Soal 1 dari 15</div>
+          <div id="question-text" class="question-text"></div>
+          <div id="options-container" class="options"></div>
+          <button
+            id="submit-btn"
+            class="submit-btn"
+            onclick="submitAnswer()"
+            disabled
+          >
+            Lanjut
+          </button>
+          <div id="explanation" class="explanation"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULTS SCREEN -->
+    <div id="results-screen" class="screen">
+      <div class="results-card">
+        <div class="results-emoji">✨</div>
+        <div class="results-title">Hasil Kuismu!</div>
+        <div class="results-score" id="results-score">0/15</div>
+        <div class="results-sub">Lihat breakdownmu di bawah</div>
+        <div class="results-breakdown">
+          <div style="font-size: 14px; margin-bottom: 8px">
+            Benar: <strong id="correct-count">0</strong> | Salah:
+            <strong id="wrong-count">0</strong>
+          </div>
+          <div style="font-size: 14px; color: var(--orange); font-weight: 700">
+            Skor: <span id="final-score">0</span>%
+          </div>
+        </div>
+        <button class="results-btn" onclick="retakeQuiz()">🔄 Coba Lagi</button>
+        <a
+          href="kas-dan-pengendalian-internal.html"
+          class="results-btn secondary"
+          >📖 Baca Ulang Materi</a
+        >
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-sub">Dibuat dengan ❤️ oleh Annisa Novita Ardana</div>
+    </footer>
+
+    <script>
+      // THEME
+      const body = document.body;
+      if (localStorage.getItem("theme") === "light") {
+        body.classList.add("light-theme");
+      }
+
+      // QUIZ DATA
+      const quizData = [
+        {
+          k: "Kas & Pengendalian Internal",
+          s: "Yang BUKAN termasuk kas adalah…",
+          p: [
+            "Uang tunai di laci kasir",
+            "Saldo rekening giro di bank",
+            "Deposito berjangka 3 bulan",
+            "Cek dari pelanggan yang belum dicairkan",
+          ],
+          j: 2,
+          b: "Deposito berjangka BUKAN kas karena tidak bisa diambil sewaktu-waktu. Termasuk investasi jangka pendek.",
+        },
+        {
+          k: "Kas & Pengendalian Internal",
+          s: "Prinsip pengendalian internal atas kas yang menyatakan orang yang memegang uang tidak boleh sama dengan orang yang mencatat disebut…",
+          p: [
+            "Otorisasi yang tepat",
+            "Pemisahan tugas (Segregation of Duties)",
+            "Pengendalian fisik",
+            "Rekonsiliasi independen",
+          ],
+          j: 1,
+          b: "Pemisahan tugas adalah prinsip bahwa kasir ≠ akuntan ≠ manajer. Ketiga orang berbeda untuk menghindari penyelewengan.",
+        },
+        {
+          k: "Kas & Pengendalian Internal",
+          s: "Mengapa karyawan yang menangani kas wajib mengambil cuti?",
+          p: [
+            "Agar tidak bosan bekerja",
+            "Untuk mendeteksi ketidakberesan — pengganti sementara bisa menemukan masalah yang disembunyikan",
+            "Karena perusahaan mengharuskan semua karyawan cuti",
+            "Tidak ada alasan khusus",
+          ],
+          j: 1,
+          b: "Rotasi karyawan & cuti wajib adalah prinsip pengendalian internal untuk mencegah karyawan menyembunyikan penyelewengan jangka panjang.",
+        },
+        {
+          k: "Kas & Pengendalian Internal",
+          s: "Rekonsiliasi bank adalah proses mencocokkan…",
+          p: [
+            "Saldo kas dengan saldo piutang",
+            "Saldo buku kas perusahaan dengan saldo rekening koran bank",
+            "Saldo kas dengan saldo hutang",
+            "Saldo utang dengan saldo modal",
+          ],
+          j: 1,
+          b: "Rekonsiliasi bank adalah cocokkan saldo buku perusahaan dengan rekening koran bank pada tanggal yang sama.",
+        },
+        {
+          k: "Kas & Pengendalian Internal",
+          s: "Penyebab perbedaan saldo antara buku kas perusahaan dan rekening koran bank yang berasal dari SISI PERUSAHAAN (belum dicatat perusahaan) adalah…",
+          p: [
+            "Deposit in transit",
+            "Outstanding check",
+            "Jasa giro dari bank",
+            "Cek yang belum dicairkan",
+          ],
+          j: 2,
+          b: "Jasa giro adalah bunga bank yang sudah dikreditkan bank tapi belum dicatat perusahaan — penyebab dari sisi perusahaan.",
+        },
+        {
+          k: "Kas & Pengendalian Internal",
+          s: "Outstanding check adalah…",
+          p: [
+            "Cek dari pelanggan yang belum diterima bank",
+            "Cek yang ditulis perusahaan tapi belum dicairkan penerima",
+            "Cek yang ditolak bank karena saldo tidak cukup",
+            "Cek yang sudah jatuh tempo",
+          ],
+          j: 1,
+          b: "Outstanding check = perusahaan sudah tulis cek, tapi penerima belum cairkan. Ini penyebab perbedaan dari sisi bank.",
+        },
+        {
+          k: "Kas & Pengendalian Internal",
+          s: "Dalam rekonsiliasi bank, deposit in transit ditambahkan pada…",
+          p: [
+            "Saldo buku kas perusahaan",
+            "Saldo rekening koran bank",
+            "Keduanya tidak perlu penyesuaian",
+            "Hanya dicatat dalam memo saja",
+          ],
+          j: 1,
+          b: "Deposit in transit = perusahaan sudah setor tapi bank belum proses. Ditambahkan ke saldo rekening koran bank.",
+        },
+        {
+          k: "Kas & Pengendalian Internal",
+          s: "Jurnal penyesuaian untuk jasa giro yang belum dicatat perusahaan adalah…",
+          p: [
+            "D: Kas | K: Beban Administrasi Bank",
+            "D: Beban Administrasi Bank | K: Kas",
+            "D: Kas | K: Pendapatan Bunga",
+            "D: Piutang | K: Kas",
+          ],
+          j: 2,
+          b: "Jasa giro MENAMBAH kas, jadi D: Kas | K: Pendapatan Bunga (atau Pendapatan Jasa Giro).",
+        },
+        {
+          k: "Kas & Pengendalian Internal",
+          s: "Cek kosong (NSF — Non-Sufficient Fund) dari pelanggan yang ditolak bank harus dijurnal…",
+          p: [
+            "D: Kas | K: Piutang Usaha",
+            "D: Piutang Usaha | K: Kas",
+            "D: Beban | K: Kas",
+            "Tidak perlu dijurnal",
+          ],
+          j: 1,
+          b: "Cek kosong = kas berkurang, piutang ke pelanggan muncul kembali. D: Piutang Usaha | K: Kas.",
+        },
+        {
+          k: "Kas & Pengendalian Internal",
+          s: "Apa itu Kas Kecil (Petty Cash)?",
+          p: [
+            "Dana besar untuk pembayaran utama",
+            "Dana tunai kecil untuk pengeluaran rutin sehari-hari yang tidak praktis ditransfer",
+            "Dana yang disetorkan ke bank setiap hari",
+            "Dana cadangan untuk investasi",
+          ],
+          j: 1,
+          b: "Kas kecil adalah dana tunai untuk pengeluaran kecil: ATK, parkir, ongkos kirim, konsumsi rapat, dsb.",
+        },
+        {
+          k: "Kas & Pengendalian Internal",
+          s: "Sistem Imprest untuk kas kecil berarti…",
+          p: [
+            "Kas kecil tidak pernah diisi ulang",
+            "Kas kecil berubah-ubah jumlahnya setiap periode",
+            "Dana kas kecil selalu dikembalikan ke jumlah awal setelah diisi ulang",
+            "Kas kecil hanya digunakan sekali",
+          ],
+          j: 2,
+          b: "Sistem Imprest = dana tetap (misal Rp 1juta) yang selalu kembali ke Rp 1juta setelah diisi ulang.",
+        },
+        {
+          k: "Kas & Pengendalian Internal",
+          s: "Jurnal pembentukan kas kecil Rp 1.000.000 adalah…",
+          p: [
+            "D: Kas Bank | K: Kas Kecil Rp 1.000.000",
+            "D: Kas Kecil Rp 1.000.000 | K: Kas Bank Rp 1.000.000",
+            "D: Beban | K: Kas Kecil Rp 1.000.000",
+            "Tidak perlu jurnal",
+          ],
+          j: 1,
+          b: "Pembentukan kas kecil = ambil uang dari bank. D: Kas Kecil | K: Kas (Bank).",
+        },
+        {
+          k: "Kas & Pengendalian Internal",
+          s: "Selama periode penggunaan kas kecil Rp 1.000.000, pengeluaran untuk ATK Rp 120rb tidak dijurnal. Mengapa?",
+          p: [
+            "Karena sudah dicatat otomatis oleh sistem",
+            "Karena hanya disimpan bukti/bon saja — jurnal baru dibuat saat pengisian ulang",
+            "Karena ATK dianggap beban modal",
+            "Tidak ada alasan khusus",
+          ],
+          j: 1,
+          b: "Dalam sistem imprest, selama penggunaan tidak ada jurnal. Jurnal hanya dibuat saat pembentukan dan pengisian ulang.",
+        },
+        {
+          k: "Kas & Pengendalian Internal",
+          s: "Dana kas kecil Rp 1.000.000 digunakan untuk: ATK Rp 150rb, Ongkos kirim Rp 80rb, Konsumsi Rp 200rb, Listrik Rp 170rb. Saat pengisian ulang, jurnal untuk Beban Administrasi adalah…",
+          p: [
+            "D: Beban Administrasi Rp 600rb | K: Kas Bank Rp 600rb",
+            "D: Beban Administrasi Rp 1.000rb | K: Kas Bank Rp 1.000rb",
+            "D: Beban Administrasi Rp 400rb | K: Kas Bank Rp 400rb",
+            "Tidak perlu jurnal beban administrasi",
+          ],
+          j: 0,
+          b: "Total pengeluaran = Rp 600rb (150+80+200+170). Pengisian ulang = D: Beban-beban (ATK, kirim, konsumsi, listrik) | K: Kas Bank Rp 600rb.",
+        },
+        {
+          k: "Kas & Pengendalian Internal",
+          s: "Dalam studi kasus PT. Sinar Abadi, masalah yang menyebabkan selisih kas adalah…",
+          p: [
+            "Sistem kas kecil yang salah",
+            "Kasir melakukan lapping — menggunakan kas untuk keperluan pribadi lalu menutupnya dengan setoran berikutnya",
+            "Kesalahan perhitungan bunga bank",
+            "Outstanding check yang banyak",
+          ],
+          j: 1,
+          b: "Lapping adalah penyelewengan kas dengan mengambil uang lalu menutupnya menggunakan setoran pelanggan berikutnya.",
+        },
+        {
+          k: "Kas & Pengendalian Internal",
+          s: "Perbaikan pengendalian internal di PT. Sinar Abadi BUKAN termasuk…",
+          p: [
+            "Pisahkan kasir dan akuntan (pemisahan tugas)",
+            "Wajib setor ke bank setiap hari (penyetoran harian)",
+            "Rekonsiliasi bank setiap tanggal 1 (rekonsiliasi independen)",
+            "Menggandakan jumlah kas kecil",
+          ],
+          j: 3,
+          b: "7 prinsip pengendalian internal tidak termasuk 'menggandakan kas kecil'. Perbaikan yang benar adalah pemisahan tugas, setor harian, rekonsiliasi, rotasi, surprise count.",
+        },
+      ];
+
+      let currentQuestion = 0;
+      let selectedAnswer = null;
+      let isAnswered = false;
+      let correctCount = 0;
+      let results = [];
+
+      function startQuiz() {
+        document.getElementById("home-screen").classList.remove("active");
+        document.getElementById("quiz-screen").classList.add("active");
+        currentQuestion = 0;
+        selectedAnswer = null;
+        isAnswered = false;
+        correctCount = 0;
+        results = [];
+        loadQuestion();
+      }
+
+      function loadQuestion() {
+        const q = quizData[currentQuestion];
+        isAnswered = false;
+        selectedAnswer = null;
+
+        document.getElementById("question-num").textContent =
+          `Soal ${currentQuestion + 1} dari ${quizData.length}`;
+        document.getElementById("question-text").textContent = q.s;
+        document.getElementById("explanation").classList.remove("show");
+        document.getElementById("explanation").textContent = "";
+
+        const optionsContainer = document.getElementById("options-container");
+        optionsContainer.innerHTML = "";
+
+        q.p.forEach((option, idx) => {
+          const btn = document.createElement("button");
+          btn.className = "option-btn";
+          btn.textContent = option;
+          btn.onclick = () => selectOption(idx);
+          optionsContainer.appendChild(btn);
+        });
+
+        updateProgress();
+        document.getElementById("submit-btn").disabled = true;
+        document.getElementById("submit-btn").textContent = "Lanjut";
+      }
+
+      function selectOption(idx) {
+        if (isAnswered) return;
+        selectedAnswer = idx;
+        const buttons = document.querySelectorAll(".option-btn");
+        buttons.forEach((btn, i) => {
+          btn.classList.toggle("selected", i === idx);
+        });
+        document.getElementById("submit-btn").disabled = false;
+      }
+
+      function submitAnswer() {
+        if (selectedAnswer === null) return;
+        if (isAnswered) {
+          nextQuestion();
+          return;
+        }
+
+        isAnswered = true;
+        const q = quizData[currentQuestion];
+        const buttons = document.querySelectorAll(".option-btn");
+        const isCorrect = selectedAnswer === q.j;
+
+        if (isCorrect) {
+          correctCount++;
+          buttons[selectedAnswer].classList.add("correct");
+        } else {
+          buttons[selectedAnswer].classList.add("wrong");
+          buttons[q.j].classList.add("correct");
+        }
+
+        results.push({ correct: isCorrect });
+        document.getElementById("explanation").textContent = q.b;
+        document.getElementById("explanation").classList.add("show");
+        document.getElementById("submit-btn").textContent =
+          currentQuestion === quizData.length - 1
+            ? "Lihat Hasil"
+            : "Soal Berikutnya";
+      }
+
+      function nextQuestion() {
+        currentQuestion++;
+        if (currentQuestion < quizData.length) {
+          loadQuestion();
+        } else {
+          showResults();
+        }
+      }
+
+      function updateProgress() {
+        const progress = ((currentQuestion + 1) / quizData.length) * 100;
+        document.getElementById("progress-fill").style.width = progress + "%";
+      }
+
+      function showResults() {
+        document.getElementById("quiz-screen").classList.remove("active");
+        document.getElementById("results-screen").classList.add("active");
+
+        const percentage = Math.round((correctCount / quizData.length) * 100);
+        document.getElementById("results-score").textContent =
+          `${correctCount}/${quizData.length}`;
+        document.getElementById("correct-count").textContent = correctCount;
+        document.getElementById("wrong-count").textContent =
+          quizData.length - correctCount;
+        document.getElementById("final-score").textContent = percentage;
+      }
+
+      function retakeQuiz() {
+        document.getElementById("results-screen").classList.remove("active");
+        startQuiz();
+      }
+    </script>
+  </body>
+</html>

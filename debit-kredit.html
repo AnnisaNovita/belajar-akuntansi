@@ -7,17 +7,80 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #F4F1EC; --dark: #1A1A2E;
+    --bg: #0f172a;
+    --dark: #f8fafc; /* In dark mode, --dark represents the text color */
     --debit: #E8572A; --kredit: #2E86AB;
     --green: #27AE60; --purple: #8E44AD;
     --yellow: #F4C542; --pink: #E91E8C;
     --radius: 20px; --radius-sm: 12px;
+
+    /* Theme specific variables */
+    --card: #1e293b;
+    --border: rgba(255, 255, 255, 0.08);
+    --hover: rgba(255, 255, 255, 0.02);
+    --text-muted: #94a3b8;
+    --hero-bg: #090d16;
+
+    --d-card-bg: rgba(232, 87, 42, 0.12);
+    --d-card-border: rgba(232, 87, 42, 0.3);
+    --k-card-bg: rgba(46, 134, 171, 0.12);
+    --k-card-border: rgba(46, 134, 171, 0.3);
   }
+
+  body.light-theme {
+    --bg: #F4F1EC;
+    --dark: #1A1A2E; /* In light mode, --dark is the dark blue text */
+    --debit: #E8572A; --kredit: #2E86AB;
+
+    --card: #FFFFFF;
+    --border: #EEE;
+    --hover: #FAFAF8;
+    --text-muted: #666666;
+    --hero-bg: #1A1A2E;
+
+    --d-card-bg: rgba(232, 87, 42, 0.08);
+    --d-card-border: rgba(232, 87, 42, 0.2);
+    --k-card-bg: rgba(46, 134, 171, 0.08);
+    --k-card-border: rgba(46, 134, 171, 0.2);
+  }
+
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--dark); }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--dark);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .back-btn {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #fff;
+    padding: 8px 18px;
+    border-radius: 99px;
+    font-family: "Syne", sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    z-index: 100;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .back-btn:hover {
+    background: rgba(255, 255, 255, 0.18);
+    transform: translateY(-1px);
+  }
 
   .hero {
-    background: var(--dark); padding: 60px 32px 52px;
+    background: var(--hero-bg); padding: 80px 32px 52px;
     position: relative; overflow: hidden;
   }
   .hero::before {
@@ -62,22 +125,22 @@
   .content { max-width: 900px; margin: 0 auto; padding: 44px 24px 72px; }
 
   .sec-label { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; margin-top: 44px; }
-  .sec-label-line { flex: 1; height: 2px; background: var(--dark); opacity: 0.08; border-radius: 2px; }
-  .sec-label-text { font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #888; white-space: nowrap; }
+  .sec-label-line { flex: 1; height: 2px; background: var(--border); opacity: 0.15; border-radius: 2px; }
+  .sec-label-text { font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); white-space: nowrap; }
 
   /* SALDO NORMAL TABLE */
   .saldo-table {
-    width: 100%; border-collapse: collapse; background: white;
-    border-radius: var(--radius); overflow: hidden; border: 2px solid #EEE;
+    width: 100%; border-collapse: collapse; background: var(--card);
+    border-radius: var(--radius); overflow: hidden; border: 2px solid var(--border);
   }
   .saldo-table th {
-    background: var(--dark); color: rgba(255,255,255,0.7);
+    background: var(--hero-bg); color: rgba(255,255,255,0.7);
     font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
     text-transform: uppercase; padding: 14px 20px; text-align: left;
   }
-  .saldo-table td { padding: 14px 20px; font-size: 14px; border-bottom: 1px solid #F5F5F5; vertical-align: middle; }
+  .saldo-table td { padding: 14px 20px; font-size: 14px; border-bottom: 1px solid var(--border); vertical-align: middle; }
   .saldo-table tr:last-child td { border-bottom: none; }
-  .saldo-table tr:hover td { background: #FAFAF8; }
+  .saldo-table tr:hover td { background: var(--hover); }
   .saldo-table td:first-child { font-weight: 600; }
 
   .chip {
@@ -87,13 +150,13 @@
   .chip.debit { background: rgba(232,87,42,0.12); color: var(--debit); }
   .chip.kredit { background: rgba(46,134,171,0.12); color: var(--kredit); }
 
-  .row-stripe { background: #FAFAFA; }
+  .row-stripe { background: var(--hover); }
 
   /* T ACCOUNT */
   .t-account-wrap { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
   .t-account {
-    background: white; border-radius: var(--radius);
-    border: 2px solid #EEE; overflow: hidden;
+    background: var(--card); border-radius: var(--radius);
+    border: 2px solid var(--border); overflow: hidden;
   }
   .t-account-header {
     padding: 14px 20px; font-family: 'Syne', sans-serif;
@@ -101,11 +164,11 @@
   }
   .t-account-body { display: grid; grid-template-columns: 1fr 1fr; }
   .t-side { padding: 16px; }
-  .t-side.left { border-right: 2px solid #F0F0F0; }
+  .t-side.left { border-right: 2px solid var(--border); }
   .t-side-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px; }
   .t-side.left .t-side-label { color: var(--debit); }
   .t-side.right .t-side-label { color: var(--kredit); }
-  .t-row { font-size: 13px; color: #666; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+  .t-row { font-size: 13px; color: var(--text-muted); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
   .t-arrow { font-size: 14px; }
   .t-arrow.up { color: var(--green); }
   .t-arrow.down { color: var(--debit); }
@@ -113,14 +176,14 @@
   /* CONTOH TRANSAKSI */
   .transaksi-list { display: flex; flex-direction: column; gap: 16px; }
   .transaksi-card {
-    background: white; border-radius: var(--radius);
-    border: 2px solid #EEE; overflow: hidden;
+    background: var(--card); border-radius: var(--radius);
+    border: 2px solid var(--border); overflow: hidden;
     transition: transform 0.15s, box-shadow 0.15s;
   }
   .transaksi-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
   .transaksi-header {
     padding: 16px 20px; display: flex; align-items: center; gap: 12px;
-    border-bottom: 1px solid #F5F5F5;
+    border-bottom: 1px solid var(--border);
   }
   .transaksi-num {
     width: 32px; height: 32px; border-radius: 99px;
@@ -133,11 +196,11 @@
   .jurnal-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
   .jurnal-row:last-child { margin-bottom: 0; }
   .jurnal-akun { font-size: 13.5px; flex: 1; }
-  .jurnal-akun.kredit-akun { padding-left: 24px; color: #666; }
+  .jurnal-akun.kredit-akun { padding-left: 24px; color: var(--text-muted); }
   .jurnal-amount { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; }
   .jurnal-amount.d { color: var(--debit); }
   .jurnal-amount.k { color: var(--kredit); }
-  .alasan { margin-top: 12px; padding: 10px 14px; background: #F8F8F6; border-radius: 8px; font-size: 12.5px; color: #666; line-height: 1.6; }
+  .alasan { margin-top: 12px; padding: 10px 14px; background: var(--hover); border-radius: 8px; font-size: 12.5px; color: var(--text-muted); line-height: 1.6; }
   .alasan strong { color: var(--dark); }
 
   /* RUMUS BOX */
@@ -146,8 +209,8 @@
   .rumus-card {
     border-radius: var(--radius); padding: 28px; text-align: center;
   }
-  .rumus-card.d { background: rgba(232,87,42,0.08); border: 2px solid rgba(232,87,42,0.2); }
-  .rumus-card.k { background: rgba(46,134,171,0.08); border: 2px solid rgba(46,134,171,0.2); }
+  .rumus-card.d { background: var(--d-card-bg); border: 2px solid var(--d-card-border); }
+  .rumus-card.k { background: var(--k-card-bg); border: 2px solid var(--k-card-border); }
   .rumus-card-title { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; margin-bottom: 12px; }
   .rumus-card.d .rumus-card-title { color: var(--debit); }
   .rumus-card.k .rumus-card-title { color: var(--kredit); }
@@ -161,6 +224,7 @@
 <body>
 
 <div class="hero">
+  <a href="index.html" class="back-btn">← Kembali ke Menu</a>
   <div class="hero-tag">Pengantar Akuntansi</div>
   <h1><span class="d">Debit</span> &<br><span class="k">Kredit</span></h1>
   <p>Lupakan dulu pengertian debit/kredit di perbankan. Di akuntansi, artinya beda — dan lebih simpel dari yang kamu kira!</p>
@@ -427,5 +491,11 @@
   </div>
 
 </div>
+<script>
+  // Theme Setup
+  if (localStorage.getItem("theme") === "light") {
+    document.body.classList.add("light-theme");
+  }
+</script>
 </body>
 </html>

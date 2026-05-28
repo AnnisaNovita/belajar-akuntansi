@@ -22,6 +22,31 @@
   --radius-sm: 10px;
   --sidebar-w: 260px;
   --mono: 'JetBrains Mono', monospace;
+  --hover: rgba(255,255,255,0.02);
+}
+
+body.light-theme {
+  --bg: #fff8f0;
+  --surface: rgba(255, 255, 255, 0.65);
+  --surface2: rgba(255, 255, 255, 0.85);
+  --border: rgba(0, 0, 0, 0.08);
+  --text: #1e293b;
+  --muted: #64748b;
+  --hover: rgba(0, 0, 0, 0.02);
+}
+
+body.light-theme .hero {
+  background: linear-gradient(135deg, #fff8f0 0%, #fae8ff 50%, #e0f2fe 100%);
+}
+body.light-theme .hero h1 {
+  color: #1e293b;
+}
+body.light-theme .hero p {
+  color: #64748b;
+}
+body.light-theme .hero-step {
+  background: var(--surface2);
+  color: var(--muted);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -33,6 +58,7 @@ body {
   color: var(--text);
   min-height: 100vh;
   display: flex;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* SIDEBAR */
@@ -43,6 +69,7 @@ body {
   position: fixed; top: 0; left: 0; bottom: 0;
   overflow-y: auto; z-index: 100;
   display: flex; flex-direction: column;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 .sidebar::-webkit-scrollbar { width: 4px; }
 .sidebar::-webkit-scrollbar-track { background: transparent; }
@@ -246,7 +273,7 @@ tbody td {
   border-bottom: 1px solid var(--border); vertical-align: middle;
 }
 tbody tr:last-child td { border-bottom: none; }
-tbody tr:hover td { background: rgba(255,255,255,0.02); }
+tbody tr:hover td { background: var(--hover); }
 .td-mono { font-family: var(--mono); font-size: 12px; }
 .td-muted { color: var(--muted); }
 .td-bold { font-weight: 600; }
@@ -436,6 +463,11 @@ tbody tr:hover td { background: rgba(255,255,255,0.02); }
 <!-- SIDEBAR -->
 <nav class="sidebar">
   <div class="sidebar-logo">
+    <a href="index.html" style="text-decoration:none; color:inherit; display:block; margin-bottom:8px;">
+      <div style="font-size:11px; color:var(--accent); font-weight:700; display:flex; align-items:center; gap:4px;">
+        <span>← Kembali ke Menu</span>
+      </div>
+    </a>
     <div class="sidebar-logo-title">Siklus Akuntansi</div>
     <div class="sidebar-logo-sub">Bersih Jaya · Jan 2025</div>
   </div>
@@ -1327,6 +1359,11 @@ tbody tr:hover td { background: rgba(255,255,255,0.02); }
 </main>
 
 <script>
+// Theme Setup
+if (localStorage.getItem("theme") === "light") {
+  document.body.classList.add("light-theme");
+}
+
 const sections = document.querySelectorAll('.section');
 const navItems = document.querySelectorAll('.nav-item');
 const observer = new IntersectionObserver((entries) => {

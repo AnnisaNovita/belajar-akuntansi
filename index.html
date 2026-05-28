@@ -861,7 +861,7 @@
             <div class="stat-label">File Latihan</div>
           </div>
           <div class="stat">
-            <div class="stat-num">50</div>
+            <div class="stat-num" id="stat-kuis-total">...</div>
             <div class="stat-label">Kuis Interaktif</div>
           </div>
         </div>
@@ -977,14 +977,13 @@
 
       <a href="kuis_akuntansi_50soal.html" class="kuis-banner">
         <div class="kuis-banner-inner">
-          <div class="kuis-tag">🎯 Latihan Soal</div>
-          <div class="kuis-title">Evaluasi Kuis Akuntansi — 50 Soal</div>
+          <div class="kuis-tag">🎯 Pusat Bank Kuis</div>
+          <div class="kuis-title">Pusat Bank Kuis Interaktif &amp; Evaluasi</div>
           <div class="kuis-desc">
-            Tersedia dalam 2 sesi evaluasi. Jawab soal, dapatkan pembahasan
-            mendalam, dan lihat tingkat penguasaan konsepmu!
+            Latih pemahamanmu per bab secara terfokus (6 bab lengkap) atau uji dirimu secara menyeluruh dengan kuis komprehensif 50 soal + pembahasan mendalam!
           </div>
         </div>
-        <div class="kuis-btn">Mulai Kuis Sekarang →</div>
+        <div class="kuis-btn">Buka Bank Kuis →</div>
       </a>
 
       <!-- STUDY GUIDE -->
@@ -1078,6 +1077,21 @@
           console.error("Gagal memuat materi.json:", err);
           document.getElementById("materi-container").innerHTML =
             `<p style="color:var(--orange);text-align:center;grid-column:1/-1;">Gagal mengambil database materi. Harap jalankan menggunakan server lokal atau deploy.</p>`;
+        });
+
+      // Load total kuis count dynamically
+      fetch("kuis.json")
+        .then((res) => res.json())
+        .then((data) => {
+          if (Array.isArray(data)) {
+            document.getElementById("stat-kuis-total").textContent = data.length;
+          } else {
+            document.getElementById("stat-kuis-total").textContent = "50+";
+          }
+        })
+        .catch((err) => {
+          console.error("Gagal memuat kuis.json:", err);
+          document.getElementById("stat-kuis-total").textContent = "50+";
         });
 
       // RENDER CONTENT CARDS

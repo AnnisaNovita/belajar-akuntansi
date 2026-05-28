@@ -56,6 +56,17 @@
       "url": "akuntansi-perusahaan-dagang.html"
     },
     {
+      "id": "kas-dan-pengendalian-internal",
+      "kategori": "akuntansi",
+      "emoji": "💰",
+      "badge": "Bab 6",
+      "judul": "Kas & Pengendalian Internal",
+      "deskripsi": "Pahami kas sebagai aset paling likuid, 7 prinsip pengendalian internal, rekonsiliasi bank, dan pengelolaan kas kecil dengan sistem imprest.",
+      "tags": ["Pengendalian Internal", "Rekonsiliasi Bank", "Kas Kecil"],
+      "warna": "#ff6b35",
+      "url": "kas-dan-pengendalian-internal.html"
+    },
+    {
       "id": "dasar-perpajakan-indonesia",
       "kategori": "pajak",
       "emoji": "🧾",
@@ -64,18 +75,18 @@
       "deskripsi": "Kenali definisi pajak, jenis-jenis pajak pusat & daerah, serta asas pemungutan pajak di Indonesia.",
       "tags": ["Pusat", "Daerah", "Asas"],
       "warna": "#F59E0B",
-      "url": "dasar-perpajakan-indonesia.html"
+      "url": ""
     }
   ],
   "latihan_excel": [
     {
-      "id": "latihan-siklus-akuntansi-laundry",
+      "id": "latihan-siklus-akuntansi-PT-Kreasi-Visual-Nusantara",
       "emoji": "🧺",
-      "judul": "Kasus Siklus Akuntansi Laundry Jaya",
-      "deskripsi": "Latihan transaksi lengkap jasa laundry mulai dari jurnal umum, buku besar, neraca saldo, penyesuaian, hingga laporan keuangan.",
-      "tags": ["Perusahaan Jasa", "Laundry", "Siklus Lengkap"],
+      "judul": "Kasus Siklus Akuntansi PT Kreasi Visual Nusantara",
+      "deskripsi": "Latihan transaksi lengkap perusahaan jasa mulai dari jurnal umum, buku besar, neraca saldo, penyesuaian, hingga laporan keuangan.",
+      "tags": ["Perusahaan Jasa", "Visual", "Siklus Lengkap"],
       "warna": "#ec4899",
-      "url": "latihan/latihan_siklus_akuntansi_laundry_jaya.xlsx",
+      "url": "latihan/PT_Kreasi_Visual_Nusantara_Jan2025.xlsx",
       "ukuran": "18 KB"
     },
     {

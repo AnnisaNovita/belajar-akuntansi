@@ -1,0 +1,1467 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kas & Pengendalian Internal — Belajar Akuntansi</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0f172a;
+        --glass-bg: rgba(30, 41, 59, 0.45);
+        --glass-border: rgba(255, 255, 255, 0.08);
+        --glass-highlight: rgba(255, 255, 255, 0.15);
+        --text: #f8fafc;
+        --text-muted: #94a3b8;
+
+        --pink: #ff3d9a;
+        --purple: #a855f7;
+        --blue: #3b82f6;
+        --green: #10b981;
+        --yellow: #fbbf24;
+        --orange: #ff6b35;
+
+        --radius: 24px;
+        --radius-sm: 14px;
+      }
+
+      /* LIGHT THEME */
+      body.light-theme {
+        --bg: #fff8f0;
+        --glass-bg: rgba(255, 255, 255, 0.65);
+        --glass-border: rgba(0, 0, 0, 0.06);
+        --glass-highlight: rgba(255, 255, 255, 0.85);
+        --text: #1e293b;
+        --text-muted: #64748b;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "DM Sans", sans-serif;
+        background-color: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        overflow-x: hidden;
+        transition:
+          background-color 0.3s ease,
+          color 0.3s ease;
+        position: relative;
+      }
+
+      /* Background Neon Blobs */
+      .blob {
+        position: absolute;
+        border-radius: 50%;
+        pointer-events: none;
+        filter: blur(80px);
+        opacity: 0.25;
+        z-index: 0;
+        animation: float 20s infinite alternate;
+      }
+      .blob-1 {
+        width: 450px;
+        height: 450px;
+        background: var(--pink);
+        top: -150px;
+        right: -80px;
+      }
+      .blob-2 {
+        width: 320px;
+        height: 320px;
+        background: var(--purple);
+        bottom: 20%;
+        left: -80px;
+        animation-delay: -5s;
+      }
+      .blob-3 {
+        width: 350px;
+        height: 350px;
+        background: var(--blue);
+        top: 40%;
+        right: 10%;
+        animation-delay: -10s;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translate(0, 0) scale(1);
+        }
+        100% {
+          transform: translate(50px, 80px) scale(1.1);
+        }
+      }
+
+      /* HEADER */
+      header {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 30px 24px 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        z-index: 10;
+      }
+      .header-logo {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 18px;
+        color: var(--text);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .theme-toggle-btn {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        color: var(--text);
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        transition:
+          transform 0.2s,
+          background-color 0.2s;
+      }
+      .theme-toggle-btn:hover {
+        transform: scale(1.08);
+        background: var(--glass-highlight);
+      }
+
+      .back-btn {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        color: var(--text);
+        padding: 10px 20px;
+        border-radius: 99px;
+        font-family: "Syne", sans-serif;
+        font-weight: 700;
+        font-size: 13px;
+        text-decoration: none;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition:
+          background-color 0.2s,
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
+      .back-btn:hover {
+        transform: translateY(-2px);
+        background: var(--glass-highlight);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      }
+
+      /* HERO */
+      .hero {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 40px 24px;
+        position: relative;
+        z-index: 10;
+        text-align: center;
+      }
+
+      .hero-glass {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-radius: var(--radius);
+        padding: 48px 32px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .hero-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 107, 53, 0.15);
+        border: 1.5px solid rgba(255, 107, 53, 0.3);
+        color: var(--orange);
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 7px 18px;
+        border-radius: 99px;
+        margin-bottom: 24px;
+        font-family: "Syne", sans-serif;
+      }
+      body.light-theme .hero-tag {
+        background: rgba(255, 107, 53, 0.1);
+        color: #ea580c;
+      }
+
+      .hero h1 {
+        font-family: "Syne", sans-serif;
+        font-size: clamp(30px, 6vw, 52px);
+        font-weight: 800;
+        line-height: 1.15;
+        margin-bottom: 16px;
+        color: #fff;
+      }
+      body.light-theme .hero h1 {
+        color: #1e293b;
+      }
+      .hero h1 .hi-highlight {
+        color: var(--orange);
+      }
+
+      .hero p {
+        color: var(--text-muted);
+        font-size: 15px;
+        line-height: 1.7;
+        max-width: 580px;
+        margin-bottom: 32px;
+      }
+
+      /* MAIN CONTENT */
+      .content {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 24px 80px;
+        position: relative;
+        z-index: 10;
+      }
+
+      .section-title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 48px;
+        margin-bottom: 24px;
+      }
+      .sec-line {
+        flex: 1;
+        height: 1.5px;
+        background: var(--glass-border);
+      }
+      .sec-text {
+        font-family: "Syne", sans-serif;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+      }
+
+      /* GRID FOR COMPONENTS */
+      .cards-3 {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+        gap: 24px;
+        margin-bottom: 48px;
+      }
+
+      .card {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-radius: var(--radius);
+        padding: 28px;
+        color: var(--text);
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+        transition:
+          transform 0.25s,
+          box-shadow 0.25s,
+          border-color 0.25s;
+      }
+      .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: var(--c, var(--orange));
+      }
+      .card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        border-color: var(--c, var(--orange));
+      }
+
+      .card-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: var(--radius-sm);
+        background: color-mix(in srgb, var(--c) 15%, transparent);
+        color: var(--c);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        margin-bottom: 18px;
+        border: 1px solid color-mix(in srgb, var(--c) 30%, transparent);
+      }
+      .card-eyebrow {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--c);
+        margin-bottom: 6px;
+      }
+      .card-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 20px;
+        line-height: 1.35;
+        margin-bottom: 10px;
+      }
+      .card-body {
+        font-size: 13.5px;
+        color: var(--text-muted);
+        line-height: 1.6;
+        margin-bottom: 18px;
+      }
+
+      /* Lists inside cards */
+      .list-items {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .list-sub {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 11px;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        margin-top: 14px;
+        margin-bottom: 4px;
+        padding-bottom: 4px;
+        border-bottom: 1px dashed var(--glass-border);
+      }
+      .list-sub:first-child {
+        margin-top: 0;
+      }
+      .list-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 13px;
+        line-height: 1.5;
+      }
+      .list-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--c);
+        flex-shrink: 0;
+        margin-top: 6px;
+        box-shadow: 0 0 8px var(--c);
+      }
+
+      /* EXAMPLE BLOCKS */
+      .example-wrap {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-radius: var(--radius);
+        padding: 32px;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+        margin-bottom: 40px;
+      }
+      .example-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 16px;
+        color: var(--orange);
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .example-story {
+        color: var(--text-muted);
+        font-size: 14.5px;
+        line-height: 1.7;
+        margin-bottom: 24px;
+        padding: 16px 20px;
+        border-left: 3px solid var(--orange);
+        background: rgba(255, 107, 53, 0.05);
+        border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      }
+      body.light-theme .example-story {
+        background: rgba(255, 107, 53, 0.02);
+      }
+
+      /* TABLES */
+      .table-wrap {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius-sm);
+        overflow: hidden;
+        margin-bottom: 24px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th {
+        background: rgba(0, 0, 0, 0.25);
+        color: var(--text-muted);
+        font-family: "Syne", sans-serif;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 16px 24px;
+        text-align: left;
+        border-bottom: 1.5px solid var(--glass-border);
+      }
+      body.light-theme th {
+        background: rgba(255, 255, 255, 0.5);
+        color: #64748b;
+      }
+      td {
+        padding: 14px 24px;
+        font-size: 14px;
+        border-bottom: 1px solid var(--glass-border);
+        color: var(--text);
+      }
+      tr:last-child td {
+        border-bottom: none;
+      }
+      tr:hover td {
+        background: rgba(255, 255, 255, 0.03);
+      }
+      body.light-theme tr:hover td {
+        background: rgba(0, 0, 0, 0.01);
+      }
+      tr.highlight td {
+        background: rgba(16, 185, 129, 0.08);
+        font-weight: 600;
+      }
+
+      /* INFO BOXES */
+      .info-box {
+        background: rgba(16, 185, 129, 0.08);
+        border: 1px solid rgba(16, 185, 129, 0.25);
+        border-radius: var(--radius-sm);
+        padding: 20px;
+        margin-bottom: 24px;
+        color: var(--text);
+      }
+      .info-box strong {
+        color: var(--green);
+      }
+
+      /* FORMULA BLOCKS */
+      .formula-block {
+        background: rgba(0, 0, 0, 0.2);
+        border: 2px solid var(--glass-border);
+        border-radius: var(--radius-sm);
+        padding: 20px;
+        margin-bottom: 20px;
+        font-family: "Syne", sans-serif;
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--orange);
+        text-align: center;
+      }
+      body.light-theme .formula-block {
+        background: rgba(255, 255, 255, 0.85);
+      }
+
+      /* FOOTER */
+      footer {
+        border-top: 1px solid var(--glass-border);
+        background: #090d16;
+        padding: 40px 24px;
+        text-align: center;
+        position: relative;
+        z-index: 10;
+      }
+      body.light-theme footer {
+        background: #fff8f0;
+      }
+      .footer-name {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 16px;
+        background: linear-gradient(
+          135deg,
+          var(--yellow),
+          var(--pink),
+          var(--purple)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 6px;
+      }
+      .footer-sub {
+        font-size: 12.5px;
+        color: var(--text-muted);
+      }
+      .footer-dots {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        margin-top: 16px;
+      }
+      .footer-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+      }
+
+      /* Quiz CTA */
+      .quiz-cta {
+        background: var(--glass-bg);
+        border: 2px solid var(--orange);
+        border-radius: var(--radius);
+        padding: 40px 32px;
+        text-align: center;
+        margin-top: 60px;
+        margin-bottom: 40px;
+      }
+      .quiz-cta h3 {
+        font-family: "Syne", sans-serif;
+        font-size: 24px;
+        margin-bottom: 12px;
+        color: var(--orange);
+      }
+      .quiz-cta p {
+        color: var(--text-muted);
+        margin-bottom: 20px;
+      }
+      .quiz-btn {
+        background: var(--orange);
+        color: white;
+        border: none;
+        padding: 14px 32px;
+        border-radius: var(--radius-sm);
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-decoration: none;
+        display: inline-block;
+      }
+      .quiz-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 24px rgba(255, 107, 53, 0.3);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Background blobs -->
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <!-- HEADER -->
+    <header>
+      <a href="index.html" class="header-logo">
+        <span style="font-size: 24px">💰</span>
+        <span
+          style="font-weight: 800; font-family: &quot;Syne&quot;, sans-serif"
+          >Belajar Akuntansi</span
+        >
+      </a>
+      <div style="display: flex; gap: 12px; align-items: center">
+        <a href="index.html" class="back-btn">← Kembali</a>
+        <button
+          class="theme-toggle-btn"
+          onclick="toggleTheme()"
+          id="theme-btn"
+          title="Ganti Tema"
+        >
+          🌓
+        </button>
+      </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <div class="hero-glass">
+        <div class="hero-tag">💰 Bab 6</div>
+        <h1>Kas & <span class="hi-highlight">Pengendalian Internal</span></h1>
+        <p>
+          Pahami konsep kas yang paling likuid, sistem pengendalian internal
+          untuk menjaga aset, cara melakukan rekonsiliasi bank, dan pengelolaan
+          kas kecil dengan sistem imprest yang rapi!
+        </p>
+      </div>
+    </section>
+
+    <!-- CONTENT SECTION -->
+    <main class="content">
+      <!-- SECTION 1: PENGERTIAN KAS -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">📌 Pengertian Kas & Setara Kas</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="cards-3">
+        <div class="card" style="--c: var(--orange)">
+          <div class="card-icon">🏦</div>
+          <div class="card-eyebrow">Komponen 01</div>
+          <div class="card-title">Apa itu Kas?</div>
+          <div class="card-body">
+            Kas adalah aset paling likuid yang dimiliki perusahaan — bisa
+            langsung digunakan untuk membayar kewajiban tanpa konversi apapun.
+          </div>
+        </div>
+
+        <div class="card" style="--c: var(--blue)">
+          <div class="card-icon">✅</div>
+          <div class="card-eyebrow">Yang Termasuk</div>
+          <div class="card-title">Bentuk-Bentuk Kas</div>
+          <div class="list-items">
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Uang tunai (kertas & koin)</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Rekening giro di bank</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Cek yang diterima</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Money order / Wesel pos</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="--c: var(--green)">
+          <div class="card-icon">❌</div>
+          <div class="card-eyebrow">JANGAN Salah</div>
+          <div class="card-title">BUKAN Kas</div>
+          <div class="list-items">
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Deposito berjangka</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Cek mundur</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Perangko & materai</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Piutang usaha</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">🏪 Contoh Nyata</div>
+        <div class="example-story">
+          Kasir Indomaret menerima cek dari supplier senilai Rp 50 juta — ini
+          masuk kas. Tapi deposito 3 bulan Rp 100 juta di BRI — bukan kas, masuk
+          Investasi Jangka Pendek.
+        </div>
+      </div>
+
+      <div class="formula-block">
+        Setara Kas (Cash Equivalent) = Investasi jangka pendek yang sangat
+        likuid, jatuh tempo ≤ 3 bulan, dengan risiko sangat kecil
+      </div>
+
+      <!-- SECTION 2: PENGENDALIAN INTERNAL -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">🔒 Pengendalian Internal Atas Kas</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">❓ Apa itu Pengendalian Internal?</div>
+        <div class="example-story">
+          Pengendalian internal adalah sistem prosedur dan kebijakan yang
+          dirancang untuk: melindungi aset dari pencurian, memastikan akurasi
+          catatan, mendorong efisiensi operasional, dan memastikan kepatuhan
+          peraturan. Contoh: CCTV di kasir, supervisor mengawasi, penghitungan
+          uang di akhir shift.
+        </div>
+      </div>
+
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">7 Prinsip Pengendalian Internal</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="cards-3">
+        <div class="card" style="--c: var(--pink)">
+          <div class="card-icon">👥</div>
+          <div class="card-eyebrow">Prinsip 1</div>
+          <div class="card-title">Pemisahan Tugas</div>
+          <div class="card-body">
+            Orang yang memegang uang ≠ orang yang mencatat ≠ orang yang
+            mengotorisasi. Di toko besar: Kasir (Ani), Akuntan (Budi), Manajer
+            (Pak Hasan) — tiga orang berbeda!
+          </div>
+        </div>
+
+        <div class="card" style="--c: var(--purple)">
+          <div class="card-icon">✍️</div>
+          <div class="card-eyebrow">Prinsip 2</div>
+          <div class="card-title">Otorisasi Tepat</div>
+          <div class="card-body">
+            Setiap pengeluaran kas harus mendapat persetujuan pejabat berwenang.
+            Contoh: Pembelian >Rp 5jt tanda tangan manajer, >Rp 50jt tanda
+            tangan direktur.
+          </div>
+        </div>
+
+        <div class="card" style="--c: var(--blue)">
+          <div class="card-icon">📄</div>
+          <div class="card-eyebrow">Prinsip 3</div>
+          <div class="card-title">Dokumen Memadai</div>
+          <div class="card-body">
+            Setiap transaksi kas harus didukung bukti tertulis bernomor urut:
+            kuitansi, faktur, PO, bukti transfer bank.
+          </div>
+        </div>
+
+        <div class="card" style="--c: var(--green)">
+          <div class="card-icon">🔐</div>
+          <div class="card-eyebrow">Prinsip 4</div>
+          <div class="card-title">Pengendalian Fisik</div>
+          <div class="card-body">
+            Uang tunai disimpan di brankas/safe deposit, akses terbatas. Setoran
+            harian ke bank oleh petugas khusus — bukan sembarang karyawan.
+          </div>
+        </div>
+
+        <div class="card" style="--c: var(--yellow)">
+          <div class="card-icon">🔍</div>
+          <div class="card-eyebrow">Prinsip 5</div>
+          <div class="card-title">Rekonsiliasi Independen</div>
+          <div class="card-body">
+            Orang yang tidak terlibat penanganan kas melakukan pengecekan rutin.
+            Bagian audit setiap bulan cocokkan saldo buku dengan rekening koran
+            bank.
+          </div>
+        </div>
+
+        <div class="card" style="--c: var(--orange)">
+          <div class="card-icon">🔄</div>
+          <div class="card-eyebrow">Prinsip 6</div>
+          <div class="card-title">Rotasi & Cuti Wajib</div>
+          <div class="card-body">
+            Karyawan yang menangani kas wajib ambil cuti, posisinya diisi orang
+            lain. Jika ada yang tidak mau cuti, bisa jadi menyembunyikan
+            sesuatu!
+          </div>
+        </div>
+
+        <div class="card" style="--c: var(--pink)">
+          <div class="card-icon">🏦</div>
+          <div class="card-eyebrow">Prinsip 7</div>
+          <div class="card-title">Penyetoran Harian</div>
+          <div class="card-body">
+            Semua penerimaan kas disetorkan ke bank hari yang sama atau keesokan
+            harinya. Apotek tidak boleh simpan uang tunai bermalam di laci
+            kasir.
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 3: REKONSILIASI BANK -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">🏦 Rekonsiliasi Bank</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">📌 Apa itu Rekonsiliasi Bank?</div>
+        <div class="example-story">
+          Rekonsiliasi bank adalah proses mencocokkan saldo kas di buku
+          perusahaan dengan saldo di rekening koran bank pada tanggal yang sama.
+          Sering berbeda karena ada transaksi yang sudah dicatat perusahaan tapi
+          belum dicatat bank, atau sebaliknya.
+        </div>
+      </div>
+
+      <h3
+        style="
+          margin-top: 32px;
+          margin-bottom: 16px;
+          font-family: &quot;Syne&quot;, sans-serif;
+          font-size: 18px;
+          color: var(--orange);
+        "
+      >
+        Penyebab Perbedaan Saldo
+      </h3>
+
+      <h4
+        style="
+          color: var(--blue);
+          margin-top: 20px;
+          margin-bottom: 10px;
+          font-size: 14px;
+          font-weight: 700;
+        "
+      >
+        Dari Sisi PERUSAHAAN (belum dicatat perusahaan):
+      </h4>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Penyebab</th>
+              <th>Penjelasan</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Jasa giro (bunga bank)</td>
+              <td>Bank sudah kreditkan bunga, perusahaan belum catat</td>
+            </tr>
+            <tr>
+              <td>Biaya administrasi bank</td>
+              <td>Bank sudah debit, perusahaan belum catat</td>
+            </tr>
+            <tr>
+              <td>Cek/transfer dari pelanggan</td>
+              <td>Bank sudah terima, perusahaan belum tahu</td>
+            </tr>
+            <tr>
+              <td>Tolakan cek (cek kosong)</td>
+              <td>Bank tolak cek pelanggan, perusahaan sudah catat terima</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4
+        style="
+          color: var(--green);
+          margin-top: 20px;
+          margin-bottom: 10px;
+          font-size: 14px;
+          font-weight: 700;
+        "
+      >
+        Dari Sisi BANK (belum dicatat bank):
+      </h4>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Penyebab</th>
+              <th>Penjelasan</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Deposit in transit</td>
+              <td>Perusahaan sudah setor, bank belum proses (akhir hari)</td>
+            </tr>
+            <tr>
+              <td>Outstanding check</td>
+              <td>Perusahaan sudah tulis cek, penerima belum cairkan</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div
+        class="formula-block"
+        style="
+          background: rgba(255, 107, 53, 0.1);
+          border-color: var(--orange);
+          margin-top: 24px;
+        "
+      >
+        📋 Rumus Cepat: SALDO PER REKENING KORAN + Deposit In Transit − Outstanding Check = SALDO PER BUKU KAS + Jasa Giro − Biaya Admin − Cek Kosong
+      </div>
+
+      <h3
+        style="
+          margin-top: 32px;
+          margin-bottom: 16px;
+          font-family: 'Syne', sans-serif;
+          font-size: 18px;
+          color: var(--orange);
+        "
+      >
+        📋 Format Standar Rekonsiliasi Bank (Dua Kolom)
+      </h3>
+      <div class="table-wrap" style="border: 1px solid rgba(255, 107, 53, 0.25); background: rgba(255, 107, 53, 0.02); margin-bottom: 32px;">
+        <table>
+          <thead>
+            <tr style="background: rgba(255, 107, 53, 0.08);">
+              <th colspan="2" style="color: var(--orange); font-size: 11.5px; font-weight: 800; border-bottom: 1.5px solid rgba(255, 107, 53, 0.15);">SISI REKENING KORAN (BANK)</th>
+              <th colspan="2" style="color: var(--orange); font-size: 11.5px; font-weight: 800; border-bottom: 1.5px solid rgba(255, 107, 53, 0.15);">SISI CATATAN PERUSAHAAN (BUKU KAS)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="font-weight: 600;">
+              <td>Saldo Per Rekening Koran</td>
+              <td style="text-align: right; font-weight: 700; color: var(--text);">Rp xxx</td>
+              <td>Saldo Per Buku Kas</td>
+              <td style="text-align: right; font-weight: 700; color: var(--text);">Rp xxx</td>
+            </tr>
+            <tr style="color: var(--green); background: rgba(16, 185, 129, 0.04);">
+              <td colspan="2"><strong>+ Ditambah (Penambahan):</strong></td>
+              <td colspan="2"><strong>+ Ditambah (Penambahan):</strong></td>
+            </tr>
+            <tr>
+              <td style="padding-left: 28px;">• Setoran dalam perjalanan (Deposit in transit)</td>
+              <td style="text-align: right; color: var(--green);">Rp xxx</td>
+              <td style="padding-left: 28px;">• Pendapatan jasa giro / bunga bank</td>
+              <td style="text-align: right; color: var(--green);">Rp xxx</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td style="padding-left: 28px;">• Penerimaan piutang langsung lewat bank (transfer)</td>
+              <td style="text-align: right; color: var(--green);">Rp xxx</td>
+            </tr>
+            <tr style="color: var(--orange); background: rgba(255, 107, 53, 0.04);">
+              <td colspan="2"><strong>− Dikurangi (Pengurangan):</strong></td>
+              <td colspan="2"><strong>− Dikurangi (Pengurangan):</strong></td>
+            </tr>
+            <tr>
+              <td style="padding-left: 28px;">• Cek masih beredar (Outstanding check)</td>
+              <td style="text-align: right; color: var(--orange);">Rp (xxx)</td>
+              <td style="padding-left: 28px;">• Beban administrasi bulanan bank</td>
+              <td style="text-align: right; color: var(--orange);">Rp (xxx)</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td style="padding-left: 28px;">• Cek kosong dari pelanggan (NSF check)</td>
+              <td style="text-align: right; color: var(--orange);">Rp (xxx)</td>
+            </tr>
+            <tr style="border-top: 2px solid var(--glass-border); font-weight: 800; background: rgba(255, 255, 255, 0.02);">
+              <td style="font-family: 'Syne', sans-serif;">SALDO YANG BENAR (DISESUAIKAN)</td>
+              <td style="text-align: right; font-weight: 800; color: var(--green); font-size: 14.5px;">Rp xxx</td>
+              <td style="font-family: 'Syne', sans-serif;">SALDO YANG BENAR (DISESUAIKAN)</td>
+              <td style="text-align: right; font-weight: 800; color: var(--green); font-size: 14.5px;">Rp xxx</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="text-align: center; margin-top: -20px; margin-bottom: 36px; font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 800; color: var(--green); letter-spacing: 0.05em;">
+        ⭐ SALDO KEDUA SISI SETELAH DISESUAIKAN HARUS BENAR-BENAR SAMA ⭐
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          ✏️ Contoh Soal Lengkap — Toko Berkah Jaya
+        </div>
+        <div class="example-story">
+          Jombang, 31 Oktober 2024 — Saldo buku kas Rp 45.200.000, Saldo
+          rekening koran BRI Rp 48.500.000. Info tambahan: (1) Setoran Rp
+          3.800.000 belum diproses (2) Cek no.112 Rp 1.500.000 & cek no.115 Rp
+          600.000 belum dicairkan (3) Jasa giro Rp 150.000 belum dicatat (4)
+          Biaya adm Rp 50.000 belum dicatat (5) Cek kosong pelanggan Rp 500.000
+          ditolak
+        </div>
+      </div>
+
+      <h4
+        style="
+          color: var(--text);
+          margin-top: 20px;
+          margin-bottom: 10px;
+          font-size: 14px;
+          font-weight: 700;
+        "
+      >
+        Penyelesaian:
+      </h4>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th colspan="2">SALDO PER REKENING KORAN BRI</th>
+              <th colspan="2">SALDO PER BUKU KAS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colspan="2">Saldo rekening koran</td>
+              <td colspan="2">Saldo buku kas</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td style="text-align: right; font-weight: 700">Rp 48.500.000</td>
+              <td></td>
+              <td style="text-align: right; font-weight: 700">Rp 45.200.000</td>
+            </tr>
+            <tr>
+              <td colspan="2"><strong>+ Deposit in transit</strong></td>
+              <td colspan="2"><strong>+ Jasa giro BRI</strong></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td style="text-align: right">Rp 3.800.000</td>
+              <td></td>
+              <td style="text-align: right">Rp 150.000</td>
+            </tr>
+            <tr>
+              <td colspan="2"><strong>− Outstanding check:</strong></td>
+              <td colspan="2"><strong>− Biaya adm. bank</strong></td>
+            </tr>
+            <tr>
+              <td>Cek no.112</td>
+              <td style="text-align: right">Rp (1.500.000)</td>
+              <td></td>
+              <td style="text-align: right">Rp (50.000)</td>
+            </tr>
+            <tr>
+              <td>Cek no.115</td>
+              <td style="text-align: right">Rp (600.000)</td>
+              <td colspan="2"><strong>− Cek kosong (NSF)</strong></td>
+            </tr>
+            <tr>
+              <td colspan="2"></td>
+              <td></td>
+              <td style="text-align: right">Rp (500.000)</td>
+            </tr>
+            <tr
+              style="
+                border-top: 2px solid var(--glass-border);
+                font-weight: 700;
+              "
+            >
+              <td colspan="2"><strong>SALDO YANG BENAR</strong></td>
+              <td colspan="2"><strong>SALDO YANG BENAR</strong></td>
+            </tr>
+            <tr style="background: rgba(16, 185, 129, 0.1)">
+              <td></td>
+              <td style="text-align: right">Rp 50.200.000</td>
+              <td></td>
+              <td style="text-align: right">Rp 44.800.000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="info-box">
+        ⚠️ Dalam soal ini, kedua sisi belum sama. Jika ada cek pelanggan Rp
+        5.400.000 yang sudah masuk ke rekening bank tapi belum dicatat
+        perusahaan → saldo buku kas yang benar = Rp 44.800.000 + Rp 5.400.000 =
+        <strong>Rp 50.200.000 ✅</strong>
+      </div>
+
+      <h4
+        style="
+          color: var(--text);
+          margin-top: 20px;
+          margin-bottom: 10px;
+          font-size: 14px;
+          font-weight: 700;
+        "
+      >
+        Jurnal Penyesuaian (hanya dari sisi buku kas):
+      </h4>
+      <div class="formula-block" style="text-align: left; font-size: 13px">
+        <strong>Jurnal 1 — Jasa giro:</strong><br />
+        Kas Rp 150.000 | Pendapatan Bunga Rp 150.000
+        <br /><br />
+        <strong>Jurnal 2 — Biaya administrasi bank:</strong><br />
+        Beban Administrasi Bank Rp 50.000 | Kas Rp 50.000
+        <br /><br />
+        <strong>Jurnal 3 — Cek kosong (NSF):</strong><br />
+        Piutang Usaha Rp 500.000 | Kas Rp 500.000
+      </div>
+
+      <div class="info-box">
+        💡 Ingat: Dari sisi bank (deposit in transit & outstanding check) tidak
+        perlu jurnal — itu hanya penyebab perbedaan sementara yang akan otomatis
+        terkoreksi di periode berikutnya.
+      </div>
+
+      <!-- SECTION 4: DANA KAS KECIL -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">💵 Dana Kas Kecil (Petty Cash)</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="cards-3">
+        <div class="card" style="--c: var(--blue)">
+          <div class="card-icon">❓</div>
+          <div class="card-eyebrow">Pengertian</div>
+          <div class="card-title">Apa itu Kas Kecil?</div>
+          <div class="card-body">
+            Dana tunai dalam jumlah kecil yang disiapkan khusus untuk membayar
+            pengeluaran-pengeluaran kecil sehari-hari yang tidak praktis jika
+            dibayar via transfer bank.
+          </div>
+        </div>
+
+        <div class="card" style="--c: var(--green)">
+          <div class="card-icon">🛒</div>
+          <div class="card-eyebrow">Contoh</div>
+          <div class="card-title">Pengeluaran Kas Kecil</div>
+          <div class="list-items">
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Beli bolpoin & kertas</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Ongkos ojek kirim dokumen</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Kopi & snack rapat</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Bayar parkir</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="--c: var(--orange)">
+          <div class="card-icon">🔄</div>
+          <div class="card-eyebrow">Sistem</div>
+          <div class="card-title">Sistem Imprest</div>
+          <div class="card-body">
+            Sistem dana tetap — jumlah dana kas kecil selalu dikembalikan ke
+            jumlah awal setiap kali diisi ulang. Dana selalu tetap Rp 1.000.000
+            (contoh).
+          </div>
+        </div>
+      </div>
+
+      <h4
+        style="
+          color: var(--text);
+          margin-top: 24px;
+          margin-bottom: 16px;
+          font-size: 14px;
+          font-weight: 700;
+        "
+      >
+        Alur Kas Kecil (Sistem Imprest):
+      </h4>
+      <div class="formula-block">
+        [1] PEMBENTUKAN: Dana Rp 1.000.000 ditetapkan oleh manajemen<br />
+        ↓<br />
+        [2] PEMAKAIAN: Keluar untuk pengeluaran kecil (simpan bukti/bon)<br />
+        ↓<br />
+        [3] PENGISIAN ULANG: Isi ulang sejumlah yang sudah terpakai → kembali Rp
+        1.000.000
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          ✏️ Contoh Soal Lengkap — CV. Maju Bersama
+        </div>
+        <div class="example-story">
+          Jombang, 1 Oktober 2024 — Dana kas kecil Rp 1.000.000. Pengeluaran
+          selama Oktober: (1) 5 Okt Beli ATK Rp 120.000 (2) 10 Okt Ongkos kirim
+          Rp 45.000 (3) 15 Okt Konsumsi rapat Rp 200.000 (4) 22 Okt Bayar
+          listrik Rp 180.000 (5) 28 Okt Beli materai Rp 60.000. Total
+          pengeluaran: Rp 605.000, Sisa kas kecil: Rp 395.000
+        </div>
+      </div>
+
+      <h4
+        style="
+          color: var(--blue);
+          margin-top: 24px;
+          margin-bottom: 12px;
+          font-size: 14.5px;
+          font-weight: 700;
+        "
+      >
+        📋 Langkah Perhitungan Posisi Kas Kecil CV. Maju Bersama:
+      </h4>
+      <div class="table-wrap" style="max-width: 600px; margin-bottom: 32px; border: 1px solid rgba(59, 130, 246, 0.25); background: rgba(59, 130, 246, 0.02);">
+        <table>
+          <thead>
+            <tr style="background: rgba(59, 130, 246, 0.08);">
+              <th style="color: var(--blue); font-size: 11.5px; font-weight: 800; border-bottom: 1.5px solid rgba(59, 130, 246, 0.15);">Deskripsi Transaksi Kas Kecil</th>
+              <th style="text-align: right; color: var(--blue); font-size: 11.5px; font-weight: 800; border-bottom: 1.5px solid rgba(59, 130, 246, 0.15);">Nilai Rupiah (Rp)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="font-weight: 700;">
+              <td>Dana Awal Kas Kecil (Ditetapkan 1 Oktober)</td>
+              <td style="text-align: right; color: var(--text);">Rp 1.000.000</td>
+            </tr>
+            <tr style="font-weight: 600; color: var(--orange); background: rgba(255, 107, 53, 0.02);">
+              <td colspan="2">Dikurangi Pengeluaran Selama Bulan Oktober:</td>
+            </tr>
+            <tr>
+              <td style="padding-left: 28px;">• 5 Okt: Pembelian Perlengkapan Kantor (ATK)</td>
+              <td style="text-align: right; color: var(--orange);">Rp (120.000)</td>
+            </tr>
+            <tr>
+              <td style="padding-left: 28px;">• 10 Okt: Ongkos kurir pengiriman dokumen kilat</td>
+              <td style="text-align: right; color: var(--orange);">Rp (45.000)</td>
+            </tr>
+            <tr>
+              <td style="padding-left: 28px;">• 15 Okt: Konsumsi snack & kopi rapat bulanan</td>
+              <td style="text-align: right; color: var(--orange);">Rp (200.000)</td>
+            </tr>
+            <tr>
+              <td style="padding-left: 28px;">• 22 Okt: Pembayaran tagihan listrik kantor</td>
+              <td style="text-align: right; color: var(--orange);">Rp (180.000)</td>
+            </tr>
+            <tr>
+              <td style="padding-left: 28px;">• 28 Okt: Pembelian materai pos dan pos kilat</td>
+              <td style="text-align: right; color: var(--orange);">Rp (60.000)</td>
+            </tr>
+            <tr style="border-top: 1.5px solid var(--glass-border); font-weight: 700;">
+              <td style="padding-left: 14px;">Total Seluruh Pengeluaran Terpakai</td>
+              <td style="text-align: right; color: var(--orange); border-bottom: 1.5px solid var(--orange);">Rp (605.000)</td>
+            </tr>
+            <tr style="background: rgba(16, 185, 129, 0.08); font-weight: 700; border-top: 2px solid var(--glass-border);">
+              <td style="font-family: 'Syne', sans-serif;">Sisa Saldo Kas Kecil Aktual (Fisik Uang Tunai)</td>
+              <td style="text-align: right; color: var(--green); font-size: 14.5px;">Rp 395.000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4
+        style="
+          color: var(--text);
+          margin-top: 20px;
+          margin-bottom: 10px;
+          font-size: 14px;
+          font-weight: 700;
+        "
+      >
+        Jurnal:
+      </h4>
+      <div class="formula-block" style="text-align: left; font-size: 13px">
+        <strong>1 Okt — Pembentukan:</strong><br />
+        Kas Kecil Rp 1.000.000 | Kas (Bank) Rp 1.000.000
+        <br /><br />
+        <strong>Selama Oktober:</strong><br />
+        TIDAK ADA JURNAL (hanya simpan bukti/bon pengeluaran)
+        <br /><br />
+        <strong>31 Okt — Pengisian Ulang:</strong><br />
+        Beban ATK Rp 120.000<br />
+        Beban Pengiriman Rp 45.000<br />
+        Beban Konsumsi Rp 200.000<br />
+        Beban Listrik Rp 180.000<br />
+        Beban Perlengkapan Rp 60.000<br />
+        | Kas (Bank) Rp 605.000
+      </div>
+
+      <div class="info-box">
+        💡 Penting: Akun Kas Kecil tetap Rp 1.000.000 — tidak berubah sepanjang
+        periode (kecuali ada perubahan kebijakan jumlah dana). Yang berubah
+        adalah akun Kas (Bank) dan akun-akun beban.
+      </div>
+
+      <!-- SECTION 5: STUDI KASUS NYATA -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">🏢 Studi Kasus Nyata</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          🔍 Kasus: PT. Sinar Abadi — Perusahaan Distribusi
+        </div>
+        <div class="example-story">
+          Auditor internal menemukan: (1) Kasir merangkap pencatat buku kas
+          (pelanggaran pemisahan tugas) (2) Penerimaan kas sering tidak disetor
+          ke bank 2–3 hari (3) Tidak ada rekonsiliasi bank selama 4 bulan (4)
+          Kas kecil tidak pernah dihitung mendadak (surprise count)
+        </div>
+      </div>
+
+      <h4
+        style="
+          color: var(--text);
+          margin-top: 20px;
+          margin-bottom: 10px;
+          font-size: 14px;
+          font-weight: 700;
+        "
+      >
+        Akibatnya:
+      </h4>
+      <div
+        class="info-box"
+        style="
+          background: rgba(239, 68, 68, 0.08);
+          border-color: rgba(239, 68, 68, 0.25);
+        "
+      >
+        Ditemukan selisih kas Rp 8.500.000 yang tidak bisa dijelaskan. Kasir
+        terbukti menggunakan kas perusahaan untuk keperluan pribadi —
+        <strong>lapping</strong> (menutup kas yang dipakai dengan setoran
+        berikutnya).
+      </div>
+
+      <h4
+        style="
+          color: var(--green);
+          margin-top: 20px;
+          margin-bottom: 10px;
+          font-size: 14px;
+          font-weight: 700;
+        "
+      >
+        ✅ Perbaikan yang dilakukan:
+      </h4>
+      <ul
+        style="
+          padding-left: 20px;
+          margin-bottom: 24px;
+          color: var(--text-muted);
+        "
+      >
+        <li>Pisahkan kasir dan akuntan → dua orang berbeda</li>
+        <li>Wajib setor ke bank setiap hari maksimal pukul 15.00</li>
+        <li>Rekonsiliasi bank setiap tanggal 1 oleh bagian keuangan</li>
+        <li>Surprise count kas kecil minimal 1x/bulan oleh supervisor</li>
+      </ul>
+
+      <!-- SECTION 6: RANGKUMAN -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">📝 Rangkuman Bab</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Poin Utama</th>
+              <th>Penjelasan Singkat</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Kas</strong></td>
+              <td>Aset paling likuid: tunai, giro, cek diterima</td>
+            </tr>
+            <tr>
+              <td><strong>Pengendalian Internal</strong></td>
+              <td>
+                7 prinsip: pemisahan tugas, otorisasi, dokumen, fisik,
+                rekonsiliasi, rotasi, setor harian
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Rekonsiliasi Bank</strong></td>
+              <td>Cocokkan saldo buku perusahaan dengan rekening koran bank</td>
+            </tr>
+            <tr>
+              <td><strong>Jurnal Rekonsiliasi</strong></td>
+              <td>Hanya dari sisi buku perusahaan yang perlu dijurnal</td>
+            </tr>
+            <tr>
+              <td><strong>Kas Kecil</strong></td>
+              <td>
+                Dana tetap untuk pengeluaran kecil — jurnal hanya saat
+                pembentukan & pengisian ulang
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Sistem Imprest</strong></td>
+              <td>Dana selalu kembali ke jumlah awal setelah diisi ulang</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- QUIZ CTA -->
+      <div class="quiz-cta">
+        <h3>🎯 Uji Pemahamanmu!</h3>
+        <p>
+          Setelah mempelajari materi Kas & Pengendalian Internal, coba kerjakan
+          kuis di bawah ini untuk mengukur seberapa paham kamu dengan topik ini.
+        </p>
+        <a href="#quiz-section" class="quiz-btn" onclick="scrollToQuiz()"
+          >Mulai Kuis Bab 6 →</a
+        >
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-name">Annisa Novita Ardana</div>
+      <div class="footer-sub">
+        Belajar Akuntansi &amp; Perpajakan &nbsp;·&nbsp; Dibuat dengan Cinta
+        &amp; Estetika 🌸
+      </div>
+      <div class="footer-dots">
+        <div class="footer-dot" style="background: #ff6b35"></div>
+        <div class="footer-dot" style="background: #ff3d9a"></div>
+        <div class="footer-dot" style="background: #a855f7"></div>
+        <div class="footer-dot" style="background: #3b82f6"></div>
+        <div class="footer-dot" style="background: #10b981"></div>
+        <div class="footer-dot" style="background: #fbbf24"></div>
+      </div>
+    </footer>
+
+    <script>
+      // THEME HANDLING
+      const body = document.body;
+      if (localStorage.getItem("theme") === "light") {
+        body.classList.add("light-theme");
+      }
+
+      function toggleTheme() {
+        body.classList.toggle("light-theme");
+        if (body.classList.contains("light-theme")) {
+          localStorage.setItem("theme", "light");
+        } else {
+          localStorage.setItem("theme", "dark");
+        }
+      }
+
+      function scrollToQuiz() {
+        window.location.href = "kuis_akuntansi_50soal.html?bab=Kas%20%26%20Pengendalian%20Internal";
+      }
+    </script>
+  </body>
+</html>

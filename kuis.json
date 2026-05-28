@@ -38,12 +38,7 @@
   {
     "k": "Pengantar Akuntansi",
     "s": "Jika Aset = Rp200jt dan Liabilitas = Rp75jt, maka Ekuitas adalah…",
-    "p": [
-      "Rp275.000.000",
-      "Rp125.000.000",
-      "Rp75.000.000",
-      "Rp200.000.000"
-    ],
+    "p": ["Rp275.000.000", "Rp125.000.000", "Rp75.000.000", "Rp200.000.000"],
     "j": 1,
     "b": "Ekuitas = Aset − Liabilitas = Rp200jt − Rp75jt = Rp125jt."
   },
@@ -62,12 +57,7 @@
   {
     "k": "Pengantar Akuntansi",
     "s": "Akun 'Akumulasi Penyusutan' termasuk jenis akun…",
-    "p": [
-      "Aset Tetap",
-      "Beban",
-      "Contra Asset (pengurang aset)",
-      "Liabilitas"
-    ],
+    "p": ["Aset Tetap", "Beban", "Contra Asset (pengurang aset)", "Liabilitas"],
     "j": 2,
     "b": "Akumulasi Penyusutan adalah contra-asset — mengurangi nilai aset tetap. Saldo normalnya Kredit, berlawanan dengan aset tetap."
   },
@@ -98,12 +88,7 @@
   {
     "k": "Perusahaan Dagang",
     "s": "Beban Angkut Pembelian dengan syarat FOB Shipping Point ditanggung oleh…",
-    "p": [
-      "Penjual",
-      "Pembeli",
-      "Ekspedisi",
-      "Dibagi dua"
-    ],
+    "p": ["Penjual", "Pembeli", "Ekspedisi", "Dibagi dua"],
     "j": 1,
     "b": "FOB Shipping Point = ongkos angkut ditanggung PEMBELI sejak barang meninggalkan gudang penjual."
   },
@@ -134,12 +119,7 @@
   {
     "k": "Perusahaan Dagang",
     "s": "Membeli barang Rp50jt + PPN 11% secara kredit. Berapa Utang Usaha yang dicatat?",
-    "p": [
-      "Rp50.000.000",
-      "Rp55.000.000",
-      "Rp55.500.000",
-      "Rp50.550.000"
-    ],
+    "p": ["Rp50.000.000", "Rp55.000.000", "Rp55.500.000", "Rp50.550.000"],
     "j": 2,
     "b": "PPN = 11% × 50jt = 5,5jt. Total utang = 50jt + 5,5jt = Rp55.500.000."
   },
@@ -170,24 +150,14 @@
   {
     "k": "Jurnal Penyesuaian",
     "s": "Perlengkapan awal Rp5jt, dibeli lagi Rp2jt, sisa akhir Rp3,5jt. Beban perlengkapan adalah…",
-    "p": [
-      "Rp2.000.000",
-      "Rp3.500.000",
-      "Rp3.000.000",
-      "Rp5.000.000"
-    ],
+    "p": ["Rp2.000.000", "Rp3.500.000", "Rp3.000.000", "Rp5.000.000"],
     "j": 1,
     "b": "Beban = (5jt + 2jt) − 3,5jt = Rp3.500.000. Ini yang terpakai selama periode."
   },
   {
     "k": "Jurnal Penyesuaian",
     "s": "Kendaraan Rp120jt, residu Rp20jt, umur 8 tahun. Penyusutan per bulan adalah…",
-    "p": [
-      "Rp833.333",
-      "Rp1.041.667",
-      "Rp1.250.000",
-      "Rp1.000.000"
-    ],
+    "p": ["Rp833.333", "Rp1.041.667", "Rp1.250.000", "Rp1.000.000"],
     "j": 1,
     "b": "(120jt − 20jt) ÷ 8 tahun ÷ 12 bulan = 100jt ÷ 96 = Rp1.041.667 per bulan."
   },
@@ -242,24 +212,14 @@
   {
     "k": "Buku Besar",
     "s": "Saldo Kas: awal Rp50jt, total debet Rp30jt, total kredit Rp45jt. Saldo akhir kas adalah…",
-    "p": [
-      "Rp35.000.000",
-      "Rp65.000.000",
-      "Rp25.000.000",
-      "Rp45.000.000"
-    ],
+    "p": ["Rp35.000.000", "Rp65.000.000", "Rp25.000.000", "Rp45.000.000"],
     "j": 0,
     "b": "Kas saldo normal Debet. Saldo akhir = 50jt + 30jt − 45jt = Rp35.000.000."
   },
   {
     "k": "Buku Besar",
     "s": "Proses memindahkan data dari jurnal ke buku besar disebut…",
-    "p": [
-      "Journalizing",
-      "Posting",
-      "Balancing",
-      "Closing"
-    ],
+    "p": ["Journalizing", "Posting", "Balancing", "Closing"],
     "j": 1,
     "b": "Posting = proses memindahkan catatan jurnal ke akun-akun di buku besar."
   },
@@ -362,12 +322,7 @@
   {
     "k": "Perusahaan Dagang",
     "s": "CV Maju membeli barang Rp20jt syarat 2/10, n/30. Membayar hari ke-8. Berapa kas yang dikeluarkan?",
-    "p": [
-      "Rp19.600.000",
-      "Rp20.000.000",
-      "Rp19.200.000",
-      "Rp20.400.000"
-    ],
+    "p": ["Rp19.600.000", "Rp20.000.000", "Rp19.200.000", "Rp20.400.000"],
     "j": 0,
     "b": "Bayar dalam 10 hari → dapat diskon 2%. Diskon = 2% × 20jt = 400rb. Kas = 20jt − 400rb = Rp19.600.000."
   },
@@ -386,12 +341,7 @@
   {
     "k": "Perusahaan Dagang",
     "s": "Persediaan awal Rp80jt, pembelian bersih Rp120jt, persediaan akhir Rp50jt. HPP adalah…",
-    "p": [
-      "Rp150.000.000",
-      "Rp170.000.000",
-      "Rp200.000.000",
-      "Rp130.000.000"
-    ],
+    "p": ["Rp150.000.000", "Rp170.000.000", "Rp200.000.000", "Rp130.000.000"],
     "j": 0,
     "b": "HPP = Persediaan Awal + Pembelian Bersih − Persediaan Akhir = 80 + 120 − 50 = Rp150jt."
   },
@@ -410,12 +360,7 @@
   {
     "k": "Perusahaan Dagang",
     "s": "Menjual barang Rp40jt + PPN 11% kredit. Total piutang yang dicatat adalah…",
-    "p": [
-      "Rp40.000.000",
-      "Rp44.000.000",
-      "Rp44.400.000",
-      "Rp65.000.000"
-    ],
+    "p": ["Rp40.000.000", "Rp44.000.000", "Rp44.400.000", "Rp65.000.000"],
     "j": 2,
     "b": "PPN = 11% × 40jt = 4,4jt. Piutang = 40jt + 4,4jt = Rp44.400.000."
   },
@@ -446,12 +391,7 @@
   {
     "k": "Jurnal Penyesuaian",
     "s": "Peralatan dibeli 1 Juli Rp24jt, umur 4 tahun, residu Rp0. Nilai buku per 31 Desember adalah…",
-    "p": [
-      "Rp21.000.000",
-      "Rp18.000.000",
-      "Rp22.500.000",
-      "Rp20.000.000"
-    ],
+    "p": ["Rp21.000.000", "Rp18.000.000", "Rp22.500.000", "Rp20.000.000"],
     "j": 0,
     "b": "Penyusutan/bln = 24jt ÷ 4 ÷ 12 = 500rb. Juli−Des = 6 bln × 500rb = 3jt. Nilai buku = 24jt − 3jt = Rp21jt."
   },
@@ -506,12 +446,7 @@
   {
     "k": "Laporan Keuangan",
     "s": "Menerima pelunasan piutang dari pelanggan masuk ke aktivitas apa dalam laporan arus kas?",
-    "p": [
-      "Investasi",
-      "Pendanaan",
-      "Operasi",
-      "Modal"
-    ],
+    "p": ["Investasi", "Pendanaan", "Operasi", "Modal"],
     "j": 2,
     "b": "Aktivitas Operasi = arus kas dari kegiatan utama bisnis (penjualan, piutang, gaji, dll)."
   },
@@ -530,12 +465,7 @@
   {
     "k": "Laporan Keuangan",
     "s": "Laba kotor Rp80jt, beban gaji Rp20jt, beban sewa Rp10jt, beban penyusutan Rp5jt. Laba bersih adalah…",
-    "p": [
-      "Rp45.000.000",
-      "Rp55.000.000",
-      "Rp60.000.000",
-      "Rp35.000.000"
-    ],
+    "p": ["Rp45.000.000", "Rp55.000.000", "Rp60.000.000", "Rp35.000.000"],
     "j": 0,
     "b": "Laba Bersih = 80jt − (20jt + 10jt + 5jt) = 80jt − 35jt = Rp45.000.000."
   },
@@ -554,24 +484,14 @@
   {
     "k": "Laporan Keuangan",
     "s": "Modal awal Rp266jt, setoran Rp25jt, laba bersih Rp48jt, prive Rp5jt. Modal akhir adalah…",
-    "p": [
-      "Rp334.000.000",
-      "Rp314.000.000",
-      "Rp339.000.000",
-      "Rp284.000.000"
-    ],
+    "p": ["Rp334.000.000", "Rp314.000.000", "Rp339.000.000", "Rp284.000.000"],
     "j": 0,
     "b": "Modal Akhir = 266 + 25 + 48 − 5 = Rp334.000.000."
   },
   {
     "k": "Perusahaan Dagang",
     "s": "PPN Keluaran Rp18jt, PPN Masukan Rp13jt, Utang PPN awal Rp2jt. Kas yang disetor ke negara…",
-    "p": [
-      "Rp5.000.000",
-      "Rp7.000.000",
-      "Rp3.000.000",
-      "Rp18.000.000"
-    ],
+    "p": ["Rp5.000.000", "Rp7.000.000", "Rp3.000.000", "Rp18.000.000"],
     "j": 1,
     "b": "PPN terutang = 18jt − 13jt = 5jt. Ditambah Utang PPN awal 2jt = total disetor Rp7jt."
   },
@@ -598,5 +518,180 @@
     ],
     "j": 0,
     "b": "Total 12jt untuk 2 bulan, baru dicatat 6jt. April belum jadi beban → koreksi: D: Sewa Dibayar Dimuka 6jt | K: Beban Sewa 6jt."
+  },
+  {
+    "k": "Kas & Pengendalian Internal",
+    "s": "Yang BUKAN termasuk kas adalah…",
+    "p": [
+      "Uang tunai di laci kasir",
+      "Saldo rekening giro di bank",
+      "Deposito berjangka 3 bulan",
+      "Cek dari pelanggan yang belum dicairkan"
+    ],
+    "j": 2,
+    "b": "Deposito berjangka BUKAN kas karena tidak bisa diambil sewaktu-waktu. Termasuk investasi jangka pendek."
+  },
+  {
+    "k": "Kas & Pengendalian Internal",
+    "s": "Prinsip pengendalian internal atas kas yang menyatakan orang yang memegang uang tidak boleh sama dengan orang yang mencatat disebut…",
+    "p": [
+      "Otorisasi yang tepat",
+      "Pemisahan tugas (Segregation of Duties)",
+      "Pengendalian fisik",
+      "Rekonsiliasi independen"
+    ],
+    "j": 1,
+    "b": "Pemisahan tugas adalah prinsip bahwa kasir ≠ akuntan ≠ manajer. Ketiga orang berbeda untuk menghindari penyelewengan."
+  },
+  {
+    "k": "Kas & Pengendalian Internal",
+    "s": "Mengapa karyawan yang menangani kas wajib mengambil cuti?",
+    "p": [
+      "Agar tidak bosan bekerja",
+      "Untuk mendeteksi ketidakberesan — pengganti sementara bisa menemukan masalah yang disembunyikan",
+      "Karena perusahaan mengharuskan semua karyawan cuti",
+      "Tidak ada alasan khusus"
+    ],
+    "j": 1,
+    "b": "Rotasi karyawan & cuti wajib adalah prinsip pengendalian internal untuk mencegah karyawan menyembunyikan penyelewengan jangka panjang."
+  },
+  {
+    "k": "Kas & Pengendalian Internal",
+    "s": "Rekonsiliasi bank adalah proses mencocokkan…",
+    "p": [
+      "Saldo kas dengan saldo piutang",
+      "Saldo buku kas perusahaan dengan saldo rekening koran bank",
+      "Saldo kas dengan saldo hutang",
+      "Saldo utang dengan saldo modal"
+    ],
+    "j": 1,
+    "b": "Rekonsiliasi bank adalah cocokkan saldo buku perusahaan dengan rekening koran bank pada tanggal yang sama."
+  },
+  {
+    "k": "Kas & Pengendalian Internal",
+    "s": "Penyebab perbedaan saldo antara buku kas perusahaan dan rekening koran bank yang berasal dari SISI PERUSAHAAN (belum dicatat perusahaan) adalah…",
+    "p": [
+      "Deposit in transit",
+      "Outstanding check",
+      "Jasa giro dari bank",
+      "Cek yang belum dicairkan"
+    ],
+    "j": 2,
+    "b": "Jasa giro adalah bunga bank yang sudah dikreditkan bank tapi belum dicatat perusahaan — penyebab dari sisi perusahaan."
+  },
+  {
+    "k": "Kas & Pengendalian Internal",
+    "s": "Outstanding check adalah…",
+    "p": [
+      "Cek dari pelanggan yang belum diterima bank",
+      "Cek yang ditulis perusahaan tapi belum dicairkan penerima",
+      "Cek yang ditolak bank karena saldo tidak cukup",
+      "Cek yang sudah jatuh tempo"
+    ],
+    "j": 1,
+    "b": "Outstanding check = perusahaan sudah tulis cek, tapi penerima belum cairkan. Ini penyebab perbedaan dari sisi bank."
+  },
+  {
+    "k": "Kas & Pengendalian Internal",
+    "s": "Dalam rekonsiliasi bank, deposit in transit ditambahkan pada…",
+    "p": [
+      "Saldo buku kas perusahaan",
+      "Saldo rekening koran bank",
+      "Keduanya tidak perlu penyesuaian",
+      "Hanya dicatat dalam memo saja"
+    ],
+    "j": 1,
+    "b": "Deposit in transit = perusahaan sudah setor tapi bank belum proses. Ditambahkan ke saldo rekening koran bank."
+  },
+  {
+    "k": "Kas & Pengendalian Internal",
+    "s": "Jurnal penyesuaian untuk jasa giro yang belum dicatat perusahaan adalah…",
+    "p": [
+      "D: Kas | K: Beban Administrasi Bank",
+      "D: Beban Administrasi Bank | K: Kas",
+      "D: Kas | K: Pendapatan Bunga",
+      "D: Piutang | K: Kas"
+    ],
+    "j": 2,
+    "b": "Jasa giro MENAMBAH kas, jadi D: Kas | K: Pendapatan Bunga (atau Pendapatan Jasa Giro)."
+  },
+  {
+    "k": "Kas & Pengendalian Internal",
+    "s": "Cek kosong (NSF — Non-Sufficient Fund) dari pelanggan yang ditolak bank harus dijurnal…",
+    "p": [
+      "D: Kas | K: Piutang Usaha",
+      "D: Piutang Usaha | K: Kas",
+      "D: Beban | K: Kas",
+      "Tidak perlu dijurnal"
+    ],
+    "j": 1,
+    "b": "Cek kosong = kas berkurang, piutang ke pelanggan muncul kembali. D: Piutang Usaha | K: Kas."
+  },
+  {
+    "k": "Kas & Pengendalian Internal",
+    "s": "Apa itu Kas Kecil (Petty Cash)?",
+    "p": [
+      "Dana besar untuk pembayaran utama",
+      "Dana tunai kecil untuk pengeluaran rutin sehari-hari yang tidak praktis ditransfer",
+      "Dana yang disetorkan ke bank setiap hari",
+      "Dana cadangan untuk investasi"
+    ],
+    "j": 1,
+    "b": "Kas kecil adalah dana tunai untuk pengeluaran kecil: ATK, parkir, ongkos kirim, konsumsi rapat, dsb."
+  },
+  {
+    "k": "Kas & Pengendalian Internal",
+    "s": "Sistem Imprest untuk kas kecil berarti…",
+    "p": [
+      "Kas kecil tidak pernah diisi ulang",
+      "Kas kecil berubah-ubah jumlahnya setiap periode",
+      "Dana kas kecil selalu dikembalikan ke jumlah awal setelah diisi ulang",
+      "Kas kecil hanya digunakan sekali"
+    ],
+    "j": 2,
+    "b": "Sistem Imprest = dana tetap (misal Rp 1juta) yang selalu kembali ke Rp 1juta setelah diisi ulang."
+  },
+  {
+    "k": "Kas & Pengendalian Internal",
+    "s": "Jurnal pembentukan kas kecil Rp 1.000.000 adalah…",
+    "p": [
+      "D: Kas Bank | K: Kas Kecil Rp 1.000.000",
+      "D: Kas Kecil Rp 1.000.000 | K: Kas Bank Rp 1.000.000",
+      "D: Beban | K: Kas Kecil Rp 1.000.000",
+      "Tidak perlu jurnal"
+    ],
+    "j": 1,
+    "b": "Pembentukan kas kecil = ambil uang dari bank. D: Kas Kecil | K: Kas (Bank)."
+  },
+  {
+    "k": "Kas & Pengendalian Internal",
+    "s": "Selama periode penggunaan kas kecil Rp 1.000.000, pengeluaran untuk ATK Rp 120rb tidak dijurnal. Mengapa?",
+    "p": [
+      "Karena sudah dicatat otomatis oleh sistem",
+      "Karena hanya disimpan bukti/bon saja — jurnal baru dibuat saat pengisian ulang",
+      "Karena ATK dianggap beban modal",
+      "Tidak ada alasan khusus"
+    ],
+    "j": 1,
+    "b": "Dalam sistem imprest, selama penggunaan tidak ada jurnal. Jurnal hanya dibuat saat pembentukan dan pengisian ulang."
+  },
+  {
+    "k": "Kas & Pengendalian Internal",
+    "s": "Dana kas kecil Rp 1.000.000 digunakan untuk: ATK Rp 150rb, Ongkos kirim Rp 80rb, Konsumsi Rp 200rb, Listrik Rp 170rb. Saat pengisian ulang, jumlah yang diisi adalah…",
+    "p": ["Rp 1.000.000", "Rp 600.000", "Rp 400.000", "Rp 800.000"],
+    "j": 1,
+    "b": "Total pengeluaran = Rp 600rb (150+80+200+170). Pengisian ulang sejumlah yang terpakai = Rp 600rb untuk kembali ke Rp 1juta."
+  },
+  {
+    "k": "Kas & Pengendalian Internal",
+    "s": "Dalam studi kasus PT. Sinar Abadi, masalah yang menyebabkan selisih kas adalah…",
+    "p": [
+      "Sistem kas kecil yang salah",
+      "Kasir melakukan lapping — menggunakan kas untuk keperluan pribadi lalu menutupnya dengan setoran berikutnya",
+      "Kesalahan perhitungan bunga bank",
+      "Outstanding check yang banyak"
+    ],
+    "j": 1,
+    "b": "Lapping adalah penyelewengan kas dengan mengambil uang lalu menutupnya menggunakan setoran pelanggan berikutnya."
   }
 ]

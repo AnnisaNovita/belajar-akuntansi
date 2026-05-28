@@ -7,17 +7,86 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #F4F1EC; --dark: #1A1A2E;
+    --bg: #0f172a;
+    --dark: #f8fafc; /* In dark mode, --dark represents the text color */
     --orange: #E8572A; --blue: #2E86AB; --green: #27AE60;
     --purple: #8E44AD; --yellow: #F4C542; --pink: #E91E8C;
     --teal: #00897B; --red: #E53935;
     --radius: 20px; --radius-sm: 12px;
+
+    /* Theme specific variables */
+    --card: #1e293b;
+    --border: rgba(255, 255, 255, 0.08);
+    --hover: rgba(255, 255, 255, 0.02);
+    --text-muted: #94a3b8;
+    --hero-bg: #090d16;
+
+    --riil-bg: rgba(46, 134, 171, 0.12);
+    --riil-border: rgba(46, 134, 171, 0.3);
+    --riil-title: #AED6F1;
+    --nominal-bg: rgba(244, 197, 66, 0.12);
+    --nominal-border: rgba(244, 197, 66, 0.3);
+    --nominal-title: #F9E79F;
   }
+
+  body.light-theme {
+    --bg: #F4F1EC;
+    --dark: #1A1A2E; /* In light mode, --dark is the dark blue text */
+    --orange: #E8572A; --blue: #2E86AB; --green: #27AE60;
+    --purple: #8E44AD; --yellow: #F4C542; --pink: #E91E8C;
+    --teal: #00897B; --red: #E53935;
+
+    --card: #FFFFFF;
+    --border: #F5F5F5;
+    --hover: #FAFAFA;
+    --text-muted: #444444;
+    --hero-bg: #1A1A2E;
+
+    --riil-bg: #EAF4FB;
+    --riil-border: #AED6F1;
+    --riil-title: #1A5276;
+    --nominal-bg: #FEF9E7;
+    --nominal-border: #F9E79F;
+    --nominal-title: #784212;
+  }
+
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--dark); }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--dark);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .back-btn {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #fff;
+    padding: 8px 18px;
+    border-radius: 99px;
+    font-family: "Syne", sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    z-index: 100;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .back-btn:hover {
+    background: rgba(255, 255, 255, 0.18);
+    transform: translateY(-1px);
+  }
 
   .hero {
-    background: var(--dark); padding: 60px 32px 52px;
+    background: var(--hero-bg); padding: 80px 32px 52px;
     position: relative; overflow: hidden;
   }
   .hero::before {
@@ -58,8 +127,8 @@
   .content { max-width: 900px; margin: 0 auto; padding: 44px 24px 72px; }
 
   .sec-label { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; margin-top: 44px; }
-  .sec-label-line { flex: 1; height: 2px; background: var(--dark); opacity: 0.08; border-radius: 2px; }
-  .sec-label-text { font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #888; white-space: nowrap; }
+  .sec-label-line { flex: 1; height: 2px; background: var(--border); opacity: 0.15; border-radius: 2px; }
+  .sec-label-text { font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); white-space: nowrap; }
 
   /* RIIL VS NOMINAL */
   .duo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
@@ -73,9 +142,9 @@
     content: ''; position: absolute; width: 150px; height: 150px;
     border-radius: 50%; top: -40px; right: -40px; opacity: 0.12;
   }
-  .big-card.riil { background: #EAF4FB; border: 2px solid #AED6F1; }
+  .big-card.riil { background: var(--riil-bg); border: 2px solid var(--riil-border); }
   .big-card.riil::before { background: var(--blue); }
-  .big-card.nominal { background: #FEF9E7; border: 2px solid #F9E79F; }
+  .big-card.nominal { background: var(--nominal-bg); border: 2px solid var(--nominal-border); }
   .big-card.nominal::before { background: var(--yellow); }
 
   .big-card-icon { font-size: 36px; margin-bottom: 14px; }
@@ -88,16 +157,16 @@
   .nominal .big-card-badge { background: var(--yellow); color: var(--dark); }
 
   .big-card-title { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; margin-bottom: 8px; }
-  .riil .big-card-title { color: #1A5276; }
-  .nominal .big-card-title { color: #784212; }
+  .riil .big-card-title { color: var(--riil-title); }
+  .nominal .big-card-title { color: var(--nominal-title); }
 
-  .big-card-desc { font-size: 14px; line-height: 1.7; margin-bottom: 18px; color: #444; }
+  .big-card-desc { font-size: 14px; line-height: 1.7; margin-bottom: 18px; color: var(--text-muted); }
   .big-card-quote {
     border-radius: 10px; padding: 12px 16px;
     font-size: 13px; font-style: italic; line-height: 1.6;
   }
-  .riil .big-card-quote { background: rgba(46,134,171,0.1); color: #1A5276; border-left: 3px solid var(--blue); }
-  .nominal .big-card-quote { background: rgba(244,197,66,0.15); color: #784212; border-left: 3px solid var(--yellow); }
+  .riil .big-card-quote { background: rgba(46,134,171,0.1); color: var(--riil-title); border-left: 3px solid var(--blue); }
+  .nominal .big-card-quote { background: rgba(244,197,66,0.15); color: var(--nominal-title); border-left: 3px solid var(--yellow); }
 
   .tag-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
   .tag {
@@ -114,11 +183,11 @@
     padding: 14px 20px; border-radius: var(--radius-sm) var(--radius-sm) 0 0;
     font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; color: #fff;
   }
-  .akun-table { width: 100%; border-collapse: collapse; background: white; border-radius: 0 0 var(--radius-sm) var(--radius-sm); overflow: hidden; }
-  .akun-table td { padding: 12px 20px; font-size: 13.5px; border-bottom: 1px solid #F5F5F5; vertical-align: top; }
+  .akun-table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 0 0 var(--radius-sm) var(--radius-sm); overflow: hidden; }
+  .akun-table td { padding: 12px 20px; font-size: 13.5px; border-bottom: 1px solid var(--border); vertical-align: top; }
   .akun-table td:first-child { font-weight: 600; white-space: nowrap; width: 200px; }
   .akun-table tr:last-child td { border-bottom: none; }
-  .akun-table tr:hover td { background: #FAFAFA; }
+  .akun-table tr:hover td { background: var(--hover); }
 
   .g-aset .akun-group-header { background: var(--orange); }
   .g-liab .akun-group-header { background: var(--blue); }
@@ -135,12 +204,12 @@
   .sub-label {
     font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
     text-transform: uppercase; color: #aaa; padding: 8px 20px 4px;
-    background: #FAFAFA; display: block; border-bottom: 1px solid #F0F0F0;
+    background: var(--hover); display: block; border-bottom: 1px solid var(--border);
   }
 
   /* TIPS BOX */
   .tips-box {
-    background: var(--dark); border-radius: var(--radius);
+    background: var(--hero-bg); border-radius: var(--radius);
     padding: 28px 32px; display: flex; gap: 20px; align-items: flex-start;
   }
   .tips-icon { font-size: 32px; flex-shrink: 0; }
@@ -152,6 +221,7 @@
 <body>
 
 <div class="hero">
+  <a href="index.html" class="back-btn">← Kembali ke Menu</a>
   <div class="hero-tag">Pengantar Akuntansi</div>
   <h1>Akun-Akun &<br><em>Jenisnya</em></h1>
   <p>Akun itu ibarat laci-laci tempat nyimpen catatan transaksi. Setiap jenis transaksi punya lacinya sendiri.</p>
@@ -301,5 +371,11 @@
   </div>
 
 </div>
+<script>
+  // Theme Setup
+  if (localStorage.getItem("theme") === "light") {
+    document.body.classList.add("light-theme");
+  }
+</script>
 </body>
 </html>
