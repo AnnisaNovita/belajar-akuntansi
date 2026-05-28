@@ -80,17 +80,17 @@
   ],
   "latihan_excel": [
     {
-      "id": "latihan-siklus-akuntansi-PT-Kreasi-Visual-Nusantara",
+      "id": "PT_Kreasi_Visual_Nusantara_Jan2025",
       "emoji": "🧺",
       "judul": "Kasus Siklus Akuntansi PT Kreasi Visual Nusantara",
       "deskripsi": "Latihan transaksi lengkap perusahaan jasa mulai dari jurnal umum, buku besar, neraca saldo, penyesuaian, hingga laporan keuangan.",
       "tags": ["Perusahaan Jasa", "Visual", "Siklus Lengkap"],
       "warna": "#ec4899",
-      "url": "latihan/PT_Kreasi_Visual_Nusantara_Jan2025.xlsx",
-      "ukuran": "18 KB"
+      "url": "PT_Kreasi_Visual_Nusantara_Jan2025.xlsx",
+      "ukuran": "47 KB"
     },
     {
-      "id": "template-kertas-kerja-akuntansi",
+      "id": "template_kertas_kerja_akuntansi",
       "emoji": "📊",
       "judul": "Template Kertas Kerja Akuntansi Otomatis",
       "deskripsi": "Lembar kerja Excel kosong siap pakai dengan format tabel Jurnal Umum, Buku Besar Akun T, Neraca Saldo, dan Neraca Lajur 10 kolom.",
