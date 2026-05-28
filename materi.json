@@ -52,7 +52,7 @@
       "judul": "Akuntansi Perusahaan Dagang",
       "deskripsi": "Karakteristik Perusahaan Dagang, Sistem Pencatatan Persediaan, Transaksi Pembelian & Penjualan, Harga Pokok Penjualan (HPP), Laporan Laba Rugi Perusahaan Dagang, dan Contoh Kasus",
       "tags": ["Perusahaan Dagang", "HPP", "FOB"],
-      "warna": "#F59E0B",
+      "warna": "#F7418F",
       "url": "akuntansi-perusahaan-dagang.html"
     },
     {
@@ -65,6 +65,17 @@
       "tags": ["Pengendalian Internal", "Rekonsiliasi Bank", "Kas Kecil"],
       "warna": "#ff6b35",
       "url": "kas-dan-pengendalian-internal.html"
+    },
+    {
+      "id": "piutang-usaha",
+      "kategori": "akuntansi",
+      "emoji": "📋",
+      "badge": "Bab 7",
+      "judul": "Piutang Usaha",
+      "deskripsi": "Cara mencatat, mengelola, dan menganalisis piutang usaha termasuk penanganan piutang yang tidak bisa ditagih.",
+      "tags": ["Piutang", "Kelola", "Taktertagih"],
+      "warna": "#24B1B1",
+      "url": "piutang-usaha.html"
     },
     {
       "id": "dasar-perpajakan-indonesia",
@@ -90,13 +101,13 @@
       "ukuran": "47 KB"
     },
     {
-      "id": "template_kertas_kerja_akuntansi",
+      "id": "latihan-studi-kasus-bab8",
       "emoji": "📊",
       "judul": "Template Kertas Kerja Akuntansi Otomatis",
-      "deskripsi": "Lembar kerja Excel kosong siap pakai dengan format tabel Jurnal Umum, Buku Besar Akun T, Neraca Saldo, dan Neraca Lajur 10 kolom.",
-      "tags": ["Template Kerja", "Tabel Akun T", "Neraca Lajur"],
+      "deskripsi": "Latihan studi kasus Persedian lengkap dengan Kunci Jawaban.",
+      "tags": ["Latihan", "Studi Kasus", "Persediaan"],
       "warna": "#06b6d4",
-      "url": "latihan/template_lembar_kerja_akuntansi.xlsx",
+      "url": "latihan-studi-kasus-bab8.docx",
       "ukuran": "25 KB"
     }
   ]
