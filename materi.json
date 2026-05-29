@@ -78,6 +78,39 @@
       "url": "piutang-usaha.html"
     },
     {
+      "id": "persediaan",
+      "kategori": "akuntansi",
+      "emoji": "📦",
+      "badge": "BAB 8",
+      "judul": "Persediaan",
+      "deskripsi": "Metode penilaian persediaan FIFO, LIFO, dan Average, prinsip LCM, estimasi metode laba kotor, dan rasio perputaran persediaan.",
+      "tags": ["FIFO", "LIFO", "Average", "LCM"],
+      "warna": "#a855f7",
+      "url": "persediaan.html"
+    },
+    {
+      "id": "aset-tetap-dan-depresiasi",
+      "kategori": "akuntansi",
+      "emoji": "🏗️",
+      "badge": "BAB 9",
+      "judul": "Aset Tetap & Depresiasi",
+      "deskripsi": "Harga perolehan, 3 Metode (garis lurus, saldo menurun, satuan produksi), Pelepasan aset tetap, Deplesi & Amortisasi",
+      "tags": ["Aset Tetap", "Depresiasi", "Metode"],
+      "warna": "#BFDDF0",
+      "url": "aset-tetap-dan-depresiasi.html"
+    },
+    {
+      "id": "utang-jangka-panjang-dan-obligasi",
+      "kategori": "akuntansi",
+      "emoji": "📜",
+      "badge": "BAB 10",
+      "judul": "Utang Jangka Panjang & Obligasi",
+      "deskripsi": "Jenis-jenis utang jangka panjang & obligasi, Nilai pari, Diskon, Premium, Amortisasi, Pelunasan Awal, Hipoek.",
+      "tags": ["Jangka Panjang", "Obligasi", "Hipotek"],
+      "warna": "#776B5D",
+      "url": "utang-jangka-panjang-dan-obligasi.html"
+    },
+    {
       "id": "dasar-perpajakan-indonesia",
       "kategori": "pajak",
       "emoji": "🧾",
@@ -109,6 +142,16 @@
       "warna": "#06b6d4",
       "url": "latihan-studi-kasus-bab8.docx",
       "ukuran": "25 KB"
+    },
+    {
+      "id": "latihan-studi-kasus-bab10",
+      "emoji": "📜",
+      "judul": "Latihan Studi Kasus Utang Jangka Panjang & Obligasi",
+      "deskripsi": "Latihan studi kasus Obligasi Dijual dengan Diskon, Obligasi Dijual dengan Premium, Utang Hipotek & Analisis Gabungan. Lengkap dengan kunci jawaban.",
+      "tags": ["Obligasi", "Utang Hipotek", "Jurnal"],
+      "warna": "#a855f7",
+      "url": "latihan-studi-kasus-bab10.docx",
+      "ukuran": "24 KB"
     }
   ]
 }

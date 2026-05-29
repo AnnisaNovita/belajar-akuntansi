@@ -1,308 +1,340 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Materi Belajar — Belajar Akuntansi</title>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #0f172a;
-      --glass-bg: rgba(30, 41, 59, 0.45);
-      --glass-border: rgba(255, 255, 255, 0.08);
-      --glass-highlight: rgba(255, 255, 255, 0.15);
-      --text: #f8fafc;
-      --text-muted: #94a3b8;
-      
-      --pink: #ff3d9a;
-      --purple: #a855f7;
-      --blue: #3b82f6;
-      --green: #10b981;
-      --yellow: #fbbf24;
-      --orange: #ff6b35;
-      
-      --radius: 24px;
-      --radius-sm: 14px;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Materi Belajar — Belajar Akuntansi</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0f172a;
+        --glass-bg: rgba(30, 41, 59, 0.45);
+        --glass-border: rgba(255, 255, 255, 0.08);
+        --glass-highlight: rgba(255, 255, 255, 0.15);
+        --text: #f8fafc;
+        --text-muted: #94a3b8;
 
-    body.light-theme {
-      --bg: #fff8f0;
-      --glass-bg: rgba(255, 255, 255, 0.65);
-      --glass-border: rgba(0, 0, 0, 0.06);
-      --glass-highlight: rgba(255, 255, 255, 0.85);
-      --text: #1e293b;
-      --text-muted: #64748b;
-    }
+        --pink: #ff3d9a;
+        --purple: #a855f7;
+        --blue: #3b82f6;
+        --green: #10b981;
+        --yellow: #fbbf24;
+        --orange: #ff6b35;
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+        --radius: 24px;
+        --radius-sm: 14px;
+      }
 
-    body {
-      font-family: "DM Sans", sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      position: relative;
-      overflow-x: hidden;
-      transition: background-color 0.3s, color 0.3s;
-    }
+      body.light-theme {
+        --bg: #fff8f0;
+        --glass-bg: rgba(255, 255, 255, 0.65);
+        --glass-border: rgba(0, 0, 0, 0.06);
+        --glass-highlight: rgba(255, 255, 255, 0.85);
+        --text: #1e293b;
+        --text-muted: #64748b;
+      }
 
-    /* Glowing Blobs */
-    .blob {
-      position: absolute;
-      border-radius: 50%;
-      pointer-events: none;
-      filter: blur(80px);
-      opacity: 0.2;
-      z-index: 0;
-    }
-    .blob-1 { width: 350px; height: 350px; background: var(--purple); top: -100px; right: -50px; }
-    .blob-2 { width: 250px; height: 250px; background: var(--pink); bottom: 10%; left: -50px; }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-    header {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 40px 24px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: relative;
-      z-index: 10;
-    }
-    .logo {
-      font-family: "Syne", sans-serif;
-      font-weight: 800;
-      font-size: 18px;
-      color: var(--text);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .nav-btn {
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      color: var(--text);
-      padding: 10px 20px;
-      border-radius: 99px;
-      font-family: "Syne", sans-serif;
-      font-weight: 700;
-      font-size: 12.5px;
-      text-decoration: none;
-      transition: all 0.2s;
-    }
-    .nav-btn:hover { background: var(--glass-highlight); }
+      body {
+        font-family: "DM Sans", sans-serif;
+        background-color: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        position: relative;
+        overflow-x: hidden;
+        transition:
+          background-color 0.3s,
+          color 0.3s;
+      }
 
-    main {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 20px 24px 80px;
-      position: relative;
-      z-index: 10;
-    }
+      /* Glowing Blobs */
+      .blob {
+        position: absolute;
+        border-radius: 50%;
+        pointer-events: none;
+        filter: blur(80px);
+        opacity: 0.2;
+        z-index: 0;
+      }
+      .blob-1 {
+        width: 350px;
+        height: 350px;
+        background: var(--purple);
+        top: -100px;
+        right: -50px;
+      }
+      .blob-2 {
+        width: 250px;
+        height: 250px;
+        background: var(--pink);
+        bottom: 10%;
+        left: -50px;
+      }
 
-    .viewer-card {
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-radius: var(--radius);
-      padding: 40px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .card-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 24px;
-    }
-    .emoji-box {
-      font-size: 48px;
-      line-height: 1;
-    }
-    .badge {
-      font-family: "Syne", sans-serif;
-      font-weight: 800;
-      font-size: 11px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 6px 16px;
-      border-radius: 99px;
-      color: #fff;
-    }
+      header {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 40px 24px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        z-index: 10;
+      }
+      .logo {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 18px;
+        color: var(--text);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .nav-btn {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        color: var(--text);
+        padding: 10px 20px;
+        border-radius: 99px;
+        font-family: "Syne", sans-serif;
+        font-weight: 700;
+        font-size: 12.5px;
+        text-decoration: none;
+        transition: all 0.2s;
+      }
+      .nav-btn:hover {
+        background: var(--glass-highlight);
+      }
 
-    h1 {
-      font-family: "Syne", sans-serif;
-      font-weight: 800;
-      font-size: clamp(26px, 5vw, 38px);
-      line-height: 1.2;
-      margin-bottom: 16px;
-    }
+      main {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px 24px 80px;
+        position: relative;
+        z-index: 10;
+      }
 
-    .tags-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 32px;
-      border-bottom: 1.5px dashed var(--glass-border);
-      padding-bottom: 24px;
-    }
-    .tag {
-      font-size: 12px;
-      font-weight: 600;
-      padding: 4px 12px;
-      border-radius: 99px;
-    }
+      .viewer-card {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-radius: var(--radius);
+        padding: 40px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        position: relative;
+        overflow: hidden;
+      }
 
-    /* MATERI CONTENT */
-    .materi-body {
-      font-size: 15px;
-      line-height: 1.8;
-      color: var(--text);
-    }
-    .materi-body p {
-      margin-bottom: 20px;
-    }
-    .materi-body h2 {
-      font-family: "Syne", sans-serif;
-      font-weight: 800;
-      font-size: 22px;
-      margin: 36px 0 16px;
-      color: var(--c, var(--pink));
-    }
-    .materi-body h3 {
-      font-family: "Syne", sans-serif;
-      font-weight: 700;
-      font-size: 16px;
-      margin: 24px 0 12px;
-    }
-    .materi-body ul, .materi-body ol {
-      margin-bottom: 20px;
-      padding-left: 24px;
-    }
-    .materi-body li {
-      margin-bottom: 8px;
-    }
-    
-    .alert-box {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--glass-border);
-      border-left: 4px solid var(--c, var(--pink));
-      border-radius: var(--radius-sm);
-      padding: 18px 22px;
-      margin: 28px 0;
-      font-size: 13.5px;
-    }
-    body.light-theme .alert-box {
-      background: rgba(255, 255, 255, 0.7);
-    }
+      .card-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 24px;
+      }
+      .emoji-box {
+        font-size: 48px;
+        line-height: 1;
+      }
+      .badge {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 6px 16px;
+        border-radius: 99px;
+        color: #fff;
+      }
 
-    .footer-nav {
-      margin-top: 40px;
-      border-top: 1.5px dashed var(--glass-border);
-      padding-top: 32px;
-      display: flex;
-      justify-content: space-between;
-    }
-  </style>
-</head>
-<body>
+      h1 {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: clamp(26px, 5vw, 38px);
+        line-height: 1.2;
+        margin-bottom: 16px;
+      }
 
-  <div class="blob blob-1"></div>
-  <div class="blob blob-2"></div>
+      .tags-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 32px;
+        border-bottom: 1.5px dashed var(--glass-border);
+        padding-bottom: 24px;
+      }
+      .tag {
+        font-size: 12px;
+        font-weight: 600;
+        padding: 4px 12px;
+        border-radius: 99px;
+      }
 
-  <header>
-    <a href="index.html" class="logo">⚖️ Belajar Akuntansi</a>
-    <a href="index.html" class="nav-btn">← Kembali</a>
-  </header>
+      /* MATERI CONTENT */
+      .materi-body {
+        font-size: 15px;
+        line-height: 1.8;
+        color: var(--text);
+      }
+      .materi-body p {
+        margin-bottom: 20px;
+      }
+      .materi-body h2 {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 22px;
+        margin: 36px 0 16px;
+        color: var(--c, var(--pink));
+      }
+      .materi-body h3 {
+        font-family: "Syne", sans-serif;
+        font-weight: 700;
+        font-size: 16px;
+        margin: 24px 0 12px;
+      }
+      .materi-body ul,
+      .materi-body ol {
+        margin-bottom: 20px;
+        padding-left: 24px;
+      }
+      .materi-body li {
+        margin-bottom: 8px;
+      }
 
-  <main>
-    <div class="viewer-card" id="viewer">
-      <div class="card-top">
-        <div class="emoji-box" id="m-emoji">📖</div>
-        <div class="badge" id="m-badge" style="background:#ff3d9a">Materi</div>
+      .alert-box {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid var(--glass-border);
+        border-left: 4px solid var(--c, var(--pink));
+        border-radius: var(--radius-sm);
+        padding: 18px 22px;
+        margin: 28px 0;
+        font-size: 13.5px;
+      }
+      body.light-theme .alert-box {
+        background: rgba(255, 255, 255, 0.7);
+      }
+
+      .footer-nav {
+        margin-top: 40px;
+        border-top: 1.5px dashed var(--glass-border);
+        padding-top: 32px;
+        display: flex;
+        justify-content: space-between;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+    <header>
+      <a href="index.html" class="logo">⚖️ Belajar Akuntansi</a>
+      <a href="index.html" class="nav-btn">← Kembali</a>
+    </header>
+
+    <main>
+      <div class="viewer-card" id="viewer">
+        <div class="card-top">
+          <div class="emoji-box" id="m-emoji">📖</div>
+          <div class="badge" id="m-badge" style="background: #ff3d9a">
+            Materi
+          </div>
+        </div>
+
+        <h1 id="m-judul">Memuat Materi...</h1>
+
+        <div class="tags-row" id="m-tags"></div>
+
+        <div class="materi-body" id="m-body">
+          <p>Sedang mengambil data materi belajar...</p>
+        </div>
+
+        <div class="footer-nav">
+          <a href="index.html" class="nav-btn">← Menu Utama</a>
+          <a
+            href="bank-kuis.html"
+            class="nav-btn"
+            style="
+              background: var(--pink);
+              color: #fff;
+              border-color: transparent;
+            "
+            >Uji Kemampuan (Kuis) →</a
+          >
+        </div>
       </div>
-      
-      <h1 id="m-judul">Memuat Materi...</h1>
-      
-      <div class="tags-row" id="m-tags"></div>
-      
-      <div class="materi-body" id="m-body">
-        <p>Sedang mengambil data materi belajar...</p>
-      </div>
+    </main>
 
-      <div class="footer-nav">
-        <a href="index.html" class="nav-btn">← Menu Utama</a>
-        <a href="kuis_akuntansi_50soal.html" class="nav-btn" style="background:var(--pink);color:#fff;border-color:transparent;">Uji Kemampuan (Kuis) →</a>
-      </div>
-    </div>
-  </main>
+    <script>
+      // Theme Setup
+      if (localStorage.getItem("theme") === "light") {
+        document.body.classList.add("light-theme");
+      }
 
-  <script>
-    // Theme Setup
-    if (localStorage.getItem("theme") === "light") {
-      document.body.classList.add("light-theme");
-    }
+      // Get URL Parameters
+      const params = new URLSearchParams(window.location.search);
+      const mId = params.get("id");
 
-    // Get URL Parameters
-    const params = new URLSearchParams(window.location.search);
-    const mId = params.get("id");
+      if (!mId) {
+        window.location.href = "index.html";
+      }
 
-    if (!mId) {
-      window.location.href = "index.html";
-    }
+      // Load Materi Database
+      fetch("materi.json")
+        .then((res) => res.json())
+        .then((data) => {
+          const item = data.materi.find((m) => m.id === mId);
+          if (!item) {
+            document.getElementById("m-judul").textContent =
+              "Materi Tidak Ditemukan";
+            document.getElementById("m-body").innerHTML =
+              "<p>Maaf, materi yang Anda cari tidak tersedia atau belum dipublikasikan oleh Annisa.</p>";
+            return;
+          }
 
-    // Load Materi Database
-    fetch("materi.json")
-      .then(res => res.json())
-      .then(data => {
-        const item = data.materi.find(m => m.id === mId);
-        if (!item) {
-          document.getElementById("m-judul").textContent = "Materi Tidak Ditemukan";
-          document.getElementById("m-body").innerHTML = "<p>Maaf, materi yang Anda cari tidak tersedia atau belum dipublikasikan oleh Annisa.</p>";
-          return;
-        }
+          // Render Page
+          document.title = `${item.judul} — Belajar Akuntansi`;
+          document.body.style.setProperty("--c", item.warna);
+          document.getElementById("m-emoji").textContent = item.emoji;
 
-        // Render Page
-        document.title = `${item.judul} — Belajar Akuntansi`;
-        document.body.style.setProperty('--c', item.warna);
-        document.getElementById("m-emoji").textContent = item.emoji;
-        
-        const badge = document.getElementById("m-badge");
-        badge.textContent = item.badge;
-        badge.style.background = item.warna;
-        badge.style.boxShadow = `0 4px 12px ${item.warna}30`;
-        
-        document.getElementById("m-judul").textContent = item.judul;
+          const badge = document.getElementById("m-badge");
+          badge.textContent = item.badge;
+          badge.style.background = item.warna;
+          badge.style.boxShadow = `0 4px 12px ${item.warna}30`;
 
-        const tagsRow = document.getElementById("m-tags");
-        tagsRow.innerHTML = "";
-        item.tags.forEach(t => {
-          const span = document.createElement("span");
-          span.className = "tag";
-          span.textContent = t;
-          span.style.background = `${item.warna}15`;
-          span.style.color = item.warna;
-          span.style.border = `1.5px solid ${item.warna}25`;
-          tagsRow.appendChild(span);
-        });
+          document.getElementById("m-judul").textContent = item.judul;
 
-        // Set Content
-        const bodyEl = document.getElementById("m-body");
-        if (item.konten) {
-          bodyEl.innerHTML = item.konten;
-        } else {
-          // Fallback Content based on ID
-          if (item.id === "dasar-perpajakan-indonesia") {
-            bodyEl.innerHTML = `
+          const tagsRow = document.getElementById("m-tags");
+          tagsRow.innerHTML = "";
+          item.tags.forEach((t) => {
+            const span = document.createElement("span");
+            span.className = "tag";
+            span.textContent = t;
+            span.style.background = `${item.warna}15`;
+            span.style.color = item.warna;
+            span.style.border = `1.5px solid ${item.warna}25`;
+            tagsRow.appendChild(span);
+          });
+
+          // Set Content
+          const bodyEl = document.getElementById("m-body");
+          if (item.konten) {
+            bodyEl.innerHTML = item.konten;
+          } else {
+            // Fallback Content based on ID
+            if (item.id === "dasar-perpajakan-indonesia") {
+              bodyEl.innerHTML = `
               <p>Perpajakan adalah salah satu instrumen finansial terpenting bagi sebuah negara. Di Indonesia, kontribusi pajak menyumbang lebih dari 80% total penerimaan APBN. Mari kita bahas konsep dasarnya dengan cara yang simpel!</p>
               
               <h2>1. Apa itu Pajak?</h2>
@@ -335,14 +367,14 @@
                 <li><strong>Withholding System:</strong> Pajak dihitung dan dipotong oleh pihak ketiga yang ditunjuk undang-undang (contoh: pemotongan PPh Pasal 21 gaji karyawan oleh perusahaan).</li>
               </ol>
             `;
-          } else {
-            bodyEl.innerHTML = `<p>Konten materi sedang ditulis dan dirapikan oleh Annisa. Silakan kembali beberapa saat lagi!</p>`;
+            } else {
+              bodyEl.innerHTML = `<p>Konten materi sedang ditulis dan dirapikan oleh Annisa. Silakan kembali beberapa saat lagi!</p>`;
+            }
           }
-        }
-      })
-      .catch(err => {
-        console.error("Error loading materi:", err);
-      });
-  </script>
-</body>
+        })
+        .catch((err) => {
+          console.error("Error loading materi:", err);
+        });
+    </script>
+  </body>
 </html>
