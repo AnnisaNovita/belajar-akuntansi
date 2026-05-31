@@ -1,0 +1,2098 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Harga Pokok Produksi — Belajar Akuntansi</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0f172a;
+        --glass-bg: rgba(30, 41, 59, 0.45);
+        --glass-border: rgba(255, 255, 255, 0.08);
+        --glass-highlight: rgba(255, 255, 255, 0.15);
+        --text: #f8fafc;
+        --text-muted: #94a3b8;
+        --pink: #ff3d9a;
+        --purple: #a855f7;
+        --blue: #3b82f6;
+        --green: #10b981;
+        --yellow: #fbbf24;
+        --orange: #ff6b35;
+        --accent: #10b981;
+        --radius: 24px;
+        --radius-sm: 14px;
+      }
+      body.light-theme {
+        --bg: #fff8f0;
+        --glass-bg: rgba(255, 255, 255, 0.65);
+        --glass-border: rgba(0, 0, 0, 0.06);
+        --glass-highlight: rgba(255, 255, 255, 0.85);
+        --text: #1e293b;
+        --text-muted: #64748b;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "DM Sans", sans-serif;
+        background-color: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        overflow-x: hidden;
+        transition:
+          background-color 0.3s ease,
+          color 0.3s ease;
+        position: relative;
+      }
+      .blob {
+        position: absolute;
+        border-radius: 50%;
+        pointer-events: none;
+        filter: blur(80px);
+        opacity: 0.25;
+        z-index: 0;
+        animation: float 20s infinite alternate;
+      }
+      .blob-1 {
+        width: 450px;
+        height: 450px;
+        background: var(--green);
+        top: -150px;
+        right: -80px;
+      }
+      .blob-2 {
+        width: 320px;
+        height: 320px;
+        background: var(--purple);
+        bottom: 20%;
+        left: -80px;
+        animation-delay: -5s;
+      }
+      .blob-3 {
+        width: 350px;
+        height: 350px;
+        background: var(--blue);
+        top: 40%;
+        right: 10%;
+        animation-delay: -10s;
+      }
+      @keyframes float {
+        0% {
+          transform: translate(0, 0) scale(1);
+        }
+        100% {
+          transform: translate(50px, 80px) scale(1.1);
+        }
+      }
+      header {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 30px 24px 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        z-index: 10;
+      }
+      .header-logo {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 18px;
+        color: var(--text);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .theme-toggle-btn,
+      .back-btn {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(12px);
+        color: var(--text);
+        transition:
+          transform 0.2s,
+          background-color 0.2s;
+      }
+      .theme-toggle-btn {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+      }
+      .back-btn {
+        padding: 10px 20px;
+        border-radius: 99px;
+        font-family: "Syne", sans-serif;
+        font-weight: 700;
+        font-size: 13px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .theme-toggle-btn:hover,
+      .back-btn:hover {
+        transform: translateY(-2px);
+        background: var(--glass-highlight);
+      }
+      .hero {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 40px 24px;
+        position: relative;
+        z-index: 10;
+        text-align: center;
+      }
+      .hero-glass {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(16px);
+        border-radius: var(--radius);
+        padding: 48px 32px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .hero-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(16, 185, 129, 0.15);
+        border: 1.5px solid rgba(16, 185, 129, 0.3);
+        color: var(--accent);
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 7px 18px;
+        border-radius: 99px;
+        margin-bottom: 24px;
+        font-family: "Syne", sans-serif;
+      }
+      .hero h1 {
+        font-family: "Syne", sans-serif;
+        font-size: clamp(30px, 6vw, 52px);
+        font-weight: 800;
+        line-height: 1.15;
+        margin-bottom: 16px;
+        color: #fff;
+      }
+      body.light-theme .hero h1 {
+        color: #1e293b;
+      }
+      .hero h1 .hi-highlight {
+        color: var(--accent);
+      }
+      .hero p {
+        color: var(--text-muted);
+        font-size: 15px;
+        line-height: 1.7;
+        max-width: 620px;
+      }
+      .content {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 24px 80px;
+        position: relative;
+        z-index: 10;
+      }
+      .section-title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 52px;
+        margin-bottom: 24px;
+      }
+      .sec-line {
+        flex: 1;
+        height: 1.5px;
+        background: var(--glass-border);
+      }
+      .sec-text {
+        font-family: "Syne", sans-serif;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+      }
+      .cards-3 {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+        gap: 24px;
+        margin-bottom: 32px;
+      }
+      .cards-2 {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 24px;
+        margin-bottom: 32px;
+      }
+      .card {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(12px);
+        border-radius: var(--radius);
+        padding: 28px;
+        position: relative;
+        overflow: hidden;
+        transition:
+          transform 0.25s,
+          box-shadow 0.25s;
+      }
+      .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: var(--c, var(--accent));
+      }
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      }
+      .card-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: var(--radius-sm);
+        background: color-mix(in srgb, var(--c) 15%, transparent);
+        color: var(--c);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        margin-bottom: 18px;
+        border: 1px solid color-mix(in srgb, var(--c) 30%, transparent);
+      }
+      .card-eyebrow {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--c);
+        margin-bottom: 6px;
+      }
+      .card-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 19px;
+        margin-bottom: 10px;
+      }
+      .card-body {
+        font-size: 13.5px;
+        color: var(--text-muted);
+        line-height: 1.6;
+      }
+      .list-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 13px;
+        line-height: 1.5;
+        margin-bottom: 8px;
+      }
+      .list-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--c, var(--accent));
+        flex-shrink: 0;
+        margin-top: 6px;
+      }
+      .example-wrap {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(16px);
+        border-radius: var(--radius);
+        padding: 32px;
+        margin-bottom: 32px;
+      }
+      .example-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 16px;
+        color: var(--accent);
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+      }
+      .example-story {
+        color: var(--text-muted);
+        font-size: 14.5px;
+        line-height: 1.7;
+        margin-bottom: 20px;
+        padding: 16px 20px;
+        border-left: 3px solid var(--accent);
+        background: rgba(16, 185, 129, 0.05);
+        border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      }
+      .formula-block {
+        background: rgba(16, 185, 129, 0.08);
+        border: 2px solid rgba(16, 185, 129, 0.25);
+        border-radius: var(--radius-sm);
+        padding: 20px 24px;
+        margin-bottom: 20px;
+        font-family: "Syne", sans-serif;
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--accent);
+        text-align: center;
+        line-height: 1.6;
+      }
+      .info-box {
+        background: rgba(16, 185, 129, 0.08);
+        border: 1px solid rgba(16, 185, 129, 0.25);
+        border-radius: var(--radius-sm);
+        padding: 18px 20px;
+        margin-bottom: 20px;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .info-box strong {
+        color: var(--accent);
+      }
+      /* —— Visual pipeline (alur biaya) —— */
+      .cost-pipeline {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr auto 1fr auto minmax(100px, 0.7fr);
+        align-items: stretch;
+        gap: 10px;
+        margin-bottom: 28px;
+        padding: 8px 0;
+      }
+      @media (max-width: 860px) {
+        .cost-pipeline {
+          grid-template-columns: 1fr;
+          gap: 12px;
+        }
+        .pipe-connector,
+        .pipe-connector-v {
+          display: none !important;
+        }
+      }
+      .pipe-stage {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius);
+        padding: 22px 18px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.25s, box-shadow 0.25s;
+      }
+      .pipe-stage::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: var(--pipe-c, var(--accent));
+      }
+      .pipe-stage:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12);
+      }
+      .pipe-stage[data-stage="bb"] {
+        --pipe-c: var(--blue);
+      }
+      .pipe-stage[data-stage="bdp"] {
+        --pipe-c: var(--purple);
+      }
+      .pipe-stage[data-stage="bj"] {
+        --pipe-c: var(--yellow);
+      }
+      .pipe-stage[data-stage="hpp"] {
+        --pipe-c: var(--pink);
+      }
+      .pipe-icon {
+        width: 52px;
+        height: 52px;
+        margin: 0 auto 12px;
+        border-radius: 14px;
+        background: color-mix(in srgb, var(--pipe-c) 18%, transparent);
+        border: 1px solid color-mix(in srgb, var(--pipe-c) 35%, transparent);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 26px;
+      }
+      .pipe-stage h4 {
+        font-family: "Syne", sans-serif;
+        font-size: 13px;
+        font-weight: 800;
+        margin-bottom: 10px;
+        color: var(--pipe-c);
+      }
+      .pipe-in,
+      .pipe-out {
+        font-size: 11.5px;
+        color: var(--text-muted);
+        line-height: 1.45;
+        margin-top: 6px;
+      }
+      .pipe-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        justify-content: center;
+        margin-top: 10px;
+      }
+      .pipe-chip {
+        font-size: 10px;
+        font-weight: 700;
+        font-family: "Syne", sans-serif;
+        padding: 4px 10px;
+        border-radius: 99px;
+        background: rgba(168, 85, 247, 0.15);
+        border: 1px solid rgba(168, 85, 247, 0.3);
+        color: var(--purple);
+      }
+      .pipe-connector {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-muted);
+        font-size: 22px;
+        font-weight: 800;
+        opacity: 0.6;
+      }
+
+      /* —— Overhead breakdown stack —— */
+      .overhead-stack {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius);
+        padding: 28px;
+        margin-bottom: 28px;
+      }
+      .overhead-stack-head {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 18px;
+        color: var(--accent);
+        text-align: center;
+        margin-bottom: 20px;
+        padding-bottom: 16px;
+        border-bottom: 1px dashed var(--glass-border);
+      }
+      .overhead-item {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 12px 16px;
+        margin-bottom: 8px;
+        border-radius: var(--radius-sm);
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--glass-border);
+        font-size: 14px;
+      }
+      body.light-theme .overhead-item {
+        background: rgba(0, 0, 0, 0.02);
+      }
+      .overhead-item .oh-plus {
+        width: 28px;
+        height: 28px;
+        border-radius: 8px;
+        background: rgba(16, 185, 129, 0.15);
+        color: var(--accent);
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-family: "Syne", sans-serif;
+      }
+
+      /* —— Job cost sheet —— */
+      .job-sheet {
+        background: linear-gradient(
+          145deg,
+          rgba(16, 185, 129, 0.08),
+          rgba(59, 130, 246, 0.06)
+        );
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius);
+        overflow: hidden;
+        margin-bottom: 32px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+      }
+      .job-sheet-top {
+        padding: 28px 28px 20px;
+        border-bottom: 1px solid var(--glass-border);
+        background: rgba(0, 0, 0, 0.15);
+      }
+      body.light-theme .job-sheet-top {
+        background: rgba(255, 255, 255, 0.4);
+      }
+      .job-sheet-top h3 {
+        font-family: "Syne", sans-serif;
+        font-size: 20px;
+        font-weight: 800;
+        margin-bottom: 16px;
+        color: var(--accent);
+      }
+      .job-meta {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 12px;
+      }
+      .job-meta-item {
+        font-size: 13px;
+      }
+      .job-meta-item span {
+        display: block;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        font-family: "Syne", sans-serif;
+        margin-bottom: 4px;
+      }
+      .job-sheet-body {
+        padding: 24px 28px 28px;
+      }
+      .job-cost-group {
+        margin-bottom: 20px;
+      }
+      .job-cost-group-title {
+        font-family: "Syne", sans-serif;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        margin-bottom: 10px;
+      }
+      .job-total-banner {
+        margin-top: 20px;
+        padding: 20px 24px;
+        border-radius: var(--radius-sm);
+        background: linear-gradient(
+          135deg,
+          rgba(16, 185, 129, 0.2),
+          rgba(59, 130, 246, 0.15)
+        );
+        border: 1px solid rgba(16, 185, 129, 0.35);
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+      }
+      .job-total-banner strong {
+        font-family: "Syne", sans-serif;
+        font-size: 22px;
+        color: var(--accent);
+      }
+      .job-unit-pill {
+        font-size: 13px;
+        padding: 8px 16px;
+        border-radius: 99px;
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        color: var(--text-muted);
+      }
+      .job-unit-pill b {
+        color: var(--text);
+      }
+
+      /* —— Laporan finansial (card) —— */
+      .laporan-card {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius);
+        overflow: hidden;
+        margin-bottom: 28px;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+      }
+      .laporan-head {
+        padding: 24px 28px;
+        text-align: center;
+        background: linear-gradient(
+          180deg,
+          rgba(16, 185, 129, 0.12) 0%,
+          transparent 100%
+        );
+        border-bottom: 1px solid var(--glass-border);
+      }
+      .laporan-badge {
+        display: inline-block;
+        font-family: "Syne", sans-serif;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--accent);
+        background: rgba(16, 185, 129, 0.12);
+        border: 1px solid rgba(16, 185, 129, 0.3);
+        padding: 5px 14px;
+        border-radius: 99px;
+        margin-bottom: 12px;
+      }
+      .laporan-head h3 {
+        font-family: "Syne", sans-serif;
+        font-size: clamp(18px, 4vw, 22px);
+        font-weight: 800;
+        margin-bottom: 6px;
+      }
+      .laporan-head p {
+        font-size: 13px;
+        color: var(--text-muted);
+      }
+      .laporan-body {
+        padding: 8px 0 12px;
+      }
+      .laporan-section-label {
+        font-family: "Syne", sans-serif;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        padding: 16px 28px 8px;
+      }
+      .laporan-group {
+        padding: 0 20px 8px;
+      }
+      .laporan-group-title {
+        font-family: "Syne", sans-serif;
+        font-size: 12px;
+        font-weight: 800;
+        color: var(--accent);
+        padding: 10px 8px 6px;
+        margin-top: 4px;
+      }
+      .lr {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 16px;
+        padding: 10px 8px;
+        font-size: 14px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      }
+      body.light-theme .lr {
+        border-bottom-color: rgba(0, 0, 0, 0.04);
+      }
+      .lr:last-child {
+        border-bottom: none;
+      }
+      .lr.indent {
+        padding-left: 24px;
+        font-size: 13px;
+        color: var(--text-muted);
+      }
+      .lr .lr-label {
+        flex: 1;
+        line-height: 1.4;
+      }
+      .lr .lr-amt {
+        font-family: "Syne", sans-serif;
+        font-weight: 700;
+        font-size: 13px;
+        white-space: nowrap;
+        color: var(--text);
+      }
+      .lr .lr-amt.neg {
+        color: #f87171;
+      }
+      .lr.subtotal {
+        background: rgba(16, 185, 129, 0.06);
+        border-radius: 8px;
+        margin: 4px 0;
+        border-bottom: none;
+      }
+      .lr.subtotal .lr-amt {
+        color: var(--accent);
+      }
+      .lr.total {
+        margin: 8px 12px;
+        padding: 14px 16px;
+        border-radius: var(--radius-sm);
+        background: rgba(16, 185, 129, 0.1);
+        border: 1px solid rgba(16, 185, 129, 0.25);
+        border-bottom: none;
+      }
+      .lr.total .lr-label {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 13px;
+        color: var(--accent);
+      }
+      .lr.total .lr-amt {
+        font-size: 16px;
+        color: var(--accent);
+      }
+      .lr.grand {
+        margin: 12px 16px 16px;
+        padding: 18px 20px;
+        border-radius: var(--radius-sm);
+        background: linear-gradient(
+          135deg,
+          rgba(16, 185, 129, 0.22),
+          rgba(59, 130, 246, 0.12)
+        );
+        border: 2px solid rgba(16, 185, 129, 0.35);
+      }
+      .lr.grand .lr-label,
+      .lr.grand .lr-amt {
+        font-size: 15px;
+        color: var(--accent);
+      }
+      .laporan-footnote {
+        text-align: center;
+        font-size: 12px;
+        color: var(--text-muted);
+        font-style: italic;
+        padding: 0 28px 20px;
+      }
+
+      /* —— Reports relationship flow —— */
+      .reports-chain {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        margin-bottom: 32px;
+        padding: 24px;
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius);
+      }
+      .chain-level {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+      }
+      .chain-node {
+        background: rgba(16, 185, 129, 0.1);
+        border: 1.5px solid rgba(16, 185, 129, 0.3);
+        border-radius: 12px;
+        padding: 12px 18px;
+        font-family: "Syne", sans-serif;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--text);
+        text-align: center;
+        min-width: 140px;
+      }
+      .chain-node.highlight {
+        background: rgba(255, 61, 154, 0.12);
+        border-color: rgba(255, 61, 154, 0.35);
+        color: var(--pink);
+      }
+      .chain-node.result {
+        background: rgba(251, 191, 36, 0.12);
+        border-color: rgba(251, 191, 36, 0.35);
+        color: var(--yellow);
+      }
+      .chain-arrow-h {
+        color: var(--text-muted);
+        font-size: 20px;
+        font-weight: 800;
+      }
+      .chain-arrow-v {
+        color: var(--accent);
+        font-size: 24px;
+        line-height: 1;
+        padding: 6px 0;
+        opacity: 0.7;
+      }
+
+      .laporan-grid-3 {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 24px;
+        margin-bottom: 28px;
+      }
+      .laporan-card.compact .laporan-head {
+        padding: 18px 20px;
+      }
+      .laporan-card.compact .laporan-body {
+        padding-bottom: 4px;
+      }
+
+      .margin-highlight {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-top: 16px;
+      }
+      .margin-stat {
+        flex: 1;
+        min-width: 140px;
+        padding: 16px 20px;
+        border-radius: var(--radius-sm);
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        text-align: center;
+      }
+      .margin-stat .ms-val {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 18px;
+        color: var(--accent);
+        display: block;
+        margin-bottom: 4px;
+      }
+      .margin-stat .ms-lbl {
+        font-size: 11px;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        font-family: "Syne", sans-serif;
+        font-weight: 700;
+      }
+      .table-wrap {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius-sm);
+        overflow: hidden;
+        margin-bottom: 24px;
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th {
+        background: rgba(0, 0, 0, 0.25);
+        color: var(--text-muted);
+        font-family: "Syne", sans-serif;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 14px 18px;
+        text-align: left;
+        border-bottom: 1.5px solid var(--glass-border);
+      }
+      body.light-theme th {
+        background: rgba(255, 255, 255, 0.5);
+      }
+      td {
+        padding: 12px 18px;
+        font-size: 13.5px;
+        border-bottom: 1px solid var(--glass-border);
+      }
+      tr:last-child td {
+        border-bottom: none;
+      }
+      tr.total-row td {
+        font-weight: 800;
+        background: rgba(16, 185, 129, 0.08);
+        color: var(--accent);
+        border-top: 2px solid var(--glass-border);
+      }
+      .rangkuman-table td:first-child {
+        font-weight: 700;
+        color: var(--accent);
+        white-space: nowrap;
+      }
+      .jurnal-box {
+        background: rgba(0, 0, 0, 0.2);
+        border: 1.5px solid var(--glass-border);
+        border-radius: var(--radius-sm);
+        padding: 20px 24px;
+        margin-bottom: 16px;
+      }
+      body.light-theme .jurnal-box {
+        background: rgba(255, 255, 255, 0.5);
+      }
+      .jurnal-title {
+        font-family: "Syne", sans-serif;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 12px;
+        border-bottom: 1px dashed var(--glass-border);
+        padding-bottom: 8px;
+      }
+      .jurnal-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 4px 0;
+        font-size: 13.5px;
+      }
+      .jurnal-akun.indent {
+        padding-left: 24px;
+        color: var(--text-muted);
+      }
+      .jurnal-amount.d {
+        color: var(--orange);
+        font-weight: 700;
+      }
+      .jurnal-amount.k {
+        color: var(--accent);
+        font-weight: 700;
+      }
+      .quiz-cta {
+        background: var(--glass-bg);
+        border: 2px solid var(--accent);
+        border-radius: var(--radius);
+        padding: 40px 32px;
+        text-align: center;
+        margin-top: 60px;
+        margin-bottom: 40px;
+      }
+      .quiz-cta h3 {
+        font-family: "Syne", sans-serif;
+        font-size: 24px;
+        margin-bottom: 12px;
+        color: var(--accent);
+      }
+      .quiz-cta p {
+        color: var(--text-muted);
+        margin-bottom: 20px;
+        font-size: 15px;
+        line-height: 1.6;
+      }
+      .quiz-btn {
+        background: var(--accent);
+        color: #fff;
+        border: none;
+        padding: 14px 32px;
+        border-radius: var(--radius-sm);
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 14px;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        transition: all 0.2s;
+      }
+      .quiz-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 24px rgba(16, 185, 129, 0.35);
+      }
+      footer {
+        border-top: 1px solid var(--glass-border);
+        background: #090d16;
+        padding: 40px 24px;
+        text-align: center;
+        position: relative;
+        z-index: 10;
+      }
+      body.light-theme footer {
+        background: #fff8f0;
+      }
+      .footer-name {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 16px;
+        background: linear-gradient(
+          135deg,
+          var(--yellow),
+          var(--pink),
+          var(--purple)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 6px;
+      }
+      .footer-sub {
+        font-size: 12.5px;
+        color: var(--text-muted);
+      }
+      .footer-dots {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        margin-top: 16px;
+      }
+      .footer-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+      }
+      @media (max-width: 600px) {
+        .cards-3,
+        .cards-2 {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <header>
+      <a href="index.html" class="header-logo">
+        <span style="font-size: 24px">🏭</span>
+        <span>Belajar Akuntansi</span>
+      </a>
+      <div style="display: flex; gap: 12px; align-items: center">
+        <a href="index.html" class="back-btn">← Kembali</a>
+        <button
+          class="theme-toggle-btn"
+          onclick="toggleTheme()"
+          title="Ganti Tema"
+        >
+          🌓
+        </button>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-glass">
+        <div class="hero-tag">🏭 Bab 15 — Akuntansi Manufaktur</div>
+        <h1>Harga Pokok <span class="hi-highlight">Produksi</span></h1>
+        <p>
+          Pelajari alur biaya dari bahan baku hingga HPP, komponen biaya
+          produksi (BB, TKL, overhead), sistem job order &amp; process costing,
+          penyusunan laporan harga pokok produksi &amp; penjualan, hingga studi
+          kasus CV. Batik Sekar Jawi.
+        </p>
+      </div>
+    </section>
+
+    <main class="content">
+      <!-- 1. ALUR BIAYA -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">1 — Alur Biaya Produksi</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">📌 Konsep Dasar</div>
+        <p class="example-story" style="margin-bottom: 24px">
+          Biaya produksi mengalir melalui <strong>tiga akun persediaan</strong>
+          sebelum akhirnya menjadi HPP di laporan laba rugi.
+        </p>
+        <div class="cost-pipeline">
+          <div class="pipe-stage" data-stage="bb">
+            <div class="pipe-icon">📦</div>
+            <h4>Bahan Baku</h4>
+            <p class="pipe-in">Stok bahan di gudang</p>
+            <p class="pipe-out">+ Bahan Baku Langsung →</p>
+          </div>
+          <div class="pipe-connector">→</div>
+          <div class="pipe-stage" data-stage="bdp">
+            <div class="pipe-icon">⚙️</div>
+            <h4>Barang Dalam Proses</h4>
+            <div class="pipe-chips">
+              <span class="pipe-chip">+ TKL</span>
+              <span class="pipe-chip">+ Overhead</span>
+            </div>
+            <p class="pipe-out">Selesai produksi →</p>
+          </div>
+          <div class="pipe-connector">→</div>
+          <div class="pipe-stage" data-stage="bj">
+            <div class="pipe-icon">✅</div>
+            <h4>Barang Jadi</h4>
+            <p class="pipe-in">Produk siap dijual</p>
+            <p class="pipe-out">Terjual →</p>
+          </div>
+          <div class="pipe-connector">→</div>
+          <div class="pipe-stage" data-stage="hpp">
+            <div class="pipe-icon">📊</div>
+            <h4>HPP</h4>
+            <p class="pipe-in">Masuk laporan laba rugi</p>
+          </div>
+        </div>
+        <div class="example-story">
+          💡 <strong>Contoh:</strong> Pabrik tahu "Berkah" Jombang — kedelai
+          dibeli masuk gudang bahan baku → masuk produksi (direbus, digiling,
+          dicetak) jadi barang dalam proses → tahu jadi masuk gudang barang
+          jadi → saat dijual ke warung baru jadi HPP!
+        </div>
+      </div>
+
+      <!-- 2. BIAYA BAHAN BAKU -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">2 — Biaya Bahan Baku</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Jenis</th>
+              <th>Definisi</th>
+              <th>Contoh</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Bahan Baku Langsung</strong></td>
+              <td>Bahan utama yang jadi bagian produk, bisa ditelusuri langsung</td>
+              <td>Kedelai untuk tahu, tepung untuk roti</td>
+            </tr>
+            <tr>
+              <td><strong>Bahan Penolong</strong></td>
+              <td>Bahan pendukung, nilainya kecil, sulit ditelusuri per unit</td>
+              <td>Garam, pewarna, bahan pengawet</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="formula-block">
+        Pemakaian Bahan Baku = Persediaan BB Awal + Pembelian BB − Persediaan BB
+        Akhir
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">📊 Contoh — Pabrik Tahu "Berkah" (November 2024)</div>
+        <div class="table-wrap" style="margin-bottom: 20px">
+          <table>
+            <tbody>
+              <tr>
+                <td>Persediaan kedelai awal</td>
+                <td style="text-align: right">Rp 8.000.000</td>
+              </tr>
+              <tr>
+                <td>Pembelian kedelai bulan ini</td>
+                <td style="text-align: right">Rp 45.000.000</td>
+              </tr>
+              <tr>
+                <td>Persediaan kedelai akhir</td>
+                <td style="text-align: right">Rp (5.000.000)</td>
+              </tr>
+              <tr class="total-row">
+                <td><strong>Pemakaian kedelai (BB)</strong></td>
+                <td style="text-align: right"><strong>Rp 48.000.000</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="jurnal-box">
+          <div class="jurnal-title">Jurnal Pembelian Bahan Baku</div>
+          <div class="jurnal-row">
+            <span class="jurnal-akun">Persediaan Bahan Baku</span>
+            <span class="jurnal-amount d">Rp 45.000.000</span>
+          </div>
+          <div class="jurnal-row">
+            <span class="jurnal-akun indent">Kas / Utang Usaha</span>
+            <span class="jurnal-amount k">Rp 45.000.000</span>
+          </div>
+        </div>
+        <div class="jurnal-box">
+          <div class="jurnal-title">Jurnal Pemakaian Bahan Baku</div>
+          <div class="jurnal-row">
+            <span class="jurnal-akun">Barang Dalam Proses — BB</span>
+            <span class="jurnal-amount d">Rp 48.000.000</span>
+          </div>
+          <div class="jurnal-row">
+            <span class="jurnal-akun indent">Persediaan Bahan Baku</span>
+            <span class="jurnal-amount k">Rp 48.000.000</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. TKL -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">3 — Biaya Tenaga Kerja Langsung (TKL)</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <p class="example-story" style="margin-bottom: 24px">
+        TKL adalah upah/gaji karyawan yang <strong>langsung terlibat</strong>
+        dalam proses produksi dan bisa ditelusuri ke produk tertentu.
+      </p>
+
+      <div class="cards-2">
+        <div class="card" style="--c: var(--green)">
+          <div class="card-icon">✅</div>
+          <div class="card-eyebrow">Termasuk TKL</div>
+          <div class="card-title">Biaya Tenaga Kerja Langsung</div>
+          <div class="list-item">
+            <span class="list-dot"></span>Operator mesin produksi
+          </div>
+          <div class="list-item">
+            <span class="list-dot"></span>Penjahit di pabrik garmen
+          </div>
+          <div class="list-item"><span class="list-dot"></span>Tukang cetak tahu</div>
+        </div>
+        <div class="card" style="--c: var(--orange)">
+          <div class="card-icon">📋</div>
+          <div class="card-eyebrow">Bukan TKL (Overhead)</div>
+          <div class="card-title">Tenaga Kerja Tidak Langsung</div>
+          <div class="list-item">
+            <span class="list-dot"></span>Gaji supervisor pabrik
+          </div>
+          <div class="list-item"><span class="list-dot"></span>Satpam pabrik</div>
+          <div class="list-item">
+            <span class="list-dot"></span>Cleaning service pabrik
+          </div>
+        </div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">📊 Contoh — Pabrik Tahu "Berkah"</div>
+        <p class="example-story">
+          5 orang karyawan produksi × Rp 3.500.000 = <strong
+            >Total TKL Rp 17.500.000/bulan</strong
+          >
+        </p>
+        <div class="jurnal-box">
+          <div class="jurnal-title">Jurnal Biaya TKL</div>
+          <div class="jurnal-row">
+            <span class="jurnal-akun">Barang Dalam Proses — TKL</span>
+            <span class="jurnal-amount d">Rp 17.500.000</span>
+          </div>
+          <div class="jurnal-row">
+            <span class="jurnal-akun indent">Utang Gaji / Kas</span>
+            <span class="jurnal-amount k">Rp 17.500.000</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. BOP -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">4 — Biaya Overhead Pabrik (BOP)</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="info-box">
+        <strong>Definisi:</strong> Semua biaya produksi selain bahan baku
+        langsung dan TKL. Tidak bisa ditelusuri langsung ke produk — harus
+        <strong>dialokasikan</strong>.
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Jenis Overhead</th>
+              <th>Contoh</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Overhead Tetap</strong></td>
+              <td>Sewa pabrik, depresiasi mesin, gaji supervisor</td>
+            </tr>
+            <tr>
+              <td><strong>Overhead Variabel</strong></td>
+              <td>Listrik pabrik, air, bahan penolong, pelumas mesin</td>
+            </tr>
+            <tr>
+              <td><strong>Overhead Campuran</strong></td>
+              <td>Biaya pemeliharaan mesin</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="overhead-stack">
+        <div class="overhead-stack-head">Overhead Pabrik =</div>
+        <div class="overhead-item">
+          <span class="oh-plus">+</span> Bahan Penolong
+        </div>
+        <div class="overhead-item">
+          <span class="oh-plus">+</span> Tenaga Kerja Tidak Langsung
+        </div>
+        <div class="overhead-item">
+          <span class="oh-plus">+</span> Depresiasi mesin &amp; gedung pabrik
+        </div>
+        <div class="overhead-item">
+          <span class="oh-plus">+</span> Listrik &amp; air pabrik
+        </div>
+        <div class="overhead-item">
+          <span class="oh-plus">+</span> Asuransi pabrik
+        </div>
+        <div class="overhead-item">
+          <span class="oh-plus">+</span> Biaya pemeliharaan pabrik
+        </div>
+        <div class="overhead-item">
+          <span class="oh-plus">+</span> Sewa pabrik
+        </div>
+        <div class="overhead-item">
+          <span class="oh-plus">+</span> Semua biaya produksi lainnya
+        </div>
+      </div>
+
+      <!-- 5. TARIF OVERHEAD -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">5 — Tarif Overhead yang Ditentukan di Muka</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="info-box">
+        <strong>Mengapa perlu tarif di muka?</strong> Overhead aktual baru
+        diketahui di akhir periode, tapi harga pokok produk perlu dihitung
+        segera saat produk selesai. Solusinya: gunakan
+        <strong>predetermined overhead rate</strong>.
+      </div>
+
+      <div class="formula-block">
+        Tarif Overhead = Estimasi Total Overhead Pabrik ÷ Estimasi Dasar
+        Alokasi
+      </div>
+
+      <p
+        style="
+          font-size: 14px;
+          color: var(--text-muted);
+          margin-bottom: 16px;
+          line-height: 1.6;
+        "
+      >
+        Dasar alokasi yang umum: jam tenaga kerja langsung (JTKL), jam mesin,
+        biaya TKL, atau unit produksi.
+      </p>
+
+      <div class="example-wrap">
+        <div class="example-title">📊 Contoh — Pabrik Roti "Sejahtera" (2024)</div>
+        <p class="example-story">
+          Estimasi overhead Rp 120.000.000 ÷ 10.000 jam TKL =
+          <strong>Rp 12.000/jam TKL</strong>. Produksi Januari: 800 jam →
+          overhead dibebankan = 800 × Rp 12.000 =
+          <strong>Rp 9.600.000</strong>
+        </p>
+        <div class="jurnal-box">
+          <div class="jurnal-title">Jurnal Pembebanan Overhead</div>
+          <div class="jurnal-row">
+            <span class="jurnal-akun">Barang Dalam Proses — BOP</span>
+            <span class="jurnal-amount d">Rp 9.600.000</span>
+          </div>
+          <div class="jurnal-row">
+            <span class="jurnal-akun indent">Overhead Pabrik Dibebankan</span>
+            <span class="jurnal-amount k">Rp 9.600.000</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cards-2">
+        <div class="card" style="--c: var(--green)">
+          <div class="card-title">Overhead Lebih Dibebankan</div>
+          <div class="card-body">
+            Overhead dibebankan &gt; overhead aktual → selisih
+            <strong>dikurangi dari HPP</strong> (laba naik).
+          </div>
+        </div>
+        <div class="card" style="--c: var(--orange)">
+          <div class="card-title">Overhead Kurang Dibebankan</div>
+          <div class="card-body">
+            Overhead dibebankan &lt; overhead aktual → selisih
+            <strong>ditambah ke HPP</strong> (laba turun).
+          </div>
+        </div>
+      </div>
+
+      <div class="example-story">
+        💡 Contoh: Overhead dibebankan Rp 115.000.000, overhead aktual Rp
+        120.000.000 → kurang dibebankan Rp 5.000.000 → HPP dinaikkan Rp
+        5.000.000.
+      </div>
+
+      <!-- 6. JOB ORDER -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">6 — Sistem Biaya Pesanan (Job Order Costing)</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="info-box">
+        Mengumpulkan biaya <strong>per pesanan/pekerjaan</strong> secara
+        terpisah. Cocok untuk: percetakan, konstruksi, bengkel, furnitur
+        custom, konveksi seragam.
+      </div>
+
+      <div class="job-sheet">
+        <div class="job-sheet-top">
+          <h3>📋 Kartu Harga Pokok Pesanan</h3>
+          <div class="job-meta">
+            <div class="job-meta-item">
+              <span>Nomor Pesanan</span> JO-2024-001
+            </div>
+            <div class="job-meta-item"><span>Pelanggan</span> Toko Berkah</div>
+            <div class="job-meta-item">
+              <span>Produk</span> Seragam batik 100 pcs
+            </div>
+            <div class="job-meta-item">
+              <span>Periode</span> 1 Nov – 20 Nov 2024
+            </div>
+          </div>
+        </div>
+        <div class="job-sheet-body">
+          <div class="job-cost-group">
+            <div class="job-cost-group-title">Bahan Baku Langsung</div>
+            <div class="lr">
+              <span class="lr-label">Kain batik 50m × Rp 80.000</span
+              ><span class="lr-amt">Rp 4.000.000</span>
+            </div>
+            <div class="lr">
+              <span class="lr-label">Benang &amp; kancing</span
+              ><span class="lr-amt">Rp 200.000</span>
+            </div>
+            <div class="lr subtotal">
+              <span class="lr-label">Total BB</span
+              ><span class="lr-amt">Rp 4.200.000</span>
+            </div>
+          </div>
+          <div class="job-cost-group">
+            <div class="job-cost-group-title">Tenaga Kerja Langsung</div>
+            <div class="lr">
+              <span class="lr-label">40 jam × Rp 25.000</span
+              ><span class="lr-amt">Rp 1.000.000</span>
+            </div>
+          </div>
+          <div class="job-cost-group">
+            <div class="job-cost-group-title">Overhead Pabrik</div>
+            <div class="lr">
+              <span class="lr-label">40 jam × Rp 15.000/jam</span
+              ><span class="lr-amt">Rp 600.000</span>
+            </div>
+          </div>
+          <div class="job-total-banner">
+            <div>
+              <span
+                style="
+                  font-size: 11px;
+                  color: var(--text-muted);
+                  font-family: Syne, sans-serif;
+                  font-weight: 800;
+                  text-transform: uppercase;
+                  letter-spacing: 0.08em;
+                "
+                >Total Harga Pokok Pesanan</span
+              >
+              <strong>Rp 5.800.000</strong>
+            </div>
+            <div class="job-unit-pill">
+              Per pcs: <b>Rp 58.000</b> (÷ 100 unit)
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">📝 Alur Jurnal — Konveksi "Maju Jaya" (JO-001)</div>
+        <div class="jurnal-box">
+          <div class="jurnal-title">Pemakaian Bahan Baku</div>
+          <div class="jurnal-row">
+            <span>Barang Dalam Proses — JO001</span>
+            <span class="jurnal-amount d">Rp 4.200.000</span>
+          </div>
+          <div class="jurnal-row">
+            <span class="jurnal-akun indent">Persediaan Bahan Baku</span>
+            <span class="jurnal-amount k">Rp 4.200.000</span>
+          </div>
+        </div>
+        <div class="jurnal-box">
+          <div class="jurnal-title">Pembebanan TKL</div>
+          <div class="jurnal-row">
+            <span>Barang Dalam Proses — JO001</span>
+            <span class="jurnal-amount d">Rp 1.000.000</span>
+          </div>
+          <div class="jurnal-row">
+            <span class="jurnal-akun indent">Utang Gaji</span>
+            <span class="jurnal-amount k">Rp 1.000.000</span>
+          </div>
+        </div>
+        <div class="jurnal-box">
+          <div class="jurnal-title">Pembebanan Overhead</div>
+          <div class="jurnal-row">
+            <span>Barang Dalam Proses — JO001</span>
+            <span class="jurnal-amount d">Rp 600.000</span>
+          </div>
+          <div class="jurnal-row">
+            <span class="jurnal-akun indent">Overhead Pabrik Dibebankan</span>
+            <span class="jurnal-amount k">Rp 600.000</span>
+          </div>
+        </div>
+        <div class="jurnal-box">
+          <div class="jurnal-title">Pesanan Selesai</div>
+          <div class="jurnal-row">
+            <span>Persediaan Barang Jadi</span>
+            <span class="jurnal-amount d">Rp 5.800.000</span>
+          </div>
+          <div class="jurnal-row">
+            <span class="jurnal-akun indent">Barang Dalam Proses — JO001</span>
+            <span class="jurnal-amount k">Rp 5.800.000</span>
+          </div>
+        </div>
+        <div class="jurnal-box">
+          <div class="jurnal-title">Pesanan Terjual (harga jual Rp 8.000.000)</div>
+          <div class="jurnal-row">
+            <span>Piutang Usaha / Kas</span>
+            <span class="jurnal-amount d">Rp 8.000.000</span>
+          </div>
+          <div class="jurnal-row">
+            <span class="jurnal-akun indent">Penjualan</span>
+            <span class="jurnal-amount k">Rp 8.000.000</span>
+          </div>
+          <div class="jurnal-row">
+            <span>HPP</span>
+            <span class="jurnal-amount d">Rp 5.800.000</span>
+          </div>
+          <div class="jurnal-row">
+            <span class="jurnal-akun indent">Persediaan Barang Jadi</span>
+            <span class="jurnal-amount k">Rp 5.800.000</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7. PROCESS COSTING -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">7 — Sistem Biaya Proses (Process Costing)</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="info-box">
+        Mengumpulkan biaya <strong>per departemen/proses per periode</strong>.
+        Cocok untuk produksi massal homogen: pabrik tahu, mie, semen, minuman,
+        kilang minyak.
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Aspek</th>
+              <th>Job Order</th>
+              <th>Process Costing</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Produk</strong></td>
+              <td>Unik per pesanan</td>
+              <td>Homogen massal</td>
+            </tr>
+            <tr>
+              <td><strong>Pengumpulan biaya</strong></td>
+              <td>Per pesanan</td>
+              <td>Per departemen/periode</td>
+            </tr>
+            <tr>
+              <td><strong>Dokumen</strong></td>
+              <td>Kartu harga pokok pesanan</td>
+              <td>Laporan biaya produksi</td>
+            </tr>
+            <tr>
+              <td><strong>Contoh</strong></td>
+              <td>Konveksi custom, percetakan</td>
+              <td>Pabrik tahu, pabrik mie</td>
+            </tr>
+            <tr>
+              <td><strong>Harga pokok</strong></td>
+              <td>Per pesanan</td>
+              <td>Rata-rata per unit</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">📊 Contoh — Pabrik Tahu "Berkah" (November 2024)</div>
+        <p class="example-story">
+          Unit diproduksi = 10.000 papan. Total biaya: BB Rp 48.000.000 + TKL
+          Rp 17.500.000 + Overhead Rp 12.000.000 = Rp 77.500.000
+        </p>
+        <div class="formula-block">
+          Harga pokok per papan = Rp 77.500.000 ÷ 10.000 = Rp 7.750/papan
+        </div>
+      </div>
+
+      <!-- 8. LAPORAN HP PRODUKSI -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">8 — Laporan Harga Pokok Produksi</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="laporan-card">
+        <div class="laporan-head">
+          <span class="laporan-badge">Laporan Produksi</span>
+          <h3>PABRIK TAHU "BERKAH"</h3>
+          <p>Laporan Harga Pokok Produksi · November 2024</p>
+        </div>
+        <div class="laporan-body">
+          <div class="laporan-section-label">Biaya Produksi</div>
+          <div class="laporan-group">
+            <div class="laporan-group-title">Bahan Baku</div>
+            <div class="lr indent">
+              <span class="lr-label">Persediaan BB awal</span
+              ><span class="lr-amt">Rp 8.000.000</span>
+            </div>
+            <div class="lr indent">
+              <span class="lr-label">+ Pembelian</span
+              ><span class="lr-amt">Rp 45.000.000</span>
+            </div>
+            <div class="lr indent">
+              <span class="lr-label">− Persediaan BB akhir</span
+              ><span class="lr-amt neg">(Rp 5.000.000)</span>
+            </div>
+            <div class="lr subtotal">
+              <span class="lr-label">Pemakaian BB</span
+              ><span class="lr-amt">Rp 48.000.000</span>
+            </div>
+          </div>
+          <div class="lr total" style="margin: 4px 12px">
+            <span class="lr-label">Tenaga Kerja Langsung</span
+            ><span class="lr-amt">Rp 17.500.000</span>
+          </div>
+          <div class="laporan-group">
+            <div class="laporan-group-title">Overhead Pabrik</div>
+            <div class="lr indent">
+              <span class="lr-label">Bahan penolong</span
+              ><span class="lr-amt">Rp 2.000.000</span>
+            </div>
+            <div class="lr indent">
+              <span class="lr-label">TK tidak langsung</span
+              ><span class="lr-amt">Rp 3.500.000</span>
+            </div>
+            <div class="lr indent">
+              <span class="lr-label">Depresiasi mesin</span
+              ><span class="lr-amt">Rp 2.500.000</span>
+            </div>
+            <div class="lr indent">
+              <span class="lr-label">Listrik pabrik</span
+              ><span class="lr-amt">Rp 2.000.000</span>
+            </div>
+            <div class="lr indent">
+              <span class="lr-label">Sewa pabrik</span
+              ><span class="lr-amt">Rp 2.000.000</span>
+            </div>
+            <div class="lr subtotal">
+              <span class="lr-label">Total Overhead</span
+              ><span class="lr-amt">Rp 12.000.000</span>
+            </div>
+          </div>
+          <div class="lr grand">
+            <span class="lr-label">TOTAL BIAYA PRODUKSI</span
+            ><span class="lr-amt">Rp 77.500.000</span>
+          </div>
+          <div class="lr indent">
+            <span class="lr-label">+ BDP Awal (1 Nov)</span
+            ><span class="lr-amt">Rp 5.000.000</span>
+          </div>
+          <div class="lr indent">
+            <span class="lr-label">− BDP Akhir (30 Nov)</span
+            ><span class="lr-amt neg">(Rp 3.500.000)</span>
+          </div>
+          <div class="lr grand">
+            <span class="lr-label">HARGA POKOK PRODUKSI</span
+            ><span class="lr-amt">Rp 79.000.000</span>
+          </div>
+        </div>
+        <p class="laporan-footnote">
+          Biaya barang yang selesai diproduksi pada periode ini
+        </p>
+      </div>
+
+      <div class="formula-block">
+        Harga Pokok Produksi = Total Biaya Produksi (BB + TKL + BOP) + BDP
+        Awal − BDP Akhir
+      </div>
+
+      <!-- 9. LAPORAN HPP -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">9 — Laporan Harga Pokok Penjualan</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="laporan-card">
+        <div class="laporan-head">
+          <span class="laporan-badge">Laporan Penjualan</span>
+          <h3>PABRIK TAHU "BERKAH"</h3>
+          <p>Laporan Harga Pokok Penjualan · November 2024</p>
+        </div>
+        <div class="laporan-body">
+          <div class="lr">
+            <span class="lr-label">Persediaan Barang Jadi Awal</span
+            ><span class="lr-amt">Rp 6.000.000</span>
+          </div>
+          <div class="lr">
+            <span class="lr-label">+ Harga Pokok Produksi</span
+            ><span class="lr-amt">Rp 79.000.000</span>
+          </div>
+          <div class="lr subtotal">
+            <span class="lr-label">Barang Tersedia Dijual</span
+            ><span class="lr-amt">Rp 85.000.000</span>
+          </div>
+          <div class="lr">
+            <span class="lr-label">− Persediaan Barang Jadi Akhir</span
+            ><span class="lr-amt neg">(Rp 7.500.000)</span>
+          </div>
+          <div class="lr grand">
+            <span class="lr-label">HARGA POKOK PENJUALAN</span
+            ><span class="lr-amt">Rp 77.500.000</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="formula-block">
+        HPP = Persediaan BJ Awal + Harga Pokok Produksi − Persediaan BJ Akhir
+      </div>
+
+      <div class="section-title" style="margin-top: 32px">
+        <div class="sec-line"></div>
+        <div class="sec-text">Hubungan Ketiga Laporan</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="reports-chain">
+        <div class="chain-level">
+          <div class="chain-node">Laporan BB + TKL + BOP</div>
+        </div>
+        <div class="chain-arrow-v">↓</div>
+        <div class="chain-level">
+          <div class="chain-node">Laporan HP Produksi</div>
+          <span class="chain-arrow-h">→</span>
+          <div class="chain-node highlight">HP Produksi</div>
+          <span class="chain-arrow-h">→</span>
+          <div class="chain-node">Laporan HPP</div>
+        </div>
+        <div class="chain-arrow-v">↓</div>
+        <div class="chain-level">
+          <div class="chain-node highlight">HPP</div>
+          <span class="chain-arrow-h">→</span>
+          <div class="chain-node result">Laporan Laba Rugi</div>
+        </div>
+      </div>
+
+      <!-- 10. STUDI KASUS -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">10 — Studi Kasus Nyata Dunia Kerja</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">🏭 CV. Batik "Sekar Jawi" — Jombang</div>
+        <p class="example-story">
+          Produsen batik tulis &amp; batik cap. Data produksi &amp; penjualan
+          November 2024.
+        </p>
+
+        <p
+          style="
+            font-family: Syne, sans-serif;
+            font-weight: 800;
+            font-size: 13px;
+            color: var(--accent);
+            margin: 20px 0 12px;
+          "
+        >
+          Data Persediaan Awal (1 November)
+        </p>
+        <div class="table-wrap">
+          <table>
+            <tbody>
+              <tr>
+                <td>Persediaan bahan baku</td>
+                <td style="text-align: right">Rp 12.000.000</td>
+              </tr>
+              <tr>
+                <td>Barang dalam proses</td>
+                <td style="text-align: right">Rp 8.500.000</td>
+              </tr>
+              <tr>
+                <td>Persediaan barang jadi</td>
+                <td style="text-align: right">Rp 15.000.000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p
+          style="
+            font-family: Syne, sans-serif;
+            font-weight: 800;
+            font-size: 13px;
+            color: var(--accent);
+            margin: 20px 0 12px;
+          "
+        >
+          Data Produksi November
+        </p>
+        <div class="cards-3">
+          <div class="card" style="--c: var(--blue)">
+            <div class="card-title">Bahan Baku</div>
+            <div class="card-body">
+              Pembelian Rp 65.000.000<br />Akhir Rp 9.000.000<br />Pemakaian =
+              Rp 68.000.000
+            </div>
+          </div>
+          <div class="card" style="--c: var(--purple)">
+            <div class="card-title">TKL</div>
+            <div class="card-body">
+              8 pembatik × Rp 4.000.000<br />= Rp 32.000.000
+            </div>
+          </div>
+          <div class="card" style="--c: var(--green)">
+            <div class="card-title">Overhead</div>
+            <div class="card-body">
+              Penolong, supervisor, depresiasi, listrik, sewa<br />Total Rp
+              16.000.000
+            </div>
+          </div>
+        </div>
+        <p class="example-story">
+          BDP akhir Rp 6.000.000 · BJ akhir Rp 18.500.000 · Penjualan 500
+          lembar @ Rp 350.000 = Rp 175.000.000
+        </p>
+      </div>
+
+      <div class="laporan-grid-3">
+        <div class="laporan-card compact">
+          <div class="laporan-head">
+            <span class="laporan-badge">A — HP Produksi</span>
+            <h3>CV. BATIK "SEKAR JAWI"</h3>
+            <p>November 2024</p>
+          </div>
+          <div class="laporan-body">
+            <div class="laporan-group-title">Bahan Baku</div>
+            <div class="lr indent">
+              <span class="lr-label">Persediaan BB awal</span
+              ><span class="lr-amt">Rp 12.000.000</span>
+            </div>
+            <div class="lr indent">
+              <span class="lr-label">+ Pembelian</span
+              ><span class="lr-amt">Rp 65.000.000</span>
+            </div>
+            <div class="lr indent">
+              <span class="lr-label">− Persediaan akhir</span
+              ><span class="lr-amt neg">(Rp 9.000.000)</span>
+            </div>
+            <div class="lr subtotal">
+              <span class="lr-label">Pemakaian BB</span
+              ><span class="lr-amt">Rp 68.000.000</span>
+            </div>
+            <div class="lr">
+              <span class="lr-label">Tenaga Kerja Langsung</span
+              ><span class="lr-amt">Rp 32.000.000</span>
+            </div>
+            <div class="lr">
+              <span class="lr-label">Overhead Pabrik</span
+              ><span class="lr-amt">Rp 16.000.000</span>
+            </div>
+            <div class="lr total">
+              <span class="lr-label">Total Biaya Produksi</span
+              ><span class="lr-amt">Rp 116.000.000</span>
+            </div>
+            <div class="lr indent">
+              <span class="lr-label">+ BDP Awal</span
+              ><span class="lr-amt">Rp 8.500.000</span>
+            </div>
+            <div class="lr indent">
+              <span class="lr-label">− BDP Akhir</span
+              ><span class="lr-amt neg">(Rp 6.000.000)</span>
+            </div>
+            <div class="lr grand">
+              <span class="lr-label">HP Produksi</span
+              ><span class="lr-amt">Rp 118.500.000</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="laporan-card compact">
+          <div class="laporan-head">
+            <span class="laporan-badge">B — HPP</span>
+            <h3>CV. BATIK "SEKAR JAWI"</h3>
+            <p>Laporan Harga Pokok Penjualan</p>
+          </div>
+          <div class="laporan-body">
+            <div class="lr">
+              <span class="lr-label">Persediaan BJ Awal</span
+              ><span class="lr-amt">Rp 15.000.000</span>
+            </div>
+            <div class="lr">
+              <span class="lr-label">+ HP Produksi</span
+              ><span class="lr-amt">Rp 118.500.000</span>
+            </div>
+            <div class="lr subtotal">
+              <span class="lr-label">Barang Tersedia Dijual</span
+              ><span class="lr-amt">Rp 133.500.000</span>
+            </div>
+            <div class="lr">
+              <span class="lr-label">− Persediaan BJ Akhir</span
+              ><span class="lr-amt neg">(Rp 18.500.000)</span>
+            </div>
+            <div class="lr grand">
+              <span class="lr-label">HPP</span
+              ><span class="lr-amt">Rp 115.000.000</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="laporan-card compact">
+          <div class="laporan-head">
+            <span class="laporan-badge">C — Laba Rugi</span>
+            <h3>CV. BATIK "SEKAR JAWI"</h3>
+            <p>Laporan Laba Rugi Singkat</p>
+          </div>
+          <div class="laporan-body">
+            <div class="lr">
+              <span class="lr-label">Penjualan</span
+              ><span class="lr-amt">Rp 175.000.000</span>
+            </div>
+            <div class="lr">
+              <span class="lr-label">HPP</span
+              ><span class="lr-amt neg">(Rp 115.000.000)</span>
+            </div>
+            <div class="lr subtotal">
+              <span class="lr-label">Laba Kotor</span
+              ><span class="lr-amt">Rp 60.000.000</span>
+            </div>
+            <div class="lr">
+              <span class="lr-label">Beban operasi</span
+              ><span class="lr-amt neg">(Rp 18.000.000)</span>
+            </div>
+            <div class="lr grand">
+              <span class="lr-label">Laba Bersih</span
+              ><span class="lr-amt">Rp 42.000.000</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <strong>Analisis margin per lembar batik</strong>
+        <div class="margin-highlight">
+          <div class="margin-stat">
+            <span class="ms-val">Rp 230.000</span>
+            <span class="ms-lbl">HPP / lembar</span>
+          </div>
+          <div class="margin-stat">
+            <span class="ms-val">Rp 350.000</span>
+            <span class="ms-lbl">Harga jual</span>
+          </div>
+          <div class="margin-stat">
+            <span class="ms-val">34,3%</span>
+            <span class="ms-lbl">Margin laba kotor</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RANGKUMAN -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">📝 Rangkuman</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="rangkuman-table">
+          <thead>
+            <tr>
+              <th>Poin</th>
+              <th>Inti</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>✅ Alur Biaya</td>
+              <td>BB → BDP → BJ → HPP</td>
+            </tr>
+            <tr>
+              <td>✅ Bahan Baku</td>
+              <td>BB awal + Pembelian − BB akhir = Pemakaian</td>
+            </tr>
+            <tr>
+              <td>✅ TKL</td>
+              <td>Upah karyawan yang langsung produksi</td>
+            </tr>
+            <tr>
+              <td>✅ Overhead</td>
+              <td>Semua biaya produksi selain BB langsung &amp; TKL</td>
+            </tr>
+            <tr>
+              <td>✅ Tarif Overhead</td>
+              <td>Estimasi BOP ÷ Estimasi dasar alokasi</td>
+            </tr>
+            <tr>
+              <td>✅ Job Order</td>
+              <td>Per pesanan — produk unik/custom</td>
+            </tr>
+            <tr>
+              <td>✅ Process Costing</td>
+              <td>Per departemen — produk massal homogen</td>
+            </tr>
+            <tr>
+              <td>✅ HP Produksi</td>
+              <td>Total BB + TKL + BOP + BDP awal − BDP akhir</td>
+            </tr>
+            <tr>
+              <td>✅ HP Penjualan</td>
+              <td>BJ awal + HP Produksi − BJ akhir</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- QUIZ CTA -->
+      <div class="quiz-cta" id="quiz-section">
+        <h3>🎯 Uji Pemahamanmu!</h3>
+        <p>
+          Setelah mempelajari seluruh materi Harga Pokok Produksi, kerjakan kuis
+          interaktif di Bank Kuis. Klik tombol di bawah untuk langsung menuju
+          kuis bab ini!
+        </p>
+        <a
+          href="bank-kuis.html?bab=Harga%20Pokok%20Produksi"
+          class="quiz-btn"
+        >
+          Mulai Kuis Harga Pokok Produksi →
+        </a>
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-name">Annisa Novita Ardana</div>
+      <div class="footer-sub">
+        Belajar Akuntansi &amp; Perpajakan &nbsp;·&nbsp; Dibuat dengan Cinta
+        &amp; Estetika 🌸
+      </div>
+      <div class="footer-dots">
+        <div class="footer-dot" style="background: #ff6b35"></div>
+        <div class="footer-dot" style="background: #ff3d9a"></div>
+        <div class="footer-dot" style="background: #a855f7"></div>
+        <div class="footer-dot" style="background: #3b82f6"></div>
+        <div class="footer-dot" style="background: #10b981"></div>
+        <div class="footer-dot" style="background: #fbbf24"></div>
+      </div>
+    </footer>
+
+    <script>
+      const body = document.body;
+      if (localStorage.getItem("theme") === "light") {
+        body.classList.add("light-theme");
+      }
+      function toggleTheme() {
+        body.classList.toggle("light-theme");
+        localStorage.setItem(
+          "theme",
+          body.classList.contains("light-theme") ? "light" : "dark",
+        );
+      }
+    </script>
+  </body>
+</html>
