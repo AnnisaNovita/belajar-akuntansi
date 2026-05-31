@@ -1,0 +1,1591 @@
+﻿<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Akuntansi Biaya — Belajar Akuntansi</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0f172a;
+        --glass-bg: rgba(30, 41, 59, 0.45);
+        --glass-border: rgba(255, 255, 255, 0.08);
+        --glass-highlight: rgba(255, 255, 255, 0.15);
+        --text: #f8fafc;
+        --text-muted: #94a3b8;
+        --pink: #ff3d9a;
+        --purple: #a855f7;
+        --blue: #3b82f6;
+        --green: #10b981;
+        --yellow: #fbbf24;
+        --orange: #ff6b35;
+        --accent: #3b82f6;
+        --radius: 24px;
+        --radius-sm: 14px;
+      }
+      body.light-theme {
+        --bg: #fff8f0;
+        --glass-bg: rgba(255, 255, 255, 0.65);
+        --glass-border: rgba(0, 0, 0, 0.06);
+        --glass-highlight: rgba(255, 255, 255, 0.85);
+        --text: #1e293b;
+        --text-muted: #64748b;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "DM Sans", sans-serif;
+        background-color: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        overflow-x: hidden;
+        transition:
+          background-color 0.3s ease,
+          color 0.3s ease;
+        position: relative;
+      }
+      .blob {
+        position: absolute;
+        border-radius: 50%;
+        pointer-events: none;
+        filter: blur(80px);
+        opacity: 0.25;
+        z-index: 0;
+        animation: float 20s infinite alternate;
+      }
+      .blob-1 {
+        width: 450px;
+        height: 450px;
+        background: var(--blue);
+        top: -150px;
+        right: -80px;
+      }
+      .blob-2 {
+        width: 320px;
+        height: 320px;
+        background: var(--purple);
+        bottom: 20%;
+        left: -80px;
+        animation-delay: -5s;
+      }
+      .blob-3 {
+        width: 350px;
+        height: 350px;
+        background: var(--blue);
+        top: 40%;
+        right: 10%;
+        animation-delay: -10s;
+      }
+      @keyframes float {
+        0% {
+          transform: translate(0, 0) scale(1);
+        }
+        100% {
+          transform: translate(50px, 80px) scale(1.1);
+        }
+      }
+      header {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 30px 24px 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        z-index: 10;
+      }
+      .header-logo {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 18px;
+        color: var(--text);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .theme-toggle-btn,
+      .back-btn {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(12px);
+        color: var(--text);
+        transition:
+          transform 0.2s,
+          background-color 0.2s;
+      }
+      .theme-toggle-btn {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+      }
+      .back-btn {
+        padding: 10px 20px;
+        border-radius: 99px;
+        font-family: "Syne", sans-serif;
+        font-weight: 700;
+        font-size: 13px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .theme-toggle-btn:hover,
+      .back-btn:hover {
+        transform: translateY(-2px);
+        background: var(--glass-highlight);
+      }
+      .hero {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 40px 24px;
+        position: relative;
+        z-index: 10;
+        text-align: center;
+      }
+      .hero-glass {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(16px);
+        border-radius: var(--radius);
+        padding: 48px 32px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .hero-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(59, 130, 246, 0.15);
+        border: 1.5px solid rgba(59, 130, 246, 0.3);
+        color: var(--accent);
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 7px 18px;
+        border-radius: 99px;
+        margin-bottom: 24px;
+        font-family: "Syne", sans-serif;
+      }
+      .hero h1 {
+        font-family: "Syne", sans-serif;
+        font-size: clamp(30px, 6vw, 52px);
+        font-weight: 800;
+        line-height: 1.15;
+        margin-bottom: 16px;
+        color: #fff;
+      }
+      body.light-theme .hero h1 {
+        color: #1e293b;
+      }
+      .hero h1 .hi-highlight {
+        color: var(--accent);
+      }
+      .hero p {
+        color: var(--text-muted);
+        font-size: 15px;
+        line-height: 1.7;
+        max-width: 620px;
+      }
+      .content {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 24px 80px;
+        position: relative;
+        z-index: 10;
+      }
+      .section-title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 52px;
+        margin-bottom: 24px;
+      }
+      .sec-line {
+        flex: 1;
+        height: 1.5px;
+        background: var(--glass-border);
+      }
+      .sec-text {
+        font-family: "Syne", sans-serif;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+      }
+      .cards-3 {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+        gap: 24px;
+        margin-bottom: 32px;
+      }
+      .cards-2 {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 24px;
+        margin-bottom: 32px;
+      }
+      .card {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(12px);
+        border-radius: var(--radius);
+        padding: 28px;
+        position: relative;
+        overflow: hidden;
+        transition:
+          transform 0.25s,
+          box-shadow 0.25s;
+      }
+      .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: var(--c, var(--accent));
+      }
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      }
+      .card-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: var(--radius-sm);
+        background: color-mix(in srgb, var(--c) 15%, transparent);
+        color: var(--c);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        margin-bottom: 18px;
+        border: 1px solid color-mix(in srgb, var(--c) 30%, transparent);
+      }
+      .card-eyebrow {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--c);
+        margin-bottom: 6px;
+      }
+      .card-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 19px;
+        margin-bottom: 10px;
+      }
+      .card-body {
+        font-size: 13.5px;
+        color: var(--text-muted);
+        line-height: 1.6;
+      }
+      .list-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 13px;
+        line-height: 1.5;
+        margin-bottom: 8px;
+      }
+      .list-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--c, var(--accent));
+        flex-shrink: 0;
+        margin-top: 6px;
+      }
+      .example-wrap {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(16px);
+        border-radius: var(--radius);
+        padding: 32px;
+        margin-bottom: 32px;
+      }
+      .example-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 16px;
+        color: var(--accent);
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+      }
+      .example-story {
+        color: var(--text-muted);
+        font-size: 14.5px;
+        line-height: 1.7;
+        margin-bottom: 20px;
+        padding: 16px 20px;
+        border-left: 3px solid var(--accent);
+        background: rgba(59, 130, 246, 0.05);
+        border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      }
+      .formula-block {
+        background: rgba(59, 130, 246, 0.08);
+        border: 2px solid rgba(59, 130, 246, 0.25);
+        border-radius: var(--radius-sm);
+        padding: 20px 24px;
+        margin-bottom: 20px;
+        font-family: "Syne", sans-serif;
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--accent);
+        text-align: center;
+        line-height: 1.6;
+      }
+      .info-box {
+        background: rgba(59, 130, 246, 0.08);
+        border: 1px solid rgba(59, 130, 246, 0.25);
+        border-radius: var(--radius-sm);
+        padding: 18px 20px;
+        margin-bottom: 20px;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .info-box strong {
+        color: var(--accent);
+      }
+      .warning-box {
+        background: rgba(251, 191, 36, 0.1);
+        border: 1px solid rgba(251, 191, 36, 0.35);
+        border-radius: var(--radius-sm);
+        padding: 18px 20px;
+        margin-bottom: 20px;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .warning-box strong {
+        color: var(--yellow);
+      }
+      .calc-steps {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 24px;
+      }
+      .calc-step {
+        display: flex;
+        gap: 16px;
+        align-items: flex-start;
+        padding: 16px 20px;
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius-sm);
+      }
+      .calc-step-num {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: rgba(59, 130, 246, 0.2);
+        border: 1.5px solid rgba(59, 130, 246, 0.4);
+        color: var(--accent);
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .calc-step-body {
+        flex: 1;
+        font-size: 14px;
+        line-height: 1.55;
+      }
+      .calc-step-body strong {
+        color: var(--accent);
+        font-family: "Syne", sans-serif;
+      }
+      .formula-eq {
+        font-family: ui-monospace, monospace;
+        font-size: 13px;
+        background: rgba(0, 0, 0, 0.2);
+        padding: 10px 14px;
+        border-radius: 8px;
+        margin-top: 8px;
+        display: inline-block;
+      }
+      body.light-theme .formula-eq {
+        background: rgba(0, 0, 0, 0.05);
+      }
+      .lr .lr-amt.pct {
+        color: var(--text-muted);
+        font-size: 12px;
+        min-width: 48px;
+        text-align: right;
+      }
+      .classify-label {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        border-radius: 8px;
+        background: rgba(59, 130, 246, 0.15);
+        color: var(--accent);
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 13px;
+        margin-right: 10px;
+      }
+      /* —— Visual pipeline (alur biaya) —— */
+      .cost-pipeline {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr auto 1fr auto minmax(100px, 0.7fr);
+        align-items: stretch;
+        gap: 10px;
+        margin-bottom: 28px;
+        padding: 8px 0;
+      }
+      @media (max-width: 860px) {
+        .cost-pipeline {
+          grid-template-columns: 1fr;
+          gap: 12px;
+        }
+        .pipe-connector,
+        .pipe-connector-v {
+          display: none !important;
+        }
+      }
+      .pipe-stage {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius);
+        padding: 22px 18px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.25s, box-shadow 0.25s;
+      }
+      .pipe-stage::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: var(--pipe-c, var(--accent));
+      }
+      .pipe-stage:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12);
+      }
+      .pipe-stage[data-stage="bb"] {
+        --pipe-c: var(--blue);
+      }
+      .pipe-stage[data-stage="bdp"] {
+        --pipe-c: var(--purple);
+      }
+      .pipe-stage[data-stage="bj"] {
+        --pipe-c: var(--yellow);
+      }
+      .pipe-stage[data-stage="hpp"] {
+        --pipe-c: var(--pink);
+      }
+      .pipe-icon {
+        width: 52px;
+        height: 52px;
+        margin: 0 auto 12px;
+        border-radius: 14px;
+        background: color-mix(in srgb, var(--pipe-c) 18%, transparent);
+        border: 1px solid color-mix(in srgb, var(--pipe-c) 35%, transparent);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 26px;
+      }
+      .pipe-stage h4 {
+        font-family: "Syne", sans-serif;
+        font-size: 13px;
+        font-weight: 800;
+        margin-bottom: 10px;
+        color: var(--pipe-c);
+      }
+      .pipe-in,
+      .pipe-out {
+        font-size: 11.5px;
+        color: var(--text-muted);
+        line-height: 1.45;
+        margin-top: 6px;
+      }
+      .pipe-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        justify-content: center;
+        margin-top: 10px;
+      }
+      .pipe-chip {
+        font-size: 10px;
+        font-weight: 700;
+        font-family: "Syne", sans-serif;
+        padding: 4px 10px;
+        border-radius: 99px;
+        background: rgba(168, 85, 247, 0.15);
+        border: 1px solid rgba(168, 85, 247, 0.3);
+        color: var(--purple);
+      }
+      .pipe-connector {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-muted);
+        font-size: 22px;
+        font-weight: 800;
+        opacity: 0.6;
+      }
+
+      /* —— Overhead breakdown stack —— */
+      .overhead-stack {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius);
+        padding: 28px;
+        margin-bottom: 28px;
+      }
+      .overhead-stack-head {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 18px;
+        color: var(--accent);
+        text-align: center;
+        margin-bottom: 20px;
+        padding-bottom: 16px;
+        border-bottom: 1px dashed var(--glass-border);
+      }
+      .overhead-item {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 12px 16px;
+        margin-bottom: 8px;
+        border-radius: var(--radius-sm);
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--glass-border);
+        font-size: 14px;
+      }
+      body.light-theme .overhead-item {
+        background: rgba(0, 0, 0, 0.02);
+      }
+      .overhead-item .oh-plus {
+        width: 28px;
+        height: 28px;
+        border-radius: 8px;
+        background: rgba(59, 130, 246, 0.15);
+        color: var(--accent);
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-family: "Syne", sans-serif;
+      }
+
+      /* —— Job cost sheet —— */
+      .job-sheet {
+        background: linear-gradient(
+          145deg,
+          rgba(59, 130, 246, 0.08),
+          rgba(59, 130, 246, 0.06)
+        );
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius);
+        overflow: hidden;
+        margin-bottom: 32px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+      }
+      .job-sheet-top {
+        padding: 28px 28px 20px;
+        border-bottom: 1px solid var(--glass-border);
+        background: rgba(0, 0, 0, 0.15);
+      }
+      body.light-theme .job-sheet-top {
+        background: rgba(255, 255, 255, 0.4);
+      }
+      .job-sheet-top h3 {
+        font-family: "Syne", sans-serif;
+        font-size: 20px;
+        font-weight: 800;
+        margin-bottom: 16px;
+        color: var(--accent);
+      }
+      .job-meta {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 12px;
+      }
+      .job-meta-item {
+        font-size: 13px;
+      }
+      .job-meta-item span {
+        display: block;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        font-family: "Syne", sans-serif;
+        margin-bottom: 4px;
+      }
+      .job-sheet-body {
+        padding: 24px 28px 28px;
+      }
+      .job-cost-group {
+        margin-bottom: 20px;
+      }
+      .job-cost-group-title {
+        font-family: "Syne", sans-serif;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        margin-bottom: 10px;
+      }
+      .job-total-banner {
+        margin-top: 20px;
+        padding: 20px 24px;
+        border-radius: var(--radius-sm);
+        background: linear-gradient(
+          135deg,
+          rgba(59, 130, 246, 0.2),
+          rgba(59, 130, 246, 0.15)
+        );
+        border: 1px solid rgba(59, 130, 246, 0.35);
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+      }
+      .job-total-banner strong {
+        font-family: "Syne", sans-serif;
+        font-size: 22px;
+        color: var(--accent);
+      }
+      .job-unit-pill {
+        font-size: 13px;
+        padding: 8px 16px;
+        border-radius: 99px;
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        color: var(--text-muted);
+      }
+      .job-unit-pill b {
+        color: var(--text);
+      }
+
+      /* —— Laporan finansial (card) —— */
+      .laporan-card {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius);
+        overflow: hidden;
+        margin-bottom: 28px;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+      }
+      .laporan-head {
+        padding: 24px 28px;
+        text-align: center;
+        background: linear-gradient(
+          180deg,
+          rgba(59, 130, 246, 0.12) 0%,
+          transparent 100%
+        );
+        border-bottom: 1px solid var(--glass-border);
+      }
+      .laporan-badge {
+        display: inline-block;
+        font-family: "Syne", sans-serif;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--accent);
+        background: rgba(59, 130, 246, 0.12);
+        border: 1px solid rgba(59, 130, 246, 0.3);
+        padding: 5px 14px;
+        border-radius: 99px;
+        margin-bottom: 12px;
+      }
+      .laporan-head h3 {
+        font-family: "Syne", sans-serif;
+        font-size: clamp(18px, 4vw, 22px);
+        font-weight: 800;
+        margin-bottom: 6px;
+      }
+      .laporan-head p {
+        font-size: 13px;
+        color: var(--text-muted);
+      }
+      .laporan-body {
+        padding: 8px 0 12px;
+      }
+      .laporan-section-label {
+        font-family: "Syne", sans-serif;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        padding: 16px 28px 8px;
+      }
+      .laporan-group {
+        padding: 0 20px 8px;
+      }
+      .laporan-group-title {
+        font-family: "Syne", sans-serif;
+        font-size: 12px;
+        font-weight: 800;
+        color: var(--accent);
+        padding: 10px 8px 6px;
+        margin-top: 4px;
+      }
+      .lr {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 16px;
+        padding: 10px 8px;
+        font-size: 14px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      }
+      body.light-theme .lr {
+        border-bottom-color: rgba(0, 0, 0, 0.04);
+      }
+      .lr:last-child {
+        border-bottom: none;
+      }
+      .lr.indent {
+        padding-left: 24px;
+        font-size: 13px;
+        color: var(--text-muted);
+      }
+      .lr .lr-label {
+        flex: 1;
+        line-height: 1.4;
+      }
+      .lr .lr-amt {
+        font-family: "Syne", sans-serif;
+        font-weight: 700;
+        font-size: 13px;
+        white-space: nowrap;
+        color: var(--text);
+      }
+      .lr .lr-amt.neg {
+        color: #f87171;
+      }
+      .lr.subtotal {
+        background: rgba(59, 130, 246, 0.06);
+        border-radius: 8px;
+        margin: 4px 0;
+        border-bottom: none;
+      }
+      .lr.subtotal .lr-amt {
+        color: var(--accent);
+      }
+      .lr.total {
+        margin: 8px 12px;
+        padding: 14px 16px;
+        border-radius: var(--radius-sm);
+        background: rgba(59, 130, 246, 0.1);
+        border: 1px solid rgba(59, 130, 246, 0.25);
+        border-bottom: none;
+      }
+      .lr.total .lr-label {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 13px;
+        color: var(--accent);
+      }
+      .lr.total .lr-amt {
+        font-size: 16px;
+        color: var(--accent);
+      }
+      .lr.grand {
+        margin: 12px 16px 16px;
+        padding: 18px 20px;
+        border-radius: var(--radius-sm);
+        background: linear-gradient(
+          135deg,
+          rgba(59, 130, 246, 0.22),
+          rgba(59, 130, 246, 0.12)
+        );
+        border: 2px solid rgba(59, 130, 246, 0.35);
+      }
+      .lr.grand .lr-label,
+      .lr.grand .lr-amt {
+        font-size: 15px;
+        color: var(--accent);
+      }
+      .laporan-footnote {
+        text-align: center;
+        font-size: 12px;
+        color: var(--text-muted);
+        font-style: italic;
+        padding: 0 28px 20px;
+      }
+
+      /* —— Reports relationship flow —— */
+      .reports-chain {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        margin-bottom: 32px;
+        padding: 24px;
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius);
+      }
+      .chain-level {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+      }
+      .chain-node {
+        background: rgba(59, 130, 246, 0.1);
+        border: 1.5px solid rgba(59, 130, 246, 0.3);
+        border-radius: 12px;
+        padding: 12px 18px;
+        font-family: "Syne", sans-serif;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--text);
+        text-align: center;
+        min-width: 140px;
+      }
+      .chain-node.highlight {
+        background: rgba(255, 61, 154, 0.12);
+        border-color: rgba(255, 61, 154, 0.35);
+        color: var(--pink);
+      }
+      .chain-node.result {
+        background: rgba(251, 191, 36, 0.12);
+        border-color: rgba(251, 191, 36, 0.35);
+        color: var(--yellow);
+      }
+      .chain-arrow-h {
+        color: var(--text-muted);
+        font-size: 20px;
+        font-weight: 800;
+      }
+      .chain-arrow-v {
+        color: var(--accent);
+        font-size: 24px;
+        line-height: 1;
+        padding: 6px 0;
+        opacity: 0.7;
+      }
+
+      .laporan-grid-3 {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 24px;
+        margin-bottom: 28px;
+      }
+      .laporan-card.compact .laporan-head {
+        padding: 18px 20px;
+      }
+      .laporan-card.compact .laporan-body {
+        padding-bottom: 4px;
+      }
+
+      .margin-highlight {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-top: 16px;
+      }
+      .margin-stat {
+        flex: 1;
+        min-width: 140px;
+        padding: 16px 20px;
+        border-radius: var(--radius-sm);
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        text-align: center;
+      }
+      .margin-stat .ms-val {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 18px;
+        color: var(--accent);
+        display: block;
+        margin-bottom: 4px;
+      }
+      .margin-stat .ms-lbl {
+        font-size: 11px;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        font-family: "Syne", sans-serif;
+        font-weight: 700;
+      }
+      .table-wrap {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius-sm);
+        overflow: hidden;
+        margin-bottom: 24px;
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th {
+        background: rgba(0, 0, 0, 0.25);
+        color: var(--text-muted);
+        font-family: "Syne", sans-serif;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 14px 18px;
+        text-align: left;
+        border-bottom: 1.5px solid var(--glass-border);
+      }
+      body.light-theme th {
+        background: rgba(255, 255, 255, 0.5);
+      }
+      td {
+        padding: 12px 18px;
+        font-size: 13.5px;
+        border-bottom: 1px solid var(--glass-border);
+      }
+      tr:last-child td {
+        border-bottom: none;
+      }
+      tr.total-row td {
+        font-weight: 800;
+        background: rgba(59, 130, 246, 0.08);
+        color: var(--accent);
+        border-top: 2px solid var(--glass-border);
+      }
+      .rangkuman-table td:first-child {
+        font-weight: 700;
+        color: var(--accent);
+        white-space: nowrap;
+      }
+      .jurnal-box {
+        background: rgba(0, 0, 0, 0.2);
+        border: 1.5px solid var(--glass-border);
+        border-radius: var(--radius-sm);
+        padding: 20px 24px;
+        margin-bottom: 16px;
+      }
+      body.light-theme .jurnal-box {
+        background: rgba(255, 255, 255, 0.5);
+      }
+      .jurnal-title {
+        font-family: "Syne", sans-serif;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 12px;
+        border-bottom: 1px dashed var(--glass-border);
+        padding-bottom: 8px;
+      }
+      .jurnal-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 4px 0;
+        font-size: 13.5px;
+      }
+      .jurnal-akun.indent {
+        padding-left: 24px;
+        color: var(--text-muted);
+      }
+      .jurnal-amount.d {
+        color: var(--orange);
+        font-weight: 700;
+      }
+      .jurnal-amount.k {
+        color: var(--accent);
+        font-weight: 700;
+      }
+      .quiz-cta {
+        background: var(--glass-bg);
+        border: 2px solid var(--accent);
+        border-radius: var(--radius);
+        padding: 40px 32px;
+        text-align: center;
+        margin-top: 60px;
+        margin-bottom: 40px;
+      }
+      .quiz-cta h3 {
+        font-family: "Syne", sans-serif;
+        font-size: 24px;
+        margin-bottom: 12px;
+        color: var(--accent);
+      }
+      .quiz-cta p {
+        color: var(--text-muted);
+        margin-bottom: 20px;
+        font-size: 15px;
+        line-height: 1.6;
+      }
+      .quiz-btn {
+        background: var(--accent);
+        color: #fff;
+        border: none;
+        padding: 14px 32px;
+        border-radius: var(--radius-sm);
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 14px;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        transition: all 0.2s;
+      }
+      .quiz-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 24px rgba(59, 130, 246, 0.35);
+      }
+      footer {
+        border-top: 1px solid var(--glass-border);
+        background: #090d16;
+        padding: 40px 24px;
+        text-align: center;
+        position: relative;
+        z-index: 10;
+      }
+      body.light-theme footer {
+        background: #fff8f0;
+      }
+      .footer-name {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 16px;
+        background: linear-gradient(
+          135deg,
+          var(--yellow),
+          var(--pink),
+          var(--purple)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 6px;
+      }
+      .footer-sub {
+        font-size: 12.5px;
+        color: var(--text-muted);
+      }
+      .footer-dots {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        margin-top: 16px;
+      }
+      .footer-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+      }
+      @media (max-width: 600px) {
+        .cards-3,
+        .cards-2 {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <header>
+      <a href="index.html" class="header-logo">
+        <span style="font-size: 24px">📊</span>
+        <span>Belajar Akuntansi</span>
+      </a>
+      <div style="display: flex; gap: 12px; align-items: center">
+        <a href="index.html" class="back-btn">← Kembali</a>
+        <button
+          class="theme-toggle-btn"
+          onclick="toggleTheme()"
+          title="Ganti Tema"
+        >
+          🌓
+        </button>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-glass">
+        <div class="hero-tag">📊 Bab 14 — Pengantar Manajemen</div>
+        <h1>Akuntansi <span class="hi-highlight">Biaya</span></h1>
+        <p>
+          Klasifikasi biaya, biaya produk vs periode, perilaku biaya (variabel,
+          tetap, campuran), metode titik tertinggi-terendah, analisis CVP, BEP,
+          margin kontribusi, margin of safety, hingga studi kasus UD. Roti
+          Berkah Jaya.
+        </p>
+      </div>
+    </section>
+
+    <main class="content">
+      <!-- 1 -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">1 — Pengertian &amp; Tujuan</div>
+        <div class="sec-line"></div>
+      </div>
+      <div class="info-box">
+        <strong>Definisi:</strong> Akuntansi biaya mengumpulkan, mengklasifikasikan,
+        menganalisis, dan melaporkan informasi biaya untuk membantu manajemen dalam
+        perencanaan, pengendalian, dan pengambilan keputusan.
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Aspek</th>
+              <th>Akuntansi Keuangan</th>
+              <th>Akuntansi Biaya</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Tujuan</strong></td>
+              <td>Laporan ke pihak eksternal</td>
+              <td>Informasi untuk manajemen internal</td>
+            </tr>
+            <tr>
+              <td><strong>Pengguna</strong></td>
+              <td>Investor, kreditur, pajak</td>
+              <td>Manajer, direksi</td>
+            </tr>
+            <tr>
+              <td><strong>Standar</strong></td>
+              <td>Wajib ikuti PSAK/IFRS</td>
+              <td>Fleksibel sesuai kebutuhan</td>
+            </tr>
+            <tr>
+              <td><strong>Fokus</strong></td>
+              <td>Historis — sudah terjadi</td>
+              <td>Historis + proyeksi ke depan</td>
+            </tr>
+            <tr>
+              <td><strong>Output</strong></td>
+              <td>Laporan keuangan standar</td>
+              <td>Laporan biaya, analisis BEP, dll</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="example-story">
+        💡 Laporan keuangan PT Indofood untuk investor (akuntansi keuangan) vs
+        laporan biaya produksi per unit mie instan untuk manajer pabrik
+        (akuntansi biaya) — dua hal yang sangat berbeda!
+      </div>
+
+      <!-- 2 -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">2 — Klasifikasi Biaya</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title"><span class="classify-label">A</span> Hubungan dengan Objek Biaya</div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Jenis</th><th>Definisi</th><th>Contoh</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Biaya Langsung</strong></td><td>Bisa ditelusuri langsung ke produk/departemen</td><td>Bahan baku, gaji pekerja langsung</td></tr>
+              <tr><td><strong>Biaya Tidak Langsung</strong></td><td>Harus dialokasikan</td><td>Listrik pabrik, gaji supervisor</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="example-wrap">
+        <div class="example-title"><span class="classify-label">B</span> Fungsi dalam Perusahaan</div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Jenis</th><th>Definisi</th><th>Contoh</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Biaya Produksi</strong></td><td>Untuk membuat produk</td><td>BB, TKL, overhead pabrik</td></tr>
+              <tr><td><strong>Biaya Pemasaran</strong></td><td>Untuk menjual produk</td><td>Iklan, komisi sales, ongkir</td></tr>
+              <tr><td><strong>Biaya Administrasi</strong></td><td>Menjalankan kantor</td><td>Gaji staf, sewa kantor, ATK</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="example-wrap">
+        <div class="example-title"><span class="classify-label">C</span> Perilaku terhadap Volume</div>
+        <div class="cards-3">
+          <div class="card" style="--c: var(--blue)">
+            <div class="card-icon">📈</div>
+            <div class="card-title">Biaya Variabel</div>
+            <div class="card-body">Naik turun seiring volume — bahan baku, komisi penjualan</div>
+          </div>
+          <div class="card" style="--c: var(--purple)">
+            <div class="card-icon">📌</div>
+            <div class="card-title">Biaya Tetap</div>
+            <div class="card-body">Tidak berubah meski volume berubah — sewa gedung, gaji manajer</div>
+          </div>
+          <div class="card" style="--c: var(--orange)">
+            <div class="card-icon">⚡</div>
+            <div class="card-title">Biaya Campuran</div>
+            <div class="card-body">Komponen tetap + variabel — listrik, telepon</div>
+          </div>
+        </div>
+      </div>
+      <div class="example-wrap">
+        <div class="example-title"><span class="classify-label">D</span> Relevansi untuk Keputusan</div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Jenis</th><th>Definisi</th><th>Contoh</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Biaya Relevan</strong></td><td>Berbeda antar alternatif</td><td>Biaya tambahan produksi</td></tr>
+              <tr><td><strong>Biaya Tidak Relevan</strong></td><td>Sama di semua alternatif</td><td>Sunk cost</td></tr>
+              <tr><td><strong>Biaya Kesempatan</strong></td><td>Manfaat yang hilang karena pilih alternatif lain</td><td>Laba hilang karena kapasitas dialihkan</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="example-story">
+          CV. Berkah punya gudang kosong: disewakan Rp 20 jt/tahun ATAU dipakai
+          sendiri. Jika dipakai sendiri, biaya kesempatan = Rp 20.000.000 (pendapatan
+          sewa yang dikorbankan).
+        </div>
+      </div>
+
+      <!-- 3 -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">3 — Biaya Produk vs Biaya Periode</div>
+        <div class="sec-line"></div>
+      </div>
+      <div class="cards-2">
+        <div class="card" style="--c: var(--blue)">
+          <div class="card-eyebrow">Product Cost</div>
+          <div class="card-title">Biaya Produk</div>
+          <div class="card-body">Melekat pada produk, dicatat sebagai persediaan — baru jadi HPP saat terjual.</div>
+          <div class="formula-block" style="font-size: 13px; margin-top: 14px; text-align: left">
+            BB Langsung + TKL + Overhead Pabrik
+          </div>
+        </div>
+        <div class="card" style="--c: var(--orange)">
+          <div class="card-eyebrow">Period Cost</div>
+          <div class="card-title">Biaya Periode</div>
+          <div class="card-body">Tidak melekat pada produk — langsung jadi beban periode terjadinya.</div>
+          <div class="formula-block" style="font-size: 13px; margin-top: 14px; text-align: left">
+            Beban Pemasaran + Administrasi &amp; Umum + Bunga
+          </div>
+        </div>
+      </div>
+      <div class="cost-pipeline" style="grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr">
+        <div class="pipe-stage" data-stage="bb"><div class="pipe-icon">📦</div><h4>Beli BB</h4><p class="pipe-in">Persediaan BB</p></div>
+        <div class="pipe-connector">→</div>
+        <div class="pipe-stage" data-stage="bdp"><div class="pipe-icon">⚙️</div><h4>Produksi</h4><p class="pipe-in">BDP (+TKL+OH)</p></div>
+        <div class="pipe-connector">→</div>
+        <div class="pipe-stage" data-stage="bj"><div class="pipe-icon">✅</div><h4>Selesai</h4><p class="pipe-in">Persediaan BJ</p></div>
+        <div class="pipe-connector">→</div>
+        <div class="pipe-stage" data-stage="hpp"><div class="pipe-icon">📊</div><h4>Terjual</h4><p class="pipe-in">HPP di L/R</p></div>
+      </div>
+      <div class="example-story">
+        Pabrik tahu "Berkah": kedelai Rp 5 jt = biaya produk (persediaan). Gaji
+        sales Rp 2 jt/bulan = biaya periode (langsung beban).
+      </div>
+
+      <!-- 4 -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">4 — Perilaku Biaya</div>
+        <div class="sec-line"></div>
+      </div>
+      <div class="example-wrap">
+        <div class="example-title">A — Biaya Variabel</div>
+        <div class="formula-block">Total Biaya Variabel = Biaya Variabel per Unit × Volume</div>
+        <p class="example-story">Mie instan Rp 2.000/bungkus: 10.000 bungkus → Rp 20 jt; 15.000 → Rp 30 jt. Per unit tetap Rp 2.000 ✅</p>
+      </div>
+      <div class="example-wrap">
+        <div class="example-title">B — Biaya Tetap</div>
+        <p class="example-story">Sewa pabrik Rp 12 jt/bulan: 1.000 unit → Rp 12.000/unit; 2.000 unit → Rp 6.000/unit; 3.000 → Rp 4.000/unit. Total tetap ✅</p>
+        <div class="info-box"><strong>Relevansi manajemen:</strong> Produksi lebih banyak → biaya tetap per unit turun → harga lebih kompetitif!</div>
+      </div>
+      <div class="example-wrap">
+        <div class="example-title">C — Biaya Campuran</div>
+        <div class="formula-block">Y = a + bX<br /><span style="font-size: 12px; font-weight: 500; color: var(--text-muted)">Y = total biaya · a = tetap · b = variabel/unit · X = volume</span></div>
+        <p class="example-story">Listrik: beban tetap Rp 500.000 + Rp 150/kWh. Pakai 2.000 kWh → Rp 500.000 + (150×2.000) = <strong>Rp 800.000</strong></p>
+      </div>
+
+      <!-- 5 -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">5 — Metode Titik Tertinggi-Terendah</div>
+        <div class="sec-line"></div>
+      </div>
+      <div class="info-box">Memisahkan biaya campuran menggunakan dua titik ekstrem — aktivitas tertinggi dan terendah.</div>
+      <div class="formula-block">b = (Biaya Tertinggi − Terendah) ÷ (Volume Tertinggi − Terendah)<br />a = Total Biaya − (b × Volume)</div>
+      <div class="example-wrap">
+        <div class="example-title">📊 CV. Berkah Jaya — Biaya Listrik 6 Bulan</div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Bulan</th><th>Jam Mesin</th><th>Biaya Listrik</th></tr></thead>
+            <tbody>
+              <tr><td>Januari</td><td>1.200</td><td>Rp 2.400.000</td></tr>
+              <tr><td>Februari</td><td>1.800</td><td>Rp 3.200.000</td></tr>
+              <tr style="background: rgba(59,130,246,0.12)"><td><strong>Maret ↑</strong></td><td><strong>2.400</strong></td><td><strong>Rp 4.000.000</strong></td></tr>
+              <tr style="background: rgba(251,191,36,0.1)"><td><strong>April ↓</strong></td><td><strong>900</strong></td><td><strong>Rp 1.900.000</strong></td></tr>
+              <tr><td>Mei</td><td>2.100</td><td>Rp 3.600.000</td></tr>
+              <tr><td>Juni</td><td>1.500</td><td>Rp 2.800.000</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="calc-steps">
+          <div class="calc-step"><span class="calc-step-num">1</span><div class="calc-step-body"><strong>Biaya variabel per jam (b)</strong><div class="formula-eq">(4.000.000 − 1.900.000) ÷ (2.400 − 900) = Rp 1.400/jam</div></div></div>
+          <div class="calc-step"><span class="calc-step-num">2</span><div class="calc-step-body"><strong>Biaya tetap (a)</strong><div class="formula-eq">4.000.000 − (1.400 × 2.400) = Rp 640.000/bulan</div></div></div>
+          <div class="calc-step"><span class="calc-step-num">3</span><div class="calc-step-body"><strong>Formula</strong><div class="formula-eq">Y = Rp 640.000 + Rp 1.400X</div>Verifikasi April: 640.000 + 1.260.000 = Rp 1.900.000 ✅</div></div>
+          <div class="calc-step"><span class="calc-step-num">4</span><div class="calc-step-body"><strong>Prediksi Juli (2.000 jam)</strong><div class="formula-eq">640.000 + 2.800.000 = Rp 3.440.000</div></div></div>
+        </div>
+      </div>
+
+      <!-- 6 -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">6 — Analisis CVP &amp; Margin Kontribusi</div>
+        <div class="sec-line"></div>
+      </div>
+      <div class="formula-block">MK/Unit = Harga Jual − Biaya Variabel/Unit · CMR = MK/Unit ÷ Harga Jual × 100%</div>
+      <div class="info-box"><strong>Makna MK:</strong> Setiap unit terjual menyumbang menutup biaya tetap. Setelah tetap tertutup, unit tambahan = laba!</div>
+      <div class="example-wrap">
+        <div class="example-title">📊 Pabrik Tahu "Berkah" — per Papan/Bulan</div>
+        <div class="table-wrap">
+          <table>
+            <tbody>
+              <tr><td>Harga jual</td><td style="text-align:right"><strong>Rp 25.000</strong></td></tr>
+              <tr><td colspan="2" style="color:var(--text-muted);font-size:12px">Biaya variabel per papan</td></tr>
+              <tr><td style="padding-left:24px;color:var(--text-muted)">Kedelai</td><td style="text-align:right">Rp 10.000</td></tr>
+              <tr><td>Bahan pembantu</td><td style="text-align:right">Rp 2.000</td></tr>
+              <tr><td>TKL</td><td style="text-align:right">Rp 3.000</td></tr>
+              <tr><td>OH variabel</td><td style="text-align:right">Rp 2.000</td></tr>
+              <tr class="total-row"><td>Total variabel</td><td style="text-align:right">Rp 17.000</td></tr>
+              <tr class="total-row"><td><strong>Margin kontribusi</strong></td><td style="text-align:right"><strong>Rp 8.000 (32%)</strong></td></tr>
+              <tr><td colspan="2" style="color:var(--text-muted);font-size:12px">Biaya tetap/bulan</td></tr>
+              <tr><td>Sewa + manajer + OH tetap</td><td style="text-align:right">Rp 12.000.000</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 7 -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">7 — Break Even Point (BEP)</div>
+        <div class="sec-line"></div>
+      </div>
+      <div class="cards-2">
+        <div class="formula-block">BEP (unit) = Biaya Tetap ÷ MK per Unit</div>
+        <div class="formula-block">BEP (rupiah) = Biaya Tetap ÷ Rasio MK</div>
+      </div>
+      <div class="example-wrap">
+        <div class="example-title">📊 BEP Pabrik Tahu Berkah</div>
+        <div class="margin-highlight">
+          <div class="margin-stat"><span class="ms-val">1.500</span><span class="ms-lbl">BEP unit/bulan</span></div>
+          <div class="margin-stat"><span class="ms-val">Rp 37,5 jt</span><span class="ms-lbl">BEP rupiah</span></div>
+        </div>
+        <div class="table-wrap" style="margin-top:20px">
+          <table>
+            <tbody>
+              <tr><td>Penjualan (1.500 × 25.000)</td><td style="text-align:right">Rp 37.500.000</td></tr>
+              <tr><td>Biaya variabel</td><td style="text-align:right">Rp 25.500.000</td></tr>
+              <tr><td>Biaya tetap</td><td style="text-align:right">Rp 12.000.000</td></tr>
+              <tr class="total-row"><td><strong>Laba</strong></td><td style="text-align:right"><strong>Rp 0 ✅</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="example-story" style="margin-top:16px"><strong>Target laba Rp 8 jt:</strong> Unit = (12.000.000 + 8.000.000) ÷ 8.000 = <strong>2.500 papan</strong></p>
+      </div>
+
+      <!-- 8 -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">8 — Margin of Safety</div>
+        <div class="sec-line"></div>
+      </div>
+      <div class="formula-block">MoS (unit) = Penjualan Aktual − BEP · MoS (%) = MoS Rp ÷ Penjualan Aktual × 100%</div>
+      <div class="example-wrap">
+        <div class="example-title">Penjualan 2.000 papan (BEP 1.500)</div>
+        <div class="margin-highlight">
+          <div class="margin-stat"><span class="ms-val">500</span><span class="ms-lbl">MoS unit</span></div>
+          <div class="margin-stat"><span class="ms-val">Rp 12,5 jt</span><span class="ms-lbl">MoS rupiah</span></div>
+          <div class="margin-stat"><span class="ms-val">25%</span><span class="ms-lbl">MoS % — cukup aman</span></div>
+        </div>
+      </div>
+      <div class="laporan-card">
+        <div class="laporan-head">
+          <span class="laporan-badge">Format Kontribusi</span>
+          <h3>PABRIK TAHU "BERKAH"</h3>
+          <p>Laporan Laba Rugi · November 2024 · 2.000 papan</p>
+        </div>
+        <div class="laporan-body">
+          <div class="lr"><span class="lr-label">Penjualan</span><span class="lr-amt">Rp 50.000.000</span><span class="lr-amt pct">100%</span></div>
+          <div class="lr"><span class="lr-label">Biaya Variabel</span><span class="lr-amt neg">Rp 34.000.000</span><span class="lr-amt pct">68%</span></div>
+          <div class="lr subtotal"><span class="lr-label">Margin Kontribusi</span><span class="lr-amt">Rp 16.000.000</span><span class="lr-amt pct">32%</span></div>
+          <div class="lr"><span class="lr-label">Biaya Tetap</span><span class="lr-amt neg">Rp 12.000.000</span><span class="lr-amt pct"></span></div>
+          <div class="lr grand"><span class="lr-label">LABA BERSIH</span><span class="lr-amt">Rp 4.000.000</span><span class="lr-amt pct"></span></div>
+        </div>
+      </div>
+
+      <!-- 9 -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">9 — Studi Kasus UD. Roti "Berkah Jaya"</div>
+        <div class="sec-line"></div>
+      </div>
+      <div class="example-wrap">
+        <div class="example-title">🏪 Data Operasional</div>
+        <div class="cards-2">
+          <div class="card" style="--c:var(--blue)"><div class="card-title">Per Loaf</div><div class="card-body">Harga jual Rp 15.000<br />Variabel Rp 7.500 (+ listrik variabel)<br />MK awal Rp 7.500</div></div>
+          <div class="card" style="--c:var(--purple)"><div class="card-title">Per Bulan</div><div class="card-body">Biaya tetap Rp 25.000.000<br />+ tetap listrik Rp 1.899.000<br />Total tetap Rp 26.899.000</div></div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Bulan</th><th>Loaf</th><th>Listrik</th></tr></thead>
+            <tbody>
+              <tr><td>Mei</td><td>1.800</td><td>Rp 4.100.000</td></tr>
+              <tr><td>Juni</td><td>2.400</td><td>Rp 4.900.000</td></tr>
+              <tr style="background:rgba(59,130,246,0.12)"><td><strong>Juli ↑</strong></td><td><strong>3.000</strong></td><td><strong>Rp 5.700.000</strong></td></tr>
+              <tr><td>Agustus</td><td>2.700</td><td>Rp 5.300.000</td></tr>
+              <tr style="background:rgba(251,191,36,0.1)"><td><strong>Sept ↓</strong></td><td><strong>1.500</strong></td><td><strong>Rp 3.800.000</strong></td></tr>
+              <tr><td>Oktober</td><td>2.100</td><td>Rp 4.500.000</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">Jawaban Studi Kasus</div>
+        <div class="calc-steps">
+          <div class="calc-step"><span class="calc-step-num">1</span><div class="calc-step-body"><strong>High-Low listrik:</strong> b = Rp 1.267/loaf · a = Rp 1.899.000 · <span class="formula-eq">Y = 1.899.000 + 1.267X</span></div></div>
+          <div class="calc-step"><span class="calc-step-num">2</span><div class="calc-step-body"><strong>Margin kontribusi:</strong> Variabel total Rp 8.767/loaf · MK = Rp 6.233 · Rasio 41,6%</div></div>
+          <div class="calc-step"><span class="calc-step-num">3</span><div class="calc-step-body"><strong>BEP:</strong> 4.316 loaf · Rp 64.663.000</div></div>
+          <div class="calc-step"><span class="calc-step-num">4</span><div class="calc-step-body"><strong>Target laba Rp 12,5 jt:</strong> 6.320 loaf · penjualan Rp 94.800.000</div></div>
+          <div class="calc-step"><span class="calc-step-num">5</span><div class="calc-step-body"><strong>MoS @ 4.500 loaf:</strong> 184 loaf · 4,2% — <span style="color:var(--yellow)">sangat tipis!</span></div></div>
+        </div>
+        <div class="warning-box"><strong>⚠️ MoS hanya 4,2%!</strong> Penjualan hanya boleh turun sedikit sebelum rugi. Perlu tambah volume atau tekan biaya tetap. Target aman: minimal 6.000 loaf (MoS &gt;25%).</div>
+      </div>
+
+      <div class="laporan-card">
+        <div class="laporan-head">
+          <span class="laporan-badge">L/R Kontribusi</span>
+          <h3>UD. ROTI "BERKAH JAYA"</h3>
+          <p>November 2024 · Penjualan 4.500 loaf</p>
+        </div>
+        <div class="laporan-body">
+          <div class="lr"><span class="lr-label">Penjualan</span><span class="lr-amt">Rp 67.500.000</span><span class="lr-amt pct">100%</span></div>
+          <div class="lr"><span class="lr-label">Biaya Variabel</span><span class="lr-amt neg">Rp 39.451.500</span><span class="lr-amt pct">58,4%</span></div>
+          <div class="lr subtotal"><span class="lr-label">Margin Kontribusi</span><span class="lr-amt">Rp 28.048.500</span><span class="lr-amt pct">41,6%</span></div>
+          <div class="lr"><span class="lr-label">Biaya Tetap</span><span class="lr-amt neg">Rp 26.899.000</span></div>
+          <div class="lr grand"><span class="lr-label">LABA BERSIH</span><span class="lr-amt">Rp 1.149.500</span></div>
+        </div>
+      </div>
+      <div class="margin-highlight">
+        <div class="margin-stat"><span class="ms-val">4.316</span><span class="ms-lbl">BEP loaf</span></div>
+        <div class="margin-stat"><span class="ms-val">4.500</span><span class="ms-lbl">Penjualan aktual</span></div>
+        <div class="margin-stat"><span class="ms-val">4,2%</span><span class="ms-lbl">MoS ⚠️</span></div>
+      </div>
+
+      <!-- Rangkuman -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">📝 Rangkuman</div>
+        <div class="sec-line"></div>
+      </div>
+      <div class="table-wrap">
+        <table class="rangkuman-table">
+          <thead><tr><th>Poin</th><th>Inti</th></tr></thead>
+          <tbody>
+            <tr><td>✅ Akuntansi Biaya</td><td>Informasi biaya untuk keputusan manajemen internal</td></tr>
+            <tr><td>✅ Biaya Langsung</td><td>Bisa ditelusuri langsung ke produk</td></tr>
+            <tr><td>✅ Biaya Variabel</td><td>Total berubah, per unit tetap</td></tr>
+            <tr><td>✅ Biaya Tetap</td><td>Total tetap, per unit berubah</td></tr>
+            <tr><td>✅ Biaya Campuran</td><td>Komponen tetap + variabel</td></tr>
+            <tr><td>✅ High-Low</td><td>Pisahkan biaya campuran dari dua titik ekstrem</td></tr>
+            <tr><td>✅ Margin Kontribusi</td><td>Harga jual − Biaya variabel per unit</td></tr>
+            <tr><td>✅ BEP Unit</td><td>Biaya Tetap ÷ MK per Unit</td></tr>
+            <tr><td>✅ BEP Rupiah</td><td>Biaya Tetap ÷ Rasio MK</td></tr>
+            <tr><td>✅ Target Laba</td><td>(Biaya Tetap + Laba) ÷ MK per Unit</td></tr>
+            <tr><td>✅ Margin of Safety</td><td>Jarak penjualan aktual ke BEP — makin besar makin aman</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </main>
+      <!-- QUIZ CTA -->
+      <div class="quiz-cta" id="quiz-section">
+        <h3>🎯 Uji Pemahamanmu!</h3>
+        <p>
+          Setelah mempelajari seluruh materi Akuntansi Biaya, kerjakan kuis
+          interaktif di Bank Kuis. Klik tombol di bawah untuk langsung menuju
+          kuis bab ini!
+        </p>
+        <a href="bank-kuis.html?bab=Akuntansi%20Biaya" class="quiz-btn">
+          Mulai Kuis Akuntansi Biaya →
+        </a>
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-name">Annisa Novita Ardana</div>
+      <div class="footer-sub">
+        Belajar Akuntansi &amp; Perpajakan &nbsp;·&nbsp; Dibuat dengan Cinta
+        &amp; Estetika 🌸
+      </div>
+      <div class="footer-dots">
+        <div class="footer-dot" style="background: #ff6b35"></div>
+        <div class="footer-dot" style="background: #ff3d9a"></div>
+        <div class="footer-dot" style="background: #a855f7"></div>
+        <div class="footer-dot" style="background: #3b82f6"></div>
+        <div class="footer-dot" style="background: #10b981"></div>
+        <div class="footer-dot" style="background: #fbbf24"></div>
+      </div>
+    </footer>
+
+    <script>
+      const body = document.body;
+      if (localStorage.getItem("theme") === "light") {
+        body.classList.add("light-theme");
+      }
+      function toggleTheme() {
+        body.classList.toggle("light-theme");
+        localStorage.setItem(
+          "theme",
+          body.classList.contains("light-theme") ? "light" : "dark",
+        );
+      }
+    </script>
+  </body>
+</html>
