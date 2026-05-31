@@ -94,7 +94,7 @@
       "emoji": "🏗️",
       "badge": "BAB 9",
       "judul": "Aset Tetap & Depresiasi",
-      "deskripsi": "Harga perolehan, 3 Metode (garis lurus, saldo menurun, satuan produksi), Pelepasan aset tetap, Deplesi & Amortisasi",
+      "deskripsi": "Cara memperoleh, mencatat, menyusutkan aset tetap berwujud dengan 3 metode depresiasi utama, pengeluaran modal vs pendapatan, hingga pelepasan aset secara lengkap.",
       "tags": ["Aset Tetap", "Depresiasi", "Metode"],
       "warna": "#BFDDF0",
       "url": "aset-tetap-dan-depresiasi.html"
@@ -105,10 +105,81 @@
       "emoji": "📜",
       "badge": "BAB 10",
       "judul": "Utang Jangka Panjang & Obligasi",
-      "deskripsi": "Jenis-jenis utang jangka panjang & obligasi, Nilai pari, Diskon, Premium, Amortisasi, Pelunasan Awal, Hipoek.",
+      "deskripsi": "Jenis-jenis utang jangka panjang & obligasi, mekanisme penerbitan obligasi pada nilai pari, diskon, dan premium, cara mengamortisasi diskon/premium, sampai pelunasan sebelum jatuh tempo.",
       "tags": ["Jangka Panjang", "Obligasi", "Hipotek"],
       "warna": "#776B5D",
       "url": "utang-jangka-panjang-dan-obligasi.html"
+    },
+    {
+      "id": "modal-dan-ekuitas",
+      "kategori": "akuntansi",
+      "emoji": "💼",
+      "badge": "BAB 11",
+      "judul": "Modal & Ekuitas",
+      "deskripsi": "Struktur modal perusahaan mulai dari penerbitan saham, pembagian dividen, hingga treasury stock dan laporan perubahan ekuitas.",
+      "tags": ["Modal", "Ekuitas", "Saham"],
+      "warna": "#ff3d9a",
+      "url": "modal-dan-ekuitas.html"
+    },
+    {
+      "id": "laporan-arus-kas",
+      "kategori": "akuntansi",
+      "emoji": "💰",
+      "badge": "BAB 12",
+      "judul": "Laporan Arus Kas",
+      "deskripsi": "Penyusunan dan analisis laporan arus kas melalui aktivitas operasi, investasi, dan pendanaan menggunakan metode langsung maupun tidak langsung.",
+      "tags": [
+        "Arus Kas",
+        "Aktivitas Operasi",
+        "Aktivitas Investasi",
+        "Aktivitas Pendanaan"
+      ],
+      "warna": "#ff6b35",
+      "url": "laporan-arus-kas.html"
+    },
+    {
+      "id": "analisis-laporan-keuangan",
+      "kategori": "akuntansi",
+      "emoji": "📊",
+      "badge": "BAB 13",
+      "judul": "Analisis Laporan Keuangan",
+      "deskripsi": "Cara menganalisis kondisi keuangan perusahaan secara menyeluruh melalui analisis horizontal, vertikal, dan 4 kelompok rasio keuangan likuiditas, solvabilitas, profitabilitas, dan aktivitas.",
+      "tags": ["Laporan Keuangan", "Analisis", "4 Kelompok"],
+      "warna": "#a855f7",
+      "url": "analisis-laporan-keuangan.html"
+    },
+    {
+      "id": "akuntansi-biaya",
+      "kategori": "akuntansi",
+      "emoji": "🏭",
+      "badge": "BAB 14",
+      "judul": "Akuntansi Biaya ( Pengantar)",
+      "deskripsi": "Konsep dasar penggolongan dan perhitungan biaya produksi sebagai dasar pengambilan keputusan manajemen.",
+      "tags": ["Dasar", "Biaya", "Penggolongan"],
+      "warna": "#3b82f6",
+      "url": "akuntansi-biaya.html"
+    },
+    {
+      "id": "harga-pokok-produksi",
+      "kategori": "akuntansi",
+      "emoji": "🏭",
+      "badge": "BAB 15",
+      "judul": "Harga Pokok Produksi",
+      "deskripsi": "Menghitung harga pokok produksi mulai dari biaya bahan baku, tenaga kerja langsung, hingga overhead pabrik untuk menentukan harga pokok barang jadi.",
+      "tags": ["Harga Pokok", "Produksi", "Biaya"],
+      "warna": "#10b981",
+      "url": "harga-pokok-produksi.html"
+    },
+    {
+      "id": "penganggaran",
+      "kategori": "akuntansi",
+      "emoji": "📊",
+      "badge": "BAB 16",
+      "judul": "Penganggaran (Budgeting)",
+      "deskripsi": "Cara menyusun anggaran komprehensif perusahaan sebagai alat perencanaan dan pengendalian keuangan.",
+      "tags": ["Penganggaran", "Menyusun", "Keuangan"],
+      "warna": "#F59E0B",
+      "url": "penganggaran.html"
     },
     {
       "id": "dasar-perpajakan-indonesia",
@@ -152,6 +223,26 @@
       "warna": "#a855f7",
       "url": "latihan-studi-kasus-bab10.docx",
       "ukuran": "24 KB"
+    },
+    {
+      "id": "latihan-studi-kasus-bab12",
+      "emoji": "💰",
+      "judul": "Latihan Studi Kasus Laporan Arus Kas",
+      "deskripsi": "Latihan studi kasus Laporan arus kas, Klasifikasi Aktivitas Arus Kas, Metode Langsung & Tidak Langsung, Analisis & Interpretasi Arus Kas.",
+      "tags": ["Arus Kas", "Analisis", "Metode"],
+      "warna": "#F59E0B",
+      "url": "latihan-studi-kasus-bab12.docx",
+      "ukuran": "30 KB"
+    },
+    {
+      "id": "latihan-studi-kasus-bab13",
+      "emoji": "📊",
+      "judul": "Latihan Studi Kasus Analisis Laporan Keuangan",
+      "deskripsi": "Latihan studi kasus Analisis laporan keuangan, Analisis Horizontal & Vertikal, Analisis Rasio, Komprehensif & Keputusan Investasi.",
+      "tags": ["Analisis", "Laporan Keuangan", "Latihan"],
+      "warna": "#3b82f6",
+      "url": "latihan-studi-kasus-bab13.docx",
+      "ukuran": "36 KB"
     }
   ]
 }

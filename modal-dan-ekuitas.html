@@ -1,0 +1,2064 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modal &amp; Ekuitas — Belajar Akuntansi</title>
+    <meta
+      name="description"
+      content="Pelajari modal dan ekuitas secara lengkap: bentuk kepemilikan bisnis, saham biasa & preferen, penerbitan saham, dividen tunai & saham, treasury stock, dan laporan perubahan ekuitas."
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ===== CSS VARIABLES — selaras dengan index.html ===== */
+      :root {
+        --bg: #0f172a;
+        --glass-bg: rgba(30, 41, 59, 0.45);
+        --glass-border: rgba(255, 255, 255, 0.08);
+        --glass-highlight: rgba(255, 255, 255, 0.15);
+        --text: #f8fafc;
+        --text-muted: #94a3b8;
+
+        --pink: #ff3d9a;
+        --purple: #a855f7;
+        --blue: #3b82f6;
+        --green: #10b981;
+        --yellow: #fbbf24;
+        --orange: #ff6b35;
+        --accent: #e9c46a;
+        --accent2: #f4a261;
+        --red: #ef4444;
+
+        --radius: 24px;
+        --radius-sm: 14px;
+      }
+
+      /* ===== LIGHT THEME ===== */
+      body.light-theme {
+        --bg: #fff8f0;
+        --glass-bg: rgba(255, 255, 255, 0.65);
+        --glass-border: rgba(0, 0, 0, 0.06);
+        --glass-highlight: rgba(255, 255, 255, 0.85);
+        --text: #1e293b;
+        --text-muted: #64748b;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "DM Sans", sans-serif;
+        background-color: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        overflow-x: hidden;
+        transition:
+          background-color 0.3s ease,
+          color 0.3s ease;
+        position: relative;
+      }
+
+      /* ===== BACKGROUND BLOBS ===== */
+      .blob {
+        position: absolute;
+        border-radius: 50%;
+        pointer-events: none;
+        filter: blur(80px);
+        opacity: 0.25;
+        z-index: 0;
+        animation: float 20s infinite alternate;
+      }
+      .blob-1 {
+        width: 450px;
+        height: 450px;
+        background: var(--pink);
+        top: -150px;
+        right: -80px;
+      }
+      .blob-2 {
+        width: 320px;
+        height: 320px;
+        background: var(--purple);
+        bottom: 20%;
+        left: -80px;
+        animation-delay: -5s;
+      }
+      .blob-3 {
+        width: 350px;
+        height: 350px;
+        background: var(--blue);
+        top: 40%;
+        right: 10%;
+        animation-delay: -10s;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translate(0, 0) scale(1);
+        }
+        100% {
+          transform: translate(50px, 80px) scale(1.1);
+        }
+      }
+
+      /* ===== HEADER ===== */
+      header {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 30px 24px 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        z-index: 10;
+      }
+      .header-logo {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 18px;
+        color: var(--text);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .theme-toggle-btn {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        color: var(--text);
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        transition:
+          transform 0.2s,
+          background-color 0.2s;
+      }
+      .theme-toggle-btn:hover {
+        transform: scale(1.08);
+        background: var(--glass-highlight);
+      }
+      .back-btn {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        color: var(--text);
+        padding: 10px 20px;
+        border-radius: 99px;
+        font-family: "Syne", sans-serif;
+        font-weight: 700;
+        font-size: 13px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition:
+          background-color 0.2s,
+          transform 0.2s;
+      }
+      .back-btn:hover {
+        transform: translateY(-2px);
+        background: var(--glass-highlight);
+      }
+
+      /* ===== HERO ===== */
+      .hero {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 40px 24px;
+        position: relative;
+        z-index: 10;
+        text-align: center;
+      }
+      .hero-glass {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-radius: var(--radius);
+        padding: 48px 32px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .hero-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 61, 154, 0.15);
+        border: 1.5px solid rgba(255, 61, 154, 0.3);
+        color: var(--pink);
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 7px 18px;
+        border-radius: 99px;
+        margin-bottom: 24px;
+        font-family: "Syne", sans-serif;
+      }
+      body.light-theme .hero-tag {
+        background: rgba(255, 61, 154, 0.1);
+        color: #e11d48;
+      }
+      .hero h1 {
+        font-family: "Syne", sans-serif;
+        font-size: clamp(28px, 5.5vw, 50px);
+        font-weight: 800;
+        line-height: 1.15;
+        margin-bottom: 16px;
+        color: #fff;
+      }
+      body.light-theme .hero h1 {
+        color: #1e293b;
+      }
+      .hero h1 .hi {
+        color: var(--pink);
+      }
+      .hero p {
+        color: var(--text-muted);
+        font-size: 15px;
+        line-height: 1.7;
+        max-width: 600px;
+        margin-bottom: 32px;
+      }
+      .hero-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+      }
+      .hero-badge {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid var(--glass-border);
+        border-radius: 99px;
+        padding: 7px 16px;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--text-muted);
+        font-family: "Syne", sans-serif;
+      }
+
+      /* ===== CONTENT AREA ===== */
+      .content {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 24px 80px;
+        position: relative;
+        z-index: 10;
+      }
+
+      /* ===== SECTION TITLES ===== */
+      .section-title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 52px;
+        margin-bottom: 24px;
+      }
+      .sec-line {
+        flex: 1;
+        height: 1.5px;
+        background: var(--glass-border);
+      }
+      .sec-text {
+        font-family: "Syne", sans-serif;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        white-space: nowrap;
+      }
+
+      /* ===== SUBSECTION HEADINGS ===== */
+      .sub-heading {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 17px;
+        margin-bottom: 16px;
+        color: var(--text);
+      }
+      .sub-heading-sm {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 14px;
+        margin: 16px 0 12px;
+        color: var(--text);
+      }
+      .sub-heading-accent {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 14px;
+        margin-bottom: 12px;
+        color: var(--accent);
+      }
+      .sub-heading-lg {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 16px;
+        margin: 24px 0 16px;
+        color: var(--text);
+      }
+
+      /* ===== CARD GRIDS ===== */
+      .cards-3 {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+        gap: 24px;
+        margin-bottom: 32px;
+      }
+      .cards-2 {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+        gap: 24px;
+        margin-bottom: 32px;
+      }
+
+      /* ===== GLASS CARD ===== */
+      .card {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-radius: var(--radius);
+        padding: 28px;
+        color: var(--text);
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+        transition:
+          transform 0.25s,
+          box-shadow 0.25s,
+          border-color 0.25s;
+      }
+      .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: var(--c, var(--accent));
+      }
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        border-color: var(--c, var(--accent));
+      }
+      .card-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: var(--radius-sm);
+        background: color-mix(in srgb, var(--c) 15%, transparent);
+        color: var(--c);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        margin-bottom: 18px;
+        border: 1px solid color-mix(in srgb, var(--c) 30%, transparent);
+      }
+      .card-eyebrow {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--c);
+        margin-bottom: 6px;
+      }
+      .card-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 19px;
+        line-height: 1.35;
+        margin-bottom: 10px;
+      }
+      .card-body {
+        font-size: 13.5px;
+        color: var(--text-muted);
+        line-height: 1.6;
+      }
+
+      /* ===== LIST ITEMS ===== */
+      .list-items {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 12px;
+      }
+      .list-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 13px;
+        line-height: 1.5;
+      }
+      .list-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--c, var(--accent));
+        flex-shrink: 0;
+        margin-top: 6px;
+        box-shadow: 0 0 8px var(--c, var(--accent));
+      }
+
+      /* ===== EXAMPLE / CONTOH SOAL BOX ===== */
+      .example-wrap {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-radius: var(--radius);
+        padding: 32px;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+        margin-bottom: 32px;
+      }
+      .example-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 16px;
+        color: var(--accent);
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .example-story {
+        color: var(--text-muted);
+        font-size: 14.5px;
+        line-height: 1.7;
+        margin-bottom: 20px;
+        padding: 16px 20px;
+        border-left: 3px solid var(--accent);
+        background: rgba(233, 196, 106, 0.05);
+        border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      }
+
+      /* ===== TABLE ===== */
+      .table-wrap {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius-sm);
+        overflow: hidden;
+        overflow-x: auto;
+        margin-bottom: 24px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th {
+        background: rgba(0, 0, 0, 0.25);
+        color: var(--text-muted);
+        font-family: "Syne", sans-serif;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 14px 18px;
+        text-align: left;
+        border-bottom: 1.5px solid var(--glass-border);
+      }
+      body.light-theme th {
+        background: rgba(255, 255, 255, 0.5);
+      }
+      td {
+        padding: 12px 18px;
+        font-size: 13.5px;
+        border-bottom: 1px solid var(--glass-border);
+        color: var(--text);
+        vertical-align: top;
+      }
+      tr:last-child td {
+        border-bottom: none;
+      }
+      tr:hover td {
+        background: rgba(255, 255, 255, 0.02);
+      }
+      tr.highlight-row td {
+        background: rgba(233, 196, 106, 0.08);
+        font-weight: 700;
+      }
+      tr.total-row td {
+        font-weight: 800;
+        background: rgba(233, 196, 106, 0.1);
+        color: var(--accent);
+        border-top: 2px solid var(--glass-border);
+      }
+
+      /* ===== CODE / PERHITUNGAN BLOCK ===== */
+      .code-block {
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius-sm);
+        padding: 20px 24px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 13.5px;
+        color: #94a3b8;
+        line-height: 1.9;
+        margin-bottom: 16px;
+        white-space: pre;
+        overflow-x: auto;
+      }
+      body.light-theme .code-block {
+        background: rgba(255, 255, 255, 0.7);
+        color: #334155;
+      }
+
+      /* ===== INFO / WARNING / DANGER BOXES ===== */
+      .info-box {
+        background: rgba(16, 185, 129, 0.08);
+        border: 1px solid rgba(16, 185, 129, 0.25);
+        border-radius: var(--radius-sm);
+        padding: 18px 20px;
+        margin-bottom: 20px;
+        color: var(--text);
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .info-box strong {
+        color: var(--green);
+      }
+      .warning-box {
+        background: rgba(233, 196, 106, 0.08);
+        border: 1px solid rgba(233, 196, 106, 0.25);
+        border-radius: var(--radius-sm);
+        padding: 18px 20px;
+        margin-bottom: 20px;
+        color: var(--text);
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .warning-box strong {
+        color: var(--accent);
+      }
+      .danger-box {
+        background: rgba(239, 68, 68, 0.08);
+        border: 1px solid rgba(239, 68, 68, 0.25);
+        border-radius: var(--radius-sm);
+        padding: 18px 20px;
+        margin-bottom: 20px;
+        color: var(--text);
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .danger-box strong {
+        color: var(--red);
+      }
+
+      /* ===== JURNAL BOX ===== */
+      .jurnal-box {
+        background: rgba(0, 0, 0, 0.2);
+        border: 1.5px solid var(--glass-border);
+        border-radius: var(--radius-sm);
+        padding: 20px 24px;
+        margin-bottom: 16px;
+      }
+      body.light-theme .jurnal-box {
+        background: rgba(255, 255, 255, 0.5);
+      }
+      .jurnal-title {
+        font-family: "Syne", sans-serif;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 12px;
+        border-bottom: 1px dashed var(--glass-border);
+        padding-bottom: 8px;
+      }
+      .jurnal-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 5px 0;
+        font-size: 13.5px;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .jurnal-akun {
+        flex: 1;
+        min-width: 120px;
+      }
+      .jurnal-akun.indent {
+        padding-left: 28px;
+        color: var(--text-muted);
+      }
+      .jurnal-d {
+        font-weight: 700;
+        font-family: "Syne", sans-serif;
+        font-size: 13px;
+        color: var(--orange);
+        min-width: 150px;
+        text-align: right;
+      }
+      .jurnal-k {
+        font-weight: 700;
+        font-family: "Syne", sans-serif;
+        font-size: 13px;
+        color: var(--blue);
+        min-width: 150px;
+        text-align: right;
+      }
+      .jurnal-blank {
+        min-width: 150px;
+        text-align: right;
+        color: var(--text-muted);
+      }
+      .jurnal-note {
+        margin-top: 10px;
+        font-size: 12px;
+        color: var(--text-muted);
+        font-style: italic;
+        border-top: 1px dashed var(--glass-border);
+        padding-top: 8px;
+        line-height: 1.6;
+      }
+
+      /* ===== NERACA BOX ===== */
+      .neraca-box {
+        background: rgba(0, 0, 0, 0.15);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius-sm);
+        padding: 20px 24px;
+        margin-bottom: 16px;
+        font-size: 13.5px;
+      }
+      body.light-theme .neraca-box {
+        background: rgba(255, 255, 255, 0.4);
+      }
+      .neraca-section {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--accent);
+        margin: 14px 0 6px;
+      }
+      .neraca-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 0;
+      }
+      .neraca-row.indent {
+        padding-left: 24px;
+        color: var(--text-muted);
+      }
+      .neraca-row.total {
+        font-weight: 800;
+        color: var(--accent);
+        border-top: 2px solid var(--glass-border);
+        margin-top: 6px;
+        padding-top: 10px;
+      }
+
+      /* ===== COMPARE GRID ===== */
+      .compare-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
+        margin-bottom: 28px;
+      }
+      .compare-card {
+        border-radius: var(--radius);
+        padding: 24px;
+        border: 1px solid var(--glass-border);
+        background: var(--glass-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+      .compare-card-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 15px;
+        margin-bottom: 12px;
+      }
+
+      /* ===== RANGKUMAN TABLE ===== */
+      .rangkuman-table td:first-child {
+        font-weight: 700;
+        color: var(--accent);
+        white-space: nowrap;
+      }
+
+      /* ===== FORMULA / RUMUS BLOCK ===== */
+      .formula-block {
+        background: rgba(233, 196, 106, 0.08);
+        border: 2px solid rgba(233, 196, 106, 0.25);
+        border-radius: var(--radius-sm);
+        padding: 20px 24px;
+        margin-bottom: 20px;
+        font-family: "Syne", sans-serif;
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--accent);
+        text-align: center;
+        line-height: 1.7;
+      }
+
+      /* ===== HIGHLIGHT TAG ===== */
+      .highlight-tag {
+        display: inline-block;
+        background: rgba(233, 196, 106, 0.12);
+        border: 1px solid rgba(233, 196, 106, 0.25);
+        color: var(--accent);
+        padding: 2px 10px;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 800;
+        font-family: "Syne", sans-serif;
+      }
+
+      /* ===== QUIZ CTA ===== */
+      .quiz-cta {
+        background: var(--glass-bg);
+        border: 2px solid rgba(233, 196, 106, 0.3);
+        border-radius: var(--radius);
+        padding: 40px 32px;
+        text-align: center;
+        margin-top: 60px;
+        margin-bottom: 40px;
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+      }
+      .quiz-cta h3 {
+        font-family: "Syne", sans-serif;
+        font-size: 24px;
+        margin-bottom: 12px;
+        color: var(--accent);
+      }
+      .quiz-cta p {
+        color: var(--text-muted);
+        margin-bottom: 20px;
+        font-size: 15px;
+        line-height: 1.6;
+      }
+      .quiz-btn {
+        background: var(--accent);
+        color: #1a1a2e;
+        border: none;
+        padding: 14px 32px;
+        border-radius: var(--radius-sm);
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-decoration: none;
+        display: inline-block;
+      }
+      .quiz-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 24px rgba(233, 196, 106, 0.35);
+      }
+
+      /* ===== FOOTER ===== */
+      footer {
+        border-top: 1px solid var(--glass-border);
+        background: #090d16;
+        padding: 40px 24px;
+        text-align: center;
+        position: relative;
+        z-index: 10;
+      }
+      body.light-theme footer {
+        background: #fff8f0;
+      }
+      .footer-name {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 16px;
+        background: linear-gradient(
+          135deg,
+          var(--yellow),
+          var(--pink),
+          var(--purple)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 6px;
+      }
+      .footer-sub {
+        font-size: 12.5px;
+        color: var(--text-muted);
+      }
+      .footer-dots {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        margin-top: 16px;
+      }
+      .footer-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+      }
+
+      /* ===== RESPONSIVE ===== */
+      @media (max-width: 640px) {
+        .cards-3,
+        .cards-2 {
+          grid-template-columns: 1fr;
+        }
+        .jurnal-d,
+        .jurnal-k,
+        .jurnal-blank {
+          min-width: 80px;
+          font-size: 12px;
+        }
+        .jurnal-akun {
+          font-size: 13px;
+        }
+        .example-wrap {
+          padding: 20px 16px;
+        }
+        .hero-glass {
+          padding: 32px 18px;
+        }
+        .compare-grid {
+          grid-template-columns: 1fr;
+        }
+        .code-block {
+          white-space: pre-wrap;
+          font-size: 11.5px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <!-- HEADER -->
+    <header>
+      <a href="index.html" class="header-logo">
+        <span style="font-size: 24px">💼</span>
+        <span>Belajar Akuntansi</span>
+      </a>
+      <div style="display: flex; gap: 12px; align-items: center">
+        <a href="index.html" class="back-btn">← Kembali</a>
+        <button
+          class="theme-toggle-btn"
+          onclick="toggleTheme()"
+          id="theme-btn"
+          title="Ganti Tema"
+        >
+          🌓
+        </button>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-glass">
+        <div class="hero-tag">💼 Bab 11 — Ekuitas Pemegang Saham</div>
+        <h1>Modal &amp; <span class="hi">Ekuitas</span></h1>
+        <p>
+          Pahami bentuk kepemilikan bisnis, karakteristik saham biasa &amp;
+          preferen, penerbitan saham, dividen tunai &amp; saham, treasury stock,
+          dan laporan perubahan ekuitas secara lengkap.
+        </p>
+        <div class="hero-badges">
+          <div class="hero-badge">🏢 Bentuk Kepemilikan Bisnis</div>
+          <div class="hero-badge">📊 Saham Biasa &amp; Preferen</div>
+          <div class="hero-badge">💰 Dividen Tunai &amp; Saham</div>
+          <div class="hero-badge">🔄 Treasury Stock</div>
+          <div class="hero-badge">📋 Laporan Ekuitas</div>
+        </div>
+      </div>
+    </section>
+
+    <main class="content">
+      <!-- ====== SECTION 1: BENTUK KEPEMILIKAN ====== -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">🏢 1. Bentuk Kepemilikan Bisnis</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Aspek</th>
+              <th>Perusahaan Perseorangan</th>
+              <th>Persekutuan (CV/Firma)</th>
+              <th>Perseroan Terbatas (PT)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Pemilik</strong></td>
+              <td>1 orang</td>
+              <td>2 orang atau lebih</td>
+              <td>Pemegang saham</td>
+            </tr>
+            <tr>
+              <td><strong>Tanggung jawab</strong></td>
+              <td>Tidak terbatas</td>
+              <td>Tidak terbatas (Firma) / terbatas (CV)</td>
+              <td>Terbatas pada modal disetor</td>
+            </tr>
+            <tr>
+              <td><strong>Modal</strong></td>
+              <td>Modal pemilik</td>
+              <td>Modal sekutu</td>
+              <td>Saham</td>
+            </tr>
+            <tr>
+              <td><strong>Kelangsungan</strong></td>
+              <td>Tergantung pemilik</td>
+              <td>Tergantung sekutu</td>
+              <td>Tidak terbatas</td>
+            </tr>
+            <tr>
+              <td><strong>Pajak</strong></td>
+              <td>PPh pribadi</td>
+              <td>PPh pribadi</td>
+              <td>PPh badan</td>
+            </tr>
+            <tr>
+              <td><strong>Contoh</strong></td>
+              <td>Warung Bu Siti</td>
+              <td>CV. Berkah Jaya</td>
+              <td>PT Indofood Tbk</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="info-box">
+        💡 <strong>Contoh Nyata:</strong> Warung sembako Pak Budi di Jombang
+        adalah perusahaan perseorangan — modal dari kantong sendiri, untung rugi
+        tanggung sendiri. CV. Berkah Jaya dimiliki dua bersaudara — persekutuan.
+        PT Telkom dimiliki ribuan pemegang saham — perseroan terbatas.
+      </div>
+
+      <!-- ====== SECTION 2: KARAKTERISTIK PT ====== -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">🏛️ 2. Karakteristik Perseroan Terbatas (PT)</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="compare-grid">
+        <div class="compare-card" style="border-top: 4px solid var(--green)">
+          <div class="compare-card-title" style="color: var(--green)">
+            ✅ Keunggulan PT
+          </div>
+          <div class="list-items" style="margin-top: 0">
+            <div class="list-item">
+              <div
+                class="list-dot"
+                style="
+                  background: var(--green);
+                  box-shadow: 0 0 8px var(--green);
+                "
+              ></div>
+              <div>
+                <strong>Tanggung jawab terbatas</strong> — hanya sebesar modal
+                yang disetor
+              </div>
+            </div>
+            <div class="list-item">
+              <div
+                class="list-dot"
+                style="
+                  background: var(--green);
+                  box-shadow: 0 0 8px var(--green);
+                "
+              ></div>
+              <div>Mudah memindahkan kepemilikan — cukup jual saham</div>
+            </div>
+            <div class="list-item">
+              <div
+                class="list-dot"
+                style="
+                  background: var(--green);
+                  box-shadow: 0 0 8px var(--green);
+                "
+              ></div>
+              <div>Kelangsungan hidup berkelanjutan</div>
+            </div>
+            <div class="list-item">
+              <div
+                class="list-dot"
+                style="
+                  background: var(--green);
+                  box-shadow: 0 0 8px var(--green);
+                "
+              ></div>
+              <div>
+                Mudah menghimpun modal besar — bisa terbitkan saham ke publik
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="compare-card" style="border-top: 4px solid var(--red)">
+          <div class="compare-card-title" style="color: var(--red)">
+            ❌ Kelemahan PT
+          </div>
+          <div class="list-items" style="margin-top: 0">
+            <div class="list-item">
+              <div
+                class="list-dot"
+                style="background: var(--red); box-shadow: 0 0 8px var(--red)"
+              ></div>
+              <div>Biaya pendirian mahal — akta notaris, izin, dll</div>
+            </div>
+            <div class="list-item">
+              <div
+                class="list-dot"
+                style="background: var(--red); box-shadow: 0 0 8px var(--red)"
+              ></div>
+              <div>Regulasi ketat — wajib audit, laporan ke OJK</div>
+            </div>
+            <div class="list-item">
+              <div
+                class="list-dot"
+                style="background: var(--red); box-shadow: 0 0 8px var(--red)"
+              ></div>
+              <div>
+                Pajak ganda — laba kena PPh badan, dividen kena PPh pribadi
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="sub-heading">Istilah Penting Modal PT</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Istilah</th>
+              <th>Definisi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Modal Dasar (Authorized Capital)</strong></td>
+              <td>Jumlah saham maksimal yang boleh diterbitkan</td>
+            </tr>
+            <tr>
+              <td><strong>Modal Ditempatkan (Issued Capital)</strong></td>
+              <td>Saham yang sudah diterbitkan ke investor</td>
+            </tr>
+            <tr>
+              <td><strong>Modal Disetor (Paid-in Capital)</strong></td>
+              <td>Saham yang sudah diterbitkan DAN dibayar</td>
+            </tr>
+            <tr>
+              <td><strong>Laba Ditahan (Retained Earnings)</strong></td>
+              <td>Akumulasi laba yang tidak dibagikan sebagai dividen</td>
+            </tr>
+            <tr>
+              <td><strong>Nilai Nominal (Par Value)</strong></td>
+              <td>Nilai minimum saham yang ditetapkan dalam akta</td>
+            </tr>
+            <tr>
+              <td><strong>Agio Saham</strong></td>
+              <td>Selisih harga jual di atas nilai nominal</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ====== SECTION 3: SAHAM BIASA & PREFEREN ====== -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">📊 3. Saham Biasa &amp; Saham Preferen</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="cards-2">
+        <div class="card" style="--c: var(--blue)">
+          <div class="card-icon">📋</div>
+          <div class="card-eyebrow">Jenis A</div>
+          <div class="card-title">Saham Biasa (Common Stock)</div>
+          <div class="card-body">
+            Saham yang memberikan hak suara dalam RUPS dan hak atas dividen
+            setelah saham preferen dipenuhi.
+          </div>
+          <div class="list-items">
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Hak suara dalam RUPS</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Hak atas dividen (setelah preferen)</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>
+                Hak atas aset saat likuidasi (setelah kreditur &amp; preferen)
+              </div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Hak preemptif — hak beli saham baru lebih dulu</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="--c: var(--accent)">
+          <div class="card-icon">⭐</div>
+          <div class="card-eyebrow">Jenis B</div>
+          <div class="card-title">Saham Preferen (Preferred Stock)</div>
+          <div class="card-body">
+            Saham dengan hak istimewa di atas saham biasa dalam hal dividen dan
+            pembagian aset saat likuidasi.
+          </div>
+          <div class="list-items">
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Prioritas dividen sebelum saham biasa</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Umumnya tidak punya hak suara</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Dividen tetap (fixed) setiap tahun</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="sub-heading">Jenis-Jenis Saham Preferen</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Jenis</th>
+              <th>Karakteristik</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Kumulatif</strong></td>
+              <td>
+                Dividen yang belum dibayar tahun lalu (dividen tertunggak) wajib
+                dibayar dulu sebelum saham biasa
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Non-kumulatif</strong></td>
+              <td>Dividen yang terlewat tidak perlu dibayar</td>
+            </tr>
+            <tr>
+              <td><strong>Partisipasi</strong></td>
+              <td>Bisa ikut dapat dividen tambahan di atas tarif tetap</td>
+            </tr>
+            <tr>
+              <td><strong>Konversi</strong></td>
+              <td>Bisa dikonversi menjadi saham biasa</td>
+            </tr>
+            <tr>
+              <td><strong>Callable</strong></td>
+              <td>Bisa ditebus perusahaan sewaktu-waktu</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="warning-box">
+        💡 <strong>Analogi:</strong> Saham preferen seperti kreditur VIP — dapat
+        bayaran duluan sebelum pemegang saham biasa. Tapi tidak punya suara
+        dalam RUPS.
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          ✏️ Contoh Dividen Saham Preferen Kumulatif
+        </div>
+        <div class="example-story">
+          PT Berkah Tbk memiliki saham preferen kumulatif 8%, nilai nominal Rp
+          1.000.000.000. Dividen tidak dibayar tahun 2022 dan 2023. Tahun 2024
+          ingin bayar dividen total Rp 500.000.000.
+        </div>
+        <div class="code-block">
+          Dividen preferen per tahun = 8% × Rp 1.000.000.000 = Rp 80.000.000
+          Tunggakan 2022 = Rp 80.000.000 Tunggakan 2023 = Rp 80.000.000 Dividen
+          2024 = Rp 80.000.000 ──────────────── Total hak preferen = Rp
+          240.000.000 Sisa untuk saham biasa = Rp 500.000.000 − Rp 240.000.000 =
+          Rp 260.000.000
+        </div>
+      </div>
+
+      <!-- ====== SECTION 4: PENERBITAN SAHAM ====== -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">🚀 4. Penerbitan Saham</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          A. Penerbitan Saham di Atas Nilai Nominal
+        </div>
+        <div class="example-story">
+          PT Maju Sejahtera menerbitkan 10.000 lembar saham biasa, nilai nominal
+          Rp 10.000/lembar, dijual seharga Rp 15.000/lembar secara tunai.
+        </div>
+        <div class="code-block">
+          Kas yang diterima = 10.000 × Rp 15.000 = Rp 150.000.000 Modal saham
+          (nominal) = 10.000 × Rp 10.000 = Rp 100.000.000 Agio saham = Rp
+          150.000.000 − Rp 100.000.000 = Rp 50.000.000
+        </div>
+        <div class="jurnal-box">
+          <div class="jurnal-title">Jurnal Penerbitan Saham Biasa</div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Kas</div>
+            <div class="jurnal-d">Rp 150.000.000</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Modal Saham Biasa</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-k">Rp 100.000.000</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Agio Saham Biasa</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-k">Rp 50.000.000</div>
+          </div>
+          <div class="jurnal-note">
+            (Menerbitkan 10.000 lembar saham biasa @ Rp 15.000)
+          </div>
+        </div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">B. Penerbitan Saham Preferen</div>
+        <div class="example-story">
+          PT Maju Sejahtera juga menerbitkan 5.000 lembar saham preferen, nilai
+          nominal Rp 20.000/lembar, dijual seharga Rp 22.000/lembar.
+        </div>
+        <div class="code-block">
+          Kas = 5.000 × Rp 22.000 = Rp 110.000.000 Modal saham preferen = 5.000
+          × Rp 20.000 = Rp 100.000.000 Agio saham preferen = Rp 110.000.000 − Rp
+          100.000.000 = Rp 10.000.000
+        </div>
+        <div class="jurnal-box">
+          <div class="jurnal-title">Jurnal Penerbitan Saham Preferen</div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Kas</div>
+            <div class="jurnal-d">Rp 110.000.000</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Modal Saham Preferen</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-k">Rp 100.000.000</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Agio Saham Preferen</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-k">Rp 10.000.000</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          C. Penerbitan Saham Tidak Tunai (Ditukar Aset)
+        </div>
+        <div class="example-story">
+          PT Maju Sejahtera menerbitkan 2.000 lembar saham biasa (nilai nominal
+          Rp 10.000) ditukar dengan tanah. Harga pasar saham Rp 18.000/lembar,
+          nilai tanah Rp 40.000.000.
+        </div>
+        <div class="code-block">
+          Gunakan nilai yang lebih dapat diandalkan: Harga pasar saham = 2.000 ×
+          Rp 18.000 = Rp 36.000.000 Nilai tanah = Rp 40.000.000 → Pakai nilai
+          saham yang lebih dapat diandalkan = Rp 36.000.000
+        </div>
+        <div class="jurnal-box">
+          <div class="jurnal-title">Jurnal Saham Ditukar Tanah</div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Tanah</div>
+            <div class="jurnal-d">Rp 36.000.000</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Modal Saham Biasa</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-k">Rp 20.000.000</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Agio Saham Biasa</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-k">Rp 16.000.000</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ====== SECTION 5: DIVIDEN TUNAI ====== -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">💵 5. Dividen Tunai</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Tanggal</th>
+              <th>Kejadian</th>
+              <th>Jurnal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Tanggal Pengumuman</strong></td>
+              <td>Direksi umumkan dividen</td>
+              <td>Laba Ditahan (D) / Utang Dividen (K)</td>
+            </tr>
+            <tr>
+              <td><strong>Tanggal Pencatatan</strong></td>
+              <td>Tentukan siapa yang berhak</td>
+              <td><em>Tidak ada jurnal</em></td>
+            </tr>
+            <tr>
+              <td><strong>Tanggal Pembayaran</strong></td>
+              <td>Dividen dibayarkan</td>
+              <td>Utang Dividen (D) / Kas (K)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">✏️ Contoh Soal Dividen Tunai</div>
+        <div class="example-story">
+          PT Berkah Tbk mengumumkan dividen tunai Rp 500/lembar pada 1 November
+          2024. Saham beredar 500.000 lembar. Tanggal pencatatan 15 November,
+          pembayaran 1 Desember 2024.
+        </div>
+        <div class="code-block">
+          Total dividen = 500.000 lembar × Rp 500 = Rp 250.000.000
+        </div>
+
+        <div class="jurnal-box">
+          <div class="jurnal-title">1 November — Jurnal Pengumuman</div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Laba Ditahan</div>
+            <div class="jurnal-d">Rp 250.000.000</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Utang Dividen</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-k">Rp 250.000.000</div>
+          </div>
+        </div>
+        <div class="info-box" style="margin-bottom: 12px">
+          📅 <strong>15 November — Tanggal Pencatatan:</strong> Tidak ada jurnal
+          — hanya pencatatan siapa yang berhak.
+        </div>
+        <div class="jurnal-box">
+          <div class="jurnal-title">1 Desember — Jurnal Pembayaran</div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Utang Dividen</div>
+            <div class="jurnal-d">Rp 250.000.000</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Kas</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-k">Rp 250.000.000</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ====== SECTION 6: DIVIDEN SAHAM & STOCK SPLIT ====== -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">
+          📈 6. Dividen Saham &amp; Pemecahan Saham (Stock Split)
+        </div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="compare-grid">
+        <div class="compare-card" style="border-top: 4px solid var(--accent)">
+          <div class="compare-card-title" style="color: var(--accent)">
+            💸 Dividen Saham
+          </div>
+          <div class="card-body">
+            Dividen dibayar dalam bentuk saham tambahan, bukan kas. Tidak ada
+            kas keluar — hanya memindahkan dari laba ditahan ke modal saham.
+          </div>
+          <div class="list-items" style="margin-top: 12px">
+            <div class="list-item">
+              <div
+                class="list-dot"
+                style="
+                  background: var(--accent);
+                  box-shadow: 0 0 8px var(--accent);
+                "
+              ></div>
+              <div>
+                <strong>Kecil (&lt;20–25%)</strong> → dicatat pada harga pasar
+              </div>
+            </div>
+            <div class="list-item">
+              <div
+                class="list-dot"
+                style="
+                  background: var(--accent);
+                  box-shadow: 0 0 8px var(--accent);
+                "
+              ></div>
+              <div>
+                <strong>Besar (≥20–25%)</strong> → dicatat pada nilai nominal
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="compare-card" style="border-top: 4px solid var(--purple)">
+          <div class="compare-card-title" style="color: var(--purple)">
+            ✂️ Pemecahan Saham (Stock Split)
+          </div>
+          <div class="card-body">
+            Memecah saham menjadi lebih banyak dengan nilai nominal lebih kecil.
+            <strong>Tidak ada jurnal</strong> — hanya perubahan catatan jumlah
+            saham dan nilai nominal.
+          </div>
+          <div class="list-items" style="margin-top: 12px">
+            <div class="list-item">
+              <div
+                class="list-dot"
+                style="
+                  background: var(--purple);
+                  box-shadow: 0 0 8px var(--purple);
+                "
+              ></div>
+              <div>Total modal saham tetap sama</div>
+            </div>
+            <div class="list-item">
+              <div
+                class="list-dot"
+                style="
+                  background: var(--purple);
+                  box-shadow: 0 0 8px var(--purple);
+                "
+              ></div>
+              <div>Tujuan: buat harga saham lebih terjangkau &amp; likuid</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">✏️ Contoh Dividen Saham Kecil (10%)</div>
+        <div class="example-story">
+          PT Berkah Tbk mengumumkan dividen saham 10% pada saat saham beredar
+          100.000 lembar. Nilai nominal Rp 10.000, harga pasar Rp 15.000.
+        </div>
+        <div class="code-block">
+          Saham baru = 10% × 100.000 = 10.000 lembar Nilai @ harga pasar =
+          10.000 × Rp 15.000 = Rp 150.000.000 Nilai nominal = 10.000 × Rp 10.000
+          = Rp 100.000.000 Agio = Rp 150.000.000 − Rp 100.000.000 = Rp
+          50.000.000
+        </div>
+        <div class="jurnal-box">
+          <div class="jurnal-title">Jurnal Pengumuman Dividen Saham Kecil</div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Laba Ditahan</div>
+            <div class="jurnal-d">Rp 150.000.000</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Modal Saham Biasa</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-k">Rp 100.000.000</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Agio Saham Biasa</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-k">Rp 50.000.000</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">✏️ Contoh Stock Split 2:1</div>
+        <div class="example-story">
+          PT Berkah punya 100.000 lembar saham @ nominal Rp 10.000. Lakukan
+          stock split 2:1. Setelah split:
+          <strong>200.000 lembar @ nominal Rp 5.000.</strong>
+          Total modal saham tetap sama! Saham PT Berkah harganya Rp
+          50.000/lembar — mahal untuk investor kecil. Setelah split 2:1 jadi Rp
+          25.000/lembar — lebih terjangkau, likuiditas meningkat.
+        </div>
+        <div class="warning-box">
+          ⚠️ <strong>Tidak ada jurnal untuk stock split</strong> — hanya
+          perubahan catatan: jumlah lembar bertambah, nilai nominal berkurang
+          proposional.
+        </div>
+      </div>
+
+      <!-- ====== SECTION 7: TREASURY STOCK ====== -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">🔁 7. Treasury Stock</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="cards-3">
+        <div class="card" style="--c: var(--accent)">
+          <div class="card-icon">❓</div>
+          <div class="card-eyebrow">Definisi</div>
+          <div class="card-title">Apa itu Treasury Stock?</div>
+          <div class="card-body">
+            Saham perusahaan yang dibeli kembali oleh perusahaan itu sendiri
+            dari pemegang saham di pasar. Saham ini tidak memberikan hak suara
+            dan tidak dapat dividen.
+          </div>
+        </div>
+        <div class="card" style="--c: var(--purple)">
+          <div class="card-icon">💡</div>
+          <div class="card-eyebrow">Mengapa?</div>
+          <div class="card-title">Alasan Beli Kembali</div>
+          <div class="list-items" style="margin-top: 0">
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Menaikkan harga saham di pasar</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Mengurangi jumlah saham beredar</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Program saham karyawan (ESOP)</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Sinyal saham undervalued</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="--c: var(--red)">
+          <div class="card-icon">📌</div>
+          <div class="card-eyebrow">Di Neraca</div>
+          <div class="card-title">Penyajian Laporan</div>
+          <div class="card-body">
+            Dicatat sebesar harga beli. Disajikan sebagai
+            <strong>pengurang ekuitas</strong> (kontra ekuitas) — bukan sebagai
+            aset!
+          </div>
+        </div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">✏️ Contoh Transaksi Treasury Stock</div>
+        <div class="example-story">
+          PT Berkah Tbk membeli kembali 5.000 lembar saham biasanya di pasar
+          pada harga Rp 18.000/lembar (nilai nominal Rp 10.000).
+        </div>
+        <div class="jurnal-box">
+          <div class="jurnal-title">Jurnal Pembelian Treasury Stock</div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Treasury Stock</div>
+            <div class="jurnal-d">Rp 90.000.000</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Kas</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-k">Rp 90.000.000</div>
+          </div>
+          <div class="jurnal-note">
+            5.000 lbr × Rp 18.000 = Rp 90.000.000 — dicatat di harga beli, bukan
+            nilai nominal
+          </div>
+        </div>
+
+        <h4 class="sub-heading-sm">
+          Jika dijual kembali 2.000 lembar @ Rp 20.000 (di atas harga beli):
+        </h4>
+        <div class="jurnal-box">
+          <div class="jurnal-title">
+            Jurnal Penjualan Kembali — Di Atas Harga Beli
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Kas</div>
+            <div class="jurnal-d">Rp 40.000.000</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Treasury Stock</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-k">Rp 36.000.000</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Agio Treasury Stock</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-k">Rp 4.000.000</div>
+          </div>
+          <div class="jurnal-note">
+            2.000 × Rp 20.000 = Rp 40.000.000 &nbsp;|&nbsp; 2.000 × Rp 18.000 =
+            Rp 36.000.000
+          </div>
+        </div>
+
+        <h4 class="sub-heading-sm">
+          Jika dijual kembali 2.000 lembar @ Rp 16.000 (di bawah harga beli):
+        </h4>
+        <div class="jurnal-box">
+          <div class="jurnal-title">
+            Jurnal Penjualan Kembali — Di Bawah Harga Beli
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Kas</div>
+            <div class="jurnal-d">Rp 32.000.000</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Agio Treasury Stock</div>
+            <div class="jurnal-d">Rp 4.000.000</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Treasury Stock</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-k">Rp 36.000.000</div>
+          </div>
+          <div class="jurnal-note">
+            Selisih Rp 4.000.000 mengurangi Agio — bukan dicatat sebagai
+            kerugian
+          </div>
+        </div>
+      </div>
+
+      <!-- ====== SECTION 8: LAPORAN PERUBAHAN EKUITAS ====== -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">📋 8. Laporan Perubahan Ekuitas</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">📄 Format Laporan Perubahan Ekuitas PT</div>
+        <div class="table-wrap" style="margin-bottom: 0">
+          <table>
+            <thead>
+              <tr>
+                <th>Keterangan</th>
+                <th>Modal Saham</th>
+                <th>Agio Saham</th>
+                <th>Laba Ditahan</th>
+                <th>Treasury Stock</th>
+                <th>Total Ekuitas</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="highlight-row">
+                <td>Saldo 1 Jan 2024</td>
+                <td>100.000.000</td>
+                <td>50.000.000</td>
+                <td>200.000.000</td>
+                <td>0</td>
+                <td>350.000.000</td>
+              </tr>
+              <tr>
+                <td>+ Penerbitan saham</td>
+                <td>20.000.000</td>
+                <td>10.000.000</td>
+                <td>—</td>
+                <td>—</td>
+                <td>30.000.000</td>
+              </tr>
+              <tr>
+                <td>+ Laba bersih 2024</td>
+                <td>—</td>
+                <td>—</td>
+                <td>80.000.000</td>
+                <td>—</td>
+                <td>80.000.000</td>
+              </tr>
+              <tr>
+                <td>− Dividen tunai</td>
+                <td>—</td>
+                <td>—</td>
+                <td>(30.000.000)</td>
+                <td>—</td>
+                <td>(30.000.000)</td>
+              </tr>
+              <tr>
+                <td>− Dividen saham</td>
+                <td>10.000.000</td>
+                <td>5.000.000</td>
+                <td>(15.000.000)</td>
+                <td>—</td>
+                <td>0</td>
+              </tr>
+              <tr>
+                <td>− Beli treasury stock</td>
+                <td>—</td>
+                <td>—</td>
+                <td>—</td>
+                <td>(18.000.000)</td>
+                <td>(18.000.000)</td>
+              </tr>
+              <tr class="total-row">
+                <td><strong>Saldo 31 Des 2024</strong></td>
+                <td><strong>130.000.000</strong></td>
+                <td><strong>65.000.000</strong></td>
+                <td><strong>235.000.000</strong></td>
+                <td><strong>(18.000.000)</strong></td>
+                <td><strong>412.000.000</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ====== SECTION 9: STUDI KASUS ====== -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">🏢 9. Studi Kasus — PT Nusantara Makmur Tbk</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          📋 PT Nusantara Makmur Tbk — Perusahaan Dagang, Jombang
+        </div>
+        <div class="example-story">
+          PT Nusantara Makmur Tbk adalah perusahaan distribusi sembako yang baru
+          IPO. Berikut transaksi ekuitas selama 2024.<br /><br />
+          <strong>Data Awal 1 Januari 2024:</strong><br />
+          Modal saham biasa (500.000 lbr @ nominal Rp 5.000) = Rp
+          2.500.000.000<br />
+          Agio saham biasa = Rp 500.000.000<br />
+          Laba ditahan = Rp 800.000.000<br />
+          Total ekuitas awal = Rp 3.800.000.000
+        </div>
+
+        <h4 class="sub-heading-accent">1 Maret — Penerbitan Saham Baru</h4>
+        <div class="code-block">
+          Kas = 50.000 × Rp 8.000 = Rp 400.000.000 Modal nominal = 50.000 × Rp
+          5.000 = Rp 250.000.000 Agio = Rp 400.000.000 − Rp 250.000.000 = Rp
+          150.000.000
+        </div>
+        <div class="jurnal-box">
+          <div class="jurnal-title">Jurnal 1 Maret — Penerbitan Saham Baru</div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Kas</div>
+            <div class="jurnal-d">Rp 400.000.000</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Modal Saham Biasa</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-k">Rp 250.000.000</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Agio Saham Biasa</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-k">Rp 150.000.000</div>
+          </div>
+        </div>
+
+        <h4 class="sub-heading-accent">1 Juni — Pengumuman Dividen Tunai</h4>
+        <div class="code-block">
+          Total dividen = 550.000 × Rp 400 = Rp 220.000.000
+        </div>
+        <div class="jurnal-box">
+          <div class="jurnal-title">
+            Jurnal 1 Juni — Pengumuman Dividen Tunai
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Laba Ditahan</div>
+            <div class="jurnal-d">Rp 220.000.000</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Utang Dividen</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-k">Rp 220.000.000</div>
+          </div>
+        </div>
+
+        <h4 class="sub-heading-accent">
+          1 Juli — Pembayaran Dividen &amp; 1 September — Beli Treasury Stock
+        </h4>
+        <div class="jurnal-box">
+          <div class="jurnal-title">
+            Jurnal 1 Juli — Pembayaran Dividen Tunai
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Utang Dividen</div>
+            <div class="jurnal-d">Rp 220.000.000</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Kas</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-k">Rp 220.000.000</div>
+          </div>
+        </div>
+        <div class="jurnal-box">
+          <div class="jurnal-title">
+            Jurnal 1 September — Treasury Stock (20.000 lbr @ Rp 9.000)
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Treasury Stock</div>
+            <div class="jurnal-d">Rp 180.000.000</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Kas</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-k">Rp 180.000.000</div>
+          </div>
+        </div>
+
+        <h4 class="sub-heading-accent">31 Desember — Dividen Saham 5%</h4>
+        <div class="code-block">
+          Saham beredar efektif = 550.000 − 20.000 = 530.000 lbr Saham baru = 5%
+          × 530.000 = 26.500 lbr Nilai @ harga pasar = 26.500 × Rp 10.000 = Rp
+          265.000.000 Nilai nominal = 26.500 × Rp 5.000 = Rp 132.500.000 Agio =
+          Rp 265.000.000 − Rp 132.500.000 = Rp 132.500.000
+        </div>
+        <div class="jurnal-box">
+          <div class="jurnal-title">Jurnal 31 Desember — Dividen Saham 5%</div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Laba Ditahan</div>
+            <div class="jurnal-d">Rp 265.000.000</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Modal Saham Biasa</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-k">Rp 132.500.000</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Agio Saham Biasa</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-k">Rp 132.500.000</div>
+          </div>
+        </div>
+
+        <h4 class="sub-heading-lg">
+          Laporan Perubahan Ekuitas 2024 — PT Nusantara Makmur Tbk
+        </h4>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Keterangan</th>
+                <th>Modal Saham Biasa</th>
+                <th>Agio Saham Biasa</th>
+                <th>Laba Ditahan</th>
+                <th>Treasury Stock</th>
+                <th>Total Ekuitas</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="highlight-row">
+                <td>Saldo 1 Jan 2024</td>
+                <td>2.500.000.000</td>
+                <td>500.000.000</td>
+                <td>800.000.000</td>
+                <td>0</td>
+                <td>3.800.000.000</td>
+              </tr>
+              <tr>
+                <td>Penerbitan saham (1 Mar)</td>
+                <td>250.000.000</td>
+                <td>150.000.000</td>
+                <td>—</td>
+                <td>—</td>
+                <td>400.000.000</td>
+              </tr>
+              <tr>
+                <td>Laba bersih 2024</td>
+                <td>—</td>
+                <td>—</td>
+                <td>650.000.000</td>
+                <td>—</td>
+                <td>650.000.000</td>
+              </tr>
+              <tr>
+                <td>Dividen tunai</td>
+                <td>—</td>
+                <td>—</td>
+                <td>(220.000.000)</td>
+                <td>—</td>
+                <td>(220.000.000)</td>
+              </tr>
+              <tr>
+                <td>Treasury stock dibeli</td>
+                <td>—</td>
+                <td>—</td>
+                <td>—</td>
+                <td>(180.000.000)</td>
+                <td>(180.000.000)</td>
+              </tr>
+              <tr>
+                <td>Dividen saham (5%)</td>
+                <td>132.500.000</td>
+                <td>132.500.000</td>
+                <td>(265.000.000)</td>
+                <td>—</td>
+                <td>0</td>
+              </tr>
+              <tr class="total-row">
+                <td><strong>Saldo 31 Des 2024</strong></td>
+                <td><strong>2.882.500.000</strong></td>
+                <td><strong>782.500.000</strong></td>
+                <td><strong>965.000.000</strong></td>
+                <td><strong>(180.000.000)</strong></td>
+                <td><strong>4.450.000.000</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ====== RANGKUMAN ====== -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">📝 Rangkuman Bab 11</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="rangkuman-table">
+          <thead>
+            <tr>
+              <th>Poin</th>
+              <th>Inti Materi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>✅ Bentuk Bisnis</td>
+              <td>
+                Perseorangan, CV/Firma, PT — beda struktur modal dan tanggung
+                jawab
+              </td>
+            </tr>
+            <tr>
+              <td>✅ Modal PT</td>
+              <td>
+                Dasar, ditempatkan, disetor — tiga level berbeda, tidak boleh
+                tertukar
+              </td>
+            </tr>
+            <tr>
+              <td>✅ Saham Biasa</td>
+              <td>Punya hak suara, dividen setelah preferen dipenuhi</td>
+            </tr>
+            <tr>
+              <td>✅ Saham Preferen</td>
+              <td>
+                Prioritas dividen, bisa kumulatif/non-kumulatif — tidak punya
+                suara
+              </td>
+            </tr>
+            <tr>
+              <td>✅ Penerbitan Saham</td>
+              <td>Harga jual &gt; nominal → selisih masuk Agio Saham</td>
+            </tr>
+            <tr>
+              <td>✅ Dividen Tunai</td>
+              <td>3 tanggal: pengumuman, pencatatan (no jurnal), pembayaran</td>
+            </tr>
+            <tr>
+              <td>✅ Dividen Saham</td>
+              <td>Tidak ada kas — pindah dari laba ditahan ke modal saham</td>
+            </tr>
+            <tr>
+              <td>✅ Stock Split</td>
+              <td>Tidak ada jurnal — hanya ubah jumlah lembar &amp; nominal</td>
+            </tr>
+            <tr>
+              <td>✅ Treasury Stock</td>
+              <td>Saham dibeli kembali — kontra ekuitas, dicatat harga beli</td>
+            </tr>
+            <tr>
+              <td>✅ Laporan Ekuitas</td>
+              <td>Perubahan seluruh komponen ekuitas selama satu periode</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ====== QUIZ CTA ====== -->
+      <div class="quiz-cta">
+        <h3>🎯 Uji Pemahamanmu!</h3>
+        <p>
+          Sudah siap menguji pemahaman Bab Modal &amp; Ekuitas? Kerjakan 20 soal
+          kuis interaktif yang mencakup semua materi dari bentuk kepemilikan
+          bisnis sampai treasury stock!
+        </p>
+        <a href="bank-kuis.html?bab=Modal%20%26%20Ekuitas" class="quiz-btn"
+          >Mulai Kuis Bab 11 →</a
+        >
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-name">Annisa Novita Ardana</div>
+      <div class="footer-sub">
+        Belajar Akuntansi &amp; Perpajakan &nbsp;·&nbsp; Dibuat dengan Cinta
+        &amp; Estetika 🌸
+      </div>
+      <div class="footer-dots">
+        <div class="footer-dot" style="background: #ff6b35"></div>
+        <div class="footer-dot" style="background: #ff3d9a"></div>
+        <div class="footer-dot" style="background: #a855f7"></div>
+        <div class="footer-dot" style="background: #3b82f6"></div>
+        <div class="footer-dot" style="background: #10b981"></div>
+        <div class="footer-dot" style="background: #fbbf24"></div>
+      </div>
+    </footer>
+
+    <script>
+      // THEME HANDLING
+      const body = document.body;
+      if (localStorage.getItem("theme") === "light") {
+        body.classList.add("light-theme");
+      }
+      function toggleTheme() {
+        body.classList.toggle("light-theme");
+        localStorage.setItem(
+          "theme",
+          body.classList.contains("light-theme") ? "light" : "dark",
+        );
+      }
+    </script>
+  </body>
+</html>

@@ -1208,5 +1208,1180 @@
     ],
     "j": 2,
     "b": "Jika harga jual < nilai buku → perusahaan rugi. Dicatat sebagai Kerugian Pelepasan Aset di laporan laba rugi bagian pendapatan/beban lain-lain."
+  },
+  {
+    "k": "Utang Jangka Panjang & Obligasi",
+    "s": "Utang jangka panjang adalah kewajiban yang jatuh temponya...",
+    "p": [
+      "Kurang dari 3 bulan",
+      "Kurang dari 1 tahun",
+      "Lebih dari 1 tahun",
+      "Lebih dari 5 tahun"
+    ],
+    "j": 2,
+    "b": "Utang jangka panjang memiliki jatuh tempo lebih dari satu tahun dari tanggal neraca. Contoh: obligasi 5 tahun, KPR 15 tahun, wesel 3 tahun."
+  },
+  {
+    "k": "Utang Jangka Panjang & Obligasi",
+    "s": "Obligasi adalah instrumen keuangan yang merupakan...",
+    "p": [
+      "Bukti kepemilikan saham perusahaan",
+      "Surat utang jangka panjang yang diterbitkan perusahaan kepada investor",
+      "Bukti setoran modal dari pemegang saham",
+      "Surat tagihan piutang kepada pelanggan"
+    ],
+    "j": 1,
+    "b": "Obligasi adalah instrumen utang — penerbit wajib membayar bunga periodik dan melunasi nilai pokok saat jatuh tempo. Berbeda dengan saham yang merupakan bukti kepemilikan."
+  },
+  {
+    "k": "Utang Jangka Panjang & Obligasi",
+    "s": "Nilai yang tertera di sertifikat obligasi dan dibayarkan kepada investor saat jatuh tempo disebut...",
+    "p": [
+      "Harga pasar obligasi",
+      "Premium obligasi",
+      "Nilai pari (face value)",
+      "Nilai buku obligasi"
+    ],
+    "j": 2,
+    "b": "Nilai pari adalah nilai nominal yang tercantum di sertifikat obligasi. Inilah jumlah yang wajib dibayar perusahaan kepada pemegang obligasi saat jatuh tempo — terlepas dari berapa harga belinya dulu."
+  },
+  {
+    "k": "Utang Jangka Panjang & Obligasi",
+    "s": "Jika bunga kupon obligasi LEBIH RENDAH dari bunga pasar, maka obligasi dijual...",
+    "p": [
+      "Dengan premium — di atas nilai pari",
+      "Dengan diskon — di bawah nilai pari",
+      "Tepat di nilai pari",
+      "Tidak bisa dijual sama sekali"
+    ],
+    "j": 1,
+    "b": "Bunga kupon rendah membuat obligasi kurang menarik. Supaya investor mau beli, harga diturunkan (diskon) sehingga total imbal hasil efektifnya setara bunga pasar."
+  },
+  {
+    "k": "Utang Jangka Panjang & Obligasi",
+    "s": "PT Sejahtera menerbitkan obligasi nilai pari Rp 800.000.000, bunga kupon 12%, bunga pasar 10%. Obligasi ini akan dijual...",
+    "p": [
+      "Dengan diskon karena kupon > pasar",
+      "Tepat di nilai pari",
+      "Dengan premium karena kupon > pasar",
+      "Tidak laku dijual"
+    ],
+    "j": 2,
+    "b": "Bunga kupon 12% lebih tinggi dari bunga pasar 10% — obligasi ini menarik bagi investor. Akibatnya investor bersedia membayar lebih dari nilai pari (premium) untuk mendapatkannya."
+  },
+  {
+    "k": "Utang Jangka Panjang & Obligasi",
+    "s": "Diskon obligasi dalam neraca dicatat sebagai...",
+    "p": [
+      "Aset lancar",
+      "Beban dibayar di muka",
+      "Akun kontra kewajiban — mengurangi utang obligasi",
+      "Ekuitas perusahaan"
+    ],
+    "j": 2,
+    "b": "Diskon obligasi mengurangi nilai buku obligasi di neraca. Nilai buku = Utang Obligasi − Diskon Obligasi. Diskon diamortisasi setiap periode hingga habis saat jatuh tempo."
+  },
+  {
+    "k": "Utang Jangka Panjang & Obligasi",
+    "s": "PT Makmur menerbitkan obligasi nilai pari Rp 1.000.000.000 dan diterima kas Rp 950.000.000. Jurnal penerbitan yang benar adalah...",
+    "p": [
+      "Kas (D) Rp 1.000.000.000 / Utang Obligasi (K) Rp 1.000.000.000",
+      "Kas (D) Rp 950.000.000 / Utang Obligasi (K) Rp 950.000.000",
+      "Kas (D) Rp 950.000.000 / Diskon Obligasi (D) Rp 50.000.000 / Utang Obligasi (K) Rp 1.000.000.000",
+      "Kas (D) Rp 950.000.000 / Utang Obligasi (K) Rp 950.000.000 / Premium (K) Rp 50.000.000"
+    ],
+    "j": 2,
+    "b": "Kas diterima Rp 950 juta (aktual), utang obligasi dicatat sebesar nilai pari Rp 1 miliar (yang wajib dilunasi), selisih Rp 50 juta adalah diskon yang didebit sebagai kontra kewajiban."
+  },
+  {
+    "k": "Utang Jangka Panjang & Obligasi",
+    "s": "PT Abadi menerbitkan obligasi nilai pari Rp 600.000.000 dan diterima kas Rp 630.000.000. Jurnal penerbitan yang benar adalah...",
+    "p": [
+      "Kas (D) Rp 630.000.000 / Utang Obligasi (K) Rp 630.000.000",
+      "Kas (D) Rp 630.000.000 / Utang Obligasi (K) Rp 600.000.000 / Premium Obligasi (K) Rp 30.000.000",
+      "Kas (D) Rp 600.000.000 / Diskon (D) Rp 30.000.000 / Utang Obligasi (K) Rp 630.000.000",
+      "Kas (D) Rp 630.000.000 / Utang Obligasi (K) Rp 600.000.000 / Keuntungan (K) Rp 30.000.000"
+    ],
+    "j": 1,
+    "b": "Kas diterima Rp 630 juta, utang obligasi dicatat nilai pari Rp 600 juta, selisih Rp 30 juta adalah premium obligasi yang dikredit sebagai tambahan kewajiban."
+  },
+  {
+    "k": "Utang Jangka Panjang & Obligasi",
+    "s": "Amortisasi diskon obligasi akan menyebabkan beban bunga yang dilaporkan...",
+    "p": [
+      "Sama dengan bunga kas yang dibayarkan",
+      "Lebih kecil dari bunga kas yang dibayarkan",
+      "Lebih besar dari bunga kas yang dibayarkan",
+      "Tidak berpengaruh pada beban bunga"
+    ],
+    "j": 2,
+    "b": "Saat ada diskon, beban bunga = bunga kas + amortisasi diskon. Perusahaan terima kas lebih sedikit dari nilai pari tapi harus bayar kembali nilai pari penuh — selisihnya adalah beban bunga tambahan."
+  },
+  {
+    "k": "Utang Jangka Panjang & Obligasi",
+    "s": "Amortisasi premium obligasi akan menyebabkan beban bunga yang dilaporkan...",
+    "p": [
+      "Lebih besar dari bunga kas yang dibayarkan",
+      "Sama dengan bunga kas yang dibayarkan",
+      "Lebih kecil dari bunga kas yang dibayarkan",
+      "Nol karena premium mengimbangi bunga"
+    ],
+    "j": 2,
+    "b": "Saat ada premium, beban bunga = bunga kas − amortisasi premium. Perusahaan terima kas lebih banyak dari nilai pari — kelebihan itu mengurangi beban bunga efektif selama masa obligasi."
+  },
+  {
+    "k": "Utang Jangka Panjang & Obligasi",
+    "s": "PT Nusantara menerbitkan obligasi dengan diskon Rp 60.000.000, masa obligasi 5 tahun. Menggunakan metode garis lurus, amortisasi diskon per tahun adalah...",
+    "p": ["Rp 6.000.000", "Rp 10.000.000", "Rp 12.000.000", "Rp 15.000.000"],
+    "j": 2,
+    "b": "Amortisasi diskon per tahun = Rp 60.000.000 / 5 tahun = Rp 12.000.000/tahun"
+  },
+  {
+    "k": "Utang Jangka Panjang & Obligasi",
+    "s": "Obligasi nilai pari Rp 1.000.000.000, bunga kupon 10%, bunga pasar 12%, diskon Rp 80.000.000, masa 4 tahun (metode garis lurus). Beban bunga tahun pertama adalah...",
+    "p": [
+      "Rp 100.000.000",
+      "Rp 110.000.000",
+      "Rp 120.000.000",
+      "Rp 80.000.000"
+    ],
+    "j": 2,
+    "b": "Bunga kas = Rp 1.000.000.000 × 10% = Rp 100.000.000. Amortisasi diskon = Rp 80.000.000 / 4 = Rp 20.000.000. Beban bunga = Rp 100.000.000 + Rp 20.000.000 = Rp 120.000.000"
+  },
+  {
+    "k": "Utang Jangka Panjang & Obligasi",
+    "s": "Obligasi nilai pari Rp 500.000.000, bunga kupon 12%, premium Rp 40.000.000, masa 4 tahun (metode garis lurus). Beban bunga tahun pertama adalah...",
+    "p": ["Rp 60.000.000", "Rp 70.000.000", "Rp 50.000.000", "Rp 55.000.000"],
+    "j": 2,
+    "b": "Bunga kas = Rp 500.000.000 × 12% = Rp 60.000.000. Amortisasi premium = Rp 40.000.000 / 4 = Rp 10.000.000. Beban bunga = Rp 60.000.000 − Rp 10.000.000 = Rp 50.000.000"
+  },
+  {
+    "k": "Utang Jangka Panjang & Obligasi",
+    "s": "Obligasi nilai pari Rp 500.000.000, bunga kupon 12%, premium Rp 40.000.000, masa 4 tahun (metode garis lurus). Beban bunga tahun pertama adalah...",
+    "p": [
+      "Metode garis lurus",
+      "Metode saldo menurun",
+      "Metode satuan produksi",
+      "Metode bunga efektif"
+    ],
+    "j": 3,
+    "b": "Metode bunga efektif menghitung beban bunga berdasarkan nilai buku obligasi × tingkat bunga pasar sehingga mencerminkan biaya pendanaan yang sesungguhnya. PSAK menganjurkan metode ini karena lebih mencerminkan substansi ekonomi transaksi."
+  },
+  {
+    "k": "Utang Jangka Panjang & Obligasi",
+    "s": "Pada metode bunga efektif untuk obligasi dengan diskon, nilai buku obligasi dari tahun ke tahun akan...",
+    "p": [
+      "Tetap sama sepanjang masa obligasi",
+      "Meningkat melebihi nilai pari",
+      "Menurun mendekati nilai pari",
+      "Meningkat mendekati nilai pari"
+    ],
+    "j": 3,
+    "b": "Setiap tahun diskon diamortisasi dan berkurang — nilai buku obligasi (= nilai pari − sisa diskon) terus naik. Tepat saat jatuh tempo, nilai buku = nilai pari persis."
+  },
+  {
+    "k": "Utang Jangka Panjang & Obligasi",
+    "s": "Perusahaan melunasi obligasi sebelum jatuh tempo dengan membeli kembali di harga Rp 980.000.000. Nilai buku obligasi saat itu Rp 950.000.000. Hasilnya adalah...",
+    "p": [
+      "Keuntungan Rp 30.000.000",
+      "Kerugian Rp 30.000.000",
+      "Tidak ada untung maupun rugi",
+      "Keuntungan Rp 980.000.000"
+    ],
+    "j": 1,
+    "b": "Harga beli kembali Rp 980 juta > nilai buku Rp 950 juta → perusahaan membayar lebih mahal dari nilai tercatat → kerugian Rp 30.000.000. Dicatat sebagai Kerugian Pelunasan Obligasi."
+  },
+  {
+    "k": "Utang Jangka Panjang & Obligasi",
+    "s": "Utang yang dijamin dengan aset tetap perusahaan (biasanya properti) disebut...",
+    "p": [
+      "Utang wesel jangka panjang",
+      "Utang hipotek",
+      "Utang obligasi",
+      "Utang usaha"
+    ],
+    "j": 1,
+    "b": "Hipotek (mortgage) adalah utang jangka panjang yang menggunakan aset tetap sebagai jaminan. Jika gagal bayar, kreditur berhak menyita aset jaminan tersebut."
+  },
+  {
+    "k": "Utang Jangka Panjang & Obligasi",
+    "s": "CV. Maju meminjam Rp 300.000.000 dengan hipotek, bunga 12%/tahun, cicilan Rp 8.000.000/bulan. Pada cicilan pertama, porsi bunga dan pokok yang benar adalah...",
+    "p": [
+      "Bunga Rp 3.000.000, Pokok Rp 5.000.000",
+      "Bunga Rp 5.000.000, Pokok Rp 3.000.000",
+      "Bunga Rp 6.000.000, Pokok Rp 2.000.000",
+      "Bunga Rp 8.000.000, Pokok Rp 0"
+    ],
+    "j": 0,
+    "b": "Bunga bulan pertama = Rp 300.000.000 × 12% / 12 = Rp 3.000.000. Pokok = Rp 8.000.000 − Rp 3.000.000 = Rp 5.000.000."
+  },
+  {
+    "k": "Utang Jangka Panjang & Obligasi",
+    "s": "Berikut ini yang merupakan keunggulan pendanaan melalui obligasi dibandingkan saham adalah...",
+    "p": [
+      "Tidak ada kewajiban membayar bunga",
+      "Bunga obligasi mengurangi beban pajak perusahaan",
+      "Pemegang obligasi ikut memiliki perusahaan",
+      "Obligasi tidak perlu dilunasi saat jatuh tempo"
+    ],
+    "j": 1,
+    "b": "Bunga obligasi adalah beban yang dapat dikurangkan dari penghasilan kena pajak (tax deductible). Dividen saham tidak bisa dikurangkan dari pajak. Inilah salah satu alasan perusahaan lebih memilih obligasi dari sisi efisiensi pajak."
+  },
+  {
+    "k": "Utang Jangka Panjang & Obligasi",
+    "s": "PT Andalan menerbitkan obligasi nilai pari Rp 500.000.000, bunga kupon 8%, bunga pasar 8%. Obligasi tersebut akan dijual dengan harga...",
+    "p": [
+      "Di bawah Rp 500.000.000 (diskon)",
+      "Di atas Rp 500.000.000 (premium)",
+      "Tepat Rp 500.000.000 (nilai pari)",
+      "Tidak bisa ditentukan"
+    ],
+    "j": 2,
+    "b": "Ketika bunga kupon = bunga pasar, investor mendapat imbal hasil yang sama dengan pasar jika beli di nilai pari. Tidak ada alasan untuk beli di atas atau di bawah pari."
+  },
+  {
+    "k": "Modal & Ekuitas",
+    "s": "Bentuk kepemilikan bisnis yang pemiliknya memiliki tanggung jawab tidak terbatas atas seluruh utang perusahaan adalah...",
+    "p": [
+      "Perseroan Terbatas (PT)",
+      "Perusahaan Perseorangan",
+      "PT Tbk",
+      "Koperasi"
+    ],
+    "j": 1,
+    "b": "Perusahaan perseorangan tidak memisahkan kekayaan pemilik dengan kekayaan usaha. Jika usaha bangkrut, seluruh harta pribadi pemilik bisa disita untuk melunasi utang."
+  },
+  {
+    "k": "Modal & Ekuitas",
+    "s": "Jumlah saham maksimal yang boleh diterbitkan perusahaan sesuai anggaran dasar disebut...",
+    "p": ["Modal disetor", "Modal ditempatkan", "Modal dasar", "Laba ditahan"],
+    "j": 2,
+    "b": "Modal dasar (authorized capital) adalah batas atas jumlah saham yang boleh diterbitkan — tercantum dalam akta pendirian PT. Perusahaan tidak boleh menerbitkan saham melebihi modal dasar tanpa mengubah anggaran dasar."
+  },
+  {
+    "k": "Modal & Ekuitas",
+    "s": "Selisih antara harga jual saham dengan nilai nominalnya disebut...",
+    "p": ["Laba ditahan", "Dividen", "Agio saham", "Treasury stock"],
+    "j": 2,
+    "b": "Agio saham (additional paid-in capital) adalah kelebihan harga jual saham di atas nilai nominal. Contoh: saham nominal Rp 5.000 dijual Rp 8.000 → agio Rp 3.000/lembar."
+  },
+  {
+    "k": "Modal & Ekuitas",
+    "s": "PT Cahaya menerbitkan 20.000 lembar saham biasa, nilai nominal Rp 5.000/lembar, dijual Rp 7.500/lembar. Jurnal yang benar adalah...",
+    "p": [
+      "Kas (D) Rp 150.000.000 / Modal Saham (K) Rp 150.000.000",
+      "Kas (D) Rp 100.000.000 / Modal Saham (K) Rp 100.000.000",
+      "Kas (D) Rp 150.000.000 / Modal Saham (K) Rp 100.000.000 / Agio (K) Rp 50.000.000",
+      "Kas (D) Rp 150.000.000 / Modal Saham (K) Rp 150.000.000 / Agio (D) Rp 50.000.000"
+    ],
+    "j": 2,
+    "b": "Kas = 20.000 × Rp 7.500 = Rp 150.000.000. Modal nominal = 20.000 × Rp 5.000 = Rp 100.000.000. Agio = Rp 150.000.000 − Rp 100.000.000 = Rp 50.000.000."
+  },
+  {
+    "k": "Modal & Ekuitas",
+    "s": "Saham yang memberikan prioritas dalam penerimaan dividen sebelum saham biasa adalah...",
+    "p": ["Saham biasa", "Saham preferen", "Treasury stock", "Saham bonus"],
+    "j": 1,
+    "b": "Saham preferen memiliki hak istimewa — dividen harus dibayarkan ke pemegang saham preferen terlebih dahulu sebelum pemegang saham biasa menerima dividen apapun."
+  },
+  {
+    "k": "Modal & Ekuitas",
+    "s": "Saham preferen kumulatif artinya...",
+    "p": [
+      "Pemegang saham preferen bisa ikut memilih direksi",
+      "Dividen yang tidak dibayar tahun lalu wajib dilunasi sebelum saham biasa mendapat dividen",
+      "Saham preferen bisa dikonversi menjadi saham biasa kapan saja",
+      "Perusahaan bisa menebus saham preferen sewaktu-waktu"
+    ],
+    "j": 1,
+    "b": "Sifat kumulatif berarti dividen yang terlewat (dividen tertunggak) tetap menjadi hak pemegang saham preferen dan harus dibayar di masa mendatang sebelum saham biasa mendapat dividen."
+  },
+  {
+    "k": "Modal & Ekuitas",
+    "s": "PT Makmur memiliki saham preferen kumulatif 10%, nilai nominal Rp 500.000.000. Dividen tidak dibayar 2022 dan 2023. Tahun 2024 tersedia dividen Rp 250.000.000. Berapa yang diterima pemegang saham biasa?",
+    "p": ["Rp 250.000.000", "Rp 100.000.000", "Rp 150.000.000", "Rp 0"],
+    "j": 1,
+    "b": "Dividen preferen/tahun = 10% × Rp 500.000.000 = Rp 50.000.000. Tunggakan 2022+2023 = Rp 100.000.000. Dividen 2024 = Rp 50.000.000. Total preferen = Rp 150.000.000. Sisa saham biasa = Rp 250.000.000 − Rp 150.000.000 = Rp 100.000.000."
+  },
+  {
+    "k": "Modal & Ekuitas",
+    "s": "Tanggal yang digunakan untuk menentukan siapa saja pemegang saham yang berhak menerima dividen disebut...",
+    "p": [
+      "Tanggal pengumuman dividen",
+      "Tanggal pencatatan dividen",
+      "Tanggal pembayaran dividen",
+      "Tanggal ex-dividen"
+    ],
+    "j": 1,
+    "b": "Pada tanggal pencatatan (date of record), perusahaan membuat daftar pemegang saham yang berhak menerima dividen. Tidak ada jurnal pada tanggal ini — hanya pencatatan administratif."
+  },
+  {
+    "k": "Modal & Ekuitas",
+    "s": "Jurnal yang dibuat pada tanggal pengumuman dividen tunai adalah...",
+    "p": [
+      "Kas (D) / Laba Ditahan (K)",
+      "Utang Dividen (D) / Kas (K)",
+      "Laba Ditahan (D) / Utang Dividen (K)",
+      "Beban Dividen (D) / Kas (K)"
+    ],
+    "j": 2,
+    "b": "Saat pengumuman, dividen menjadi kewajiban perusahaan. Laba ditahan berkurang (didebit) karena dividen diambil dari laba ditahan. Utang dividen dikredit sebagai kewajiban yang akan dibayar."
+  },
+  {
+    "k": "Modal & Ekuitas",
+    "s": "PT Abadi mengumumkan dividen tunai Rp 600/lembar. Saham beredar 400.000 lembar. Jurnal pada tanggal pembayaran adalah...",
+    "p": [
+      "Laba Ditahan (D) Rp 240.000.000 / Kas (K) Rp 240.000.000",
+      "Utang Dividen (D) Rp 240.000.000 / Kas (K) Rp 240.000.000",
+      "Kas (D) Rp 240.000.000 / Utang Dividen (K) Rp 240.000.000",
+      "Beban Dividen (D) Rp 240.000.000 / Kas (K) Rp 240.000.000"
+    ],
+    "j": 1,
+    "b": "Total dividen = 400.000 × Rp 600 = Rp 240.000.000. Saat pembayaran, utang dividen dilunasi (didebit) dan kas berkurang (dikredit). Bukan laba ditahan lagi — itu sudah dijurnal saat pengumuman."
+  },
+  {
+    "k": "Modal & Ekuitas",
+    "s": "Dividen saham (stock dividend) berbeda dari dividen tunai karena...",
+    "p": [
+      "Dividen saham mengurangi total ekuitas perusahaan",
+      "Dividen saham menambah total ekuitas perusahaan",
+      "Dividen saham tidak mengurangi kas — hanya memindahkan antar komponen ekuitas",
+      "Dividen saham hanya untuk pemegang saham preferen"
+    ],
+    "j": 2,
+    "b": "Dividen saham memindahkan saldo dari laba ditahan ke modal saham dan agio. Total ekuitas tetap sama — tidak ada kas yang keluar dan tidak ada penambahan nilai bagi pemegang saham."
+  },
+  {
+    "k": "Modal & Ekuitas",
+    "s": "PT Nusantara mengumumkan dividen saham 10%. Saham beredar 200.000 lembar, nilai nominal Rp 10.000, harga pasar Rp 14.000. Berapa saham baru yang diterbitkan?",
+    "p": ["10.000 lembar", "20.000 lembar", "14.000 lembar", "200.000 lembar"],
+    "j": 1,
+    "b": "Saham baru = 10% × 200.000 lembar = 20.000 lembar. Persentase dividen saham dikalikan dengan jumlah saham beredar, bukan dengan nilai rupiah."
+  },
+  {
+    "k": "Modal & Ekuitas",
+    "s": "Menggunakan data soal nomor 12 (PT Nusantara, dividen saham 10%, 200.000 lembar, nominal Rp 10.000, pasar Rp 14.000), jurnal pengumuman dividen saham yang benar adalah...",
+    "p": [
+      "Laba Ditahan (D) Rp 200.000.000 / Modal Saham (K) Rp 200.000.000",
+      "Laba Ditahan (D) Rp 280.000.000 / Modal Saham (K) Rp 200.000.000 / Agio (K) Rp 80.000.000",
+      "Laba Ditahan (D) Rp 280.000.000 / Modal Saham (K) Rp 280.000.000",
+      "Modal Saham (D) Rp 280.000.000 / Laba Ditahan (K) Rp 280.000.000"
+    ],
+    "j": 1,
+    "b": "Dividen saham kecil (<25%) dicatat di harga pasar: 20.000 × Rp 14.000 = Rp 280.000.000. Modal nominal: 20.000 × Rp 10.000 = Rp 200.000.000. Agio: Rp 280.000.000 − Rp 200.000.000 = Rp 80.000.000."
+  },
+  {
+    "k": "Modal & Ekuitas",
+    "s": "Pemecahan saham (stock split) 3:1 dilakukan PT Berkah yang memiliki 100.000 lembar saham nominal Rp 15.000. Setelah stock split, jumlah lembar dan nilai nominal menjadi...",
+    "p": [
+      "300.000 lembar @ Rp 15.000",
+      "100.000 lembar @ Rp 5.000",
+      "300.000 lembar @ Rp 5.000",
+      "33.333 lembar @ Rp 45.000"
+    ],
+    "j": 2,
+    "b": "Stock split 3:1 berarti setiap 1 lembar dipecah jadi 3 lembar. Jumlah = 100.000 × 3 = 300.000 lembar. Nilai nominal = Rp 15.000 / 3 = Rp 5.000. Total modal saham tetap: 300.000 × Rp 5.000 = 100.000 × Rp 15.000."
+  },
+  {
+    "k": "Modal & Ekuitas",
+    "s": "Jurnal yang diperlukan saat perusahaan melakukan stock split adalah...",
+    "p": [
+      "Modal Saham (D) / Agio Saham (K)",
+      "Laba Ditahan (D) / Modal Saham (K)",
+      "Tidak ada jurnal — hanya perubahan catatan jumlah lembar dan nilai nominal",
+      "Kas (D) / Modal Saham (K)"
+    ],
+    "j": 2,
+    "b": "Stock split tidak mengubah total nilai modal saham, tidak ada aset yang masuk/keluar, dan tidak ada perpindahan antar akun. Hanya memo yang mencatat perubahan jumlah lembar dan nilai nominal baru."
+  },
+  {
+    "k": "Modal & Ekuitas",
+    "s": "Treasury stock adalah...",
+    "p": [
+      "Saham yang belum pernah diterbitkan perusahaan",
+      "Saham perusahaan yang dibeli kembali dari pemegang saham",
+      "Saham yang diberikan kepada karyawan sebagai bonus",
+      "Saham yang masih dalam proses penerbitan"
+    ],
+    "j": 1,
+    "b": "Treasury stock adalah saham yang sudah pernah diterbitkan, kemudian dibeli kembali oleh perusahaan penerbitnya. Saham ini tidak memiliki hak suara dan tidak mendapat dividen selama dipegang perusahaan."
+  },
+  {
+    "k": "Modal & Ekuitas",
+    "s": "Treasury stock disajikan dalam laporan keuangan sebagai...",
+    "p": [
+      "Aset tetap perusahaan",
+      "Investasi jangka pendek",
+      "Pengurang ekuitas (kontra ekuitas)",
+      "Utang jangka panjang"
+    ],
+    "j": 2,
+    "b": "Treasury stock mengurangi total ekuitas pemegang saham di neraca. Dicatat sebesar harga beli kembali dan disajikan di bagian ekuitas sebagai angka negatif/pengurang."
+  },
+  {
+    "k": "Modal & Ekuitas",
+    "s": "PT Sejahtera membeli kembali 8.000 lembar sahamnya di harga Rp 12.000/lembar (nilai nominal Rp 8.000). Jurnal yang benar adalah...",
+    "p": [
+      "Modal Saham (D) Rp 64.000.000 / Kas (K) Rp 64.000.000",
+      "Treasury Stock (D) Rp 96.000.000 / Kas (K) Rp 96.000.000",
+      "Treasury Stock (D) Rp 64.000.000 / Kas (K) Rp 64.000.000",
+      "Kas (D) Rp 96.000.000 / Treasury Stock (K) Rp 96.000.000"
+    ],
+    "j": 1,
+    "b": "Treasury stock dicatat sebesar harga beli kembali — bukan nilai nominal. 8.000 × Rp 12.000 = Rp 96.000.000. Nilai nominal tidak relevan dalam pencatatan pembelian treasury stock."
+  },
+  {
+    "k": "Modal & Ekuitas",
+    "s": "Laba ditahan (retained earnings) merupakan...",
+    "p": [
+      "Kas yang disimpan perusahaan di bank",
+      "Akumulasi laba bersih perusahaan yang tidak dibagikan sebagai dividen",
+      "Modal yang disetor pemegang saham saat IPO",
+      "Cadangan untuk membayar utang jangka panjang"
+    ],
+    "j": 1,
+    "b": "Laba ditahan adalah kumpulan laba bersih dari tahun ke tahun yang diputuskan untuk ditahan dalam perusahaan — bukan dibagikan sebagai dividen. Digunakan untuk ekspansi, bayar utang, atau cadangan operasional."
+  },
+  {
+    "k": "Modal & Ekuitas",
+    "s": "Berikut ini yang MENGURANGI saldo laba ditahan adalah...",
+    "p": [
+      "Penerbitan saham baru",
+      "Laba bersih periode berjalan",
+      "Penerimaan dividen dari investasi saham lain",
+      "Pengumuman dividen tunai dan dividen saham"
+    ],
+    "j": 3,
+    "b": "Dividen tunai mengurangi laba ditahan saat diumumkan (Laba Ditahan didebit). Dividen saham juga mengurangi laba ditahan dan memindahkannya ke modal saham. Laba bersih justru menambah laba ditahan."
+  },
+  {
+    "k": "Laporan Arus Kas",
+    "s": "Laporan arus kas disusun untuk menunjukkan...",
+    "p": [
+      "Besarnya laba bersih perusahaan selama satu periode",
+      "Posisi aset dan kewajiban perusahaan pada tanggal tertentu",
+      "Sumber penerimaan dan penggunaan kas perusahaan selama satu periode",
+      "Perubahan modal pemegang saham selama satu periode"
+    ],
+    "j": 2,
+    "b": "Laporan arus kas menjelaskan mengapa saldo kas berubah dari awal ke akhir periode — dari mana kas diperoleh dan untuk apa kas digunakan. Sangat penting karena laba besar tidak selalu berarti kas melimpah."
+  },
+  {
+    "k": "Laporan Arus Kas",
+    "s": "Pembayaran gaji karyawan dalam laporan arus kas termasuk aktivitas...",
+    "p": ["Investasi", "Pendanaan", "Operasi", "Ekuitas"],
+    "j": 2,
+    "b": "Gaji karyawan adalah beban operasional yang berkaitan langsung dengan kegiatan utama bisnis. Semua penerimaan dan pengeluaran kas dari kegiatan utama bisnis masuk aktivitas operasi."
+  },
+  {
+    "k": "Laporan Arus Kas",
+    "s": "Pembelian mesin produksi baru secara tunai dalam laporan arus kas termasuk aktivitas...",
+    "p": ["Operasi", "Investasi", "Pendanaan", "Ekuitas"],
+    "j": 1,
+    "b": "Pembelian aset tetap adalah aktivitas investasi karena berkaitan dengan perolehan aset jangka panjang yang akan digunakan untuk menghasilkan pendapatan di masa mendatang."
+  },
+  {
+    "k": "Laporan Arus Kas",
+    "s": "Penerbitan obligasi oleh perusahaan untuk mendapatkan dana termasuk aktivitas...",
+    "p": ["Operasi", "Investasi", "Ekuitas", "Pendanaan"],
+    "j": 3,
+    "b": "Penerbitan obligasi adalah cara perusahaan mendanai operasional/ekspansinya melalui utang. Semua transaksi yang berkaitan dengan perubahan utang jangka panjang dan ekuitas masuk aktivitas pendanaan."
+  },
+  {
+    "k": "Laporan Arus Kas",
+    "s": "Berikut ini yang termasuk aktivitas INVESTASI adalah...",
+    "p": [
+      "Pembayaran dividen tunai kepada pemegang saham",
+      "Penerimaan kas dari pelanggan atas penjualan barang",
+      "Penjualan kendaraan operasional yang sudah tua",
+      "Pembayaran bunga pinjaman bank"
+    ],
+    "j": 2,
+    "b": "Penjualan aset tetap menghasilkan kas masuk dari aktivitas investasi. Pembayaran dividen = pendanaan. Penerimaan dari pelanggan = operasi. Pembayaran bunga = operasi (umumnya)."
+  },
+  {
+    "k": "Laporan Arus Kas",
+    "s": "Dalam metode tidak langsung, beban depresiasi ditambahkan kembali ke laba bersih karena...",
+    "p": [
+      "Depresiasi menambah nilai aset perusahaan",
+      "Depresiasi adalah beban non-kas yang tidak melibatkan pengeluaran kas",
+      "Depresiasi mengurangi utang perusahaan",
+      "Depresiasi merupakan pendapatan bagi perusahaan"
+    ],
+    "j": 1,
+    "b": "Depresiasi mengurangi laba bersih tapi tidak ada kas yang keluar. Maka dalam rekonsiliasi laba ke kas operasi, depresiasi harus ditambahkan kembali agar tidak ikut mengurangi kas operasi."
+  },
+  {
+    "k": "Laporan Arus Kas",
+    "s": "Dalam metode tidak langsung, kenaikan piutang usaha akan...",
+    "p": [
+      "Ditambahkan ke laba bersih",
+      "Dikurangkan dari laba bersih",
+      "Tidak mempengaruhi arus kas operasi",
+      "Dipindahkan ke aktivitas investasi"
+    ],
+    "j": 1,
+    "b": "Piutang naik artinya ada penjualan yang belum tertagih kasnya. Laba sudah mengakui penjualan ini, tapi kas belum masuk. Maka kenaikan piutang dikurangkan dari laba bersih untuk mencerminkan kas aktual."
+  },
+  {
+    "k": "Laporan Arus Kas",
+    "s": "Dalam metode tidak langsung, kenaikan utang usaha akan...",
+    "p": [
+      "Dikurangkan dari laba bersih",
+      "Ditambahkan ke laba bersih",
+      "Dipindahkan ke aktivitas pendanaan",
+      "Tidak mempengaruhi arus kas operasi"
+    ],
+    "j": 1,
+    "b": "Utang usaha naik artinya ada pembelian yang belum dibayar kasnya. HPP sudah mengurangi laba, tapi kas belum keluar. Maka kenaikan utang usaha ditambahkan ke laba bersih karena kas belum benar-benar dibayarkan."
+  },
+  {
+    "k": "Laporan Arus Kas",
+    "s": "PT Abadi memiliki penjualan Rp 500.000.000, piutang awal Rp 40.000.000, piutang akhir Rp 60.000.000. Penerimaan kas dari pelanggan dengan metode langsung adalah...",
+    "p": [
+      "Rp 520.000.000",
+      "Rp 500.000.000",
+      "Rp 480.000.000",
+      "Rp 460.000.000"
+    ],
+    "j": 2,
+    "b": "Penerimaan dari pelanggan = Penjualan − Kenaikan piutang = Rp 500.000.000 − Rp 20.000.000 = Rp 480.000.000. Piutang naik Rp 20 juta berarti Rp 20 juta penjualan belum tertagih kasnya."
+  },
+  {
+    "k": "Laporan Arus Kas",
+    "s": "PT Makmur memiliki HPP Rp 300.000.000, persediaan turun Rp 15.000.000, utang usaha naik Rp 20.000.000. Pembayaran ke supplier dengan metode langsung adalah...",
+    "p": [
+      "Rp 335.000.000",
+      "Rp 300.000.000",
+      "Rp 285.000.000",
+      "Rp 265.000.000"
+    ],
+    "j": 3,
+    "b": "Pembayaran ke supplier = HPP − Penurunan persediaan − Kenaikan utang usaha = Rp 300.000.000 − Rp 15.000.000 − Rp 20.000.000 = Rp 265.000.000."
+  },
+  {
+    "k": "Laporan Arus Kas",
+    "s": "Dalam laporan arus kas metode tidak langsung, keuntungan penjualan aset tetap harus...",
+    "p": [
+      "Ditambahkan ke laba bersih di bagian operasi",
+      "Dikurangkan dari laba bersih di bagian operasi",
+      "Dilaporkan penuh di bagian investasi",
+      "Diabaikan karena tidak melibatkan kas"
+    ],
+    "j": 1,
+    "b": "Keuntungan jual aset sudah masuk ke laba bersih tapi kasnya dilaporkan penuh di bagian investasi. Agar tidak dobel, keuntungan ini dikurangkan dari laba bersih di bagian operasi."
+  },
+  {
+    "k": "Laporan Arus Kas",
+    "s": "Sebaliknya, kerugian penjualan aset tetap dalam metode tidak langsung harus...",
+    "p": [
+      "Dikurangkan dari laba bersih di bagian operasi",
+      "Ditambahkan ke laba bersih di bagian operasi",
+      "Dilaporkan sebagai arus kas keluar di investasi",
+      "Diabaikan dalam laporan arus kas"
+    ],
+    "j": 1,
+    "b": "Kerugian jual aset sudah mengurangi laba bersih tapi kasnya dilaporkan penuh di bagian investasi. Agar tidak dikurangi dua kali, kerugian ditambahkan kembali ke laba bersih di bagian operasi."
+  },
+  {
+    "k": "Laporan Arus Kas",
+    "s": "Pembayaran dividen tunai kepada pemegang saham dalam laporan arus kas masuk ke aktivitas...",
+    "p": ["Operasi", "Investasi", "Pendanaan", "Bisa operasi atau pendanaan"],
+    "j": 2,
+    "b": "Dividen tunai adalah pembayaran kepada pemilik modal — berkaitan dengan aktivitas pendanaan. Pembayaran dividen mengurangi kas dan mengurangi utang dividen yang sebelumnya dicatat saat pengumuman."
+  },
+  {
+    "k": "Laporan Arus Kas",
+    "s": "Saldo kas awal CV. Sejahtera Rp 120.000.000. Kas bersih dari operasi Rp 180.000.000, dari investasi Rp (250.000.000), dari pendanaan Rp 100.000.000. Saldo kas akhir adalah...",
+    "p": [
+      "Rp 150.000.000",
+      "Rp 200.000.000",
+      "Rp 100.000.000",
+      "Rp 50.000.000"
+    ],
+    "j": 0,
+    "b": "Saldo kas akhir = Rp 120.000.000 + Rp 180.000.000 − Rp 250.000.000 + Rp 100.000.000 = Rp 150.000.000."
+  },
+  {
+    "k": "Laporan Arus Kas",
+    "s": "Free Cash Flow dihitung dengan rumus...",
+    "p": [
+      "Laba bersih − Beban depresiasi",
+      "Kas operasi + Kas investasi",
+      "Kas operasi − Pengeluaran modal (Capex)",
+      "Laba bersih + Depresiasi − Dividen"
+    ],
+    "j": 2,
+    "b": "Free cash flow mengukur kas yang tersisa setelah perusahaan membiayai operasi dan investasi aset tetap. Angka positif berarti perusahaan punya fleksibilitas untuk bayar dividen, lunasi utang, atau ekspansi lebih lanjut."
+  },
+  {
+    "k": "Laporan Arus Kas",
+    "s": "Rasio kualitas laba dihitung dengan rumus...",
+    "p": [
+      "Laba bersih / Total aset",
+      "Kas operasi / Laba bersih",
+      "Kas operasi / Total utang",
+      "Laba bersih / Penjualan"
+    ],
+    "j": 1,
+    "b": "Rasio kualitas laba mengukur seberapa besar laba bersih yang benar-benar terkonversi menjadi kas. Rasio > 1 berarti kualitas laba baik — kas lebih besar dari laba yang dilaporkan."
+  },
+  {
+    "k": "Laporan Arus Kas",
+    "s": "Perusahaan memiliki kas operasi negatif, kas investasi positif, dan kas pendanaan positif. Kondisi ini mengindikasikan...",
+    "p": [
+      "Perusahaan sangat sehat dan berkembang pesat",
+      "Perusahaan sedang kesulitan kas — menjual aset dan mencari pinjaman baru",
+      "Perusahaan sedang ekspansi agresif dengan utang",
+      "Perusahaan startup yang baru berdiri"
+    ],
+    "j": 1,
+    "b": "Pola operasi negatif + investasi positif + pendanaan positif adalah sinyal bahaya — operasi tidak menghasilkan kas, perusahaan terpaksa jual aset dan cari pinjaman baru untuk bertahan. Kondisi tidak berkelanjutan jangka panjang."
+  },
+  {
+    "k": "Laporan Arus Kas",
+    "s": "Yang TIDAK termasuk aktivitas pendanaan dalam laporan arus kas adalah...",
+    "p": [
+      "Pembayaran cicilan pokok obligasi",
+      "Penerimaan dari penerbitan saham baru",
+      "Pembelian kembali treasury stock",
+      "Penerimaan dari penjualan tanah"
+    ],
+    "j": 3,
+    "b": "Penjualan tanah adalah penjualan aset tetap → masuk aktivitas investasi, bukan pendanaan. Tiga pilihan lainnya — cicilan obligasi, terbit saham, beli treasury stock — semuanya berkaitan dengan struktur modal → aktivitas pendanaan."
+  },
+  {
+    "k": "Laporan Arus Kas",
+    "s": "PT Berkah membeli gedung Rp 600.000.000 secara tunai dan menjual peralatan lama Rp 80.000.000. Kas bersih dari aktivitas investasi adalah...",
+    "p": [
+      "Rp 680.000.000 keluar",
+      "Rp 520.000.000 keluar",
+      "Rp 600.000.000 keluar",
+      "Rp 520.000.000 masuk"
+    ],
+    "j": 1,
+    "b": "Kas investasi = Rp 80.000.000 (masuk dari jual peralatan) − Rp 600.000.000 (keluar beli gedung) = Rp (520.000.000) atau Rp 520.000.000 keluar bersih."
+  },
+  {
+    "k": "Laporan Arus Kas",
+    "s": "Metode penyusunan arus kas dari aktivitas operasi yang paling banyak digunakan perusahaan di Indonesia dan diawali dari laba bersih adalah...",
+    "p": [
+      "Metode langsung",
+      "Metode tidak langsung",
+      "Metode campuran",
+      "Metode akrual"
+    ],
+    "j": 1,
+    "b": "Metode tidak langsung dimulai dari laba bersih kemudian disesuaikan dengan item non-kas dan perubahan modal kerja. Lebih mudah disusun karena datanya sudah tersedia dari laporan laba rugi dan neraca — sehingga paling banyak digunakan perusahaan Indonesia."
+  },
+  {
+    "k": "Analisis Laporan Keuangan",
+    "s": "Analisis laporan keuangan yang membandingkan laporan keuangan dua periode atau lebih untuk melihat tren perubahan disebut...",
+    "p": [
+      "Analisis vertikal",
+      "Analisis rasio",
+      "Analisis horizontal",
+      "Analisis komparatif internal"
+    ],
+    "j": 2,
+    "b": "Analisis horizontal membandingkan angka laporan keuangan antar periode (misalnya 2023 vs 2024) untuk melihat tren kenaikan atau penurunan — baik secara nominal maupun persentase."
+  },
+  {
+    "k": "Analisis Laporan Keuangan",
+    "s": "PT. Sejahtera mencatat penjualan Rp 800.000.000 tahun 2023 dan Rp 1.000.000.000 tahun 2024. Persentase perubahan penjualan secara horizontal adalah...",
+    "p": ["15%", "20%", "25%", "30%"],
+    "j": 2,
+    "b": "Perubahan = Rp 1.000.000.000 − Rp 800.000.000 = Rp 200.000.000. Persentase = Rp 200.000.000 / Rp 800.000.000 × 100% = 25%."
+  },
+  {
+    "k": "Analisis Laporan Keuangan",
+    "s": "Analisis vertikal pada laporan laba rugi menyatakan setiap item sebagai persentase dari...",
+    "p": ["Total aset", "Total ekuitas", "Penjualan bersih", "Laba bersih"],
+    "j": 2,
+    "b": "Dalam analisis vertikal laporan laba rugi, penjualan bersih dijadikan angka dasar (100%) dan setiap item lainnya dinyatakan sebagai persentase dari penjualan bersih."
+  },
+  {
+    "k": "Analisis Laporan Keuangan",
+    "s": "Analisis vertikal pada neraca menyatakan setiap item sebagai persentase dari...",
+    "p": ["Total ekuitas", "Total aset", "Total utang", "Aset lancar"],
+    "j": 1,
+    "b": "Dalam analisis vertikal neraca, total aset dijadikan angka dasar (100%). Ini memudahkan perbandingan struktur aset dan pembiayaan antar perusahaan yang berbeda ukuran."
+  },
+  {
+    "k": "Analisis Laporan Keuangan",
+    "s": "Rasio yang mengukur kemampuan perusahaan memenuhi kewajiban jangka pendek dengan menggunakan seluruh aset lancarnya disebut...",
+    "p": ["Rasio cepat", "Rasio kas", "Rasio lancar", "Rasio solvabilitas"],
+    "j": 2,
+    "b": "Rasio lancar = Aset Lancar / Kewajiban Lancar. Mengukur kemampuan membayar utang jangka pendek menggunakan semua aset lancar termasuk persediaan dan beban dibayar di muka."
+  },
+  {
+    "k": "Analisis Laporan Keuangan",
+    "s": "PT. Makmur memiliki aset lancar Rp 600.000.000 dan kewajiban lancar Rp 200.000.000. Rasio lancarnya adalah...",
+    "p": ["2,0", "2,5", "3,0", "3,5"],
+    "j": 2,
+    "b": "Rasio Lancar = Rp 600.000.000 / Rp 200.000.000 = 3,0. Artinya setiap Rp 1 utang lancar dijamin oleh Rp 3 aset lancar — kondisi likuiditas sangat baik."
+  },
+  {
+    "k": "Analisis Laporan Keuangan",
+    "s": "Perbedaan utama rasio cepat dengan rasio lancar adalah rasio cepat...",
+    "p": [
+      "Menggunakan total aset sebagai pembagi",
+      "Tidak memasukkan persediaan dan beban dibayar di muka dalam perhitungan",
+      "Hanya menggunakan kas dalam perhitungan",
+      "Menggunakan kewajiban jangka panjang sebagai pembagi"
+    ],
+    "j": 1,
+    "b": "Rasio cepat lebih ketat dari rasio lancar karena mengeluarkan persediaan (tidak selalu cepat dijual) dan beban dibayar di muka (tidak bisa dikonversi jadi kas). Hanya kas, setara kas, dan piutang yang dihitung."
+  },
+  {
+    "k": "Analisis Laporan Keuangan",
+    "s": "CV. Berkah memiliki data: kas Rp 80.000.000, piutang Rp 170.000.000, persediaan Rp 200.000.000, beban dibayar di muka Rp 50.000.000, kewajiban lancar Rp 250.000.000. Rasio cepat CV. Berkah adalah...",
+    "p": ["0,80", "1,00", "1,20", "2,00"],
+    "j": 1,
+    "b": "Rasio Cepat = (Kas + Piutang) / Kewajiban Lancar = (Rp 80.000.000 + Rp 170.000.000) / Rp 250.000.000 = Rp 250.000.000 / Rp 250.000.000 = 1,00."
+  },
+  {
+    "k": "Analisis Laporan Keuangan",
+    "s": "Rasio yang mengukur proporsi total aset yang dibiayai oleh utang adalah...",
+    "p": [
+      "Debt to Equity Ratio",
+      "Interest Coverage Ratio",
+      "Debt to Asset Ratio",
+      "Current Ratio"
+    ],
+    "j": 2,
+    "b": "Debt to Asset Ratio = Total Utang / Total Aset × 100%. Semakin tinggi persentasenya, semakin besar porsi aset yang dibiayai utang — semakin berisiko bagi kreditur."
+  },
+  {
+    "k": "Analisis Laporan Keuangan",
+    "s": "PT. Nusantara memiliki total utang Rp 900.000.000 dan total ekuitas Rp 600.000.000. Debt to Equity Ratio (DER) perusahaan adalah...",
+    "p": ["0,67", "1,00", "1,50", "2,00"],
+    "j": 2,
+    "b": "DER = Total Utang / Total Ekuitas = Rp 900.000.000 / Rp 600.000.000 = 1,50. Artinya utang 1,5× lebih besar dari ekuitas — cukup berisiko, perlu diperhatikan."
+  },
+  {
+    "k": "Analisis Laporan Keuangan",
+    "s": "Interest Coverage Ratio (ICR) digunakan untuk mengukur...",
+    "p": [
+      "Kemampuan perusahaan membayar dividen kepada pemegang saham",
+      "Kemampuan perusahaan membayar beban bunga dari laba operasinya",
+      "Perbandingan antara utang jangka panjang dan ekuitas",
+      "Tingkat pengembalian atas investasi pemegang saham"
+    ],
+    "j": 1,
+    "b": "ICR = EBIT / Beban Bunga. Semakin tinggi ICR, semakin aman perusahaan dalam membayar bunga. ICR di bawah 1,5 dianggap sangat berisiko karena laba hampir habis hanya untuk bayar bunga."
+  },
+  {
+    "k": "Analisis Laporan Keuangan",
+    "s": "PT. Abadi memiliki EBIT Rp 360.000.000 dan beban bunga Rp 40.000.000. Interest Coverage Ratio adalah...",
+    "p": ["7,0", "8,0", "9,0", "10,0"],
+    "j": 2,
+    "b": "ICR = Rp 360.000.000 / Rp 40.000.000 = 9,0. Sangat baik — laba operasi 9× lebih besar dari beban bunga, risiko gagal bayar bunga sangat rendah."
+  },
+  {
+    "k": "Analisis Laporan Keuangan",
+    "s": "Gross Profit Margin (GPM) dihitung dengan rumus...",
+    "p": [
+      "Laba Bersih / Total Aset × 100%",
+      "Laba Kotor / Penjualan Bersih × 100%",
+      "Laba Bersih / Penjualan Bersih × 100%",
+      "Laba Kotor / Total Ekuitas × 100%"
+    ],
+    "j": 1,
+    "b": "GPM mengukur berapa persen dari penjualan yang tersisa setelah dikurangi HPP. Semakin tinggi GPM, semakin efisien perusahaan mengelola biaya produksi/pembelian barang dagangnya."
+  },
+  {
+    "k": "Analisis Laporan Keuangan",
+    "s": "PT. Cahaya mencatat penjualan Rp 2.000.000.000, HPP Rp 1.400.000.000, dan laba bersih Rp 200.000.000. Net Profit Margin (NPM) adalah...",
+    "p": ["7%", "10%", "30%", "15%"],
+    "j": 1,
+    "b": "NPM = Laba Bersih / Penjualan Bersih × 100% = Rp 200.000.000 / Rp 2.000.000.000 × 100% = 10%. Dari setiap Rp 100 penjualan, Rp 10 menjadi laba bersih."
+  },
+  {
+    "k": "Analisis Laporan Keuangan",
+    "s": "Return on Assets (ROA) mengukur...",
+    "p": [
+      "Seberapa besar laba yang dihasilkan dari setiap rupiah modal pemegang saham",
+      "Seberapa besar laba yang dihasilkan dari setiap rupiah total aset yang dimiliki",
+      "Seberapa cepat aset tetap menghasilkan pendapatan",
+      "Perbandingan antara laba kotor dan total aset"
+    ],
+    "j": 1,
+    "b": "ROA = Laba Bersih / Rata-rata Total Aset × 100%. Mengukur efisiensi penggunaan aset — semakin tinggi ROA, semakin produktif aset perusahaan dalam menghasilkan laba."
+  },
+  {
+    "k": "Analisis Laporan Keuangan",
+    "s": "PT. Berkah memiliki laba bersih Rp 240.000.000, aset awal tahun Rp 1.600.000.000, aset akhir tahun Rp 2.000.000.000. Return on Assets (ROA) adalah...",
+    "p": ["12%", "13,3%", "15%", "16%"],
+    "j": 1,
+    "b": "Rata-rata aset = (Rp 1.600.000.000 + Rp 2.000.000.000) / 2 = Rp 1.800.000.000. ROA = Rp 240.000.000 / Rp 1.800.000.000 × 100% = 13,3%."
+  },
+  {
+    "k": "Analisis Laporan Keuangan",
+    "s": "Days Sales Outstanding (DSO) yang semakin kecil menunjukkan...",
+    "p": [
+      "Perusahaan semakin lambat menagih piutang dari pelanggan",
+      "Perusahaan semakin cepat dan efisien menagih piutang dari pelanggan",
+      "Perusahaan memberikan syarat kredit yang semakin panjang",
+      "Perusahaan memiliki piutang tak tertagih yang semakin besar"
+    ],
+    "j": 1,
+    "b": "DSO kecil berarti rata-rata piutang cepat tertagih — perusahaan tidak lama 'menahan' kas di tangan pelanggan. Idealnya DSO ≤ syarat kredit yang diberikan ke pelanggan."
+  },
+  {
+    "k": "Analisis Laporan Keuangan",
+    "s": "Siklus Konversi Kas (Cash Conversion Cycle/CCC) dihitung dengan rumus...",
+    "p": [
+      "DSO + DIO + DPO",
+      "DSO − DIO − DPO",
+      "DSO + DIO − DPO",
+      "DIO − DSO + DPO"
+    ],
+    "j": 2,
+    "b": "CCC = DSO + DIO − DPO. Mengukur berapa hari kas perusahaan 'terkunci' dalam siklus operasi. DPO dikurangkan karena semakin lama bayar supplier, semakin lama perusahaan memegang kasnya."
+  },
+  {
+    "k": "Analisis Laporan Keuangan",
+    "s": "Perusahaan A memiliki CCC 30 hari, Perusahaan B memiliki CCC 75 hari. Pernyataan yang benar adalah...",
+    "p": [
+      "Perusahaan B lebih efisien karena CCC lebih besar",
+      "Perusahaan A lebih efisien karena kas lebih cepat berputar dalam siklus operasi",
+      "CCC tidak berpengaruh pada efisiensi operasional",
+      "Kedua perusahaan sama efisiennya"
+    ],
+    "j": 1,
+    "b": "CCC yang lebih kecil berarti perusahaan lebih cepat mengubah investasi persediaan dan piutang menjadi kas kembali. Perusahaan A butuh 30 hari vs B 75 hari — A jauh lebih efisien mengelola modal kerjanya."
+  },
+  {
+    "k": "Analisis Laporan Keuangan",
+    "s": "Berikut ini yang merupakan tanda-tanda perusahaan dalam kondisi keuangan TIDAK sehat adalah...",
+    "p": [
+      "Rasio lancar 2,5 dan DER 0,8",
+      "NPM 15% dan ROE 25%",
+      "DSO 30 hari dengan syarat kredit n/30",
+      "Rasio kas 0,05, DER 2,5, dan NPM negatif"
+    ],
+    "j": 3,
+    "b": "Rasio kas 0,05 = hampir tidak punya kas. DER 2,5 = utang 2,5× ekuitas, sangat berisiko. NPM negatif = perusahaan merugi. Kombinasi ketiganya adalah tanda bahaya serius yang membutuhkan restrukturisasi segera."
+  },
+  {
+    "k": "Akuntansi Biaya",
+    "s": "Akuntansi biaya berbeda dari akuntansi keuangan karena akuntansi biaya...",
+    "p": [
+      "Wajib mengikuti standar PSAK dan IFRS secara ketat",
+      "Ditujukan untuk pelaporan kepada investor dan kreditur eksternal",
+      "Menyediakan informasi biaya untuk kebutuhan manajemen internal",
+      "Hanya mencatat transaksi historis yang sudah terjadi"
+    ],
+    "j": 2,
+    "b": "Akuntansi biaya berfokus pada penyediaan informasi bagi manajemen untuk perencanaan, pengendalian, dan pengambilan keputusan. Tidak harus mengikuti standar PSAK secara ketat karena fleksibel sesuai kebutuhan internal perusahaan."
+  },
+  {
+    "k": "Akuntansi Biaya",
+    "s": "Biaya yang dapat ditelusuri secara langsung ke produk atau departemen tertentu disebut...",
+    "p": [
+      "Biaya tidak langsung",
+      "Biaya overhead",
+      "Biaya langsung",
+      "Biaya campuran"
+    ],
+    "j": 2,
+    "b": "Biaya langsung (direct cost) memiliki hubungan yang jelas dan dapat ditelusuri langsung ke objek biaya tertentu tanpa perlu alokasi. Contoh: bahan baku untuk membuat satu produk tertentu."
+  },
+  {
+    "k": "Akuntansi Biaya",
+    "s": "Gaji supervisor pabrik yang mengawasi beberapa lini produksi sekaligus termasuk...",
+    "p": [
+      "Biaya langsung",
+      "Biaya variabel",
+      "Biaya tidak langsung",
+      "Biaya produk langsung"
+    ],
+    "j": 2,
+    "b": "Gaji supervisor tidak bisa ditelusuri langsung ke satu produk tertentu karena ia mengawasi banyak lini produksi. Biaya ini harus dialokasikan menggunakan dasar tertentu ke masing-masing produk."
+  },
+  {
+    "k": "Akuntansi Biaya",
+    "s": "Tiga komponen utama biaya produksi adalah...",
+    "p": [
+      "Biaya pemasaran, biaya administrasi, biaya keuangan",
+      "Bahan baku langsung, tenaga kerja langsung, overhead pabrik",
+      "Biaya tetap, biaya variabel, biaya campuran",
+      "Biaya langsung, biaya tidak langsung, biaya periode"
+    ],
+    "j": 1,
+    "b": "Ketiga komponen ini membentuk biaya produksi (manufacturing cost) yang melekat pada produk dan dicatat sebagai persediaan sampai produk terjual."
+  },
+  {
+    "k": "Akuntansi Biaya",
+    "s": "Biaya iklan dan promosi produk termasuk kategori...",
+    "p": [
+      "Biaya produksi",
+      "Biaya overhead pabrik",
+      "Biaya periode — beban pemasaran",
+      "Biaya bahan baku langsung"
+    ],
+    "j": 2,
+    "b": "Biaya iklan tidak melekat pada produk — langsung diakui sebagai beban periode terjadinya. Biaya periode mencakup beban pemasaran, administrasi, dan bunga yang tidak masuk ke harga pokok produksi."
+  },
+  {
+    "k": "Akuntansi Biaya",
+    "s": "Perbedaan biaya produk dan biaya periode adalah...",
+    "p": [
+      "Biaya produk langsung jadi beban, biaya periode masuk persediaan dulu",
+      "Biaya produk melekat pada produk dan jadi HPP saat terjual, biaya periode langsung jadi beban",
+      "Biaya produk hanya untuk perusahaan jasa, biaya periode untuk manufaktur",
+      "Tidak ada perbedaan — keduanya langsung dicatat sebagai beban"
+    ],
+    "j": 1,
+    "b": "Biaya produk 'menunggu' di persediaan sampai produk terjual, baru diakui sebagai HPP. Biaya periode langsung dibebankan di periode terjadinya tanpa memandang kapan produk terjual."
+  },
+  {
+    "k": "Akuntansi Biaya",
+    "s": "Biaya variabel memiliki karakteristik...",
+    "p": [
+      "Total tetap, biaya per unit berubah seiring volume",
+      "Total berubah proporsional, biaya per unit tetap konstan",
+      "Total dan per unit sama-sama berubah tidak proporsional",
+      "Tidak terpengaruh sama sekali oleh perubahan volume produksi"
+    ],
+    "j": 1,
+    "b": "Inilah ciri khas biaya variabel — jika produksi 2× lipat, total biaya variabel juga 2× lipat. Tapi biaya per unitnya selalu sama tidak peduli berapa banyak diproduksi."
+  },
+  {
+    "k": "Akuntansi Biaya",
+    "s": "Pabrik keripik singkong memproduksi 500 bungkus dengan biaya bahan baku Rp 2.500.000. Jika produksi naik menjadi 800 bungkus, total biaya bahan baku menjadi...",
+    "p": [
+      "Rp 2.500.000 (tidak berubah)",
+      "Rp 3.500.000",
+      "Rp 4.000.000",
+      "Rp 4.500.000"
+    ],
+    "j": 2,
+    "b": "Bahan baku adalah biaya variabel — biaya per unit = Rp 2.500.000 / 500 = Rp 5.000/bungkus. Total untuk 800 bungkus = 800 × Rp 5.000 = Rp 4.000.000."
+  },
+  {
+    "k": "Akuntansi Biaya",
+    "s": "Biaya tetap memiliki karakteristik...",
+    "p": [
+      "Total berubah, biaya per unit tetap",
+      "Total tetap dalam rentang aktivitas tertentu, biaya per unit berubah",
+      "Selalu nol jika tidak ada produksi",
+      "Total dan per unit keduanya tetap"
+    ],
+    "j": 1,
+    "b": "Total biaya tetap tidak berubah meski volume naik/turun (dalam relevant range). Tapi biaya per unit justru menurun saat volume naik — inilah mengapa efisiensi skala penting dalam manufaktur."
+  },
+  {
+    "k": "Akuntansi Biaya",
+    "s": "Sewa gedung pabrik Rp 10.000.000/bulan. Jika produksi naik dari 1.000 unit menjadi 2.000 unit, biaya sewa per unit menjadi...",
+    "p": [
+      "Rp 10.000/unit (tetap sama)",
+      "Rp 20.000/unit (naik)",
+      "Rp 5.000/unit (turun)",
+      "Rp 15.000/unit (naik sedikit)"
+    ],
+    "j": 2,
+    "b": "Sewa tetap Rp 10.000.000. Produksi 1.000 unit → per unit Rp 10.000. Produksi 2.000 unit → per unit Rp 10.000.000 / 2.000 = Rp 5.000/unit. Inilah mengapa produksi lebih banyak = biaya tetap per unit makin kecil."
+  },
+  {
+    "k": "Akuntansi Biaya",
+    "s": "Tagihan telepon kantor terdiri dari biaya abonemen tetap Rp 200.000 ditambah Rp 150 per menit pemakaian. Biaya telepon ini termasuk jenis...",
+    "p": [
+      "Biaya tetap murni",
+      "Biaya variabel murni",
+      "Biaya campuran (semi-variabel)",
+      "Biaya langsung"
+    ],
+    "j": 2,
+    "b": "Ada komponen tetap (abonemen Rp 200.000 — ada meski tidak telepon sama sekali) dan komponen variabel (Rp 150/menit — naik seiring pemakaian). Kombinasi inilah yang disebut biaya campuran."
+  },
+  {
+    "k": "Akuntansi Biaya",
+    "s": "Metode yang digunakan untuk memisahkan biaya campuran menjadi komponen tetap dan variabel menggunakan dua titik data ekstrem adalah...",
+    "p": [
+      "Metode regresi linier",
+      "Metode titik tertinggi-terendah (high-low method)",
+      "Metode rata-rata bergerak",
+      "Metode least squares"
+    ],
+    "j": 1,
+    "b": "High-low method menggunakan hanya dua titik data — bulan dengan volume tertinggi dan terendah — untuk menghitung biaya variabel per unit dan biaya tetap. Sederhana tapi cukup akurat untuk estimasi awal."
+  },
+  {
+    "k": "Akuntansi Biaya",
+    "s": "Data biaya pemeliharaan mesin: volume tertinggi 3.000 jam dengan biaya Rp 9.000.000, volume terendah 1.000 jam dengan biaya Rp 5.000.000. Biaya variabel per jam adalah...",
+    "p": ["Rp 1.500/jam", "Rp 2.000/jam", "Rp 2.500/jam", "Rp 3.000/jam"],
+    "j": 1,
+    "b": "b = (Rp 9.000.000 − Rp 5.000.000) / (3.000 − 1.000) = Rp 4.000.000 / 2.000 = Rp 2.000/jam."
+  },
+  {
+    "k": "Akuntansi Biaya",
+    "s": "Menggunakan data soal nomor 13 (volume tertinggi 3.000 jam biaya Rp 9.000.000, terendah 1.000 jam biaya Rp 5.000.000), komponen biaya tetap per bulan adalah...",
+    "p": ["Rp 1.000.000", "Rp 2.000.000", "Rp 3.000.000", "Rp 4.000.000"],
+    "j": 2,
+    "b": "a = Total biaya − (b × volume). Gunakan titik tertinggi: a = Rp 9.000.000 − (Rp 2.000 × 3.000) = Rp 9.000.000 − Rp 6.000.000 = Rp 3.000.000."
+  },
+  {
+    "k": "Akuntansi Biaya",
+    "s": "Margin kontribusi per unit dihitung dengan rumus...",
+    "p": [
+      "Harga jual − Biaya tetap per unit",
+      "Harga jual − Total biaya per unit",
+      "Harga jual − Biaya variabel per unit",
+      "Laba bersih / Jumlah unit terjual"
+    ],
+    "j": 2,
+    "b": "Margin kontribusi adalah kontribusi setiap unit yang terjual untuk menutup biaya tetap. Setelah biaya tetap tertutup, setiap unit tambahan langsung menjadi laba bersih."
+  },
+  {
+    "k": "Akuntansi Biaya",
+    "s": "Produk X dijual Rp 50.000/unit, biaya variabel Rp 30.000/unit. Margin kontribusi per unit dan rasio margin kontribusi adalah...",
+    "p": [
+      "Rp 20.000 dan 30%",
+      "Rp 20.000 dan 40%",
+      "Rp 30.000 dan 60%",
+      "Rp 20.000 dan 60%"
+    ],
+    "j": 1,
+    "b": "MK per unit = Rp 50.000 − Rp 30.000 = Rp 20.000. Rasio MK = Rp 20.000 / Rp 50.000 × 100% = 40%."
+  },
+  {
+    "k": "Akuntansi Biaya",
+    "s": "Break Even Point (BEP) adalah kondisi di mana...",
+    "p": [
+      "Penjualan sama dengan biaya variabel",
+      "Total pendapatan sama dengan total biaya tetap",
+      "Total pendapatan sama dengan total biaya (tidak ada laba maupun rugi)",
+      "Margin kontribusi sama dengan nol"
+    ],
+    "j": 2,
+    "b": "BEP adalah titik impas — perusahaan tidak untung tidak rugi. Di bawah BEP perusahaan rugi, di atas BEP perusahaan mulai membukukan laba."
+  },
+  {
+    "k": "Akuntansi Biaya",
+    "s": "Rumus BEP dalam unit adalah...",
+    "p": [
+      "Total Biaya Tetap × Margin Kontribusi per Unit",
+      "Total Biaya Tetap / Harga Jual per Unit",
+      "Total Biaya Tetap / Margin Kontribusi per Unit",
+      "Margin Kontribusi per Unit / Total Biaya Tetap"
+    ],
+    "j": 2,
+    "b": "BEP unit = Biaya Tetap / MK per Unit. Logikanya: berapa unit harus terjual agar total margin kontribusi cukup menutup semua biaya tetap. Saat itulah tercapai titik impas."
+  },
+  {
+    "k": "Akuntansi Biaya",
+    "s": "UD. Berkah memiliki biaya tetap Rp 18.000.000/bulan, harga jual Rp 30.000/unit, biaya variabel Rp 18.000/unit. BEP dalam unit adalah...",
+    "p": ["1.000 unit", "1.200 unit", "1.500 unit", "1.800 unit"],
+    "j": 2,
+    "b": "MK per unit = Rp 30.000 − Rp 18.000 = Rp 12.000. BEP = Rp 18.000.000 / Rp 12.000 = 1.500 unit."
+  },
+  {
+    "k": "Akuntansi Biaya",
+    "s": "UD. Berkah (biaya tetap Rp 18.000.000, harga jual Rp 30.000/unit, biaya variabel Rp 18.000/unit, BEP 1.500 unit). BEP dalam rupiah adalah...",
+    "p": ["Rp 30.000.000", "Rp 36.000.000", "Rp 40.000.000", "Rp 45.000.000"],
+    "j": 3,
+    "b": "BEP rupiah = BEP unit × Harga Jual = 1.500 × Rp 30.000 = Rp 45.000.000. Atau: BEP rupiah = Biaya Tetap / Rasio MK = Rp 18.000.000 / 40% = Rp 45.000.000."
+  },
+  {
+    "k": "Akuntansi Biaya",
+    "s": "UD. Berkah (biaya tetap Rp 18.000.000/bulan, MK per unit Rp 12.000) ingin meraih laba Rp 6.000.000/bulan. Jumlah unit yang harus dijual adalah...",
+    "p": ["1.500 unit", "1.800 unit", "2.000 unit", "2.200 unit"],
+    "j": 2,
+    "b": "Unit = (Biaya Tetap + Target Laba) / MK per Unit = (Rp 18.000.000 + Rp 6.000.000) / Rp 12.000 = Rp 24.000.000 / Rp 12.000 = 2.000 unit."
+  },
+  {
+    "k": "Akuntansi Biaya",
+    "s": "Margin of Safety menunjukkan...",
+    "p": [
+      "Selisih antara harga jual dan biaya variabel per unit",
+      "Seberapa jauh penjualan boleh turun sebelum perusahaan mulai merugi",
+      "Persentase biaya tetap terhadap total biaya",
+      "Jumlah unit yang harus dijual untuk menutup biaya tetap"
+    ],
+    "j": 1,
+    "b": "Margin of Safety adalah 'bantal keamanan' perusahaan. Semakin besar MoS, semakin jauh perusahaan dari titik merugi — semakin aman dan stabil kondisi keuangannya."
+  },
+  {
+    "k": "Akuntansi Biaya",
+    "s": "Penjualan aktual 2.500 unit, BEP 2.000 unit, harga jual Rp 40.000/unit. Margin of Safety dalam rupiah adalah...",
+    "p": ["Rp 10.000.000", "Rp 15.000.000", "Rp 20.000.000", "Rp 25.000.000"],
+    "j": 2,
+    "b": "MoS unit = 2.500 − 2.000 = 500 unit. MoS rupiah = 500 × Rp 40.000 = Rp 20.000.000."
+  },
+  {
+    "k": "Akuntansi Biaya",
+    "s": "Penjualan aktual 2.500 unit (Rp 100.000.000) dan BEP 2.000 unit. Persentase Margin of Safety adalah...",
+    "p": ["15%", "20%", "25%", "30%"],
+    "j": 1,
+    "b": "Penjualan aktual = 2.500 × Rp 40.000 = Rp 100.000.000. MoS % = Rp 20.000.000 / Rp 100.000.000 × 100% = 20%. Artinya penjualan boleh turun 20% sebelum perusahaan merugi."
+  },
+  {
+    "k": "Akuntansi Biaya",
+    "s": "Biaya kesempatan (opportunity cost) adalah...",
+    "p": [
+      "Biaya yang sudah dikeluarkan dan tidak bisa dipulihkan",
+      "Manfaat/penghasilan yang dikorbankan karena memilih satu alternatif",
+      "Biaya tambahan yang timbul akibat keputusan tertentu",
+      "Biaya yang sama di semua alternatif keputusan"
+    ],
+    "j": 1,
+    "b": "Opportunity cost bukan pengeluaran kas nyata tapi harus dipertimbangkan dalam pengambilan keputusan. Contoh: memilih kuliah berarti mengorbankan gaji yang bisa diperoleh jika langsung bekerja."
+  },
+  {
+    "k": "Akuntansi Biaya",
+    "s": "Biaya yang sudah dikeluarkan di masa lalu dan tidak relevan untuk keputusan saat ini disebut...",
+    "p": [
+      "Biaya kesempatan",
+      "Biaya relevan",
+      "Biaya tenggelam (sunk cost)",
+      "Biaya variabel"
+    ],
+    "j": 2,
+    "b": "Sunk cost tidak bisa dipulihkan apapun keputusan yang diambil sekarang — sehingga tidak relevan dan harus diabaikan dalam pengambilan keputusan rasional. Contoh: biaya riset yang sudah dikeluarkan untuk proyek yang sedang dievaluasi."
+  },
+  {
+    "k": "Akuntansi Biaya",
+    "s": "Laporan laba rugi format kontribusi berbeda dari format tradisional karena...",
+    "p": [
+      "Tidak mencantumkan beban bunga dan pajak",
+      "Memisahkan biaya menjadi variabel dan tetap — bukan berdasarkan fungsi",
+      "Hanya digunakan untuk perusahaan manufaktur besar",
+      "Tidak mencantumkan HPP dalam perhitungannya"
+    ],
+    "j": 1,
+    "b": "Format kontribusi mengelompokkan semua biaya variabel (produksi + pemasaran + admin variabel) terpisah dari semua biaya tetap. Format ini sangat berguna untuk analisis BEP dan perencanaan laba."
+  },
+  {
+    "k": "Akuntansi Biaya",
+    "s": "Jika rasio margin kontribusi suatu produk adalah 35% dan biaya tetap Rp 21.000.000, maka BEP dalam rupiah adalah...",
+    "p": ["Rp 50.000.000", "Rp 55.000.000", "Rp 60.000.000", "Rp 65.000.000"],
+    "j": 2,
+    "b": "BEP rupiah = Biaya Tetap / Rasio MK = Rp 21.000.000 / 35% = Rp 60.000.000."
+  },
+  {
+    "k": "Akuntansi Biaya",
+    "s": "Perusahaan A memiliki biaya tetap tinggi dan biaya variabel rendah. Perusahaan B sebaliknya. Dalam kondisi penjualan yang sangat tinggi, perusahaan mana yang lebih menguntungkan?",
+    "p": [
+      "Perusahaan B karena biaya totalnya lebih kecil",
+      "Perusahaan A karena margin kontribusi per unitnya lebih besar",
+      "Keduanya sama menguntungkannya",
+      "Tidak bisa ditentukan tanpa data harga jual"
+    ],
+    "j": 1,
+    "b": "Biaya tetap tinggi + biaya variabel rendah = margin kontribusi per unit tinggi. Saat volume penjualan sangat tinggi, biaya tetap sudah tertutup dan setiap unit tambahan menghasilkan laba lebih besar. Perusahaan A unggul di volume tinggi meski BEP-nya lebih tinggi."
+  },
+  {
+    "k": "Akuntansi Biaya",
+    "s": "Sebuah perusahaan memiliki Margin of Safety hanya 5%. Kondisi ini menunjukkan...",
+    "p": [
+      "Perusahaan sangat aman dari risiko kerugian",
+      "Perusahaan sangat rentan — penurunan penjualan kecil saja sudah bisa menyebabkan kerugian",
+      "Perusahaan sudah melewati BEP dengan sangat baik",
+      "Perusahaan tidak perlu khawatir karena masih di atas BEP"
+    ],
+    "j": 1,
+    "b": "MoS 5% berarti penjualan hanya boleh turun 5% sebelum perusahaan merugi. Ini sangat berbahaya — gangguan kecil seperti kehilangan satu pelanggan besar atau kenaikan biaya kecil bisa langsung membuat perusahaan merugi."
   }
 ]

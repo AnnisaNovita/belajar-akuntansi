@@ -1,0 +1,2227 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Laporan Arus Kas — Belajar Akuntansi</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0f172a;
+        --glass-bg: rgba(30, 41, 59, 0.45);
+        --glass-border: rgba(255, 255, 255, 0.08);
+        --glass-highlight: rgba(255, 255, 255, 0.15);
+        --text: #f8fafc;
+        --text-muted: #94a3b8;
+
+        --pink: #ff3d9a;
+        --purple: #a855f7;
+        --blue: #3b82f6;
+        --green: #10b981;
+        --yellow: #fbbf24;
+        --orange: #ff6b35;
+        --teal: #06b6d4;
+        --red: #ef4444;
+
+        /* Accent warna bab ini — teal/cyan untuk arus kas */
+        --accent: #06b6d4;
+        --accent-glow: rgba(6, 182, 212, 0.12);
+        --accent-border: rgba(6, 182, 212, 0.28);
+
+        --radius: 24px;
+        --radius-sm: 14px;
+      }
+
+      body.light-theme {
+        --bg: #f0fafa;
+        --glass-bg: rgba(255, 255, 255, 0.65);
+        --glass-border: rgba(0, 0, 0, 0.06);
+        --glass-highlight: rgba(255, 255, 255, 0.85);
+        --text: #1e293b;
+        --text-muted: #64748b;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "DM Sans", sans-serif;
+        background-color: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        overflow-x: hidden;
+        transition:
+          background-color 0.3s ease,
+          color 0.3s ease;
+        position: relative;
+      }
+
+      .blob {
+        position: absolute;
+        border-radius: 50%;
+        pointer-events: none;
+        filter: blur(80px);
+        opacity: 0.22;
+        z-index: 0;
+        animation: float 20s infinite alternate;
+      }
+      .blob-1 {
+        width: 450px;
+        height: 450px;
+        background: var(--teal);
+        top: -150px;
+        right: -80px;
+      }
+      .blob-2 {
+        width: 320px;
+        height: 320px;
+        background: var(--blue);
+        bottom: 20%;
+        left: -80px;
+        animation-delay: -5s;
+      }
+      .blob-3 {
+        width: 350px;
+        height: 350px;
+        background: var(--purple);
+        top: 40%;
+        right: 10%;
+        animation-delay: -10s;
+      }
+      @keyframes float {
+        0% {
+          transform: translate(0, 0) scale(1);
+        }
+        100% {
+          transform: translate(50px, 80px) scale(1.1);
+        }
+      }
+
+      /* HEADER */
+      header {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 30px 24px 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        z-index: 10;
+      }
+      .header-logo {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 18px;
+        color: var(--text);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .theme-toggle-btn {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(12px);
+        color: var(--text);
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        transition:
+          transform 0.2s,
+          background-color 0.2s;
+      }
+      .theme-toggle-btn:hover {
+        transform: scale(1.08);
+        background: var(--glass-highlight);
+      }
+      .back-btn {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(12px);
+        color: var(--text);
+        padding: 10px 20px;
+        border-radius: 99px;
+        font-family: "Syne", sans-serif;
+        font-weight: 700;
+        font-size: 13px;
+        text-decoration: none;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition:
+          background-color 0.2s,
+          transform 0.2s;
+      }
+      .back-btn:hover {
+        transform: translateY(-2px);
+        background: var(--glass-highlight);
+      }
+
+      /* HERO */
+      .hero {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 40px 24px;
+        position: relative;
+        z-index: 10;
+        text-align: center;
+      }
+      .hero-glass {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(16px);
+        border-radius: var(--radius);
+        padding: 48px 32px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .hero-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--accent-glow);
+        border: 1.5px solid var(--accent-border);
+        color: var(--accent);
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 7px 18px;
+        border-radius: 99px;
+        margin-bottom: 24px;
+        font-family: "Syne", sans-serif;
+      }
+      body.light-theme .hero-tag {
+        background: rgba(6, 182, 212, 0.08);
+      }
+      .hero h1 {
+        font-family: "Syne", sans-serif;
+        font-size: clamp(28px, 5.5vw, 50px);
+        font-weight: 800;
+        line-height: 1.15;
+        margin-bottom: 16px;
+        color: #fff;
+      }
+      body.light-theme .hero h1 {
+        color: #1e293b;
+      }
+      .hero h1 .hi {
+        color: var(--accent);
+      }
+      .hero p {
+        color: var(--text-muted);
+        font-size: 15px;
+        line-height: 1.7;
+        max-width: 600px;
+        margin-bottom: 32px;
+      }
+      .hero-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+      }
+      .hero-badge {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid var(--glass-border);
+        border-radius: 99px;
+        padding: 7px 16px;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--text-muted);
+        font-family: "Syne", sans-serif;
+      }
+
+      /* CONTENT */
+      .content {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 24px 80px;
+        position: relative;
+        z-index: 10;
+      }
+
+      .section-title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 52px;
+        margin-bottom: 24px;
+      }
+      .sec-line {
+        flex: 1;
+        height: 1.5px;
+        background: var(--glass-border);
+      }
+      .sec-text {
+        font-family: "Syne", sans-serif;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+      }
+
+      /* CARDS */
+      .cards-3 {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+        gap: 24px;
+        margin-bottom: 32px;
+      }
+      .cards-2 {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+        gap: 24px;
+        margin-bottom: 32px;
+      }
+      .card {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(12px);
+        border-radius: var(--radius);
+        padding: 28px;
+        color: var(--text);
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+        transition:
+          transform 0.25s,
+          box-shadow 0.25s,
+          border-color 0.25s;
+      }
+      .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: var(--c, var(--accent));
+      }
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        border-color: var(--c, var(--accent));
+      }
+      .card-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: var(--radius-sm);
+        background: color-mix(in srgb, var(--c) 15%, transparent);
+        color: var(--c);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        margin-bottom: 18px;
+        border: 1px solid color-mix(in srgb, var(--c) 30%, transparent);
+      }
+      .card-eyebrow {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--c);
+        margin-bottom: 6px;
+      }
+      .card-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 19px;
+        line-height: 1.35;
+        margin-bottom: 10px;
+      }
+      .card-body {
+        font-size: 13.5px;
+        color: var(--text-muted);
+        line-height: 1.6;
+      }
+      .list-items {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 12px;
+      }
+      .list-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 13px;
+        line-height: 1.5;
+      }
+      .list-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--c);
+        flex-shrink: 0;
+        margin-top: 6px;
+        box-shadow: 0 0 8px var(--c);
+      }
+
+      /* EXAMPLE WRAP */
+      .example-wrap {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(16px);
+        border-radius: var(--radius);
+        padding: 32px;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+        margin-bottom: 32px;
+      }
+      .example-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 16px;
+        color: var(--accent);
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .example-story {
+        color: var(--text-muted);
+        font-size: 14.5px;
+        line-height: 1.7;
+        margin-bottom: 20px;
+        padding: 16px 20px;
+        border-left: 3px solid var(--accent);
+        background: var(--accent-glow);
+        border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      }
+
+      /* TABLES */
+      .table-wrap {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius-sm);
+        overflow: hidden;
+        overflow-x: auto;
+        margin-bottom: 24px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th {
+        background: rgba(0, 0, 0, 0.25);
+        color: var(--text-muted);
+        font-family: "Syne", sans-serif;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 14px 18px;
+        text-align: left;
+        border-bottom: 1.5px solid var(--glass-border);
+      }
+      body.light-theme th {
+        background: rgba(255, 255, 255, 0.5);
+      }
+      td {
+        padding: 12px 18px;
+        font-size: 13.5px;
+        border-bottom: 1px solid var(--glass-border);
+        color: var(--text);
+        vertical-align: top;
+      }
+      tr:last-child td {
+        border-bottom: none;
+      }
+      tr:hover td {
+        background: rgba(255, 255, 255, 0.02);
+      }
+      body.light-theme tr:hover td {
+        background: rgba(0, 0, 0, 0.01);
+      }
+      tr.total-row td {
+        font-weight: 800;
+        background: var(--accent-glow);
+        color: var(--accent);
+        border-top: 2px solid var(--glass-border);
+      }
+      tr.highlight-row td {
+        background: rgba(6, 182, 212, 0.06);
+      }
+
+      /* FORMULA BLOCK */
+      .formula-block {
+        background: var(--accent-glow);
+        border: 2px solid var(--accent-border);
+        border-radius: var(--radius-sm);
+        padding: 20px 24px;
+        margin-bottom: 20px;
+        font-family: "Syne", sans-serif;
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--accent);
+        text-align: center;
+        line-height: 1.8;
+      }
+
+      /* INFO / WARNING BOX */
+      .info-box {
+        background: rgba(16, 185, 129, 0.08);
+        border: 1px solid rgba(16, 185, 129, 0.25);
+        border-radius: var(--radius-sm);
+        padding: 18px 20px;
+        margin-bottom: 20px;
+        color: var(--text);
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .info-box strong {
+        color: var(--green);
+      }
+      .warning-box {
+        background: var(--accent-glow);
+        border: 1px solid var(--accent-border);
+        border-radius: var(--radius-sm);
+        padding: 18px 20px;
+        margin-bottom: 20px;
+        color: var(--text);
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .warning-box strong {
+        color: var(--accent);
+      }
+      .danger-box {
+        background: rgba(239, 68, 68, 0.08);
+        border: 1px solid rgba(239, 68, 68, 0.25);
+        border-radius: var(--radius-sm);
+        padding: 18px 20px;
+        margin-bottom: 20px;
+        color: var(--text);
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .danger-box strong {
+        color: var(--red);
+      }
+
+      /* LAPORAN / REPORT BOX */
+      .laporan-box {
+        background: rgba(0, 0, 0, 0.2);
+        border: 1.5px solid var(--glass-border);
+        border-radius: var(--radius-sm);
+        padding: 24px;
+        margin-bottom: 16px;
+        font-family: "DM Sans", monospace;
+      }
+      body.light-theme .laporan-box {
+        background: rgba(255, 255, 255, 0.5);
+      }
+      .laporan-header {
+        text-align: center;
+        border-bottom: 1.5px solid var(--glass-border);
+        padding-bottom: 14px;
+        margin-bottom: 16px;
+      }
+      .laporan-header h4 {
+        font-family: "Syne", sans-serif;
+        font-size: 15px;
+        font-weight: 800;
+        color: var(--text);
+        letter-spacing: 0.05em;
+      }
+      .laporan-header h5 {
+        font-size: 12px;
+        color: var(--accent);
+        font-weight: 700;
+        text-transform: uppercase;
+        margin: 3px 0;
+      }
+      .laporan-header p {
+        font-size: 11px;
+        color: var(--text-muted);
+        font-style: italic;
+      }
+      .laporan-section {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--accent);
+        margin: 16px 0 8px;
+      }
+      .laporan-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        padding: 4px 0;
+        font-size: 13.5px;
+        gap: 12px;
+      }
+      .laporan-row.indent1 {
+        padding-left: 20px;
+      }
+      .laporan-row.indent2 {
+        padding-left: 40px;
+        color: var(--text-muted);
+      }
+      .laporan-row.subtotal {
+        border-top: 1px solid var(--glass-border);
+        margin-top: 4px;
+        padding-top: 8px;
+        font-weight: 700;
+      }
+      .laporan-row.total {
+        border-top: 2px solid var(--glass-border);
+        margin-top: 6px;
+        padding-top: 10px;
+        font-weight: 800;
+        color: var(--accent);
+      }
+      .laporan-row.double-border {
+        border-top: 2px double rgba(6, 182, 212, 0.4);
+        border-bottom: 2px double rgba(6, 182, 212, 0.4);
+        padding: 8px 0;
+        margin: 4px 0;
+      }
+      .laporan-row .label {
+        flex: 1;
+      }
+      .laporan-row .amount {
+        font-family: "Syne", sans-serif;
+        font-size: 13px;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+      .amount.masuk {
+        color: var(--green);
+      }
+      .amount.keluar {
+        color: var(--red);
+      }
+      .amount.netpos {
+        color: var(--green);
+        font-size: 14px;
+      }
+      .amount.netneg {
+        color: var(--red);
+        font-size: 14px;
+      }
+      .divider-line {
+        height: 1px;
+        background: var(--glass-border);
+        margin: 8px 0;
+      }
+
+      /* JURNAL BOX */
+      .jurnal-box {
+        background: rgba(0, 0, 0, 0.2);
+        border: 1.5px solid var(--glass-border);
+        border-radius: var(--radius-sm);
+        padding: 20px 24px;
+        margin-bottom: 16px;
+      }
+      body.light-theme .jurnal-box {
+        background: rgba(255, 255, 255, 0.5);
+      }
+      .jurnal-title {
+        font-family: "Syne", sans-serif;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 12px;
+        border-bottom: 1px dashed var(--glass-border);
+        padding-bottom: 8px;
+      }
+
+      /* PATTERN ARUS KAS */
+      .pola-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 16px;
+        margin-bottom: 28px;
+      }
+      .pola-card {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius-sm);
+        padding: 20px;
+        position: relative;
+        overflow: hidden;
+      }
+      .pola-label {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 14px;
+        margin-bottom: 10px;
+      }
+      .pola-badges {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+      }
+      .pola-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 4px 10px;
+        border-radius: 99px;
+      }
+      .pola-badge.pos {
+        background: rgba(16, 185, 129, 0.12);
+        color: var(--green);
+      }
+      .pola-badge.neg {
+        background: rgba(239, 68, 68, 0.12);
+        color: var(--red);
+      }
+      .pola-desc {
+        font-size: 12.5px;
+        color: var(--text-muted);
+        line-height: 1.6;
+      }
+
+      /* KODE KALKULASI */
+      .kode-box {
+        background: #090d16;
+        border: 1.5px solid var(--glass-border);
+        border-radius: var(--radius-sm);
+        padding: 20px;
+        margin-bottom: 16px;
+        font-family: "Courier New", monospace;
+        font-size: 13px;
+        color: #94a3b8;
+        line-height: 1.8;
+        white-space: pre;
+        overflow-x: auto;
+      }
+      body.light-theme .kode-box {
+        background: #f8fafc;
+        color: #334155;
+      }
+      .kode-box .kode-strong {
+        color: var(--accent);
+        font-weight: 700;
+      }
+      .kode-box .kode-num {
+        color: var(--green);
+      }
+      .kode-box .kode-red {
+        color: var(--red);
+      }
+      .kode-box .kode-label {
+        color: var(--text-muted);
+      }
+
+      /* RASIO CARDS */
+      .rasio-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+        gap: 20px;
+        margin-bottom: 28px;
+      }
+      .rasio-card {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius);
+        padding: 24px;
+      }
+      .rasio-card-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 15px;
+        color: var(--accent);
+        margin-bottom: 10px;
+      }
+      .rasio-formula {
+        background: var(--accent-glow);
+        border: 1px solid var(--accent-border);
+        border-radius: 10px;
+        padding: 12px 16px;
+        font-family: "Syne", sans-serif;
+        font-weight: 700;
+        font-size: 13px;
+        color: var(--accent);
+        text-align: center;
+        margin-bottom: 12px;
+      }
+
+      /* RANGKUMAN TABLE */
+      .rangkuman-table td:first-child {
+        font-weight: 700;
+        color: var(--accent);
+      }
+
+      /* QUIZ CTA */
+      .quiz-cta {
+        background: var(--glass-bg);
+        border: 2px solid var(--accent-border);
+        border-radius: var(--radius);
+        padding: 40px 32px;
+        text-align: center;
+        margin-top: 60px;
+        margin-bottom: 40px;
+      }
+      .quiz-cta h3 {
+        font-family: "Syne", sans-serif;
+        font-size: 24px;
+        margin-bottom: 12px;
+        color: var(--accent);
+      }
+      .quiz-cta p {
+        color: var(--text-muted);
+        margin-bottom: 20px;
+        font-size: 15px;
+        line-height: 1.6;
+      }
+      .quiz-btn {
+        background: var(--accent);
+        color: #0f172a;
+        border: none;
+        padding: 14px 32px;
+        border-radius: var(--radius-sm);
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-decoration: none;
+        display: inline-block;
+      }
+      .quiz-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 24px rgba(6, 182, 212, 0.35);
+      }
+
+      /* FOOTER */
+      footer {
+        border-top: 1px solid var(--glass-border);
+        background: #090d16;
+        padding: 40px 24px;
+        text-align: center;
+        position: relative;
+        z-index: 10;
+      }
+      body.light-theme footer {
+        background: #f0fafa;
+      }
+      .footer-name {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 16px;
+        background: linear-gradient(
+          135deg,
+          var(--yellow),
+          var(--pink),
+          var(--purple)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 6px;
+      }
+      .footer-sub {
+        font-size: 12.5px;
+        color: var(--text-muted);
+      }
+      .footer-dots {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        margin-top: 16px;
+      }
+      .footer-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+      }
+
+      @media (max-width: 600px) {
+        .cards-3,
+        .cards-2 {
+          grid-template-columns: 1fr;
+        }
+        .pola-grid {
+          grid-template-columns: 1fr;
+        }
+        .rasio-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Smooth scroll */
+      html {
+        scroll-behavior: smooth;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <!-- HEADER -->
+    <header>
+      <a href="index.html" class="header-logo">
+        <span style="font-size: 24px">💰</span>
+        <span
+          style="font-weight: 800; font-family: &quot;Syne&quot;, sans-serif"
+          >Belajar Akuntansi</span
+        >
+      </a>
+      <div style="display: flex; gap: 12px; align-items: center">
+        <a href="index.html" class="back-btn">← Kembali</a>
+        <button
+          class="theme-toggle-btn"
+          onclick="toggleTheme()"
+          title="Ganti Tema"
+        >
+          🌓
+        </button>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-glass">
+        <div class="hero-tag">💰 Bab 12 — Laporan Arus Kas</div>
+        <h1>Laporan <span class="hi">Arus Kas</span></h1>
+        <p>
+          Pahami tujuan &amp; kegunaan laporan arus kas, tiga aktivitas utama
+          (operasi, investasi, pendanaan), metode langsung vs tidak langsung,
+          hingga analisis rasio arus kas secara lengkap dan mendalam.
+        </p>
+        <div class="hero-badges">
+          <div class="hero-badge">⚙️ Aktivitas Operasi</div>
+          <div class="hero-badge">📈 Aktivitas Investasi</div>
+          <div class="hero-badge">💳 Aktivitas Pendanaan</div>
+          <div class="hero-badge">📊 Metode Langsung</div>
+          <div class="hero-badge">🔄 Metode Tidak Langsung</div>
+          <div class="hero-badge">📐 Analisis Rasio</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <main class="content">
+      <!-- ══════════════════════════════════════════
+           SECTION 1: TUJUAN & KEGUNAAN
+      ══════════════════════════════════════════ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">📌 1. Tujuan &amp; Kegunaan Laporan Arus Kas</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">❓ Mengapa Laporan Arus Kas Penting?</div>
+        <div class="example-story">
+          Laporan laba rugi bisa saja menunjukkan
+          <strong>laba besar</strong> tapi perusahaan
+          <strong>tidak punya kas</strong> untuk bayar gaji atau utang. Inilah
+          mengapa laporan arus kas sangat penting!<br /><br />
+          <strong>Contoh:</strong> CV. Berkah Jaya mencatat laba Rp 500.000.000
+          tahun 2024. Tapi hampir semua penjualan secara kredit dan belum
+          tertagih. Kas di bank hanya Rp 20.000.000. Perusahaan
+          <strong>laba di atas kertas tapi krisis kas</strong> di kenyataan!
+        </div>
+      </div>
+
+      <div class="info-box">
+        <strong>Definisi:</strong> Laporan Arus Kas adalah laporan keuangan yang
+        menunjukkan
+        <strong>sumber penerimaan dan penggunaan kas perusahaan</strong> selama
+        satu periode — menjelaskan mengapa saldo kas berubah dari awal ke akhir
+        periode.
+      </div>
+
+      <h3
+        style="
+          font-family: &quot;Syne&quot;, sans-serif;
+          font-weight: 800;
+          font-size: 16px;
+          margin-bottom: 14px;
+          color: var(--text);
+        "
+      >
+        Pengguna &amp; Kepentingan Laporan Arus Kas
+      </h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Pengguna</th>
+              <th>Kepentingan</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Manajemen</strong></td>
+              <td>
+                Merencanakan kebutuhan kas &amp; keputusan investasi ke depan
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Investor</strong></td>
+              <td>
+                Menilai kemampuan perusahaan menghasilkan kas dari operasi
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Kreditur</strong></td>
+              <td>Menilai kemampuan perusahaan membayar utang tepat waktu</td>
+            </tr>
+            <tr>
+              <td><strong>Analis Keuangan</strong></td>
+              <td>
+                Membandingkan kualitas laba antar perusahaan di industri yang
+                sama
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ══════════════════════════════════════════
+           SECTION 2: TIGA AKTIVITAS
+      ══════════════════════════════════════════ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">⚡ 2. Tiga Aktivitas Arus Kas</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="cards-3">
+        <div class="card" style="--c: var(--green)">
+          <div class="card-icon">⚙️</div>
+          <div class="card-eyebrow">Aktivitas A</div>
+          <div class="card-title">Operasi</div>
+          <div class="card-body">
+            Arus kas dari <strong>kegiatan utama bisnis</strong> — menjual
+            barang/jasa dan membayar beban operasional.
+          </div>
+          <div class="list-items">
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>
+                <strong>Masuk:</strong> Penerimaan dari pelanggan, penerimaan
+                bunga
+              </div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>
+                <strong>Keluar:</strong> Bayar supplier, gaji, pajak, bunga
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="--c: var(--blue)">
+          <div class="card-icon">📈</div>
+          <div class="card-eyebrow">Aktivitas B</div>
+          <div class="card-title">Investasi</div>
+          <div class="card-body">
+            Arus kas dari
+            <strong>pembelian dan penjualan aset jangka panjang</strong> serta
+            investasi.
+          </div>
+          <div class="list-items">
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>
+                <strong>Masuk:</strong> Jual aset tetap, jual investasi
+                saham/obligasi
+              </div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>
+                <strong>Keluar:</strong> Beli aset tetap, beli investasi
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="--c: var(--purple)">
+          <div class="card-icon">💳</div>
+          <div class="card-eyebrow">Aktivitas C</div>
+          <div class="card-title">Pendanaan</div>
+          <div class="card-body">
+            Arus kas dari
+            <strong>perubahan utang jangka panjang dan ekuitas</strong>
+            perusahaan.
+          </div>
+          <div class="list-items">
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>
+                <strong>Masuk:</strong> Terbitkan saham, terima
+                pinjaman/obligasi
+              </div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>
+                <strong>Keluar:</strong> Lunasi utang, bayar dividen, beli
+                treasury stock
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          💡 Analogi Nyata — CV. Berkah Jaya Jombang
+        </div>
+        <div class="example-story">
+          Setiap transaksi CV. Berkah Jaya bisa langsung dikategorikan:
+        </div>
+        <div class="table-wrap" style="margin-bottom: 0">
+          <table>
+            <thead>
+              <tr>
+                <th>Transaksi</th>
+                <th>Aktivitas</th>
+                <th>Alasan</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Terima bayaran dari warung pelanggan</td>
+                <td>
+                  <span style="color: var(--green); font-weight: 700"
+                    >⚙️ Operasi</span
+                  >
+                </td>
+                <td>Kegiatan usaha utama</td>
+              </tr>
+              <tr>
+                <td>Beli truk baru untuk distribusi</td>
+                <td>
+                  <span style="color: var(--blue); font-weight: 700"
+                    >📈 Investasi</span
+                  >
+                </td>
+                <td>Perolehan aset tetap jangka panjang</td>
+              </tr>
+              <tr>
+                <td>Pinjam modal ke Bank BRI</td>
+                <td>
+                  <span style="color: var(--purple); font-weight: 700"
+                    >💳 Pendanaan</span
+                  >
+                </td>
+                <td>Perubahan utang jangka panjang</td>
+              </tr>
+              <tr>
+                <td>Bayar gaji karyawan gudang</td>
+                <td>
+                  <span style="color: var(--green); font-weight: 700"
+                    >⚙️ Operasi</span
+                  >
+                </td>
+                <td>Beban operasional usaha</td>
+              </tr>
+              <tr>
+                <td>Jual mesin lama yang sudah tua</td>
+                <td>
+                  <span style="color: var(--blue); font-weight: 700"
+                    >📈 Investasi</span
+                  >
+                </td>
+                <td>Penjualan aset tetap</td>
+              </tr>
+              <tr>
+                <td>Bayar dividen ke pemilik usaha</td>
+                <td>
+                  <span style="color: var(--purple); font-weight: 700"
+                    >💳 Pendanaan</span
+                  >
+                </td>
+                <td>Pembayaran kepada pemegang modal</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="formula-block">
+        Saldo Kas Awal &nbsp;+&nbsp; Kas Bersih Operasi &nbsp;+&nbsp; Kas Bersih
+        Investasi &nbsp;+&nbsp; Kas Bersih Pendanaan<br />
+        <span style="font-size: 13px; opacity: 0.8"
+          >= Saldo Kas Akhir (harus sama dengan kas di neraca akhir
+          periode)</span
+        >
+      </div>
+
+      <!-- ══════════════════════════════════════════
+           SECTION 3: METODE LANGSUNG
+      ══════════════════════════════════════════ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">📊 3. Metode Langsung — Aktivitas Operasi</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="info-box">
+        <strong>Konsep Metode Langsung:</strong> Melaporkan
+        <strong>setiap penerimaan dan pengeluaran kas</strong>
+        dari operasi secara rinci. Lebih informatif bagi pengguna laporan, tapi
+        lebih sulit disusun karena butuh rekonsiliasi setiap akun.
+      </div>
+
+      <h3
+        style="
+          font-family: &quot;Syne&quot;, sans-serif;
+          font-weight: 800;
+          font-size: 16px;
+          margin-bottom: 16px;
+          color: var(--accent);
+        "
+      >
+        Formula Konversi
+      </h3>
+
+      <div class="cards-3">
+        <div class="card" style="--c: var(--teal)">
+          <div class="card-icon">👥</div>
+          <div class="card-eyebrow">Formula 1</div>
+          <div class="card-title">Penerimaan dari Pelanggan</div>
+          <div
+            style="
+              background: var(--accent-glow);
+              border: 1px solid var(--accent-border);
+              border-radius: 10px;
+              padding: 12px;
+              font-family: &quot;Syne&quot;, sans-serif;
+              font-weight: 700;
+              font-size: 12.5px;
+              color: var(--accent);
+              line-height: 1.8;
+              margin-top: 12px;
+            "
+          >
+            Penjualan Bersih<br />
+            + Penurunan Piutang (atau − Kenaikan Piutang)<br />
+            = <strong>Penerimaan dari Pelanggan</strong>
+          </div>
+        </div>
+        <div class="card" style="--c: var(--orange)">
+          <div class="card-icon">📦</div>
+          <div class="card-eyebrow">Formula 2</div>
+          <div class="card-title">Pembayaran ke Supplier</div>
+          <div
+            style="
+              background: rgba(255, 107, 53, 0.1);
+              border: 1px solid rgba(255, 107, 53, 0.2);
+              border-radius: 10px;
+              padding: 12px;
+              font-family: &quot;Syne&quot;, sans-serif;
+              font-weight: 700;
+              font-size: 12.5px;
+              color: var(--orange);
+              line-height: 1.8;
+              margin-top: 12px;
+            "
+          >
+            HPP<br />
+            + Kenaikan Persediaan (atau − Penurunan)<br />
+            + Penurunan Utang Usaha (atau − Kenaikan)<br />
+            = <strong>Pembayaran ke Supplier</strong>
+          </div>
+        </div>
+        <div class="card" style="--c: var(--purple)">
+          <div class="card-icon">💼</div>
+          <div class="card-eyebrow">Formula 3</div>
+          <div class="card-title">Pembayaran Beban Operasi</div>
+          <div
+            style="
+              background: rgba(168, 85, 247, 0.1);
+              border: 1px solid rgba(168, 85, 247, 0.2);
+              border-radius: 10px;
+              padding: 12px;
+              font-family: &quot;Syne&quot;, sans-serif;
+              font-weight: 700;
+              font-size: 12.5px;
+              color: var(--purple);
+              line-height: 1.8;
+              margin-top: 12px;
+            "
+          >
+            Beban Operasi (tanpa depresiasi)<br />
+            + Kenaikan Beban Dibayar Dimuka<br />
+            + Penurunan Utang Beban<br />
+            = <strong>Pembayaran Beban Operasi</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          ✏️ Contoh Metode Langsung — CV. Berkah Jaya 2024
+        </div>
+        <div class="example-story">
+          <strong>Data L/R:</strong> Penjualan bersih Rp 800.000.000 | HPP Rp
+          500.000.000 | Beban operasi (tanpa depresiasi) Rp 120.000.000 |
+          Depresiasi Rp 30.000.000 | Pajak Rp 25.000.000<br /><br />
+          <strong>Perubahan Neraca:</strong> Piutang naik Rp 20 juta |
+          Persediaan turun Rp 5 juta | Utang usaha naik Rp 15 juta | Utang pajak
+          naik Rp 3 juta
+        </div>
+
+        <div class="laporan-box">
+          <div class="laporan-header">
+            <h4>CV. BERKAH JAYA</h4>
+            <h5>Aktivitas Operasi — Metode Langsung</h5>
+            <p>Untuk Tahun yang Berakhir 31 Desember 2024</p>
+          </div>
+
+          <div class="laporan-row indent2">
+            <span class="label">Penjualan Bersih</span>
+            <span class="amount" style="color: var(--text-muted)"
+              >800.000.000</span
+            >
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">− Kenaikan Piutang Usaha</span>
+            <span class="amount" style="color: var(--red)">(20.000.000)</span>
+          </div>
+          <div class="laporan-row indent1 subtotal">
+            <span class="label">Penerimaan dari Pelanggan</span>
+            <span class="amount masuk">Rp 780.000.000</span>
+          </div>
+          <div class="divider-line"></div>
+          <div class="laporan-row indent2">
+            <span class="label">HPP</span>
+            <span class="amount" style="color: var(--text-muted)"
+              >500.000.000</span
+            >
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">− Penurunan Persediaan</span>
+            <span class="amount" style="color: var(--green)">(5.000.000)</span>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">− Kenaikan Utang Usaha</span>
+            <span class="amount" style="color: var(--green)">(15.000.000)</span>
+          </div>
+          <div class="laporan-row indent1 subtotal">
+            <span class="label">Pembayaran ke Supplier</span>
+            <span class="amount keluar">Rp (480.000.000)</span>
+          </div>
+          <div class="divider-line"></div>
+          <div class="laporan-row indent1 subtotal">
+            <span class="label">Pembayaran Beban Operasi</span>
+            <span class="amount keluar">Rp (120.000.000)</span>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label"
+              >Beban Pajak Rp 25.000.000 − Kenaikan Utang Pajak Rp
+              3.000.000</span
+            >
+            <span class="amount" style="color: var(--text-muted)"></span>
+          </div>
+          <div class="laporan-row indent1 subtotal">
+            <span class="label">Pembayaran Pajak</span>
+            <span class="amount keluar">Rp (22.000.000)</span>
+          </div>
+          <div class="laporan-row total double-border">
+            <span class="label">KAS BERSIH DARI AKTIVITAS OPERASI</span>
+            <span class="amount netpos">Rp 158.000.000 ✓</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════
+           SECTION 4: METODE TIDAK LANGSUNG
+      ══════════════════════════════════════════ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">
+          🔄 4. Metode Tidak Langsung — Aktivitas Operasi
+        </div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="info-box">
+        <strong>Konsep Metode Tidak Langsung:</strong> Dimulai dari
+        <strong>laba bersih</strong>, lalu disesuaikan dengan item non-kas dan
+        perubahan modal kerja. Metode ini paling umum digunakan perusahaan
+        Indonesia karena lebih mudah disusun dari data yang sudah tersedia.
+      </div>
+
+      <div class="formula-block">
+        Laba Bersih<br />
+        + Penyesuaian item non-kas (depresiasi, amortisasi, kerugian/keuntungan
+        aset)<br />
+        ± Perubahan modal kerja (aset lancar &amp; kewajiban lancar)<br />
+        = <strong>Kas Bersih dari Aktivitas Operasi</strong>
+      </div>
+
+      <div class="warning-box">
+        💡 <strong>Cara Hafal Arah Penyesuaian:</strong><br />
+        • <strong>Depresiasi</strong> → selalu
+        <span style="color: var(--green)">TAMBAH</span> (non-kas, tidak ada kas
+        keluar)<br />
+        • <strong>Keuntungan jual aset</strong> →
+        <span style="color: var(--red)">KURANG</span> (kasnya ada di investasi,
+        jangan dobel)<br />
+        • <strong>Kerugian jual aset</strong> →
+        <span style="color: var(--green)">TAMBAH</span> (sudah kurangi laba,
+        kasnya ada di investasi)<br />
+        • <strong>Aset lancar naik</strong> (piutang, persediaan) →
+        <span style="color: var(--red)">KURANG</span> (kas belum masuk)<br />
+        • <strong>Kewajiban lancar naik</strong> (utang usaha) →
+        <span style="color: var(--green)">TAMBAH</span> (kas belum keluar)
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          ✏️ Contoh Metode Tidak Langsung — CV. Berkah Jaya 2024
+        </div>
+        <div class="example-story">
+          Data sama seperti sebelumnya. Laba bersih = Rp 155.000.000
+        </div>
+
+        <div class="laporan-box">
+          <div class="laporan-header">
+            <h4>CV. BERKAH JAYA</h4>
+            <h5>Aktivitas Operasi — Metode Tidak Langsung</h5>
+          </div>
+          <div class="laporan-row indent1">
+            <span class="label">Laba Bersih</span
+            ><span class="amount masuk">Rp 155.000.000</span>
+          </div>
+          <div class="laporan-section">Penyesuaian Item Non-Kas:</div>
+          <div class="laporan-row indent2">
+            <span class="label">+ Beban Depresiasi</span
+            ><span class="amount masuk">30.000.000</span>
+          </div>
+          <div class="laporan-section">Perubahan Modal Kerja:</div>
+          <div class="laporan-row indent2">
+            <span class="label">− Kenaikan Piutang Usaha</span
+            ><span class="amount keluar">(20.000.000)</span>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">+ Penurunan Persediaan</span
+            ><span class="amount masuk">5.000.000</span>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">+ Kenaikan Utang Usaha</span
+            ><span class="amount masuk">15.000.000</span>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">+ Kenaikan Utang Pajak</span
+            ><span class="amount masuk">3.000.000</span>
+          </div>
+          <div class="laporan-row total double-border">
+            <span class="label">KAS BERSIH DARI AKTIVITAS OPERASI</span>
+            <span class="amount netpos">Rp 188.000.000</span>
+          </div>
+        </div>
+
+        <div class="info-box" style="margin-top: 16px; margin-bottom: 0">
+          ⚠️ Hasil metode langsung (Rp 158 juta) dan tidak langsung (Rp 188
+          juta) berbeda di contoh ini karena laba bersih di contoh tidak
+          langsung adalah Rp 155 juta. Jika datanya sama persis, kedua metode
+          <strong>PASTI menghasilkan angka kas operasi yang sama</strong>.
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════
+           SECTION 5: AKTIVITAS INVESTASI
+      ══════════════════════════════════════════ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">📈 5. Aktivitas Investasi</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="info-box">
+        <strong>Penting:</strong> Yang dilaporkan adalah
+        <strong>kas yang diterima/dibayar secara aktual</strong>, bukan
+        keuntungan atau kerugiannya. Keuntungan/kerugian jual aset sudah masuk
+        ke laba bersih di L/R.
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          ✏️ Contoh Aktivitas Investasi — CV. Berkah Jaya 2024
+        </div>
+        <div class="example-story">
+          Beli truk baru Rp 150.000.000 tunai | Jual mesin lama Rp 45.000.000
+          (nilai buku Rp 40.000.000) | Beli investasi saham PT X Rp 80.000.000
+        </div>
+        <div class="laporan-box">
+          <div class="laporan-header">
+            <h4>CV. BERKAH JAYA</h4>
+            <h5>Aktivitas Investasi</h5>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">Penerimaan dari penjualan mesin lama</span
+            ><span class="amount masuk">45.000.000</span>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">Pembelian truk baru</span
+            ><span class="amount keluar">(150.000.000)</span>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">Pembelian investasi saham PT X</span
+            ><span class="amount keluar">(80.000.000)</span>
+          </div>
+          <div class="laporan-row total double-border">
+            <span class="label">KAS BERSIH DARI AKTIVITAS INVESTASI</span>
+            <span class="amount netneg">Rp (185.000.000)</span>
+          </div>
+        </div>
+        <div class="warning-box" style="margin-top: 16px; margin-bottom: 0">
+          💡 Keuntungan jual mesin Rp 5.000.000 (Rp 45jt − Rp 40jt) sudah
+          termasuk dalam laba bersih di aktivitas operasi (metode tidak
+          langsung: dikurangkan). Di aktivitas investasi, dilaporkan kas penuh
+          yang diterima: Rp 45.000.000.
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════
+           SECTION 6: AKTIVITAS PENDANAAN
+      ══════════════════════════════════════════ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">💳 6. Aktivitas Pendanaan</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          ✏️ Contoh Aktivitas Pendanaan — CV. Berkah Jaya 2024
+        </div>
+        <div class="example-story">
+          Terbitkan obligasi Rp 200.000.000 | Bayar cicilan utang bank Rp
+          50.000.000 | Terbitkan saham baru Rp 100.000.000 | Bayar dividen tunai
+          Rp 40.000.000
+        </div>
+        <div class="laporan-box">
+          <div class="laporan-header">
+            <h4>CV. BERKAH JAYA</h4>
+            <h5>Aktivitas Pendanaan</h5>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">Penerimaan dari penerbitan obligasi</span
+            ><span class="amount masuk">200.000.000</span>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">Penerimaan dari penerbitan saham baru</span
+            ><span class="amount masuk">100.000.000</span>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">Pembayaran cicilan utang bank</span
+            ><span class="amount keluar">(50.000.000)</span>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">Pembayaran dividen tunai</span
+            ><span class="amount keluar">(40.000.000)</span>
+          </div>
+          <div class="laporan-row total double-border">
+            <span class="label">KAS BERSIH DARI AKTIVITAS PENDANAAN</span>
+            <span class="amount netpos">Rp 210.000.000</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════
+           SECTION 7: LAPORAN LENGKAP
+      ══════════════════════════════════════════ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">📋 7. Laporan Arus Kas Lengkap</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="laporan-box">
+        <div class="laporan-header">
+          <h4>CV. BERKAH JAYA</h4>
+          <h5>LAPORAN ARUS KAS</h5>
+          <h5>METODE TIDAK LANGSUNG</h5>
+          <p>Untuk Tahun yang Berakhir 31 Desember 2024</p>
+        </div>
+
+        <!-- OPERASI -->
+        <div class="laporan-section">⚙️ AKTIVITAS OPERASI:</div>
+        <div class="laporan-row indent1">
+          <span class="label">Laba Bersih</span
+          ><span class="amount masuk">155.000.000</span>
+        </div>
+        <div
+          class="laporan-row indent2"
+          style="
+            color: var(--text-muted);
+            font-size: 12px;
+            font-style: italic;
+            padding: 4px 0 4px 40px;
+          "
+        >
+          Penyesuaian non-kas:
+        </div>
+        <div class="laporan-row indent2">
+          <span class="label">+ Beban Depresiasi</span
+          ><span class="amount masuk">30.000.000</span>
+        </div>
+        <div class="laporan-row indent2">
+          <span class="label">− Keuntungan penjualan mesin</span
+          ><span class="amount keluar">(5.000.000)</span>
+        </div>
+        <div
+          class="laporan-row indent2"
+          style="
+            color: var(--text-muted);
+            font-size: 12px;
+            font-style: italic;
+            padding: 4px 0 4px 40px;
+          "
+        >
+          Perubahan modal kerja:
+        </div>
+        <div class="laporan-row indent2">
+          <span class="label">− Kenaikan piutang usaha</span
+          ><span class="amount keluar">(20.000.000)</span>
+        </div>
+        <div class="laporan-row indent2">
+          <span class="label">+ Penurunan persediaan</span
+          ><span class="amount masuk">5.000.000</span>
+        </div>
+        <div class="laporan-row indent2">
+          <span class="label">+ Kenaikan utang usaha</span
+          ><span class="amount masuk">15.000.000</span>
+        </div>
+        <div class="laporan-row indent2">
+          <span class="label">+ Kenaikan utang pajak</span
+          ><span class="amount masuk">3.000.000</span>
+        </div>
+        <div class="laporan-row subtotal indent1">
+          <span class="label" style="font-weight: 800"
+            >KAS BERSIH DARI OPERASI</span
+          >
+          <span class="amount netpos">Rp 183.000.000</span>
+        </div>
+
+        <div style="height: 12px"></div>
+
+        <!-- INVESTASI -->
+        <div class="laporan-section">📈 AKTIVITAS INVESTASI:</div>
+        <div class="laporan-row indent2">
+          <span class="label">Penerimaan dari penjualan mesin</span
+          ><span class="amount masuk">45.000.000</span>
+        </div>
+        <div class="laporan-row indent2">
+          <span class="label">Pembelian truk baru</span
+          ><span class="amount keluar">(150.000.000)</span>
+        </div>
+        <div class="laporan-row indent2">
+          <span class="label">Pembelian investasi saham</span
+          ><span class="amount keluar">(80.000.000)</span>
+        </div>
+        <div class="laporan-row subtotal indent1">
+          <span class="label" style="font-weight: 800"
+            >KAS BERSIH DARI INVESTASI</span
+          >
+          <span class="amount netneg">Rp (185.000.000)</span>
+        </div>
+
+        <div style="height: 12px"></div>
+
+        <!-- PENDANAAN -->
+        <div class="laporan-section">💳 AKTIVITAS PENDANAAN:</div>
+        <div class="laporan-row indent2">
+          <span class="label">Penerimaan dari penerbitan obligasi</span
+          ><span class="amount masuk">200.000.000</span>
+        </div>
+        <div class="laporan-row indent2">
+          <span class="label">Penerimaan dari penerbitan saham</span
+          ><span class="amount masuk">100.000.000</span>
+        </div>
+        <div class="laporan-row indent2">
+          <span class="label">Pembayaran cicilan utang bank</span
+          ><span class="amount keluar">(50.000.000)</span>
+        </div>
+        <div class="laporan-row indent2">
+          <span class="label">Pembayaran dividen tunai</span
+          ><span class="amount keluar">(40.000.000)</span>
+        </div>
+        <div class="laporan-row subtotal indent1">
+          <span class="label" style="font-weight: 800"
+            >KAS BERSIH DARI PENDANAAN</span
+          >
+          <span class="amount netpos">Rp 210.000.000</span>
+        </div>
+
+        <div style="height: 16px"></div>
+        <div class="divider-line"></div>
+        <div class="laporan-row" style="padding: 10px 0">
+          <span class="label" style="font-weight: 700"
+            >KENAIKAN KAS BERSIH</span
+          >
+          <span
+            class="amount"
+            style="
+              font-family: &quot;Syne&quot;, sans-serif;
+              font-weight: 800;
+              font-size: 14px;
+            "
+            >Rp 208.000.000</span
+          >
+        </div>
+        <div class="laporan-row">
+          <span class="label">Saldo Kas Awal (1 Januari 2024)</span>
+          <span
+            class="amount"
+            style="font-family: &quot;Syne&quot;, sans-serif; font-weight: 700"
+            >Rp 50.000.000</span
+          >
+        </div>
+        <div class="laporan-row total double-border">
+          <span class="label">SALDO KAS AKHIR (31 Desember 2024)</span>
+          <span class="amount netpos">Rp 258.000.000 ✓</span>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════
+           SECTION 8: ANALISIS & POLA
+      ══════════════════════════════════════════ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">📐 8. Analisis Laporan Arus Kas</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <h3
+        style="
+          font-family: &quot;Syne&quot;, sans-serif;
+          font-weight: 800;
+          font-size: 16px;
+          margin-bottom: 16px;
+          color: var(--text);
+        "
+      >
+        Pola Arus Kas &amp; Interpretasinya
+      </h3>
+
+      <div class="pola-grid">
+        <div class="pola-card">
+          <div class="pola-label" style="color: var(--green)">✅ Ideal</div>
+          <div class="pola-badges">
+            <span class="pola-badge pos">⚙️ Operasi +</span>
+            <span class="pola-badge neg">📈 Investasi −</span>
+            <span class="pola-badge neg">💳 Pendanaan −</span>
+          </div>
+          <div class="pola-desc">
+            Operasi kuat, perusahaan berinvestasi untuk tumbuh, dan mampu
+            membayar utang dari kas operasi sendiri.
+          </div>
+        </div>
+        <div class="pola-card">
+          <div class="pola-label" style="color: var(--blue)">
+            📊 Ekspansi Agresif
+          </div>
+          <div class="pola-badges">
+            <span class="pola-badge pos">⚙️ Operasi +</span>
+            <span class="pola-badge neg">📈 Investasi −</span>
+            <span class="pola-badge pos">💳 Pendanaan +</span>
+          </div>
+          <div class="pola-desc">
+            Investasi besar didanai dari utang/saham baru. Sehat selama operasi
+            tetap kuat dan investasi menghasilkan return.
+          </div>
+        </div>
+        <div class="pola-card">
+          <div class="pola-label" style="color: var(--yellow)">
+            ⚠️ Kesulitan Kas
+          </div>
+          <div class="pola-badges">
+            <span class="pola-badge neg">⚙️ Operasi −</span>
+            <span class="pola-badge pos">📈 Investasi +</span>
+            <span class="pola-badge pos">💳 Pendanaan +</span>
+          </div>
+          <div class="pola-desc">
+            Operasi tidak menghasilkan kas — terpaksa jual aset dan cari
+            pinjaman baru untuk bertahan. Tidak berkelanjutan jangka panjang.
+          </div>
+        </div>
+        <div class="pola-card">
+          <div class="pola-label" style="color: var(--purple)">
+            🚀 Startup / Awal Bisnis
+          </div>
+          <div class="pola-badges">
+            <span class="pola-badge neg">⚙️ Operasi −</span>
+            <span class="pola-badge neg">📈 Investasi −</span>
+            <span class="pola-badge pos">💳 Pendanaan +</span>
+          </div>
+          <div class="pola-desc">
+            Butuh pendanaan eksternal untuk menutup operasi dan investasi.
+            Normal untuk bisnis tahap awal yang sedang membangun pondasi.
+          </div>
+        </div>
+        <div class="pola-card">
+          <div class="pola-label" style="color: var(--red)">🚨 Bahaya</div>
+          <div class="pola-badges">
+            <span class="pola-badge neg">⚙️ Operasi −</span>
+            <span class="pola-badge pos">📈 Investasi +</span>
+            <span class="pola-badge neg">💳 Pendanaan −</span>
+          </div>
+          <div class="pola-desc">
+            Menjual aset untuk membayar utang dan menutup kekurangan operasi.
+            Tanda perusahaan dalam kesulitan serius — hampir bangkrut.
+          </div>
+        </div>
+        <div class="pola-card">
+          <div class="pola-label" style="color: var(--teal)">
+            💎 Matang &amp; Stabil
+          </div>
+          <div class="pola-badges">
+            <span class="pola-badge pos">⚙️ Operasi +</span>
+            <span class="pola-badge pos">📈 Investasi +</span>
+            <span class="pola-badge neg">💳 Pendanaan −</span>
+          </div>
+          <div class="pola-desc">
+            Jual sebagian aset + operasi kuat, digunakan untuk melunasi utang
+            dan bayar dividen besar. Perusahaan matang yang mungkin menyusutkan
+            diri.
+          </div>
+        </div>
+      </div>
+
+      <h3
+        style="
+          font-family: &quot;Syne&quot;, sans-serif;
+          font-weight: 800;
+          font-size: 16px;
+          margin-bottom: 16px;
+          color: var(--text);
+        "
+      >
+        Rasio Arus Kas Penting
+      </h3>
+      <div class="rasio-grid">
+        <div class="rasio-card">
+          <div class="rasio-card-title">1. Rasio Kualitas Laba</div>
+          <div class="rasio-formula">
+            Kualitas Laba = Kas Operasi ÷ Laba Bersih
+          </div>
+          <div
+            style="font-size: 13px; color: var(--text-muted); line-height: 1.7"
+          >
+            <span style="color: var(--green)">&#62; 1,0</span> = Kualitas laba
+            baik — kas lebih besar dari laba<br />
+            <span style="color: var(--yellow)">= 1,0</span> = Normal<br />
+            <span style="color: var(--red)">&#60; 1,0</span> = Laba "kertas" —
+            banyak laba belum jadi kas
+          </div>
+        </div>
+        <div class="rasio-card">
+          <div class="rasio-card-title">2. Rasio Cakupan Kas</div>
+          <div class="rasio-formula">
+            Cakupan Kas = Kas Operasi ÷ Total Utang
+          </div>
+          <div
+            style="font-size: 13px; color: var(--text-muted); line-height: 1.7"
+          >
+            Semakin tinggi = semakin mampu melunasi utang dari operasi sendiri
+            tanpa bergantung pendanaan eksternal.
+          </div>
+        </div>
+        <div class="rasio-card">
+          <div class="rasio-card-title">3. Free Cash Flow (FCF)</div>
+          <div class="rasio-formula">
+            FCF = Kas Operasi − Pengeluaran Modal (Capex)
+          </div>
+          <div
+            style="font-size: 13px; color: var(--text-muted); line-height: 1.7"
+          >
+            <span style="color: var(--green)">Positif</span> = Ada kas sisa
+            setelah investasi aset tetap — bisa bayar dividen &amp; lunasi
+            utang<br />
+            <span style="color: var(--red)">Negatif</span> = Perlu cari
+            pendanaan tambahan
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════
+           SECTION 9: STUDI KASUS LENGKAP
+      ══════════════════════════════════════════ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">
+          🏢 9. Studi Kasus — PT. Nusantara Distribusi Jombang
+        </div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          📋 PT. Nusantara Distribusi — Jombang, 2024
+        </div>
+        <div class="example-story">
+          PT. Nusantara Distribusi adalah distributor sembako skala menengah di
+          Jombang.<br /><br />
+          <strong>Data Laporan Laba Rugi 2024:</strong><br />
+          Penjualan bersih Rp 1.200.000.000 | HPP Rp 780.000.000 | Beban operasi
+          (tanpa depresiasi) Rp 180.000.000 | Beban depresiasi Rp 45.000.000 |
+          Beban bunga Rp 25.000.000 | Pajak 25% → Laba bersih
+          <strong>Rp 127.500.000</strong><br /><br />
+          <strong>Perubahan Akun Neraca:</strong>
+          Piutang naik Rp 35 juta | Persediaan turun Rp 20 juta | Utang usaha
+          naik Rp 28 juta | Utang pajak turun Rp 5 juta | Beban akrual naik Rp 8
+          juta<br /><br />
+          <strong>Transaksi Lain:</strong>
+          Beli gudang baru Rp 400 juta | Jual kendaraan lama Rp 60 juta (nilai
+          buku Rp 75 juta) | Terbitkan obligasi Rp 300 juta | Bayar cicilan
+          hipotek Rp 80 juta | Bayar dividen Rp 50 juta | Saldo kas awal Rp 85
+          juta
+        </div>
+
+        <div class="laporan-box">
+          <div class="laporan-header">
+            <h4>PT. NUSANTARA DISTRIBUSI</h4>
+            <h5>LAPORAN ARUS KAS</h5>
+            <h5>METODE TIDAK LANGSUNG</h5>
+            <p>Untuk Tahun yang Berakhir 31 Desember 2024</p>
+          </div>
+
+          <div class="laporan-section">⚙️ AKTIVITAS OPERASI:</div>
+          <div class="laporan-row indent1">
+            <span class="label">Laba Bersih</span
+            ><span class="amount masuk">127.500.000</span>
+          </div>
+          <div
+            class="laporan-row indent2"
+            style="
+              color: var(--text-muted);
+              font-size: 12px;
+              font-style: italic;
+              padding: 3px 0 3px 40px;
+            "
+          >
+            Penyesuaian non-kas:
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">+ Beban Depresiasi</span
+            ><span class="amount masuk">45.000.000</span>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label"
+              >+ Kerugian penjualan kendaraan (Rp60jt − Rp75jt)</span
+            ><span class="amount masuk">15.000.000</span>
+          </div>
+          <div
+            class="laporan-row indent2"
+            style="
+              color: var(--text-muted);
+              font-size: 12px;
+              font-style: italic;
+              padding: 3px 0 3px 40px;
+            "
+          >
+            Perubahan modal kerja:
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">− Kenaikan piutang usaha</span
+            ><span class="amount keluar">(35.000.000)</span>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">+ Penurunan persediaan</span
+            ><span class="amount masuk">20.000.000</span>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">+ Kenaikan utang usaha</span
+            ><span class="amount masuk">28.000.000</span>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">− Penurunan utang pajak</span
+            ><span class="amount keluar">(5.000.000)</span>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">+ Kenaikan beban akrual</span
+            ><span class="amount masuk">8.000.000</span>
+          </div>
+          <div class="laporan-row subtotal indent1">
+            <span class="label" style="font-weight: 800"
+              >KAS BERSIH DARI OPERASI</span
+            >
+            <span class="amount netpos">Rp 203.500.000</span>
+          </div>
+
+          <div style="height: 12px"></div>
+
+          <div class="laporan-section">📈 AKTIVITAS INVESTASI:</div>
+          <div class="laporan-row indent2">
+            <span class="label">Penerimaan dari penjualan kendaraan</span
+            ><span class="amount masuk">60.000.000</span>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">Pembelian gudang baru</span
+            ><span class="amount keluar">(400.000.000)</span>
+          </div>
+          <div class="laporan-row subtotal indent1">
+            <span class="label" style="font-weight: 800"
+              >KAS BERSIH DARI INVESTASI</span
+            >
+            <span class="amount netneg">Rp (340.000.000)</span>
+          </div>
+
+          <div style="height: 12px"></div>
+
+          <div class="laporan-section">💳 AKTIVITAS PENDANAAN:</div>
+          <div class="laporan-row indent2">
+            <span class="label">Penerimaan dari penerbitan obligasi</span
+            ><span class="amount masuk">300.000.000</span>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">Pembayaran cicilan hipotek</span
+            ><span class="amount keluar">(80.000.000)</span>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">Pembayaran dividen tunai</span
+            ><span class="amount keluar">(50.000.000)</span>
+          </div>
+          <div class="laporan-row subtotal indent1">
+            <span class="label" style="font-weight: 800"
+              >KAS BERSIH DARI PENDANAAN</span
+            >
+            <span class="amount netpos">Rp 170.000.000</span>
+          </div>
+
+          <div style="height: 16px"></div>
+          <div class="divider-line"></div>
+          <div class="laporan-row" style="padding: 10px 0">
+            <span class="label" style="font-weight: 700"
+              >KENAIKAN KAS BERSIH</span
+            >
+            <span
+              class="amount"
+              style="
+                font-family: &quot;Syne&quot;, sans-serif;
+                font-weight: 800;
+                font-size: 14px;
+              "
+              >Rp 33.500.000</span
+            >
+          </div>
+          <div class="laporan-row">
+            <span class="label">Saldo Kas Awal (1 Januari 2024)</span>
+            <span
+              class="amount"
+              style="
+                font-family: &quot;Syne&quot;, sans-serif;
+                font-weight: 700;
+              "
+              >Rp 85.000.000</span
+            >
+          </div>
+          <div class="laporan-row total double-border">
+            <span class="label">SALDO KAS AKHIR (31 Desember 2024)</span>
+            <span class="amount netpos">Rp 118.500.000 ✓</span>
+          </div>
+        </div>
+
+        <!-- ANALISIS RASIO STUDI KASUS -->
+        <h4
+          style="
+            font-family: &quot;Syne&quot;, sans-serif;
+            font-weight: 800;
+            font-size: 15px;
+            color: var(--accent);
+            margin: 24px 0 14px;
+          "
+        >
+          📊 Analisis Rasio PT. Nusantara Distribusi
+        </h4>
+        <div class="table-wrap" style="margin-bottom: 16px">
+          <table>
+            <thead>
+              <tr>
+                <th>Rasio</th>
+                <th>Perhitungan</th>
+                <th>Hasil</th>
+                <th>Interpretasi</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Kualitas Laba</strong></td>
+                <td>Rp 203.500.000 ÷ Rp 127.500.000</td>
+                <td><strong style="color: var(--green)">1,60 ✅</strong></td>
+                <td>
+                  Sangat baik — kas operasi 1,6× lebih besar dari laba bersih
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Free Cash Flow</strong></td>
+                <td>Rp 203.500.000 − Rp 400.000.000</td>
+                <td>
+                  <strong style="color: var(--red)">(Rp 196.500.000) ⚠️</strong>
+                </td>
+                <td>
+                  Negatif karena investasi gudang besar — wajar untuk tahun
+                  ekspansi
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="info-box" style="margin-bottom: 0">
+          ✅ <strong>Pola: Operasi+ Investasi− Pendanaan+</strong> = Perusahaan
+          ekspansi agresif dengan dukungan pendanaan eksternal. Sehat selama
+          operasi tetap kuat (terbukti: kualitas laba 1,6). Free cash flow
+          negatif tidak berbahaya di tahun investasi besar seperti membangun
+          gudang baru.
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════
+           SECTION 10: RANGKUMAN
+      ══════════════════════════════════════════ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">📝 Rangkuman Bab 12</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="rangkuman-table">
+          <thead>
+            <tr>
+              <th>Poin Utama</th>
+              <th>Inti Materi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>✅ Tujuan</td>
+              <td>
+                Menunjukkan sumber &amp; penggunaan kas — laba besar ≠ kas
+                melimpah
+              </td>
+            </tr>
+            <tr>
+              <td>✅ Aktivitas Operasi</td>
+              <td>
+                Kegiatan utama bisnis — penjualan, bayar supplier, gaji, pajak
+              </td>
+            </tr>
+            <tr>
+              <td>✅ Aktivitas Investasi</td>
+              <td>
+                Beli/jual aset tetap &amp; investasi jangka panjang — bukan
+                keuntungannya!
+              </td>
+            </tr>
+            <tr>
+              <td>✅ Aktivitas Pendanaan</td>
+              <td>Utang jangka panjang, penerbitan saham, dividen tunai</td>
+            </tr>
+            <tr>
+              <td>✅ Metode Langsung</td>
+              <td>
+                Rinci setiap kas masuk/keluar dari operasi — lebih informatif
+              </td>
+            </tr>
+            <tr>
+              <td>✅ Metode Tidak Langsung</td>
+              <td>
+                Mulai dari laba bersih + penyesuaian — paling umum di Indonesia
+              </td>
+            </tr>
+            <tr>
+              <td>✅ Depresiasi</td>
+              <td>
+                Selalu ditambahkan kembali ke laba — bukan pengeluaran kas!
+              </td>
+            </tr>
+            <tr>
+              <td>✅ Kualitas Laba</td>
+              <td>Kas Operasi ÷ Laba Bersih — idealnya &gt; 1,0</td>
+            </tr>
+            <tr>
+              <td>✅ Free Cash Flow</td>
+              <td>
+                Kas Operasi − Capex — ukur fleksibilitas keuangan perusahaan
+              </td>
+            </tr>
+            <tr>
+              <td>✅ Pola Arus Kas</td>
+              <td>
+                Operasi+ Investasi− Pendanaan− = Ideal; baca polanya untuk
+                diagnosa kesehatan
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- QUIZ CTA -->
+      <div class="quiz-cta">
+        <h3>🎯 Uji Pemahamanmu!</h3>
+        <p>
+          Setelah mempelajari Laporan Arus Kas, coba kerjakan 20 soal kuis
+          interaktif yang mencakup tiga aktivitas arus kas, metode langsung
+          &amp; tidak langsung, serta analisis rasio kualitas laba dan free cash
+          flow!
+        </p>
+        <a href="bank-kuis.html?bab=Laporan%20Arus%20Kas" class="quiz-btn">
+          Mulai Kuis Laporan Arus Kas →
+        </a>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-name">Annisa Novita Ardana</div>
+      <div class="footer-sub">
+        Belajar Akuntansi &amp; Perpajakan &nbsp;·&nbsp; Dibuat dengan Cinta
+        &amp; Estetika 🌸
+      </div>
+      <div class="footer-dots">
+        <div class="footer-dot" style="background: #ff6b35"></div>
+        <div class="footer-dot" style="background: #ff3d9a"></div>
+        <div class="footer-dot" style="background: #a855f7"></div>
+        <div class="footer-dot" style="background: #3b82f6"></div>
+        <div class="footer-dot" style="background: #10b981"></div>
+        <div class="footer-dot" style="background: #fbbf24"></div>
+      </div>
+    </footer>
+
+    <script>
+      // Theme
+      const body = document.body;
+      if (localStorage.getItem("theme") === "light")
+        body.classList.add("light-theme");
+      function toggleTheme() {
+        body.classList.toggle("light-theme");
+        localStorage.setItem(
+          "theme",
+          body.classList.contains("light-theme") ? "light" : "dark",
+        );
+      }
+    </script>
+  </body>
+</html>

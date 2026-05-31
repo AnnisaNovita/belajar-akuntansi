@@ -1,0 +1,2600 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Analisis Laporan Keuangan — Belajar Akuntansi</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0f172a;
+        --glass-bg: rgba(30, 41, 59, 0.45);
+        --glass-border: rgba(255, 255, 255, 0.08);
+        --glass-highlight: rgba(255, 255, 255, 0.15);
+        --text: #f8fafc;
+        --text-muted: #94a3b8;
+
+        --pink: #ff3d9a;
+        --purple: #a855f7;
+        --blue: #3b82f6;
+        --green: #10b981;
+        --yellow: #fbbf24;
+        --orange: #ff6b35;
+        --teal: #06b6d4;
+        --red: #ef4444;
+
+        --accent: #a855f7;
+        --accent-glow: rgba(168, 85, 247, 0.1);
+        --accent-border: rgba(168, 85, 247, 0.28);
+
+        --radius: 24px;
+        --radius-sm: 14px;
+      }
+
+      body.light-theme {
+        --bg: #faf5ff;
+        --glass-bg: rgba(255, 255, 255, 0.65);
+        --glass-border: rgba(0, 0, 0, 0.06);
+        --glass-highlight: rgba(255, 255, 255, 0.85);
+        --text: #1e293b;
+        --text-muted: #64748b;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "DM Sans", sans-serif;
+        background-color: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        overflow-x: hidden;
+        transition:
+          background-color 0.3s ease,
+          color 0.3s ease;
+        position: relative;
+      }
+
+      /* ─── BLOBS ─────────────────────────── */
+      .blob {
+        position: absolute;
+        border-radius: 50%;
+        pointer-events: none;
+        filter: blur(80px);
+        opacity: 0.22;
+        z-index: 0;
+        animation: float 20s infinite alternate;
+      }
+      .blob-1 {
+        width: 450px;
+        height: 450px;
+        background: var(--purple);
+        top: -150px;
+        right: -80px;
+      }
+      .blob-2 {
+        width: 320px;
+        height: 320px;
+        background: var(--pink);
+        bottom: 20%;
+        left: -80px;
+        animation-delay: -5s;
+      }
+      .blob-3 {
+        width: 350px;
+        height: 350px;
+        background: var(--blue);
+        top: 40%;
+        right: 10%;
+        animation-delay: -10s;
+      }
+      @keyframes float {
+        0% {
+          transform: translate(0, 0) scale(1);
+        }
+        100% {
+          transform: translate(50px, 80px) scale(1.1);
+        }
+      }
+
+      /* ─── HEADER ────────────────────────── */
+      header {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 30px 24px 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        z-index: 10;
+      }
+      .header-logo {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 18px;
+        color: var(--text);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .theme-toggle-btn {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(12px);
+        color: var(--text);
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        transition:
+          transform 0.2s,
+          background-color 0.2s;
+      }
+      .theme-toggle-btn:hover {
+        transform: scale(1.08);
+        background: var(--glass-highlight);
+      }
+      .back-btn {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(12px);
+        color: var(--text);
+        padding: 10px 20px;
+        border-radius: 99px;
+        font-family: "Syne", sans-serif;
+        font-weight: 700;
+        font-size: 13px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition:
+          background-color 0.2s,
+          transform 0.2s;
+      }
+      .back-btn:hover {
+        transform: translateY(-2px);
+        background: var(--glass-highlight);
+      }
+
+      /* ─── HERO ──────────────────────────── */
+      .hero {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 40px 24px;
+        position: relative;
+        z-index: 10;
+        text-align: center;
+      }
+      .hero-glass {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(16px);
+        border-radius: var(--radius);
+        padding: 48px 32px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .hero-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--accent-glow);
+        border: 1.5px solid var(--accent-border);
+        color: var(--accent);
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 7px 18px;
+        border-radius: 99px;
+        margin-bottom: 24px;
+        font-family: "Syne", sans-serif;
+      }
+      .hero h1 {
+        font-family: "Syne", sans-serif;
+        font-size: clamp(28px, 5.5vw, 50px);
+        font-weight: 800;
+        line-height: 1.15;
+        margin-bottom: 16px;
+        color: #fff;
+      }
+      body.light-theme .hero h1 {
+        color: #1e293b;
+      }
+      .hero h1 .hi {
+        color: var(--accent);
+      }
+      .hero p {
+        color: var(--text-muted);
+        font-size: 15px;
+        line-height: 1.7;
+        max-width: 600px;
+        margin-bottom: 32px;
+      }
+      .hero-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+      }
+      .hero-badge {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid var(--glass-border);
+        border-radius: 99px;
+        padding: 7px 16px;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--text-muted);
+        font-family: "Syne", sans-serif;
+      }
+
+      /* ─── CONTENT ───────────────────────── */
+      .content {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 24px 80px;
+        position: relative;
+        z-index: 10;
+      }
+
+      .section-title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 52px;
+        margin-bottom: 24px;
+      }
+      .sec-line {
+        flex: 1;
+        height: 1.5px;
+        background: var(--glass-border);
+      }
+      .sec-text {
+        font-family: "Syne", sans-serif;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+      }
+
+      /* ─── CARDS ─────────────────────────── */
+      .cards-3 {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+        gap: 24px;
+        margin-bottom: 32px;
+      }
+      .cards-2 {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+        gap: 24px;
+        margin-bottom: 32px;
+      }
+      .card {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(12px);
+        border-radius: var(--radius);
+        padding: 28px;
+        color: var(--text);
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+        transition:
+          transform 0.25s,
+          box-shadow 0.25s,
+          border-color 0.25s;
+      }
+      .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: var(--c, var(--accent));
+      }
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        border-color: var(--c, var(--accent));
+      }
+      .card-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: var(--radius-sm);
+        background: color-mix(in srgb, var(--c) 15%, transparent);
+        color: var(--c);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        margin-bottom: 18px;
+        border: 1px solid color-mix(in srgb, var(--c) 30%, transparent);
+      }
+      .card-eyebrow {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--c);
+        margin-bottom: 6px;
+      }
+      .card-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 19px;
+        line-height: 1.35;
+        margin-bottom: 10px;
+      }
+      .card-body {
+        font-size: 13.5px;
+        color: var(--text-muted);
+        line-height: 1.6;
+      }
+      .list-items {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 12px;
+      }
+      .list-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 13px;
+        line-height: 1.5;
+      }
+      .list-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--c);
+        flex-shrink: 0;
+        margin-top: 6px;
+        box-shadow: 0 0 8px var(--c);
+      }
+
+      /* ─── EXAMPLE WRAP ──────────────────── */
+      .example-wrap {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(16px);
+        border-radius: var(--radius);
+        padding: 32px;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+        margin-bottom: 32px;
+      }
+      .example-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 16px;
+        color: var(--accent);
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .example-story {
+        color: var(--text-muted);
+        font-size: 14.5px;
+        line-height: 1.7;
+        margin-bottom: 20px;
+        padding: 16px 20px;
+        border-left: 3px solid var(--accent);
+        background: var(--accent-glow);
+        border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      }
+
+      /* ─── TABLES ─────────────────────────── */
+      .table-wrap {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius-sm);
+        overflow: hidden;
+        overflow-x: auto;
+        margin-bottom: 24px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th {
+        background: rgba(0, 0, 0, 0.25);
+        color: var(--text-muted);
+        font-family: "Syne", sans-serif;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 14px 18px;
+        text-align: left;
+        border-bottom: 1.5px solid var(--glass-border);
+      }
+      body.light-theme th {
+        background: rgba(255, 255, 255, 0.5);
+      }
+      td {
+        padding: 12px 18px;
+        font-size: 13.5px;
+        border-bottom: 1px solid var(--glass-border);
+        color: var(--text);
+        vertical-align: top;
+      }
+      tr:last-child td {
+        border-bottom: none;
+      }
+      tr:hover td {
+        background: rgba(255, 255, 255, 0.02);
+      }
+      body.light-theme tr:hover td {
+        background: rgba(0, 0, 0, 0.01);
+      }
+      tr.total-row td {
+        font-weight: 800;
+        background: var(--accent-glow);
+        color: var(--accent);
+        border-top: 2px solid var(--glass-border);
+      }
+      tr.highlight-row td {
+        background: rgba(168, 85, 247, 0.06);
+      }
+
+      /* ─── INFO / FORMULA BOXES ──────────── */
+      .info-box {
+        background: rgba(16, 185, 129, 0.08);
+        border: 1px solid rgba(16, 185, 129, 0.25);
+        border-radius: var(--radius-sm);
+        padding: 18px 20px;
+        margin-bottom: 20px;
+        color: var(--text);
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .info-box strong {
+        color: var(--green);
+      }
+      .warning-box {
+        background: var(--accent-glow);
+        border: 1px solid var(--accent-border);
+        border-radius: var(--radius-sm);
+        padding: 18px 20px;
+        margin-bottom: 20px;
+        color: var(--text);
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .warning-box strong {
+        color: var(--accent);
+      }
+      .danger-box {
+        background: rgba(239, 68, 68, 0.08);
+        border: 1px solid rgba(239, 68, 68, 0.25);
+        border-radius: var(--radius-sm);
+        padding: 18px 20px;
+        margin-bottom: 20px;
+        color: var(--text);
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .danger-box strong {
+        color: var(--red);
+      }
+      .formula-block {
+        background: var(--accent-glow);
+        border: 2px solid var(--accent-border);
+        border-radius: var(--radius-sm);
+        padding: 20px 24px;
+        margin-bottom: 20px;
+        font-family: "Syne", sans-serif;
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--accent);
+        text-align: center;
+        line-height: 1.8;
+      }
+
+      /* ─── RASIO CARDS ───────────────────── */
+      .rasio-group {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius);
+        overflow: hidden;
+        margin-bottom: 28px;
+      }
+      .rasio-group-header {
+        padding: 16px 24px;
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 14px;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .rasio-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .rasio-table th {
+        background: rgba(0, 0, 0, 0.2);
+        padding: 10px 18px;
+        font-family: "Syne", sans-serif;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        border-bottom: 1px solid var(--glass-border);
+      }
+      .rasio-table td {
+        padding: 13px 18px;
+        font-size: 13.5px;
+        border-bottom: 1px solid var(--glass-border);
+        color: var(--text);
+      }
+      .rasio-table tr:last-child td {
+        border-bottom: none;
+      }
+      .rasio-table tr:hover td {
+        background: rgba(255, 255, 255, 0.02);
+      }
+      .rasio-table td:first-child {
+        font-weight: 700;
+      }
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 4px 12px;
+        border-radius: 99px;
+      }
+      .chip-ok {
+        background: rgba(16, 185, 129, 0.12);
+        color: var(--green);
+        border: 1px solid rgba(16, 185, 129, 0.3);
+      }
+      .chip-warn {
+        background: rgba(251, 191, 36, 0.12);
+        color: var(--yellow);
+        border: 1px solid rgba(251, 191, 36, 0.3);
+      }
+      .chip-bad {
+        background: rgba(239, 68, 68, 0.12);
+        color: var(--red);
+        border: 1px solid rgba(239, 68, 68, 0.3);
+      }
+
+      /* ─── STUDI KASUS TABLE ─────────────── */
+      .comparison-table-wrap {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius);
+        overflow: hidden;
+        overflow-x: auto;
+        margin-bottom: 28px;
+      }
+      .comparison-table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 700px;
+      }
+      .comparison-table th {
+        background: rgba(0, 0, 0, 0.3);
+        padding: 12px 16px;
+        font-family: "Syne", sans-serif;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        border-bottom: 1.5px solid var(--glass-border);
+      }
+      .comparison-table td {
+        padding: 12px 16px;
+        font-size: 13px;
+        border-bottom: 1px solid var(--glass-border);
+        color: var(--text);
+      }
+      .comparison-table tr:last-child td {
+        border-bottom: none;
+      }
+      .comparison-table td:first-child {
+        font-weight: 600;
+        color: var(--text-muted);
+      }
+      .comparison-table tr.highlight td {
+        background: rgba(168, 85, 247, 0.06);
+      }
+      .win-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 4px 10px;
+        border-radius: 99px;
+        background: rgba(16, 185, 129, 0.12);
+        color: var(--green);
+        border: 1px solid rgba(16, 185, 129, 0.25);
+      }
+
+      /* ─── KEPUTUSAN CARD ────────────────── */
+      .decision-card {
+        background: var(--glass-bg);
+        border: 2px solid var(--accent-border);
+        border-radius: var(--radius);
+        padding: 32px;
+        margin-bottom: 28px;
+      }
+      .decision-card h3 {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 18px;
+        color: var(--accent);
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .decision-row {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 10px 0;
+        border-bottom: 1px dashed var(--glass-border);
+        font-size: 13.5px;
+      }
+      .decision-row:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+      .decision-icon {
+        font-size: 16px;
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+
+      /* ─── INTERACTIVE CALCULATOR ────────── */
+      .calc-section {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius);
+        padding: 32px;
+        margin-bottom: 32px;
+      }
+      .calc-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 18px;
+        margin-bottom: 6px;
+        color: var(--accent);
+      }
+      .calc-subtitle {
+        font-size: 13px;
+        color: var(--text-muted);
+        margin-bottom: 24px;
+      }
+      .calc-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+      @media (max-width: 700px) {
+        .calc-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .calc-input-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .calc-input-group label {
+        font-family: "Syne", sans-serif;
+        font-weight: 700;
+        font-size: 12px;
+        color: var(--text);
+      }
+      .calc-input-group input,
+      .calc-input-group select {
+        background: rgba(0, 0, 0, 0.2);
+        border: 1.5px solid var(--glass-border);
+        border-radius: var(--radius-sm);
+        padding: 11px 14px;
+        color: #fff;
+        font-size: 14px;
+        font-family: inherit;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      body.light-theme .calc-input-group input,
+      body.light-theme .calc-input-group select {
+        background: rgba(255, 255, 255, 0.7);
+        color: #1e293b;
+      }
+      .calc-input-group input:focus,
+      .calc-input-group select:focus {
+        border-color: var(--accent);
+      }
+      .calc-btn {
+        background: var(--accent);
+        color: #fff;
+        border: none;
+        border-radius: var(--radius-sm);
+        padding: 14px;
+        font-weight: 800;
+        font-size: 14px;
+        font-family: "Syne", sans-serif;
+        cursor: pointer;
+        margin-top: 8px;
+        grid-column: 1/-1;
+        box-shadow: 0 6px 20px rgba(168, 85, 247, 0.3);
+        transition: all 0.2s;
+      }
+      .calc-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(168, 85, 247, 0.45);
+      }
+      .calc-result-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 14px;
+        margin-top: 24px;
+      }
+      .calc-stat {
+        background: var(--accent-glow);
+        border: 1px solid var(--accent-border);
+        border-radius: var(--radius-sm);
+        padding: 16px;
+        text-align: center;
+      }
+      .calc-stat-val {
+        font-family: "Syne", sans-serif;
+        font-size: 20px;
+        font-weight: 800;
+        color: var(--accent);
+      }
+      .calc-stat-label {
+        font-size: 11px;
+        color: var(--text-muted);
+        margin-top: 4px;
+      }
+      .calc-stat.ok .calc-stat-val {
+        color: var(--green);
+      }
+      .calc-stat.warn .calc-stat-val {
+        color: var(--yellow);
+      }
+      .calc-stat.bad .calc-stat-val {
+        color: var(--red);
+      }
+
+      /* ─── RANGKUMAN TABLE ───────────────── */
+      .rangkuman-table td:first-child {
+        font-weight: 700;
+        color: var(--accent);
+      }
+
+      /* ─── QUIZ CTA ──────────────────────── */
+      .quiz-cta {
+        background: var(--glass-bg);
+        border: 2px solid var(--accent-border);
+        border-radius: var(--radius);
+        padding: 40px 32px;
+        text-align: center;
+        margin-top: 60px;
+        margin-bottom: 40px;
+      }
+      .quiz-cta h3 {
+        font-family: "Syne", sans-serif;
+        font-size: 24px;
+        margin-bottom: 12px;
+        color: var(--accent);
+      }
+      .quiz-cta p {
+        color: var(--text-muted);
+        margin-bottom: 20px;
+        font-size: 15px;
+        line-height: 1.6;
+      }
+      .quiz-btn {
+        background: var(--accent);
+        color: #fff;
+        border: none;
+        padding: 14px 32px;
+        border-radius: var(--radius-sm);
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-decoration: none;
+        display: inline-block;
+      }
+      .quiz-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 24px rgba(168, 85, 247, 0.35);
+      }
+
+      /* ─── FOOTER ─────────────────────────── */
+      footer {
+        border-top: 1px solid var(--glass-border);
+        background: #090d16;
+        padding: 40px 24px;
+        text-align: center;
+        position: relative;
+        z-index: 10;
+      }
+      body.light-theme footer {
+        background: #faf5ff;
+      }
+      .footer-name {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 16px;
+        background: linear-gradient(
+          135deg,
+          var(--yellow),
+          var(--pink),
+          var(--purple)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 6px;
+      }
+      .footer-sub {
+        font-size: 12.5px;
+        color: var(--text-muted);
+      }
+      .footer-dots {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        margin-top: 16px;
+      }
+      .footer-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+      }
+
+      @media (max-width: 600px) {
+        .cards-3,
+        .cards-2 {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <!-- HEADER -->
+    <header>
+      <a href="index.html" class="header-logo">
+        <span style="font-size: 24px">📊</span>
+        <span
+          style="font-weight: 800; font-family: &quot;Syne&quot;, sans-serif"
+          >Belajar Akuntansi</span
+        >
+      </a>
+      <div style="display: flex; gap: 12px; align-items: center">
+        <a href="index.html" class="back-btn">← Kembali</a>
+        <button
+          class="theme-toggle-btn"
+          onclick="toggleTheme()"
+          title="Ganti Tema"
+        >
+          🌓
+        </button>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-glass">
+        <div class="hero-tag">📊 Bab 13 — Analisis Laporan Keuangan</div>
+        <h1>Analisis <span class="hi">Laporan Keuangan</span></h1>
+        <p>
+          Ubah angka-angka mentah menjadi informasi bermakna. Kuasai analisis
+          horizontal, vertikal, serta 4 kelompok rasio keuangan — likuiditas,
+          solvabilitas, profitabilitas, dan aktivitas.
+        </p>
+        <div class="hero-badges">
+          <div class="hero-badge">📈 Analisis Horizontal</div>
+          <div class="hero-badge">📉 Analisis Vertikal</div>
+          <div class="hero-badge">💧 Rasio Likuiditas</div>
+          <div class="hero-badge">🏦 Rasio Solvabilitas</div>
+          <div class="hero-badge">💰 Rasio Profitabilitas</div>
+          <div class="hero-badge">⚡ Rasio Aktivitas</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <main class="content">
+      <!-- ══════════════════════════════════
+           1. TUJUAN & METODE ANALISIS
+      ══════════════════════════════════ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">📌 1. Tujuan &amp; Metode Analisis</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          ❓ Mengapa Perlu Analisis Laporan Keuangan?
+        </div>
+        <div class="example-story">
+          Laporan keuangan berisi <strong>angka-angka mentah</strong>. Analisis
+          mengubah angka-angka itu menjadi
+          <strong>informasi bermakna</strong> untuk pengambilan keputusan. Tanpa
+          analisis, laporan keuangan hanya tumpukan data yang tidak bicara
+          apa-apa!
+        </div>
+      </div>
+
+      <h3
+        style="
+          font-family: &quot;Syne&quot;, sans-serif;
+          font-weight: 800;
+          font-size: 16px;
+          margin-bottom: 16px;
+          color: var(--text);
+        "
+      >
+        Pengguna &amp; Kepentingannya
+      </h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Pengguna</th>
+              <th>Pertanyaan Utama</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Investor</strong></td>
+              <td>Apakah saham ini layak dibeli?</td>
+            </tr>
+            <tr>
+              <td><strong>Kreditur / Bank</strong></td>
+              <td>Apakah perusahaan mampu bayar utang?</td>
+            </tr>
+            <tr>
+              <td><strong>Manajemen</strong></td>
+              <td>Di mana kelemahan kinerja kita?</td>
+            </tr>
+            <tr>
+              <td><strong>Supplier</strong></td>
+              <td>Apakah aman memberi kredit ke perusahaan ini?</td>
+            </tr>
+            <tr>
+              <td><strong>Karyawan</strong></td>
+              <td>Apakah perusahaan ini akan bertahan lama?</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="cards-3">
+        <div class="card" style="--c: var(--blue)">
+          <div class="card-icon">📈</div>
+          <div class="card-eyebrow">Metode 1</div>
+          <div class="card-title">Analisis Horizontal</div>
+          <div class="card-body">
+            Membandingkan laporan keuangan
+            <strong>dua periode atau lebih</strong> untuk melihat tren perubahan
+            — naik atau turun secara nominal maupun persentase.
+          </div>
+        </div>
+        <div class="card" style="--c: var(--orange)">
+          <div class="card-icon">📉</div>
+          <div class="card-eyebrow">Metode 2</div>
+          <div class="card-title">Analisis Vertikal</div>
+          <div class="card-body">
+            Menyatakan setiap item laporan keuangan sebagai
+            <strong>persentase dari angka dasar</strong> — penjualan (L/R) atau
+            total aset (Neraca).
+          </div>
+        </div>
+        <div class="card" style="--c: var(--accent)">
+          <div class="card-icon">🔢</div>
+          <div class="card-eyebrow">Metode 3</div>
+          <div class="card-title">Analisis Rasio</div>
+          <div class="card-body">
+            Menghubungkan dua angka menjadi
+            <strong>satu ukuran yang bermakna</strong> — likuiditas,
+            solvabilitas, profitabilitas, dan aktivitas.
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════
+           2. ANALISIS HORIZONTAL
+      ══════════════════════════════════ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">📈 2. Analisis Horizontal</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="formula-block">
+        Perubahan Nominal = Nilai Tahun Ini − Nilai Tahun Lalu<br />
+        Perubahan (%) = (Perubahan Nominal ÷ Nilai Tahun Lalu) × 100%
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">✏️ Contoh — PT. Berkah Nusantara</div>
+        <div class="example-story">
+          Laporan Laba Rugi perbandingan 2023 vs 2024
+        </div>
+        <div class="table-wrap" style="margin-bottom: 0">
+          <table>
+            <thead>
+              <tr>
+                <th>Keterangan</th>
+                <th>2023</th>
+                <th>2024</th>
+                <th>Perubahan</th>
+                <th>%</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Penjualan</td>
+                <td>Rp 1.500.000.000</td>
+                <td>Rp 1.800.000.000</td>
+                <td style="color: var(--green)">+Rp 300.000.000</td>
+                <td style="color: var(--green)">+20%</td>
+              </tr>
+              <tr>
+                <td>HPP</td>
+                <td>Rp 950.000.000</td>
+                <td>Rp 1.100.000.000</td>
+                <td style="color: var(--red)">+Rp 150.000.000</td>
+                <td style="color: var(--red)">+15,8%</td>
+              </tr>
+              <tr class="highlight-row">
+                <td>Laba Kotor</td>
+                <td>Rp 550.000.000</td>
+                <td>Rp 700.000.000</td>
+                <td style="color: var(--green)">+Rp 150.000.000</td>
+                <td style="color: var(--green)">+27,3%</td>
+              </tr>
+              <tr>
+                <td>Beban Operasi</td>
+                <td>Rp 280.000.000</td>
+                <td>Rp 310.000.000</td>
+                <td style="color: var(--red)">+Rp 30.000.000</td>
+                <td style="color: var(--red)">+10,7%</td>
+              </tr>
+              <tr class="total-row">
+                <td><strong>Laba Bersih</strong></td>
+                <td>Rp 270.000.000</td>
+                <td>Rp 390.000.000</td>
+                <td style="color: var(--green)">+Rp 120.000.000</td>
+                <td style="color: var(--green)">+44,4%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="info-box">
+        🎉 <strong>Interpretasi:</strong> Penjualan naik 20% tapi laba bersih
+        naik <strong>44,4%</strong> — artinya perusahaan
+        <strong>semakin efisien</strong>! HPP naik lebih lambat (15,8%) dan
+        beban operasi terkendali (10,7%). Tanda manajemen yang sangat baik!
+      </div>
+
+      <!-- ══════════════════════════════════
+           3. ANALISIS VERTIKAL
+      ══════════════════════════════════ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">📉 3. Analisis Vertikal</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="cards-2">
+        <div class="card" style="--c: var(--teal)">
+          <div class="card-icon">📋</div>
+          <div class="card-eyebrow">Laporan Laba Rugi</div>
+          <div class="card-title">Base: Penjualan Bersih</div>
+          <div class="card-body" style="margin-bottom: 12px">
+            Setiap item dinyatakan sebagai % dari penjualan bersih (= 100%)
+          </div>
+          <div
+            style="
+              background: rgba(6, 182, 212, 0.1);
+              border: 1px solid rgba(6, 182, 212, 0.25);
+              border-radius: 10px;
+              padding: 12px;
+              font-family: &quot;Syne&quot;, sans-serif;
+              font-weight: 700;
+              font-size: 13px;
+              color: var(--teal);
+              text-align: center;
+            "
+          >
+            % L/R = (Item ÷ Penjualan Bersih) × 100%
+          </div>
+        </div>
+        <div class="card" style="--c: var(--orange)">
+          <div class="card-icon">🏦</div>
+          <div class="card-eyebrow">Neraca</div>
+          <div class="card-title">Base: Total Aset</div>
+          <div class="card-body" style="margin-bottom: 12px">
+            Setiap item dinyatakan sebagai % dari total aset (= 100%)
+          </div>
+          <div
+            style="
+              background: rgba(255, 107, 53, 0.1);
+              border: 1px solid rgba(255, 107, 53, 0.25);
+              border-radius: 10px;
+              padding: 12px;
+              font-family: &quot;Syne&quot;, sans-serif;
+              font-weight: 700;
+              font-size: 13px;
+              color: var(--orange);
+              text-align: center;
+            "
+          >
+            % Neraca = (Item ÷ Total Aset) × 100%
+          </div>
+        </div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          ✏️ Contoh Vertikal — PT. Berkah Nusantara 2024
+        </div>
+        <div class="table-wrap" style="margin-bottom: 0">
+          <table>
+            <thead>
+              <tr>
+                <th>Keterangan</th>
+                <th>Jumlah</th>
+                <th>% dari Penjualan</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Penjualan Bersih</td>
+                <td>Rp 1.800.000.000</td>
+                <td><strong>100%</strong></td>
+              </tr>
+              <tr>
+                <td>HPP</td>
+                <td>Rp 1.100.000.000</td>
+                <td style="color: var(--red)">61,1%</td>
+              </tr>
+              <tr class="highlight-row">
+                <td>Laba Kotor</td>
+                <td>Rp 700.000.000</td>
+                <td style="color: var(--green)">38,9%</td>
+              </tr>
+              <tr>
+                <td>Beban Operasi</td>
+                <td>Rp 310.000.000</td>
+                <td style="color: var(--red)">17,2%</td>
+              </tr>
+              <tr class="total-row">
+                <td><strong>Laba Bersih</strong></td>
+                <td>Rp 390.000.000</td>
+                <td style="color: var(--green)"><strong>21,7%</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="warning-box">
+        💡 <strong>Kegunaan utama analisis vertikal:</strong> Kita bisa
+        membandingkan perusahaan berbeda ukuran secara <em>apple-to-apple</em>.
+        PT A penjualan Rp 1 miliar, PT B Rp 10 miliar — tidak bisa dibandingkan
+        nominalnya, tapi bisa dibandingkan <strong>persentasenya!</strong>
+      </div>
+
+      <!-- ══════════════════════════════════
+           4. RASIO LIKUIDITAS
+      ══════════════════════════════════ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">💧 4. Rasio Likuiditas</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="info-box">
+        <strong>Definisi:</strong> Mengukur kemampuan perusahaan memenuhi
+        <strong>kewajiban jangka pendek</strong> yang segera jatuh tempo.
+      </div>
+
+      <div class="rasio-group">
+        <div
+          class="rasio-group-header"
+          style="background: linear-gradient(135deg, var(--blue), var(--teal))"
+        >
+          💧 Rasio Likuiditas — Standar &amp; Rumus
+        </div>
+        <table class="rasio-table">
+          <thead>
+            <tr>
+              <th>Nama Rasio</th>
+              <th>Rumus</th>
+              <th>Standar</th>
+              <th>Interpretasi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Rasio Lancar (Current Ratio)</td>
+              <td>Aset Lancar ÷ Kewajiban Lancar</td>
+              <td><span class="chip chip-ok">≥ 2,0</span></td>
+              <td>Rp 2 aset per Rp 1 utang lancar</td>
+            </tr>
+            <tr>
+              <td>Rasio Cepat (Quick Ratio)</td>
+              <td>(Kas + Piutang) ÷ Kewajiban Lancar</td>
+              <td><span class="chip chip-ok">≥ 1,0</span></td>
+              <td>Tanpa persediaan — lebih ketat</td>
+            </tr>
+            <tr>
+              <td>Rasio Kas (Cash Ratio)</td>
+              <td>Kas ÷ Kewajiban Lancar</td>
+              <td><span class="chip chip-warn">≥ 0,5</span></td>
+              <td>Kemampuan bayar pakai kas tunai</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          ✏️ Contoh — PT. Berkah Nusantara 31 Des 2024
+        </div>
+        <div class="example-story">
+          <strong>Aset Lancar:</strong> Kas Rp 80 jt | Piutang Rp 220 jt |
+          Persediaan Rp 180 jt | Beban DIM Rp 20 jt →
+          <strong>Total Rp 500 jt</strong><br />
+          <strong>Kewajiban Lancar:</strong> Utang Usaha Rp 150 jt | Utang Gaji
+          Rp 30 jt | Utang Pajak Rp 20 jt → <strong>Total Rp 200 jt</strong>
+        </div>
+        <div class="table-wrap" style="margin-bottom: 0">
+          <table>
+            <thead>
+              <tr>
+                <th>Rasio</th>
+                <th>Perhitungan</th>
+                <th>Hasil</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Rasio Lancar</td>
+                <td>500 ÷ 200</td>
+                <td style="font-weight: 700; color: var(--green)">2,50</td>
+                <td><span class="chip chip-ok">✅ Sangat Baik</span></td>
+              </tr>
+              <tr>
+                <td>Rasio Cepat</td>
+                <td>(80+220) ÷ 200</td>
+                <td style="font-weight: 700; color: var(--green)">1,50</td>
+                <td><span class="chip chip-ok">✅ Baik</span></td>
+              </tr>
+              <tr>
+                <td>Rasio Kas</td>
+                <td>80 ÷ 200</td>
+                <td style="font-weight: 700; color: var(--yellow)">0,40</td>
+                <td><span class="chip chip-warn">⚠️ Perhatian</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════
+           5. RASIO SOLVABILITAS
+      ══════════════════════════════════ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">🏦 5. Rasio Solvabilitas</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="info-box">
+        <strong>Definisi:</strong> Mengukur kemampuan perusahaan memenuhi
+        <strong>kewajiban jangka panjang</strong> dan seberapa besar perusahaan
+        dibiayai utang.
+      </div>
+
+      <div class="rasio-group">
+        <div
+          class="rasio-group-header"
+          style="
+            background: linear-gradient(135deg, var(--orange), var(--yellow));
+          "
+        >
+          🏦 Rasio Solvabilitas — Standar &amp; Rumus
+        </div>
+        <table class="rasio-table">
+          <thead>
+            <tr>
+              <th>Nama Rasio</th>
+              <th>Rumus</th>
+              <th>Standar</th>
+              <th>Interpretasi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Debt to Asset Ratio</td>
+              <td>(Total Utang ÷ Total Aset) × 100%</td>
+              <td><span class="chip chip-ok">≤ 50%</span></td>
+              <td>Semakin rendah semakin aman</td>
+            </tr>
+            <tr>
+              <td>Debt to Equity Ratio (DER)</td>
+              <td>Total Utang ÷ Total Ekuitas</td>
+              <td><span class="chip chip-ok">≤ 1,0</span></td>
+              <td>Utang tidak melebihi modal</td>
+            </tr>
+            <tr>
+              <td>Interest Coverage Ratio (ICR)</td>
+              <td>EBIT ÷ Beban Bunga</td>
+              <td><span class="chip chip-ok">≥ 3,0</span></td>
+              <td>Semakin tinggi semakin aman bayar bunga</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">✏️ Contoh — PT. Berkah Nusantara 2024</div>
+        <div class="example-story">
+          Total Aset Rp 2.000 jt | Total Utang Rp 800 jt | Total Ekuitas Rp
+          1.200 jt | EBIT Rp 450 jt | Beban Bunga Rp 30 jt
+        </div>
+        <div class="table-wrap" style="margin-bottom: 0">
+          <table>
+            <thead>
+              <tr>
+                <th>Rasio</th>
+                <th>Perhitungan</th>
+                <th>Hasil</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Debt to Asset</td>
+                <td>800 ÷ 2.000</td>
+                <td style="font-weight: 700; color: var(--green)">40%</td>
+                <td><span class="chip chip-ok">✅ Aman</span></td>
+              </tr>
+              <tr>
+                <td>DER</td>
+                <td>800 ÷ 1.200</td>
+                <td style="font-weight: 700; color: var(--green)">0,67</td>
+                <td><span class="chip chip-ok">✅ Sangat Baik</span></td>
+              </tr>
+              <tr>
+                <td>ICR</td>
+                <td>450 ÷ 30</td>
+                <td style="font-weight: 700; color: var(--green)">15,0</td>
+                <td><span class="chip chip-ok">✅ Luar Biasa</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════
+           6. RASIO PROFITABILITAS
+      ══════════════════════════════════ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">💰 6. Rasio Profitabilitas</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="info-box">
+        <strong>Definisi:</strong> Mengukur kemampuan perusahaan menghasilkan
+        <strong>laba</strong> dari penjualan, aset, dan modal yang dimiliki.
+      </div>
+
+      <div class="rasio-group">
+        <div
+          class="rasio-group-header"
+          style="background: linear-gradient(135deg, var(--green), var(--teal))"
+        >
+          💰 Rasio Profitabilitas — Standar &amp; Rumus
+        </div>
+        <table class="rasio-table">
+          <thead>
+            <tr>
+              <th>Nama Rasio</th>
+              <th>Rumus</th>
+              <th>Standar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>GPM (Gross Profit Margin)</td>
+              <td>Laba Kotor ÷ Penjualan Bersih × 100%</td>
+              <td><span class="chip chip-ok">≥ 25%</span></td>
+            </tr>
+            <tr>
+              <td>NPM (Net Profit Margin)</td>
+              <td>Laba Bersih ÷ Penjualan Bersih × 100%</td>
+              <td><span class="chip chip-ok">≥ 10%</span></td>
+            </tr>
+            <tr>
+              <td>ROA (Return on Assets)</td>
+              <td>Laba Bersih ÷ Rata-rata Total Aset × 100%</td>
+              <td><span class="chip chip-ok">≥ 10%</span></td>
+            </tr>
+            <tr>
+              <td>ROE (Return on Equity)</td>
+              <td>Laba Bersih ÷ Rata-rata Total Ekuitas × 100%</td>
+              <td><span class="chip chip-ok">≥ 15%</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">✏️ Contoh — PT. Berkah Nusantara 2024</div>
+        <div class="example-story">
+          Penjualan Rp 1.800 jt | Laba Kotor Rp 700 jt | Laba Bersih Rp 390 jt |
+          Rata-rata Aset Rp 1.900 jt | Rata-rata Ekuitas Rp 1.150 jt
+        </div>
+        <div class="table-wrap" style="margin-bottom: 0">
+          <table>
+            <thead>
+              <tr>
+                <th>Rasio</th>
+                <th>Perhitungan</th>
+                <th>Hasil</th>
+                <th>Interpretasi</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>GPM</td>
+                <td>700 ÷ 1.800 × 100%</td>
+                <td style="font-weight: 700; color: var(--green)">38,9%</td>
+                <td>Rp 38,9 laba kotor per Rp 100 penjualan</td>
+              </tr>
+              <tr>
+                <td>NPM</td>
+                <td>390 ÷ 1.800 × 100%</td>
+                <td style="font-weight: 700; color: var(--green)">21,7%</td>
+                <td>Rp 21,7 laba bersih per Rp 100 penjualan</td>
+              </tr>
+              <tr>
+                <td>ROA</td>
+                <td>390 ÷ 1.900 × 100%</td>
+                <td style="font-weight: 700; color: var(--green)">20,5%</td>
+                <td>Rp 20,5 laba per Rp 100 aset — efisiensi tinggi!</td>
+              </tr>
+              <tr class="total-row">
+                <td>ROE</td>
+                <td>390 ÷ 1.150 × 100%</td>
+                <td style="font-weight: 700">33,9%</td>
+                <td>Return sangat menarik bagi investor!</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════
+           7. RASIO AKTIVITAS
+      ══════════════════════════════════ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">⚡ 7. Rasio Aktivitas</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="info-box">
+        <strong>Definisi:</strong> Mengukur seberapa efisien perusahaan
+        menggunakan aset-asetnya untuk menghasilkan penjualan.
+      </div>
+
+      <div class="rasio-group">
+        <div
+          class="rasio-group-header"
+          style="
+            background: linear-gradient(135deg, var(--accent), var(--pink));
+          "
+        >
+          ⚡ Rasio Aktivitas — Standar &amp; Rumus
+        </div>
+        <table class="rasio-table">
+          <thead>
+            <tr>
+              <th>Nama Rasio</th>
+              <th>Rumus</th>
+              <th>Standar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Perputaran Piutang</td>
+              <td>Penjualan Kredit ÷ Rata-rata Piutang</td>
+              <td>Semakin besar ↑</td>
+            </tr>
+            <tr>
+              <td>DSO (Days Sales Outstanding)</td>
+              <td>360 ÷ Perputaran Piutang</td>
+              <td><span class="chip chip-ok">≤ syarat kredit</span></td>
+            </tr>
+            <tr>
+              <td>Perputaran Persediaan</td>
+              <td>HPP ÷ Rata-rata Persediaan</td>
+              <td>Semakin besar ↑</td>
+            </tr>
+            <tr>
+              <td>DIO (Days Inventory Outstanding)</td>
+              <td>360 ÷ Perputaran Persediaan</td>
+              <td>Semakin kecil ↓</td>
+            </tr>
+            <tr>
+              <td>DPO (Days Payable Outstanding)</td>
+              <td>360 ÷ Perputaran Utang</td>
+              <td>30–60 hari</td>
+            </tr>
+            <tr>
+              <td>Perputaran Total Aset</td>
+              <td>Penjualan Bersih ÷ Rata-rata Total Aset</td>
+              <td>Semakin besar ↑</td>
+            </tr>
+            <tr class="highlight-row">
+              <td><strong>CCC (Cash Conversion Cycle)</strong></td>
+              <td><strong>DSO + DIO − DPO</strong></td>
+              <td><span class="chip chip-ok">Semakin kecil/negatif ↓</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          ✏️ Contoh Rasio Aktivitas — PT. Berkah Nusantara 2024
+        </div>
+        <div class="example-story">
+          Penjualan Rp 1.800 jt | HPP Rp 1.100 jt | Pembelian Kredit Rp 1.200 jt
+          | Rata-rata Piutang Rp 200 jt | Rata-rata Persediaan Rp 160 jt |
+          Rata-rata Utang Usaha Rp 130 jt | Rata-rata Aset Rp 1.900 jt
+        </div>
+        <div class="table-wrap" style="margin-bottom: 16px">
+          <table>
+            <thead>
+              <tr>
+                <th>Rasio</th>
+                <th>Perhitungan</th>
+                <th>Hasil</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Perputaran Piutang</td>
+                <td>1.800 ÷ 200</td>
+                <td>9,0 kali</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td>DSO</td>
+                <td>360 ÷ 9</td>
+                <td style="font-weight: 700; color: var(--green)">40 hari</td>
+                <td><span class="chip chip-ok">✅ Baik</span></td>
+              </tr>
+              <tr>
+                <td>Perputaran Persediaan</td>
+                <td>1.100 ÷ 160</td>
+                <td>6,9 kali</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td>DIO</td>
+                <td>360 ÷ 6,9</td>
+                <td style="font-weight: 700; color: var(--green)">52 hari</td>
+                <td><span class="chip chip-ok">✅ Wajar</span></td>
+              </tr>
+              <tr>
+                <td>DPO</td>
+                <td>360 ÷ 9,2</td>
+                <td style="font-weight: 700">39 hari</td>
+                <td><span class="chip chip-ok">✅ Normal</span></td>
+              </tr>
+              <tr>
+                <td>Perputaran Aset</td>
+                <td>1.800 ÷ 1.900</td>
+                <td>0,95 kali</td>
+                <td>—</td>
+              </tr>
+              <tr class="total-row">
+                <td><strong>CCC</strong></td>
+                <td>40 + 52 − 39</td>
+                <td style="font-weight: 800"><strong>53 hari</strong></td>
+                <td><span class="chip chip-ok">✅ Baik</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="info-box" style="margin-bottom: 0">
+          💡 <strong>CCC 53 hari</strong> = perusahaan butuh 53 hari dari bayar
+          supplier sampai kas kembali. Semakin kecil angka CCC, semakin efisien
+          pengelolaan modal kerja!
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════
+           8. KALKULATOR RASIO INTERAKTIF
+      ══════════════════════════════════ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">🧮 8. Kalkulator Rasio Interaktif</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="calc-section">
+        <div class="calc-title">Hitung Rasio Otomatis</div>
+        <div class="calc-subtitle">
+          Masukkan data keuangan perusahaan — seluruh rasio kunci akan dihitung
+          seketika
+        </div>
+        <div class="calc-grid">
+          <div class="calc-input-group">
+            <label>Aset Lancar (Rp)</label>
+            <input
+              type="number"
+              id="c-al"
+              value="500000000"
+              oninput="hitungRasio()"
+            />
+          </div>
+          <div class="calc-input-group">
+            <label>Kewajiban Lancar (Rp)</label>
+            <input
+              type="number"
+              id="c-kl"
+              value="200000000"
+              oninput="hitungRasio()"
+            />
+          </div>
+          <div class="calc-input-group">
+            <label>Kas (Rp)</label>
+            <input
+              type="number"
+              id="c-kas"
+              value="80000000"
+              oninput="hitungRasio()"
+            />
+          </div>
+          <div class="calc-input-group">
+            <label>Piutang (Rp)</label>
+            <input
+              type="number"
+              id="c-piutang"
+              value="220000000"
+              oninput="hitungRasio()"
+            />
+          </div>
+          <div class="calc-input-group">
+            <label>Total Utang (Rp)</label>
+            <input
+              type="number"
+              id="c-utang"
+              value="800000000"
+              oninput="hitungRasio()"
+            />
+          </div>
+          <div class="calc-input-group">
+            <label>Total Aset (Rp)</label>
+            <input
+              type="number"
+              id="c-aset"
+              value="2000000000"
+              oninput="hitungRasio()"
+            />
+          </div>
+          <div class="calc-input-group">
+            <label>Total Ekuitas (Rp)</label>
+            <input
+              type="number"
+              id="c-ekuitas"
+              value="1200000000"
+              oninput="hitungRasio()"
+            />
+          </div>
+          <div class="calc-input-group">
+            <label>EBIT (Rp)</label>
+            <input
+              type="number"
+              id="c-ebit"
+              value="450000000"
+              oninput="hitungRasio()"
+            />
+          </div>
+          <div class="calc-input-group">
+            <label>Beban Bunga (Rp)</label>
+            <input
+              type="number"
+              id="c-bunga"
+              value="30000000"
+              oninput="hitungRasio()"
+            />
+          </div>
+          <div class="calc-input-group">
+            <label>Laba Bersih (Rp)</label>
+            <input
+              type="number"
+              id="c-laba"
+              value="390000000"
+              oninput="hitungRasio()"
+            />
+          </div>
+          <div class="calc-input-group">
+            <label>Penjualan Bersih (Rp)</label>
+            <input
+              type="number"
+              id="c-jual"
+              value="1800000000"
+              oninput="hitungRasio()"
+            />
+          </div>
+          <div class="calc-input-group">
+            <label>Laba Kotor (Rp)</label>
+            <input
+              type="number"
+              id="c-labakotor"
+              value="700000000"
+              oninput="hitungRasio()"
+            />
+          </div>
+        </div>
+        <div
+          id="rasio-results"
+          class="calc-result-grid"
+          style="margin-top: 24px"
+        ></div>
+      </div>
+
+      <!-- ══════════════════════════════════
+           9. ANALISIS KOMPREHENSIF
+      ══════════════════════════════════ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">📋 9. Analisis Komprehensif</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Rasio</th>
+              <th>PT. Berkah</th>
+              <th>Standar Industri</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="highlight-row">
+              <td
+                colspan="4"
+                style="
+                  font-weight: 800;
+                  color: var(--blue);
+                  font-family: &quot;Syne&quot;, sans-serif;
+                  font-size: 12px;
+                  letter-spacing: 0.08em;
+                  text-transform: uppercase;
+                "
+              >
+                LIKUIDITAS
+              </td>
+            </tr>
+            <tr>
+              <td>Rasio Lancar</td>
+              <td>2,50</td>
+              <td>≥ 2,0</td>
+              <td><span class="chip chip-ok">✅ Baik</span></td>
+            </tr>
+            <tr>
+              <td>Rasio Cepat</td>
+              <td>1,50</td>
+              <td>≥ 1,0</td>
+              <td><span class="chip chip-ok">✅ Baik</span></td>
+            </tr>
+            <tr>
+              <td>Rasio Kas</td>
+              <td>0,40</td>
+              <td>≥ 0,5</td>
+              <td><span class="chip chip-warn">⚠️ Perhatian</span></td>
+            </tr>
+            <tr class="highlight-row">
+              <td
+                colspan="4"
+                style="
+                  font-weight: 800;
+                  color: var(--orange);
+                  font-family: &quot;Syne&quot;, sans-serif;
+                  font-size: 12px;
+                  letter-spacing: 0.08em;
+                  text-transform: uppercase;
+                "
+              >
+                SOLVABILITAS
+              </td>
+            </tr>
+            <tr>
+              <td>Debt to Asset</td>
+              <td>40%</td>
+              <td>≤ 50%</td>
+              <td><span class="chip chip-ok">✅ Aman</span></td>
+            </tr>
+            <tr>
+              <td>DER</td>
+              <td>0,67</td>
+              <td>≤ 1,0</td>
+              <td><span class="chip chip-ok">✅ Baik</span></td>
+            </tr>
+            <tr>
+              <td>ICR</td>
+              <td>15,0</td>
+              <td>≥ 3,0</td>
+              <td><span class="chip chip-ok">✅ Sangat Baik</span></td>
+            </tr>
+            <tr class="highlight-row">
+              <td
+                colspan="4"
+                style="
+                  font-weight: 800;
+                  color: var(--green);
+                  font-family: &quot;Syne&quot;, sans-serif;
+                  font-size: 12px;
+                  letter-spacing: 0.08em;
+                  text-transform: uppercase;
+                "
+              >
+                PROFITABILITAS
+              </td>
+            </tr>
+            <tr>
+              <td>GPM</td>
+              <td>38,9%</td>
+              <td>≥ 25%</td>
+              <td><span class="chip chip-ok">✅ Sangat Baik</span></td>
+            </tr>
+            <tr>
+              <td>NPM</td>
+              <td>21,7%</td>
+              <td>≥ 10%</td>
+              <td><span class="chip chip-ok">✅ Sangat Baik</span></td>
+            </tr>
+            <tr>
+              <td>ROA</td>
+              <td>20,5%</td>
+              <td>≥ 10%</td>
+              <td><span class="chip chip-ok">✅ Sangat Baik</span></td>
+            </tr>
+            <tr>
+              <td>ROE</td>
+              <td>33,9%</td>
+              <td>≥ 15%</td>
+              <td><span class="chip chip-ok">✅ Sangat Baik</span></td>
+            </tr>
+            <tr class="highlight-row">
+              <td
+                colspan="4"
+                style="
+                  font-weight: 800;
+                  color: var(--accent);
+                  font-family: &quot;Syne&quot;, sans-serif;
+                  font-size: 12px;
+                  letter-spacing: 0.08em;
+                  text-transform: uppercase;
+                "
+              >
+                AKTIVITAS
+              </td>
+            </tr>
+            <tr>
+              <td>DSO</td>
+              <td>40 hari</td>
+              <td>≤ 45 hari</td>
+              <td><span class="chip chip-ok">✅ Baik</span></td>
+            </tr>
+            <tr>
+              <td>DIO</td>
+              <td>52 hari</td>
+              <td>≤ 60 hari</td>
+              <td><span class="chip chip-ok">✅ Baik</span></td>
+            </tr>
+            <tr>
+              <td>DPO</td>
+              <td>39 hari</td>
+              <td>30–60 hari</td>
+              <td><span class="chip chip-ok">✅ Normal</span></td>
+            </tr>
+            <tr class="total-row">
+              <td>CCC</td>
+              <td>53 hari</td>
+              <td>≤ 60 hari</td>
+              <td><span class="chip chip-ok">✅ Baik</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="info-box">
+        ✅ <strong>Kesimpulan Komprehensif:</strong> PT. Berkah Nusantara adalah
+        perusahaan yang <strong>sangat sehat secara finansial</strong>. Hampir
+        semua rasio di atas standar industri. Satu-satunya perhatian adalah
+        rasio kas yang sedikit di bawah standar (0,40 vs 0,5) — manajemen perlu
+        memastikan piutang tertagih tepat waktu!
+      </div>
+
+      <!-- ══════════════════════════════════
+           10. STUDI KASUS JOMBANG
+      ══════════════════════════════════ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">🏪 10. Studi Kasus — Jombang 2024</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          📋 Bank BRI Jombang — Analisis Kredit Distributor Sembako
+        </div>
+        <div class="example-story">
+          Bank BRI Jombang menerima permohonan kredit dari dua perusahaan
+          distributor sembako. Analis kredit harus menentukan mana yang lebih
+          layak mendapat pinjaman <strong>Rp 500.000.000</strong>.
+        </div>
+      </div>
+
+      <div class="comparison-table-wrap">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Data Keuangan</th>
+              <th>PT. Makmur Sentosa</th>
+              <th>CV. Lancar Abadi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Penjualan Bersih</td>
+              <td>Rp 3.000.000.000</td>
+              <td>Rp 2.500.000.000</td>
+            </tr>
+            <tr>
+              <td>Laba Kotor</td>
+              <td>Rp 750.000.000</td>
+              <td>Rp 500.000.000</td>
+            </tr>
+            <tr>
+              <td>Laba Bersih</td>
+              <td>Rp 300.000.000</td>
+              <td>Rp 125.000.000</td>
+            </tr>
+            <tr>
+              <td>Total Aset</td>
+              <td>Rp 2.500.000.000</td>
+              <td>Rp 2.000.000.000</td>
+            </tr>
+            <tr>
+              <td>Aset Lancar</td>
+              <td>Rp 1.200.000.000</td>
+              <td>Rp 800.000.000</td>
+            </tr>
+            <tr>
+              <td>Kas</td>
+              <td>Rp 150.000.000</td>
+              <td>Rp 60.000.000</td>
+            </tr>
+            <tr>
+              <td>Piutang</td>
+              <td>Rp 400.000.000</td>
+              <td>Rp 450.000.000</td>
+            </tr>
+            <tr>
+              <td>Total Utang</td>
+              <td>Rp 1.000.000.000</td>
+              <td>Rp 1.200.000.000</td>
+            </tr>
+            <tr>
+              <td>Kewajiban Lancar</td>
+              <td>Rp 400.000.000</td>
+              <td>Rp 500.000.000</td>
+            </tr>
+            <tr>
+              <td>Total Ekuitas</td>
+              <td>Rp 1.500.000.000</td>
+              <td>Rp 800.000.000</td>
+            </tr>
+            <tr>
+              <td>EBIT</td>
+              <td>Rp 400.000.000</td>
+              <td>Rp 180.000.000</td>
+            </tr>
+            <tr>
+              <td>Beban Bunga</td>
+              <td>Rp 50.000.000</td>
+              <td>Rp 40.000.000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="comparison-table-wrap">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Rasio</th>
+              <th>PT. Makmur Sentosa</th>
+              <th>CV. Lancar Abadi</th>
+              <th>Unggul</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="highlight">
+              <td
+                colspan="4"
+                style="
+                  font-weight: 800;
+                  color: var(--blue);
+                  font-size: 12px;
+                  letter-spacing: 0.06em;
+                  text-transform: uppercase;
+                  font-family: &quot;Syne&quot;, sans-serif;
+                "
+              >
+                LIKUIDITAS
+              </td>
+            </tr>
+            <tr>
+              <td>Rasio Lancar</td>
+              <td style="font-weight: 700; color: var(--green)">3,00</td>
+              <td style="font-weight: 700; color: var(--red)">1,60</td>
+              <td><span class="win-badge">PT. Makmur ✅</span></td>
+            </tr>
+            <tr>
+              <td>Rasio Cepat</td>
+              <td style="font-weight: 700; color: var(--green)">1,38</td>
+              <td style="font-weight: 700; color: var(--red)">1,02</td>
+              <td><span class="win-badge">PT. Makmur ✅</span></td>
+            </tr>
+            <tr>
+              <td>Rasio Kas</td>
+              <td style="font-weight: 700; color: var(--yellow)">0,38</td>
+              <td style="font-weight: 700; color: var(--red)">0,12</td>
+              <td><span class="win-badge">PT. Makmur ✅</span></td>
+            </tr>
+            <tr class="highlight">
+              <td
+                colspan="4"
+                style="
+                  font-weight: 800;
+                  color: var(--orange);
+                  font-size: 12px;
+                  letter-spacing: 0.06em;
+                  text-transform: uppercase;
+                  font-family: &quot;Syne&quot;, sans-serif;
+                "
+              >
+                SOLVABILITAS
+              </td>
+            </tr>
+            <tr>
+              <td>Debt/Asset</td>
+              <td style="font-weight: 700; color: var(--green)">40%</td>
+              <td style="font-weight: 700; color: var(--red)">60%</td>
+              <td><span class="win-badge">PT. Makmur ✅</span></td>
+            </tr>
+            <tr>
+              <td>DER</td>
+              <td style="font-weight: 700; color: var(--green)">0,67</td>
+              <td style="font-weight: 700; color: var(--red)">1,50</td>
+              <td><span class="win-badge">PT. Makmur ✅</span></td>
+            </tr>
+            <tr>
+              <td>ICR</td>
+              <td style="font-weight: 700; color: var(--green)">8,0</td>
+              <td style="font-weight: 700; color: var(--yellow)">4,5</td>
+              <td><span class="win-badge">PT. Makmur ✅</span></td>
+            </tr>
+            <tr class="highlight">
+              <td
+                colspan="4"
+                style="
+                  font-weight: 800;
+                  color: var(--green);
+                  font-size: 12px;
+                  letter-spacing: 0.06em;
+                  text-transform: uppercase;
+                  font-family: &quot;Syne&quot;, sans-serif;
+                "
+              >
+                PROFITABILITAS
+              </td>
+            </tr>
+            <tr>
+              <td>GPM</td>
+              <td style="font-weight: 700; color: var(--green)">25%</td>
+              <td style="font-weight: 700; color: var(--red)">20%</td>
+              <td><span class="win-badge">PT. Makmur ✅</span></td>
+            </tr>
+            <tr>
+              <td>NPM</td>
+              <td style="font-weight: 700; color: var(--green)">10%</td>
+              <td style="font-weight: 700; color: var(--red)">5%</td>
+              <td><span class="win-badge">PT. Makmur ✅</span></td>
+            </tr>
+            <tr>
+              <td>ROA</td>
+              <td style="font-weight: 700; color: var(--green)">12%</td>
+              <td style="font-weight: 700; color: var(--red)">6,3%</td>
+              <td><span class="win-badge">PT. Makmur ✅</span></td>
+            </tr>
+            <tr>
+              <td>ROE</td>
+              <td style="font-weight: 700; color: var(--green)">20%</td>
+              <td style="font-weight: 700; color: var(--yellow)">15,6%</td>
+              <td><span class="win-badge">PT. Makmur ✅</span></td>
+            </tr>
+            <tr class="highlight">
+              <td
+                colspan="4"
+                style="
+                  font-weight: 800;
+                  color: var(--accent);
+                  font-size: 12px;
+                  letter-spacing: 0.06em;
+                  text-transform: uppercase;
+                  font-family: &quot;Syne&quot;, sans-serif;
+                "
+              >
+                AKTIVITAS
+              </td>
+            </tr>
+            <tr>
+              <td>DSO</td>
+              <td style="font-weight: 700; color: var(--green)">46 hari</td>
+              <td style="font-weight: 700; color: var(--red)">62 hari</td>
+              <td><span class="win-badge">PT. Makmur ✅</span></td>
+            </tr>
+            <tr>
+              <td>DIO</td>
+              <td style="font-weight: 700; color: var(--red)">88 hari</td>
+              <td style="font-weight: 700; color: var(--green)">47 hari</td>
+              <td><span class="win-badge">CV. Lancar ✅</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="decision-card">
+        <h3>🏦 Rekomendasi Analis Kredit Bank BRI</h3>
+        <div class="decision-row">
+          <span class="decision-icon">🎯</span>
+          <div>
+            <strong style="color: var(--green)"
+              >KEPUTUSAN: Berikan kredit ke PT. MAKMUR SENTOSA</strong
+            >
+          </div>
+        </div>
+        <div class="decision-row">
+          <span class="decision-icon">✅</span>
+          <div>
+            Likuiditas jauh lebih kuat — rasio lancar 3,0 vs 1,6 (lebih dari 2×
+            lipat)
+          </div>
+        </div>
+        <div class="decision-row">
+          <span class="decision-icon">✅</span>
+          <div>
+            Struktur modal lebih sehat — DER 0,67 vs 1,50 (utang tidak
+            mendominasi ekuitas)
+          </div>
+        </div>
+        <div class="decision-row">
+          <span class="decision-icon">✅</span>
+          <div>
+            Profitabilitas unggul di semua lini: GPM 25% vs 20%, NPM 10% vs 5%
+          </div>
+        </div>
+        <div class="decision-row">
+          <span class="decision-icon">✅</span>
+          <div>
+            ICR 8,0 — kemampuan bayar bunga 8× lebih besar dari kebutuhan bunga
+          </div>
+        </div>
+        <div class="decision-row">
+          <span class="decision-icon">✅</span>
+          <div>
+            DSO lebih baik (46 hari) — penagihan piutang lebih efisien dari CV.
+            Lancar (62 hari)
+          </div>
+        </div>
+        <div class="decision-row">
+          <span class="decision-icon">⚠️</span>
+          <div style="color: var(--yellow)">
+            <strong>Catatan:</strong> DIO 88 hari cukup lama — perlu evaluasi
+            manajemen persediaan. Rasio kas 0,38 perlu ditingkatkan.
+          </div>
+        </div>
+        <div class="decision-row">
+          <span class="decision-icon">🚨</span>
+          <div style="color: var(--red)">
+            <strong>CV. Lancar Abadi TIDAK direkomendasikan:</strong> DER 1,50
+            terlalu berisiko | Rasio kas 0,12 sangat rentan | DSO 62 hari
+            berisiko piutang macet | NPM hanya 5% sangat tipis
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════
+           RANGKUMAN
+      ══════════════════════════════════ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">📝 Rangkuman Bab 13</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="rangkuman-table">
+          <thead>
+            <tr>
+              <th>Rasio</th>
+              <th>Rumus</th>
+              <th>Standar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="highlight-row">
+              <td
+                colspan="3"
+                style="
+                  font-weight: 800;
+                  color: var(--blue);
+                  font-size: 12px;
+                  letter-spacing: 0.06em;
+                  text-transform: uppercase;
+                  font-family: &quot;Syne&quot;, sans-serif;
+                "
+              >
+                LIKUIDITAS
+              </td>
+            </tr>
+            <tr>
+              <td>Rasio Lancar</td>
+              <td>Aset Lancar ÷ Kewajiban Lancar</td>
+              <td>≥ 2,0</td>
+            </tr>
+            <tr>
+              <td>Rasio Cepat</td>
+              <td>(Kas + Piutang) ÷ Kewajiban Lancar</td>
+              <td>≥ 1,0</td>
+            </tr>
+            <tr>
+              <td>Rasio Kas</td>
+              <td>Kas ÷ Kewajiban Lancar</td>
+              <td>≥ 0,5</td>
+            </tr>
+            <tr class="highlight-row">
+              <td
+                colspan="3"
+                style="
+                  font-weight: 800;
+                  color: var(--orange);
+                  font-size: 12px;
+                  letter-spacing: 0.06em;
+                  text-transform: uppercase;
+                  font-family: &quot;Syne&quot;, sans-serif;
+                "
+              >
+                SOLVABILITAS
+              </td>
+            </tr>
+            <tr>
+              <td>Debt/Asset</td>
+              <td>Total Utang ÷ Total Aset</td>
+              <td>≤ 50%</td>
+            </tr>
+            <tr>
+              <td>DER</td>
+              <td>Total Utang ÷ Total Ekuitas</td>
+              <td>≤ 1,0</td>
+            </tr>
+            <tr>
+              <td>ICR</td>
+              <td>EBIT ÷ Beban Bunga</td>
+              <td>≥ 3,0</td>
+            </tr>
+            <tr class="highlight-row">
+              <td
+                colspan="3"
+                style="
+                  font-weight: 800;
+                  color: var(--green);
+                  font-size: 12px;
+                  letter-spacing: 0.06em;
+                  text-transform: uppercase;
+                  font-family: &quot;Syne&quot;, sans-serif;
+                "
+              >
+                PROFITABILITAS
+              </td>
+            </tr>
+            <tr>
+              <td>GPM</td>
+              <td>Laba Kotor ÷ Penjualan</td>
+              <td>≥ 25%</td>
+            </tr>
+            <tr>
+              <td>NPM</td>
+              <td>Laba Bersih ÷ Penjualan</td>
+              <td>≥ 10%</td>
+            </tr>
+            <tr>
+              <td>ROA</td>
+              <td>Laba Bersih ÷ Rata-rata Aset</td>
+              <td>≥ 10%</td>
+            </tr>
+            <tr>
+              <td>ROE</td>
+              <td>Laba Bersih ÷ Rata-rata Ekuitas</td>
+              <td>≥ 15%</td>
+            </tr>
+            <tr class="highlight-row">
+              <td
+                colspan="3"
+                style="
+                  font-weight: 800;
+                  color: var(--accent);
+                  font-size: 12px;
+                  letter-spacing: 0.06em;
+                  text-transform: uppercase;
+                  font-family: &quot;Syne&quot;, sans-serif;
+                "
+              >
+                AKTIVITAS
+              </td>
+            </tr>
+            <tr>
+              <td>DSO</td>
+              <td>360 ÷ Perputaran Piutang</td>
+              <td>≤ syarat kredit</td>
+            </tr>
+            <tr>
+              <td>DIO</td>
+              <td>360 ÷ Perputaran Persediaan</td>
+              <td>Semakin kecil ↓</td>
+            </tr>
+            <tr>
+              <td>DPO</td>
+              <td>360 ÷ Perputaran Utang</td>
+              <td>30–60 hari</td>
+            </tr>
+            <tr class="total-row">
+              <td>CCC</td>
+              <td>DSO + DIO − DPO</td>
+              <td>Semakin kecil/negatif ↓</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- QUIZ CTA -->
+      <div class="quiz-cta">
+        <h3>🎯 Uji Pemahamanmu!</h3>
+        <p>
+          Setelah mempelajari Analisis Laporan Keuangan, coba kerjakan 20 soal
+          kuis interaktif yang mencakup analisis horizontal &amp; vertikal,
+          semua kelompok rasio keuangan, interpretasi, hingga studi kasus
+          pengambilan keputusan kredit!
+        </p>
+        <a
+          href="bank-kuis.html?bab=Analisis%20Laporan%20Keuangan"
+          class="quiz-btn"
+        >
+          Mulai Kuis Analisis Laporan Keuangan →
+        </a>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-name">Annisa Novita Ardana</div>
+      <div class="footer-sub">
+        Belajar Akuntansi &amp; Perpajakan &nbsp;·&nbsp; Dibuat dengan Cinta
+        &amp; Estetika 🌸
+      </div>
+      <div class="footer-dots">
+        <div class="footer-dot" style="background: #ff6b35"></div>
+        <div class="footer-dot" style="background: #ff3d9a"></div>
+        <div class="footer-dot" style="background: #a855f7"></div>
+        <div class="footer-dot" style="background: #3b82f6"></div>
+        <div class="footer-dot" style="background: #10b981"></div>
+        <div class="footer-dot" style="background: #fbbf24"></div>
+      </div>
+    </footer>
+
+    <script>
+      // Theme
+      const body = document.body;
+      if (localStorage.getItem("theme") === "light")
+        body.classList.add("light-theme");
+      function toggleTheme() {
+        body.classList.toggle("light-theme");
+        localStorage.setItem(
+          "theme",
+          body.classList.contains("light-theme") ? "light" : "dark",
+        );
+      }
+
+      // ─── KALKULATOR RASIO ──────────────────────────────────────
+      function fmt(n, decimals = 2) {
+        return isNaN(n) || !isFinite(n) ? "—" : n.toFixed(decimals);
+      }
+
+      function statusClass(val, good, dir) {
+        // dir: "above" = semakin tinggi bagus, "below" = semakin rendah bagus
+        if (val === null || isNaN(val) || !isFinite(val)) return "";
+        if (dir === "above") {
+          if (val >= good) return "ok";
+          if (val >= good * 0.7) return "warn";
+          return "bad";
+        } else {
+          if (val <= good) return "ok";
+          if (val <= good * 1.3) return "warn";
+          return "bad";
+        }
+      }
+
+      function makeStatCard(label, value, unit, cls) {
+        return `<div class="calc-stat ${cls}">
+          <div class="calc-stat-val">${value}${unit}</div>
+          <div class="calc-stat-label">${label}</div>
+        </div>`;
+      }
+
+      function hitungRasio() {
+        const al = parseFloat(document.getElementById("c-al").value) || 0;
+        const kl = parseFloat(document.getElementById("c-kl").value) || 1;
+        const kas = parseFloat(document.getElementById("c-kas").value) || 0;
+        const piu = parseFloat(document.getElementById("c-piutang").value) || 0;
+        const utang = parseFloat(document.getElementById("c-utang").value) || 0;
+        const aset = parseFloat(document.getElementById("c-aset").value) || 1;
+        const ekuitas =
+          parseFloat(document.getElementById("c-ekuitas").value) || 1;
+        const ebit = parseFloat(document.getElementById("c-ebit").value) || 0;
+        const bunga = parseFloat(document.getElementById("c-bunga").value) || 1;
+        const laba = parseFloat(document.getElementById("c-laba").value) || 0;
+        const jual = parseFloat(document.getElementById("c-jual").value) || 1;
+        const labakotor =
+          parseFloat(document.getElementById("c-labakotor").value) || 0;
+
+        const rasioLancar = al / kl;
+        const rasioCepat = (kas + piu) / kl;
+        const rasioKas = kas / kl;
+        const debtAsset = (utang / aset) * 100;
+        const der = utang / ekuitas;
+        const icr = ebit / bunga;
+        const gpm = (labakotor / jual) * 100;
+        const npm = (laba / jual) * 100;
+        const roa = (laba / aset) * 100;
+        const roe = (laba / ekuitas) * 100;
+
+        const stats = [
+          {
+            label: "Rasio Lancar",
+            val: fmt(rasioLancar),
+            unit: "x",
+            cls: statusClass(rasioLancar, 2, "above"),
+          },
+          {
+            label: "Rasio Cepat",
+            val: fmt(rasioCepat),
+            unit: "x",
+            cls: statusClass(rasioCepat, 1, "above"),
+          },
+          {
+            label: "Rasio Kas",
+            val: fmt(rasioKas),
+            unit: "x",
+            cls: statusClass(rasioKas, 0.5, "above"),
+          },
+          {
+            label: "Debt/Asset",
+            val: fmt(debtAsset, 1),
+            unit: "%",
+            cls: statusClass(debtAsset, 50, "below"),
+          },
+          {
+            label: "DER",
+            val: fmt(der),
+            unit: "x",
+            cls: statusClass(der, 1.0, "below"),
+          },
+          {
+            label: "ICR",
+            val: fmt(icr),
+            unit: "x",
+            cls: statusClass(icr, 3, "above"),
+          },
+          {
+            label: "GPM",
+            val: fmt(gpm, 1),
+            unit: "%",
+            cls: statusClass(gpm, 25, "above"),
+          },
+          {
+            label: "NPM",
+            val: fmt(npm, 1),
+            unit: "%",
+            cls: statusClass(npm, 10, "above"),
+          },
+          {
+            label: "ROA",
+            val: fmt(roa, 1),
+            unit: "%",
+            cls: statusClass(roa, 10, "above"),
+          },
+          {
+            label: "ROE",
+            val: fmt(roe, 1),
+            unit: "%",
+            cls: statusClass(roe, 15, "above"),
+          },
+        ];
+
+        const container = document.getElementById("rasio-results");
+        container.innerHTML = stats
+          .map((s) => makeStatCard(s.label, s.val, s.unit, s.cls))
+          .join("");
+      }
+
+      // Run on load
+      hitungRasio();
+    </script>
+  </body>
+</html>

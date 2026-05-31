@@ -1,0 +1,1986 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Utang Jangka Panjang & Obligasi — Belajar Akuntansi</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0f172a;
+        --glass-bg: rgba(30, 41, 59, 0.45);
+        --glass-border: rgba(255, 255, 255, 0.08);
+        --glass-highlight: rgba(255, 255, 255, 0.15);
+        --text: #f8fafc;
+        --text-muted: #94a3b8;
+
+        --pink: #ff3d9a;
+        --purple: #a855f7;
+        --blue: #3b82f6;
+        --green: #10b981;
+        --yellow: #fbbf24;
+        --orange: #ff6b35;
+        --teal: #06b6d4;
+
+        /* Warna tema bab ini */
+        --accent: #b8a99a;
+        --accent-dark: #776b5d;
+        --accent-glow: rgba(184, 169, 154, 0.18);
+        --accent-border: rgba(184, 169, 154, 0.28);
+
+        --radius: 24px;
+        --radius-sm: 14px;
+      }
+
+      body.light-theme {
+        --bg: #fff8f0;
+        --glass-bg: rgba(255, 255, 255, 0.65);
+        --glass-border: rgba(0, 0, 0, 0.06);
+        --glass-highlight: rgba(255, 255, 255, 0.85);
+        --text: #1e293b;
+        --text-muted: #64748b;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "DM Sans", sans-serif;
+        background-color: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        overflow-x: hidden;
+        transition:
+          background-color 0.3s ease,
+          color 0.3s ease;
+        position: relative;
+      }
+
+      /* ── BLOBS ── */
+      .blob {
+        position: absolute;
+        border-radius: 50%;
+        pointer-events: none;
+        filter: blur(80px);
+        opacity: 0.22;
+        z-index: 0;
+        animation: float 20s infinite alternate;
+      }
+      .blob-1 {
+        width: 420px;
+        height: 420px;
+        background: #776b5d;
+        top: -130px;
+        right: -70px;
+      }
+      .blob-2 {
+        width: 300px;
+        height: 300px;
+        background: var(--purple);
+        bottom: 18%;
+        left: -70px;
+        animation-delay: -6s;
+      }
+      .blob-3 {
+        width: 320px;
+        height: 320px;
+        background: #b8a99a;
+        top: 42%;
+        right: 8%;
+        animation-delay: -12s;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translate(0, 0) scale(1);
+        }
+        100% {
+          transform: translate(45px, 70px) scale(1.1);
+        }
+      }
+
+      /* ── HEADER ── */
+      header {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 30px 24px 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        z-index: 10;
+      }
+      .header-logo {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 18px;
+        color: var(--text);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .theme-toggle-btn {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(12px);
+        color: var(--text);
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        transition:
+          transform 0.2s,
+          background-color 0.2s;
+      }
+      .theme-toggle-btn:hover {
+        transform: scale(1.08);
+        background: var(--glass-highlight);
+      }
+      .back-btn {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(12px);
+        color: var(--text);
+        padding: 10px 20px;
+        border-radius: 99px;
+        font-family: "Syne", sans-serif;
+        font-weight: 700;
+        font-size: 13px;
+        text-decoration: none;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition:
+          background-color 0.2s,
+          transform 0.2s;
+      }
+      .back-btn:hover {
+        transform: translateY(-2px);
+        background: var(--glass-highlight);
+      }
+
+      /* ── HERO ── */
+      .hero {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 40px 24px;
+        position: relative;
+        z-index: 10;
+        text-align: center;
+      }
+      .hero-glass {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(16px);
+        border-radius: var(--radius);
+        padding: 48px 32px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .hero-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--accent-glow);
+        border: 1.5px solid var(--accent-border);
+        color: var(--accent);
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 7px 18px;
+        border-radius: 99px;
+        margin-bottom: 24px;
+        font-family: "Syne", sans-serif;
+      }
+      body.light-theme .hero-tag {
+        color: var(--accent-dark);
+      }
+      .hero h1 {
+        font-family: "Syne", sans-serif;
+        font-size: clamp(28px, 5.5vw, 50px);
+        font-weight: 800;
+        line-height: 1.15;
+        margin-bottom: 16px;
+        color: #fff;
+      }
+      body.light-theme .hero h1 {
+        color: #1e293b;
+      }
+      .hero h1 .hi {
+        color: var(--accent);
+      }
+      .hero p {
+        color: var(--text-muted);
+        font-size: 15px;
+        line-height: 1.7;
+        max-width: 600px;
+        margin-bottom: 32px;
+      }
+      .hero-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+      }
+      .hero-badge {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid var(--glass-border);
+        border-radius: 99px;
+        padding: 7px 16px;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--text-muted);
+        font-family: "Syne", sans-serif;
+      }
+
+      /* ── CONTENT ── */
+      .content {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 24px 80px;
+        position: relative;
+        z-index: 10;
+      }
+
+      .section-title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 52px;
+        margin-bottom: 24px;
+      }
+      .sec-line {
+        flex: 1;
+        height: 1.5px;
+        background: var(--glass-border);
+      }
+      .sec-text {
+        font-family: "Syne", sans-serif;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+      }
+
+      /* ── CARDS ── */
+      .cards-3 {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+        gap: 24px;
+        margin-bottom: 32px;
+      }
+      .cards-2 {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+        gap: 24px;
+        margin-bottom: 32px;
+      }
+      .card {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(12px);
+        border-radius: var(--radius);
+        padding: 28px;
+        color: var(--text);
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+        transition:
+          transform 0.25s,
+          box-shadow 0.25s,
+          border-color 0.25s;
+      }
+      .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: var(--c, var(--accent));
+      }
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        border-color: var(--c, var(--accent));
+      }
+      .card-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: var(--radius-sm);
+        background: color-mix(in srgb, var(--c) 15%, transparent);
+        color: var(--c);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        margin-bottom: 18px;
+        border: 1px solid color-mix(in srgb, var(--c) 30%, transparent);
+      }
+      .card-eyebrow {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--c);
+        margin-bottom: 6px;
+      }
+      .card-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 19px;
+        line-height: 1.35;
+        margin-bottom: 10px;
+      }
+      .card-body {
+        font-size: 13.5px;
+        color: var(--text-muted);
+        line-height: 1.6;
+      }
+      .list-items {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 12px;
+      }
+      .list-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 13px;
+        line-height: 1.5;
+      }
+      .list-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--c);
+        flex-shrink: 0;
+        margin-top: 6px;
+        box-shadow: 0 0 8px var(--c);
+      }
+
+      /* ── TABLES ── */
+      .table-wrap {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius-sm);
+        overflow: hidden;
+        overflow-x: auto;
+        margin-bottom: 24px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th {
+        background: rgba(0, 0, 0, 0.25);
+        color: var(--text-muted);
+        font-family: "Syne", sans-serif;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 14px 18px;
+        text-align: left;
+        border-bottom: 1.5px solid var(--glass-border);
+      }
+      body.light-theme th {
+        background: rgba(255, 255, 255, 0.5);
+      }
+      td {
+        padding: 12px 18px;
+        font-size: 13.5px;
+        border-bottom: 1px solid var(--glass-border);
+        color: var(--text);
+        vertical-align: top;
+      }
+      tr:last-child td {
+        border-bottom: none;
+      }
+      tr:hover td {
+        background: rgba(255, 255, 255, 0.02);
+      }
+      body.light-theme tr:hover td {
+        background: rgba(0, 0, 0, 0.01);
+      }
+      tr.total-row td {
+        font-weight: 800;
+        background: var(--accent-glow);
+        color: var(--accent);
+        border-top: 2px solid var(--glass-border);
+      }
+      tr.highlight-row td {
+        background: rgba(16, 185, 129, 0.06);
+      }
+
+      /* ── FORMULA ── */
+      .formula-block {
+        background: var(--accent-glow);
+        border: 2px solid var(--accent-border);
+        border-radius: var(--radius-sm);
+        padding: 20px 24px;
+        margin-bottom: 20px;
+        font-family: "Syne", sans-serif;
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--accent);
+        text-align: center;
+        line-height: 1.7;
+      }
+
+      /* ── INFO / WARNING / DANGER BOXES ── */
+      .info-box {
+        background: rgba(16, 185, 129, 0.08);
+        border: 1px solid rgba(16, 185, 129, 0.25);
+        border-radius: var(--radius-sm);
+        padding: 18px 20px;
+        margin-bottom: 20px;
+        color: var(--text);
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .info-box strong {
+        color: var(--green);
+      }
+      .warning-box {
+        background: var(--accent-glow);
+        border: 1px solid var(--accent-border);
+        border-radius: var(--radius-sm);
+        padding: 18px 20px;
+        margin-bottom: 20px;
+        color: var(--text);
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .warning-box strong {
+        color: var(--accent);
+      }
+      .danger-box {
+        background: rgba(239, 68, 68, 0.08);
+        border: 1px solid rgba(239, 68, 68, 0.25);
+        border-radius: var(--radius-sm);
+        padding: 18px 20px;
+        margin-bottom: 20px;
+        color: var(--text);
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .danger-box strong {
+        color: #ef4444;
+      }
+
+      /* ── EXAMPLE WRAP ── */
+      .example-wrap {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(16px);
+        border-radius: var(--radius);
+        padding: 32px;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+        margin-bottom: 32px;
+      }
+      .example-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 16px;
+        color: var(--accent);
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .example-story {
+        color: var(--text-muted);
+        font-size: 14.5px;
+        line-height: 1.7;
+        margin-bottom: 20px;
+        padding: 16px 20px;
+        border-left: 3px solid var(--accent);
+        background: var(--accent-glow);
+        border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      }
+
+      /* ── JURNAL BOX ── */
+      .jurnal-box {
+        background: rgba(0, 0, 0, 0.2);
+        border: 1.5px solid var(--glass-border);
+        border-radius: var(--radius-sm);
+        padding: 20px 24px;
+        margin-bottom: 16px;
+      }
+      body.light-theme .jurnal-box {
+        background: rgba(255, 255, 255, 0.5);
+      }
+      .jurnal-title {
+        font-family: "Syne", sans-serif;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 12px;
+        border-bottom: 1px dashed var(--glass-border);
+        padding-bottom: 8px;
+      }
+      .jurnal-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 4px 0;
+        font-size: 13.5px;
+        gap: 8px;
+      }
+      .jurnal-akun {
+        flex: 1;
+      }
+      .jurnal-akun.indent {
+        padding-left: 28px;
+        color: var(--text-muted);
+      }
+      .jurnal-debet {
+        font-weight: 700;
+        font-family: "Syne", sans-serif;
+        font-size: 13px;
+        color: var(--orange);
+        min-width: 130px;
+        text-align: right;
+      }
+      .jurnal-kredit {
+        font-weight: 700;
+        font-family: "Syne", sans-serif;
+        font-size: 13px;
+        color: var(--teal);
+        min-width: 130px;
+        text-align: right;
+      }
+      .jurnal-blank {
+        min-width: 130px;
+        text-align: right;
+        color: var(--text-muted);
+      }
+      .jurnal-note {
+        margin-top: 10px;
+        font-size: 12px;
+        color: var(--text-muted);
+        font-style: italic;
+        border-top: 1px dashed var(--glass-border);
+        padding-top: 8px;
+        line-height: 1.6;
+      }
+
+      /* ── NERACA BOX ── */
+      .neraca-box {
+        background: rgba(0, 0, 0, 0.15);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius-sm);
+        padding: 20px 24px;
+        margin-bottom: 16px;
+        font-size: 13.5px;
+      }
+      body.light-theme .neraca-box {
+        background: rgba(255, 255, 255, 0.4);
+      }
+      .neraca-section {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--accent);
+        margin: 14px 0 6px;
+      }
+      .neraca-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 0;
+      }
+      .neraca-row.indent {
+        padding-left: 24px;
+        color: var(--text-muted);
+      }
+      .neraca-row.indent-2 {
+        padding-left: 48px;
+        color: var(--text-muted);
+      }
+      .neraca-row.red {
+        color: #ef4444;
+      }
+      .neraca-row.green-val {
+        color: var(--green);
+      }
+      .neraca-row.total {
+        font-weight: 800;
+        color: var(--accent);
+        border-top: 2px solid var(--glass-border);
+        margin-top: 6px;
+        padding-top: 10px;
+      }
+
+      /* ── HIGHLIGHT BADGE ── */
+      .highlight-badge {
+        display: inline-block;
+        background: var(--accent-glow);
+        border: 1px solid var(--accent-border);
+        color: var(--accent);
+        padding: 2px 10px;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 800;
+        font-family: "Syne", sans-serif;
+      }
+
+      /* ── COMPARE GRID ── */
+      .compare-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
+        margin-bottom: 28px;
+      }
+      .compare-card {
+        border-radius: var(--radius);
+        padding: 24px;
+        border: 1px solid var(--glass-border);
+        background: var(--glass-bg);
+      }
+      .compare-card-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 15px;
+        margin-bottom: 12px;
+      }
+
+      /* ── QUIZ CTA ── */
+      .quiz-cta {
+        background: var(--glass-bg);
+        border: 2px solid var(--accent-border);
+        border-radius: var(--radius);
+        padding: 40px 32px;
+        text-align: center;
+        margin-top: 60px;
+        margin-bottom: 40px;
+      }
+      .quiz-cta h3 {
+        font-family: "Syne", sans-serif;
+        font-size: 24px;
+        margin-bottom: 12px;
+        color: var(--accent);
+      }
+      .quiz-cta p {
+        color: var(--text-muted);
+        margin-bottom: 20px;
+        font-size: 15px;
+        line-height: 1.6;
+      }
+      .quiz-btn {
+        background: var(--accent-dark);
+        color: #fff;
+        border: none;
+        padding: 14px 32px;
+        border-radius: var(--radius-sm);
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-decoration: none;
+        display: inline-block;
+      }
+      .quiz-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 24px rgba(119, 107, 93, 0.35);
+      }
+
+      /* ── FOOTER ── */
+      footer {
+        border-top: 1px solid var(--glass-border);
+        background: #090d16;
+        padding: 40px 24px;
+        text-align: center;
+        position: relative;
+        z-index: 10;
+      }
+      body.light-theme footer {
+        background: #fff8f0;
+      }
+      .footer-name {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 16px;
+        background: linear-gradient(
+          135deg,
+          var(--yellow),
+          var(--pink),
+          var(--purple)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 6px;
+      }
+      .footer-sub {
+        font-size: 12.5px;
+        color: var(--text-muted);
+      }
+      .footer-dots {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        margin-top: 16px;
+      }
+      .footer-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+      }
+
+      @media (max-width: 600px) {
+        .cards-3,
+        .cards-2 {
+          grid-template-columns: 1fr;
+        }
+        .jurnal-debet,
+        .jurnal-kredit,
+        .jurnal-blank {
+          min-width: 90px;
+          font-size: 12px;
+        }
+        .jurnal-akun {
+          font-size: 13px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <!-- HEADER -->
+    <header>
+      <a href="index.html" class="header-logo">
+        <span style="font-size: 24px">📜</span>
+        <span
+          style="font-weight: 800; font-family: &quot;Syne&quot;, sans-serif"
+          >Belajar Akuntansi</span
+        >
+      </a>
+      <div style="display: flex; gap: 12px; align-items: center">
+        <a href="index.html" class="back-btn">← Kembali</a>
+        <button
+          class="theme-toggle-btn"
+          onclick="toggleTheme()"
+          title="Ganti Tema"
+        >
+          🌓
+        </button>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-glass">
+        <div class="hero-tag">📜 Bab 10 — Kewajiban Jangka Panjang</div>
+        <h1>
+          Utang Jangka Panjang<br />&amp; <span class="hi">Obligasi</span>
+        </h1>
+        <p>
+          Pahami jenis-jenis utang jangka panjang, mekanisme penerbitan obligasi
+          pada nilai pari, diskon, dan premium, cara mengamortisasi
+          diskon/premium, sampai pelunasan sebelum jatuh tempo — lengkap dengan
+          jurnal, tabel amortisasi, dan studi kasus nyata.
+        </p>
+        <div class="hero-badges">
+          <div class="hero-badge">📜 Jenis Utang Panjang</div>
+          <div class="hero-badge">💲 Nilai Pari, Diskon &amp; Premium</div>
+          <div class="hero-badge">📊 Amortisasi Garis Lurus &amp; Efektif</div>
+          <div class="hero-badge">🔄 Pelunasan Sebelum Jatuh Tempo</div>
+          <div class="hero-badge">🏠 Utang Hipotek &amp; Wesel</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTENT -->
+    <main class="content">
+      <!-- ═══ SECTION 1: JENIS-JENIS UTANG ═══ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">📌 1. Jenis-Jenis Utang Jangka Panjang</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">💡 Definisi</div>
+        <div class="example-story">
+          Utang jangka panjang adalah kewajiban perusahaan yang jatuh temponya
+          <strong>lebih dari satu tahun</strong> dari tanggal neraca. Digunakan
+          untuk mendanai aset tetap, ekspansi bisnis, atau kebutuhan modal besar
+          lainnya.
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Jenis</th>
+              <th>Definisi</th>
+              <th>Contoh</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Obligasi</strong></td>
+              <td>Surat utang yang diterbitkan dan dijual ke publik</td>
+              <td>PT Telkom terbitkan obligasi Rp 1 triliun</td>
+            </tr>
+            <tr>
+              <td><strong>Wesel Jangka Panjang</strong></td>
+              <td>Surat janji bayar jangka panjang ke kreditur tertentu</td>
+              <td>Pinjaman ke bank dengan promes 5 tahun</td>
+            </tr>
+            <tr>
+              <td><strong>Utang Hipotek</strong></td>
+              <td>Utang yang dijamin dengan aset tetap (properti)</td>
+              <td>KPR, kredit gedung pabrik</td>
+            </tr>
+            <tr>
+              <td><strong>Utang Sewa Pembiayaan</strong></td>
+              <td>Kewajiban dari leasing aset tetap</td>
+              <td>Leasing truk, leasing mesin produksi</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="info-box">
+        <strong>Contoh Nyata:</strong> PT Indofood butuh dana Rp 500 miliar
+        untuk bangun pabrik baru. Mereka bisa pilih: (1) terbitkan obligasi ke
+        publik, (2) pinjam ke bank dengan hipotek pabrik lama sebagai jaminan,
+        atau (3) leasing mesin produksi. Ketiganya adalah utang jangka panjang!
+      </div>
+
+      <!-- ═══ SECTION 2: OBLIGASI ═══ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">📋 2. Obligasi — Karakteristik &amp; Jenis</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">❓ Apa itu Obligasi?</div>
+        <div class="example-story">
+          Obligasi <em>(bond)</em> adalah
+          <strong>surat utang jangka panjang</strong> yang diterbitkan
+          perusahaan kepada investor. Perusahaan berjanji membayar
+          <strong>bunga periodik (kupon)</strong> — biasanya setiap 6 bulan atau
+          1 tahun — dan <strong>nilai pokok (nilai pari/face value)</strong>
+          saat jatuh tempo.
+        </div>
+      </div>
+
+      <h3
+        style="
+          font-family: &quot;Syne&quot;, sans-serif;
+          font-size: 16px;
+          margin-bottom: 12px;
+          color: var(--accent);
+        "
+      >
+        Istilah-Istilah Penting Obligasi
+      </h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Istilah</th>
+              <th>Definisi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Nilai Pari (Face Value)</strong></td>
+              <td>
+                Nilai nominal obligasi yang tertera di sertifikat — dibayar saat
+                jatuh tempo
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Tingkat Bunga Kupon</strong></td>
+              <td>
+                Bunga yang dibayar perusahaan kepada pemegang obligasi secara
+                periodik
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Tingkat Bunga Pasar</strong></td>
+              <td>
+                Bunga yang berlaku di pasar saat ini (bisa berbeda dengan kupon)
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Harga Penerbitan</strong></td>
+              <td>
+                Harga jual obligasi ke investor (bisa = pari, &lt; pari, &gt;
+                pari)
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Jatuh Tempo</strong></td>
+              <td>Tanggal pelunasan nilai pokok obligasi</td>
+            </tr>
+            <tr>
+              <td><strong>Diskon Obligasi</strong></td>
+              <td>Selisih ketika harga jual &lt; nilai pari</td>
+            </tr>
+            <tr>
+              <td><strong>Premium Obligasi</strong></td>
+              <td>Selisih ketika harga jual &gt; nilai pari</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3
+        style="
+          font-family: &quot;Syne&quot;, sans-serif;
+          font-size: 16px;
+          margin: 20px 0 12px;
+          color: var(--accent);
+        "
+      >
+        Jenis-Jenis Obligasi
+      </h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Jenis</th>
+              <th>Karakteristik</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Obligasi Biasa</strong></td>
+              <td>
+                Tidak dijamin aset tertentu — hanya didukung reputasi perusahaan
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Obligasi Hipotek</strong></td>
+              <td>Dijamin dengan aset tetap perusahaan</td>
+            </tr>
+            <tr>
+              <td><strong>Obligasi Konversi</strong></td>
+              <td>Bisa dikonversi menjadi saham perusahaan</td>
+            </tr>
+            <tr>
+              <td><strong>Obligasi Callable</strong></td>
+              <td>Bisa dilunasi perusahaan sebelum jatuh tempo</td>
+            </tr>
+            <tr>
+              <td><strong>Zero Coupon Bond</strong></td>
+              <td>
+                Tidak bayar bunga periodik — dijual jauh di bawah nilai pari
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="formula-block">
+        Bunga kupon = Bunga pasar &nbsp;→&nbsp; Obligasi dijual
+        <strong>PADA NILAI PARI</strong><br />
+        Bunga kupon &lt; Bunga pasar &nbsp;→&nbsp; Obligasi dijual
+        <strong>DENGAN DISKON</strong> (di bawah pari)<br />
+        Bunga kupon &gt; Bunga pasar &nbsp;→&nbsp; Obligasi dijual
+        <strong>DENGAN PREMIUM</strong> (di atas pari)
+      </div>
+
+      <div class="warning-box">
+        <strong>💡 Logika Pasar:</strong> Kalau bunga kupon lebih rendah dari
+        bunga pasar, investor tidak tertarik beli di harga pari. Supaya menarik,
+        harga jual diturunkan (diskon) agar imbal hasil efektifnya setara bunga
+        pasar.<br /><br />
+        <strong>Analogi:</strong> Kamu punya deposito bunga 8%/tahun. Ada yang
+        tawarkan obligasi bunga 6%/tahun. Mau beli di harga penuh? Tidak! Tapi
+        kalau harganya didiskon jadi lebih murah dari nilai nominalnya, mungkin
+        menarik karena total <em>return</em>-nya setara.
+      </div>
+
+      <!-- ═══ SECTION 3: NILAI PARI ═══ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">🟰 3. Penerbitan Obligasi pada Nilai Pari</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="info-box">
+        <strong>Kondisi:</strong> Bunga Kupon = Bunga Pasar → Obligasi dijual
+        tepat di nilai pari
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">✏️ Contoh — PT Berkah Nusantara</div>
+        <div class="example-story">
+          Menerbitkan obligasi pada <strong>1 Januari 2024</strong> dengan nilai
+          pari <strong>Rp 1.000.000.000</strong>, bunga kupon
+          <strong>10%/tahun</strong>, bunga pasar <strong>10%/tahun</strong>,
+          jatuh tempo <strong>5 tahun</strong>, bunga dibayar tiap 31 Desember.
+          Karena kupon = pasar → dijual tepat di nilai pari.
+        </div>
+
+        <div class="jurnal-box">
+          <div class="jurnal-title">
+            1 Januari 2024 — Jurnal Penerbitan (Nilai Pari)
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Kas</div>
+            <div class="jurnal-debet">Rp 1.000.000.000</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Utang Obligasi</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-kredit">Rp 1.000.000.000</div>
+          </div>
+          <div class="jurnal-note">
+            Menerbitkan obligasi 10%, 5 tahun, pada nilai pari
+          </div>
+        </div>
+
+        <div class="jurnal-box">
+          <div class="jurnal-title">
+            31 Desember 2024 — Jurnal Pembayaran Bunga Tahunan
+          </div>
+          <div
+            style="
+              background: var(--accent-glow);
+              border-radius: 8px;
+              padding: 10px 14px;
+              margin-bottom: 12px;
+              font-size: 13px;
+              color: var(--accent);
+            "
+          >
+            Bunga = Rp 1.000.000.000 × 10% = <strong>Rp 100.000.000</strong>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Beban Bunga</div>
+            <div class="jurnal-debet">Rp 100.000.000</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Kas</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-kredit">Rp 100.000.000</div>
+          </div>
+        </div>
+
+        <div class="jurnal-box">
+          <div class="jurnal-title">
+            31 Desember 2028 — Jurnal Pelunasan Jatuh Tempo
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Utang Obligasi</div>
+            <div class="jurnal-debet">Rp 1.000.000.000</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Kas</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-kredit">Rp 1.000.000.000</div>
+          </div>
+          <div class="jurnal-note">
+            Melunasi nilai pokok obligasi saat jatuh tempo
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ SECTION 4: DISKON ═══ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">📉 4. Penerbitan Obligasi dengan Diskon</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="info-box">
+        <strong>Kondisi:</strong> Bunga Kupon (10%) &lt; Bunga Pasar (12%) →
+        Harga jual di bawah nilai pari
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          ✏️ Contoh — PT Berkah Nusantara (Diskon)
+        </div>
+        <div class="example-story">
+          Data sama seperti di atas, tetapi bunga pasar sekarang
+          <strong>12%</strong>. Harga jual hasil kalkulasi
+          <em>present value</em>: <strong>Rp 927.906.000</strong>. Diskon = Rp
+          1.000.000.000 − Rp 927.906.000 = <strong>Rp 72.094.000</strong>.
+        </div>
+
+        <div class="jurnal-box">
+          <div class="jurnal-title">
+            1 Januari 2024 — Jurnal Penerbitan dengan Diskon
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Kas</div>
+            <div class="jurnal-debet">Rp 927.906.000</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Diskon Obligasi</div>
+            <div class="jurnal-debet">Rp 72.094.000</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Utang Obligasi</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-kredit">Rp 1.000.000.000</div>
+          </div>
+          <div class="jurnal-note">
+            Diskon Obligasi = akun <strong>kontra kewajiban</strong> yang
+            mengurangi nilai utang obligasi di neraca
+          </div>
+        </div>
+
+        <div class="neraca-box">
+          <div class="neraca-section">Penyajian di Neraca — 1 Januari 2024</div>
+          <p
+            style="
+              font-size: 12px;
+              color: var(--text-muted);
+              margin-bottom: 8px;
+            "
+          >
+            Kewajiban Jangka Panjang:
+          </p>
+          <div class="neraca-row indent">
+            <span>Utang Obligasi 10%, jatuh tempo 2028</span
+            ><span>Rp 1.000.000.000</span>
+          </div>
+          <div class="neraca-row indent red">
+            <span>− Diskon Obligasi</span><span>(Rp 72.094.000)</span>
+          </div>
+          <div class="neraca-row total">
+            <span>Nilai Buku Obligasi</span><span>Rp 927.906.000</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ SECTION 5: PREMIUM ═══ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">📈 5. Penerbitan Obligasi dengan Premium</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="info-box">
+        <strong>Kondisi:</strong> Bunga Kupon (10%) &gt; Bunga Pasar (8%) →
+        Harga jual di atas nilai pari
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          ✏️ Contoh — PT Berkah Nusantara (Premium)
+        </div>
+        <div class="example-story">
+          Data sama seperti di atas, tetapi bunga pasar sekarang
+          <strong>8%</strong>. Harga jual hasil kalkulasi
+          <em>present value</em>: <strong>Rp 1.079.854.000</strong>. Premium =
+          Rp 1.079.854.000 − Rp 1.000.000.000 = <strong>Rp 79.854.000</strong>.
+        </div>
+
+        <div class="jurnal-box">
+          <div class="jurnal-title">
+            1 Januari 2024 — Jurnal Penerbitan dengan Premium
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Kas</div>
+            <div class="jurnal-debet">Rp 1.079.854.000</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Utang Obligasi</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-kredit">Rp 1.000.000.000</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Premium Obligasi</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-kredit">Rp 79.854.000</div>
+          </div>
+          <div class="jurnal-note">
+            Premium Obligasi = akun <strong>tambahan kewajiban</strong> yang
+            menambah nilai utang obligasi di neraca
+          </div>
+        </div>
+
+        <div class="neraca-box">
+          <div class="neraca-section">Penyajian di Neraca — 1 Januari 2024</div>
+          <p
+            style="
+              font-size: 12px;
+              color: var(--text-muted);
+              margin-bottom: 8px;
+            "
+          >
+            Kewajiban Jangka Panjang:
+          </p>
+          <div class="neraca-row indent">
+            <span>Utang Obligasi 10%, jatuh tempo 2028</span
+            ><span>Rp 1.000.000.000</span>
+          </div>
+          <div class="neraca-row indent green-val">
+            <span>+ Premium Obligasi</span><span>Rp 79.854.000</span>
+          </div>
+          <div class="neraca-row total">
+            <span>Nilai Buku Obligasi</span><span>Rp 1.079.854.000</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ SECTION 6: AMORTISASI ═══ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">🔄 6. Amortisasi Diskon &amp; Premium</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="warning-box">
+        <strong>Mengapa Perlu Diamortisasi?</strong> Diskon dan premium harus
+        <strong>diamortisasi</strong>
+        (dialokasikan) selama masa hidup obligasi agar beban bunga yang
+        dilaporkan mencerminkan
+        <strong>bunga efektif</strong> yang sesungguhnya.
+      </div>
+
+      <div class="compare-grid">
+        <div class="compare-card" style="border-top: 4px solid var(--accent)">
+          <div class="compare-card-title" style="color: var(--accent)">
+            📏 Metode Garis Lurus
+          </div>
+          <div class="card-body">
+            Amortisasi sama besar setiap periode — sederhana, mudah dihitung.
+          </div>
+          <div class="list-items">
+            <div class="list-item">
+              <div class="list-dot" style="background: var(--accent)"></div>
+              <div>Diskon atau Premium ÷ Masa Obligasi</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot" style="background: var(--accent)"></div>
+              <div>Jumlah amortisasi tetap sama setiap tahun</div>
+            </div>
+          </div>
+        </div>
+        <div class="compare-card" style="border-top: 4px solid var(--blue)">
+          <div class="compare-card-title" style="color: var(--blue)">
+            📊 Metode Bunga Efektif
+          </div>
+          <div class="card-body">
+            Amortisasi berdasarkan nilai buku × bunga pasar — lebih akurat,
+            dianjurkan PSAK.
+          </div>
+          <div class="list-items">
+            <div class="list-item">
+              <div class="list-dot" style="background: var(--blue)"></div>
+              <div>Beban bunga = Nilai buku × Bunga pasar</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot" style="background: var(--blue)"></div>
+              <div>Amortisasi berubah setiap periode</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Amortisasi Diskon GL -->
+      <div class="example-wrap">
+        <div class="example-title">
+          A. Amortisasi Diskon — Metode Garis Lurus
+        </div>
+        <div class="example-story">
+          Diskon Rp 72.094.000, masa 5 tahun → amortisasi per tahun = Rp
+          72.094.000 ÷ 5 = <strong>Rp 14.418.800/tahun</strong>
+        </div>
+
+        <div class="jurnal-box">
+          <div class="jurnal-title">
+            31 Desember 2024 — Bunga + Amortisasi Diskon (Garis Lurus)
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Beban Bunga</div>
+            <div class="jurnal-debet">Rp 114.418.800</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Kas</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-kredit">Rp 100.000.000</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Diskon Obligasi</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-kredit">Rp 14.418.800</div>
+          </div>
+          <div class="jurnal-note">
+            💡 Beban bunga > kas yang dibayar karena diskon = bunga tambahan
+            yang dialokasikan 5 tahun
+          </div>
+        </div>
+
+        <!-- Amortisasi Premium GL -->
+        <div class="example-title" style="margin-top: 24px">
+          B. Amortisasi Premium — Metode Garis Lurus
+        </div>
+        <div class="example-story">
+          Premium Rp 79.854.000, masa 5 tahun → amortisasi per tahun = Rp
+          79.854.000 ÷ 5 = <strong>Rp 15.970.800/tahun</strong>
+        </div>
+
+        <div class="jurnal-box">
+          <div class="jurnal-title">
+            31 Desember 2024 — Bunga + Amortisasi Premium (Garis Lurus)
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Beban Bunga</div>
+            <div class="jurnal-debet">Rp 84.029.200</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Premium Obligasi</div>
+            <div class="jurnal-debet">Rp 15.970.800</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Kas</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-kredit">Rp 100.000.000</div>
+          </div>
+          <div class="jurnal-note">
+            💡 Beban bunga < kas yang dibayar karena premium = keuntungan awal
+            yang mengurangi beban bunga selama 5 tahun
+          </div>
+        </div>
+      </div>
+
+      <!-- Bunga Efektif (Diskon) -->
+      <div class="example-wrap">
+        <div class="example-title">
+          C. Amortisasi Diskon — Metode Bunga Efektif (PSAK Dianjurkan)
+        </div>
+        <div class="example-story">
+          Beban bunga = Nilai buku awal × Bunga pasar (12%). Nilai buku naik
+          setiap tahun mendekati nilai pari.
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Tahun</th>
+                <th>Nilai Buku Awal</th>
+                <th>Beban Bunga (×12%)</th>
+                <th>Bunga Kas (×10%)</th>
+                <th>Amortisasi Diskon</th>
+                <th>Nilai Buku Akhir</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>2024</td>
+                <td>Rp 927.906.000</td>
+                <td>Rp 111.348.720</td>
+                <td>Rp 100.000.000</td>
+                <td>Rp 11.348.720</td>
+                <td>Rp 939.254.720</td>
+              </tr>
+              <tr>
+                <td>2025</td>
+                <td>Rp 939.254.720</td>
+                <td>Rp 112.710.567</td>
+                <td>Rp 100.000.000</td>
+                <td>Rp 12.710.567</td>
+                <td>Rp 951.965.287</td>
+              </tr>
+              <tr>
+                <td>2026</td>
+                <td>Rp 951.965.287</td>
+                <td>Rp 114.235.834</td>
+                <td>Rp 100.000.000</td>
+                <td>Rp 14.235.834</td>
+                <td>Rp 966.201.121</td>
+              </tr>
+              <tr>
+                <td>2027</td>
+                <td>Rp 966.201.121</td>
+                <td>Rp 115.944.135</td>
+                <td>Rp 100.000.000</td>
+                <td>Rp 15.944.135</td>
+                <td>Rp 982.145.256</td>
+              </tr>
+              <tr class="total-row">
+                <td>2028</td>
+                <td>Rp 982.145.256</td>
+                <td>Rp 117.854.744*</td>
+                <td>Rp 100.000.000</td>
+                <td>Rp 17.854.744</td>
+                <td>Rp 1.000.000.000 ✓</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p
+          style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px"
+        >
+          *Dibulatkan agar nilai buku akhir tepat Rp 1.000.000.000
+        </p>
+
+        <div class="jurnal-box">
+          <div class="jurnal-title">
+            31 Desember 2024 — Metode Bunga Efektif
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Beban Bunga</div>
+            <div class="jurnal-debet">Rp 111.348.720</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Kas</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-kredit">Rp 100.000.000</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Diskon Obligasi</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-kredit">Rp 11.348.720</div>
+          </div>
+          <div class="jurnal-note">
+            Nilai buku obligasi naik setiap tahun mendekati nilai pari — tepat
+            Rp 1.000.000.000 saat jatuh tempo
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ SECTION 7: PELUNASAN AWAL ═══ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">⏩ 7. Pelunasan Obligasi Sebelum Jatuh Tempo</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="info-box">
+        <strong>Konsep:</strong> Perusahaan bisa melunasi obligasi sebelum jatuh
+        tempo dengan membeli kembali di pasar. Selisih antara harga beli kembali
+        dan nilai buku saat itu menimbulkan
+        <strong>keuntungan atau kerugian</strong>.
+      </div>
+
+      <div class="formula-block">
+        Keuntungan/Kerugian = Nilai Buku Obligasi − Harga Beli Kembali<br />
+        <span style="font-size: 13px; opacity: 0.8"
+          >Positif = Keuntungan &nbsp;|&nbsp; Negatif = Kerugian</span
+        >
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">✏️ Contoh Pelunasan Sebelum Jatuh Tempo</div>
+        <div class="example-story">
+          PT Berkah Nusantara melunasi obligasi pada
+          <strong>1 Januari 2027</strong> (2 tahun sebelum jatuh tempo). Nilai
+          buku saat itu <strong>Rp 966.201.121</strong> (dari tabel amortisasi
+          bunga efektif). Harga pembelian kembali
+          <strong>Rp 990.000.000</strong>.
+        </div>
+
+        <div class="neraca-box">
+          <div class="neraca-section">Perhitungan Untung/Rugi</div>
+          <div class="neraca-row indent">
+            <span>Harga beli kembali</span><span>Rp 990.000.000</span>
+          </div>
+          <div class="neraca-row indent">
+            <span>Nilai buku saat ini</span><span>Rp 966.201.121</span>
+          </div>
+          <div class="neraca-row total red">
+            <span>Kerugian Pelunasan</span><span>Rp (23.798.879)</span>
+          </div>
+        </div>
+
+        <div class="jurnal-box">
+          <div class="jurnal-title">
+            1 Januari 2027 — Jurnal Pelunasan Sebelum Jatuh Tempo
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Utang Obligasi</div>
+            <div class="jurnal-debet">Rp 1.000.000.000</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Diskon Obligasi (sisa)</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-kredit">Rp 33.798.879</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Kas</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-kredit">Rp 990.000.000</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Kerugian Pelunasan Obligasi</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-kredit">Rp 23.798.879</div>
+          </div>
+          <div class="jurnal-note">
+            Diskon sisa = Rp 72.094.000 − Rp 11.348.720 − Rp 12.710.567 − Rp
+            14.235.834 = Rp 33.798.879<br />
+            💡 Jika harga beli kembali &lt; nilai buku → dicatat sebagai
+            <strong>Keuntungan</strong> Pelunasan Obligasi (Kredit)
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ SECTION 8: HIPOTEK & WESEL ═══ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">
+          🏠 8. Utang Hipotek &amp; Wesel Jangka Panjang
+        </div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="cards-2">
+        <div class="card" style="--c: var(--accent)">
+          <div class="card-icon">🏠</div>
+          <div class="card-eyebrow">Utang Hipotek</div>
+          <div class="card-title">Dijamin Aset Tetap</div>
+          <div class="card-body">
+            Utang jangka panjang yang
+            <strong>dijamin dengan aset tetap</strong> (biasanya properti). Jika
+            gagal bayar, kreditur berhak menyita aset jaminan.
+          </div>
+          <div class="list-items">
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Cicilan terdiri dari bunga + pokok</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Porsi bunga makin kecil seiring utang berkurang</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Contoh: KPR, kredit pabrik</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="--c: var(--blue)">
+          <div class="card-icon">📝</div>
+          <div class="card-eyebrow">Wesel Jangka Panjang</div>
+          <div class="card-title">Surat Janji Bayar</div>
+          <div class="card-body">
+            Surat janji bayar jangka panjang ke kreditur tertentu. Umumnya untuk
+            pinjaman bank atau pembelian aset secara kredit jangka panjang.
+          </div>
+          <div class="list-items">
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Didukung promes yang ditandatangani</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Biasanya berbunga periodik</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Contoh: beli truk dengan wesel 3 tahun</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">✏️ Contoh — CV. Berkah Jaya (Hipotek)</div>
+        <div class="example-story">
+          CV. Berkah Jaya meminjam <strong>Rp 300.000.000</strong> ke Bank BRI
+          dengan jaminan gudang di Jombang. Bunga <strong>12%/tahun</strong>,
+          cicilan <strong>Rp 8.000.000/bulan</strong>.
+        </div>
+
+        <div class="jurnal-box">
+          <div class="jurnal-title">Jurnal Penerimaan Pinjaman Hipotek</div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Kas</div>
+            <div class="jurnal-debet">Rp 300.000.000</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Utang Hipotek</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-kredit">Rp 300.000.000</div>
+          </div>
+        </div>
+
+        <div
+          style="
+            background: var(--accent-glow);
+            border: 1.5px solid var(--accent-border);
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 16px;
+            font-size: 13px;
+            color: var(--accent);
+          "
+        >
+          <strong>Perhitungan cicilan pertama:</strong><br />
+          Bunga = Rp 300.000.000 × 12% ÷ 12 = <strong>Rp 3.000.000</strong
+          ><br />
+          Pokok = Rp 8.000.000 − Rp 3.000.000 = <strong>Rp 5.000.000</strong>
+        </div>
+
+        <div class="jurnal-box">
+          <div class="jurnal-title">
+            Jurnal Pembayaran Cicilan Bulan Pertama
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Beban Bunga</div>
+            <div class="jurnal-debet">Rp 3.000.000</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Utang Hipotek</div>
+            <div class="jurnal-debet">Rp 5.000.000</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Kas</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-kredit">Rp 8.000.000</div>
+          </div>
+          <div class="jurnal-note">
+            💡 Setiap cicilan = bunga + pokok. Semakin lama porsi pokok makin
+            besar karena saldo utang terus berkurang.
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ SECTION 9: STUDI KASUS ═══ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">
+          🏢 9. Studi Kasus Nyata — PT Maju Bersama Tbk
+        </div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          📋 PT Maju Bersama Tbk — Perusahaan Distribusi Jawa Timur
+        </div>
+        <div class="example-story">
+          PT Maju Bersama Tbk butuh dana ekspansi
+          <strong>Rp 2.000.000.000</strong> untuk bangun gudang baru dan tambah
+          armada truk se-Jawa Timur. Keputusan: terbitkan obligasi pada
+          <strong>1 Januari 2024</strong>.<br /><br />
+          Nilai pari: Rp 2.000.000.000 | Bunga kupon:
+          <strong>9%/tahun</strong> (bayar 31 Des) | Bunga pasar:
+          <strong>11%/tahun</strong> | Jatuh tempo: <strong>4 tahun</strong> (31
+          Des 2027)
+        </div>
+
+        <div class="warning-box" style="margin-bottom: 20px">
+          <strong>Langkah 1 — Tentukan harga penerbitan:</strong><br />
+          Karena bunga kupon (9%) &lt; bunga pasar (11%) → Obligasi
+          <strong>DIJUAL DENGAN DISKON</strong><br />
+          Harga jual hasil kalkulasi PV = <strong>Rp 1.876.680.000</strong
+          ><br />
+          Diskon = Rp 2.000.000.000 − Rp 1.876.680.000 =
+          <strong>Rp 123.320.000</strong>
+        </div>
+
+        <div class="jurnal-box">
+          <div class="jurnal-title">Langkah 2 — Jurnal 1 Januari 2024</div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Kas</div>
+            <div class="jurnal-debet">Rp 1.876.680.000</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Diskon Obligasi</div>
+            <div class="jurnal-debet">Rp 123.320.000</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Utang Obligasi</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-kredit">Rp 2.000.000.000</div>
+          </div>
+        </div>
+
+        <div
+          style="
+            background: var(--accent-glow);
+            border: 1.5px solid var(--accent-border);
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 16px;
+            font-size: 13px;
+            color: var(--accent);
+          "
+        >
+          <strong>Langkah 3 — Amortisasi diskon (garis lurus):</strong><br />
+          Rp 123.320.000 ÷ 4 tahun = <strong>Rp 30.830.000/tahun</strong>
+        </div>
+
+        <div class="jurnal-box">
+          <div class="jurnal-title">
+            Langkah 4 — Jurnal Bunga &amp; Amortisasi 31 Desember 2024
+          </div>
+          <div
+            style="
+              background: rgba(0, 0, 0, 0.12);
+              border-radius: 8px;
+              padding: 10px 14px;
+              margin-bottom: 12px;
+              font-size: 13px;
+              color: var(--text-muted);
+            "
+          >
+            Bunga kas = Rp 2.000.000.000 × 9% = Rp 180.000.000 &nbsp;|&nbsp;
+            Amortisasi diskon = Rp 30.830.000<br />
+            <strong style="color: var(--text)"
+              >Beban bunga = Rp 180.000.000 + Rp 30.830.000 = Rp
+              210.830.000</strong
+            >
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Beban Bunga</div>
+            <div class="jurnal-debet">Rp 210.830.000</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Kas</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-kredit">Rp 180.000.000</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Diskon Obligasi</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-kredit">Rp 30.830.000</div>
+          </div>
+        </div>
+
+        <div class="neraca-box">
+          <div class="neraca-section">
+            Langkah 5 — Penyajian di Neraca 31 Desember 2024
+          </div>
+          <p
+            style="
+              font-size: 12px;
+              color: var(--text-muted);
+              margin-bottom: 8px;
+            "
+          >
+            Kewajiban Jangka Panjang:
+          </p>
+          <div class="neraca-row indent">
+            <span>Utang Obligasi 9%, jatuh tempo 2027</span
+            ><span>Rp 2.000.000.000</span>
+          </div>
+          <div class="neraca-row indent red">
+            <span>− Diskon Obligasi</span><span>(Rp 92.490.000)</span>
+          </div>
+          <div class="neraca-row total">
+            <span>Nilai Buku Obligasi</span><span>Rp 1.907.510.000</span>
+          </div>
+          <p style="font-size: 12px; color: var(--text-muted); margin-top: 8px">
+            Diskon sisa = Rp 123.320.000 − Rp 30.830.000 = Rp 92.490.000
+          </p>
+        </div>
+
+        <div class="info-box">
+          <strong>Analisis Manajemen:</strong> PT Maju Bersama memilih obligasi
+          dibanding pinjaman bank karena: (1) bisa dapat dana lebih besar, (2)
+          bunga tetap sepanjang masa — tidak terpengaruh kenaikan suku bunga,
+          (3) tidak perlu agunan aset seperti KPR/hipotek. Kelemahannya, harus
+          menanggung diskon Rp 123 juta sebagai biaya tambahan yang diamortisasi
+          selama 4 tahun.
+        </div>
+      </div>
+
+      <!-- ═══ RANGKUMAN ═══ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">📝 Rangkuman Bab 10</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Poin</th>
+              <th>Inti</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <strong style="color: var(--green)"
+                  >✅ Utang Jangka Panjang</strong
+                >
+              </td>
+              <td>
+                Jatuh tempo &gt; 1 tahun — obligasi, hipotek, wesel panjang,
+                leasing
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong style="color: var(--green)">✅ Nilai Pari</strong>
+              </td>
+              <td>Kupon = Pasar → jual di pari — tidak ada diskon/premium</td>
+            </tr>
+            <tr>
+              <td><strong style="color: var(--green)">✅ Diskon</strong></td>
+              <td>
+                Kupon &lt; Pasar → jual di bawah pari — beban bunga &gt; kas
+                bunga
+              </td>
+            </tr>
+            <tr>
+              <td><strong style="color: var(--green)">✅ Premium</strong></td>
+              <td>
+                Kupon &gt; Pasar → jual di atas pari — beban bunga &lt; kas
+                bunga
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong style="color: var(--green)">✅ Amortisasi</strong>
+              </td>
+              <td>
+                Diskon/premium dialokasikan selama masa obligasi — setiap
+                periode
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong style="color: var(--green)">✅ Garis Lurus</strong>
+              </td>
+              <td>
+                Amortisasi sama setiap periode — sederhana dan mudah dihitung
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong style="color: var(--green)">✅ Bunga Efektif</strong>
+              </td>
+              <td>
+                Amortisasi dari nilai buku × bunga pasar — lebih akurat,
+                dianjurkan PSAK
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong style="color: var(--green)">✅ Pelunasan Awal</strong>
+              </td>
+              <td>
+                Harga beli kembali vs nilai buku → catat keuntungan atau
+                kerugian
+              </td>
+            </tr>
+            <tr>
+              <td><strong style="color: var(--green)">✅ Hipotek</strong></td>
+              <td>
+                Utang dijamin aset tetap — cicilan = bunga + pokok per periode
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong style="color: var(--green)"
+                  >✅ Wesel Jangka Panjang</strong
+                >
+              </td>
+              <td>
+                Surat promes ke kreditur — jatuh tempo &gt; 1 tahun, biasanya
+                berbunga
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ═══ QUIZ CTA ═══ -->
+      <div class="quiz-cta">
+        <h3>🎯 Uji Pemahamanmu!</h3>
+        <p>
+          Setelah mempelajari Utang Jangka Panjang &amp; Obligasi, coba kerjakan
+          20 soal kuis interaktif yang mencakup seluruh materi bab ini — mulai
+          dari konsep nilai pari sampai perhitungan amortisasi!
+        </p>
+        <a
+          href="bank-kuis.html?bab=Utang%20Jangka%20Panjang%20%26%20Obligasi"
+          class="quiz-btn"
+        >
+          Mulai Kuis Bab 10 →
+        </a>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-name">Annisa Novita Ardana</div>
+      <div class="footer-sub">
+        Belajar Akuntansi &amp; Perpajakan &nbsp;·&nbsp; Dibuat dengan Cinta
+        &amp; Estetika 🌸
+      </div>
+      <div class="footer-dots">
+        <div class="footer-dot" style="background: #ff6b35"></div>
+        <div class="footer-dot" style="background: #ff3d9a"></div>
+        <div class="footer-dot" style="background: #a855f7"></div>
+        <div class="footer-dot" style="background: #3b82f6"></div>
+        <div class="footer-dot" style="background: #10b981"></div>
+        <div class="footer-dot" style="background: #fbbf24"></div>
+      </div>
+    </footer>
+
+    <script>
+      // Theme
+      const body = document.body;
+      if (localStorage.getItem("theme") === "light")
+        body.classList.add("light-theme");
+      function toggleTheme() {
+        body.classList.toggle("light-theme");
+        localStorage.setItem(
+          "theme",
+          body.classList.contains("light-theme") ? "light" : "dark",
+        );
+      }
+    </script>
+  </body>
+</html>
