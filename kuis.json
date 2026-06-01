@@ -2383,5 +2383,970 @@
     ],
     "j": 1,
     "b": "MoS 5% berarti penjualan hanya boleh turun 5% sebelum perusahaan merugi. Ini sangat berbahaya — gangguan kecil seperti kehilangan satu pelanggan besar atau kenaikan biaya kecil bisa langsung membuat perusahaan merugi."
+  },
+  {
+    "k": "Harga Pokok Produksi",
+    "s": "Urutan alur biaya produksi yang benar adalah...",
+    "p": [
+      "Barang Jadi → Barang Dalam Proses → Bahan Baku → HPP",
+      "Bahan Baku → Barang Dalam Proses → Barang Jadi → HPP",
+      "HPP → Barang Jadi → Barang Dalam Proses → Bahan Baku",
+      "Bahan Baku → Barang Jadi → Barang Dalam Proses → HPP"
+    ],
+    "j": 1,
+    "b": "Inilah alur biaya produksi yang benar — bahan baku diproses menjadi barang dalam proses, setelah selesai menjadi barang jadi, dan saat terjual barulah diakui sebagai HPP di laporan laba rugi."
+  },
+  {
+    "k": "Harga Pokok Produksi",
+    "s": "Bahan baku yang digunakan dalam produksi dihitung dengan rumus...",
+    "p": [
+      "Pembelian + Persediaan Akhir − Persediaan Awal",
+      "Persediaan Awal + Pembelian − Persediaan Akhir",
+      "Persediaan Akhir − Persediaan Awal + Pembelian",
+      "Pembelian − Persediaan Awal − Persediaan Akhir"
+    ],
+    "j": 1,
+    "b": "Pemakaian BB = BB Awal + Pembelian − BB Akhir. Logikanya: stok awal + yang dibeli = yang tersedia. Dari yang tersedia dikurangi sisa akhir = yang terpakai untuk produksi."
+  },
+  {
+    "k": "Harga Pokok Produksi",
+    "s": "Pabrik roti memiliki persediaan bahan baku awal Rp 6.000.000, pembelian bahan baku Rp 40.000.000, persediaan akhir Rp 4.000.000. Bahan baku yang digunakan adalah...",
+    "p": ["Rp 38.000.000", "Rp 40.000.000", "Rp 42.000.000", "Rp 44.000.000"],
+    "j": 2,
+    "b": "Pemakaian BB = Rp 6.000.000 + Rp 40.000.000 − Rp 4.000.000 = Rp 42.000.000."
+  },
+  {
+    "k": "Harga Pokok Produksi",
+    "s": "Gaji operator mesin produksi termasuk dalam...",
+    "p": [
+      "Overhead pabrik tetap",
+      "Biaya tenaga kerja tidak langsung",
+      "Biaya tenaga kerja langsung",
+      "Biaya administrasi umum"
+    ],
+    "j": 2,
+    "b": "Operator mesin langsung mengerjakan produk — bisa ditelusuri langsung ke produk yang dihasilkan. Itulah definisi TKL. Berbeda dengan supervisor atau satpam yang tidak langsung mengerjakan produk."
+  },
+  {
+    "k": "Harga Pokok Produksi",
+    "s": "Berikut yang termasuk overhead pabrik adalah...",
+    "p": [
+      "Bahan baku utama dan gaji direktur",
+      "Gaji sales dan biaya iklan",
+      "Depresiasi mesin pabrik dan listrik pabrik",
+      "Komisi penjualan dan biaya pengiriman"
+    ],
+    "j": 2,
+    "b": "Overhead pabrik adalah semua biaya produksi selain BB langsung dan TKL. Depresiasi mesin dan listrik pabrik keduanya berkaitan langsung dengan kegiatan produksi tapi tidak bisa ditelusuri per unit produk."
+  },
+  {
+    "k": "Harga Pokok Produksi",
+    "s": "Tarif overhead yang ditentukan di muka dihitung dengan rumus...",
+    "p": [
+      "Overhead Aktual / Dasar Alokasi Aktual",
+      "Estimasi Overhead / Estimasi Dasar Alokasi",
+      "Overhead Aktual / Estimasi Dasar Alokasi",
+      "Estimasi Overhead / Dasar Alokasi Aktual"
+    ],
+    "j": 1,
+    "b": "Tarif di muka dihitung di awal periode menggunakan angka estimasi — bukan aktual. Tujuannya agar harga pokok produk bisa dihitung segera saat produk selesai tanpa menunggu data aktual akhir periode."
+  },
+  {
+    "k": "Harga Pokok Produksi",
+    "s": "Pabrik X mengestimasi overhead Rp 90.000.000 dan estimasi jam mesin 15.000 jam. Tarif overhead per jam mesin adalah...",
+    "p": ["Rp 4.000/jam", "Rp 5.000/jam", "Rp 6.000/jam", "Rp 7.000/jam"],
+    "j": 2,
+    "b": "Tarif overhead = Rp 90.000.000 / 15.000 jam = Rp 6.000/jam mesin."
+  },
+  {
+    "k": "Harga Pokok Produksi",
+    "s": "Jika overhead yang dibebankan lebih besar dari overhead aktual, kondisi ini disebut...",
+    "p": [
+      "Overhead kurang dibebankan — HPP dinaikkan",
+      "Overhead lebih dibebankan — HPP diturunkan",
+      "Overhead seimbang — tidak perlu penyesuaian",
+      "Overhead kurang dibebankan — HPP diturunkan"
+    ],
+    "j": 1,
+    "b": "Jika overhead dibebankan > overhead aktual, berarti terlalu banyak biaya yang dibebankan ke produk. Koreksinya: kurangi HPP sebesar selisih tersebut sehingga laba meningkat."
+  },
+  {
+    "k": "Harga Pokok Produksi",
+    "s": "Sistem biaya pesanan (job order costing) paling tepat digunakan oleh...",
+    "p": [
+      "Pabrik mie instan yang produksi massal homogen",
+      "Perusahaan konveksi yang menerima pesanan seragam custom per klien",
+      "Kilang minyak yang proses produksinya berkelanjutan",
+      "Pabrik semen yang produksinya tidak bisa dibedakan per batch"
+    ],
+    "j": 1,
+    "b": "Job order costing cocok untuk produk yang berbeda-beda antar pesanan. Konveksi custom membuat seragam berbeda untuk setiap klien — ukuran, model, dan jumlah berbeda — sehingga biaya per pesanan harus dihitung terpisah."
+  },
+  {
+    "k": "Harga Pokok Produksi",
+    "s": "Dokumen utama yang digunakan dalam sistem biaya pesanan untuk mengumpulkan biaya per pesanan adalah...",
+    "p": [
+      "Laporan harga pokok produksi",
+      "Kartu persediaan barang jadi",
+      "Kartu harga pokok pesanan (job cost sheet)",
+      "Laporan biaya departemen"
+    ],
+    "j": 2,
+    "b": "Job cost sheet adalah dokumen yang mencatat semua biaya (BB, TKL, overhead) yang dibebankan ke satu pesanan tertentu. Total biaya di kartu ini menjadi harga pokok pesanan tersebut."
+  },
+  {
+    "k": "Harga Pokok Produksi",
+    "s": "Sistem biaya proses (process costing) paling tepat digunakan oleh...",
+    "p": [
+      "Perusahaan konstruksi gedung",
+      "Bengkel reparasi kendaraan",
+      "Pabrik tahu yang produksi massal homogen setiap hari",
+      "Percetakan buku teks dengan spesifikasi berbeda tiap order"
+    ],
+    "j": 2,
+    "b": "Process costing cocok untuk produksi massal produk homogen yang tidak bisa dibedakan satu per satu. Pabrik tahu menghasilkan ribuan papan tahu identik setiap hari — biaya dihitung rata-rata per unit."
+  },
+  {
+    "k": "Harga Pokok Produksi",
+    "s": "Dalam sistem biaya proses, harga pokok per unit dihitung dengan cara...",
+    "p": [
+      "Menjumlahkan semua biaya di kartu pesanan",
+      "Membagi total biaya produksi periode dengan jumlah unit yang diproduksi",
+      "Mengalikan tarif overhead dengan jam mesin yang digunakan",
+      "Menghitung selisih persediaan awal dan akhir barang jadi"
+    ],
+    "j": 1,
+    "b": "HP per unit = Total biaya produksi / Jumlah unit. Karena produknya homogen, semua unit mendapat biaya yang sama rata."
+  },
+  {
+    "k": "Harga Pokok Produksi",
+    "s": "Pabrik tempe memproduksi 5.000 bungkus. Total biaya: BB Rp 25.000.000, TKL Rp 10.000.000, overhead Rp 5.000.000. Harga pokok per bungkus adalah...",
+    "p": ["Rp 6.000", "Rp 7.000", "Rp 7.500", "Rp 8.000"],
+    "j": 3,
+    "b": "Total biaya = Rp 25.000.000 + Rp 10.000.000 + Rp 5.000.000 = Rp 40.000.000. HP per bungkus = Rp 40.000.000 / 5.000 = Rp 8.000/bungkus."
+  },
+  {
+    "k": "Harga Pokok Produksi",
+    "s": "Komponen Harga Pokok Produksi terdiri dari...",
+    "p": [
+      "Total biaya produksi + BDP awal − BDP akhir",
+      "Total biaya produksi − BDP awal + BDP akhir",
+      "Total biaya produksi + BJ awal − BJ akhir",
+      "Total biaya produksi − BB awal + BB akhir"
+    ],
+    "j": 0,
+    "b": "HP Produksi = Total Biaya Produksi (BB+TKL+BOP) + BDP Awal − BDP Akhir. BDP awal ditambahkan karena sudah mulai diproses periode lalu, BDP akhir dikurangkan karena belum selesai."
+  },
+  {
+    "k": "Harga Pokok Produksi",
+    "s": "Pabrik keripik: total biaya produksi Rp 80.000.000, BDP awal Rp 5.000.000, BDP akhir Rp 8.000.000. Harga Pokok Produksi adalah...",
+    "p": ["Rp 77.000.000", "Rp 80.000.000", "Rp 83.000.000", "Rp 93.000.000"],
+    "j": 0,
+    "b": "HP Produksi = Rp 80.000.000 + Rp 5.000.000 − Rp 8.000.000 = Rp 77.000.000."
+  },
+  {
+    "k": "Harga Pokok Produksi",
+    "s": "Harga Pokok Penjualan (HPP) dihitung dengan rumus...",
+    "p": [
+      "HP Produksi + BJ awal − BJ akhir",
+      "BJ awal + HP Produksi − BJ akhir",
+      "HP Produksi − BJ awal + BJ akhir",
+      "BJ akhir + HP Produksi − BJ awal"
+    ],
+    "j": 1,
+    "b": "HPP = BJ Awal + HP Produksi − BJ Akhir. Sama seperti menghitung pemakaian — stok awal + yang masuk − sisa akhir = yang terjual (HPP)."
+  },
+  {
+    "k": "Harga Pokok Produksi",
+    "s": "Pabrik sepatu: BJ awal Rp 20.000.000, HP Produksi Rp 150.000.000, BJ akhir Rp 25.000.000. HPP adalah...",
+    "p": [
+      "Rp 145.000.000",
+      "Rp 150.000.000",
+      "Rp 155.000.000",
+      "Rp 170.000.000"
+    ],
+    "j": 0,
+    "b": "HPP = Rp 20.000.000 + Rp 150.000.000 − Rp 25.000.000 = Rp 145.000.000."
+  },
+  {
+    "k": "Harga Pokok Produksi",
+    "s": "Jurnal yang tepat saat bahan baku dikeluarkan dari gudang untuk proses produksi adalah...",
+    "p": [
+      "Persediaan Bahan Baku (D) / Kas (K)",
+      "HPP (D) / Persediaan Bahan Baku (K)",
+      "Barang Dalam Proses (D) / Persediaan Bahan Baku (K)",
+      "Persediaan Barang Jadi (D) / Barang Dalam Proses (K)"
+    ],
+    "j": 2,
+    "b": "Saat BB dikeluarkan untuk produksi, aset Persediaan BB berkurang (kredit) dan biaya masuk ke BDP (debit) sebagai akumulasi biaya produksi yang sedang berjalan."
+  },
+  {
+    "k": "Harga Pokok Produksi",
+    "s": "Jurnal yang dibuat saat produk selesai diproduksi dan dipindahkan ke gudang barang jadi adalah...",
+    "p": [
+      "HPP (D) / Barang Dalam Proses (K)",
+      "Persediaan Barang Jadi (D) / Barang Dalam Proses (K)",
+      "Barang Dalam Proses (D) / Persediaan Barang Jadi (K)",
+      "Persediaan Barang Jadi (D) / HPP (K)"
+    ],
+    "j": 1,
+    "b": "Produk selesai berpindah dari BDP ke Persediaan BJ. BDP berkurang (kredit), Persediaan BJ bertambah (debit). Belum jadi HPP — baru jadi HPP saat produk terjual."
+  },
+  {
+    "k": "Harga Pokok Produksi",
+    "s": "Pernyataan yang BENAR tentang hubungan laporan harga pokok produksi dan laporan HPP adalah...",
+    "p": [
+      "HPP langsung sama dengan harga pokok produksi setiap periode",
+      "Harga pokok produksi adalah output dari laporan HPP",
+      "Harga pokok produksi menjadi input dalam laporan HPP bersama dengan perubahan persediaan barang jadi",
+      "Laporan HPP tidak berkaitan dengan laporan harga pokok produksi"
+    ],
+    "j": 2,
+    "b": "HP Produksi (dari laporan HP Produksi) + BJ Awal − BJ Akhir = HPP (di laporan HPP). Keduanya berkaitan erat — laporan HP Produksi memberi angka yang dibutuhkan laporan HPP."
+  },
+  {
+    "k": "Penganggaran",
+    "s": "Anggaran dalam akuntansi manajemen didefinisikan sebagai...",
+    "p": [
+      "Laporan keuangan historis yang sudah diaudit",
+      "Rencana keuangan tertulis dalam satuan kuantitatif untuk periode mendatang",
+      "Catatan transaksi keuangan yang sudah terjadi",
+      "Laporan pertanggungjawaban manajemen kepada pemegang saham"
+    ],
+    "j": 1,
+    "b": "Anggaran adalah perencanaan ke depan — berisi target dan rencana keuangan dalam unit dan rupiah untuk periode yang akan datang, bukan catatan masa lalu."
+  },
+  {
+    "k": "Penganggaran",
+    "s": "Fungsi anggaran sebagai alat untuk membandingkan realisasi dengan target yang telah ditetapkan disebut fungsi...",
+    "p": ["Perencanaan", "Koordinasi", "Pengendalian", "Motivasi"],
+    "j": 2,
+    "b": "Fungsi pengendalian anggaran adalah membandingkan hasil aktual dengan anggaran yang ditetapkan, mengidentifikasi penyimpangan, dan mengambil tindakan korektif jika diperlukan."
+  },
+  {
+    "k": "Penganggaran",
+    "s": "Anggaran yang paling pertama harus disusun dalam proses penganggaran adalah...",
+    "p": [
+      "Anggaran produksi",
+      "Anggaran kas",
+      "Anggaran bahan baku",
+      "Anggaran penjualan"
+    ],
+    "j": 3,
+    "b": "Anggaran penjualan adalah titik awal seluruh proses penganggaran karena semua anggaran lain (produksi, BB, TKL, overhead, kas) bergantung pada berapa banyak yang direncanakan untuk dijual."
+  },
+  {
+    "k": "Penganggaran",
+    "s": "CV. Roti Berkah merencanakan penjualan Januari 3.000 loaf, Februari 3.500 loaf, Maret 4.000 loaf dengan harga Rp 15.000/loaf. Total anggaran penjualan Q1 adalah...",
+    "p": [
+      "Rp 157.500.000",
+      "Rp 150.000.000",
+      "Rp 165.000.000",
+      "Rp 142.500.000"
+    ],
+    "j": 0,
+    "b": "Total unit = 3.000 + 3.500 + 4.000 = 10.500 loaf. Total penjualan = 10.500 × Rp 15.000 = Rp 157.500.000."
+  },
+  {
+    "k": "Penganggaran",
+    "s": "Rumus yang benar untuk menghitung unit yang harus diproduksi dalam anggaran produksi adalah...",
+    "p": [
+      "Unit dijual − Persediaan akhir + Persediaan awal",
+      "Unit dijual + Persediaan akhir − Persediaan awal",
+      "Unit dijual + Persediaan awal − Persediaan akhir",
+      "Unit dijual − Persediaan awal + Persediaan akhir"
+    ],
+    "j": 1,
+    "b": "Logikanya: target jual + yang harus tersisa di akhir − yang sudah ada di awal = yang harus diproduksi. Persediaan akhir ditambahkan karena harus disiapkan, persediaan awal dikurangi karena sudah tersedia."
+  },
+  {
+    "k": "Penganggaran",
+    "s": "Pabrik tempe merencanakan penjualan Januari 4.000 papan, persediaan akhir yang diinginkan 400 papan, persediaan awal tersedia 350 papan. Unit yang harus diproduksi Januari adalah...",
+    "p": ["3.950 papan", "4.050 papan", "4.350 papan", "4.750 papan"],
+    "j": 1,
+    "b": "Unit diproduksi = 4.000 + 400 − 350 = 4.050 papan."
+  },
+  {
+    "k": "Penganggaran",
+    "s": "Kebijakan persediaan barang jadi akhir ditetapkan 10% dari penjualan bulan berikutnya. Jika penjualan Februari 5.000 unit dan Maret 6.000 unit, persediaan akhir Februari yang diinginkan adalah...",
+    "p": ["500 unit", "550 unit", "600 unit", "650 unit"],
+    "j": 2,
+    "b": "Persediaan akhir Februari = 10% × penjualan Maret = 10% × 6.000 = 600 unit."
+  },
+  {
+    "k": "Penganggaran",
+    "s": "Anggaran pembelian bahan baku dihitung dengan rumus...",
+    "p": [
+      "Kebutuhan BB + Persediaan BB awal − Persediaan BB akhir",
+      "Kebutuhan BB − Persediaan BB awal + Persediaan BB akhir",
+      "Kebutuhan BB + Persediaan BB akhir − Persediaan BB awal",
+      "Kebutuhan BB − Persediaan BB akhir − Persediaan BB awal"
+    ],
+    "j": 2,
+    "b": "Pembelian BB = Kebutuhan produksi + Pers. BB akhir (yang harus disiapkan) − Pers. BB awal (sudah tersedia). Sama logikanya dengan anggaran produksi tapi untuk bahan baku."
+  },
+  {
+    "k": "Penganggaran",
+    "s": "Pabrik kerupuk memproduksi 6.000 bungkus dengan standar BB 0,2 kg/bungkus. Persediaan BB akhir yang diinginkan 150 kg, persediaan BB awal 120 kg. Pembelian BB yang dianggarkan adalah...",
+    "p": ["1.200 kg", "1.230 kg", "1.260 kg", "1.300 kg"],
+    "j": 1,
+    "b": "Kebutuhan BB = 6.000 × 0,2 = 1.200 kg. Pembelian = 1.200 + 150 − 120 = 1.230 kg."
+  },
+  {
+    "k": "Penganggaran",
+    "s": "Pabrik roti membutuhkan 1.230 kg tepung dengan harga Rp 12.000/kg. Kebijakan pembayaran: 75% tunai, 25% bulan berikutnya. Pengeluaran kas untuk BB bulan ini adalah...",
+    "p": ["Rp 11.070.000", "Rp 14.760.000", "Rp 3.690.000", "Rp 7.380.000"],
+    "j": 0,
+    "b": "Total pembelian BB = 1.230 × Rp 12.000 = Rp 14.760.000. Kas bulan ini = 75% × Rp 14.760.000 = Rp 11.070.000."
+  },
+  {
+    "k": "Penganggaran",
+    "s": "Anggaran tenaga kerja langsung untuk produksi 5.000 unit dengan standar 0,08 jam/unit dan tarif Rp 30.000/jam adalah...",
+    "p": ["Rp 10.000.000", "Rp 11.000.000", "Rp 12.000.000", "Rp 13.000.000"],
+    "j": 2,
+    "b": "Jam TKL = 5.000 × 0,08 = 400 jam. Biaya TKL = 400 × Rp 30.000 = Rp 12.000.000."
+  },
+  {
+    "k": "Penganggaran",
+    "s": "Overhead pabrik variabel Rp 10.000/jam TKL, overhead tetap Rp 7.000.000/bulan. Jika jam TKL yang dianggarkan 350 jam, total overhead pabrik adalah...",
+    "p": ["Rp 10.500.000", "Rp 14.000.000", "Rp 17.000.000", "Rp 3.500.000"],
+    "j": 0,
+    "b": "Overhead variabel = 350 × Rp 10.000 = Rp 3.500.000. Total = Rp 3.500.000 + Rp 7.000.000 = Rp 10.500.000."
+  },
+  {
+    "k": "Penganggaran",
+    "s": "Dalam anggaran overhead pabrik, biaya depresiasi mesin produksi...",
+    "p": [
+      "Tidak perlu dimasukkan karena tidak melibatkan kas",
+      "Dimasukkan dalam anggaran overhead tetapi tidak masuk pengeluaran kas di anggaran kas",
+      "Dimasukkan dalam anggaran kas sebagai pengeluaran",
+      "Dimasukkan sebagai biaya variabel"
+    ],
+    "j": 1,
+    "b": "Depresiasi adalah biaya non-kas — ada di anggaran overhead untuk menghitung HPP, tapi tidak masuk pengeluaran di anggaran kas karena tidak ada uang yang keluar untuk depresiasi."
+  },
+  {
+    "k": "Penganggaran",
+    "s": "Format anggaran kas diawali dengan...",
+    "p": [
+      "Total penerimaan kas periode berjalan",
+      "Saldo kas awal periode",
+      "Laba bersih yang dianggarkan",
+      "Total pengeluaran kas periode berjalan"
+    ],
+    "j": 1,
+    "b": "Anggaran kas dimulai dari saldo kas awal, ditambah penerimaan, dikurangi pengeluaran, sehingga menghasilkan saldo kas akhir yang diproyeksikan."
+  },
+  {
+    "k": "Penganggaran",
+    "s": "Penjualan dianggarkan Rp 80.000.000 dengan kebijakan 65% tunai dan 35% kredit dibayar bulan berikutnya. Penerimaan kas dari penjualan bulan ini adalah...",
+    "p": ["Rp 28.000.000", "Rp 52.000.000", "Rp 60.000.000", "Rp 80.000.000"],
+    "j": 1,
+    "b": "Penerimaan tunai = 65% × Rp 80.000.000 = Rp 52.000.000. Sisanya Rp 28.000.000 baru diterima bulan berikutnya."
+  },
+  {
+    "k": "Penganggaran",
+    "s": "Saldo kas awal Rp 12.000.000, total penerimaan Rp 70.000.000, total pengeluaran Rp 75.000.000, kas minimum Rp 10.000.000. Perusahaan perlu meminjam sebesar...",
+    "p": ["Rp 3.000.000", "Rp 5.000.000", "Rp 7.000.000", "Rp 10.000.000"],
+    "j": 0,
+    "b": "Kas sebelum pendanaan = Rp 12.000.000 + Rp 70.000.000 − Rp 75.000.000 = Rp 7.000.000. Kas minimum Rp 10.000.000. Kekurangan = Rp 10.000.000 − Rp 7.000.000 = Rp 3.000.000 yang harus dipinjam."
+  },
+  {
+    "k": "Penganggaran",
+    "s": "Jika saldo kas akhir yang diproyeksikan melebihi kas minimum yang ditetapkan, kondisi ini disebut...",
+    "p": [
+      "Defisit kas — perlu pinjaman segera",
+      "Kelebihan kas — bisa dilunasi pinjaman atau diinvestasikan",
+      "Kas minimum — kondisi kritis",
+      "Kas negatif — perusahaan bangkrut"
+    ],
+    "j": 1,
+    "b": "Kelebihan kas di atas minimum adalah hal positif — manajemen bisa memanfaatkannya untuk melunasi utang jangka pendek lebih cepat atau menginvestasikannya dalam instrumen jangka pendek agar menghasilkan bunga."
+  },
+  {
+    "k": "Penganggaran",
+    "s": "Anggaran induk (master budget) terdiri dari dua kelompok besar yaitu...",
+    "p": [
+      "Anggaran jangka pendek dan anggaran jangka panjang",
+      "Anggaran operasional dan anggaran keuangan",
+      "Anggaran tetap dan anggaran fleksibel",
+      "Anggaran penjualan dan anggaran produksi"
+    ],
+    "j": 1,
+    "b": "Master budget = anggaran operasional (penjualan, produksi, BB, TKL, overhead, beban operasi) + anggaran keuangan (kas, L/R pro forma, neraca pro forma). Keduanya terintegrasi membentuk rencana keuangan komprehensif."
+  },
+  {
+    "k": "Penganggaran",
+    "s": "Laporan keuangan yang disusun berdasarkan anggaran — bukan data aktual — disebut...",
+    "p": [
+      "Laporan keuangan audited",
+      "Laporan keuangan konsolidasi",
+      "Laporan keuangan pro forma",
+      "Laporan keuangan interim"
+    ],
+    "j": 2,
+    "b": "Laporan pro forma (projected financial statements) adalah laporan keuangan proyeksi yang disusun berdasarkan anggaran — menunjukkan bagaimana posisi keuangan dan kinerja perusahaan jika semua anggaran tercapai."
+  },
+  {
+    "k": "Penganggaran",
+    "s": "Anggaran fleksibel berbeda dari anggaran statis karena anggaran fleksibel...",
+    "p": [
+      "Hanya mencakup biaya variabel saja",
+      "Disesuaikan dengan berbagai level aktivitas aktual — bukan satu level saja",
+      "Tidak bisa digunakan untuk evaluasi kinerja",
+      "Hanya berlaku untuk perusahaan manufaktur besar"
+    ],
+    "j": 1,
+    "b": "Anggaran fleksibel jauh lebih berguna untuk evaluasi karena membandingkan realisasi dengan anggaran pada level aktivitas yang sama. Anggaran statis hanya satu level sehingga kurang adil jika volume aktual berbeda jauh dari yang direncanakan."
+  },
+  {
+    "k": "Penganggaran",
+    "s": "CV. Tempe Makmur merencanakan produksi 4.000 papan dengan standar BB 0,3 kg kedelai/papan @ Rp 10.000/kg. Persediaan BB awal 180 kg, persediaan BB akhir yang diinginkan 200 kg. Biaya pembelian BB yang dianggarkan adalah...",
+    "p": ["Rp 12.000.000", "Rp 12.200.000", "Rp 11.800.000", "Rp 13.000.000"],
+    "j": 1,
+    "b": "Kebutuhan BB = 4.000 × 0,3 = 1.200 kg. Pembelian = 1.200 + 200 − 180 = 1.220 kg. Biaya = 1.220 × Rp 10.000 = Rp 12.200.000."
+  },
+  {
+    "k": "Penganggaran",
+    "s": "Dalam proses penyusunan anggaran, mengapa anggaran kas disusun setelah anggaran operasional?",
+    "p": [
+      "Karena kas tidak berkaitan dengan operasional perusahaan",
+      "Karena anggaran kas membutuhkan data penerimaan dan pengeluaran yang berasal dari anggaran operasional",
+      "Karena kas hanya berkaitan dengan aktivitas pendanaan saja",
+      "Karena anggaran kas lebih mudah disusun tanpa data operasional"
+    ],
+    "j": 1,
+    "b": "Anggaran kas memerlukan data: penerimaan dari anggaran penjualan, pengeluaran BB dari anggaran pembelian BB, pengeluaran TKL dari anggaran TKL, overhead kas dari anggaran overhead. Semua data ini baru tersedia setelah anggaran operasional selesai disusun."
+  },
+  {
+    "k": "Penganggaran",
+    "s": "Pabrik keripik menetapkan kas minimum Rp 8.000.000. Proyeksi: saldo awal Rp 5.000.000, penerimaan Rp 45.000.000, pengeluaran Rp 38.000.000. Kondisi kas perusahaan adalah...",
+    "p": [
+      "Defisit — perlu pinjaman Rp 3.000.000",
+      "Kelebihan kas Rp 4.000.000",
+      "Tepat di kas minimum",
+      "Defisit — perlu pinjaman Rp 8.000.000"
+    ],
+    "j": 1,
+    "b": "Saldo akhir = Rp 5.000.000 + Rp 45.000.000 − Rp 38.000.000 = Rp 12.000.000. Kas minimum = Rp 8.000.000. Kelebihan = Rp 12.000.000 − Rp 8.000.000 = Rp 4.000.000 — tidak perlu pinjaman."
+  },
+  {
+    "k": "Penganggaran",
+    "s": "Manfaat utama penyusunan anggaran bagi UMKM adalah...",
+    "p": [
+      "Memenuhi kewajiban pelaporan kepada OJK dan Bursa Efek",
+      "Memaksa pemilik merencanakan keuangan ke depan, mengelola kas, dan mengendalikan pengeluaran",
+      "Menghitung pajak penghasilan badan secara otomatis",
+      "Menggantikan laporan keuangan kepada bank saat mengajukan kredit"
+    ],
+    "j": 1,
+    "b": "Bahkan untuk UMKM, anggaran sederhana sangat bermanfaat — membantu pemilik merencanakan pembelian stok, mengelola kas agar tidak kehabisan uang di tengah bulan, dan mengendalikan pengeluaran agar tidak boros."
+  },
+  {
+    "k": "Penganggaran",
+    "s": "Penyimpangan (variance) antara anggaran dan realisasi yang perlu mendapat perhatian segera dari manajemen adalah...",
+    "p": [
+      "Penyimpangan menguntungkan (favorable) yang sangat kecil",
+      "Penyimpangan merugikan (unfavorable) yang signifikan — realisasi lebih buruk dari anggaran",
+      "Semua penyimpangan apapun besarnya harus diselidiki",
+      "Hanya penyimpangan pada anggaran kas saja"
+    ],
+    "j": 1,
+    "b": "Manajemen menggunakan prinsip management by exception — fokus pada penyimpangan yang signifikan, terutama yang merugikan (biaya aktual melebihi anggaran atau penjualan aktual di bawah anggaran). Penyimpangan kecil atau menguntungkan tidak memerlukan tindakan segera."
+  },
+  {
+    "k": "Akuntansi Manajemen",
+    "s": "Perbedaan utama akuntansi manajemen dengan akuntansi keuangan adalah...",
+    "p": [
+      "Akuntansi manajemen wajib mengikuti standar PSAK secara ketat",
+      "Akuntansi manajemen ditujukan untuk pengguna internal dan tidak harus mengikuti standar baku",
+      "Akuntansi manajemen hanya mencatat transaksi masa lalu",
+      "Akuntansi manajemen wajib diaudit oleh akuntan publik"
+    ],
+    "j": 1,
+    "b": "Akuntansi manajemen menyediakan informasi untuk manajer dan direksi dalam mengambil keputusan. Karena sifatnya internal, tidak perlu mengikuti PSAK/IFRS dan tidak wajib diaudit — yang terpenting informasinya relevan dan berguna bagi manajemen."
+  },
+  {
+    "k": "Akuntansi Manajemen",
+    "s": "Biaya yang sudah dikeluarkan di masa lalu dan tidak dapat dipulihkan kembali apapun keputusan yang diambil disebut...",
+    "p": [
+      "Biaya diferensial",
+      "Biaya kesempatan",
+      "Biaya relevan",
+      "Biaya sunk (tenggelam)"
+    ],
+    "j": 3,
+    "b": "Sunk cost harus diabaikan dalam pengambilan keputusan karena sudah terjadi dan tidak bisa dikembalikan. Mempertimbangkan sunk cost hanya akan membuat keputusan menjadi tidak rasional dan bias."
+  },
+  {
+    "k": "Akuntansi Manajemen",
+    "s": "CV. Maju sudah mengeluarkan Rp 30.000.000 untuk riset produk baru. Proyek tersebut sedang dievaluasi apakah dilanjutkan atau dihentikan. Biaya Rp 30.000.000 tersebut dalam analisis keputusan adalah...",
+    "p": [
+      "Biaya relevan yang harus diperhitungkan",
+      "Biaya diferensial antar dua alternatif",
+      "Sunk cost yang harus diabaikan",
+      "Biaya kesempatan yang menambah beban"
+    ],
+    "j": 2,
+    "b": "Rp 30.000.000 sudah dikeluarkan dan tidak bisa dikembalikan apapun keputusannya. Melanjutkan atau menghentikan proyek tidak mengubah fakta bahwa uang itu sudah habis. Keputusan harus didasarkan pada biaya dan manfaat masa depan saja."
+  },
+  {
+    "k": "Akuntansi Manajemen",
+    "s": "Biaya yang berbeda antar dua alternatif keputusan dan relevan untuk dipertimbangkan disebut...",
+    "p": ["Biaya tetap", "Biaya diferensial", "Biaya overhead", "Biaya sunk"],
+    "j": 1,
+    "b": "Biaya diferensial adalah selisih biaya antara dua atau lebih alternatif pilihan. Hanya biaya yang berbeda antar alternatif yang relevan untuk dipertimbangkan dalam pengambilan keputusan."
+  },
+  {
+    "k": "Akuntansi Manajemen",
+    "s": "Manfaat yang dikorbankan karena memilih satu alternatif dan meninggalkan alternatif lain disebut...",
+    "p": [
+      "Biaya tetap langsung",
+      "Biaya produksi",
+      "Biaya kesempatan (opportunity cost)",
+      "Biaya tidak langsung"
+    ],
+    "j": 2,
+    "b": "Biaya kesempatan bukan pengeluaran kas nyata tapi sangat relevan dalam pengambilan keputusan. Contoh: jika gudang kosong dipakai sendiri padahal bisa disewakan Rp 20 juta — Rp 20 juta itu adalah biaya kesempatan yang harus diperhitungkan."
+  },
+  {
+    "k": "Akuntansi Manajemen",
+    "s": "Pesanan khusus sebaiknya DITERIMA apabila...",
+    "p": [
+      "Harga pesanan khusus sama dengan harga jual normal",
+      "Harga pesanan khusus lebih besar dari biaya variabel per unit ditambah biaya kesempatan",
+      "Harga pesanan khusus lebih besar dari total biaya per unit termasuk biaya tetap",
+      "Harga pesanan khusus lebih kecil dari biaya variabel per unit"
+    ],
+    "j": 1,
+    "b": "Selama harga pesanan khusus menutupi biaya variabel dan biaya kesempatan yang timbul, pesanan tersebut memberikan kontribusi positif ke laba perusahaan dan sebaiknya diterima."
+  },
+  {
+    "k": "Akuntansi Manajemen",
+    "s": "Syarat utama yang harus dipenuhi agar perusahaan bisa mempertimbangkan menerima pesanan khusus dengan harga di bawah normal adalah...",
+    "p": [
+      "Pelanggan pesanan khusus harus pelanggan lama",
+      "Harus ada kapasitas produksi yang masih menganggur (idle capacity)",
+      "Biaya tetap harus nol",
+      "Produk pesanan khusus harus berbeda dari produk reguler"
+    ],
+    "j": 1,
+    "b": "Jika kapasitas sudah penuh, menerima pesanan khusus berarti mengorbankan produksi reguler yang menghasilkan harga lebih tinggi — ada biaya kesempatan yang besar. Pesanan khusus baru menguntungkan jika kapasitas masih tersedia."
+  },
+  {
+    "k": "Akuntansi Manajemen",
+    "s": "Pabrik kerupuk kapasitas 8.000 bungkus/bulan, produksi normal 5.500 bungkus, harga jual Rp 20.000, biaya variabel Rp 12.000, biaya tetap total Rp 16.500.000. Ada pesanan khusus 1.500 bungkus @ Rp 14.000. Kontribusi pesanan khusus adalah...",
+    "p": ["Rp 3.000.000", "Rp 4.000.000", "Rp 6.000.000", "Rp 2.000.000"],
+    "j": 0,
+    "b": "Kapasitas tersedia = 8.000 − 5.500 = 2.500 bungkus, cukup untuk 1.500. Kontribusi per bungkus = Rp 14.000 − Rp 12.000 = Rp 2.000. Total = 1.500 × Rp 2.000 = Rp 3.000.000."
+  },
+  {
+    "k": "Akuntansi Manajemen",
+    "s": "Menggunakan data soal nomor 8 (pesanan khusus 1.500 bungkus @ Rp 14.000, biaya variabel Rp 12.000, kapasitas tersedia), apakah pesanan khusus tersebut sebaiknya diterima atau ditolak?",
+    "p": [
+      "Ditolak karena harga di bawah harga normal",
+      "Ditolak karena biaya tetap tidak tertutupi",
+      "Diterima karena memberikan kontribusi positif Rp 3.000.000",
+      "Diterima hanya jika biaya tetap per unit ikut diperhitungkan"
+    ],
+    "j": 2,
+    "b": "Biaya tetap Rp 16.500.000 sudah ada dan tidak berubah — bukan biaya relevan. Yang relevan hanya biaya variabel Rp 12.000. Karena harga Rp 14.000 > biaya variabel Rp 12.000, setiap bungkus menyumbang Rp 2.000 ke laba. Total tambahan laba = Rp 3.000.000. TERIMA!"
+  },
+  {
+    "k": "Akuntansi Manajemen",
+    "s": "Dalam analisis keputusan pesanan khusus ketika kapasitas sudah PENUH, yang harus dipertimbangkan sebagai biaya tambahan adalah...",
+    "p": [
+      "Biaya tetap yang meningkat",
+      "Biaya depresiasi aset tetap",
+      "Biaya kesempatan dari penjualan reguler yang harus dikorbankan",
+      "Biaya administrasi kantor pusat"
+    ],
+    "j": 2,
+    "b": "Jika kapasitas penuh, menerima pesanan khusus berarti mengorbankan penjualan reguler yang harganya lebih tinggi. Selisih margin kontribusi yang hilang dari penjualan reguler adalah biaya kesempatan yang harus dimasukkan dalam analisis."
+  },
+  {
+    "k": "Akuntansi Manajemen",
+    "s": "Keputusan make or buy membandingkan...",
+    "p": [
+      "Harga jual produk jadi vs biaya produksinya",
+      "Biaya membuat sendiri vs harga membeli dari pemasok luar",
+      "Biaya variabel vs biaya tetap produksi",
+      "Biaya produksi vs harga pasar produk jadi"
+    ],
+    "j": 1,
+    "b": "Make or buy adalah keputusan outsourcing — apakah lebih hemat memproduksi komponen/produk sendiri atau membelinya dari pemasok luar. Keputusan ini harus mempertimbangkan biaya relevan saja, bukan total biaya termasuk overhead tetap yang tidak terhindarkan."
+  },
+  {
+    "k": "Akuntansi Manajemen",
+    "s": "Dalam analisis make or buy, biaya overhead tetap yang dialokasikan ke produk...",
+    "p": [
+      "Selalu harus diperhitungkan sebagai biaya relevan",
+      "Hanya relevan jika bisa dihindari ketika memilih untuk membeli dari luar",
+      "Tidak pernah relevan dalam keputusan apapun",
+      "Harus dikurangi dari harga beli pemasok"
+    ],
+    "j": 1,
+    "b": "Overhead tetap yang dialokasikan seringkali tidak bisa dihindari meski produksi dihentikan — biaya sewa pabrik tetap ada misalnya. Overhead tetap baru relevan jika memang bisa dihilangkan ketika memilih buy."
+  },
+  {
+    "k": "Akuntansi Manajemen",
+    "s": "CV. Sepatu Maju mempertimbangkan membeli sol dari luar seharga Rp 25.000/pasang. Biaya buat sendiri: BB Rp 12.000, TKL Rp 7.000, overhead variabel Rp 3.000, overhead tetap dialokasikan Rp 5.000. Overhead tetap tidak bisa dihindari. Keputusan yang tepat adalah...",
+    "p": [
+      "Beli dari luar karena total biaya buat Rp 27.000 > harga beli Rp 25.000",
+      "Buat sendiri karena biaya relevan Rp 22.000 < harga beli Rp 25.000",
+      "Beli dari luar karena lebih praktis",
+      "Buat sendiri karena overhead tetap harus diserap"
+    ],
+    "j": 1,
+    "b": "Biaya relevan buat sendiri = BB + TKL + Overhead variabel = Rp 12.000 + Rp 7.000 + Rp 3.000 = Rp 22.000. Overhead tetap Rp 5.000 diabaikan karena tidak bisa dihindari. Rp 22.000 < Rp 25.000 → BUAT SENDIRI hemat Rp 3.000/pasang."
+  },
+  {
+    "k": "Akuntansi Manajemen",
+    "s": "Dalam keputusan make or buy, jika kapasitas yang dibebaskan bisa digunakan untuk kegiatan lain yang menghasilkan pendapatan, maka pendapatan tersebut harus diperhitungkan sebagai...",
+    "p": [
+      "Pendapatan tambahan yang mengurangi biaya buat sendiri",
+      "Biaya kesempatan yang menambah biaya buat sendiri",
+      "Biaya tetap yang tidak relevan",
+      "Pendapatan luar biasa di laporan laba rugi"
+    ],
+    "j": 1,
+    "b": "Jika memilih buat sendiri berarti kapasitas tidak bisa digunakan untuk hal lain yang menghasilkan — pendapatan yang hilang itu adalah biaya kesempatan yang harus ditambahkan ke biaya buat sendiri agar perbandingannya adil."
+  },
+  {
+    "k": "Akuntansi Manajemen",
+    "s": "Prinsip utama dalam keputusan menghentikan atau melanjutkan segmen yang merugi adalah...",
+    "p": [
+      "Hentikan segmen apapun yang menunjukkan kerugian di laporan laba rugi",
+      "Lanjutkan segmen jika margin kontribusinya positif dan melebihi biaya tetap yang bisa dihindari",
+      "Hentikan segmen jika penjualannya di bawah rata-rata perusahaan",
+      "Lanjutkan segmen hanya jika laba bersihnya positif"
+    ],
+    "j": 1,
+    "b": "Segmen yang rugi di laporan L/R tidak otomatis harus dihentikan — mungkin rugi karena menanggung biaya tetap bersama yang tidak bisa dihindari. Selama MK > biaya tetap yang BISA dihindari, segmen masih berkontribusi positif ke laba keseluruhan."
+  },
+  {
+    "k": "Akuntansi Manajemen",
+    "s": "Biaya tetap yang akan hilang jika segmen dihentikan disebut...",
+    "p": [
+      "Biaya tetap bersama",
+      "Biaya tetap tidak langsung",
+      "Biaya tetap yang dapat dihindari (avoidable fixed cost)",
+      "Biaya tetap overhead pabrik"
+    ],
+    "j": 2,
+    "b": "Avoidable fixed cost adalah biaya tetap yang benar-benar hilang jika segmen dihentikan — misalnya gaji manajer segmen, sewa khusus untuk segmen itu. Ini satu-satunya biaya tetap yang relevan dalam keputusan hentikan segmen."
+  },
+  {
+    "k": "Akuntansi Manajemen",
+    "s": "Lini produk C memiliki margin kontribusi Rp 18.000.000, biaya tetap langsung yang bisa dihindari Rp 12.000.000, dan biaya tetap bersama yang dialokasikan Rp 8.000.000. Jika Lini C dihentikan, dampak ke laba perusahaan adalah...",
+    "p": [
+      "Laba naik Rp 2.000.000",
+      "Laba turun Rp 6.000.000",
+      "Laba naik Rp 8.000.000",
+      "Laba tidak berubah"
+    ],
+    "j": 1,
+    "b": "Jika dihentikan: kehilangan MK Rp 18.000.000, hemat biaya tetap langsung Rp 12.000.000. Biaya tetap bersama Rp 8.000.000 tetap ada. Dampak = −Rp 18.000.000 + Rp 12.000.000 = −Rp 6.000.000 → laba turun Rp 6.000.000. LANJUTKAN!"
+  },
+  {
+    "k": "Akuntansi Manajemen",
+    "s": "Dalam keputusan bauran produk dengan sumber daya terbatas, kriteria prioritas yang benar adalah...",
+    "p": [
+      "Prioritaskan produk dengan harga jual tertinggi",
+      "Prioritaskan produk dengan margin kontribusi per unit tertinggi",
+      "Prioritaskan produk dengan margin kontribusi per unit sumber daya langka tertinggi",
+      "Prioritaskan produk dengan biaya variabel terendah"
+    ],
+    "j": 2,
+    "b": "Ketika ada keterbatasan sumber daya, yang terpenting bukan MK per unit produk tapi MK yang dihasilkan per unit sumber daya langka yang digunakan. Produk yang menghasilkan MK terbesar per jam mesin atau per kg bahan langka harus diprioritaskan."
+  },
+  {
+    "k": "Akuntansi Manajemen",
+    "s": "Produk X: MK per unit Rp 40.000, butuh 4 jam mesin per unit. Produk Y: MK per unit Rp 30.000, butuh 2 jam mesin per unit. Kapasitas mesin terbatas. Produk mana yang diprioritaskan?",
+    "p": [
+      "Produk X karena MK per unit lebih tinggi",
+      "Produk Y karena MK per jam mesin lebih tinggi",
+      "Produk X karena harga jualnya lebih tinggi",
+      "Sama saja karena kapasitas terbatas"
+    ],
+    "j": 1,
+    "b": "MK per jam mesin: X = Rp 40.000 / 4 = Rp 10.000/jam. Y = Rp 30.000 / 2 = Rp 15.000/jam. Produk Y menghasilkan Rp 15.000 per jam mesin vs X hanya Rp 10.000 — Y diprioritaskan meski MK per unitnya lebih rendah."
+  },
+  {
+    "k": "Akuntansi Manajemen",
+    "s": "Kapasitas mesin 2.000 jam. Produk P butuh 2 jam/unit, MK Rp 24.000/unit. Produk Q butuh 1 jam/unit, MK Rp 16.000/unit. Permintaan P = 600 unit, Q = 800 unit. Bauran optimal yang memaksimalkan laba adalah...",
+    "p": [
+      "P: 400 unit, Q: 800 unit",
+      "P: 600 unit, Q: 600 unit",
+      "P: 600 unit, Q: 800 unit",
+      "P: 500 unit, Q: 1.000 unit"
+    ],
+    "j": 2,
+    "b": "MK/jam: P = Rp 24.000/2 = Rp 12.000. Q = Rp 16.000/1 = Rp 16.000. Prioritas Q dulu: 800 × 1 = 800 jam. Sisa = 1.200 jam. P = 1.200/2 = 600 unit (tepat permintaan). Bauran: P 600 unit + Q 800 unit — total 1.600 jam, masih dalam kapasitas 2.000 jam."
+  },
+  {
+    "k": "Akuntansi Manajemen",
+    "s": "Metode penetapan harga di mana harga jual ditentukan dengan menambahkan persentase markup ke biaya per unit disebut...",
+    "p": [
+      "Target costing",
+      "Penetapan harga berbasis pasar",
+      "Cost-plus pricing",
+      "Contribution margin pricing"
+    ],
+    "j": 2,
+    "b": "Cost-plus pricing = Biaya + Markup. Sederhana dan memastikan semua biaya tertutupi. Kelemahannya: tidak mempertimbangkan kondisi pasar dan persaingan — harga yang dihasilkan mungkin terlalu tinggi atau terlalu rendah dibanding kompetitor."
+  },
+  {
+    "k": "Akuntansi Manajemen",
+    "s": "Target costing berbeda dari cost-plus pricing karena target costing...",
+    "p": [
+      "Menambahkan markup ke biaya untuk menentukan harga jual",
+      "Menentukan target biaya berdasarkan harga pasar dikurangi laba yang diinginkan",
+      "Menggunakan biaya variabel sebagai dasar penetapan harga",
+      "Tidak mempertimbangkan laba dalam penetapan harga"
+    ],
+    "j": 1,
+    "b": "Target costing: harga ditentukan pasar → target biaya = harga pasar − target laba. Perusahaan harus bekerja keras efisienkan biaya agar ≤ target biaya. Pendekatan ini berorientasi pasar dan lebih kompetitif dari cost-plus."
+  },
+  {
+    "k": "Akuntansi Manajemen",
+    "s": "Harga minimum yang boleh diterima untuk pesanan khusus ketika tidak ada biaya kesempatan adalah...",
+    "p": [
+      "Total biaya per unit termasuk biaya tetap",
+      "Biaya tetap per unit saja",
+      "Biaya variabel per unit",
+      "Harga jual normal dikurangi 20%"
+    ],
+    "j": 2,
+    "b": "Harga minimum = biaya variabel per unit. Di titik ini kontribusi = nol — perusahaan tidak untung tidak rugi dari pesanan khusus. Harga di atas biaya variabel = ada kontribusi positif. Harga di bawah biaya variabel = perusahaan rugi di setiap unit."
+  },
+  {
+    "k": "Akuntansi Manajemen",
+    "s": "Pabrik tahu biaya variabel Rp 6.000/papan, biaya tetap Rp 8.000.000/bulan, produksi normal 4.000 papan. Ada kapasitas tersisa 1.000 papan. Pesanan khusus 800 papan @ Rp 7.500. Harga minimum agar impas pada pesanan ini adalah...",
+    "p": [
+      "Rp 6.000/papan",
+      "Rp 7.500/papan",
+      "Rp 8.000/papan",
+      "Rp 10.000/papan"
+    ],
+    "j": 0,
+    "b": "Harga minimum = biaya variabel = Rp 6.000/papan. Biaya tetap sudah ada dan tidak berubah — bukan biaya relevan. Pesanan ini @ Rp 7.500 memberikan kontribusi Rp 7.500 − Rp 6.000 = Rp 1.500/papan × 800 = Rp 1.200.000 tambahan laba. TERIMA!"
+  },
+  {
+    "k": "Akuntansi Manajemen",
+    "s": "Pernyataan yang PALING TEPAT tentang penggunaan akuntansi manajemen dalam UMKM adalah...",
+    "p": [
+      "UMKM tidak perlu akuntansi manajemen karena skalanya terlalu kecil",
+      "Akuntansi manajemen hanya berguna untuk perusahaan yang sudah go public",
+      "UMKM bisa menggunakan prinsip akuntansi manajemen sederhana seperti analisis BEP dan biaya relevan untuk membuat keputusan bisnis lebih baik",
+      "Akuntansi manajemen harus diterapkan persis sama dengan perusahaan besar agar bermanfaat"
+    ],
+    "j": 2,
+    "b": "Prinsip akuntansi manajemen bisa diterapkan di skala apapun. Pemilik warung yang memutuskan apakah menerima pesanan nasi bungkus 100 porsi dengan harga lebih murah — itu sudah menggunakan konsep pesanan khusus dan biaya relevan, meski tidak menyadarinya!"
+  },
+  {
+    "k": "Perpajakan Dasar dalam Akuntansi",
+    "s": "Sistem perpajakan Indonesia yang mewajibkan wajib pajak menghitung, menyetor, dan melaporkan pajaknya sendiri disebut...",
+    "p": [
+      "Official assessment system",
+      "Withholding system",
+      "Self assessment system",
+      "Automatic assessment system"
+    ],
+    "j": 2,
+    "b": "Indonesia menganut self assessment system sejak reformasi perpajakan 1983. Wajib pajak diberi kepercayaan penuh untuk menghitung, menyetor, dan melaporkan sendiri kewajiban pajaknya. Fiskus (DJP) bertugas melakukan pengawasan dan pemeriksaan."
+  },
+  {
+    "k": "Perpajakan Dasar dalam Akuntansi",
+    "s": "Tarif Pajak Penghasilan Badan umum yang berlaku di Indonesia adalah...",
+    "p": ["15%", "20%", "22%", "25%"],
+    "j": 2,
+    "b": "Tarif PPh Badan umum adalah 22% dari Penghasilan Kena Pajak. PT yang sahamnya diperdagangkan di Bursa Efek Indonesia mendapat pengurangan 3% menjadi 19%. UMKM dengan omzet ≤ Rp 4,8 miliar menggunakan tarif PPh Final 0,5% dari omzet."
+  },
+  {
+    "k": "Perpajakan Dasar dalam Akuntansi",
+    "s": "PT. Maju Sejahtera memiliki Penghasilan Kena Pajak Rp 800.000.000 tahun 2024. PPh Badan yang terutang adalah...",
+    "p": [
+      "Rp 160.000.000",
+      "Rp 176.000.000",
+      "Rp 180.000.000",
+      "Rp 200.000.000"
+    ],
+    "j": 1,
+    "b": "PPh Badan = 22% × Rp 800.000.000 = Rp 176.000.000."
+  },
+  {
+    "k": "Perpajakan Dasar dalam Akuntansi",
+    "s": "PPh Pasal 25 adalah...",
+    "p": [
+      "Pajak atas penghasilan karyawan yang dipotong pemberi kerja",
+      "Angsuran pajak penghasilan badan yang dibayar setiap bulan",
+      "Pajak atas jasa yang dibayarkan kepada pihak lain",
+      "Pajak atas impor barang dari luar negeri"
+    ],
+    "j": 1,
+    "b": "PPh Pasal 25 adalah sistem angsuran agar wajib pajak tidak mengalami kurang bayar besar di akhir tahun. Besarnya dihitung berdasarkan PPh terutang tahun lalu dibagi 12 bulan."
+  },
+  {
+    "k": "Perpajakan Dasar dalam Akuntansi",
+    "s": "PPh terutang PT. Berkah tahun 2023 adalah Rp 180.000.000. Angsuran PPh Pasal 25 per bulan tahun 2024 adalah...",
+    "p": ["Rp 12.000.000", "Rp 13.500.000", "Rp 15.000.000", "Rp 18.000.000"],
+    "j": 2,
+    "b": "PPh Ps. 25/bulan = Rp 180.000.000 / 12 = Rp 15.000.000/bulan."
+  },
+  {
+    "k": "Perpajakan Dasar dalam Akuntansi",
+    "s": "PPh Pasal 21 adalah pajak yang dikenakan atas...",
+    "p": [
+      "Laba bersih perusahaan setelah rekonsiliasi fiskal",
+      "Penghasilan karyawan berupa gaji, tunjangan, dan bonus",
+      "Jasa konsultasi yang diterima badan usaha",
+      "Pembelian barang impor dari luar negeri"
+    ],
+    "j": 1,
+    "b": "PPh Pasal 21 dikenakan atas penghasilan orang pribadi dari pekerjaan (gaji, upah, honorarium, tunjangan, dll). Pemberi kerja wajib memotong PPh 21 dari gaji karyawan dan menyetorkannya ke kas negara."
+  },
+  {
+    "k": "Perpajakan Dasar dalam Akuntansi",
+    "s": "PTKP (Penghasilan Tidak Kena Pajak) untuk status kawin dengan 2 tanggungan (K/2) adalah...",
+    "p": ["Rp 54.000.000", "Rp 58.500.000", "Rp 63.000.000", "Rp 67.500.000"],
+    "j": 3,
+    "b": "PTKP K/2 = Rp 54.000.000 (diri sendiri) + Rp 4.500.000 (status kawin) + (2 × Rp 4.500.000) (2 tanggungan) = Rp 67.500.000."
+  },
+  {
+    "k": "Perpajakan Dasar dalam Akuntansi",
+    "s": "Pak Doni status TK/0 (tidak kawin, tanpa tanggungan), gaji Rp 6.000.000/bulan. PKP setahun Pak Doni adalah...",
+    "p": ["Rp 14.400.000", "Rp 16.200.000", "Rp 18.000.000", "Rp 72.000.000"],
+    "j": 0,
+    "b": "Gaji setahun = Rp 6.000.000 × 12 = Rp 72.000.000. Biaya jabatan 5% × Rp 72.000.000 = Rp 3.600.000. PTKP TK/0 = Rp 54.000.000. PKP = Rp 72.000.000 − Rp 3.600.000 − Rp 54.000.000 = Rp 14.400.000."
+  },
+  {
+    "k": "Perpajakan Dasar dalam Akuntansi",
+    "s": "PPh Pasal 23 dikenakan dengan tarif 2% atas...",
+    "p": [
+      "Dividen yang diterima pemegang saham",
+      "Bunga pinjaman bank",
+      "Jasa konsultasi dan jasa teknik yang dibayarkan kepada badan",
+      "Penghasilan dari impor barang"
+    ],
+    "j": 2,
+    "b": "PPh Ps. 23 tarif 2% dikenakan atas jasa (konsultan, teknik, manajemen, konstruksi, dll) dan sewa selain tanah/bangunan. Tarif 15% untuk dividen, bunga, dan royalti."
+  },
+  {
+    "k": "Perpajakan Dasar dalam Akuntansi",
+    "s": "PT. Nusantara membayar jasa desain grafis kepada CV. Kreatif sebesar Rp 5.000.000. PPh Pasal 23 yang harus dipotong adalah...",
+    "p": ["Rp 50.000", "Rp 75.000", "Rp 100.000", "Rp 750.000"],
+    "j": 2,
+    "b": "PPh Ps. 23 = 2% × Rp 5.000.000 = Rp 100.000. PT. Nusantara hanya membayar Rp 4.900.000 ke CV. Kreatif, sisanya Rp 100.000 disetorkan ke DJP."
+  },
+  {
+    "k": "Perpajakan Dasar dalam Akuntansi",
+    "s": "Tarif PPN yang berlaku umum di Indonesia sejak April 2022 adalah...",
+    "p": ["10%", "11%", "12%", "15%"],
+    "j": 1,
+    "b": "Tarif PPN naik dari 10% menjadi 11% mulai 1 April 2022 berdasarkan UU HPP (Harmonisasi Peraturan Perpajakan). Rencana kenaikan menjadi 12% berlaku mulai 2025."
+  },
+  {
+    "k": "Perpajakan Dasar dalam Akuntansi",
+    "s": "PPN Masukan adalah...",
+    "p": [
+      "PPN yang dipungut perusahaan dari pembeli saat menjual barang",
+      "PPN yang dibayar perusahaan kepada supplier saat membeli barang",
+      "PPN yang disetor ke DJP setiap bulan",
+      "Selisih antara PPN Keluaran dan PPN yang sudah dibayar"
+    ],
+    "j": 1,
+    "b": "PPN Masukan adalah pajak yang dibayar PKP saat membeli BKP/JKP dari supplier. PPN Masukan bisa dikreditkan (dikurangkan) dari PPN Keluaran untuk menghitung PPN yang harus disetor ke DJP."
+  },
+  {
+    "k": "Perpajakan Dasar dalam Akuntansi",
+    "s": "PT. Abadi (PKP) menjual barang seharga Rp 100.000.000 (belum PPN) dan membeli barang seharga Rp 70.000.000 (belum PPN). PPN yang harus disetor ke DJP adalah...",
+    "p": ["Rp 3.300.000", "Rp 7.700.000", "Rp 11.000.000", "Rp 3.000.000"],
+    "j": 0,
+    "b": "PPN Keluaran = 11% × Rp 100.000.000 = Rp 11.000.000. PPN Masukan = 11% × Rp 70.000.000 = Rp 7.700.000. PPN disetor = Rp 11.000.000 − Rp 7.700.000 = Rp 3.300.000."
+  },
+  {
+    "k": "Perpajakan Dasar dalam Akuntansi",
+    "s": "Jika PPN Masukan lebih besar dari PPN Keluaran dalam satu masa pajak, kondisi ini disebut...",
+    "p": [
+      "PPN kurang bayar — harus disetor ke DJP",
+      "PPN lebih bayar — bisa diminta restitusi atau dikompensasi",
+      "PPN nihil — tidak ada yang disetor maupun dikembalikan",
+      "PPN fiktif — melanggar peraturan perpajakan"
+    ],
+    "j": 1,
+    "b": "Jika PPN Masukan > PPN Keluaran, artinya PKP terlalu banyak membayar PPN. Kelebihan ini bisa dikompensasi ke masa pajak berikutnya atau dimintakan restitusi (pengembalian) ke DJP."
+  },
+  {
+    "k": "Perpajakan Dasar dalam Akuntansi",
+    "s": "Rekonsiliasi fiskal diperlukan karena...",
+    "p": [
+      "Laporan keuangan komersial dan fiskal selalu sama",
+      "Standar akuntansi (PSAK) dan ketentuan perpajakan memiliki perbedaan dalam pengakuan pendapatan dan biaya",
+      "DJP tidak mempercayai laporan keuangan perusahaan",
+      "Perusahaan ingin meminimalkan pajak secara ilegal"
+    ],
+    "j": 1,
+    "b": "PSAK mengakui biaya berdasarkan prinsip akrual dan matching, sedangkan fiskal punya aturan sendiri tentang biaya yang boleh dikurangkan. Perbedaan inilah yang menyebabkan laba komersial ≠ laba fiskal dan memerlukan rekonsiliasi."
+  },
+  {
+    "k": "Perpajakan Dasar dalam Akuntansi",
+    "s": "Biaya sumbangan yang tidak memenuhi syarat fiskal dalam rekonsiliasi fiskal akan menghasilkan...",
+    "p": [
+      "Koreksi negatif — mengurangi laba fiskal",
+      "Koreksi positif — menambah laba fiskal",
+      "Tidak ada koreksi — sudah sesuai ketentuan",
+      "Pengurangan tarif pajak"
+    ],
+    "j": 1,
+    "b": "Biaya yang tidak diperkenankan fiskal (non-deductible) harus dikoreksi positif — ditambahkan kembali ke laba komersial untuk mendapatkan laba fiskal. Sumbangan yang tidak memenuhi syarat tidak boleh mengurangi penghasilan kena pajak."
+  },
+  {
+    "k": "Perpajakan Dasar dalam Akuntansi",
+    "s": "Penghasilan bunga deposito yang sudah dikenai PPh Final dalam rekonsiliasi fiskal akan menghasilkan...",
+    "p": [
+      "Koreksi positif — menambah laba fiskal",
+      "Koreksi negatif — mengurangi laba fiskal",
+      "Tidak ada koreksi karena sudah masuk laba komersial",
+      "Penambahan PPh Badan terutang"
+    ],
+    "j": 1,
+    "b": "Penghasilan yang sudah dikenai PPh Final (bunga deposito, sewa tanah/bangunan) tidak boleh dikenai PPh Badan lagi. Karena sudah masuk laba komersial, harus dikoreksi negatif untuk dikeluarkan dari laba fiskal."
+  },
+  {
+    "k": "Perpajakan Dasar dalam Akuntansi",
+    "s": "PT. Sejahtera memiliki laba komersial Rp 500.000.000. Koreksi positif Rp 40.000.000, koreksi negatif Rp 25.000.000. PPh Badan terutang adalah...",
+    "p": [
+      "Rp 113.300.000",
+      "Rp 115.500.000",
+      "Rp 110.000.000",
+      "Rp 118.800.000"
+    ],
+    "j": 0,
+    "b": "Laba fiskal = Rp 500.000.000 + Rp 40.000.000 − Rp 25.000.000 = Rp 515.000.000. PPh Badan = 22% × Rp 515.000.000 = Rp 113.300.000."
+  },
+  {
+    "k": "Perpajakan Dasar dalam Akuntansi",
+    "s": "Pajak tangguhan (deferred tax) muncul karena adanya...",
+    "p": [
+      "Perbedaan permanen antara laba komersial dan laba fiskal",
+      "Perbedaan temporer antara nilai aset/kewajiban secara akuntansi dan fiskal",
+      "Kesalahan perhitungan pajak oleh wajib pajak",
+      "Perubahan tarif pajak oleh pemerintah"
+    ],
+    "j": 1,
+    "b": "Pajak tangguhan timbul dari beda temporer — perbedaan yang akan berbalik di masa mendatang. Contoh: metode penyusutan berbeda antara komersial dan fiskal. Beda permanen (sumbangan tidak deductible) tidak menimbulkan pajak tangguhan."
+  },
+  {
+    "k": "Perpajakan Dasar dalam Akuntansi",
+    "s": "Perusahaan menggunakan depresiasi garis lurus komersial Rp 15.000.000/tahun, tapi fiskal menggunakan saldo menurun Rp 25.000.000/tahun. Dampak pajak tangguhan yang timbul adalah...",
+    "p": [
+      "Aset pajak tangguhan karena laba fiskal lebih tinggi dari komersial",
+      "Liabilitas pajak tangguhan karena laba fiskal lebih rendah dari komersial saat ini",
+      "Tidak ada pajak tangguhan karena perbedaan ini bersifat permanen",
+      "Pengurangan beban pajak kini sebesar selisih depresiasi"
+    ],
+    "j": 1,
+    "b": "Depresiasi fiskal (Rp 25 juta) > depresiasi komersial (Rp 15 juta) → laba fiskal lebih kecil → bayar pajak lebih sedikit sekarang. Tapi di masa depan akan bayar lebih banyak. Maka dibentuk liabilitas pajak tangguhan = 22% × (Rp 25 juta − Rp 15 juta) = Rp 2.200.000."
   }
 ]

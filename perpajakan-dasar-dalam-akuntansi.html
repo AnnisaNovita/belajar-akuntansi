@@ -1,0 +1,2406 @@
+html
+
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Perpajakan Dasar dalam Akuntansi — Belajar Akuntansi</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0f172a;
+        --glass-bg: rgba(30, 41, 59, 0.45);
+        --glass-border: rgba(255, 255, 255, 0.08);
+        --glass-highlight: rgba(255, 255, 255, 0.15);
+        --text: #f8fafc;
+        --text-muted: #94a3b8;
+
+        --pink: #ff3d9a;
+        --purple: #a855f7;
+        --blue: #3b82f6;
+        --green: #10b981;
+        --yellow: #fbbf24;
+        --orange: #ff6b35;
+        --teal: #06b6d4;
+        --red: #ef4444;
+
+        /* Tema Bab — amber/kuning untuk pajak */
+        --accent: #f59e0b;
+        --accent2: #fbbf24;
+        --accent-glow: rgba(245, 158, 11, 0.12);
+        --accent-border: rgba(245, 158, 11, 0.28);
+
+        --radius: 24px;
+        --radius-sm: 14px;
+      }
+
+      body.light-theme {
+        --bg: #fffbf0;
+        --glass-bg: rgba(255, 255, 255, 0.65);
+        --glass-border: rgba(0, 0, 0, 0.06);
+        --glass-highlight: rgba(255, 255, 255, 0.85);
+        --text: #1e293b;
+        --text-muted: #64748b;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "DM Sans", sans-serif;
+        background-color: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        overflow-x: hidden;
+        transition:
+          background-color 0.3s ease,
+          color 0.3s ease;
+        position: relative;
+      }
+
+      .blob {
+        position: absolute;
+        border-radius: 50%;
+        pointer-events: none;
+        filter: blur(80px);
+        opacity: 0.22;
+        z-index: 0;
+        animation: float 20s infinite alternate;
+      }
+      .blob-1 {
+        width: 450px;
+        height: 450px;
+        background: var(--accent);
+        top: -150px;
+        right: -80px;
+      }
+      .blob-2 {
+        width: 320px;
+        height: 320px;
+        background: var(--orange);
+        bottom: 20%;
+        left: -80px;
+        animation-delay: -5s;
+      }
+      .blob-3 {
+        width: 350px;
+        height: 350px;
+        background: var(--purple);
+        top: 40%;
+        right: 10%;
+        animation-delay: -10s;
+      }
+      @keyframes float {
+        0% {
+          transform: translate(0, 0) scale(1);
+        }
+        100% {
+          transform: translate(50px, 80px) scale(1.1);
+        }
+      }
+
+      header {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 30px 24px 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        z-index: 10;
+      }
+      .header-logo {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 18px;
+        color: var(--text);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .theme-toggle-btn {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(12px);
+        color: var(--text);
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        transition:
+          transform 0.2s,
+          background-color 0.2s;
+      }
+      .theme-toggle-btn:hover {
+        transform: scale(1.08);
+        background: var(--glass-highlight);
+      }
+      .back-btn {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(12px);
+        color: var(--text);
+        padding: 10px 20px;
+        border-radius: 99px;
+        font-family: "Syne", sans-serif;
+        font-weight: 700;
+        font-size: 13px;
+        text-decoration: none;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition:
+          background-color 0.2s,
+          transform 0.2s;
+      }
+      .back-btn:hover {
+        transform: translateY(-2px);
+        background: var(--glass-highlight);
+      }
+
+      /* HERO */
+      .hero {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 40px 24px;
+        position: relative;
+        z-index: 10;
+        text-align: center;
+      }
+      .hero-glass {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(16px);
+        border-radius: var(--radius);
+        padding: 48px 32px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .hero-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--accent-glow);
+        border: 1.5px solid var(--accent-border);
+        color: var(--accent);
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 7px 18px;
+        border-radius: 99px;
+        margin-bottom: 24px;
+        font-family: "Syne", sans-serif;
+      }
+      .hero h1 {
+        font-family: "Syne", sans-serif;
+        font-size: clamp(28px, 5.5vw, 50px);
+        font-weight: 800;
+        line-height: 1.15;
+        margin-bottom: 16px;
+        color: #fff;
+      }
+      body.light-theme .hero h1 {
+        color: #1e293b;
+      }
+      .hero h1 .hi {
+        color: var(--accent);
+      }
+      .hero p {
+        color: var(--text-muted);
+        font-size: 15px;
+        line-height: 1.7;
+        max-width: 620px;
+        margin-bottom: 32px;
+      }
+      .hero-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+      }
+      .hero-badge {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid var(--glass-border);
+        border-radius: 99px;
+        padding: 7px 16px;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--text-muted);
+        font-family: "Syne", sans-serif;
+      }
+
+      /* CONTENT */
+      .content {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 24px 80px;
+        position: relative;
+        z-index: 10;
+      }
+
+      .section-title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 52px;
+        margin-bottom: 24px;
+      }
+      .sec-line {
+        flex: 1;
+        height: 1.5px;
+        background: var(--glass-border);
+      }
+      .sec-text {
+        font-family: "Syne", sans-serif;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+      }
+
+      .cards-3 {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+        gap: 24px;
+        margin-bottom: 32px;
+      }
+      .cards-2 {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+        gap: 24px;
+        margin-bottom: 32px;
+      }
+
+      .card {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(12px);
+        border-radius: var(--radius);
+        padding: 28px;
+        color: var(--text);
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+        transition:
+          transform 0.25s,
+          box-shadow 0.25s,
+          border-color 0.25s;
+      }
+      .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: var(--c, var(--accent));
+      }
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        border-color: var(--c, var(--accent));
+      }
+      .card-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: var(--radius-sm);
+        background: color-mix(in srgb, var(--c) 15%, transparent);
+        color: var(--c);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        margin-bottom: 18px;
+        border: 1px solid color-mix(in srgb, var(--c) 30%, transparent);
+      }
+      .card-eyebrow {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--c);
+        margin-bottom: 6px;
+      }
+      .card-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 19px;
+        line-height: 1.35;
+        margin-bottom: 10px;
+      }
+      .card-body {
+        font-size: 13.5px;
+        color: var(--text-muted);
+        line-height: 1.6;
+      }
+      .list-items {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 12px;
+      }
+      .list-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 13px;
+        line-height: 1.5;
+      }
+      .list-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--c);
+        flex-shrink: 0;
+        margin-top: 6px;
+        box-shadow: 0 0 8px var(--c);
+      }
+
+      .example-wrap {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(16px);
+        border-radius: var(--radius);
+        padding: 32px;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+        margin-bottom: 32px;
+      }
+      .example-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 16px;
+        color: var(--accent);
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .example-story {
+        color: var(--text-muted);
+        font-size: 14.5px;
+        line-height: 1.7;
+        margin-bottom: 20px;
+        padding: 16px 20px;
+        border-left: 3px solid var(--accent);
+        background: var(--accent-glow);
+        border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      }
+
+      .table-wrap {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius-sm);
+        overflow: hidden;
+        overflow-x: auto;
+        margin-bottom: 24px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th {
+        background: rgba(0, 0, 0, 0.25);
+        color: var(--text-muted);
+        font-family: "Syne", sans-serif;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 14px 18px;
+        text-align: left;
+        border-bottom: 1.5px solid var(--glass-border);
+      }
+      body.light-theme th {
+        background: rgba(255, 255, 255, 0.5);
+      }
+      td {
+        padding: 12px 18px;
+        font-size: 13.5px;
+        border-bottom: 1px solid var(--glass-border);
+        color: var(--text);
+        vertical-align: top;
+      }
+      tr:last-child td {
+        border-bottom: none;
+      }
+      tr:hover td {
+        background: rgba(255, 255, 255, 0.02);
+      }
+      body.light-theme tr:hover td {
+        background: rgba(0, 0, 0, 0.01);
+      }
+      tr.total-row td {
+        font-weight: 800;
+        background: var(--accent-glow);
+        color: var(--accent);
+        border-top: 2px solid var(--glass-border);
+      }
+      tr.highlight-row td {
+        background: rgba(245, 158, 11, 0.06);
+      }
+
+      .formula-block {
+        background: var(--accent-glow);
+        border: 2px solid var(--accent-border);
+        border-radius: var(--radius-sm);
+        padding: 20px 24px;
+        margin-bottom: 20px;
+        font-family: "Syne", sans-serif;
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--accent);
+        text-align: center;
+        line-height: 1.8;
+      }
+
+      .info-box {
+        background: rgba(16, 185, 129, 0.08);
+        border: 1px solid rgba(16, 185, 129, 0.25);
+        border-radius: var(--radius-sm);
+        padding: 18px 20px;
+        margin-bottom: 20px;
+        color: var(--text);
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .info-box strong {
+        color: var(--green);
+      }
+      .warning-box {
+        background: var(--accent-glow);
+        border: 1px solid var(--accent-border);
+        border-radius: var(--radius-sm);
+        padding: 18px 20px;
+        margin-bottom: 20px;
+        color: var(--text);
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .warning-box strong {
+        color: var(--accent);
+      }
+      .danger-box {
+        background: rgba(239, 68, 68, 0.08);
+        border: 1px solid rgba(239, 68, 68, 0.25);
+        border-radius: var(--radius-sm);
+        padding: 18px 20px;
+        margin-bottom: 20px;
+        color: var(--text);
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .danger-box strong {
+        color: var(--red);
+      }
+
+      /* JURNAL BOX */
+      .jurnal-box {
+        background: rgba(0, 0, 0, 0.2);
+        border: 1.5px solid var(--glass-border);
+        border-radius: var(--radius-sm);
+        padding: 20px 24px;
+        margin-bottom: 16px;
+      }
+      body.light-theme .jurnal-box {
+        background: rgba(255, 255, 255, 0.5);
+      }
+      .jurnal-title {
+        font-family: "Syne", sans-serif;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 12px;
+        border-bottom: 1px dashed var(--glass-border);
+        padding-bottom: 8px;
+      }
+      .jurnal-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 4px 0;
+        font-size: 13.5px;
+        gap: 8px;
+      }
+      .jurnal-akun {
+        flex: 1;
+      }
+      .jurnal-akun.indent {
+        padding-left: 28px;
+        color: var(--text-muted);
+      }
+      .jurnal-debet {
+        font-weight: 700;
+        font-family: "Syne", sans-serif;
+        font-size: 13px;
+        color: var(--orange);
+        min-width: 130px;
+        text-align: right;
+      }
+      .jurnal-kredit {
+        font-weight: 700;
+        font-family: "Syne", sans-serif;
+        font-size: 13px;
+        color: var(--teal);
+        min-width: 130px;
+        text-align: right;
+      }
+      .jurnal-blank {
+        min-width: 130px;
+        text-align: right;
+        color: var(--text-muted);
+      }
+      .jurnal-note {
+        margin-top: 10px;
+        font-size: 12px;
+        color: var(--text-muted);
+        font-style: italic;
+        border-top: 1px dashed var(--glass-border);
+        padding-top: 8px;
+        line-height: 1.6;
+      }
+
+      /* KODE BLOCK */
+      .kode-box {
+        background: #090d16;
+        border: 1.5px solid var(--glass-border);
+        border-radius: var(--radius-sm);
+        padding: 20px;
+        margin-bottom: 16px;
+        font-family: "Courier New", monospace;
+        font-size: 12.5px;
+        color: #94a3b8;
+        line-height: 1.85;
+        white-space: pre;
+        overflow-x: auto;
+      }
+      body.light-theme .kode-box {
+        background: #f8fafc;
+        color: #334155;
+      }
+
+      /* REKONSILIASI BOX */
+      .rekon-box {
+        background: rgba(0, 0, 0, 0.15);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius-sm);
+        padding: 20px 24px;
+        margin-bottom: 16px;
+        font-size: 13.5px;
+      }
+      body.light-theme .rekon-box {
+        background: rgba(255, 255, 255, 0.4);
+      }
+      .rekon-section {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--accent);
+        margin: 12px 0 6px;
+      }
+      .rekon-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        padding: 4px 0;
+        gap: 12px;
+      }
+      .rekon-row.indent1 {
+        padding-left: 20px;
+      }
+      .rekon-row.indent2 {
+        padding-left: 40px;
+        color: var(--text-muted);
+      }
+      .rekon-row.subtotal {
+        border-top: 1px solid var(--glass-border);
+        margin-top: 4px;
+        padding-top: 8px;
+        font-weight: 700;
+      }
+      .rekon-row.total {
+        border-top: 2px solid var(--glass-border);
+        margin-top: 6px;
+        padding-top: 10px;
+        font-weight: 800;
+        color: var(--accent);
+      }
+      .rekon-row.double {
+        border-top: 2px double rgba(245, 158, 11, 0.4);
+        border-bottom: 2px double rgba(245, 158, 11, 0.4);
+        padding: 8px 0;
+        margin: 4px 0;
+      }
+      .rekon-row .label {
+        flex: 1;
+      }
+      .rekon-row .amount {
+        font-family: "Syne", sans-serif;
+        font-size: 13px;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+      .amount-green {
+        color: var(--green);
+      }
+      .amount-red {
+        color: var(--red);
+      }
+
+      /* COMPARE GRID */
+      .compare-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
+        margin-bottom: 28px;
+      }
+      .compare-card {
+        border-radius: var(--radius);
+        padding: 24px;
+        border: 1px solid var(--glass-border);
+        background: var(--glass-bg);
+      }
+      .compare-card-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 15px;
+        margin-bottom: 12px;
+      }
+
+      /* RANGKUMAN TABLE */
+      .rangkuman-table td:first-child {
+        font-weight: 700;
+        color: var(--accent);
+      }
+
+      /* QUIZ CTA */
+      .quiz-cta {
+        background: var(--glass-bg);
+        border: 2px solid var(--accent-border);
+        border-radius: var(--radius);
+        padding: 40px 32px;
+        text-align: center;
+        margin-top: 60px;
+        margin-bottom: 40px;
+      }
+      .quiz-cta h3 {
+        font-family: "Syne", sans-serif;
+        font-size: 24px;
+        margin-bottom: 12px;
+        color: var(--accent);
+      }
+      .quiz-cta p {
+        color: var(--text-muted);
+        margin-bottom: 20px;
+        font-size: 15px;
+        line-height: 1.6;
+      }
+      .quiz-btn {
+        background: var(--accent);
+        color: #1a1a2e;
+        border: none;
+        padding: 14px 32px;
+        border-radius: var(--radius-sm);
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-decoration: none;
+        display: inline-block;
+      }
+      .quiz-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 24px rgba(245, 158, 11, 0.35);
+      }
+
+      footer {
+        border-top: 1px solid var(--glass-border);
+        background: #090d16;
+        padding: 40px 24px;
+        text-align: center;
+        position: relative;
+        z-index: 10;
+      }
+      body.light-theme footer {
+        background: #fffbf0;
+      }
+      .footer-name {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 16px;
+        background: linear-gradient(
+          135deg,
+          var(--yellow),
+          var(--pink),
+          var(--purple)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 6px;
+      }
+      .footer-sub {
+        font-size: 12.5px;
+        color: var(--text-muted);
+      }
+      .footer-dots {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        margin-top: 16px;
+      }
+      .footer-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+      }
+
+      @media (max-width: 600px) {
+        .cards-3,
+        .cards-2 {
+          grid-template-columns: 1fr;
+        }
+        .compare-grid {
+          grid-template-columns: 1fr;
+        }
+        .jurnal-debet,
+        .jurnal-kredit,
+        .jurnal-blank {
+          min-width: 90px;
+          font-size: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <!-- HEADER -->
+    <header>
+      <a href="index.html" class="header-logo">
+        <span style="font-size: 24px">🧾</span>
+        <span
+          style="font-weight: 800; font-family: &quot;Syne&quot;, sans-serif"
+          >Belajar Akuntansi</span
+        >
+      </a>
+      <div style="display: flex; gap: 12px; align-items: center">
+        <a href="index.html" class="back-btn">← Kembali</a>
+        <button
+          class="theme-toggle-btn"
+          onclick="toggleTheme()"
+          title="Ganti Tema"
+        >
+          🌓
+        </button>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-glass">
+        <div class="hero-tag">🧾 Bab 18 — Perpajakan</div>
+        <h1>Perpajakan Dasar<br /><span class="hi">dalam Akuntansi</span></h1>
+        <p>
+          Pahami sistem perpajakan Indonesia, PPh Badan, PPh Pasal 21 karyawan,
+          PPh Pasal 23 jasa, PPN, rekonsiliasi fiskal, hingga pajak tangguhan
+          secara lengkap dengan contoh jurnal dan studi kasus nyata.
+        </p>
+        <div class="hero-badges">
+          <div class="hero-badge">🏛️ Sistem Self Assessment</div>
+          <div class="hero-badge">🏢 PPh Badan 22%</div>
+          <div class="hero-badge">👤 PPh Pasal 21</div>
+          <div class="hero-badge">🔧 PPh Pasal 23</div>
+          <div class="hero-badge">🛒 PPN 11%</div>
+          <div class="hero-badge">📊 Rekonsiliasi Fiskal</div>
+          <div class="hero-badge">⏳ Pajak Tangguhan</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <main class="content">
+      <!-- ══════════════════════════════════════════
+           SECTION 1: SISTEM PERPAJAKAN
+      ══════════════════════════════════════════ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">📌 1. Sistem Perpajakan Indonesia</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">💡 Definisi Pajak</div>
+        <div class="example-story">
+          Pajak adalah <strong>iuran wajib kepada negara</strong> yang bersifat
+          memaksa berdasarkan undang-undang, tanpa mendapat imbalan langsung,
+          dan digunakan untuk keperluan negara demi kemakmuran rakyat.<br /><br />
+          <strong>3 Kata Kunci Utama:</strong> (1) <strong>Memaksa</strong> —
+          wajib dibayar berdasarkan hukum UU | (2)
+          <strong>Tanpa kontraprestasi langsung</strong> — tidak dapat jasa
+          timbal balik langsung | (3) <strong>Kemakmuran rakyat</strong> — untuk
+          subsidi, pertahanan, fasilitas publik.
+        </div>
+      </div>
+
+      <div class="cards-3">
+        <div class="card" style="--c: var(--accent)">
+          <div class="card-icon">⚖️</div>
+          <div class="card-eyebrow">Sistem 1</div>
+          <div class="card-title">Self Assessment</div>
+          <div class="card-body">
+            Wajib pajak
+            <strong>menghitung, menyetor, dan melaporkan</strong> pajaknya
+            sendiri. Indonesia menganut sistem ini sejak 1983.
+          </div>
+          <div class="list-items">
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Contoh: PPh Badan tahunan (SPT Tahunan)</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Fiskus (DJP) hanya mengawasi &amp; memeriksa</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="--c: var(--blue)">
+          <div class="card-icon">🏛️</div>
+          <div class="card-eyebrow">Sistem 2</div>
+          <div class="card-title">Official Assessment</div>
+          <div class="card-body">
+            Wewenang pemungutan pajak sepenuhnya ada di
+            <strong>aparatur pajak (fiskus)</strong>. WP tinggal membayar
+            berdasarkan SKP.
+          </div>
+          <div class="list-items">
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Contoh: PBB tahunan</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Jumlah ditentukan DJP, WP bayar saja</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="--c: var(--purple)">
+          <div class="card-icon">✂️</div>
+          <div class="card-eyebrow">Sistem 3</div>
+          <div class="card-title">Withholding</div>
+          <div class="card-body">
+            Pajak dihitung dan <strong>dipotong oleh pihak ketiga</strong> yang
+            ditunjuk undang-undang.
+          </div>
+          <div class="list-items">
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Contoh: PPh Pasal 21 gaji karyawan</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Perusahaan potong gaji → setor ke DJP</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3
+        style="
+          font-family: &quot;Syne&quot;, sans-serif;
+          font-weight: 800;
+          font-size: 16px;
+          margin-bottom: 16px;
+          color: var(--text);
+        "
+      >
+        Jenis Pajak yang Berkaitan dengan Akuntansi Perusahaan
+      </h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Jenis Pajak</th>
+              <th>Objek</th>
+              <th>Tarif</th>
+              <th>Pihak</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>PPh Badan</strong></td>
+              <td>Laba perusahaan</td>
+              <td>22%</td>
+              <td>Perusahaan (PT, CV)</td>
+            </tr>
+            <tr>
+              <td><strong>PPh Ps. 21</strong></td>
+              <td>Penghasilan karyawan</td>
+              <td>Progresif 5%–35%</td>
+              <td>Karyawan (dipotong pemberi kerja)</td>
+            </tr>
+            <tr>
+              <td><strong>PPh Ps. 22</strong></td>
+              <td>Impor &amp; pembelian tertentu</td>
+              <td>1,5%–3%</td>
+              <td>Importir/pembeli</td>
+            </tr>
+            <tr>
+              <td><strong>PPh Ps. 23</strong></td>
+              <td>Jasa, royalti, bunga</td>
+              <td>2%–15%</td>
+              <td>Penerima penghasilan</td>
+            </tr>
+            <tr>
+              <td><strong>PPh Ps. 25/29</strong></td>
+              <td>Angsuran/pelunasan PPh Badan</td>
+              <td>Sesuai perhitungan</td>
+              <td>Perusahaan</td>
+            </tr>
+            <tr>
+              <td><strong>PPh Final Ps. 4(2)</strong></td>
+              <td>Sewa, konstruksi, UMKM</td>
+              <td>Beragam</td>
+              <td>Beragam</td>
+            </tr>
+            <tr>
+              <td><strong>PPN</strong></td>
+              <td>Penjualan BKP/JKP</td>
+              <td>11%</td>
+              <td>Konsumen akhir</td>
+            </tr>
+            <tr>
+              <td><strong>PPnBM</strong></td>
+              <td>Barang mewah</td>
+              <td>10%–95%</td>
+              <td>Pembeli</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ══════════════════════════════════════════
+           SECTION 2: PPh BADAN
+      ══════════════════════════════════════════ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">🏢 2. Pajak Penghasilan (PPh) Badan</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="cards-3">
+        <div class="card" style="--c: var(--accent)">
+          <div class="card-icon">🏢</div>
+          <div class="card-eyebrow">Tarif Umum</div>
+          <div class="card-title">22% dari PKP</div>
+          <div class="card-body">
+            Tarif umum PPh Badan untuk PT, CV, Firma, Koperasi, BUMN/BUMD, dan
+            Yayasan yang melakukan usaha di Indonesia.
+          </div>
+        </div>
+        <div class="card" style="--c: var(--blue)">
+          <div class="card-icon">📉</div>
+          <div class="card-eyebrow">PT Go Public</div>
+          <div class="card-title">19% (Diskon 3%)</div>
+          <div class="card-body">
+            PT yang sahamnya diperdagangkan di BEI (Bursa Efek Indonesia)
+            mendapat pengurangan tarif 3% menjadi <strong>19%</strong>.
+          </div>
+        </div>
+        <div class="card" style="--c: var(--green)">
+          <div class="card-icon">🏪</div>
+          <div class="card-eyebrow">UMKM</div>
+          <div class="card-title">0,5% dari Omzet</div>
+          <div class="card-body">
+            UMKM dengan omzet ≤ Rp 4,8 miliar/tahun menggunakan
+            <strong>PPh Final 0,5%</strong> dari omzet bruto — lebih sederhana!
+          </div>
+        </div>
+      </div>
+
+      <div class="formula-block">
+        Penghasilan Bruto<br />
+        − Biaya yang diperkenankan (deductible expenses)<br />
+        = <strong>Penghasilan Kena Pajak (PKP)</strong><br />
+        × Tarif 22% = <strong>PPh Badan Terutang</strong><br />
+        − PPh yang sudah dibayar/dipotong (PPh 22, 23, 25)<br />
+        = <strong>PPh Pasal 29 (kurang bayar)</strong> / PPh Pasal 28A (lebih
+        bayar)
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          ✏️ Contoh Perhitungan PPh Badan — PT Berkah Nusantara 2024
+        </div>
+        <div class="example-story">
+          Penghasilan bruto Rp 5.000.000.000 | Biaya yang diperkenankan fiskal
+          Rp 3.800.000.000 | Kredit pajak: PPh Ps. 22 (impor) Rp 10 juta | PPh
+          Ps. 23 (jasa diterima) Rp 8 juta | PPh Ps. 25 (angsuran bulanan) Rp
+          200 juta
+        </div>
+
+        <div class="rekon-box">
+          <div
+            style="
+              text-align: center;
+              border-bottom: 1.5px solid var(--glass-border);
+              padding-bottom: 12px;
+              margin-bottom: 14px;
+            "
+          >
+            <div
+              style="
+                font-family: &quot;Syne&quot;, sans-serif;
+                font-weight: 800;
+                font-size: 15px;
+              "
+            >
+              PT BERKAH NUSANTARA
+            </div>
+            <div
+              style="
+                font-size: 12px;
+                color: var(--accent);
+                font-weight: 700;
+                text-transform: uppercase;
+                margin: 3px 0;
+              "
+            >
+              PERHITUNGAN PPh BADAN 2024
+            </div>
+          </div>
+          <div class="rekon-row indent1">
+            <span class="label">Penghasilan Bruto</span
+            ><span class="amount">Rp 5.000.000.000</span>
+          </div>
+          <div class="rekon-row indent1">
+            <span class="label">− Biaya yang diperkenankan fiskal</span
+            ><span class="amount amount-red">(3.800.000.000)</span>
+          </div>
+          <div class="rekon-row subtotal indent1">
+            <span class="label">Penghasilan Kena Pajak (PKP)</span
+            ><span class="amount">Rp 1.200.000.000</span>
+          </div>
+          <div class="rekon-row indent1">
+            <span class="label">× Tarif PPh Badan</span
+            ><span class="amount">22%</span>
+          </div>
+          <div class="rekon-row total">
+            <span class="label">PPh Badan Terutang</span
+            ><span class="amount">Rp 264.000.000</span>
+          </div>
+          <div class="rekon-section">Kredit Pajak:</div>
+          <div class="rekon-row indent2">
+            <span class="label">PPh Ps. 22 (impor)</span
+            ><span class="amount amount-green">(10.000.000)</span>
+          </div>
+          <div class="rekon-row indent2">
+            <span class="label">PPh Ps. 23 (jasa diterima)</span
+            ><span class="amount amount-green">(8.000.000)</span>
+          </div>
+          <div class="rekon-row indent2">
+            <span class="label">PPh Ps. 25 (angsuran bulanan)</span
+            ><span class="amount amount-green">(200.000.000)</span>
+          </div>
+          <div class="rekon-row double">
+            <span class="label" style="font-weight: 800"
+              >PPh Pasal 29 — KURANG BAYAR</span
+            ><span class="amount" style="color: var(--red); font-size: 14px"
+              >Rp 46.000.000</span
+            >
+          </div>
+          <p
+            style="
+              font-size: 12px;
+              color: var(--text-muted);
+              font-style: italic;
+              margin-top: 8px;
+            "
+          >
+            * Harus dibayar sebelum lapor SPT Tahunan PPh Badan
+          </p>
+        </div>
+
+        <div class="jurnal-box" style="margin-top: 16px">
+          <div class="jurnal-title">Jurnal Pengakuan Beban PPh Badan</div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Beban Pajak Penghasilan</div>
+            <div class="jurnal-debet">Rp 264.000.000</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Utang PPh Pasal 29</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-kredit">Rp 46.000.000</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">PPh Ps. 22 Dibayar di Muka</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-kredit">Rp 10.000.000</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">PPh Ps. 23 Dibayar di Muka</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-kredit">Rp 8.000.000</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">PPh Ps. 25 Dibayar di Muka</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-kredit">Rp 200.000.000</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">📅 PPh Angsuran Pasal 25</div>
+        <div class="example-story">
+          Angsuran PPh yang dibayar <strong>setiap bulan</strong> sepanjang
+          tahun berjalan agar tidak terjadi kurang bayar besar di akhir tahun.
+        </div>
+        <div class="formula-block">
+          PPh Ps. 25/bulan = PPh Terutang Tahun Lalu ÷ 12
+        </div>
+        <div class="info-box">
+          <strong>Contoh:</strong> PPh terutang 2023 = Rp 240.000.000<br />
+          PPh Ps. 25 per bulan 2024 = Rp 240.000.000 ÷ 12 =
+          <strong>Rp 20.000.000/bulan</strong>
+        </div>
+        <div class="jurnal-box">
+          <div class="jurnal-title">Jurnal Setiap Bulan — Bayar PPh Ps. 25</div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">PPh Pasal 25 Dibayar di Muka</div>
+            <div class="jurnal-debet">Rp 20.000.000</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Kas / Bank</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-kredit">Rp 20.000.000</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════
+           SECTION 3: PPh PASAL 21
+      ══════════════════════════════════════════ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">👤 3. PPh Pasal 21 — Pajak Karyawan</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="info-box">
+        <strong>Definisi:</strong> PPh Pasal 21 adalah pajak atas
+        <strong>penghasilan karyawan</strong> (gaji, tunjangan, bonus) yang
+        dipotong oleh pemberi kerja dan disetorkan ke kas negara. Ini adalah
+        sistem <strong>withholding</strong> — perusahaan bertindak sebagai
+        pemotong pajak.
+      </div>
+
+      <div class="cards-2">
+        <div class="card" style="--c: var(--accent)">
+          <div class="card-icon">📊</div>
+          <div class="card-eyebrow">Tarif Progresif</div>
+          <div class="card-title">PPh 21 — 2024</div>
+          <div class="list-items">
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>5% — s.d. Rp 60.000.000/tahun</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>15% — Rp 60jt s.d. Rp 250.000.000</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>25% — Rp 250jt s.d. Rp 500.000.000</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>30% — Rp 500jt s.d. Rp 5.000.000.000</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>35% — di atas Rp 5.000.000.000</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="--c: var(--green)">
+          <div class="card-icon">🛡️</div>
+          <div class="card-eyebrow">PTKP 2024</div>
+          <div class="card-title">Penghasilan Tidak Kena Pajak</div>
+          <div class="list-items">
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>TK/0 — Rp 54.000.000/tahun</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>K/0 — Rp 58.500.000/tahun</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>K/1 — Rp 63.000.000/tahun</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>K/2 — Rp 67.500.000/tahun</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>K/3 — Rp 72.000.000/tahun</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="formula-block">
+        Gaji Setahun − Biaya Jabatan (5%, maks Rp6jt/bln) − PTKP =
+        <strong>PKP Setahun</strong><br />
+        PKP × Tarif Progresif = <strong>PPh 21 Setahun</strong><br />
+        PPh 21 Setahun ÷ 12 = <strong>PPh 21 per Bulan</strong>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          ✏️ Contoh Perhitungan PPh 21 — Pak Budi K/2
+        </div>
+        <div class="example-story">
+          Pak Budi, karyawan CV. Berkah Jaya, status <strong>K/2</strong>, gaji
+          Rp 8.000.000/bulan.
+        </div>
+        <div class="rekon-box">
+          <div class="rekon-row indent1">
+            <span class="label">Gaji setahun (Rp 8jt × 12)</span
+            ><span class="amount">Rp 96.000.000</span>
+          </div>
+          <div class="rekon-row indent1">
+            <span class="label">− PTKP K/2</span
+            ><span class="amount amount-red">(67.500.000)</span>
+          </div>
+          <div class="rekon-row subtotal indent1">
+            <span class="label">PKP Setahun</span
+            ><span class="amount">Rp 28.500.000</span>
+          </div>
+          <div class="rekon-row indent1">
+            <span class="label">PPh 21 = 5% × Rp 28.500.000</span
+            ><span class="amount">Rp 1.425.000/tahun</span>
+          </div>
+          <div class="rekon-row total">
+            <span class="label">PPh 21 per Bulan</span
+            ><span class="amount">Rp 118.750</span>
+          </div>
+        </div>
+
+        <div class="jurnal-box" style="margin-top: 16px">
+          <div class="jurnal-title">Jurnal Penggajian (Metode Gross)</div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Beban Gaji</div>
+            <div class="jurnal-debet">Rp 8.000.000</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Utang PPh Pasal 21</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-kredit">Rp 118.750</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Kas / Bank (gaji bersih)</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-kredit">Rp 7.881.250</div>
+          </div>
+          <div class="jurnal-note">
+            Gaji dipotong PPh 21 sebelum dibayarkan ke karyawan
+          </div>
+        </div>
+        <div class="jurnal-box">
+          <div class="jurnal-title">Jurnal Setor PPh 21 ke Kas Negara</div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Utang PPh Pasal 21</div>
+            <div class="jurnal-debet">Rp 118.750</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Kas / Bank</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-kredit">Rp 118.750</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════
+           SECTION 4: PPh PASAL 23
+      ══════════════════════════════════════════ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">🔧 4. PPh Pasal 23 — Pajak Jasa</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="info-box">
+        <strong>Definisi:</strong> PPh Pasal 23 dipotong atas
+        <strong
+          >penghasilan dari jasa, sewa, royalti, bunga, dan dividen</strong
+        >
+        yang dibayarkan kepada Wajib Pajak Badan atau orang pribadi tertentu.
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Jenis Penghasilan</th>
+              <th>Tarif</th>
+              <th>Contoh</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Dividen, Bunga, Royalti</strong></td>
+              <td><strong style="color: var(--orange)">15%</strong></td>
+              <td>Dividen ke pemegang saham, bunga pinjaman, fee royalti</td>
+            </tr>
+            <tr>
+              <td><strong>Jasa Teknik, Konsultan, Manajemen</strong></td>
+              <td><strong style="color: var(--accent)">2%</strong></td>
+              <td>Fee konsultan akuntansi, jasa desain, jasa teknik</td>
+            </tr>
+            <tr>
+              <td><strong>Sewa (selain tanah/bangunan)</strong></td>
+              <td><strong style="color: var(--accent)">2%</strong></td>
+              <td>Sewa mesin, sewa kendaraan, sewa peralatan</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          ✏️ Contoh PPh Pasal 23 — PT Berkah Bayar Jasa Konsultan
+        </div>
+        <div class="example-story">
+          <strong>PT Berkah</strong> membayar jasa konsultan akuntansi kepada
+          <strong>KAP Maju</strong> sebesar Rp 10.000.000.
+        </div>
+        <div class="formula-block">
+          PPh 23 = 2% × Rp 10.000.000 = <strong>Rp 200.000</strong><br />
+          <span style="font-size: 13px; opacity: 0.8"
+            >PT Berkah hanya membayar Rp 9.800.000 ke KAP Maju<br />
+            Rp 200.000 disetorkan ke DJP atas nama KAP Maju</span
+          >
+        </div>
+        <div class="jurnal-box">
+          <div class="jurnal-title">Jurnal di PT Berkah (Pemotong)</div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Beban Jasa Konsultan</div>
+            <div class="jurnal-debet">Rp 10.000.000</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Utang PPh Pasal 23</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-kredit">Rp 200.000</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Kas (dibayar ke KAP)</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-kredit">Rp 9.800.000</div>
+          </div>
+        </div>
+        <div class="jurnal-box">
+          <div class="jurnal-title">Jurnal Setor PPh 23 ke DJP</div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Utang PPh Pasal 23</div>
+            <div class="jurnal-debet">Rp 200.000</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Kas / Bank</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-kredit">Rp 200.000</div>
+          </div>
+          <div class="jurnal-note">
+            Bagi KAP Maju, Rp 200.000 ini adalah
+            <strong>kredit pajak</strong> yang mengurangi PPh terutangnya saat
+            lapor SPT.
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════
+           SECTION 5: PPN
+      ══════════════════════════════════════════ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">🛒 5. Pajak Pertambahan Nilai (PPN)</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="info-box">
+        <strong>Definisi:</strong> PPN adalah pajak atas
+        <strong>konsumsi barang dan jasa kena pajak</strong> di dalam daerah
+        pabean. Tarif umum <strong>11%</strong> (sejak April 2022 berdasarkan UU
+        HPP).
+      </div>
+
+      <div class="cards-3">
+        <div class="card" style="--c: var(--accent)">
+          <div class="card-icon">📤</div>
+          <div class="card-eyebrow">PPN Keluaran</div>
+          <div class="card-title">Output Tax</div>
+          <div class="card-body">
+            PPN yang <strong>dipungut perusahaan dari pembeli</strong> saat
+            menjual BKP/JKP. Ini adalah kewajiban perusahaan kepada DJP.
+          </div>
+        </div>
+        <div class="card" style="--c: var(--blue)">
+          <div class="card-icon">📥</div>
+          <div class="card-eyebrow">PPN Masukan</div>
+          <div class="card-title">Input Tax</div>
+          <div class="card-body">
+            PPN yang <strong>dibayar perusahaan kepada supplier</strong> saat
+            membeli BKP/JKP. Ini bisa dikreditkan (dikurangkan).
+          </div>
+        </div>
+        <div class="card" style="--c: var(--green)">
+          <div class="card-icon">🏦</div>
+          <div class="card-eyebrow">Setor ke DJP</div>
+          <div class="card-title">Kurang / Lebih Bayar</div>
+          <div class="card-body">
+            <strong>Disetor = Keluaran − Masukan</strong><br /><br />Jika
+            Masukan &gt; Keluaran → <strong>Lebih Bayar</strong> → bisa
+            restitusi/kompensasi
+          </div>
+        </div>
+      </div>
+
+      <div class="warning-box">
+        💡 <strong>PKP (Pengusaha Kena Pajak):</strong> Perusahaan wajib
+        dikukuhkan sebagai PKP jika omzet melebihi
+        <strong>Rp 4.800.000.000/tahun</strong>. PKP wajib memungut PPN, membuat
+        Faktur Pajak, dan melaporkan SPT Masa PPN setiap bulan.
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          ✏️ Contoh Transaksi PPN — PT Berkah (PKP)
+        </div>
+        <div class="example-story">
+          <strong>Pembelian:</strong> Beli barang dari supplier Rp 50.000.000
+          (belum PPN)<br />
+          <strong>Penjualan:</strong> Jual ke pelanggan Rp 80.000.000 (belum
+          PPN)
+        </div>
+
+        <h4
+          style="
+            font-family: &quot;Syne&quot;, sans-serif;
+            font-weight: 800;
+            font-size: 14px;
+            color: var(--accent);
+            margin-bottom: 12px;
+          "
+        >
+          Transaksi 1 — Pembelian (PPN Masukan)
+        </h4>
+        <div class="formula-block" style="margin-bottom: 12px">
+          PPN Masukan = 11% × Rp 50.000.000 = <strong>Rp 5.500.000</strong
+          ><br />
+          Total bayar ke supplier = Rp 50.000.000 + Rp 5.500.000 = Rp 55.500.000
+        </div>
+        <div class="jurnal-box">
+          <div class="jurnal-title">Jurnal Pembelian</div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Persediaan Barang Dagang</div>
+            <div class="jurnal-debet">Rp 50.000.000</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">PPN Masukan</div>
+            <div class="jurnal-debet">Rp 5.500.000</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Kas / Utang Usaha</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-kredit">Rp 55.500.000</div>
+          </div>
+        </div>
+
+        <h4
+          style="
+            font-family: &quot;Syne&quot;, sans-serif;
+            font-weight: 800;
+            font-size: 14px;
+            color: var(--accent);
+            margin: 20px 0 12px;
+          "
+        >
+          Transaksi 2 — Penjualan (PPN Keluaran)
+        </h4>
+        <div class="formula-block" style="margin-bottom: 12px">
+          PPN Keluaran = 11% × Rp 80.000.000 = <strong>Rp 8.800.000</strong
+          ><br />
+          Total terima dari pelanggan = Rp 80.000.000 + Rp 8.800.000 = Rp
+          88.800.000
+        </div>
+        <div class="jurnal-box">
+          <div class="jurnal-title">Jurnal Penjualan</div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Kas / Piutang Usaha</div>
+            <div class="jurnal-debet">Rp 88.800.000</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Penjualan</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-kredit">Rp 80.000.000</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">PPN Keluaran</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-kredit">Rp 8.800.000</div>
+          </div>
+        </div>
+
+        <h4
+          style="
+            font-family: &quot;Syne&quot;, sans-serif;
+            font-weight: 800;
+            font-size: 14px;
+            color: var(--accent);
+            margin: 20px 0 12px;
+          "
+        >
+          Setor PPN ke DJP
+        </h4>
+        <div class="rekon-box">
+          <div class="rekon-row indent1">
+            <span class="label">PPN Keluaran</span
+            ><span class="amount">Rp 8.800.000</span>
+          </div>
+          <div class="rekon-row indent1">
+            <span class="label">− PPN Masukan</span
+            ><span class="amount amount-red">(5.500.000)</span>
+          </div>
+          <div class="rekon-row total double">
+            <span class="label">PPN KURANG BAYAR (disetor)</span
+            ><span class="amount" style="color: var(--red)">Rp 3.300.000</span>
+          </div>
+        </div>
+        <div class="jurnal-box">
+          <div class="jurnal-title">Jurnal Setor PPN</div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">PPN Keluaran</div>
+            <div class="jurnal-debet">Rp 8.800.000</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">PPN Masukan</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-kredit">Rp 5.500.000</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Kas / Bank</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-kredit">Rp 3.300.000</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="danger-box">
+        🚨 <strong>Faktur Pajak Fiktif adalah Tindak Pidana!</strong> Banyak
+        kasus fraud perpajakan di Indonesia melibatkan faktur pajak fiktif —
+        perusahaan mengklaim PPN Masukan dari transaksi yang tidak pernah
+        terjadi untuk mengurangi PPN yang harus dibayar. Sanksinya bisa
+        <strong>pidana penjara</strong>!
+      </div>
+
+      <!-- ══════════════════════════════════════════
+           SECTION 6: REKONSILIASI FISKAL
+      ══════════════════════════════════════════ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">📊 6. Rekonsiliasi Fiskal</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="info-box">
+        <strong>Mengapa Ada Rekonsiliasi Fiskal?</strong> Laba akuntansi
+        (komersial) ≠ laba fiskal karena standar akuntansi PSAK dan ketentuan
+        pajak memiliki perbedaan dalam pengakuan biaya dan pendapatan.
+        Rekonsiliasi fiskal adalah proses menjembatani perbedaan tersebut.
+      </div>
+
+      <div class="cards-2">
+        <div class="card" style="--c: var(--orange)">
+          <div class="card-icon">➕</div>
+          <div class="card-eyebrow">Jenis 1</div>
+          <div class="card-title">Koreksi Positif</div>
+          <div class="card-body">
+            <strong>Menambah laba fiskal.</strong> Biaya yang diakui akuntansi
+            tapi TIDAK diperkenankan fiskal (non-deductible).
+          </div>
+          <div class="list-items">
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Biaya sumbangan (tidak memenuhi syarat)</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Biaya entertainment tanpa daftar nominatif</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Sanksi / denda perpajakan</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Penyusutan melebihi ketentuan fiskal</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="--c: var(--green)">
+          <div class="card-icon">➖</div>
+          <div class="card-eyebrow">Jenis 2</div>
+          <div class="card-title">Koreksi Negatif</div>
+          <div class="card-body">
+            <strong>Mengurangi laba fiskal.</strong> Penghasilan yang sudah
+            dikenai PPh Final tidak boleh kena PPh Badan lagi.
+          </div>
+          <div class="list-items">
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Bunga deposito (sudah PPh Final)</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Sewa tanah/bangunan (PPh Final)</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Dividen dari anak perusahaan (≥25%)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          ✏️ Contoh Rekonsiliasi Fiskal — PT Berkah Nusantara 2024
+        </div>
+        <div class="example-story">
+          <strong>Data:</strong> Laba komersial Rp 1.000.000.000 | Sumbangan
+          non-deductible Rp 30jt | Entertainment tanpa nominatif Rp 20jt |
+          Sanksi pajak Rp 5jt | Penyusutan komersial &gt; fiskal Rp 15jt | Bunga
+          deposito (PPh Final) Rp 25jt | Dividen anak perusahaan Rp 45jt
+        </div>
+
+        <div class="rekon-box">
+          <div
+            style="
+              text-align: center;
+              border-bottom: 1.5px solid var(--glass-border);
+              padding-bottom: 12px;
+              margin-bottom: 14px;
+            "
+          >
+            <div
+              style="
+                font-family: &quot;Syne&quot;, sans-serif;
+                font-weight: 800;
+                font-size: 15px;
+              "
+            >
+              PT BERKAH NUSANTARA
+            </div>
+            <div
+              style="
+                font-size: 12px;
+                color: var(--accent);
+                font-weight: 700;
+                text-transform: uppercase;
+                margin: 3px 0;
+              "
+            >
+              REKONSILIASI FISKAL 2024
+            </div>
+          </div>
+
+          <div class="rekon-row indent1">
+            <span class="label">Laba Komersial (per Laporan L/R)</span
+            ><span class="amount">Rp 1.000.000.000</span>
+          </div>
+
+          <div class="rekon-section" style="color: var(--orange)">
+            + KOREKSI POSITIF (menambah laba fiskal):
+          </div>
+          <div class="rekon-row indent2">
+            <span class="label">Biaya sumbangan (non-deductible)</span
+            ><span class="amount amount-green">+ 30.000.000</span>
+          </div>
+          <div class="rekon-row indent2">
+            <span class="label">Biaya entertainment (tanpa nominatif)</span
+            ><span class="amount amount-green">+ 20.000.000</span>
+          </div>
+          <div class="rekon-row indent2">
+            <span class="label">Sanksi keterlambatan pajak</span
+            ><span class="amount amount-green">+ 5.000.000</span>
+          </div>
+          <div class="rekon-row indent2">
+            <span class="label">Penyusutan komersial &gt; fiskal</span
+            ><span class="amount amount-green">+ 15.000.000</span>
+          </div>
+          <div class="rekon-row subtotal indent1">
+            <span class="label">Total Koreksi Positif</span
+            ><span class="amount amount-green">Rp 70.000.000</span>
+          </div>
+
+          <div class="rekon-section" style="color: var(--green)">
+            − KOREKSI NEGATIF (mengurangi laba fiskal):
+          </div>
+          <div class="rekon-row indent2">
+            <span class="label">Penghasilan bunga deposito (PPh Final)</span
+            ><span class="amount amount-red">− 25.000.000</span>
+          </div>
+          <div class="rekon-row indent2">
+            <span class="label">Dividen dari anak perusahaan</span
+            ><span class="amount amount-red">− 45.000.000</span>
+          </div>
+          <div class="rekon-row subtotal indent1">
+            <span class="label">Total Koreksi Negatif</span
+            ><span class="amount amount-red">(Rp 70.000.000)</span>
+          </div>
+
+          <div class="rekon-row double">
+            <span class="label" style="font-weight: 800"
+              >LABA FISKAL / PENGHASILAN KENA PAJAK</span
+            ><span class="amount" style="color: var(--accent); font-size: 14px"
+              >Rp 1.000.000.000</span
+            >
+          </div>
+          <div class="rekon-row indent1">
+            <span class="label">PPh Badan = 22% × Rp 1.000.000.000</span
+            ><span class="amount" style="color: var(--red); font-weight: 800"
+              >Rp 220.000.000</span
+            >
+          </div>
+        </div>
+
+        <div class="jurnal-box" style="margin-top: 16px">
+          <div class="jurnal-title">Jurnal Pengakuan Beban Pajak</div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Beban Pajak Penghasilan</div>
+            <div class="jurnal-debet">Rp 220.000.000</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Utang PPh Badan</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-kredit">Rp 220.000.000</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════
+           SECTION 7: PAJAK TANGGUHAN
+      ══════════════════════════════════════════ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">⏳ 7. Pajak Tangguhan (Deferred Tax)</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="info-box">
+        <strong>Definisi:</strong> Pajak tangguhan muncul karena
+        <strong>perbedaan waktu (beda temporer)</strong>
+        antara pengakuan pendapatan/beban secara akuntansi dengan secara fiskal
+        — menghasilkan perbedaan yang akan
+        <strong>berbalik di masa mendatang</strong>. Beda permanen (seperti
+        sumbangan) TIDAK menimbulkan pajak tangguhan.
+      </div>
+
+      <div class="cards-2">
+        <div class="card" style="--c: var(--red)">
+          <div class="card-icon">📋</div>
+          <div class="card-eyebrow">Jenis 1</div>
+          <div class="card-title">Liabilitas Pajak Tangguhan</div>
+          <div class="card-body">
+            Laba fiskal &lt; laba komersial saat ini → bayar pajak lebih sedikit
+            sekarang → tapi akan bayar lebih banyak di masa depan.
+          </div>
+          <div class="list-items">
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Contoh: Depresiasi fiskal &gt; depresiasi komersial</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Diakui sebagai <strong>Kewajiban</strong> di neraca</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="--c: var(--green)">
+          <div class="card-icon">💰</div>
+          <div class="card-eyebrow">Jenis 2</div>
+          <div class="card-title">Aset Pajak Tangguhan</div>
+          <div class="card-body">
+            Laba fiskal &gt; laba komersial saat ini → bayar pajak terlalu
+            banyak sekarang → akan bayar lebih sedikit di masa depan.
+          </div>
+          <div class="list-items">
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Contoh: Penyisihan piutang tidak diakui fiskal</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Diakui sebagai <strong>Aset</strong> di neraca</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          ✏️ Contoh Pajak Tangguhan — Perbedaan Metode Depresiasi
+        </div>
+        <div class="example-story">
+          <strong>Komersial (Garis Lurus):</strong> Depresiasi Rp
+          20.000.000/tahun<br />
+          <strong>Fiskal (Saldo Menurun):</strong> Depresiasi Rp
+          30.000.000/tahun<br /><br />
+          Depresiasi fiskal &gt; komersial → laba fiskal lebih kecil → bayar
+          pajak lebih sedikit sekarang → akan bayar lebih banyak nanti →
+          <strong>LIABILITAS Pajak Tangguhan</strong>
+        </div>
+        <div class="formula-block">
+          Selisih depresiasi = Rp 30.000.000 − Rp 20.000.000 = Rp 10.000.000<br />
+          Liabilitas pajak tangguhan = 22% × Rp 10.000.000 =
+          <strong>Rp 2.200.000</strong>
+        </div>
+        <div class="jurnal-box">
+          <div class="jurnal-title">
+            Jurnal Pengakuan Liabilitas Pajak Tangguhan
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Beban Pajak Tangguhan</div>
+            <div class="jurnal-debet">Rp 2.200.000</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Liabilitas Pajak Tangguhan</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-kredit">Rp 2.200.000</div>
+          </div>
+          <div class="jurnal-note">
+            Liabilitas ini menunjukkan "utang pajak masa depan" yang akan jatuh
+            tempo saat depresiasi fiskal menjadi lebih kecil dari depresiasi
+            komersial.
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════
+           SECTION 8: STUDI KASUS KOMPREHENSIF
+      ══════════════════════════════════════════ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">
+          🏢 8. Studi Kasus Komprehensif — PT. Berkah Mandiri
+        </div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          📋 PT. Berkah Mandiri — Distributor Sembako Jombang
+        </div>
+        <div class="example-story">
+          PT. Berkah Mandiri adalah distributor sembako yang dikukuhkan sebagai
+          PKP. Data tahun 2024:<br /><br />
+          <strong>Data Operasional:</strong> Penjualan Rp 8.000.000.000 |
+          Pembelian/HPP Rp 5.500.000.000 | Beban operasi Rp 800.000.000 | Beban
+          gaji (termasuk direksi) Rp 600.000.000 | Penghasilan bunga deposito Rp
+          50.000.000 | Sumbangan bencana alam Rp 20.000.000 | Entertainment
+          tanpa nominatif Rp 15.000.000 | Sanksi pajak tahun lalu Rp 8.000.000 |
+          PPh Ps. 25 dibayar (12 bulan) Rp 150.000.000<br /><br />
+          <strong>Data Karyawan Pak Hasan (Manajer, K/3):</strong> Gaji Rp
+          12.000.000/bulan | Tunjangan makan &amp; transport Rp
+          2.000.000/bulan<br /><br />
+          <strong>Transaksi PPN Desember 2024:</strong> Penjualan Rp 750.000.000
+          | Pembelian Rp 500.000.000 (semua belum PPN)
+        </div>
+
+        <!-- A: REKONSILIASI FISKAL & PPh BADAN -->
+        <h4
+          style="
+            font-family: &quot;Syne&quot;, sans-serif;
+            font-weight: 800;
+            font-size: 15px;
+            color: var(--accent);
+            margin-bottom: 14px;
+          "
+        >
+          A. Rekonsiliasi Fiskal &amp; PPh Badan 2024
+        </h4>
+
+        <div class="rekon-box">
+          <div
+            style="
+              text-align: center;
+              border-bottom: 1.5px solid var(--glass-border);
+              padding-bottom: 12px;
+              margin-bottom: 14px;
+            "
+          >
+            <div
+              style="
+                font-family: &quot;Syne&quot;, sans-serif;
+                font-weight: 800;
+                font-size: 15px;
+              "
+            >
+              PT. BERKAH MANDIRI
+            </div>
+            <div
+              style="
+                font-size: 12px;
+                color: var(--accent);
+                font-weight: 700;
+                text-transform: uppercase;
+                margin: 3px 0;
+              "
+            >
+              REKONSILIASI FISKAL 2024
+            </div>
+          </div>
+
+          <div class="rekon-section">Perhitungan Laba Komersial:</div>
+          <div class="rekon-row indent2">
+            <span class="label">Penjualan</span
+            ><span class="amount">8.000.000.000</span>
+          </div>
+          <div class="rekon-row indent2">
+            <span class="label">− Pembelian/HPP</span
+            ><span class="amount amount-red">(5.500.000.000)</span>
+          </div>
+          <div class="rekon-row indent2">
+            <span class="label">− Beban operasi</span
+            ><span class="amount amount-red">(800.000.000)</span>
+          </div>
+          <div class="rekon-row indent2">
+            <span class="label">− Beban gaji</span
+            ><span class="amount amount-red">(600.000.000)</span>
+          </div>
+          <div class="rekon-row indent2">
+            <span class="label">+ Bunga deposito</span
+            ><span class="amount amount-green">50.000.000</span>
+          </div>
+          <div class="rekon-row indent2">
+            <span class="label">− Sumbangan</span
+            ><span class="amount amount-red">(20.000.000)</span>
+          </div>
+          <div class="rekon-row indent2">
+            <span class="label">− Entertainment</span
+            ><span class="amount amount-red">(15.000.000)</span>
+          </div>
+          <div class="rekon-row indent2">
+            <span class="label">− Sanksi pajak</span
+            ><span class="amount amount-red">(8.000.000)</span>
+          </div>
+          <div class="rekon-row subtotal indent1">
+            <span class="label">Laba Komersial</span
+            ><span class="amount">Rp 1.107.000.000</span>
+          </div>
+
+          <div class="rekon-section" style="color: var(--orange)">
+            + Koreksi Positif:
+          </div>
+          <div class="rekon-row indent2">
+            <span class="label">Sumbangan (non-deductible)</span
+            ><span class="amount amount-green">+ 20.000.000</span>
+          </div>
+          <div class="rekon-row indent2">
+            <span class="label">Entertainment (tanpa nominatif)</span
+            ><span class="amount amount-green">+ 15.000.000</span>
+          </div>
+          <div class="rekon-row indent2">
+            <span class="label">Sanksi pajak</span
+            ><span class="amount amount-green">+ 8.000.000</span>
+          </div>
+          <div class="rekon-row subtotal indent1">
+            <span class="label">Total Koreksi Positif</span
+            ><span class="amount amount-green">+ Rp 43.000.000</span>
+          </div>
+
+          <div class="rekon-section" style="color: var(--green)">
+            − Koreksi Negatif:
+          </div>
+          <div class="rekon-row indent2">
+            <span class="label">Bunga deposito (PPh Final)</span
+            ><span class="amount amount-red">− 50.000.000</span>
+          </div>
+          <div class="rekon-row subtotal indent1">
+            <span class="label">Total Koreksi Negatif</span
+            ><span class="amount amount-red">(Rp 50.000.000)</span>
+          </div>
+
+          <div class="rekon-row double">
+            <span class="label" style="font-weight: 800">LABA FISKAL (PKP)</span
+            ><span class="amount" style="color: var(--accent); font-size: 14px"
+              >Rp 1.100.000.000</span
+            >
+          </div>
+
+          <div class="rekon-row indent1">
+            <span class="label">PPh Badan = 22% × Rp 1.100.000.000</span
+            ><span class="amount">Rp 242.000.000</span>
+          </div>
+          <div class="rekon-row indent1">
+            <span class="label">− PPh Ps. 25 (sudah dibayar)</span
+            ><span class="amount amount-red">(150.000.000)</span>
+          </div>
+          <div class="rekon-row total">
+            <span class="label">PPh Pasal 29 (KURANG BAYAR)</span
+            ><span class="amount" style="color: var(--red)">Rp 92.000.000</span>
+          </div>
+        </div>
+
+        <div class="jurnal-box" style="margin-top: 16px">
+          <div class="jurnal-title">Jurnal PPh Badan PT. Berkah Mandiri</div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Beban Pajak Penghasilan</div>
+            <div class="jurnal-debet">Rp 242.000.000</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">PPh Ps. 25 Dibayar di Muka</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-kredit">Rp 150.000.000</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Utang PPh Pasal 29</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-kredit">Rp 92.000.000</div>
+          </div>
+        </div>
+
+        <!-- B: PPh 21 PAK HASAN -->
+        <h4
+          style="
+            font-family: &quot;Syne&quot;, sans-serif;
+            font-weight: 800;
+            font-size: 15px;
+            color: var(--accent);
+            margin: 24px 0 14px;
+          "
+        >
+          B. PPh 21 Pak Hasan — Manajer (K/3)
+        </h4>
+        <div class="rekon-box">
+          <div class="rekon-row indent2">
+            <span class="label">Gaji: Rp 12.000.000 × 12</span
+            ><span class="amount">Rp 144.000.000</span>
+          </div>
+          <div class="rekon-row indent2">
+            <span class="label">Tunjangan: Rp 2.000.000 × 12</span
+            ><span class="amount">Rp 24.000.000</span>
+          </div>
+          <div class="rekon-row subtotal indent1">
+            <span class="label">Total Penghasilan Bruto Setahun</span
+            ><span class="amount">Rp 168.000.000</span>
+          </div>
+          <div class="rekon-row indent2">
+            <span class="label"
+              >− Biaya jabatan (5%, maks Rp 6jt/bln = Rp 72jt/thn, tapi
+              5%×168=8,4jt &gt; maks → pakai maks Rp 72.000.000 ÷ 12 = Rp
+              6jt/bln × 12)</span
+            >
+          </div>
+          <div class="rekon-row indent2">
+            <span class="label" style="padding-left: 20px">Biaya jabatan</span
+            ><span class="amount amount-red">(6.000.000)</span>
+          </div>
+          <div class="rekon-row indent2">
+            <span class="label">− PTKP K/3</span
+            ><span class="amount amount-red">(72.000.000)</span>
+          </div>
+          <div class="rekon-row subtotal indent1">
+            <span class="label">PKP Setahun</span
+            ><span class="amount">Rp 90.000.000</span>
+          </div>
+          <div class="rekon-section">Perhitungan PPh 21:</div>
+          <div class="rekon-row indent2">
+            <span class="label">5% × Rp 60.000.000</span
+            ><span class="amount">Rp 3.000.000</span>
+          </div>
+          <div class="rekon-row indent2">
+            <span class="label">15% × Rp 30.000.000 (sisa 90jt − 60jt)</span
+            ><span class="amount">Rp 4.500.000</span>
+          </div>
+          <div class="rekon-row total">
+            <span class="label">PPh 21 Setahun</span
+            ><span class="amount">Rp 7.500.000</span>
+          </div>
+          <div class="rekon-row indent1">
+            <span class="label">PPh 21 per Bulan = Rp 7.500.000 ÷ 12</span
+            ><span class="amount" style="font-weight: 800">Rp 625.000</span>
+          </div>
+        </div>
+
+        <div class="jurnal-box" style="margin-top: 12px">
+          <div class="jurnal-title">Jurnal Penggajian Pak Hasan per Bulan</div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Beban Gaji</div>
+            <div class="jurnal-debet">Rp 14.000.000</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Utang PPh Pasal 21</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-kredit">Rp 625.000</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Kas (gaji bersih)</div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-kredit">Rp 13.375.000</div>
+          </div>
+        </div>
+
+        <!-- C: PPN DESEMBER -->
+        <h4
+          style="
+            font-family: &quot;Syne&quot;, sans-serif;
+            font-weight: 800;
+            font-size: 15px;
+            color: var(--accent);
+            margin: 24px 0 14px;
+          "
+        >
+          C. PPN Desember 2024
+        </h4>
+        <div class="rekon-box">
+          <div class="rekon-row indent1">
+            <span class="label">PPN Keluaran = 11% × Rp 750.000.000</span
+            ><span class="amount">Rp 82.500.000</span>
+          </div>
+          <div class="rekon-row indent1">
+            <span class="label">PPN Masukan = 11% × Rp 500.000.000</span
+            ><span class="amount amount-red">(55.000.000)</span>
+          </div>
+          <div class="rekon-row total">
+            <span class="label">PPN KURANG BAYAR (Disetor ke DJP)</span
+            ><span class="amount" style="color: var(--red)">Rp 27.500.000</span>
+          </div>
+        </div>
+
+        <!-- D: RINGKASAN KEWAJIBAN PAJAK -->
+        <h4
+          style="
+            font-family: &quot;Syne&quot;, sans-serif;
+            font-weight: 800;
+            font-size: 15px;
+            color: var(--accent);
+            margin: 24px 0 14px;
+          "
+        >
+          D. Ringkasan Kewajiban Pajak PT. Berkah Mandiri 2024
+        </h4>
+        <div class="table-wrap" style="margin-bottom: 0">
+          <table>
+            <thead>
+              <tr>
+                <th>Jenis Pajak</th>
+                <th>Jumlah</th>
+                <th>Tenggat</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>PPh Badan (Ps. 29)</strong></td>
+                <td style="color: var(--red); font-weight: 700">
+                  Rp 92.000.000
+                </td>
+                <td>Setor sebelum lapor SPT Tahunan (April 2025)</td>
+              </tr>
+              <tr>
+                <td><strong>PPh Ps. 21 Pak Hasan (per bulan)</strong></td>
+                <td style="color: var(--accent); font-weight: 700">
+                  Rp 625.000
+                </td>
+                <td>Paling lambat tanggal 10 bulan berikutnya</td>
+              </tr>
+              <tr>
+                <td><strong>PPN Desember</strong></td>
+                <td style="color: var(--red); font-weight: 700">
+                  Rp 27.500.000
+                </td>
+                <td>Paling lambat tanggal 25 bulan berikutnya</td>
+              </tr>
+              <tr class="total-row">
+                <td><strong>Total Pajak Setahun (estimasi)</strong></td>
+                <td><strong>≈ Rp 350.000.000+</strong></td>
+                <td>Kontribusi besar untuk APBN 🇮🇩</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════
+           SECTION 9: RANGKUMAN
+      ══════════════════════════════════════════ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">📝 Rangkuman Bab 18</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="rangkuman-table">
+          <thead>
+            <tr>
+              <th>Poin</th>
+              <th>Inti</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>✅ PPh Badan</td>
+              <td>22% dari PKP — rekonsiliasi fiskal dulu baru hitung pajak</td>
+            </tr>
+            <tr>
+              <td>✅ PPh 21</td>
+              <td>
+                Pajak karyawan — dipotong pemberi kerja, tarif progresif 5%–35%
+              </td>
+            </tr>
+            <tr>
+              <td>✅ PPh 23</td>
+              <td>
+                2% dari jasa/sewa yang dibayarkan | 15% untuk
+                dividen/bunga/royalti
+              </td>
+            </tr>
+            <tr>
+              <td>✅ PPh 25</td>
+              <td>Angsuran bulanan PPh Badan = PPh tahun lalu ÷ 12</td>
+            </tr>
+            <tr>
+              <td>✅ PPN</td>
+              <td>11% — Keluaran − Masukan = yang disetor ke DJP</td>
+            </tr>
+            <tr>
+              <td>✅ Rekonsiliasi</td>
+              <td>
+                Laba fiskal ≠ laba komersial — ada koreksi positif dan negatif
+              </td>
+            </tr>
+            <tr>
+              <td>✅ Koreksi Positif</td>
+              <td>
+                Biaya non-deductible menambah laba fiskal (sumbangan, denda,
+                entertainment)
+              </td>
+            </tr>
+            <tr>
+              <td>✅ Koreksi Negatif</td>
+              <td>
+                Penghasilan PPh Final mengurangi laba fiskal (bunga deposito,
+                sewa)
+              </td>
+            </tr>
+            <tr>
+              <td>✅ Pajak Tangguhan</td>
+              <td>
+                Beda temporer → liabilitas atau aset pajak tangguhan di neraca
+              </td>
+            </tr>
+            <tr>
+              <td>✅ Self Assessment</td>
+              <td>
+                WP hitung, setor, lapor sendiri — akuntan bertanggung jawab
+                akurasi SPT
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- QUIZ CTA -->
+      <div class="quiz-cta">
+        <h3>🎯 Uji Pemahamanmu!</h3>
+        <p>
+          Sudah siap menguji pemahaman Bab Perpajakan Dasar dalam Akuntansi?
+          Kerjakan 20 soal kuis interaktif yang mencakup semua materi dari
+          sistem self assessment, PPh Badan, PPh 21, PPN, hingga rekonsiliasi
+          fiskal dan pajak tangguhan!
+        </p>
+        <a
+          href="bank-kuis.html?bab=Perpajakan%20Dasar%20dalam%20Akuntansi"
+          class="quiz-btn"
+        >
+          Mulai Kuis Perpajakan →
+        </a>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-name">Annisa Novita Ardana</div>
+      <div class="footer-sub">
+        Belajar Akuntansi &amp; Perpajakan &nbsp;·&nbsp; Dibuat dengan Cinta
+        &amp; Estetika 🌸
+      </div>
+      <div class="footer-dots">
+        <div class="footer-dot" style="background: #ff6b35"></div>
+        <div class="footer-dot" style="background: #ff3d9a"></div>
+        <div class="footer-dot" style="background: #a855f7"></div>
+        <div class="footer-dot" style="background: #3b82f6"></div>
+        <div class="footer-dot" style="background: #10b981"></div>
+        <div class="footer-dot" style="background: #fbbf24"></div>
+      </div>
+    </footer>
+
+    <script>
+      const body = document.body;
+      if (localStorage.getItem("theme") === "light")
+        body.classList.add("light-theme");
+      function toggleTheme() {
+        body.classList.toggle("light-theme");
+        localStorage.setItem(
+          "theme",
+          body.classList.contains("light-theme") ? "light" : "dark",
+        );
+      }
+    </script>
+  </body>
+</html>

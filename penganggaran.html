@@ -1,0 +1,2079 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Penganggaran (Budgeting) — Belajar Akuntansi</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0f172a;
+        --glass-bg: rgba(30, 41, 59, 0.45);
+        --glass-border: rgba(255, 255, 255, 0.08);
+        --glass-highlight: rgba(255, 255, 255, 0.15);
+        --text: #f8fafc;
+        --text-muted: #94a3b8;
+        --pink: #ff3d9a;
+        --purple: #a855f7;
+        --blue: #3b82f6;
+        --green: #10b981;
+        --yellow: #fbbf24;
+        --orange: #ff6b35;
+        --teal: #06b6d4;
+        --red: #ef4444;
+        --amber: #f59e0b;
+        --radius: 24px;
+        --radius-sm: 14px;
+      }
+      body.light-theme {
+        --bg: #fff8f0;
+        --glass-bg: rgba(255, 255, 255, 0.65);
+        --glass-border: rgba(0, 0, 0, 0.06);
+        --glass-highlight: rgba(255, 255, 255, 0.85);
+        --text: #1e293b;
+        --text-muted: #64748b;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "DM Sans", sans-serif;
+        background-color: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        overflow-x: hidden;
+        transition:
+          background-color 0.3s ease,
+          color 0.3s ease;
+        position: relative;
+      }
+      .blob {
+        position: absolute;
+        border-radius: 50%;
+        pointer-events: none;
+        filter: blur(80px);
+        opacity: 0.22;
+        z-index: 0;
+        animation: float 20s infinite alternate;
+      }
+      .blob-1 {
+        width: 450px;
+        height: 450px;
+        background: var(--amber);
+        top: -150px;
+        right: -80px;
+      }
+      .blob-2 {
+        width: 320px;
+        height: 320px;
+        background: var(--orange);
+        bottom: 20%;
+        left: -80px;
+        animation-delay: -5s;
+      }
+      .blob-3 {
+        width: 350px;
+        height: 350px;
+        background: var(--yellow);
+        top: 40%;
+        right: 10%;
+        animation-delay: -10s;
+      }
+      @keyframes float {
+        0% {
+          transform: translate(0, 0) scale(1);
+        }
+        100% {
+          transform: translate(50px, 80px) scale(1.1);
+        }
+      }
+
+      /* HEADER */
+      header {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 30px 24px 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        z-index: 10;
+      }
+      .header-logo {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 18px;
+        color: var(--text);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .theme-toggle-btn {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(12px);
+        color: var(--text);
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        transition:
+          transform 0.2s,
+          background-color 0.2s;
+      }
+      .theme-toggle-btn:hover {
+        transform: scale(1.08);
+        background: var(--glass-highlight);
+      }
+      .back-btn {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(12px);
+        color: var(--text);
+        padding: 10px 20px;
+        border-radius: 99px;
+        font-family: "Syne", sans-serif;
+        font-weight: 700;
+        font-size: 13px;
+        text-decoration: none;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition:
+          background-color 0.2s,
+          transform 0.2s;
+      }
+      .back-btn:hover {
+        transform: translateY(-2px);
+        background: var(--glass-highlight);
+      }
+
+      /* HERO */
+      .hero {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 40px 24px;
+        position: relative;
+        z-index: 10;
+        text-align: center;
+      }
+      .hero-glass {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(16px);
+        border-radius: var(--radius);
+        padding: 48px 32px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .hero-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(245, 158, 11, 0.15);
+        border: 1.5px solid rgba(245, 158, 11, 0.3);
+        color: var(--amber);
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 7px 18px;
+        border-radius: 99px;
+        margin-bottom: 24px;
+        font-family: "Syne", sans-serif;
+      }
+      body.light-theme .hero-tag {
+        background: rgba(245, 158, 11, 0.1);
+        color: #b45309;
+      }
+      .hero h1 {
+        font-family: "Syne", sans-serif;
+        font-size: clamp(30px, 6vw, 52px);
+        font-weight: 800;
+        line-height: 1.15;
+        margin-bottom: 16px;
+        color: #fff;
+      }
+      body.light-theme .hero h1 {
+        color: #1e293b;
+      }
+      .hero h1 .hi {
+        color: var(--amber);
+      }
+      .hero p {
+        color: var(--text-muted);
+        font-size: 15px;
+        line-height: 1.7;
+        max-width: 620px;
+        margin-bottom: 28px;
+      }
+      .hero-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+      }
+      .hero-badge {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid var(--glass-border);
+        border-radius: 99px;
+        padding: 7px 16px;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--text-muted);
+        font-family: "Syne", sans-serif;
+      }
+
+      /* CONTENT */
+      .content {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 24px 80px;
+        position: relative;
+        z-index: 10;
+      }
+      .section-title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 52px;
+        margin-bottom: 24px;
+      }
+      .sec-line {
+        flex: 1;
+        height: 1.5px;
+        background: var(--glass-border);
+      }
+      .sec-text {
+        font-family: "Syne", sans-serif;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+      }
+
+      /* CARDS */
+      .cards-3 {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+        gap: 24px;
+        margin-bottom: 32px;
+      }
+      .cards-2 {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+        gap: 24px;
+        margin-bottom: 32px;
+      }
+      .card {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(12px);
+        border-radius: var(--radius);
+        padding: 28px;
+        color: var(--text);
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+        transition:
+          transform 0.25s,
+          box-shadow 0.25s,
+          border-color 0.25s;
+      }
+      .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: var(--c, var(--amber));
+      }
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        border-color: var(--c, var(--amber));
+      }
+      .card-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: var(--radius-sm);
+        background: color-mix(in srgb, var(--c) 15%, transparent);
+        color: var(--c);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        margin-bottom: 18px;
+        border: 1px solid color-mix(in srgb, var(--c) 30%, transparent);
+      }
+      .card-eyebrow {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--c);
+        margin-bottom: 6px;
+      }
+      .card-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 18px;
+        line-height: 1.35;
+        margin-bottom: 10px;
+      }
+      .card-body {
+        font-size: 13.5px;
+        color: var(--text-muted);
+        line-height: 1.6;
+      }
+      .list-items {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 12px;
+      }
+      .list-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 13px;
+        line-height: 1.5;
+      }
+      .list-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--c);
+        flex-shrink: 0;
+        margin-top: 6px;
+        box-shadow: 0 0 8px var(--c);
+      }
+
+      /* EXAMPLE */
+      .example-wrap {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(16px);
+        border-radius: var(--radius);
+        padding: 32px;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+        margin-bottom: 32px;
+      }
+      .example-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 16px;
+        color: var(--amber);
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .example-story {
+        color: var(--text-muted);
+        font-size: 14.5px;
+        line-height: 1.7;
+        margin-bottom: 20px;
+        padding: 16px 20px;
+        border-left: 3px solid var(--amber);
+        background: rgba(245, 158, 11, 0.05);
+        border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      }
+
+      /* TABLE */
+      .table-wrap {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius-sm);
+        overflow: hidden;
+        margin-bottom: 24px;
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th {
+        background: rgba(0, 0, 0, 0.25);
+        color: var(--text-muted);
+        font-family: "Syne", sans-serif;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 14px 18px;
+        text-align: left;
+        border-bottom: 1.5px solid var(--glass-border);
+      }
+      body.light-theme th {
+        background: rgba(255, 255, 255, 0.5);
+      }
+      td {
+        padding: 12px 18px;
+        font-size: 13.5px;
+        border-bottom: 1px solid var(--glass-border);
+        color: var(--text);
+      }
+      tr:last-child td {
+        border-bottom: none;
+      }
+      tr:hover td {
+        background: rgba(255, 255, 255, 0.02);
+      }
+      body.light-theme tr:hover td {
+        background: rgba(0, 0, 0, 0.01);
+      }
+      tr.total-row td {
+        font-weight: 800;
+        background: rgba(245, 158, 11, 0.08);
+        color: var(--amber);
+        border-top: 2px solid var(--glass-border);
+      }
+      tr.subtotal-row td {
+        font-weight: 700;
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      /* FORMULA */
+      .formula-block {
+        background: rgba(245, 158, 11, 0.08);
+        border: 2px solid rgba(245, 158, 11, 0.25);
+        border-radius: var(--radius-sm);
+        padding: 20px 24px;
+        margin-bottom: 20px;
+        font-family: "Syne", sans-serif;
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--amber);
+        text-align: center;
+        line-height: 1.8;
+      }
+
+      /* INFO BOXES */
+      .info-box {
+        background: rgba(16, 185, 129, 0.08);
+        border: 1px solid rgba(16, 185, 129, 0.25);
+        border-radius: var(--radius-sm);
+        padding: 18px 20px;
+        margin-bottom: 20px;
+        color: var(--text);
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .info-box strong {
+        color: var(--green);
+      }
+      .warning-box {
+        background: rgba(245, 158, 11, 0.08);
+        border: 1px solid rgba(245, 158, 11, 0.25);
+        border-radius: var(--radius-sm);
+        padding: 18px 20px;
+        margin-bottom: 20px;
+        color: var(--text);
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .warning-box strong {
+        color: var(--amber);
+      }
+
+      /* BUDGET REPORT BOX */
+      .laporan-box {
+        background: rgba(0, 0, 0, 0.2);
+        border: 1.5px solid var(--glass-border);
+        border-radius: var(--radius-sm);
+        padding: 24px;
+        margin-bottom: 16px;
+        font-family: "DM Sans", monospace;
+      }
+      body.light-theme .laporan-box {
+        background: rgba(255, 255, 255, 0.5);
+      }
+      .laporan-header {
+        text-align: center;
+        border-bottom: 1.5px solid var(--glass-border);
+        padding-bottom: 14px;
+        margin-bottom: 16px;
+      }
+      .laporan-header h4 {
+        font-family: "Syne", sans-serif;
+        font-size: 15px;
+        font-weight: 800;
+        color: var(--text);
+        letter-spacing: 0.05em;
+      }
+      .laporan-header h5 {
+        font-size: 12px;
+        color: var(--amber);
+        font-weight: 700;
+        text-transform: uppercase;
+        margin: 3px 0;
+      }
+      .laporan-header p {
+        font-size: 11px;
+        color: var(--text-muted);
+        font-style: italic;
+      }
+      .laporan-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        padding: 4px 0;
+        font-size: 13.5px;
+        gap: 12px;
+      }
+      .laporan-row.indent1 {
+        padding-left: 20px;
+      }
+      .laporan-row.indent2 {
+        padding-left: 40px;
+        color: var(--text-muted);
+      }
+      .laporan-row.subtotal {
+        border-top: 1px solid var(--glass-border);
+        margin-top: 4px;
+        padding-top: 8px;
+        font-weight: 700;
+      }
+      .laporan-row.total {
+        border-top: 2px solid var(--glass-border);
+        margin-top: 6px;
+        padding-top: 10px;
+        font-weight: 800;
+        color: var(--amber);
+      }
+      .laporan-row.double-border {
+        border-top: 2px double rgba(245, 158, 11, 0.4);
+        border-bottom: 2px double rgba(245, 158, 11, 0.4);
+        padding: 8px 0;
+        margin: 4px 0;
+      }
+      .laporan-row .label {
+        flex: 1;
+      }
+      .laporan-row .amount {
+        font-family: "Syne", sans-serif;
+        font-size: 13px;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+      .amount.masuk {
+        color: var(--green);
+      }
+      .amount.keluar {
+        color: var(--red);
+      }
+      .amount.netpos {
+        color: var(--green);
+        font-size: 14px;
+      }
+
+      /* FLOW DIAGRAM */
+      .flow-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        padding: 28px;
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius);
+        margin-bottom: 28px;
+      }
+      .flow-step {
+        background: rgba(245, 158, 11, 0.12);
+        border: 1.5px solid rgba(245, 158, 11, 0.3);
+        border-radius: 10px;
+        padding: 10px 28px;
+        font-family: "Syne", sans-serif;
+        font-weight: 700;
+        font-size: 13px;
+        color: var(--amber);
+        text-align: center;
+        min-width: 280px;
+      }
+      .flow-step.highlight {
+        background: rgba(245, 158, 11, 0.22);
+        border-color: var(--amber);
+        font-size: 14px;
+      }
+      .flow-arrow {
+        color: var(--text-muted);
+        font-size: 20px;
+      }
+
+      /* KODE/MONOSPACE BOX */
+      .kode-box {
+        background: #060a14;
+        border: 1.5px solid var(--glass-border);
+        border-radius: var(--radius-sm);
+        padding: 20px;
+        margin-bottom: 16px;
+        font-family: "Courier New", monospace;
+        font-size: 12.5px;
+        color: #94a3b8;
+        line-height: 2;
+        white-space: pre;
+        overflow-x: auto;
+      }
+      body.light-theme .kode-box {
+        background: #f8fafc;
+        color: #334155;
+      }
+      .kode-box .kc {
+        color: var(--amber);
+        font-weight: 700;
+      }
+      .kode-box .kn {
+        color: var(--green);
+      }
+      .kode-box .kr {
+        color: var(--red);
+      }
+
+      /* QUIZ CTA */
+      .quiz-cta {
+        background: var(--glass-bg);
+        border: 2px solid var(--amber);
+        border-radius: var(--radius);
+        padding: 40px 32px;
+        text-align: center;
+        margin-top: 60px;
+        margin-bottom: 40px;
+      }
+      .quiz-cta h3 {
+        font-family: "Syne", sans-serif;
+        font-size: 24px;
+        margin-bottom: 12px;
+        color: var(--amber);
+      }
+      .quiz-cta p {
+        color: var(--text-muted);
+        margin-bottom: 20px;
+        font-size: 15px;
+        line-height: 1.6;
+      }
+      .quiz-btn {
+        background: var(--amber);
+        color: #000;
+        border: none;
+        padding: 14px 32px;
+        border-radius: var(--radius-sm);
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-decoration: none;
+        display: inline-block;
+      }
+      .quiz-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 24px rgba(245, 158, 11, 0.3);
+      }
+
+      /* RANGKUMAN */
+      .rangkuman-table td:first-child {
+        font-weight: 700;
+        color: var(--amber);
+      }
+
+      /* FOOTER */
+      footer {
+        border-top: 1px solid var(--glass-border);
+        background: #090d16;
+        padding: 40px 24px;
+        text-align: center;
+        position: relative;
+        z-index: 10;
+      }
+      body.light-theme footer {
+        background: #fff8f0;
+      }
+      .footer-name {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 16px;
+        background: linear-gradient(
+          135deg,
+          var(--yellow),
+          var(--pink),
+          var(--purple)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 6px;
+      }
+      .footer-sub {
+        font-size: 12.5px;
+        color: var(--text-muted);
+      }
+      .footer-dots {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        margin-top: 16px;
+      }
+      .footer-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+      }
+
+      @media (max-width: 600px) {
+        .cards-3,
+        .cards-2 {
+          grid-template-columns: 1fr;
+        }
+        .flow-step {
+          min-width: 0;
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <header>
+      <a href="index.html" class="header-logo">
+        <span style="font-size: 24px">📊</span>
+        <span
+          style="font-weight: 800; font-family: &quot;Syne&quot;, sans-serif"
+          >Belajar Akuntansi</span
+        >
+      </a>
+      <div style="display: flex; gap: 12px; align-items: center">
+        <a href="index.html" class="back-btn">← Kembali</a>
+        <button
+          class="theme-toggle-btn"
+          onclick="toggleTheme()"
+          title="Ganti Tema"
+        >
+          🌓
+        </button>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-glass">
+        <div class="hero-tag">📊 Bab 16 — Akuntansi Manajemen</div>
+        <h1>Penganggaran<br /><span class="hi">(Budgeting)</span></h1>
+        <p>
+          Pelajari cara menyusun anggaran komprehensif perusahaan — dari
+          anggaran penjualan, produksi, bahan baku, TKL, overhead, hingga
+          anggaran kas dan laporan L/R pro forma sebagai alat perencanaan &
+          pengendalian keuangan.
+        </p>
+        <div class="hero-badges">
+          <div class="hero-badge">📈 Anggaran Penjualan</div>
+          <div class="hero-badge">🏭 Anggaran Produksi</div>
+          <div class="hero-badge">🌾 Anggaran Bahan Baku</div>
+          <div class="hero-badge">👷 Anggaran TKL</div>
+          <div class="hero-badge">⚙️ Anggaran Overhead</div>
+          <div class="hero-badge">💰 Anggaran Kas</div>
+          <div class="hero-badge">📋 L/R Pro Forma</div>
+        </div>
+      </div>
+    </section>
+
+    <main class="content">
+      <!-- ─── 1. PENGERTIAN & MANFAAT ─── -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">📌 1. Pengertian & Manfaat Anggaran</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">💡 Definisi Anggaran</div>
+        <div class="example-story">
+          Anggaran adalah <strong>rencana keuangan tertulis</strong> yang
+          dinyatakan dalam satuan kuantitatif (unit dan rupiah) untuk periode
+          tertentu di masa mendatang.<br /><br />
+          <strong>Analogi:</strong> Anggaran itu seperti GPS untuk bisnis —
+          tanpa GPS kamu bisa tetap nyetir, tapi sering nyasar, buang waktu, dan
+          boros bensin. Dengan GPS (anggaran), perjalanan lebih terarah,
+          efisien, dan tahu kapan harus belok!
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Fungsi</th>
+              <th>Penjelasan</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Perencanaan</strong></td>
+              <td>Memaksa manajemen berpikir ke depan dan menetapkan target</td>
+            </tr>
+            <tr>
+              <td><strong>Koordinasi</strong></td>
+              <td>Menyelaraskan kegiatan antar departemen</td>
+            </tr>
+            <tr>
+              <td><strong>Komunikasi</strong></td>
+              <td>Menyampaikan rencana manajemen ke seluruh organisasi</td>
+            </tr>
+            <tr>
+              <td><strong>Motivasi</strong></td>
+              <td>
+                Target yang jelas memotivasi karyawan bekerja lebih terarah
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Pengendalian</strong></td>
+              <td>
+                Membandingkan realisasi vs anggaran — temukan penyimpangan
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Evaluasi</strong></td>
+              <td>Dasar penilaian kinerja manajer dan departemen</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ─── PROSES PENYUSUNAN ─── -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">
+          🔄 Proses Penyusunan Anggaran (Alur Master Budget)
+        </div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="flow-wrap">
+        <div class="flow-step highlight">Visi & Strategi Perusahaan</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step highlight">
+          Anggaran Penjualan ← Titik Awal Semua Anggaran
+        </div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step">Anggaran Produksi</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step">
+          Anggaran BB + Anggaran TKL + Anggaran Overhead
+        </div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step">Anggaran Beban Operasi</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step">Anggaran Kas</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step highlight">
+          Anggaran L/R Pro Forma + Neraca Pro Forma
+        </div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step highlight">ANGGARAN INDUK (MASTER BUDGET)</div>
+      </div>
+
+      <!-- ─── 2. JENIS-JENIS ANGGARAN ─── -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">📂 2. Jenis-Jenis Anggaran</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="cards-3">
+        <div class="card" style="--c: var(--amber)">
+          <div class="card-icon">📁</div>
+          <div class="card-eyebrow">Berdasarkan Ruang Lingkup</div>
+          <div class="card-title">Anggaran Induk vs Parsial</div>
+          <div class="list-items">
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>
+                <strong>Master Budget</strong> — kumpulan semua anggaran
+                terintegrasi
+              </div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>
+                <strong>Anggaran Operasional</strong> — penjualan, produksi,
+                biaya operasi
+              </div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>
+                <strong>Anggaran Keuangan</strong> — kas, neraca pro forma, L/R
+                pro forma
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="--c: var(--blue)">
+          <div class="card-icon">📐</div>
+          <div class="card-eyebrow">Berdasarkan Fleksibilitas</div>
+          <div class="card-title">Statis vs Fleksibel</div>
+          <div class="list-items">
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>
+                <strong>Anggaran Statis (Fixed)</strong> — dibuat untuk satu
+                level aktivitas
+              </div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>
+                <strong>Anggaran Fleksibel</strong> — disesuaikan dengan
+                berbagai level aktivitas aktual (lebih adil untuk evaluasi)
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="--c: var(--green)">
+          <div class="card-icon">📅</div>
+          <div class="card-eyebrow">Berdasarkan Periode</div>
+          <div class="card-title">Jangka Pendek vs Panjang</div>
+          <div class="list-items">
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>
+                <strong>Jangka Pendek</strong> (≤ 1 tahun) — anggaran
+                operasional harian/bulanan/tahunan
+              </div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>
+                <strong>Jangka Panjang</strong> (> 1 tahun) — capital budget,
+                rencana strategis 3–5 tahun
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── 3. ANGGARAN PENJUALAN ─── -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">📈 3. Anggaran Penjualan</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="info-box">
+        <strong>Kenapa Anggaran Penjualan Disusun Pertama?</strong><br />
+        Karena semua anggaran lain bergantung pada ini — berapa yang dijual
+        menentukan berapa yang harus diproduksi, berapa bahan baku dibutuhkan,
+        berapa kas yang akan masuk.
+        <strong>Salah estimasi penjualan = seluruh anggaran berantakan.</strong>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          ✏️ Contoh — CV. Roti "Berkah Jaya" Jombang
+        </div>
+        <div class="example-story">
+          Target penjualan Q1 2025: Januari 4.000 loaf, Februari 4.500 loaf,
+          Maret 5.000 loaf. Harga jual Rp15.000/loaf.<br />
+          Kebijakan penerimaan kas:
+          <strong>60% tunai, 40% kredit</strong> (dibayar bulan berikutnya).
+        </div>
+
+        <div class="laporan-box">
+          <div class="laporan-header">
+            <h4>CV. ROTI "BERKAH JAYA"</h4>
+            <h5>ANGGARAN PENJUALAN — Kuartal I 2025</h5>
+          </div>
+          <div class="table-wrap" style="margin-bottom: 0">
+            <table>
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Januari</th>
+                  <th>Februari</th>
+                  <th>Maret</th>
+                  <th>Total Q1</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Unit (loaf)</strong></td>
+                  <td>4.000</td>
+                  <td>4.500</td>
+                  <td>5.000</td>
+                  <td>13.500</td>
+                </tr>
+                <tr>
+                  <td>Harga/unit</td>
+                  <td>Rp15.000</td>
+                  <td>Rp15.000</td>
+                  <td>Rp15.000</td>
+                  <td>—</td>
+                </tr>
+                <tr class="total-row">
+                  <td><strong>Total Penjualan</strong></td>
+                  <td><strong>Rp60.000.000</strong></td>
+                  <td><strong>Rp67.500.000</strong></td>
+                  <td><strong>Rp75.000.000</strong></td>
+                  <td><strong>Rp202.500.000</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <h4
+          style="
+            font-family: &quot;Syne&quot;, sans-serif;
+            font-weight: 800;
+            font-size: 14px;
+            margin: 20px 0 12px;
+            color: var(--text);
+          "
+        >
+          💵 Pola Penerimaan Kas:
+        </h4>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Bulan</th>
+                <th>Sumber</th>
+                <th>Jumlah</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Januari</strong></td>
+                <td>Tunai 60% × Rp60jt</td>
+                <td>Rp36.000.000</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>Kredit 40% → terima Februari</td>
+                <td>Rp24.000.000</td>
+              </tr>
+              <tr>
+                <td><strong>Februari</strong></td>
+                <td>Dari piutang Januari</td>
+                <td>Rp24.000.000</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>Tunai 60% × Rp67,5jt</td>
+                <td>Rp40.500.000</td>
+              </tr>
+              <tr class="subtotal-row">
+                <td></td>
+                <td><strong>Total Terima Februari</strong></td>
+                <td><strong>Rp64.500.000</strong></td>
+              </tr>
+              <tr>
+                <td><strong>Maret</strong></td>
+                <td>Dari piutang Februari</td>
+                <td>Rp27.000.000</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>Tunai 60% × Rp75jt</td>
+                <td>Rp45.000.000</td>
+              </tr>
+              <tr class="subtotal-row">
+                <td></td>
+                <td><strong>Total Terima Maret</strong></td>
+                <td><strong>Rp72.000.000</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ─── 4. ANGGARAN PRODUKSI ─── -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">🏭 4. Anggaran Produksi</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="formula-block">
+        Unit Produksi = Unit Dijual + Persediaan Akhir yang Diinginkan −
+        Persediaan Awal
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          ✏️ Anggaran Produksi — CV. Roti "Berkah Jaya"
+        </div>
+        <div class="example-story">
+          Kebijakan persediaan akhir = <strong>10%</strong> dari penjualan bulan
+          berikutnya. Persediaan awal Januari = 400 unit.
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Januari</th>
+                <th>Februari</th>
+                <th>Maret</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Unit dijual</td>
+                <td>4.000</td>
+                <td>4.500</td>
+                <td>5.000</td>
+              </tr>
+              <tr>
+                <td>+ Persediaan akhir (10% bln berikut)</td>
+                <td>450</td>
+                <td>500</td>
+                <td>550 *</td>
+              </tr>
+              <tr>
+                <td>− Persediaan awal</td>
+                <td>400</td>
+                <td>450</td>
+                <td>500</td>
+              </tr>
+              <tr class="total-row">
+                <td><strong>Unit Diproduksi</strong></td>
+                <td><strong>4.050</strong></td>
+                <td><strong>4.550</strong></td>
+                <td><strong>5.050</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size: 12px; color: var(--text-muted)">
+          * Estimasi April 5.500 unit → persediaan akhir = 10% × 5.500 = 550
+        </p>
+      </div>
+
+      <!-- ─── 5. ANGGARAN BAHAN BAKU ─── -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">🌾 5. Anggaran Bahan Baku</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="cards-2">
+        <div class="card" style="--c: var(--orange)">
+          <div class="card-icon">📦</div>
+          <div class="card-eyebrow">Bagian A</div>
+          <div class="card-title">Anggaran Kebutuhan BB</div>
+          <div class="formula-block" style="font-size: 13px; margin-top: 12px">
+            Kebutuhan BB = Unit Produksi × Standar BB per Unit
+          </div>
+        </div>
+        <div class="card" style="--c: var(--teal)">
+          <div class="card-icon">🛒</div>
+          <div class="card-eyebrow">Bagian B</div>
+          <div class="card-title">Anggaran Pembelian BB</div>
+          <div
+            class="formula-block"
+            style="
+              font-size: 13px;
+              margin-top: 12px;
+              background: rgba(6, 182, 212, 0.08);
+              border-color: rgba(6, 182, 212, 0.25);
+              color: var(--teal);
+            "
+          >
+            Pembelian BB = Kebutuhan BB + Pers. BB Akhir − Pers. BB Awal
+          </div>
+        </div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          ✏️ Anggaran Bahan Baku — CV. Roti "Berkah Jaya"
+        </div>
+        <div class="example-story">
+          Standar BB: <strong>0,5 kg tepung/loaf</strong> @ Rp12.000/kg.
+          Kebijakan persediaan BB akhir = <strong>20%</strong> kebutuhan bulan
+          berikutnya.
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Januari</th>
+                <th>Februari</th>
+                <th>Maret</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Unit diproduksi</td>
+                <td>4.050</td>
+                <td>4.550</td>
+                <td>5.050</td>
+              </tr>
+              <tr>
+                <td>× Standar BB (0,5 kg)</td>
+                <td>× 0,5</td>
+                <td>× 0,5</td>
+                <td>× 0,5</td>
+              </tr>
+              <tr class="subtotal-row">
+                <td>Kebutuhan BB (kg)</td>
+                <td>2.025</td>
+                <td>2.275</td>
+                <td>2.525</td>
+              </tr>
+              <tr>
+                <td>+ Pers. BB akhir (20%)</td>
+                <td>455</td>
+                <td>505</td>
+                <td>530 *</td>
+              </tr>
+              <tr>
+                <td>− Pers. BB awal</td>
+                <td>405</td>
+                <td>455</td>
+                <td>505</td>
+              </tr>
+              <tr class="subtotal-row">
+                <td><strong>Pembelian BB (kg)</strong></td>
+                <td><strong>2.075</strong></td>
+                <td><strong>2.325</strong></td>
+                <td><strong>2.550</strong></td>
+              </tr>
+              <tr>
+                <td>× Harga (Rp12.000/kg)</td>
+                <td>×12.000</td>
+                <td>×12.000</td>
+                <td>×12.000</td>
+              </tr>
+              <tr class="total-row">
+                <td><strong>Biaya Pembelian BB</strong></td>
+                <td><strong>Rp24.900.000</strong></td>
+                <td><strong>Rp27.900.000</strong></td>
+                <td><strong>Rp30.600.000</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size: 12px; color: var(--text-muted)">
+          * Estimasi Feb kebutuhan 2.650 kg → pers. akhir = 20% × 2.650 = 530
+        </p>
+      </div>
+
+      <!-- ─── 6. ANGGARAN TKL ─── -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">👷 6. Anggaran Tenaga Kerja Langsung (TKL)</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="formula-block">
+        Jam TKL = Unit Produksi × Standar Jam TKL per Unit<br />
+        Biaya TKL = Jam TKL × Tarif Upah per Jam
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          ✏️ Anggaran TKL — CV. Roti "Berkah Jaya"
+        </div>
+        <div class="example-story">
+          Standar: <strong>0,1 jam TKL/loaf</strong>, tarif
+          <strong>Rp25.000/jam</strong>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Januari</th>
+                <th>Februari</th>
+                <th>Maret</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Unit diproduksi</td>
+                <td>4.050</td>
+                <td>4.550</td>
+                <td>5.050</td>
+              </tr>
+              <tr>
+                <td>× Standar jam TKL (0,1)</td>
+                <td>× 0,1</td>
+                <td>× 0,1</td>
+                <td>× 0,1</td>
+              </tr>
+              <tr class="subtotal-row">
+                <td>Total Jam TKL</td>
+                <td>405</td>
+                <td>455</td>
+                <td>505</td>
+              </tr>
+              <tr>
+                <td>× Tarif (Rp25.000/jam)</td>
+                <td>×25.000</td>
+                <td>×25.000</td>
+                <td>×25.000</td>
+              </tr>
+              <tr class="total-row">
+                <td><strong>Biaya TKL</strong></td>
+                <td><strong>Rp10.125.000</strong></td>
+                <td><strong>Rp11.375.000</strong></td>
+                <td><strong>Rp12.625.000</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ─── 7. ANGGARAN OVERHEAD ─── -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">⚙️ 7. Anggaran Overhead Pabrik</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="formula-block">
+        Overhead Pabrik = Overhead Variabel + Overhead Tetap<br />
+        <span style="font-size: 12px; opacity: 0.8"
+          >Overhead Variabel = Tarif Variabel × Jam TKL &nbsp;|&nbsp; Overhead
+          Tetap = Jumlah Tetap per Periode</span
+        >
+      </div>
+
+      <div class="warning-box">
+        <strong>⚠️ Penting saat menyusun Anggaran Kas:</strong> Depresiasi
+        adalah bagian dari overhead tetap, tapi
+        <strong>TIDAK masuk pengeluaran kas</strong> — karena tidak ada uang
+        yang benar-benar keluar. Selalu pisahkan overhead kas dari depresiasi!
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          ✏️ Anggaran Overhead — CV. Roti "Berkah Jaya"
+        </div>
+        <div class="example-story">
+          Overhead variabel: <strong>Rp15.000/jam TKL</strong>. Overhead tetap:
+          <strong>Rp8.000.000/bulan</strong>.
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Januari</th>
+                <th>Februari</th>
+                <th>Maret</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Jam TKL</td>
+                <td>405</td>
+                <td>455</td>
+                <td>505</td>
+              </tr>
+              <tr>
+                <td>× Tarif variabel (Rp15.000)</td>
+                <td>×15.000</td>
+                <td>×15.000</td>
+                <td>×15.000</td>
+              </tr>
+              <tr>
+                <td>Overhead variabel</td>
+                <td>Rp6.075.000</td>
+                <td>Rp6.825.000</td>
+                <td>Rp7.575.000</td>
+              </tr>
+              <tr>
+                <td>Overhead tetap</td>
+                <td>Rp8.000.000</td>
+                <td>Rp8.000.000</td>
+                <td>Rp8.000.000</td>
+              </tr>
+              <tr class="total-row">
+                <td><strong>Total Overhead</strong></td>
+                <td><strong>Rp14.075.000</strong></td>
+                <td><strong>Rp14.825.000</strong></td>
+                <td><strong>Rp15.575.000</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ─── 8. ANGGARAN KAS ─── -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">💰 8. Anggaran Kas</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="info-box">
+        <strong>Mengapa Anggaran Kas Krusial?</strong><br />
+        Perusahaan bisa laba di L/R tapi
+        <strong>bangkrut karena kehabisan kas</strong>. Anggaran kas memastikan
+        selalu ada cukup uang tunai untuk operasional setiap bulan. Jika
+        proyeksi saldo kas turun di bawah minimum → manajemen harus segera
+        mencari pendanaan.
+      </div>
+
+      <div class="formula-block" style="text-align: left; font-size: 13px">
+        Saldo Kas Awal<br />
+        + Total Penerimaan Kas (dari pelanggan, penerimaan lain)<br />
+        ─────────────────────────────────<br />
+        = Kas Tersedia<br />
+        − Total Pengeluaran Kas (BB, TKL, overhead kas, operasi, cicilan)<br />
+        ─────────────────────────────────<br />
+        = Saldo Kas Sebelum Pendanaan<br />
+        ± Pendanaan (pinjam jika kurang, lunasi jika lebih)<br />
+        ─────────────────────────────────<br />
+        = <strong>Saldo Kas Akhir</strong>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          ✏️ Anggaran Kas Januari — CV. Roti "Berkah Jaya"
+        </div>
+        <div class="example-story">
+          Saldo kas awal Januari: Rp15.000.000 | Kas minimum: Rp10.000.000<br />
+          Pembayaran BB: 70% tunai, 30% bulan berikutnya | Beban operasi tunai:
+          Rp12.000.000/bulan | Cicilan bank: Rp5.000.000/bulan
+        </div>
+
+        <div class="laporan-box">
+          <div class="laporan-header">
+            <h4>CV. ROTI "BERKAH JAYA"</h4>
+            <h5>ANGGARAN KAS — Januari 2025</h5>
+          </div>
+
+          <div
+            class="laporan-row subtotal"
+            style="
+              color: var(--text-muted);
+              font-size: 12px;
+              font-family: &quot;Syne&quot;, sans-serif;
+              font-weight: 800;
+              letter-spacing: 0.05em;
+              text-transform: uppercase;
+            "
+          >
+            <span>Penerimaan Kas:</span>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">Penjualan tunai Jan (60% × Rp60jt)</span>
+            <span class="amount masuk">Rp36.000.000</span>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">Piutang Desember (estimasi 40% × Rp55jt)</span>
+            <span class="amount masuk">Rp22.000.000</span>
+          </div>
+          <div class="laporan-row subtotal indent1">
+            <span class="label">Total Penerimaan</span>
+            <span class="amount masuk">Rp58.000.000</span>
+          </div>
+
+          <div
+            class="laporan-row subtotal"
+            style="
+              color: var(--text-muted);
+              font-size: 12px;
+              font-family: &quot;Syne&quot;, sans-serif;
+              font-weight: 800;
+              letter-spacing: 0.05em;
+              text-transform: uppercase;
+              margin-top: 8px;
+            "
+          >
+            <span>Pengeluaran Kas:</span>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">Pembelian BB tunai (70% × Rp24.900.000)</span>
+            <span class="amount keluar">(Rp17.430.000)</span>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">Biaya TKL</span>
+            <span class="amount keluar">(Rp10.125.000)</span>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">Overhead kas (tanpa depresiasi)</span>
+            <span class="amount keluar">(Rp12.075.000)</span>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">Beban operasi tunai</span>
+            <span class="amount keluar">(Rp12.000.000)</span>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">Cicilan bank</span>
+            <span class="amount keluar">(Rp5.000.000)</span>
+          </div>
+          <div class="laporan-row subtotal indent1">
+            <span class="label">Total Pengeluaran</span>
+            <span class="amount keluar">(Rp56.630.000)</span>
+          </div>
+
+          <div style="height: 12px"></div>
+          <div class="laporan-row indent1">
+            <span class="label">Saldo Kas Awal</span>
+            <span class="amount">Rp15.000.000</span>
+          </div>
+          <div class="laporan-row indent1">
+            <span class="label">+ Total Penerimaan</span>
+            <span class="amount masuk">Rp58.000.000</span>
+          </div>
+          <div class="laporan-row indent1">
+            <span class="label">− Total Pengeluaran</span>
+            <span class="amount keluar">(Rp56.630.000)</span>
+          </div>
+          <div class="laporan-row subtotal indent1">
+            <span class="label">Saldo Sebelum Pendanaan</span>
+            <span class="amount">Rp16.370.000</span>
+          </div>
+          <div class="laporan-row indent2" style="color: var(--text-muted)">
+            <span class="label">Kas Minimum</span>
+            <span class="amount">Rp10.000.000</span>
+          </div>
+          <div class="laporan-row indent2" style="color: var(--green)">
+            <span class="label">Kelebihan Kas ✅ (Tidak Perlu Pinjaman)</span>
+            <span class="amount masuk">Rp6.370.000</span>
+          </div>
+          <div class="laporan-row total double-border">
+            <span class="label">SALDO KAS AKHIR JANUARI</span>
+            <span class="amount netpos">Rp16.370.000</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── 9. L/R PRO FORMA ─── -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">📋 9. Laporan L/R Pro Forma (Anggaran)</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="info-box">
+        <strong>Apa itu Laporan Pro Forma?</strong><br />
+        Laporan keuangan yang disusun berdasarkan anggaran — menunjukkan
+        bagaimana posisi keuangan dan kinerja perusahaan
+        <em>jika semua anggaran tercapai</em>. Digunakan untuk evaluasi
+        kelayakan anggaran dan presentasi ke investor/bank.
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          ✏️ L/R Pro Forma Q1 — CV. Roti "Berkah Jaya"
+        </div>
+        <div class="laporan-box">
+          <div class="laporan-header">
+            <h4>CV. ROTI "BERKAH JAYA"</h4>
+            <h5>LAPORAN L/R PRO FORMA (ANGGARAN)</h5>
+            <p>Kuartal I 2025 (Januari – Maret)</p>
+          </div>
+
+          <div class="laporan-row indent1">
+            <span class="label">Penjualan</span>
+            <span class="amount masuk">Rp202.500.000</span>
+          </div>
+
+          <div
+            class="laporan-row subtotal"
+            style="
+              color: var(--text-muted);
+              font-size: 12px;
+              font-family: &quot;Syne&quot;, sans-serif;
+              font-weight: 800;
+              letter-spacing: 0.05em;
+              text-transform: uppercase;
+              margin-top: 8px;
+            "
+          >
+            <span>Harga Pokok Penjualan (HPP):</span>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">Bahan Baku terpakai</span>
+            <span class="amount keluar">Rp81.000.000</span>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">Tenaga Kerja Langsung</span>
+            <span class="amount keluar">Rp34.125.000</span>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">Overhead Pabrik</span>
+            <span class="amount keluar">Rp44.475.000</span>
+          </div>
+          <div class="laporan-row subtotal indent1">
+            <span class="label">Total HPP</span>
+            <span class="amount keluar">(Rp159.600.000)</span>
+          </div>
+
+          <div
+            class="laporan-row subtotal total"
+            style="
+              border-top: 2px solid rgba(59, 130, 246, 0.3);
+              color: var(--blue);
+            "
+          >
+            <span class="label">LABA KOTOR</span>
+            <span class="amount" style="color: var(--blue); font-size: 15px"
+              >Rp42.900.000</span
+            >
+          </div>
+
+          <div
+            class="laporan-row subtotal"
+            style="
+              color: var(--text-muted);
+              font-size: 12px;
+              font-family: &quot;Syne&quot;, sans-serif;
+              font-weight: 800;
+              letter-spacing: 0.05em;
+              text-transform: uppercase;
+              margin-top: 8px;
+            "
+          >
+            <span>Beban Operasi:</span>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">Beban Pemasaran</span>
+            <span class="amount keluar">Rp10.000.000</span>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">Beban Administrasi</span>
+            <span class="amount keluar">Rp8.000.000</span>
+          </div>
+          <div class="laporan-row subtotal indent1">
+            <span class="label">Total Beban Operasi</span>
+            <span class="amount keluar">(Rp18.000.000)</span>
+          </div>
+
+          <div class="laporan-row subtotal indent1">
+            <span class="label">Laba Operasi</span>
+            <span class="amount">Rp24.900.000</span>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">Beban Bunga</span>
+            <span class="amount keluar">(Rp3.000.000)</span>
+          </div>
+          <div class="laporan-row subtotal indent1">
+            <span class="label">Laba Sebelum Pajak</span>
+            <span class="amount">Rp21.900.000</span>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">Pajak 25%</span>
+            <span class="amount keluar">(Rp5.475.000)</span>
+          </div>
+          <div class="laporan-row total double-border">
+            <span class="label">LABA BERSIH PRO FORMA</span>
+            <span class="amount netpos">Rp16.425.000 ✓</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── 10. STUDI KASUS ─── -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">
+          🏢 10. Studi Kasus — CV. Tempe "Berkah Mandiri" Jombang
+        </div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          📋 CV. Tempe "Berkah Mandiri" — Produsen Tempe, Jombang
+        </div>
+        <div class="example-story">
+          CV. Tempe Berkah Mandiri mendistribusikan tempe ke pasar-pasar
+          tradisional dan warung di Jombang. Data Q1 2025:<br /><br />
+          • Harga jual: <strong>Rp12.000/papan</strong><br />
+          • Standar BB (kedelai): <strong>0,3 kg/papan</strong> @ Rp10.000/kg<br />
+          • Standar TKL: <strong>0,05 jam/papan</strong> @ Rp20.000/jam<br />
+          • Overhead variabel: Rp8.000/jam TKL | Overhead tetap:
+          Rp6.000.000/bulan<br />
+          • Saldo kas awal Januari: Rp8.000.000 | Kas minimum: Rp5.000.000<br />
+          • Target: Januari 5.000 papan | Februari 5.500 papan | Maret 6.000
+          papan
+        </div>
+
+        <!-- Hasil Studi Kasus dalam bentuk tabel ringkas -->
+        <h4
+          style="
+            font-family: &quot;Syne&quot;, sans-serif;
+            font-weight: 800;
+            font-size: 14px;
+            margin-bottom: 12px;
+            color: var(--amber);
+          "
+        >
+          A. Anggaran Penjualan:
+        </h4>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Januari</th>
+                <th>Februari</th>
+                <th>Maret</th>
+                <th>Total Q1</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Unit (papan)</td>
+                <td>5.000</td>
+                <td>5.500</td>
+                <td>6.000</td>
+                <td>16.500</td>
+              </tr>
+              <tr class="total-row">
+                <td><strong>Total Penjualan</strong></td>
+                <td><strong>Rp60jt</strong></td>
+                <td><strong>Rp66jt</strong></td>
+                <td><strong>Rp72jt</strong></td>
+                <td><strong>Rp198.000.000</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4
+          style="
+            font-family: &quot;Syne&quot;, sans-serif;
+            font-weight: 800;
+            font-size: 14px;
+            margin: 20px 0 12px;
+            color: var(--amber);
+          "
+        >
+          B. Anggaran Produksi (Pers. akhir = 10% penjualan bln berikut):
+        </h4>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Januari</th>
+                <th>Februari</th>
+                <th>Maret</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Unit dijual</td>
+                <td>5.000</td>
+                <td>5.500</td>
+                <td>6.000</td>
+              </tr>
+              <tr>
+                <td>+ Persediaan akhir (10%)</td>
+                <td>550</td>
+                <td>600</td>
+                <td>650</td>
+              </tr>
+              <tr>
+                <td>− Persediaan awal</td>
+                <td>500</td>
+                <td>550</td>
+                <td>600</td>
+              </tr>
+              <tr class="total-row">
+                <td><strong>Unit Diproduksi</strong></td>
+                <td><strong>5.050</strong></td>
+                <td><strong>5.550</strong></td>
+                <td><strong>6.050</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4
+          style="
+            font-family: &quot;Syne&quot;, sans-serif;
+            font-weight: 800;
+            font-size: 14px;
+            margin: 20px 0 12px;
+            color: var(--amber);
+          "
+        >
+          C. Anggaran TKL:
+        </h4>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Januari</th>
+                <th>Februari</th>
+                <th>Maret</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Jam TKL (× 0,05)</td>
+                <td>252,5</td>
+                <td>277,5</td>
+                <td>302,5</td>
+              </tr>
+              <tr class="total-row">
+                <td><strong>Biaya TKL</strong></td>
+                <td><strong>Rp5.050.000</strong></td>
+                <td><strong>Rp5.550.000</strong></td>
+                <td><strong>Rp6.050.000</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4
+          style="
+            font-family: &quot;Syne&quot;, sans-serif;
+            font-weight: 800;
+            font-size: 14px;
+            margin: 20px 0 12px;
+            color: var(--amber);
+          "
+        >
+          D. Anggaran Kas Januari (Penerimaan: 70% tunai | BB: 80% tunai):
+        </h4>
+        <div class="laporan-box">
+          <div class="laporan-row indent1">
+            <span class="label">Saldo Kas Awal</span
+            ><span class="amount">Rp8.000.000</span>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">+ Penjualan tunai (70% × Rp60jt)</span
+            ><span class="amount masuk">Rp42.000.000</span>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">+ Piutang Des (30% × Rp55jt)</span
+            ><span class="amount masuk">Rp16.500.000</span>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">− BB tunai (80% × Rp15.400.000)</span
+            ><span class="amount keluar">(Rp12.320.000)</span>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">− TKL</span
+            ><span class="amount keluar">(Rp5.050.000)</span>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">− Overhead kas</span
+            ><span class="amount keluar">(Rp7.020.000)</span>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">− Beban operasi tunai</span
+            ><span class="amount keluar">(Rp7.000.000)</span>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">− Cicilan bank</span
+            ><span class="amount keluar">(Rp3.000.000)</span>
+          </div>
+          <div class="laporan-row total double-border">
+            <span class="label">SALDO KAS AKHIR JANUARI ✅</span>
+            <span class="amount netpos">Rp32.110.000</span>
+          </div>
+        </div>
+
+        <div class="info-box" style="margin-bottom: 0">
+          <strong>Analisis:</strong> Saldo akhir Rp32.110.000 jauh di atas kas
+          minimum Rp5.000.000. Kelebihan kas Rp27.110.000 bisa diinvestasikan
+          jangka pendek atau digunakan ekspansi ke wilayah Mojowarno dan Ploso!
+        </div>
+
+        <h4
+          style="
+            font-family: &quot;Syne&quot;, sans-serif;
+            font-weight: 800;
+            font-size: 14px;
+            margin: 24px 0 12px;
+            color: var(--amber);
+          "
+        >
+          E. Laporan L/R Pro Forma Q1:
+        </h4>
+        <div class="laporan-box">
+          <div class="laporan-header">
+            <h4>CV. TEMPE "BERKAH MANDIRI"</h4>
+            <h5>LAPORAN L/R PRO FORMA</h5>
+            <p>Kuartal I 2025</p>
+          </div>
+          <div class="laporan-row indent1">
+            <span class="label">Penjualan</span
+            ><span class="amount masuk">Rp198.000.000</span>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">BB terpakai (16.500 × 0,3 × Rp10.000)</span
+            ><span class="amount keluar">(Rp49.500.000)</span>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">TKL</span
+            ><span class="amount keluar">(Rp16.650.000)</span>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">Overhead pabrik</span
+            ><span class="amount keluar">(Rp24.660.000)</span>
+          </div>
+          <div class="laporan-row subtotal indent1">
+            <span class="label" style="color: var(--blue)">Laba Kotor</span
+            ><span class="amount" style="color: var(--blue)"
+              >Rp107.190.000</span
+            >
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">Beban operasi (3 bln)</span
+            ><span class="amount keluar">(Rp21.000.000)</span>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">Cicilan bank (3 bln)</span
+            ><span class="amount keluar">(Rp9.000.000)</span>
+          </div>
+          <div class="laporan-row subtotal indent1">
+            <span class="label">Laba Sebelum Pajak</span
+            ><span class="amount">Rp77.190.000</span>
+          </div>
+          <div class="laporan-row indent2">
+            <span class="label">Pajak 25%</span
+            ><span class="amount keluar">(Rp19.297.500)</span>
+          </div>
+          <div class="laporan-row total double-border">
+            <span class="label">LABA BERSIH PRO FORMA</span>
+            <span class="amount netpos">Rp57.892.500 ✓</span>
+          </div>
+        </div>
+        <div class="info-box" style="margin-top: 16px; margin-bottom: 0">
+          Margin Kotor = 54,1% ✅ &nbsp;|&nbsp; Margin Bersih =
+          <strong>29,2%</strong> ✅ — Sangat profitabel!
+        </div>
+      </div>
+
+      <!-- ─── RANGKUMAN ─── -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">📝 Rangkuman</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="rangkuman-table">
+          <thead>
+            <tr>
+              <th>Poin</th>
+              <th>Inti</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>✅ Anggaran</td>
+              <td>
+                Rencana keuangan tertulis — alat perencanaan & pengendalian
+              </td>
+            </tr>
+            <tr>
+              <td>✅ Titik Awal</td>
+              <td>Anggaran penjualan — semua anggaran lain mengikutinya</td>
+            </tr>
+            <tr>
+              <td>✅ Produksi</td>
+              <td>Penjualan + Pers. akhir − Pers. awal</td>
+            </tr>
+            <tr>
+              <td>✅ Bahan Baku</td>
+              <td>Kebutuhan BB + Pers. BB akhir − Pers. BB awal</td>
+            </tr>
+            <tr>
+              <td>✅ TKL</td>
+              <td>Unit produksi × Standar jam × Tarif upah</td>
+            </tr>
+            <tr>
+              <td>✅ Overhead</td>
+              <td>
+                Variabel (tarif × jam) + Tetap — depresiasi tidak masuk kas!
+              </td>
+            </tr>
+            <tr>
+              <td>✅ Anggaran Kas</td>
+              <td>Saldo awal + Penerimaan − Pengeluaran</td>
+            </tr>
+            <tr>
+              <td>✅ Kas Minimum</td>
+              <td>Jika saldo < minimum → perlu pinjaman tambahan</td>
+            </tr>
+            <tr>
+              <td>✅ Pro Forma</td>
+              <td>Laporan keuangan proyeksi berdasarkan anggaran</td>
+            </tr>
+            <tr>
+              <td>✅ Master Budget</td>
+              <td>Integrasi semua anggaran → L/R & Neraca Pro Forma</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- QUIZ CTA -->
+      <div class="quiz-cta">
+        <h3>🎯 Uji Pemahamanmu!</h3>
+        <p>
+          Setelah mempelajari seluruh materi Penganggaran, coba kerjakan 25 soal
+          kuis interaktif yang mencakup semua komponen dari anggaran penjualan
+          hingga L/R pro forma!
+        </p>
+        <a href="bank-kuis.html?bab=Penganggaran" class="quiz-btn"
+          >Mulai Kuis Penganggaran →</a
+        >
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-name">Annisa Novita Ardana</div>
+      <div class="footer-sub">
+        Belajar Akuntansi &amp; Perpajakan &nbsp;·&nbsp; Dibuat dengan Cinta
+        &amp; Estetika 🌸
+      </div>
+      <div class="footer-dots">
+        <div class="footer-dot" style="background: #ff6b35"></div>
+        <div class="footer-dot" style="background: #ff3d9a"></div>
+        <div class="footer-dot" style="background: #a855f7"></div>
+        <div class="footer-dot" style="background: #3b82f6"></div>
+        <div class="footer-dot" style="background: #10b981"></div>
+        <div class="footer-dot" style="background: #fbbf24"></div>
+      </div>
+    </footer>
+
+    <script>
+      if (localStorage.getItem("theme") === "light")
+        document.body.classList.add("light-theme");
+      function toggleTheme() {
+        document.body.classList.toggle("light-theme");
+        localStorage.setItem(
+          "theme",
+          document.body.classList.contains("light-theme") ? "light" : "dark",
+        );
+      }
+    </script>
+  </body>
+</html>

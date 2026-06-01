@@ -182,6 +182,28 @@
       "url": "penganggaran.html"
     },
     {
+      "id": "akuntansi-manajemen",
+      "kategori": "akuntansi",
+      "emoji": "📈",
+      "badge": "BAB 17",
+      "judul": "Akuntansi Manajemen - Pengambilan Keputusan",
+      "deskripsi": "Penggunaan informasi akuntansi untuk mendukung pengambilan keputusan manajemen seperti analisis biaya-volume-laba dan keputusan make or buy.",
+      "tags": ["Keputusan", "Make or Buy", "Analisis"],
+      "warna": "#ff3d9a",
+      "url": "akuntansi-manajemen.html"
+    },
+    {
+      "id": "perpajakan-dasar-dalam-akuntansi",
+      "kategori": "akuntansi",
+      "emoji": "🧾",
+      "badge": "BAB 18",
+      "judul": "Perpajakan Dasar dalam Akuntansi",
+      "deskripsi": "Konsep dasar perpajakan yang berkaitan dengan akuntansi perusahaan termasuk PPh badan, PPN, dan rekonsiliasi fiskal.",
+      "tags": ["Akuntansi", "Perpajakan", "Dasar", "Perusahaan"],
+      "warna": "#ff6b35",
+      "url": "perpajakan-dasar-dalam-akuntansi.html"
+    },
+    {
       "id": "dasar-perpajakan-indonesia",
       "kategori": "pajak",
       "emoji": "🧾",
