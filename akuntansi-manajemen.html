@@ -1,0 +1,2068 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Akuntansi Manajemen — Belajar Akuntansi</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0f172a;
+        --glass-bg: rgba(30, 41, 59, 0.45);
+        --glass-border: rgba(255, 255, 255, 0.08);
+        --glass-highlight: rgba(255, 255, 255, 0.15);
+        --text: #f8fafc;
+        --text-muted: #94a3b8;
+        --pink: #ff3d9a;
+        --purple: #a855f7;
+        --blue: #3b82f6;
+        --green: #10b981;
+        --yellow: #fbbf24;
+        --orange: #ff6b35;
+        --teal: #06b6d4;
+        --red: #ef4444;
+        --radius: 24px;
+        --radius-sm: 14px;
+      }
+      body.light-theme {
+        --bg: #fff8f0;
+        --glass-bg: rgba(255, 255, 255, 0.65);
+        --glass-border: rgba(0, 0, 0, 0.06);
+        --glass-highlight: rgba(255, 255, 255, 0.85);
+        --text: #1e293b;
+        --text-muted: #64748b;
+        --pink: #d01c70;
+        --purple: #7e22ce;
+        --blue: #1d4ed8;
+        --green: #047857;
+        --yellow: #b45309;
+        --orange: #c2410c;
+        --teal: #0f766e;
+        --red: #b91c1c;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "DM Sans", sans-serif;
+        background-color: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        overflow-x: hidden;
+        transition:
+          background-color 0.3s,
+          color 0.3s;
+        position: relative;
+      }
+      .blob {
+        position: absolute;
+        border-radius: 50%;
+        pointer-events: none;
+        filter: blur(80px);
+        opacity: 0.22;
+        z-index: 0;
+        animation: float 20s infinite alternate;
+      }
+      .blob-1 {
+        width: 450px;
+        height: 450px;
+        background: var(--pink);
+        top: -150px;
+        right: -80px;
+      }
+      .blob-2 {
+        width: 320px;
+        height: 320px;
+        background: var(--purple);
+        bottom: 20%;
+        left: -80px;
+        animation-delay: -5s;
+      }
+      .blob-3 {
+        width: 350px;
+        height: 350px;
+        background: var(--blue);
+        top: 40%;
+        right: 10%;
+        animation-delay: -10s;
+      }
+      @keyframes float {
+        0% {
+          transform: translate(0, 0) scale(1);
+        }
+        100% {
+          transform: translate(50px, 80px) scale(1.1);
+        }
+      }
+
+      header {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 30px 24px 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        z-index: 10;
+      }
+      .header-logo {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 18px;
+        color: var(--text);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .theme-toggle-btn {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(12px);
+        color: var(--text);
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        transition: transform 0.2s;
+      }
+      .theme-toggle-btn:hover {
+        transform: scale(1.08);
+        background: var(--glass-highlight);
+      }
+      .back-btn {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(12px);
+        color: var(--text);
+        padding: 10px 20px;
+        border-radius: 99px;
+        font-family: "Syne", sans-serif;
+        font-weight: 700;
+        font-size: 13px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition:
+          background-color 0.2s,
+          transform 0.2s;
+      }
+      .back-btn:hover {
+        transform: translateY(-2px);
+        background: var(--glass-highlight);
+      }
+
+      .hero {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 40px 24px;
+        position: relative;
+        z-index: 10;
+        text-align: center;
+      }
+      .hero-glass {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(16px);
+        border-radius: var(--radius);
+        padding: 48px 32px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .hero-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 61, 154, 0.15);
+        border: 1.5px solid rgba(255, 61, 154, 0.3);
+        color: var(--pink);
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 7px 18px;
+        border-radius: 99px;
+        margin-bottom: 24px;
+        font-family: "Syne", sans-serif;
+      }
+      .hero h1 {
+        font-family: "Syne", sans-serif;
+        font-size: clamp(28px, 5.5vw, 50px);
+        font-weight: 800;
+        line-height: 1.15;
+        margin-bottom: 16px;
+        color: #fff;
+      }
+      body.light-theme .hero h1 {
+        color: #1e293b;
+      }
+      .hero h1 .hi {
+        color: var(--pink);
+      }
+      .hero p {
+        color: var(--text-muted);
+        font-size: 15px;
+        line-height: 1.7;
+        max-width: 620px;
+        margin-bottom: 28px;
+      }
+      .hero-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+      }
+      .hero-badge {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid var(--glass-border);
+        border-radius: 99px;
+        padding: 7px 16px;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--text-muted);
+        font-family: "Syne", sans-serif;
+      }
+
+      .content {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 24px 80px;
+        position: relative;
+        z-index: 10;
+      }
+      .section-title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 52px;
+        margin-bottom: 24px;
+      }
+      .sec-line {
+        flex: 1;
+        height: 1.5px;
+        background: var(--glass-border);
+      }
+      .sec-text {
+        font-family: "Syne", sans-serif;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+      }
+
+      .cards-3 {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+        gap: 24px;
+        margin-bottom: 32px;
+      }
+      .cards-2 {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+        gap: 24px;
+        margin-bottom: 32px;
+      }
+      .card {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(12px);
+        border-radius: var(--radius);
+        padding: 28px;
+        color: var(--text);
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+        transition:
+          transform 0.25s,
+          box-shadow 0.25s,
+          border-color 0.25s;
+      }
+      .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: var(--c, var(--pink));
+      }
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        border-color: var(--c, var(--pink));
+      }
+      .card-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: var(--radius-sm);
+        background: color-mix(in srgb, var(--c) 15%, transparent);
+        color: var(--c);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        margin-bottom: 18px;
+        border: 1px solid color-mix(in srgb, var(--c) 30%, transparent);
+      }
+      .card-eyebrow {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--c);
+        margin-bottom: 6px;
+      }
+      .card-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 18px;
+        line-height: 1.35;
+        margin-bottom: 10px;
+      }
+      .card-body {
+        font-size: 13.5px;
+        color: var(--text-muted);
+        line-height: 1.6;
+      }
+      .list-items {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 12px;
+      }
+      .list-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 13px;
+        line-height: 1.5;
+      }
+      .list-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--c);
+        flex-shrink: 0;
+        margin-top: 6px;
+        box-shadow: 0 0 8px var(--c);
+      }
+
+      .example-wrap {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(16px);
+        border-radius: var(--radius);
+        padding: 32px;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+        margin-bottom: 32px;
+      }
+      .example-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 16px;
+        color: var(--pink);
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .example-story {
+        color: var(--text-muted);
+        font-size: 14.5px;
+        line-height: 1.7;
+        margin-bottom: 20px;
+        padding: 16px 20px;
+        border-left: 3px solid var(--pink);
+        background: rgba(255, 61, 154, 0.05);
+        border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      }
+
+      .table-wrap {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius-sm);
+        overflow: hidden;
+        margin-bottom: 24px;
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th {
+        background: rgba(0, 0, 0, 0.25);
+        color: var(--text-muted);
+        font-family: "Syne", sans-serif;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 14px 18px;
+        text-align: left;
+        border-bottom: 1.5px solid var(--glass-border);
+      }
+      body.light-theme th {
+        background: rgba(255, 255, 255, 0.5);
+      }
+      td {
+        padding: 12px 18px;
+        font-size: 13.5px;
+        border-bottom: 1px solid var(--glass-border);
+        color: var(--text);
+      }
+      tr:last-child td {
+        border-bottom: none;
+      }
+      tr:hover td {
+        background: rgba(255, 255, 255, 0.02);
+      }
+      tr.total-row td {
+        font-weight: 800;
+        background: rgba(255, 61, 154, 0.08);
+        color: var(--pink);
+        border-top: 2px solid var(--glass-border);
+      }
+      tr.sub-row td {
+        font-weight: 700;
+        background: rgba(255, 255, 255, 0.03);
+      }
+      td.hijau {
+        color: var(--green) !important;
+        font-weight: 700;
+      }
+      td.merah {
+        color: var(--red) !important;
+        font-weight: 700;
+      }
+
+      .formula-block {
+        background: rgba(255, 61, 154, 0.08);
+        border: 2px solid rgba(255, 61, 154, 0.25);
+        border-radius: var(--radius-sm);
+        padding: 20px 24px;
+        margin-bottom: 20px;
+        font-family: "Syne", sans-serif;
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--pink);
+        text-align: center;
+        line-height: 1.8;
+      }
+
+      .info-box {
+        background: rgba(16, 185, 129, 0.08);
+        border: 1px solid rgba(16, 185, 129, 0.25);
+        border-radius: var(--radius-sm);
+        padding: 18px 20px;
+        margin-bottom: 20px;
+        color: var(--text);
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .info-box strong {
+        color: var(--green);
+      }
+      .warning-box {
+        background: rgba(251, 191, 36, 0.08);
+        border: 1px solid rgba(251, 191, 36, 0.25);
+        border-radius: var(--radius-sm);
+        padding: 18px 20px;
+        margin-bottom: 20px;
+        color: var(--text);
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .warning-box strong {
+        color: var(--yellow);
+      }
+      .danger-box {
+        background: rgba(239, 68, 68, 0.08);
+        border: 1px solid rgba(239, 68, 68, 0.25);
+        border-radius: var(--radius-sm);
+        padding: 18px 20px;
+        margin-bottom: 20px;
+        color: var(--text);
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .danger-box strong {
+        color: var(--red);
+      }
+
+      /* ── Kode-box: modern calc card ─────────────────────── */
+      .kode-box {
+        background: rgba(15, 23, 42, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        border-radius: var(--radius-sm);
+        padding: 20px 22px;
+        margin-bottom: 16px;
+        overflow-x: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+      body.light-theme .kode-box {
+        background: rgba(241, 245, 249, 0.85);
+        border-color: rgba(0, 0, 0, 0.07);
+      }
+
+      /* Each line rendered as flex row */
+      .kode-box .calc-row {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        padding: 5px 10px;
+        border-radius: 8px;
+        gap: 12px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 13.5px;
+        line-height: 1.5;
+        transition: background 0.15s;
+      }
+      .kode-box .calc-row:hover {
+        background: rgba(255, 255, 255, 0.04);
+      }
+      body.light-theme .kode-box .calc-row:hover {
+        background: rgba(0, 0, 0, 0.03);
+      }
+
+      .kode-box .calc-row.section-header {
+        font-family: "Syne", sans-serif;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--yellow);
+        padding: 8px 10px 4px;
+        justify-content: flex-start;
+        background: none !important;
+        margin-top: 4px;
+      }
+      .kode-box .calc-row.divider {
+        height: 1px;
+        background: rgba(255, 255, 255, 0.1);
+        margin: 4px 10px;
+        padding: 0;
+        border-radius: 0;
+        pointer-events: none;
+      }
+      body.light-theme .kode-box .calc-row.divider {
+        background: rgba(0, 0, 0, 0.1);
+      }
+
+      .kode-box .calc-label {
+        color: var(--text-muted);
+        font-weight: 500;
+        flex: 1;
+        min-width: 0;
+      }
+      .kode-box .calc-row.total-line .calc-label {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 13px;
+        color: var(--text);
+      }
+      .kode-box .calc-value {
+        font-weight: 700;
+        font-variant-numeric: tabular-nums;
+        white-space: nowrap;
+        font-size: 14px;
+      }
+      .kode-box .kc {
+        color: var(--text-muted);
+      }
+      .kode-box .kn {
+        color: var(--green);
+      }
+      .kode-box .kr {
+        color: var(--red);
+      }
+      .kode-box .km {
+        color: var(--yellow);
+        font-style: italic;
+        font-size: 12.5px;
+      }
+
+      /* total line highlight */
+      .kode-box .calc-row.total-line {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+        margin: 4px 0 2px;
+        padding: 9px 12px;
+      }
+      .kode-box .calc-row.total-line .calc-value {
+        font-size: 15px;
+      }
+      body.light-theme .kode-box .calc-row.total-line {
+        background: rgba(0, 0, 0, 0.04);
+      }
+
+      .kode-title {
+        font-family: "Syne", sans-serif;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--pink);
+        margin-bottom: 12px;
+        border-bottom: 1px dashed var(--glass-border);
+        padding-bottom: 8px;
+      }
+
+      .keputusan {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 20px;
+        border-radius: var(--radius-sm);
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 14px;
+        margin: 12px 0;
+        width: 100%;
+      }
+      .keputusan.terima {
+        background: rgba(16, 185, 129, 0.15);
+        border: 1.5px solid rgba(16, 185, 129, 0.3);
+        color: var(--green);
+      }
+      .keputusan.tolak {
+        background: rgba(239, 68, 68, 0.15);
+        border: 1.5px solid rgba(239, 68, 68, 0.3);
+        color: var(--red);
+      }
+      .keputusan.hati {
+        background: rgba(251, 191, 36, 0.15);
+        border: 1.5px solid rgba(251, 191, 36, 0.3);
+        color: var(--yellow);
+      }
+
+      .alt-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-bottom: 20px;
+      }
+      @media (max-width: 600px) {
+        .alt-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .alt-card {
+        border-radius: var(--radius-sm);
+        padding: 20px;
+        border: 1.5px solid var(--glass-border);
+        background: var(--glass-bg);
+      }
+      .alt-card.buat {
+        border-top: 4px solid var(--blue);
+      }
+      .alt-card.beli {
+        border-top: 4px solid var(--green);
+      }
+      .alt-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 14px;
+        margin-bottom: 12px;
+      }
+      .alt-card.buat .alt-title {
+        color: var(--blue);
+      }
+      .alt-card.beli .alt-title {
+        color: var(--green);
+      }
+
+      .rangkuman-table td:first-child {
+        font-weight: 700;
+        color: var(--pink);
+      }
+
+      .quiz-cta {
+        background: var(--glass-bg);
+        border: 2px solid var(--pink);
+        border-radius: var(--radius);
+        padding: 40px 32px;
+        text-align: center;
+        margin-top: 60px;
+        margin-bottom: 40px;
+      }
+      .quiz-cta h3 {
+        font-family: "Syne", sans-serif;
+        font-size: 24px;
+        margin-bottom: 12px;
+        color: var(--pink);
+      }
+      .quiz-cta p {
+        color: var(--text-muted);
+        margin-bottom: 20px;
+        font-size: 15px;
+        line-height: 1.6;
+      }
+      .quiz-btn {
+        background: var(--pink);
+        color: #fff;
+        border: none;
+        padding: 14px 32px;
+        border-radius: var(--radius-sm);
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-decoration: none;
+        display: inline-block;
+      }
+      .quiz-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 24px rgba(255, 61, 154, 0.3);
+      }
+
+      footer {
+        border-top: 1px solid var(--glass-border);
+        background: #090d16;
+        padding: 40px 24px;
+        text-align: center;
+        position: relative;
+        z-index: 10;
+      }
+      body.light-theme footer {
+        background: #fff8f0;
+      }
+      .footer-name {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 16px;
+        background: linear-gradient(
+          135deg,
+          var(--yellow),
+          var(--pink),
+          var(--purple)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 6px;
+      }
+      .footer-sub {
+        font-size: 12.5px;
+        color: var(--text-muted);
+      }
+      .footer-dots {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        margin-top: 16px;
+      }
+      .footer-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+      }
+      @media (max-width: 600px) {
+        .cards-3,
+        .cards-2 {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <header>
+      <a href="index.html" class="header-logo"
+        ><span style="font-size: 24px">📈</span
+        ><span
+          style="font-weight: 800; font-family: &quot;Syne&quot;, sans-serif"
+          >Belajar Akuntansi</span
+        ></a
+      >
+      <div style="display: flex; gap: 12px; align-items: center">
+        <a href="index.html" class="back-btn">← Kembali</a>
+        <button class="theme-toggle-btn" onclick="toggleTheme()">🌓</button>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-glass">
+        <div class="hero-tag">📈 Bab 17 — Pengambilan Keputusan</div>
+        <h1>Akuntansi <span class="hi">Manajemen</span></h1>
+        <p>
+          Gunakan informasi biaya untuk membuat keputusan bisnis yang lebih
+          cerdas — biaya relevan, make or buy, pesanan khusus, hentikan segmen,
+          keterbatasan kapasitas, hingga penetapan harga jual optimal.
+        </p>
+        <div class="hero-badges">
+          <div class="hero-badge">💡 Biaya Relevan</div>
+          <div class="hero-badge">🏭 Make or Buy</div>
+          <div class="hero-badge">📦 Pesanan Khusus</div>
+          <div class="hero-badge">❌ Hentikan Segmen</div>
+          <div class="hero-badge">⚙️ Kapasitas Terbatas</div>
+          <div class="hero-badge">💰 Penetapan Harga</div>
+        </div>
+      </div>
+    </section>
+
+    <main class="content">
+      <!-- 1. PERAN -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">📌 1. Peran Akuntansi Manajemen</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">💡 Definisi</div>
+        <div class="example-story">
+          Akuntansi manajemen menyediakan
+          <strong>informasi keuangan dan non-keuangan</strong> untuk manajer
+          dalam pengambilan keputusan. Tidak harus mengikuti standar PSAK — yang
+          penting <strong>relevan dan berguna bagi manajemen internal</strong>.
+        </div>
+        <div class="info-box" style="margin-bottom: 0">
+          <strong>💡 Contoh Penerapan:</strong> Manajer pabrik tahu "Berkah" Jombang harus memutuskan: apakah membeli mesin cetak tahu baru atau tetap mencetak manual? Akuntansi manajemen memberikan analisis perbandingan biaya yang membantu keputusan ini.
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Jenis Keputusan</th>
+              <th>Pertanyaan Inti</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Make or Buy</strong></td>
+              <td>Buat sendiri atau beli dari luar?</td>
+            </tr>
+            <tr>
+              <td><strong>Pesanan Khusus</strong></td>
+              <td>Terima pesanan di bawah harga normal?</td>
+            </tr>
+            <tr>
+              <td><strong>Hentikan Segmen</strong></td>
+              <td>Tutup produk / cabang yang tampak rugi?</td>
+            </tr>
+            <tr>
+              <td><strong>Kapasitas Terbatas</strong></td>
+              <td>Produk mana yang paling menguntungkan?</td>
+            </tr>
+            <tr>
+              <td><strong>Harga Jual</strong></td>
+              <td>Berapa harga yang optimal?</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 2. BIAYA RELEVAN -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">💡 2. Biaya Relevan & Tidak Relevan</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="formula-block">
+        Hanya biaya yang BERBEDA antar alternatif yang relevan untuk keputusan!
+      </div>
+
+      <div class="cards-3">
+        <div class="card" style="--c: var(--green)">
+          <div class="card-icon">✅</div>
+          <div class="card-eyebrow">Biaya Relevan</div>
+          <div class="card-title">Harus Dipertimbangkan</div>
+          <div class="list-items">
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Biaya yang <strong>berbeda</strong> antar alternatif</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Biaya variabel (umumnya)</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Biaya kesempatan (opportunity cost)</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Biaya tetap yang <em>bisa dihindari</em></div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="--c: var(--red)">
+          <div class="card-icon">❌</div>
+          <div class="card-eyebrow">Biaya Tidak Relevan</div>
+          <div class="card-title">Abaikan!</div>
+          <div class="list-items">
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>
+                <strong>Sunk Cost</strong> — sudah terjadi, tidak bisa
+                dipulihkan
+              </div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Biaya yang <strong>sama</strong> di semua alternatif</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Biaya tetap yang <em>tidak bisa dihindari</em></div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="--c: var(--purple)">
+          <div class="card-icon">🔀</div>
+          <div class="card-eyebrow">Opportunity Cost</div>
+          <div class="card-title">Sering Terlupakan!</div>
+          <div class="card-body">
+            Manfaat yang dikorbankan karena memilih satu alternatif. Bukan
+            pengeluaran kas, tapi wajib diperhitungkan.
+          </div>
+          <div class="list-items">
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>
+                Gudang kosong dipakai sendiri → kehilangan potensi uang sewa
+              </div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Kuliah → korbankan gaji jika langsung kerja</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          ✏️ Identifikasi Biaya Relevan — CV. Berkah
+        </div>
+        <div class="example-story">
+          CV. Berkah mempertimbangkan beli mesin baru Rp50.000.000. Mesin lama
+          sudah dibeli Rp30.000.000 (3 tahun lalu) dan tidak bisa dijual.
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Biaya</th>
+                <th>Relevan?</th>
+                <th>Alasan</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Mesin lama Rp30.000.000</td>
+                <td style="color: var(--red); font-weight: 700">❌ TIDAK</td>
+                <td>Sunk cost — sudah dikeluarkan, tidak bisa dipulihkan</td>
+              </tr>
+              <tr>
+                <td>Mesin baru Rp50.000.000</td>
+                <td style="color: var(--green); font-weight: 700">✅ YA</td>
+                <td>Berbeda antar alternatif (beli vs tidak beli)</td>
+              </tr>
+              <tr>
+                <td>Penghematan biaya operasi</td>
+                <td style="color: var(--green); font-weight: 700">✅ YA</td>
+                <td>Berbeda antar alternatif</td>
+              </tr>
+              <tr>
+                <td>Gaji direktur (tidak berubah)</td>
+                <td style="color: var(--red); font-weight: 700">❌ TIDAK</td>
+                <td>Sama di semua alternatif</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 3. MAKE OR BUY -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">🏭 3. Keputusan Make or Buy</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="info-box">
+        <strong>Kunci:</strong> Overhead tetap yang
+        <strong>tidak bisa dihindari</strong> TIDAK RELEVAN — tetap harus
+        dibayar meski memilih beli dari luar!
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">🧮 Format Analisis Buat vs Beli (Per Unit)</div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Biaya Membuat Sendiri (Buat)</th>
+                <th>Biaya Membeli dari Luar (Beli)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Bahan baku langsung: Rp xxx</td>
+                <td>Harga beli dari supplier luar: Rp xxx</td>
+              </tr>
+              <tr>
+                <td>Tenaga kerja langsung: Rp xxx</td>
+                <td>Biaya tambahan penanganan/beli: Rp xxx</td>
+              </tr>
+              <tr>
+                <td>Overhead variabel: Rp xxx</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Overhead tetap yang <em>bisa dihindari</em>: Rp xxx</td>
+                <td></td>
+              </tr>
+              <tr class="total-row">
+                <td>Total biaya relevan membuat: Rp xxx</td>
+                <td>Total biaya relevan membeli: Rp xxx</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">✏️ Contoh — Pabrik Roti "Sejahtera"</div>
+        <div class="example-story">
+          Membuat kemasan sendiri. Biaya per 1.000 kemasan: BB Rp800rb | TKL
+          Rp400rb | OH variabel Rp200rb | OH tetap dialokasikan Rp300rb = Total
+          Rp1.700.000<br />Supplier tawarkan
+          <strong>Rp1.200.000/1.000 pcs</strong>. OH tetap
+          <strong>tidak bisa dihindari</strong>.
+        </div>
+
+        <div class="alt-grid">
+          <div class="alt-card buat">
+            <div class="alt-title">🔧 Biaya BUAT (Relevan)</div>
+            <div class="kode-box">
+              <div class="calc-row">
+                <span class="calc-label">Bahan Baku</span
+                ><span class="calc-value kn">Rp 800.000</span>
+              </div>
+              <div class="calc-row">
+                <span class="calc-label">TKL</span
+                ><span class="calc-value kn">Rp 400.000</span>
+              </div>
+              <div class="calc-row">
+                <span class="calc-label">OH Variabel</span
+                ><span class="calc-value kn">Rp 200.000</span>
+              </div>
+              <div class="calc-row">
+                <span class="calc-label km">OH Tetap</span
+                ><span class="calc-value km">ABAIKAN ❌</span>
+              </div>
+              <div class="calc-row divider"></div>
+              <div class="calc-row total-line">
+                <span class="calc-label">Total Relevan</span
+                ><span class="calc-value kn">Rp1.400.000</span>
+              </div>
+            </div>
+          </div>
+          <div class="alt-card beli">
+            <div class="alt-title">🛒 Biaya BELI dari Supplier</div>
+            <div class="kode-box">
+              <div class="calc-row">
+                <span class="calc-label">Harga Supplier</span
+                ><span class="calc-value kn">Rp1.200.000</span>
+              </div>
+              <div class="calc-row">
+                <span class="calc-label">Biaya Tambahan</span
+                ><span class="calc-value kn">Rp 0</span>
+              </div>
+              <div class="calc-row divider"></div>
+              <div class="calc-row total-line">
+                <span class="calc-label">Total Beli</span
+                ><span class="calc-value kn">Rp1.200.000</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="kode-box">
+          <div class="calc-row total-line">
+            <span class="calc-label">Selisih = Rp1.400.000 − Rp1.200.000</span
+            ><span class="calc-value kn">= Rp200.000</span>
+          </div>
+        </div>
+        <div class="keputusan terima">
+          ✅ BELI dari Supplier — lebih hemat Rp200.000 per 1.000 pcs
+        </div>
+        <div class="warning-box" style="margin-top: 12px; margin-bottom: 0">
+          <strong>⚠️ Pertimbangan Non-Keuangan:</strong> Kualitas supplier,
+          ketergantungan, apakah kapasitas yang dibebaskan bisa menghasilkan
+          pendapatan lain?<br /><br />
+          <strong>💡 Contoh Riil:</strong> Indomie memutuskan membeli plastik kemasan dari vendor khusus daripada memproduksi sendiri — ini lebih hemat dan memungkinkan mereka tetap fokus pada produksi mie instan (core business).
+        </div>
+      </div>
+
+      <!-- 4. PESANAN KHUSUS -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">📦 4. Keputusan Pesanan Khusus</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="cards-2">
+        <div class="card" style="--c: var(--teal)">
+          <div class="card-icon">✅</div>
+          <div class="card-eyebrow">Syarat Terima</div>
+          <div class="card-title">Kapan Boleh Diterima?</div>
+          <div class="list-items">
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Masih ada <strong>kapasitas menganggur</strong></div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Harga minimal menutup <strong>biaya variabel</strong></div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Tidak mengganggu pasar reguler</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="--c: var(--orange)">
+          <div class="card-icon">🧮</div>
+          <div class="card-eyebrow">Formula</div>
+          <div class="card-title">Analisis Tambahan Laba</div>
+          <div
+            class="formula-block"
+            style="
+              font-size: 12.5px;
+              margin-top: 14px;
+              background: rgba(255, 107, 53, 0.1);
+              border-color: rgba(255, 107, 53, 0.25);
+              color: var(--orange);
+            "
+          >
+            + Pendapatan Pesanan<br />− Biaya Variabel<br />− Biaya Tetap
+            Tambahan<br />──────────────<br />= Tambahan Laba → jika &gt; 0:
+            TERIMA
+          </div>
+        </div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">✏️ Contoh — Konveksi "Maju Jaya"</div>
+        <div class="example-story">
+          Kapasitas 10.000 pcs/bulan, produksi 7.500 pcs. Biaya variabel
+          Rp50.000/pcs, biaya tetap Rp300jt/bulan.<br />Supermarket pesan
+          <strong>2.000 pcs @ Rp65.000</strong> (harga normal Rp80.000). Tidak
+          ada biaya tetap tambahan.
+        </div>
+        <div class="kode-box">
+          <div class="calc-row section-header">Kapasitas Tersedia</div>
+          <div class="calc-row">
+            <span class="calc-label km">10.000 − 7.500</span
+            ><span class="calc-value kn">= 2.500 pcs ✅</span>
+          </div>
+          <div class="calc-row divider"></div>
+          <div class="calc-row">
+            <span class="calc-label"
+              >Tambahan Pendapatan (2.000 × Rp65.000)</span
+            ><span class="calc-value kn">Rp130.000.000</span>
+          </div>
+          <div class="calc-row">
+            <span class="calc-label">Tambahan Biaya Var (2.000 × Rp50.000)</span
+            ><span class="calc-value kr">Rp100.000.000</span>
+          </div>
+          <div class="calc-row divider"></div>
+          <div class="calc-row total-line">
+            <span class="calc-label">Tambahan Laba</span
+            ><span class="calc-value kn">Rp 30.000.000 ✅</span>
+          </div>
+        </div>
+        <div class="keputusan terima">
+          ✅ TERIMA — Biaya tetap sudah tertutup penjualan reguler, tidak
+          relevan di sini
+        </div>
+        <div class="info-box" style="margin-top: 12px; margin-bottom: 0">
+          <strong>💡 Harga minimum</strong> yang boleh diterima = biaya variabel
+          = Rp50.000/pcs. Di bawah itu perusahaan rugi di setiap unit.
+        </div>
+      </div>
+
+      <!-- 5. HENTIKAN SEGMEN -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">❌ 5. Keputusan Menghentikan Segmen</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="danger-box">
+        <strong>⚠️ Jangan terburu-buru!</strong> Segmen yang rugi di laporan L/R
+        mungkin masih punya <strong>margin kontribusi positif</strong>.
+        Menghentikannya bisa <strong>memperburuk laba keseluruhan!</strong>
+      </div>
+
+      <div class="formula-block">
+        MK Segmen &gt; Biaya Tetap yang Bisa Dihindari →
+        <strong>PERTAHANKAN</strong> (masih menutup sebagian biaya tetap)<br />
+        MK Segmen &lt; Biaya Tetap yang Bisa Dihindari →
+        <strong>HENTIKAN</strong> (merugikan bahkan sebelum biaya tetap)
+      </div>
+
+      <div class="info-box">
+        <strong>💡 Rambu Analisis Menghentikan Segmen:</strong>
+        <div class="list-items" style="margin-top: 8px">
+          <div class="list-item">
+            <div class="list-dot"></div>
+            <div><strong>Analisis Laba/Rugi:</strong> Apakah segmen yang tampak "rugi" punya margin kontribusi positif? Jika positif, ia masih membantu menutup biaya tetap bersama perusahaan.</div>
+          </div>
+          <div class="list-item">
+            <div class="list-dot"></div>
+            <div><strong>Biaya Relevan:</strong> Fokus hanya pada biaya tetap langsung yang benar-benar bisa dihindari (avoidable fixed cost) jika segmen ditutup.</div>
+          </div>
+          <div class="list-item">
+            <div class="list-dot"></div>
+            <div><strong>Dampak Sinergi:</strong> Dampak penutupan terhadap penjualan produk/segmen lainnya (misal: penutupan produk rempeyek menurunkan penjualan keripik karena konsumen menyukai bundling).</div>
+          </div>
+          <div class="list-item">
+            <div class="list-dot"></div>
+            <div><strong>Biaya Transisi:</strong> Adanya biaya penutupan segmen, seperti uang pesangon (severance pay) karyawan atau pembersihan pabrik.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          ✏️ Contoh — CV. Aneka Snack (Biaya Tetap Tidak Bisa Dihindari)
+        </div>
+        <div class="example-story">
+          Manajemen ingin hentikan Rempeyek karena tampak rugi Rp4jt.
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Keripik</th>
+                <th>Kacang</th>
+                <th>Rempeyek</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Penjualan</td>
+                <td>Rp80jt</td>
+                <td>Rp50jt</td>
+                <td>Rp30jt</td>
+                <td>Rp160jt</td>
+              </tr>
+              <tr>
+                <td>Biaya variabel</td>
+                <td>Rp48jt</td>
+                <td>Rp35jt</td>
+                <td>Rp22jt</td>
+                <td>Rp105jt</td>
+              </tr>
+              <tr class="sub-row">
+                <td><strong>Margin Kontribusi</strong></td>
+                <td class="hijau">Rp32jt</td>
+                <td class="hijau">Rp15jt</td>
+                <td class="hijau">Rp8jt ✅</td>
+                <td>Rp55jt</td>
+              </tr>
+              <tr>
+                <td>Biaya tetap bersama</td>
+                <td>Rp20jt</td>
+                <td>Rp15jt</td>
+                <td>Rp12jt</td>
+                <td>Rp47jt</td>
+              </tr>
+              <tr class="total-row">
+                <td><strong>Laba (Rugi)</strong></td>
+                <td class="hijau">Rp12jt</td>
+                <td>Rp0</td>
+                <td class="merah">Rp(4jt)</td>
+                <td>Rp8jt</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="kode-box">
+          <div class="calc-row section-header">Jika Rempeyek dihentikan</div>
+          <div class="calc-row">
+            <span class="calc-label">Kehilangan MK</span
+            ><span class="calc-value kr">Rp(8.000.000)</span>
+          </div>
+          <div class="calc-row">
+            <span class="calc-label"
+              >Biaya tetap dihindari
+              <span class="km">(tidak bisa dihindari)</span></span
+            ><span class="calc-value kn">Rp 0</span>
+          </div>
+          <div class="calc-row divider"></div>
+          <div class="calc-row total-line">
+            <span class="calc-label">Perubahan Laba</span
+            ><span class="calc-value kr">Rp(8.000.000)</span>
+          </div>
+          <div class="calc-row section-header">Kesimpulan</div>
+          <div class="calc-row">
+            <span class="calc-label">Laba semula</span
+            ><span class="calc-value kn">Rp8jt</span>
+          </div>
+          <div class="calc-row">
+            <span class="calc-label">Laba setelah henti</span
+            ><span class="calc-value kr">Rp0</span>
+          </div>
+        </div>
+        <div class="keputusan tolak">
+          ❌ JANGAN HENTIKAN — Menghentikan Rempeyek membuat laba turun dari
+          Rp8jt menjadi Rp0!
+        </div>
+      </div>
+
+      <!-- 6. KAPASITAS TERBATAS -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">⚙️ 6. Keterbatasan Kapasitas</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="info-box">
+        <strong>Prinsip:</strong> Prioritaskan produk dengan
+        <strong
+          >Margin Kontribusi per unit sumber daya terbatas tertinggi</strong
+        >
+        — bukan MK per unit produk!
+      </div>
+
+      <div class="formula-block">
+        MK per unit sumber daya = MK per Unit ÷ Kebutuhan Sumber Daya per Unit
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          ✏️ Pabrik Kerupuk "Renyah" — Kapasitas 2.000 jam/bulan
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Keterangan</th>
+                <th>Kerupuk Udang</th>
+                <th>Kerupuk Ikan</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Harga jual/kg</td>
+                <td>Rp40.000</td>
+                <td>Rp35.000</td>
+              </tr>
+              <tr>
+                <td>Biaya variabel/kg</td>
+                <td>Rp24.000</td>
+                <td>Rp18.000</td>
+              </tr>
+              <tr>
+                <td>Margin Kontribusi/kg</td>
+                <td>Rp16.000</td>
+                <td>Rp17.000</td>
+              </tr>
+              <tr>
+                <td>Jam mesin/kg</td>
+                <td>0,5 jam</td>
+                <td>1,0 jam</td>
+              </tr>
+              <tr class="total-row">
+                <td><strong>MK per jam mesin</strong></td>
+                <td><strong>Rp32.000/jam ← P1</strong></td>
+                <td><strong>Rp17.000/jam</strong></td>
+              </tr>
+              <tr>
+                <td>Permintaan maks</td>
+                <td>3.000 kg</td>
+                <td>1.500 kg</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="kode-box">
+          <div class="calc-row section-header">Alokasi 2.000 jam</div>
+          <div class="calc-row">
+            <span class="calc-label"
+              >Prioritas 1 — Kerupuk Udang (3.000 kg × 0,5 jam)</span
+            ><span class="calc-value kn">1.500 jam</span>
+          </div>
+          <div class="calc-row">
+            <span class="calc-label" style="padding-left: 16px"
+              >MK Kerupuk Udang</span
+            ><span class="calc-value kn">Rp48.000.000</span>
+          </div>
+          <div class="calc-row">
+            <span class="calc-label">Sisa jam (2.000 − 1.500)</span
+            ><span class="calc-value">500 jam</span>
+          </div>
+          <div class="calc-row">
+            <span class="calc-label"
+              >Prioritas 2 — Kerupuk Ikan (500 ÷ 1,0)</span
+            ><span class="calc-value kn">500 kg</span>
+          </div>
+          <div class="calc-row">
+            <span class="calc-label" style="padding-left: 16px"
+              >MK Kerupuk Ikan</span
+            ><span class="calc-value kn">Rp8.500.000</span>
+          </div>
+          <div class="calc-row divider"></div>
+          <div class="calc-row total-line">
+            <span class="calc-label">Total MK Optimal</span
+            ><span class="calc-value kn">Rp56.500.000</span>
+          </div>
+        </div>
+        <div class="danger-box" style="margin-bottom: 0">
+          <strong>⚠️ Jebakan:</strong> MK per kg Kerupuk Ikan (Rp17.000) lebih
+          tinggi dari Udang (Rp16.000), tapi MK per jam mesin Udang (Rp32.000)
+          jauh lebih tinggi. Jangan tertipu MK per unit!
+        </div>
+      </div>
+
+      <!-- 7. PROFITABILITAS SEGMEN -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">📊 7. Analisis Profitabilitas Segmen</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">📋 Format Laporan Segmen</div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Produk A</th>
+                <th>Produk B</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Penjualan</td>
+                <td>Rp xxx</td>
+                <td>Rp xxx</td>
+                <td>Rp xxx</td>
+              </tr>
+              <tr>
+                <td>Biaya variabel</td>
+                <td>Rp xxx</td>
+                <td>Rp xxx</td>
+                <td>Rp xxx</td>
+              </tr>
+              <tr class="sub-row">
+                <td><strong>Margin Kontribusi</strong></td>
+                <td>Rp xxx</td>
+                <td>Rp xxx</td>
+                <td>Rp xxx</td>
+              </tr>
+              <tr>
+                <td>Biaya tetap langsung (bisa dihindari)</td>
+                <td>Rp xxx</td>
+                <td>Rp xxx</td>
+                <td>Rp xxx</td>
+              </tr>
+              <tr class="total-row">
+                <td><strong>Margin Segmen ← Kunci!</strong></td>
+                <td>Rp xxx</td>
+                <td>Rp xxx</td>
+                <td>Rp xxx</td>
+              </tr>
+              <tr>
+                <td>Biaya tetap bersama</td>
+                <td>—</td>
+                <td>—</td>
+                <td>Rp xxx</td>
+              </tr>
+              <tr>
+                <td><strong>Laba Bersih</strong></td>
+                <td>—</td>
+                <td>—</td>
+                <td>Rp xxx</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="info-box" style="margin-bottom: 0">
+          💡 <strong>Margin segmen</strong> = MK − Biaya tetap langsung yang
+          bisa dihindari. Lebih akurat untuk menilai profitabilitas segmen
+          daripada laba bersih setelah alokasi biaya tetap bersama.
+        </div>
+      </div>
+
+      <!-- 8. PENETAPAN HARGA -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">💰 8. Penetapan Harga Jual</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="cards-2">
+        <div class="card" style="--c: var(--blue)">
+          <div class="card-icon">🏷️</div>
+          <div class="card-eyebrow">Metode A</div>
+          <div class="card-title">Cost-Plus Pricing</div>
+          <div class="card-body">
+            Harga ditentukan dari biaya — tambahkan markup ke total biaya. Markup sendiri dapat dihitung berdasarkan:
+            <ul style="margin-left: 18px; margin-top: 8px; display: flex; flex-direction: column; gap: 4px;">
+              <li>Persentase dari biaya produksi</li>
+              <li>Persentase dari biaya total (produksi + non-produksi)</li>
+              <li>Persentase dari biaya variabel saja</li>
+            </ul>
+          </div>
+          <div
+            class="formula-block"
+            style="
+              font-size: 12px;
+              margin-top: 14px;
+              background: rgba(59, 130, 246, 0.1);
+              border-color: rgba(59, 130, 246, 0.25);
+              color: var(--blue);
+            "
+          >
+            Harga Jual = Total Biaya + Markup
+          </div>
+        </div>
+        <div class="card" style="--c: var(--green)">
+          <div class="card-icon">🎯</div>
+          <div class="card-eyebrow">Metode B</div>
+          <div class="card-title">Target Costing</div>
+          <div class="card-body">
+            Harga ditentukan pasar — perusahaan menyesuaikan biaya.
+          </div>
+          <div
+            class="formula-block"
+            style="
+              font-size: 12px;
+              margin-top: 14px;
+              background: rgba(16, 185, 129, 0.1);
+              border-color: rgba(16, 185, 129, 0.25);
+              color: var(--green);
+            "
+          >
+            Target Biaya = Harga Pasar − Target Laba
+          </div>
+        </div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          ✏️ Contoh — Pabrik Tempe "Berkah" Jombang
+        </div>
+        <div class="example-story">
+          Biaya variabel Rp7.500/papan | Biaya tetap Rp2.000/papan | Total biaya
+          Rp9.500. Target markup 30%.
+        </div>
+        <div class="kode-box">
+          <div class="calc-row section-header">Cost-Plus Pricing</div>
+          <div class="calc-row">
+            <span class="calc-label">Total Biaya</span
+            ><span class="calc-value">Rp9.500</span>
+          </div>
+          <div class="calc-row">
+            <span class="calc-label">Markup 30%</span
+            ><span class="calc-value">+ Rp2.850</span>
+          </div>
+          <div class="calc-row divider"></div>
+          <div class="calc-row total-line">
+            <span class="calc-label">Harga Jual</span
+            ><span class="calc-value kn">Rp12.350/papan</span>
+          </div>
+          <div class="calc-row section-header">Target Costing</div>
+          <div class="calc-row">
+            <span class="calc-label">Harga pasar</span
+            ><span class="calc-value">Rp12.000</span>
+          </div>
+          <div class="calc-row">
+            <span class="calc-label">Target laba 25%</span
+            ><span class="calc-value">× (1 − 25%)</span>
+          </div>
+          <div class="calc-row divider"></div>
+          <div class="calc-row total-line">
+            <span class="calc-label">Target Biaya</span
+            ><span class="calc-value kn">Rp9.000/papan</span>
+          </div>
+          <div class="calc-row">
+            <span class="calc-label">Biaya saat ini</span
+            ><span class="calc-value kr"
+              >Rp9.500 → Harus efisiensi Rp500/papan!</span
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- 9. STUDI KASUS KOMPREHENSIF -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">
+          🏢 9. Studi Kasus — CV. Aneka Produk "Berkah" Jombang
+        </div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">📋 Data Desember 2024</div>
+        <div class="example-story">
+          3 produk makanan | Biaya tetap bersama Rp30jt | Kapasitas mesin 4.500
+          jam/bulan
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Keterangan</th>
+                <th>Keripik Singkong</th>
+                <th>Rempeyek Kacang</th>
+                <th>Kerupuk Udang</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Penjualan</td>
+                <td>Rp120jt (6.000 kg)</td>
+                <td>Rp80jt (4.000 kg)</td>
+                <td>Rp60jt (3.000 kg)</td>
+              </tr>
+              <tr>
+                <td>Biaya variabel/kg</td>
+                <td>Rp12.000</td>
+                <td>Rp14.000</td>
+                <td>Rp16.000</td>
+              </tr>
+              <tr>
+                <td>Jam mesin/kg</td>
+                <td>0,3 jam</td>
+                <td>0,4 jam</td>
+                <td>0,5 jam</td>
+              </tr>
+              <tr>
+                <td>Biaya tetap langsung</td>
+                <td>Rp25jt</td>
+                <td>Rp20jt</td>
+                <td>Rp18jt</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4
+          style="
+            font-family: &quot;Syne&quot;, sans-serif;
+            font-weight: 800;
+            font-size: 14px;
+            margin-bottom: 12px;
+            color: var(--pink);
+          "
+        >
+          A. Laporan Profitabilitas Segmen:
+        </h4>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Keripik</th>
+                <th>Rempeyek</th>
+                <th>Kerupuk</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Penjualan</td>
+                <td>Rp120jt</td>
+                <td>Rp80jt</td>
+                <td>Rp60jt</td>
+                <td>Rp260jt</td>
+              </tr>
+              <tr>
+                <td>Biaya variabel</td>
+                <td>Rp72jt</td>
+                <td>Rp56jt</td>
+                <td>Rp48jt</td>
+                <td>Rp176jt</td>
+              </tr>
+              <tr class="sub-row">
+                <td><strong>Margin Kontribusi</strong></td>
+                <td class="hijau">Rp48jt</td>
+                <td class="hijau">Rp24jt</td>
+                <td class="hijau">Rp12jt</td>
+                <td>Rp84jt</td>
+              </tr>
+              <tr>
+                <td>Biaya tetap langsung</td>
+                <td>Rp25jt</td>
+                <td>Rp20jt</td>
+                <td>Rp18jt</td>
+                <td>Rp63jt</td>
+              </tr>
+              <tr class="total-row">
+                <td><strong>Margin Segmen</strong></td>
+                <td class="hijau">Rp23jt</td>
+                <td class="hijau">Rp4jt</td>
+                <td class="merah">Rp(6jt)</td>
+                <td>Rp21jt</td>
+              </tr>
+              <tr>
+                <td>Biaya tetap bersama</td>
+                <td>—</td>
+                <td>—</td>
+                <td>—</td>
+                <td style="color: var(--red)">(Rp30jt)</td>
+              </tr>
+              <tr>
+                <td><strong>Laba Bersih</strong></td>
+                <td>—</td>
+                <td>—</td>
+                <td>—</td>
+                <td class="merah"><strong>Rp(9jt)</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4
+          style="
+            font-family: &quot;Syne&quot;, sans-serif;
+            font-weight: 800;
+            font-size: 14px;
+            margin: 20px 0 12px;
+            color: var(--pink);
+          "
+        >
+          B. Make or Buy — Kerupuk Udang (supplier @ Rp17.500/kg):
+        </h4>
+        <div class="kode-box">
+          <div class="calc-row section-header">
+            Biaya relevan buat sendiri / kg
+          </div>
+          <div class="calc-row">
+            <span class="calc-label">Biaya variabel</span
+            ><span class="calc-value kn">Rp16.000</span>
+          </div>
+          <div class="calc-row">
+            <span class="calc-label"
+              >Biaya tetap langsung dihindari (Rp18jt ÷ 3.000)</span
+            ><span class="calc-value kn">Rp 6.000</span>
+          </div>
+          <div class="calc-row divider"></div>
+          <div class="calc-row total-line">
+            <span class="calc-label">Total biaya relevan</span
+            ><span class="calc-value kn">Rp22.000</span>
+          </div>
+          <div class="calc-row divider"></div>
+          <div class="calc-row">
+            <span class="calc-label">Harga beli supplier</span
+            ><span class="calc-value">Rp17.500</span>
+          </div>
+          <div class="calc-row total-line">
+            <span class="calc-label">Penghematan per kg</span
+            ><span class="calc-value kn">Rp 4.500</span>
+          </div>
+          <div class="calc-row total-line">
+            <span class="calc-label">Penghematan total (3.000 kg)</span
+            ><span class="calc-value kn">Rp13.500.000/bulan</span>
+          </div>
+        </div>
+        <div class="keputusan terima">
+          ✅ BELI dari Supplier — hemat Rp13.500.000/bulan, kapasitas mesin bisa
+          dipakai produk lain
+        </div>
+
+        <h4
+          style="
+            font-family: &quot;Syne&quot;, sans-serif;
+            font-weight: 800;
+            font-size: 14px;
+            margin: 20px 0 12px;
+            color: var(--pink);
+          "
+        >
+          C. Pesanan Khusus — 1.000 kg Keripik @ Rp15.000 (normal Rp20.000):
+        </h4>
+        <div class="kode-box">
+          <div class="calc-row section-header">
+            Kapasitas terpakai: 6.000×0,3 + 4.000×0,4 + 3.000×0,5 = 4.900 jam →
+            PENUH!
+          </div>
+          <div class="calc-row">
+            <span class="calc-label km"
+              >Kurangi Kerupuk 600 kg (300 jam) untuk beri ruang pesanan</span
+            >
+          </div>
+          <div class="calc-row divider"></div>
+          <div class="calc-row">
+            <span class="calc-label"
+              >Tambahan pendapatan (1.000 × Rp15.000)</span
+            ><span class="calc-value kn">Rp15.000.000</span>
+          </div>
+          <div class="calc-row">
+            <span class="calc-label">Tambahan biaya var (1.000 × Rp12.000)</span
+            ><span class="calc-value kr">Rp12.000.000</span>
+          </div>
+          <div class="calc-row">
+            <span class="calc-label">MK hilang Kerupuk (600 × Rp4.000)</span
+            ><span class="calc-value kr">Rp 2.400.000</span>
+          </div>
+          <div class="calc-row divider"></div>
+          <div class="calc-row total-line">
+            <span class="calc-label">Tambahan Laba Bersih</span
+            ><span class="calc-value kn">Rp 600.000</span>
+          </div>
+        </div>
+        <div class="keputusan hati">
+          ⚠️ TERIMA dengan syarat — laba hanya Rp600.000. Negosiasi minimal
+          Rp16.400/kg agar lebih layak
+        </div>
+
+        <h4
+          style="
+            font-family: &quot;Syne&quot;, sans-serif;
+            font-weight: 800;
+            font-size: 14px;
+            margin: 20px 0 12px;
+            color: var(--pink);
+          "
+        >
+          D. Hentikan Kerupuk Udang? (margin segmen −Rp6jt, biaya tetap BISA
+          dihindari):
+        </h4>
+        <div class="kode-box">
+          <div class="calc-row section-header">
+            Jika Kerupuk Udang dihentikan
+          </div>
+          <div class="calc-row">
+            <span class="calc-label">Laba bersih saat ini</span
+            ><span class="calc-value kr">Rp(9.000.000)</span>
+          </div>
+          <div class="calc-row">
+            <span class="calc-label">− MK Kerupuk yang hilang</span
+            ><span class="calc-value kr">Rp(12.000.000)</span>
+          </div>
+          <div class="calc-row">
+            <span class="calc-label">+ Biaya tetap langsung hemat</span
+            ><span class="calc-value kn">Rp 18.000.000</span>
+          </div>
+          <div class="calc-row divider"></div>
+          <div class="calc-row total-line">
+            <span class="calc-label">Laba bersih setelah henti</span
+            ><span class="calc-value kn">Rp(3.000.000)</span>
+          </div>
+          <div class="calc-row">
+            <span class="calc-label km"
+              >Rugi berkurang dari Rp9jt → Rp3jt ✅</span
+            >
+          </div>
+        </div>
+        <div class="keputusan terima">
+          ✅ HENTIKAN Kerupuk — margin segmen negatif DAN biaya tetap bisa
+          dihindari (beda dengan kasus Rempeyek!)
+        </div>
+
+        <h4
+          style="
+            font-family: &quot;Syne&quot;, sans-serif;
+            font-weight: 800;
+            font-size: 14px;
+            margin: 20px 0 12px;
+            color: var(--pink);
+          "
+        >
+          E. Optimal setelah hentikan Kerupuk + beli dari supplier:
+        </h4>
+        <div class="kode-box">
+          <div class="calc-row section-header">MK per jam mesin</div>
+          <div class="calc-row">
+            <span class="calc-label">MK per jam: Keripik (Rp8.000 ÷ 0,3)</span
+            ><span class="calc-value kn">Rp26.667/jam → P1</span>
+          </div>
+          <div class="calc-row">
+            <span class="calc-label">MK per jam: Rempeyek (Rp6.000 ÷ 0,4)</span
+            ><span class="calc-value kn">Rp15.000/jam → P2</span>
+          </div>
+          <div class="calc-row section-header">Alokasi 4.500 jam</div>
+          <div class="calc-row">
+            <span class="calc-label"
+              >Keripik 8.000 kg × 0,3 = 2.400 jam → MK</span
+            ><span class="calc-value kn">Rp64.000.000</span>
+          </div>
+          <div class="calc-row">
+            <span class="calc-label"
+              >Rempeyek 5.000 kg (Maks) × 0,4 = 2.000 jam → MK</span
+            ><span class="calc-value kn">Rp30.000.000</span>
+          </div>
+          <div class="calc-row">
+            <span class="calc-label km"
+              >Sisa kapasitas menganggur = 100 jam (karena permintaan Rempeyek sudah terpenuhi maks 5.000 kg)</span
+            >
+          </div>
+          <div class="calc-row divider"></div>
+          <div class="calc-row total-line">
+            <span class="calc-label">Total MK Optimal</span
+            ><span class="calc-value kn">Rp94.000.000</span>
+          </div>
+          <div class="calc-row">
+            <span class="calc-label">− Biaya tetap langsung (Keripik &amp; Rempeyek)</span
+            ><span class="calc-value kr">Rp45.000.000</span>
+          </div>
+          <div class="calc-row">
+            <span class="calc-label">− Biaya tetap bersama</span
+            ><span class="calc-value kr">Rp30.000.000</span>
+          </div>
+          <div class="calc-row">
+            <span class="calc-label">+ Penghematan beli Kerupuk</span
+            ><span class="calc-value kn">Rp13.500.000</span>
+          </div>
+          <div class="calc-row divider"></div>
+          <div class="calc-row total-line">
+            <span class="calc-label">LABA BERSIH OPTIMAL</span
+            ><span class="calc-value kn">Rp32.500.000 🎉</span>
+          </div>
+          <div class="calc-row">
+            <span class="calc-label km"
+              >Kondisi awal: RUGI Rp9jt → Peningkatan laba Rp41.500.000!</span
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- RANGKUMAN -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">📝 Rangkuman</div>
+        <div class="sec-line"></div>
+      </div>
+      <div class="table-wrap">
+        <table class="rangkuman-table">
+          <thead>
+            <tr>
+              <th>Poin</th>
+              <th>Inti</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>✅ Biaya Relevan</td>
+              <td>Hanya biaya yang BERBEDA antar alternatif</td>
+            </tr>
+            <tr>
+              <td>✅ Sunk Cost</td>
+              <td>Sudah terjadi — abaikan dalam keputusan</td>
+            </tr>
+            <tr>
+              <td>✅ Make or Buy</td>
+              <td>
+                Bandingkan biaya relevan buat vs harga beli (abaikan OH tetap
+                tidak terhindarkan)
+              </td>
+            </tr>
+            <tr>
+              <td>✅ Pesanan Khusus</td>
+              <td>
+                Terima jika harga &gt; biaya variabel dan ada kapasitas. Biaya
+                tetap tidak relevan
+              </td>
+            </tr>
+            <tr>
+              <td>✅ Hentikan Segmen</td>
+              <td>
+                Hentikan jika margin segmen negatif DAN biaya tetap bisa
+                dihindari
+              </td>
+            </tr>
+            <tr>
+              <td>✅ Kapasitas Terbatas</td>
+              <td>
+                Prioritaskan MK per unit sumber daya — bukan MK per unit produk
+              </td>
+            </tr>
+            <tr>
+              <td>✅ Margin Segmen</td>
+              <td>
+                MK − Biaya tetap langsung → ukuran profitabilitas segmen paling
+                akurat
+              </td>
+            </tr>
+            <tr>
+              <td>✅ Cost-Plus</td>
+              <td>Harga = Biaya + Markup</td>
+            </tr>
+            <tr>
+              <td>✅ Target Costing</td>
+              <td>Harga dari pasar → biaya harus menyesuaikan</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="quiz-cta">
+        <h3>🎯 Uji Pemahamanmu!</h3>
+        <p>
+          Setelah mempelajari Akuntansi Manajemen, coba kerjakan 25 soal kuis
+          interaktif yang mencakup semua topik pengambilan keputusan!
+        </p>
+        <a href="bank-kuis.html?bab=Akuntansi%20Manajemen" class="quiz-btn"
+          >Mulai Kuis Akuntansi Manajemen →</a
+        >
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-name">Annisa Novita Ardana</div>
+      <div class="footer-sub">
+        Belajar Akuntansi &amp; Perpajakan &nbsp;·&nbsp; Dibuat dengan Cinta
+        &amp; Estetika 🌸
+      </div>
+      <div class="footer-dots">
+        <div class="footer-dot" style="background: #ff6b35"></div>
+        <div class="footer-dot" style="background: #ff3d9a"></div>
+        <div class="footer-dot" style="background: #a855f7"></div>
+        <div class="footer-dot" style="background: #3b82f6"></div>
+        <div class="footer-dot" style="background: #10b981"></div>
+        <div class="footer-dot" style="background: #fbbf24"></div>
+      </div>
+    </footer>
+
+    <script>
+      if (localStorage.getItem("theme") === "light")
+        document.body.classList.add("light-theme");
+      function toggleTheme() {
+        document.body.classList.toggle("light-theme");
+        localStorage.setItem(
+          "theme",
+          document.body.classList.contains("light-theme") ? "light" : "dark",
+        );
+      }
+    </script>
+  </body>
+</html>

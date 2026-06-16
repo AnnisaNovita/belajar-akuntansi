@@ -1,0 +1,1781 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kas & Piutang — Belajar Akuntansi</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0f172a;
+        --glass-bg: rgba(30, 41, 59, 0.45);
+        --glass-border: rgba(255, 255, 255, 0.08);
+        --glass-highlight: rgba(255, 255, 255, 0.15);
+        --text: #f8fafc;
+        --text-muted: #94a3b8;
+        --pink: #ff3d9a;
+        --purple: #a855f7;
+        --blue: #3b82f6;
+        --green: #10b981;
+        --yellow: #fbbf24;
+        --orange: #ff6b35;
+        --teal: #06b6d4;
+        --red: #ef4444;
+        --radius: 24px;
+        --radius-sm: 14px;
+      }
+      body.light-theme {
+        --bg: #fff8f0;
+        --glass-bg: rgba(255, 255, 255, 0.65);
+        --glass-border: rgba(0, 0, 0, 0.06);
+        --glass-highlight: rgba(255, 255, 255, 0.85);
+        --text: #1e293b;
+        --text-muted: #64748b;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "DM Sans", sans-serif;
+        background-color: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        overflow-x: hidden;
+        transition:
+          background-color 0.3s,
+          color 0.3s;
+        position: relative;
+      }
+      .blob {
+        position: absolute;
+        border-radius: 50%;
+        pointer-events: none;
+        filter: blur(80px);
+        opacity: 0.22;
+        z-index: 0;
+        animation: float 20s infinite alternate;
+      }
+      .blob-1 {
+        width: 450px;
+        height: 450px;
+        background: var(--teal);
+        top: -150px;
+        right: -80px;
+      }
+      .blob-2 {
+        width: 320px;
+        height: 320px;
+        background: var(--blue);
+        bottom: 20%;
+        left: -80px;
+        animation-delay: -5s;
+      }
+      .blob-3 {
+        width: 350px;
+        height: 350px;
+        background: var(--purple);
+        top: 40%;
+        right: 10%;
+        animation-delay: -10s;
+      }
+      @keyframes float {
+        0% {
+          transform: translate(0, 0) scale(1);
+        }
+        100% {
+          transform: translate(50px, 80px) scale(1.1);
+        }
+      }
+
+      header {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 30px 24px 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        z-index: 10;
+      }
+      .header-logo {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 18px;
+        color: var(--text);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .theme-toggle-btn {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(12px);
+        color: var(--text);
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        transition: transform 0.2s;
+      }
+      .theme-toggle-btn:hover {
+        transform: scale(1.08);
+        background: var(--glass-highlight);
+      }
+      .back-btn {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(12px);
+        color: var(--text);
+        padding: 10px 20px;
+        border-radius: 99px;
+        font-family: "Syne", sans-serif;
+        font-weight: 700;
+        font-size: 13px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition:
+          background-color 0.2s,
+          transform 0.2s;
+      }
+      .back-btn:hover {
+        transform: translateY(-2px);
+        background: var(--glass-highlight);
+      }
+
+      .hero {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 40px 24px;
+        position: relative;
+        z-index: 10;
+        text-align: center;
+      }
+      .hero-glass {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(16px);
+        border-radius: var(--radius);
+        padding: 48px 32px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .hero-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(6, 182, 212, 0.15);
+        border: 1.5px solid rgba(6, 182, 212, 0.3);
+        color: var(--teal);
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 7px 18px;
+        border-radius: 99px;
+        margin-bottom: 24px;
+        font-family: "Syne", sans-serif;
+      }
+      .hero h1 {
+        font-family: "Syne", sans-serif;
+        font-size: clamp(28px, 5.5vw, 50px);
+        font-weight: 800;
+        line-height: 1.15;
+        margin-bottom: 16px;
+        color: #fff;
+      }
+      body.light-theme .hero h1 {
+        color: #1e293b;
+      }
+      .hero h1 .hi {
+        color: var(--teal);
+      }
+      .hero p {
+        color: var(--text-muted);
+        font-size: 15px;
+        line-height: 1.7;
+        max-width: 620px;
+        margin-bottom: 28px;
+      }
+      .hero-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+      }
+      .hero-badge {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid var(--glass-border);
+        border-radius: 99px;
+        padding: 7px 16px;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--text-muted);
+        font-family: "Syne", sans-serif;
+      }
+
+      .content {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 24px 80px;
+        position: relative;
+        z-index: 10;
+      }
+      .section-title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 52px;
+        margin-bottom: 24px;
+      }
+      .sec-line {
+        flex: 1;
+        height: 1.5px;
+        background: var(--glass-border);
+      }
+      .sec-text {
+        font-family: "Syne", sans-serif;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+      }
+
+      .cards-3 {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+        gap: 24px;
+        margin-bottom: 32px;
+      }
+      .cards-2 {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+        gap: 24px;
+        margin-bottom: 32px;
+      }
+      .card {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(12px);
+        border-radius: var(--radius);
+        padding: 28px;
+        color: var(--text);
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+        transition:
+          transform 0.25s,
+          box-shadow 0.25s,
+          border-color 0.25s;
+      }
+      .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: var(--c, var(--teal));
+      }
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        border-color: var(--c, var(--teal));
+      }
+      .card-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: var(--radius-sm);
+        background: color-mix(in srgb, var(--c) 15%, transparent);
+        color: var(--c);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        margin-bottom: 18px;
+        border: 1px solid color-mix(in srgb, var(--c) 30%, transparent);
+      }
+      .card-eyebrow {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--c);
+        margin-bottom: 6px;
+      }
+      .card-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 18px;
+        line-height: 1.35;
+        margin-bottom: 10px;
+      }
+      .card-body {
+        font-size: 13.5px;
+        color: var(--text-muted);
+        line-height: 1.6;
+      }
+      .list-items {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 12px;
+      }
+      .list-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 13px;
+        line-height: 1.5;
+      }
+      .list-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--c);
+        flex-shrink: 0;
+        margin-top: 6px;
+        box-shadow: 0 0 8px var(--c);
+      }
+
+      .example-wrap {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(16px);
+        border-radius: var(--radius);
+        padding: 32px;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+        margin-bottom: 32px;
+      }
+      .example-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 16px;
+        color: var(--teal);
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .example-story {
+        color: var(--text-muted);
+        font-size: 14.5px;
+        line-height: 1.7;
+        margin-bottom: 20px;
+        padding: 16px 20px;
+        border-left: 3px solid var(--teal);
+        background: rgba(6, 182, 212, 0.05);
+        border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      }
+
+      .table-wrap {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius-sm);
+        overflow: hidden;
+        margin-bottom: 24px;
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th {
+        background: rgba(0, 0, 0, 0.25);
+        color: var(--text-muted);
+        font-family: "Syne", sans-serif;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 14px 18px;
+        text-align: left;
+        border-bottom: 1.5px solid var(--glass-border);
+      }
+      body.light-theme th {
+        background: rgba(255, 255, 255, 0.5);
+      }
+      td {
+        padding: 12px 18px;
+        font-size: 13.5px;
+        border-bottom: 1px solid var(--glass-border);
+        color: var(--text);
+      }
+      tr:last-child td {
+        border-bottom: none;
+      }
+      tr:hover td {
+        background: rgba(255, 255, 255, 0.02);
+      }
+      tr.total-row td {
+        font-weight: 800;
+        background: rgba(6, 182, 212, 0.08);
+        color: var(--teal);
+        border-top: 2px solid var(--glass-border);
+      }
+      tr.sub-row td {
+        font-weight: 700;
+        background: rgba(255, 255, 255, 0.02);
+      }
+
+      .formula-block {
+        background: rgba(6, 182, 212, 0.08);
+        border: 2px solid rgba(6, 182, 212, 0.25);
+        border-radius: var(--radius-sm);
+        padding: 20px 24px;
+        margin-bottom: 20px;
+        font-family: "Syne", sans-serif;
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--teal);
+        text-align: center;
+        line-height: 1.8;
+      }
+
+      .info-box {
+        background: rgba(16, 185, 129, 0.08);
+        border: 1px solid rgba(16, 185, 129, 0.25);
+        border-radius: var(--radius-sm);
+        padding: 18px 20px;
+        margin-bottom: 20px;
+        color: var(--text);
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .info-box strong {
+        color: var(--green);
+      }
+      .warning-box {
+        background: rgba(251, 191, 36, 0.08);
+        border: 1px solid rgba(251, 191, 36, 0.25);
+        border-radius: var(--radius-sm);
+        padding: 18px 20px;
+        margin-bottom: 20px;
+        color: var(--text);
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .warning-box strong {
+        color: var(--yellow);
+      }
+      .danger-box {
+        background: rgba(239, 68, 68, 0.08);
+        border: 1px solid rgba(239, 68, 68, 0.25);
+        border-radius: var(--radius-sm);
+        padding: 18px 20px;
+        margin-bottom: 20px;
+        color: var(--text);
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .danger-box strong {
+        color: var(--red);
+      }
+
+      .jurnal-box {
+        background: rgba(0, 0, 0, 0.2);
+        border: 1.5px solid var(--glass-border);
+        border-radius: var(--radius-sm);
+        padding: 20px 24px;
+        margin-bottom: 16px;
+      }
+      body.light-theme .jurnal-box {
+        background: rgba(255, 255, 255, 0.5);
+      }
+      .jurnal-title {
+        font-family: "Syne", sans-serif;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--teal);
+        margin-bottom: 12px;
+        border-bottom: 1px dashed var(--glass-border);
+        padding-bottom: 8px;
+      }
+      .jurnal-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px 0;
+        font-size: 13.5px;
+        gap: 12px;
+      }
+      .jurnal-akun {
+        flex: 1;
+      }
+      .jurnal-akun.indent {
+        padding-left: 24px;
+        color: var(--text-muted);
+      }
+      .jurnal-amount {
+        font-weight: 700;
+        font-family: "Syne", sans-serif;
+        font-size: 13px;
+        min-width: 130px;
+        text-align: right;
+      }
+      .jurnal-amount.d {
+        color: var(--orange);
+      }
+      .jurnal-amount.k {
+        color: var(--teal);
+      }
+      .jurnal-note {
+        margin-top: 10px;
+        font-size: 12px;
+        color: var(--text-muted);
+        font-style: italic;
+        border-top: 1px dashed var(--glass-border);
+        padding-top: 8px;
+      }
+
+      .rekonsiliasi-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-bottom: 20px;
+      }
+      @media (max-width: 640px) {
+        .rekonsiliasi-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .rekon-card {
+        background: var(--glass-bg);
+        border: 1.5px solid var(--glass-border);
+        border-radius: var(--radius-sm);
+        padding: 20px;
+      }
+      .rekon-card.bank {
+        border-top: 4px solid var(--blue);
+      }
+      .rekon-card.perusahaan {
+        border-top: 4px solid var(--teal);
+      }
+      .rekon-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 13px;
+        margin-bottom: 12px;
+      }
+      .rekon-card.bank .rekon-title {
+        color: var(--blue);
+      }
+      .rekon-card.perusahaan .rekon-title {
+        color: var(--teal);
+      }
+      .rekon-row {
+        display: flex;
+        justify-content: space-between;
+        font-size: 13px;
+        padding: 4px 0;
+      }
+      .rekon-row.indent {
+        padding-left: 16px;
+        color: var(--text-muted);
+      }
+      .rekon-row.total {
+        border-top: 2px solid var(--glass-border);
+        margin-top: 6px;
+        padding-top: 8px;
+        font-weight: 800;
+      }
+      .rekon-card.bank .rekon-row.total span:last-child {
+        color: var(--blue);
+      }
+      .rekon-card.perusahaan .rekon-row.total span:last-child {
+        color: var(--teal);
+      }
+
+      .aging-table td:nth-child(3) {
+        color: var(--yellow);
+        font-weight: 600;
+      }
+      .aging-table td:nth-child(4) {
+        color: var(--orange);
+        font-weight: 600;
+      }
+
+      .rangkuman-table td:first-child {
+        font-weight: 700;
+        color: var(--teal);
+      }
+
+      .quiz-cta {
+        background: var(--glass-bg);
+        border: 2px solid var(--teal);
+        border-radius: var(--radius);
+        padding: 40px 32px;
+        text-align: center;
+        margin-top: 60px;
+        margin-bottom: 40px;
+      }
+      .quiz-cta h3 {
+        font-family: "Syne", sans-serif;
+        font-size: 24px;
+        margin-bottom: 12px;
+        color: var(--teal);
+      }
+      .quiz-cta p {
+        color: var(--text-muted);
+        margin-bottom: 20px;
+        font-size: 15px;
+        line-height: 1.6;
+      }
+      .quiz-btn {
+        background: var(--teal);
+        color: #fff;
+        border: none;
+        padding: 14px 32px;
+        border-radius: var(--radius-sm);
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-decoration: none;
+        display: inline-block;
+      }
+      .quiz-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 24px rgba(6, 182, 212, 0.3);
+      }
+
+      footer {
+        border-top: 1px solid var(--glass-border);
+        background: #090d16;
+        padding: 40px 24px;
+        text-align: center;
+        position: relative;
+        z-index: 10;
+      }
+      body.light-theme footer {
+        background: #fff8f0;
+      }
+      .footer-name {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 16px;
+        background: linear-gradient(
+          135deg,
+          var(--yellow),
+          var(--pink),
+          var(--purple)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 6px;
+      }
+      .footer-sub {
+        font-size: 12.5px;
+        color: var(--text-muted);
+      }
+      .footer-dots {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        margin-top: 16px;
+      }
+      .footer-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+      }
+      @media (max-width: 600px) {
+        .cards-3,
+        .cards-2 {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <header>
+      <a href="index.html" class="header-logo"
+        ><span style="font-size: 24px">💵</span
+        ><span
+          style="font-weight: 800; font-family: &quot;Syne&quot;, sans-serif"
+          >Belajar Akuntansi</span
+        ></a
+      >
+      <div style="display: flex; gap: 12px; align-items: center">
+        <a href="index.html" class="back-btn">← Kembali</a>
+        <button class="theme-toggle-btn" onclick="toggleTheme()">🌓</button>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-glass">
+        <div class="hero-tag">💵 Bab 21 — Aset Lancar</div>
+        <h1>Kas & <span class="hi">Piutang</span></h1>
+        <p>
+          Pelajari komponen kas & setara kas, pengendalian internal,
+          rekonsiliasi bank, sistem kas kecil, klasifikasi piutang, syarat
+          kredit, metode penghapusan langsung dan penyisihan, aging schedule,
+          hingga piutang wesel berbunga.
+        </p>
+        <div class="hero-badges">
+          <div class="hero-badge">🏦 Kas & Setara Kas</div>
+          <div class="hero-badge">🔒 Pengendalian Internal</div>
+          <div class="hero-badge">📋 Rekonsiliasi Bank</div>
+          <div class="hero-badge">💵 Kas Kecil</div>
+          <div class="hero-badge">📄 Piutang Usaha</div>
+          <div class="hero-badge">📅 Aging Schedule</div>
+          <div class="hero-badge">📝 Piutang Wesel</div>
+        </div>
+      </div>
+    </section>
+
+    <main class="content">
+      <!-- ══ 1. KAS & SETARA KAS ══ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">🏦 1. Kas & Setara Kas</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">💡 Definisi</div>
+        <div class="example-story">
+          Kas adalah <strong>aset paling likuid</strong> — bisa langsung
+          digunakan untuk membayar kewajiban tanpa konversi apapun.<br /><br /><strong
+            >Analogi:</strong
+          >
+          Kas itu seperti darah dalam tubuh manusia. Perusahaan bisa punya
+          banyak aset (gedung, mesin, stok barang), tapi kalau tidak ada kas
+          yang mengalir, perusahaan bisa "mati" alias bangkrut meski kelihatan
+          kaya di atas kertas.
+        </div>
+      </div>
+
+      <div class="cards-2">
+        <div class="card" style="--c: var(--green)">
+          <div class="card-icon">✅</div>
+          <div class="card-eyebrow">Yang TERMASUK Kas</div>
+          <div class="card-title">Komponen Kas</div>
+          <div class="list-items">
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Uang tunai (kertas & koin) — di tangan maupun brankas</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>
+                Rekening giro (demand deposit) — bisa ditarik sewaktu-waktu
+              </div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Cek dari pelanggan yang belum disetorkan</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Deposito berjangka ≤ 3 bulan</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Petty cash (kas kecil)</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="--c: var(--red)">
+          <div class="card-icon">❌</div>
+          <div class="card-eyebrow">Yang BUKAN Kas</div>
+          <div class="card-title">Jangan Salah!</div>
+          <div class="list-items">
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Deposito > 3 bulan → Investasi Jangka Pendek</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Cek mundur (postdated) → Piutang</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Cek ditolak bank (bounced) → Piutang</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Restricted cash → Aset Lain-lain</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Perangko & materai → Perlengkapan</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Uang muka ke karyawan → Piutang Karyawan</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <strong>Restricted Cash:</strong> Dana cadangan pelunasan obligasi, kas
+        yang dijaminkan ke bank, atau dana reklamasi tambang —
+        <strong>TIDAK boleh</strong> disajikan bersama kas & setara kas. Harus
+        disajikan terpisah di aset tidak lancar.
+      </div>
+
+      <!-- ══ 2. PENGENDALIAN INTERNAL ══ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">🔒 2. Pengendalian Internal atas Kas</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="cards-3">
+        <div class="card" style="--c: var(--pink)">
+          <div class="card-icon">👥</div>
+          <div class="card-eyebrow">Prinsip 1</div>
+          <div class="card-title">Pemisahan Tugas</div>
+          <div class="card-body">
+            Yang memegang kas ≠ yang mencatat ≠ yang mengotorisasi. Kasir (Ani),
+            Akuntan (Budi), Manajer (Pak Hasan) — tiga orang berbeda!
+          </div>
+        </div>
+        <div class="card" style="--c: var(--purple)">
+          <div class="card-icon">✍️</div>
+          <div class="card-eyebrow">Prinsip 2</div>
+          <div class="card-title">Otorisasi Bertingkat</div>
+          <div class="card-body">
+            Pembayaran > Rp5jt tanda tangan manajer. Pembayaran > Rp50jt tanda
+            tangan direktur.
+          </div>
+        </div>
+        <div class="card" style="--c: var(--blue)">
+          <div class="card-icon">📋</div>
+          <div class="card-eyebrow">Prinsip 3</div>
+          <div class="card-title">Rekonsiliasi Rutin</div>
+          <div class="card-body">
+            Cocokkan catatan perusahaan vs rekening koran setiap bulan oleh
+            pihak yang tidak menangani kas.
+          </div>
+        </div>
+        <div class="card" style="--c: var(--green)">
+          <div class="card-icon">🏦</div>
+          <div class="card-eyebrow">Prinsip 4</div>
+          <div class="card-title">Penyetoran Harian</div>
+          <div class="card-body">
+            Semua penerimaan kas disetor ke bank hari itu juga. Apotek tidak
+            boleh simpan uang tunai bermalam di laci kasir.
+          </div>
+        </div>
+        <div class="card" style="--c: var(--yellow)">
+          <div class="card-icon">💳</div>
+          <div class="card-eyebrow">Prinsip 5</div>
+          <div class="card-title">Bayar via Transfer</div>
+          <div class="card-body">
+            Minimalkan pembayaran tunai besar. Semua pengeluaran signifikan
+            lewat cek/transfer bank agar ada jejak yang jelas.
+          </div>
+        </div>
+        <div class="card" style="--c: var(--orange)">
+          <div class="card-icon">🔍</div>
+          <div class="card-eyebrow">Prinsip 6</div>
+          <div class="card-title">Surprise Audit</div>
+          <div class="card-body">
+            Audit mendadak untuk mendeteksi kecurangan. Karyawan kas juga wajib
+            ambil cuti — posisinya diisi orang lain agar penyimpangan
+            terdeteksi.
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ 3. REKONSILIASI BANK ══ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">📋 3. Rekonsiliasi Bank</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">💡 Apa itu Rekonsiliasi Bank?</div>
+        <div class="example-story">
+          Proses mencocokkan
+          <strong>saldo kas menurut catatan perusahaan</strong> dengan
+          <strong>saldo di rekening koran bank</strong> — keduanya sering
+          berbeda!<br /><br /><strong>Analogi:</strong> Seperti kamu ngecek
+          saldo di aplikasi m-banking vs catatan pengeluaran di buku catatanmu.
+          Sering beda kan? Rekonsiliasi itu proses mencari tahu kenapa beda dan
+          mana yang benar.
+        </div>
+      </div>
+
+      <h3
+        style="
+          font-family: &quot;Syne&quot;, sans-serif;
+          font-weight: 800;
+          font-size: 16px;
+          margin-bottom: 16px;
+          color: var(--text);
+        "
+      >
+        Penyebab Perbedaan Saldo
+      </h3>
+
+      <div class="cards-2">
+        <div class="card" style="--c: var(--blue)">
+          <div class="card-icon">🏦</div>
+          <div class="card-eyebrow">Dari Sisi PERUSAHAAN</div>
+          <div class="card-title">Belum Dicatat Perusahaan</div>
+          <div class="list-items">
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>
+                <strong>Jasa giro/bunga bank</strong> — bank sudah tambahkan,
+                perusahaan belum catat
+              </div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>
+                <strong>Biaya administrasi bank</strong> — bank sudah potong,
+                perusahaan belum catat
+              </div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>
+                <strong>Transfer masuk dari pelanggan</strong> — langsung ke
+                bank, perusahaan belum tahu
+              </div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>
+                <strong>Cek bounced (NSF)</strong> — bank tolak, perusahaan
+                sudah catat terima
+              </div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>
+                <strong>Kesalahan pencatatan</strong> — salah tulis nominal
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="--c: var(--teal)">
+          <div class="card-icon">🏧</div>
+          <div class="card-eyebrow">Dari Sisi BANK</div>
+          <div class="card-title">Belum Dicatat Bank</div>
+          <div class="list-items">
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>
+                <strong>Deposit in transit</strong> — perusahaan sudah setor,
+                bank belum proses (akhir hari)
+              </div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>
+                <strong>Outstanding check</strong> — perusahaan sudah tulis cek,
+                penerima belum cairkan
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          ✏️ Contoh Soal — Toko Berkah Abadi, 31 Des 2024
+        </div>
+        <div class="example-story">
+          Saldo buku perusahaan: <strong>Rp45.200.000</strong> | Saldo rekening
+          koran: <strong>Rp52.500.000</strong><br /><br />
+          Informasi tambahan: (1) Deposit in transit Rp8.000.000 (2) Outstanding
+          checks Rp12.500.000 (3) Jasa giro Rp500.000 (4) Biaya adm bank
+          Rp200.000 (5) Pelanggan bayar langsung ke bank Rp2.500.000 (6) Cek
+          pelanggan bounced Rp1.300.000 (7) Kesalahan catat: seharusnya
+          Rp3.000.000 dicatat Rp300.000
+        </div>
+
+        <div class="rekonsiliasi-grid">
+          <div class="rekon-card bank">
+            <div class="rekon-title">🏦 SISI REKENING KORAN BANK</div>
+            <div class="rekon-row">
+              <span>Saldo rekening koran</span
+              ><span style="color: var(--text); font-weight: 700"
+                >Rp52.500.000</span
+              >
+            </div>
+            <div class="rekon-row indent" style="color: var(--green)">
+              <span>+ Deposit in transit</span><span>Rp8.000.000</span>
+            </div>
+            <div class="rekon-row indent" style="color: var(--red)">
+              <span>− Outstanding checks</span><span>(Rp12.500.000)</span>
+            </div>
+            <div class="rekon-row total">
+              <span>SALDO BENAR</span><span>Rp48.000.000</span>
+            </div>
+          </div>
+          <div class="rekon-card perusahaan">
+            <div class="rekon-title">📒 SISI BUKU PERUSAHAAN</div>
+            <div class="rekon-row">
+              <span>Saldo buku perusahaan</span
+              ><span style="color: var(--text); font-weight: 700"
+                >Rp45.200.000</span
+              >
+            </div>
+            <div class="rekon-row indent" style="color: var(--green)">
+              <span>+ Jasa giro</span><span>Rp500.000</span>
+            </div>
+            <div class="rekon-row indent" style="color: var(--green)">
+              <span>+ Penerimaan langsung</span><span>Rp2.500.000</span>
+            </div>
+            <div class="rekon-row indent" style="color: var(--green)">
+              <span>+ Koreksi salah catat</span><span>Rp2.700.000</span>
+            </div>
+            <div class="rekon-row indent" style="color: var(--red)">
+              <span>− Biaya adm bank</span><span>(Rp200.000)</span>
+            </div>
+            <div class="rekon-row indent" style="color: var(--red)">
+              <span>− Cek bounced</span><span>(Rp1.300.000)</span>
+            </div>
+            <div class="rekon-row indent" style="color: var(--red)">
+              <span>− Item lainnya</span><span>(Rp1.400.000)</span>
+            </div>
+            <div class="rekon-row total">
+              <span>SALDO BENAR</span><span>Rp48.000.000</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-box">
+          ⭐
+          <strong>Kedua sisi harus menghasilkan saldo yang sama persis!</strong>
+          Jika belum sama, berarti masih ada item yang belum ditemukan.
+        </div>
+
+        <h4
+          style="
+            font-family: &quot;Syne&quot;, sans-serif;
+            font-weight: 800;
+            font-size: 14px;
+            margin: 20px 0 12px;
+            color: var(--text);
+          "
+        >
+          Jurnal Penyesuaian — Hanya dari Sisi Buku Perusahaan:
+        </h4>
+
+        <div class="jurnal-box">
+          <div class="jurnal-title">1. Jasa Giro dari Bank</div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Kas</div>
+            <div class="jurnal-amount d">Rp500.000</div>
+            <div class="jurnal-amount" style="color: var(--text-muted)">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Pendapatan Bunga</div>
+            <div class="jurnal-amount" style="color: var(--text-muted)">—</div>
+            <div class="jurnal-amount k">Rp500.000</div>
+          </div>
+        </div>
+        <div class="jurnal-box">
+          <div class="jurnal-title">2. Penerimaan Langsung dari Pelanggan</div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Kas</div>
+            <div class="jurnal-amount d">Rp2.500.000</div>
+            <div class="jurnal-amount" style="color: var(--text-muted)">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Piutang Usaha</div>
+            <div class="jurnal-amount" style="color: var(--text-muted)">—</div>
+            <div class="jurnal-amount k">Rp2.500.000</div>
+          </div>
+        </div>
+        <div class="jurnal-box">
+          <div class="jurnal-title">3. Biaya Administrasi Bank</div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Beban Administrasi Bank</div>
+            <div class="jurnal-amount d">Rp200.000</div>
+            <div class="jurnal-amount" style="color: var(--text-muted)">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Kas</div>
+            <div class="jurnal-amount" style="color: var(--text-muted)">—</div>
+            <div class="jurnal-amount k">Rp200.000</div>
+          </div>
+        </div>
+        <div class="jurnal-box">
+          <div class="jurnal-title">4. Cek Bounced (NSF) dari Pelanggan</div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Piutang Usaha</div>
+            <div class="jurnal-amount d">Rp1.300.000</div>
+            <div class="jurnal-amount" style="color: var(--text-muted)">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Kas</div>
+            <div class="jurnal-amount" style="color: var(--text-muted)">—</div>
+            <div class="jurnal-amount k">Rp1.300.000</div>
+          </div>
+          <div class="jurnal-note">
+            Deposit in transit & outstanding checks TIDAK perlu dijurnal — akan
+            otomatis terkoreksi di periode berikutnya.
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ 4. KAS KECIL ══ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">💵 4. Dana Kas Kecil (Petty Cash)</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="cards-2">
+        <div class="card" style="--c: var(--teal)">
+          <div class="card-icon">💡</div>
+          <div class="card-eyebrow">Definisi</div>
+          <div class="card-title">Apa itu Kas Kecil?</div>
+          <div class="card-body">
+            Dana tunai kecil untuk membayar pengeluaran-pengeluaran kecil
+            sehari-hari yang tidak praktis dibayar via transfer bank.
+          </div>
+          <div class="list-items">
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Beli ATK & tinta printer</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Ongkir kirim dokumen</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Konsumsi rapat</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Bayar parkir tamu</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="--c: var(--orange)">
+          <div class="card-icon">🔄</div>
+          <div class="card-eyebrow">Sistem Imprest</div>
+          <div class="card-title">Dana Tetap</div>
+          <div class="card-body">
+            Dana kas kecil selalu dikembalikan ke jumlah awal setiap kali diisi
+            ulang. Akun <strong>Kas Kecil tidak berubah</strong> selama
+            penggunaan sehari-hari!
+          </div>
+          <div
+            class="formula-block"
+            style="
+              font-size: 12px;
+              margin-top: 14px;
+              background: rgba(255, 107, 53, 0.1);
+              border-color: rgba(255, 107, 53, 0.25);
+              color: var(--orange);
+            "
+          >
+            Pembentukan → Pemakaian (simpan bon) → Pengisian Ulang
+          </div>
+        </div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          ✏️ Contoh — CV. Maju Bersama, Oktober 2024
+        </div>
+        <div class="example-story">
+          Dana kas kecil Rp1.000.000. Pengeluaran: ATK Rp150.000 | Ongkir
+          Rp80.000 | Konsumsi Rp200.000 | Listrik Rp180.000 | Materai Rp60.000 =
+          Total Rp670.000. Sisa: Rp330.000.
+        </div>
+
+        <div class="jurnal-box">
+          <div class="jurnal-title">1 Oktober — Pembentukan Kas Kecil</div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Kas Kecil</div>
+            <div class="jurnal-amount d">Rp1.000.000</div>
+            <div class="jurnal-amount" style="color: var(--text-muted)">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Kas (Bank)</div>
+            <div class="jurnal-amount" style="color: var(--text-muted)">—</div>
+            <div class="jurnal-amount k">Rp1.000.000</div>
+          </div>
+        </div>
+
+        <div class="info-box">
+          💡 <strong>Selama Oktober</strong> — TIDAK ADA JURNAL. Hanya simpan
+          bon/bukti pengeluaran. Akun Kas Kecil tetap Rp1.000.000.
+        </div>
+
+        <div class="jurnal-box">
+          <div class="jurnal-title">
+            31 Oktober — Pengisian Ulang (Rp670.000)
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Beban ATK</div>
+            <div class="jurnal-amount d">Rp150.000</div>
+            <div class="jurnal-amount" style="color: var(--text-muted)">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Beban Pengiriman</div>
+            <div class="jurnal-amount d">Rp80.000</div>
+            <div class="jurnal-amount" style="color: var(--text-muted)">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Beban Konsumsi</div>
+            <div class="jurnal-amount d">Rp200.000</div>
+            <div class="jurnal-amount" style="color: var(--text-muted)">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Beban Listrik</div>
+            <div class="jurnal-amount d">Rp180.000</div>
+            <div class="jurnal-amount" style="color: var(--text-muted)">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Beban Perlengkapan (materai)</div>
+            <div class="jurnal-amount d">Rp60.000</div>
+            <div class="jurnal-amount" style="color: var(--text-muted)">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Kas (Bank)</div>
+            <div class="jurnal-amount" style="color: var(--text-muted)">—</div>
+            <div class="jurnal-amount k">Rp670.000</div>
+          </div>
+          <div class="jurnal-note">
+            Akun Kas Kecil tetap Rp1.000.000 — tidak berubah. Yang berubah hanya
+            Kas Bank dan akun-akun beban.
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ 5. KLASIFIKASI PIUTANG ══ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">📄 5. Klasifikasi & Pengakuan Piutang</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="cards-3">
+        <div class="card" style="--c: var(--teal)">
+          <div class="card-icon">🧾</div>
+          <div class="card-eyebrow">Jenis 1</div>
+          <div class="card-title">Piutang Usaha</div>
+          <div class="card-body">
+            Tagihan dari penjualan barang/jasa secara kredit kepada pelanggan
+            dalam kegiatan usaha utama. Jangka pendek (&lt; 12 bulan).
+          </div>
+        </div>
+        <div class="card" style="--c: var(--purple)">
+          <div class="card-icon">📝</div>
+          <div class="card-eyebrow">Jenis 2</div>
+          <div class="card-title">Piutang Wesel</div>
+          <div class="card-body">
+            Ada surat janji bayar (promes) formal + bunga eksplisit. Lebih kuat
+            secara hukum dari piutang usaha biasa.
+          </div>
+        </div>
+        <div class="card" style="--c: var(--orange)">
+          <div class="card-icon">📦</div>
+          <div class="card-eyebrow">Jenis 3</div>
+          <div class="card-title">Piutang Lain-lain</div>
+          <div class="list-items">
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Pinjaman ke karyawan</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Uang muka sewa</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Tagihan klaim asuransi</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Piutang bunga</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          ✏️ Syarat Kredit "2/10, n/30" — PT. Indofood
+        </div>
+        <div class="example-story">
+          PT. Indofood jual mi instan ke distributor Rp100.000.000 syarat 2/10,
+          n/30. Jika bayar dalam 10 hari → diskon 2%. Jika lewat 10 hari → bayar
+          penuh maksimal hari ke-30.
+        </div>
+
+        <div class="jurnal-box">
+          <div class="jurnal-title">Saat Penjualan</div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Piutang Usaha</div>
+            <div class="jurnal-amount d">Rp100.000.000</div>
+            <div class="jurnal-amount" style="color: var(--text-muted)">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Penjualan</div>
+            <div class="jurnal-amount" style="color: var(--text-muted)">—</div>
+            <div class="jurnal-amount k">Rp100.000.000</div>
+          </div>
+        </div>
+        <div class="jurnal-box">
+          <div class="jurnal-title">Bayar Hari ke-8 (Dalam Masa Diskon 2%)</div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Kas (Rp100jt − Rp2jt)</div>
+            <div class="jurnal-amount d">Rp98.000.000</div>
+            <div class="jurnal-amount" style="color: var(--text-muted)">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Potongan Penjualan</div>
+            <div class="jurnal-amount d">Rp2.000.000</div>
+            <div class="jurnal-amount" style="color: var(--text-muted)">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Piutang Usaha</div>
+            <div class="jurnal-amount" style="color: var(--text-muted)">—</div>
+            <div class="jurnal-amount k">Rp100.000.000</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ 6. METODE PENYISIHAN ══ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">
+          📅 6. Piutang Tak Tertagih — Metode Penyisihan
+        </div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="info-box">
+        <strong>Prinsip Matching:</strong> Estimasi kerugian piutang dicatat di
+        akhir periode yang sama dengan penjualannya — sebelum tahu persis
+        pelanggan mana yang tidak bayar. Ini sesuai PSAK dan lebih akurat.
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          📅 Pendekatan Aging Schedule — Distributor "Sekar Jawi" Jombang
+        </div>
+        <div class="example-story">
+          Analisis umur piutang per 31 Oktober 2024:
+        </div>
+        <div class="table-wrap">
+          <table class="aging-table">
+            <thead>
+              <tr>
+                <th>Umur Piutang</th>
+                <th>Saldo</th>
+                <th>% Tak Tertagih</th>
+                <th>Estimasi Kerugian</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Belum jatuh tempo</td>
+                <td>Rp200.000.000</td>
+                <td>1%</td>
+                <td>Rp2.000.000</td>
+              </tr>
+              <tr>
+                <td>1 – 30 hari</td>
+                <td>Rp80.000.000</td>
+                <td>3%</td>
+                <td>Rp2.400.000</td>
+              </tr>
+              <tr>
+                <td>31 – 60 hari</td>
+                <td>Rp40.000.000</td>
+                <td>8%</td>
+                <td>Rp3.200.000</td>
+              </tr>
+              <tr>
+                <td>61 – 90 hari</td>
+                <td>Rp15.000.000</td>
+                <td>15%</td>
+                <td>Rp2.250.000</td>
+              </tr>
+              <tr>
+                <td>&gt; 90 hari</td>
+                <td>Rp10.000.000</td>
+                <td>40%</td>
+                <td>Rp4.000.000</td>
+              </tr>
+              <tr class="total-row">
+                <td><strong>Total</strong></td>
+                <td><strong>Rp345.000.000</strong></td>
+                <td>—</td>
+                <td><strong>Rp13.850.000</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="info-box">
+          Saldo penyisihan saat ini: Rp3.000.000 | Tambahan = Rp13.850.000 −
+          Rp3.000.000 = <strong>Rp10.850.000</strong>
+        </div>
+
+        <div class="jurnal-box">
+          <div class="jurnal-title">Jurnal Penyesuaian</div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Beban Piutang Tak Tertagih</div>
+            <div class="jurnal-amount d">Rp10.850.000</div>
+            <div class="jurnal-amount" style="color: var(--text-muted)">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">
+              Penyisihan Piutang Tak Tertagih
+            </div>
+            <div class="jurnal-amount" style="color: var(--text-muted)">—</div>
+            <div class="jurnal-amount k">Rp10.850.000</div>
+          </div>
+        </div>
+
+        <div class="jurnal-box">
+          <div class="jurnal-title">
+            Jurnal Penghapusan Piutang (Metode Penyisihan)
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Penyisihan Piutang Tak Tertagih</div>
+            <div class="jurnal-amount d">Rp5.000.000</div>
+            <div class="jurnal-amount" style="color: var(--text-muted)">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Piutang Usaha</div>
+            <div class="jurnal-amount" style="color: var(--text-muted)">—</div>
+            <div class="jurnal-amount k">Rp5.000.000</div>
+          </div>
+          <div class="jurnal-note">
+            💡 Tidak ada beban baru saat hapus — beban sudah diakui saat
+            membentuk penyisihan!
+          </div>
+        </div>
+
+        <div class="jurnal-box">
+          <div class="jurnal-title">
+            Jurnal Pemulihan (Jika Pelanggan Bayar Lagi)
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Piutang Usaha</div>
+            <div class="jurnal-amount d">Rp5.000.000</div>
+            <div class="jurnal-amount" style="color: var(--text-muted)">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">
+              Penyisihan Piutang Tak Tertagih
+            </div>
+            <div class="jurnal-amount" style="color: var(--text-muted)">—</div>
+            <div class="jurnal-amount k">Rp5.000.000</div>
+          </div>
+        </div>
+        <div class="jurnal-box">
+          <div class="jurnal-title">Lalu Jurnal Penerimaan Kas</div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Kas</div>
+            <div class="jurnal-amount d">Rp5.000.000</div>
+            <div class="jurnal-amount" style="color: var(--text-muted)">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Piutang Usaha</div>
+            <div class="jurnal-amount" style="color: var(--text-muted)">—</div>
+            <div class="jurnal-amount k">Rp5.000.000</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ 7. PIUTANG WESEL ══ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">📝 7. Piutang Wesel (Notes Receivable)</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="formula-block">
+        Bunga = Nilai Nominal × Tingkat Bunga × (Hari ÷ 360)<br />
+        Nilai Jatuh Tempo = Nilai Nominal + Bunga
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">✏️ Contoh — CV. Berkah Abadi</div>
+        <div class="example-story">
+          Terima wesel Rp60.000.000, bunga 12%/tahun, 90 hari, tertanggal 1
+          November 2024.
+        </div>
+
+        <div class="formula-block" style="text-align: left; font-size: 13.5px">
+          Bunga = Rp60.000.000 × 12% × (90/360) = <strong>Rp1.800.000</strong
+          ><br />
+          Nilai Jatuh Tempo = Rp60.000.000 + Rp1.800.000 =
+          <strong>Rp61.800.000</strong><br />
+          Jatuh Tempo = 1 Nov + 90 hari = <strong>29 Januari 2025</strong>
+        </div>
+
+        <div class="jurnal-box">
+          <div class="jurnal-title">1 November — Terima Wesel</div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Piutang Wesel</div>
+            <div class="jurnal-amount d">Rp60.000.000</div>
+            <div class="jurnal-amount" style="color: var(--text-muted)">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Piutang Usaha</div>
+            <div class="jurnal-amount" style="color: var(--text-muted)">—</div>
+            <div class="jurnal-amount k">Rp60.000.000</div>
+          </div>
+        </div>
+        <div class="jurnal-box">
+          <div class="jurnal-title">
+            31 Desember — Akrual Bunga 2 Bulan (60 hari)
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Piutang Bunga (60jt × 12% × 60/360)</div>
+            <div class="jurnal-amount d">Rp1.200.000</div>
+            <div class="jurnal-amount" style="color: var(--text-muted)">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Pendapatan Bunga</div>
+            <div class="jurnal-amount" style="color: var(--text-muted)">—</div>
+            <div class="jurnal-amount k">Rp1.200.000</div>
+          </div>
+        </div>
+        <div class="jurnal-box">
+          <div class="jurnal-title">29 Januari 2025 — Pelunasan Wesel</div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Kas</div>
+            <div class="jurnal-amount d">Rp61.800.000</div>
+            <div class="jurnal-amount" style="color: var(--text-muted)">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Piutang Wesel</div>
+            <div class="jurnal-amount" style="color: var(--text-muted)">—</div>
+            <div class="jurnal-amount k">Rp60.000.000</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">Piutang Bunga (sudah akrual)</div>
+            <div class="jurnal-amount" style="color: var(--text-muted)">—</div>
+            <div class="jurnal-amount k">Rp1.200.000</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">
+              Pendapatan Bunga (Jan = 30 hari)
+            </div>
+            <div class="jurnal-amount" style="color: var(--text-muted)">—</div>
+            <div class="jurnal-amount k">Rp600.000</div>
+          </div>
+          <div class="jurnal-note">
+            Bunga Januari = 60jt × 12% × 30/360 = Rp600.000
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ 8. PENYAJIAN ══ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">📊 8. Penyajian di Laporan Keuangan</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Akun</th>
+              <th style="text-align: right">Nilai</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td
+                style="
+                  padding-left: 8px;
+                  color: var(--text-muted);
+                  font-size: 12px;
+                  font-family: &quot;Syne&quot;, sans-serif;
+                  font-weight: 800;
+                  text-transform: uppercase;
+                "
+              >
+                ASET LANCAR:
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td style="padding-left: 24px">Kas dan Setara Kas</td>
+              <td style="text-align: right">Rp xxx</td>
+            </tr>
+            <tr>
+              <td style="padding-left: 24px">Piutang Usaha</td>
+              <td style="text-align: right">Rp345.000.000</td>
+            </tr>
+            <tr>
+              <td style="padding-left: 36px; color: var(--red)">
+                − Penyisihan Piutang Tak Tertagih
+              </td>
+              <td style="text-align: right; color: var(--red)">
+                (Rp13.850.000)
+              </td>
+            </tr>
+            <tr class="total-row">
+              <td style="padding-left: 24px">
+                <strong>Piutang Usaha — Neto</strong>
+              </td>
+              <td style="text-align: right"><strong>Rp331.150.000</strong></td>
+            </tr>
+            <tr>
+              <td style="padding-left: 24px">Piutang Wesel</td>
+              <td style="text-align: right">Rp60.000.000</td>
+            </tr>
+            <tr>
+              <td style="padding-left: 24px">Piutang Bunga</td>
+              <td style="text-align: right">Rp1.200.000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="warning-box">
+        <strong>Wajib diungkap di CaLK:</strong> Kebijakan pengakuan piutang,
+        metode estimasi penyisihan, aging schedule piutang, piutang yang
+        dijaminkan/dijual (factoring), dan konsentrasi risiko kredit.
+      </div>
+
+      <!-- ══ RANGKUMAN ══ -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">📝 Rangkuman</div>
+        <div class="sec-line"></div>
+      </div>
+      <div class="table-wrap">
+        <table class="rangkuman-table">
+          <thead>
+            <tr>
+              <th>Poin</th>
+              <th>Inti</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>✅ Kas</td>
+              <td>
+                Paling likuid — tunai, giro, cek diterima, deposito ≤ 3 bulan
+              </td>
+            </tr>
+            <tr>
+              <td>✅ Bukan Kas</td>
+              <td>Deposito > 3 bulan, cek mundur, restricted cash, perangko</td>
+            </tr>
+            <tr>
+              <td>✅ Pengendalian</td>
+              <td>
+                Pemisahan tugas, otorisasi, rekonsiliasi, setor harian, surprise
+                audit
+              </td>
+            </tr>
+            <tr>
+              <td>✅ Rekonsiliasi</td>
+              <td>
+                Cocokkan buku perusahaan vs rekening koran — kedua sisi harus
+                sama
+              </td>
+            </tr>
+            <tr>
+              <td>✅ Jurnal Rekonsiliasi</td>
+              <td>Hanya dari sisi buku perusahaan yang dijurnal</td>
+            </tr>
+            <tr>
+              <td>✅ Kas Kecil (Imprest)</td>
+              <td>
+                Akun Kas Kecil tidak berubah saat pemakaian — jurnal saat
+                pembentukan & pengisian ulang
+              </td>
+            </tr>
+            <tr>
+              <td>✅ Syarat 2/10, n/30</td>
+              <td>Diskon 2% jika bayar ≤ 10 hari, jatuh tempo 30 hari</td>
+            </tr>
+            <tr>
+              <td>✅ Aging Schedule</td>
+              <td>Makin tua piutang → makin besar % tak tertagih</td>
+            </tr>
+            <tr>
+              <td>✅ Piutang Wesel</td>
+              <td>Ada promes + bunga = Nominal × Rate × Waktu/360</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- QUIZ CTA -->
+      <div class="quiz-cta">
+        <h3>🎯 Uji Pemahamanmu!</h3>
+        <p>
+          Setelah mempelajari Kas & Piutang, coba kerjakan kuis interaktif di
+          Bank Soal yang mencakup rekonsiliasi bank, kas kecil, aging schedule,
+          dan piutang wesel!
+        </p>
+        <a href="bank-kuis.html?bab=Kas%20%26%20Piutang" class="quiz-btn"
+          >Mulai Kuis Kas & Piutang →</a
+        >
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-name">Annisa Novita Ardana</div>
+      <div class="footer-sub">
+        Belajar Akuntansi &amp; Perpajakan &nbsp;·&nbsp; Dibuat dengan Cinta
+        &amp; Estetika 🌸
+      </div>
+      <div class="footer-dots">
+        <div class="footer-dot" style="background: #ff6b35"></div>
+        <div class="footer-dot" style="background: #ff3d9a"></div>
+        <div class="footer-dot" style="background: #a855f7"></div>
+        <div class="footer-dot" style="background: #3b82f6"></div>
+        <div class="footer-dot" style="background: #10b981"></div>
+        <div class="footer-dot" style="background: #fbbf24"></div>
+      </div>
+    </footer>
+
+    <script>
+      if (localStorage.getItem("theme") === "light")
+        document.body.classList.add("light-theme");
+      function toggleTheme() {
+        document.body.classList.toggle("light-theme");
+        localStorage.setItem(
+          "theme",
+          document.body.classList.contains("light-theme") ? "light" : "dark",
+        );
+      }
+    </script>
+  </body>
+</html>

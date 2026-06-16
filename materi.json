@@ -204,6 +204,95 @@
       "url": "perpajakan-dasar-dalam-akuntansi.html"
     },
     {
+      "id": "kerangka-konseptual-akuntansi",
+      "kategori": "akuntansi",
+      "emoji": "🏛️",
+      "badge": "BAB 19",
+      "judul": "Kerangka Konseptual Akuntansi Keuangan & PSAK",
+      "deskripsi": "Fondasi dan blueprint yang menjadi dasar penyusunan seluruh standar akuntansi PSAK di Indonesia beserta hierarki penggunanya.",
+      "tags": ["Konsep", "Akuntansi", "PSAK"],
+      "warna": "#a855f7",
+      "url": "kerangka-konseptual-akuntansi.html"
+    },
+    {
+      "id": "laporan-keuangan-dan-siklus-akuntansi",
+      "kategori": "akuntansi",
+      "emoji": "📊",
+      "badge": "BAB 20",
+      "judul": "Laporan Keuangan & Siklus Akuntansi (Review & Pendalaman)",
+      "deskripsi": "Review dan pendalaman siklus akuntansi lengkap beserta penyajian seluruh komponen laporan keuangan sesuai standar PSAK yang berlaku.",
+      "tags": ["Laporan", "Siklus", "Pendalaman"],
+      "warna": "#3b82f6",
+      "url": "laporan-keuangan-dan-siklus-akuntansi.html"
+    },
+    {
+      "id": "kas-dan-piutang",
+      "kategori": "akuntansi",
+      "emoji": "💰",
+      "badge": "BAB 21",
+      "judul": "Kas dan Piutang",
+      "deskripsi": "Pengakuan, pengukuran, dan pengendalian kas serta pencatatan piutang usaha termasuk metode estimasi piutang tak tertagih.",
+      "tags": ["Kas", "Piutang", "Metode"],
+      "warna": "#10b981",
+      "url": "kas-dan-piutang.html"
+    },
+    {
+      "id": "persediaan-metode-penilaian",
+      "kategori": "akuntansi",
+      "emoji": "📦",
+      "badge": "BAB 22",
+      "judul": "Persediaan — Metode Penilaian",
+      "deskripsi": "Berbagai metode penilaian persediaan FIFO dan rata-rata tertimbang serta dampak perbedaannya terhadap laba dan laporan keuangan.",
+      "tags": ["Pesediaan", "Penilaian", "Metode", "Dampak"],
+      "warna": "#F59E0B",
+      "url": "persediaan-metode-penilaian.html"
+    },
+    {
+      "id": "aset-tetap-penyusutan-perolehan",
+      "kategori": "akuntansi",
+      "emoji": "🏭",
+      "badge": "BAB 23",
+      "judul": "Aset Tetap — Perolehan & Penyusutan",
+      "deskripsi": "Cara mencatat perolehan aset tetap dari berbagai sumber dan menghitung penyusutan dengan berbagai metode sesuai PSAK 16.",
+      "tags": ["Penyusutan", "Perolehan", "Aset Tetap", "PSAK 16"],
+      "warna": "#ff3d9a",
+      "url": "aset-tetap-penyusutan-perolehan.html"
+    },
+    {
+      "id": "aset-tetap-disposisi-revaluasi",
+      "kategori": "akuntansi",
+      "emoji": "🔄",
+      "badge": "BAB 24",
+      "judul": "Aset Tetap — Disposisi, Revaluasi & Penurunan Nilai",
+      "deskripsi": "Pencatatan pelepasan aset tetap, pilihan model revaluasi ke nilai wajar, dan prosedur pengujian penurunan nilai aset.",
+      "tags": ["Pelepasan", "Revaluasi", "Aset Tetap"],
+      "warna": "#ff6b35",
+      "url": "aset-tetap-disposisi-revaluasi.html"
+    },
+    {
+      "id": "aset-takberwuwjud-dan-aset-lain",
+      "kategori": "akuntansi",
+      "emoji": "💡",
+      "badge": "BAB 25",
+      "judul": "Aset Tak Berwujud & Aset Lain-lain",
+      "deskripsi": "pengakuan, pengukuran, dan amortisasi aset tidak berwujud seperti hak paten, merek dagang, dan goodwill sesuai PSAK 19.",
+      "tags": ["Aset Tak Berwujud", "PSAK 19", "Aset Lain"],
+      "warna": "#a855f7",
+      "url": "aset-takberwuwjud-dan-aset-lain.html"
+    },
+    {
+      "id": "liabilitas-jangka-pendek",
+      "kategori": "akuntansi",
+      "emoji": "⏰",
+      "badge": "BAB 26",
+      "judul": "Liabilitas Jangka Pendek",
+      "deskripsi": "Pengakuan dan pengukuran berbagai kewajiban yang jatuh tempo dalam satu tahun seperti utang usaha, beban akrual, dan provisi.",
+      "tags": ["Liabilitas", "Jangka Pendek", "Pengakuan", "Pengukuran"],
+      "warna": "#3b82f6",
+      "url": "liabilitas-jangka-pendek.html"
+    },
+
+    {
       "id": "dasar-perpajakan-indonesia",
       "kategori": "pajak",
       "emoji": "🧾",

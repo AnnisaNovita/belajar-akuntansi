@@ -1,0 +1,2441 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Persediaan — Metode Penilaian — Belajar Akuntansi</title>
+    <meta
+      name="description"
+      content="Berbagai metode penilaian persediaan FIFO dan rata-rata tertimbang serta dampak perbedaannya terhadap laba dan laporan keuangan."
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0f172a;
+        --glass-bg: rgba(30, 41, 59, 0.45);
+        --glass-border: rgba(255, 255, 255, 0.08);
+        --glass-highlight: rgba(255, 255, 255, 0.15);
+        --text: #f8fafc;
+        --text-muted: #94a3b8;
+        --pink: #ff3d9a;
+        --purple: #a855f7;
+        --blue: #3b82f6;
+        --green: #10b981;
+        --yellow: #fbbf24;
+        --orange: #ff6b35;
+        --accent: #f59e0b;
+        --accent2: #f4a261;
+        --red: #ef4444;
+        --radius: 24px;
+        --radius-sm: 14px;
+      }
+      body.light-theme {
+        --bg: #fff8f0;
+        --glass-bg: rgba(255, 255, 255, 0.65);
+        --glass-border: rgba(0, 0, 0, 0.06);
+        --glass-highlight: rgba(255, 255, 255, 0.85);
+        --text: #1e293b;
+        --text-muted: #64748b;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "DM Sans", sans-serif;
+        background-color: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        overflow-x: clip;
+        transition:
+          background-color 0.3s ease,
+          color 0.3s ease;
+        position: relative;
+      }
+      .blob {
+        position: absolute;
+        border-radius: 50%;
+        pointer-events: none;
+        filter: blur(80px);
+        opacity: 0.25;
+        z-index: 0;
+        animation: float 20s infinite alternate;
+      }
+      .blob-1 {
+        width: 450px;
+        height: 450px;
+        background: var(--accent);
+        top: -150px;
+        right: -80px;
+      }
+      .blob-2 {
+        width: 320px;
+        height: 320px;
+        background: var(--purple);
+        bottom: 20%;
+        left: -80px;
+        animation-delay: -5s;
+      }
+      .blob-3 {
+        width: 350px;
+        height: 350px;
+        background: var(--green);
+        top: 40%;
+        right: 10%;
+        animation-delay: -10s;
+      }
+      @keyframes float {
+        0% {
+          transform: translate(0, 0) scale(1);
+        }
+        100% {
+          transform: translate(50px, 80px) scale(1.1);
+        }
+      }
+      header {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 30px 24px 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        z-index: 10;
+      }
+      .header-logo {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 18px;
+        color: var(--text);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .theme-toggle-btn {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        color: var(--text);
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        transition:
+          transform 0.2s,
+          background-color 0.2s;
+      }
+      .theme-toggle-btn:hover {
+        transform: scale(1.08);
+        background: var(--glass-highlight);
+      }
+      .back-btn {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        color: var(--text);
+        padding: 10px 20px;
+        border-radius: 99px;
+        font-family: "Syne", sans-serif;
+        font-weight: 700;
+        font-size: 13px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition:
+          background-color 0.2s,
+          transform 0.2s;
+      }
+      .back-btn:hover {
+        transform: translateY(-2px);
+        background: var(--glass-highlight);
+      }
+
+      /* HERO */
+      .hero {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 40px 24px;
+        position: relative;
+        z-index: 10;
+        text-align: center;
+      }
+      .hero-glass {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-radius: var(--radius);
+        padding: 48px 32px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .hero-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(245, 158, 11, 0.15);
+        border: 1.5px solid rgba(245, 158, 11, 0.3);
+        color: var(--accent);
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 7px 18px;
+        border-radius: 99px;
+        margin-bottom: 24px;
+        font-family: "Syne", sans-serif;
+      }
+      .hero h1 {
+        font-family: "Syne", sans-serif;
+        font-size: clamp(28px, 5.5vw, 50px);
+        font-weight: 800;
+        line-height: 1.15;
+        margin-bottom: 16px;
+        color: #fff;
+      }
+      body.light-theme .hero h1 {
+        color: #1e293b;
+      }
+      .hero h1 .hi {
+        color: var(--accent);
+      }
+      .hero p {
+        color: var(--text-muted);
+        font-size: 15px;
+        line-height: 1.7;
+        max-width: 600px;
+        margin-bottom: 32px;
+      }
+      .hero-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+      }
+      .hero-badge {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid var(--glass-border);
+        border-radius: 99px;
+        padding: 7px 16px;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--text-muted);
+        font-family: "Syne", sans-serif;
+      }
+
+      /* CONTENT */
+      .content {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 24px 80px;
+        position: relative;
+        z-index: 10;
+      }
+      .section-title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 52px;
+        margin-bottom: 24px;
+      }
+      .sec-line {
+        flex: 1;
+        height: 1.5px;
+        background: var(--glass-border);
+      }
+      .sec-text {
+        font-family: "Syne", sans-serif;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        white-space: nowrap;
+      }
+      .sub-heading {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 17px;
+        margin-bottom: 16px;
+        color: var(--text);
+      }
+      .sub-heading-sm {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 14px;
+        margin: 16px 0 12px;
+        color: var(--text);
+      }
+      .sub-heading-accent {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 14px;
+        margin-bottom: 12px;
+        color: var(--accent);
+      }
+
+      /* CARDS */
+      .cards-3 {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+        gap: 24px;
+        margin-bottom: 32px;
+      }
+      .cards-2 {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+        gap: 24px;
+        margin-bottom: 32px;
+      }
+      .card {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-radius: var(--radius);
+        padding: 28px;
+        color: var(--text);
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+        transition:
+          transform 0.25s,
+          box-shadow 0.25s,
+          border-color 0.25s;
+      }
+      .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: var(--c, var(--accent));
+      }
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        border-color: var(--c, var(--accent));
+      }
+      .card-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: var(--radius-sm);
+        background: color-mix(in srgb, var(--c) 15%, transparent);
+        color: var(--c);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        margin-bottom: 18px;
+        border: 1px solid color-mix(in srgb, var(--c) 30%, transparent);
+      }
+      .card-eyebrow {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--c);
+        margin-bottom: 6px;
+      }
+      .card-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 19px;
+        line-height: 1.35;
+        margin-bottom: 10px;
+      }
+      .card-body {
+        font-size: 13.5px;
+        color: var(--text-muted);
+        line-height: 1.6;
+      }
+      .list-items {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 12px;
+      }
+      .list-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 13px;
+        line-height: 1.5;
+      }
+      .list-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--c, var(--accent));
+        flex-shrink: 0;
+        margin-top: 6px;
+        box-shadow: 0 0 8px var(--c, var(--accent));
+      }
+
+      /* EXAMPLE */
+      .example-wrap {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-radius: var(--radius);
+        padding: 32px;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+        margin-bottom: 32px;
+      }
+      .example-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 16px;
+        color: var(--accent);
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .example-story {
+        color: var(--text-muted);
+        font-size: 14.5px;
+        line-height: 1.7;
+        margin-bottom: 20px;
+        padding: 16px 20px;
+        border-left: 3px solid var(--accent);
+        background: rgba(245, 158, 11, 0.05);
+        border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      }
+
+      /* TABLE */
+      .table-wrap {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius-sm);
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin-bottom: 24px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th {
+        background: rgba(0, 0, 0, 0.25);
+        color: var(--text-muted);
+        font-family: "Syne", sans-serif;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 14px 18px;
+        text-align: left;
+        border-bottom: 1.5px solid var(--glass-border);
+      }
+      body.light-theme th {
+        background: rgba(255, 255, 255, 0.5);
+      }
+      td {
+        padding: 12px 18px;
+        font-size: 13.5px;
+        border-bottom: 1px solid var(--glass-border);
+        color: var(--text);
+        vertical-align: top;
+        white-space: nowrap;
+      }
+      tr:last-child td {
+        border-bottom: none;
+      }
+      tr:hover td {
+        background: rgba(255, 255, 255, 0.02);
+      }
+      tr.highlight-row td {
+        background: rgba(245, 158, 11, 0.08);
+        font-weight: 700;
+      }
+      tr.total-row td {
+        font-weight: 800;
+        background: rgba(245, 158, 11, 0.1);
+        color: var(--accent);
+        border-top: 2px solid var(--glass-border);
+      }
+
+      /* CODE BLOCK */
+      .code-block {
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius-sm);
+        padding: 20px 24px;
+        font-family: "DM Mono", "Courier New", monospace;
+        font-size: 12.5px;
+        color: #94a3b8;
+        line-height: 1.9;
+        margin-bottom: 16px;
+        white-space: pre;
+        overflow-x: auto;
+      }
+      body.light-theme .code-block {
+        background: rgba(255, 255, 255, 0.7);
+        color: #334155;
+      }
+
+      /* INFO / WARNING / DANGER */
+      .info-box {
+        background: rgba(16, 185, 129, 0.08);
+        border: 1px solid rgba(16, 185, 129, 0.25);
+        border-radius: var(--radius-sm);
+        padding: 18px 20px;
+        margin-bottom: 20px;
+        color: var(--text);
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .info-box strong {
+        color: var(--green);
+      }
+      .warning-box {
+        background: rgba(245, 158, 11, 0.08);
+        border: 1px solid rgba(245, 158, 11, 0.25);
+        border-radius: var(--radius-sm);
+        padding: 18px 20px;
+        margin-bottom: 20px;
+        color: var(--text);
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .warning-box strong {
+        color: var(--accent);
+      }
+      .danger-box {
+        background: rgba(239, 68, 68, 0.08);
+        border: 1px solid rgba(239, 68, 68, 0.25);
+        border-radius: var(--radius-sm);
+        padding: 18px 20px;
+        margin-bottom: 20px;
+        color: var(--text);
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .danger-box strong {
+        color: var(--red);
+      }
+
+      /* JURNAL */
+      .jurnal-box {
+        background: rgba(0, 0, 0, 0.2);
+        border: 1.5px solid var(--glass-border);
+        border-radius: var(--radius-sm);
+        padding: 20px 24px;
+        margin-bottom: 16px;
+      }
+      body.light-theme .jurnal-box {
+        background: rgba(255, 255, 255, 0.5);
+      }
+      .jurnal-title {
+        font-family: "Syne", sans-serif;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 12px;
+        border-bottom: 1px dashed var(--glass-border);
+        padding-bottom: 8px;
+      }
+      .jurnal-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 5px 0;
+        font-size: 13.5px;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .jurnal-akun {
+        flex: 1;
+        min-width: 120px;
+      }
+      .jurnal-akun.indent {
+        padding-left: 28px;
+        color: var(--text-muted);
+      }
+      .jurnal-d {
+        font-weight: 700;
+        font-family: "Syne", sans-serif;
+        font-size: 13px;
+        color: var(--orange);
+        min-width: 150px;
+        text-align: right;
+      }
+      .jurnal-k {
+        font-weight: 700;
+        font-family: "Syne", sans-serif;
+        font-size: 13px;
+        color: var(--blue);
+        min-width: 150px;
+        text-align: right;
+      }
+      .jurnal-blank {
+        min-width: 150px;
+        text-align: right;
+        color: var(--text-muted);
+      }
+      .jurnal-note {
+        margin-top: 10px;
+        font-size: 12px;
+        color: var(--text-muted);
+        font-style: italic;
+        border-top: 1px dashed var(--glass-border);
+        padding-top: 8px;
+        line-height: 1.6;
+      }
+
+      /* FORMULA */
+      .formula-block {
+        background: rgba(245, 158, 11, 0.08);
+        border: 2px solid rgba(245, 158, 11, 0.25);
+        border-radius: var(--radius-sm);
+        padding: 20px 24px;
+        margin-bottom: 20px;
+        font-family: "Syne", sans-serif;
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--accent);
+        text-align: left;
+        line-height: 1.7;
+      }
+
+      /* COMPARE */
+      .compare-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
+        margin-bottom: 28px;
+      }
+      .compare-card {
+        border-radius: var(--radius);
+        padding: 24px;
+        border: 1px solid var(--glass-border);
+        background: var(--glass-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+      .compare-card-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 15px;
+        margin-bottom: 12px;
+      }
+
+      /* KARTU PERSEDIAAN (kartu stok visual) */
+      .kartu-persediaan {
+        background: rgba(0, 0, 0, 0.2);
+        border: 1.5px solid var(--glass-border);
+        border-radius: var(--radius-sm);
+        overflow: hidden;
+        margin-bottom: 20px;
+      }
+      .kartu-table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      body.light-theme .kartu-persediaan {
+        background: rgba(255, 255, 255, 0.45);
+      }
+      .kartu-header {
+        background: rgba(245, 158, 11, 0.12);
+        padding: 12px 18px;
+        border-bottom: 1px solid var(--glass-border);
+        font-family: "Syne", sans-serif;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+      .kartu-table {
+        width: 100%;
+        min-width: 600px;
+        border-collapse: collapse;
+        font-size: 12.5px;
+      }
+      .kartu-table th {
+        background: rgba(0, 0, 0, 0.18);
+        color: var(--text-muted);
+        font-family: "Syne", sans-serif;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 10px 14px;
+        text-align: right;
+        border-bottom: 1px solid var(--glass-border);
+      }
+      .kartu-table th:first-child {
+        text-align: left;
+      }
+      body.light-theme .kartu-table th {
+        background: rgba(255, 255, 255, 0.4);
+      }
+      .kartu-table td {
+        padding: 9px 14px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        color: var(--text);
+        text-align: right;
+        white-space: nowrap;
+      }
+      .kartu-table td:first-child {
+        text-align: left;
+        color: var(--text-muted);
+        font-size: 12px;
+      }
+      .kartu-table tr.k-separator td {
+        border-top: 2px dashed rgba(245, 158, 11, 0.3);
+        background: rgba(245, 158, 11, 0.03);
+      }
+      .kartu-table tr.k-total td {
+        font-weight: 800;
+        color: var(--accent);
+        background: rgba(245, 158, 11, 0.08);
+        border-top: 2px solid rgba(245, 158, 11, 0.25);
+      }
+      .kartu-table .badge-in {
+        background: rgba(16, 185, 129, 0.15);
+        color: var(--green);
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 10px;
+        font-weight: 800;
+        font-family: "Syne", sans-serif;
+      }
+      .kartu-table .badge-out {
+        background: rgba(239, 68, 68, 0.12);
+        color: #f87171;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 10px;
+        font-weight: 800;
+        font-family: "Syne", sans-serif;
+      }
+
+      /* CALC BOX */
+      .calc-box {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        background: rgba(245, 158, 11, 0.07);
+        border: 1px solid rgba(245, 158, 11, 0.2);
+        border-left: 3px solid var(--accent);
+        border-radius: var(--radius-sm);
+        padding: 14px 18px;
+        margin-bottom: 16px;
+      }
+      .calc-eq {
+        font-size: 14px;
+        color: var(--text);
+        font-family: "DM Sans", sans-serif;
+      }
+      .calc-eq strong {
+        color: var(--green);
+      }
+      .calc-note {
+        font-size: 12px;
+        color: var(--text-muted);
+        margin-top: 2px;
+      }
+
+      /* DAMPAK TABLE */
+      .dampak-positive {
+        color: var(--green);
+        font-weight: 700;
+      }
+      .dampak-negative {
+        color: #f87171;
+        font-weight: 700;
+      }
+      .dampak-mid {
+        color: var(--yellow);
+        font-weight: 700;
+      }
+
+      /* RANGKUMAN */
+      .rangkuman-table td:first-child {
+        font-weight: 700;
+        color: var(--accent);
+        white-space: nowrap;
+      }
+
+      /* QUIZ CTA */
+      .quiz-cta {
+        background: var(--glass-bg);
+        border: 2px solid rgba(245, 158, 11, 0.3);
+        border-radius: var(--radius);
+        padding: 40px 32px;
+        text-align: center;
+        margin-top: 60px;
+        margin-bottom: 40px;
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+      }
+      .quiz-cta h3 {
+        font-family: "Syne", sans-serif;
+        font-size: 24px;
+        margin-bottom: 12px;
+        color: var(--accent);
+      }
+      .quiz-cta p {
+        color: var(--text-muted);
+        margin-bottom: 20px;
+        font-size: 15px;
+        line-height: 1.6;
+      }
+      .quiz-btn {
+        background: var(--accent);
+        color: #1a1a2e;
+        border: none;
+        padding: 14px 32px;
+        border-radius: var(--radius-sm);
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-decoration: none;
+        display: inline-block;
+      }
+      .quiz-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 24px rgba(245, 158, 11, 0.35);
+      }
+
+      /* FOOTER */
+      footer {
+        border-top: 1px solid var(--glass-border);
+        background: #090d16;
+        padding: 40px 24px;
+        text-align: center;
+        position: relative;
+        z-index: 10;
+      }
+      body.light-theme footer {
+        background: #fff8f0;
+      }
+      .footer-name {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 16px;
+        background: linear-gradient(
+          135deg,
+          var(--yellow),
+          var(--pink),
+          var(--purple)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 6px;
+      }
+      .footer-sub {
+        font-size: 12.5px;
+        color: var(--text-muted);
+      }
+      .footer-dots {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        margin-top: 16px;
+      }
+      .footer-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+      }
+
+      @media (max-width: 640px) {
+        .cards-3,
+        .cards-2 {
+          grid-template-columns: 1fr;
+        }
+        .compare-grid {
+          grid-template-columns: 1fr;
+        }
+        .code-block {
+          white-space: pre-wrap;
+          font-size: 11px;
+        }
+        .jurnal-d,
+        .jurnal-k,
+        .jurnal-blank {
+          min-width: 80px;
+          font-size: 12px;
+        }
+        .example-wrap {
+          padding: 20px 16px;
+        }
+        .hero-glass {
+          padding: 32px 18px;
+        }
+        .kartu-table {
+          font-size: 11px;
+        }
+        .kartu-table th,
+        .kartu-table td {
+          padding: 7px 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <header>
+      <a href="index.html" class="header-logo">
+        <span style="font-size: 24px">📦</span>
+        <span>Belajar Akuntansi</span>
+      </a>
+      <div style="display: flex; gap: 12px; align-items: center">
+        <a href="index.html" class="back-btn">← Kembali</a>
+        <button
+          class="theme-toggle-btn"
+          onclick="toggleTheme()"
+          title="Ganti Tema"
+        >
+          🌓
+        </button>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-glass">
+        <div class="hero-tag">📦 Bab 22 — Penilaian Persediaan</div>
+        <h1>Persediaan — <span class="hi">Metode Penilaian</span></h1>
+        <p>
+          Kuasai metode FIFO dan Rata-rata Tertimbang (Moving Average & Weighted
+          Average), prinsip Lower of Cost or NRV, dampak kesalahan persediaan,
+          dan estimasi persediaan menggunakan metode laba bruto & ritel.
+        </p>
+        <div class="hero-badges">
+          <div class="hero-badge">📦 Definisi & Klasifikasi PSAK 14</div>
+          <div class="hero-badge">🔄 FIFO Perpetual</div>
+          <div class="hero-badge">📊 Moving & Weighted Average</div>
+          <div class="hero-badge">📉 NRV & Penurunan Nilai</div>
+          <div class="hero-badge">⚠️ Dampak Kesalahan</div>
+          <div class="hero-badge">🔥 Estimasi Laba Bruto & Ritel</div>
+        </div>
+      </div>
+    </section>
+
+    <main class="content">
+      <!-- SECTION 1: DEFINISI & KLASIFIKASI -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">
+          📦 1. Definisi &amp; Klasifikasi Persediaan (PSAK 14)
+        </div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="formula-block">
+        PSAK 14 — Persediaan adalah aset yang:<br />
+        a. Tersedia untuk <strong>dijual</strong><br />
+        b. Dalam proses <strong>produksi</strong><br />
+        c. Sebagai <strong>bahan baku/pembantu</strong> produksi
+      </div>
+
+      <div class="cards-2">
+        <div class="card" style="--c: var(--orange)">
+          <div class="card-icon">🛒</div>
+          <div class="card-eyebrow">Perusahaan Dagang</div>
+          <div class="card-title">Barang Dagangan</div>
+          <div class="card-body">
+            Dibeli dalam kondisi jadi, langsung dijual kembali ke pelanggan
+            tanpa proses produksi.
+          </div>
+          <div class="list-items">
+            <div class="list-item">
+              <div
+                class="list-dot"
+                style="
+                  background: var(--orange);
+                  box-shadow: 0 0 8px var(--orange);
+                "
+              ></div>
+              <div>Alfamart, Indomaret</div>
+            </div>
+            <div class="list-item">
+              <div
+                class="list-dot"
+                style="
+                  background: var(--orange);
+                  box-shadow: 0 0 8px var(--orange);
+                "
+              ></div>
+              <div>Toko elektronik, distributor</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="--c: var(--blue)">
+          <div class="card-icon">🏭</div>
+          <div class="card-eyebrow">Perusahaan Manufaktur</div>
+          <div class="card-title">3 Jenis Persediaan</div>
+          <div class="list-items" style="margin-top: 0">
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>
+                <strong>Bahan Baku (Raw Materials)</strong> — belum diproses
+              </div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>
+                <strong>Barang Dalam Proses (WIP)</strong> — sedang diproduksi
+              </div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>
+                <strong>Barang Jadi (Finished Goods)</strong> — siap dijual
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="sub-heading">FOB Shipping Point vs FOB Destination</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Syarat</th>
+              <th>Kepemilikan Berpindah</th>
+              <th>Siapa yang Catat Persediaan?</th>
+              <th>Contoh</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>FOB Shipping Point</strong></td>
+              <td>Saat meninggalkan gudang penjual</td>
+              <td>✅ <strong>Pembeli</strong> — meski barang belum tiba</td>
+              <td>
+                Barang dikirim dari Jakarta ke Surabaya, risiko ke pembeli sejak
+                naik truk
+              </td>
+            </tr>
+            <tr>
+              <td><strong>FOB Destination</strong></td>
+              <td>Saat tiba di gudang pembeli</td>
+              <td>✅ <strong>Penjual</strong> — sampai barang tiba</td>
+              <td>Barang masih di jalan, masih jadi persediaan penjual</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Termasuk Persediaan?</th>
+              <th>Alasan</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Barang FOB Shipping Point (dalam perjalanan)</td>
+              <td>
+                <span style="color: var(--green); font-weight: 700"
+                  >✅ Ya (Pembeli)</span
+                >
+              </td>
+              <td>Risiko sudah berpindah ke pembeli</td>
+            </tr>
+            <tr>
+              <td>Barang FOB Destination (dalam perjalanan)</td>
+              <td>
+                <span style="color: #f87171; font-weight: 700"
+                  >❌ Tidak (Pembeli)</span
+                >
+              </td>
+              <td>Masih milik penjual sampai tiba</td>
+            </tr>
+            <tr>
+              <td>Barang konsinyasi yang dikirim ke agen</td>
+              <td>
+                <span style="color: var(--green); font-weight: 700"
+                  >✅ Ya (Pengirim/Consignor)</span
+                >
+              </td>
+              <td>Tetap milik pengirim sampai terjual</td>
+            </tr>
+            <tr>
+              <td>Barang konsinyasi yang diterima dari pihak lain</td>
+              <td>
+                <span style="color: #f87171; font-weight: 700"
+                  >❌ Tidak (Penerima/Consignee)</span
+                >
+              </td>
+              <td>Bukan milik penerima</td>
+            </tr>
+            <tr>
+              <td>Barang sudah dijual, belum diambil pembeli</td>
+              <td>
+                <span style="color: #f87171; font-weight: 700">❌ Tidak</span>
+              </td>
+              <td>Sudah milik pembeli setelah penjualan</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="sub-heading">Biaya yang Masuk vs Tidak Masuk ke Persediaan</h3>
+      <div class="cards-2">
+        <div class="card" style="--c: var(--green)">
+          <div class="card-icon">✅</div>
+          <div class="card-eyebrow">Dikapitalisasi ke Persediaan</div>
+          <div class="card-title">Masuk Biaya Persediaan</div>
+          <div class="list-items" style="margin-top: 0">
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Harga beli (faktur pemasok)</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Bea masuk &amp; pajak impor</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Biaya angkut masuk ke gudang</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Biaya asuransi pengiriman masuk</div>
+            </div>
+            <div class="list-item">
+              <div class="list-dot"></div>
+              <div>Biaya handling &amp; bongkar muat</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="--c: var(--red)">
+          <div class="card-icon">❌</div>
+          <div class="card-eyebrow">Langsung Jadi Beban</div>
+          <div class="card-title">Tidak Masuk Persediaan</div>
+          <div class="list-items" style="margin-top: 0">
+            <div class="list-item">
+              <div
+                class="list-dot"
+                style="background: var(--red); box-shadow: 0 0 8px var(--red)"
+              ></div>
+              <div>Biaya angkut keluar/penjualan</div>
+            </div>
+            <div class="list-item">
+              <div
+                class="list-dot"
+                style="background: var(--red); box-shadow: 0 0 8px var(--red)"
+              ></div>
+              <div>Biaya iklan &amp; promosi</div>
+            </div>
+            <div class="list-item">
+              <div
+                class="list-dot"
+                style="background: var(--red); box-shadow: 0 0 8px var(--red)"
+              ></div>
+              <div>Biaya penyimpanan (kecuali WIP)</div>
+            </div>
+            <div class="list-item">
+              <div
+                class="list-dot"
+                style="background: var(--red); box-shadow: 0 0 8px var(--red)"
+              ></div>
+              <div>Overhead administrasi umum</div>
+            </div>
+            <div class="list-item">
+              <div
+                class="list-dot"
+                style="background: var(--red); box-shadow: 0 0 8px var(--red)"
+              ></div>
+              <div>Potongan &amp; retur pembelian (pengurang)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 2: SISTEM PENCATATAN -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">🗂️ 2. Sistem Pencatatan Persediaan</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="compare-grid">
+        <div class="compare-card" style="border-top: 4px solid var(--green)">
+          <div class="compare-card-title" style="color: var(--green)">
+            🅰️ Sistem Perpetual
+          </div>
+          <div class="card-body">
+            Update saldo persediaan <strong>setiap transaksi</strong>. HPP
+            dicatat langsung saat penjualan. Cocok untuk barang bernilai tinggi
+            (supermarket, otomotif, elektronik).
+          </div>
+          <div class="list-items" style="margin-top: 12px">
+            <div class="list-item">
+              <div
+                class="list-dot"
+                style="
+                  background: var(--green);
+                  box-shadow: 0 0 8px var(--green);
+                "
+              ></div>
+              <div>Saldo persediaan selalu up-to-date</div>
+            </div>
+            <div class="list-item">
+              <div
+                class="list-dot"
+                style="
+                  background: var(--green);
+                  box-shadow: 0 0 8px var(--green);
+                "
+              ></div>
+              <div>Butuh sistem ERP/software</div>
+            </div>
+            <div class="list-item">
+              <div
+                class="list-dot"
+                style="
+                  background: var(--green);
+                  box-shadow: 0 0 8px var(--green);
+                "
+              ></div>
+              <div>
+                <strong>2 jurnal</strong> saat penjualan (pendapatan + HPP)
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="compare-card" style="border-top: 4px solid var(--accent)">
+          <div class="compare-card-title" style="color: var(--accent)">
+            🅱️ Sistem Periodik
+          </div>
+          <div class="card-body">
+            Persediaan dihitung fisik (stock opname) hanya di
+            <strong>akhir periode</strong>. HPP diketahui di akhir periode saja.
+            Cocok untuk barang murah, banyak jenis.
+          </div>
+          <div class="list-items" style="margin-top: 12px">
+            <div class="list-item">
+              <div
+                class="list-dot"
+                style="
+                  background: var(--accent);
+                  box-shadow: 0 0 8px var(--accent);
+                "
+              ></div>
+              <div>HPP = Saldo Awal + Pembelian Bersih − Saldo Akhir</div>
+            </div>
+            <div class="list-item">
+              <div
+                class="list-dot"
+                style="
+                  background: var(--accent);
+                  box-shadow: 0 0 8px var(--accent);
+                "
+              ></div>
+              <div>Lebih sederhana, tidak butuh software</div>
+            </div>
+            <div class="list-item">
+              <div
+                class="list-dot"
+                style="
+                  background: var(--accent);
+                  box-shadow: 0 0 8px var(--accent);
+                "
+              ></div>
+              <div>
+                <strong>1 jurnal</strong> saat penjualan (pendapatan saja)
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="formula-block">
+        HPP (Periodik) = Persediaan Awal + Pembelian Bersih − Persediaan
+        Akhir<br />
+        Pembelian Bersih = Pembelian − Retur Pembelian − Potongan Pembelian +
+        Biaya Angkut Masuk
+      </div>
+
+      <!-- SECTION 3: FIFO -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">🔄 3. Metode FIFO (First In, First Out)</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="info-box">
+        💡 <strong>Analogi FIFO:</strong> Seperti rak roti di minimarket — roti
+        yang lebih dulu dipajang (lebih dekat kadaluarsa) diambil duluan. Yang
+        baru masuk diletakkan di belakang.
+        <strong>"Barang yang pertama masuk, pertama keluar."</strong>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          📊 Contoh Perhitungan FIFO — Sistem Perpetual
+        </div>
+        <div class="example-story">
+          <strong>Data PT Sumber Makmur — Januari 2024:</strong><br />
+          1 Jan: Saldo awal 100 unit @ Rp 10.000<br />
+          8 Jan: Pembelian 200 unit @ Rp 12.000<br />
+          10 Jan: Penjualan 120 unit<br />
+          15 Jan: Pembelian 150 unit @ Rp 13.000<br />
+          20 Jan: Penjualan 180 unit
+        </div>
+
+        <div class="kartu-persediaan">
+          <div class="kartu-header">
+            📋 Kartu Persediaan — Metode FIFO Perpetual
+          </div>
+          <div class="kartu-table-wrap">
+            <table class="kartu-table">
+              <thead>
+                <tr>
+                  <th>Tgl</th>
+                  <th>Keterangan</th>
+                  <th>Masuk Unit</th>
+                  <th>Masuk Harga</th>
+                  <th>Masuk Total</th>
+                  <th>Keluar Unit</th>
+                  <th>Keluar Harga</th>
+                  <th>Keluar Total</th>
+                  <th>Saldo Unit</th>
+                  <th>Saldo Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1/1</td>
+                  <td>Saldo Awal</td>
+                  <td>—</td>
+                  <td>—</td>
+                  <td>—</td>
+                  <td>—</td>
+                  <td>—</td>
+                  <td>—</td>
+                  <td>100</td>
+                  <td>Rp 1.000.000</td>
+                </tr>
+                <tr>
+                  <td>8/1</td>
+                  <td><span class="badge-in">MASUK</span></td>
+                  <td>200</td>
+                  <td>Rp 12.000</td>
+                  <td>Rp 2.400.000</td>
+                  <td>—</td>
+                  <td>—</td>
+                  <td>—</td>
+                  <td>300</td>
+                  <td>Rp 3.400.000</td>
+                </tr>
+                <tr>
+                  <td>10/1</td>
+                  <td><span class="badge-out">JUAL</span></td>
+                  <td>—</td>
+                  <td>—</td>
+                  <td>—</td>
+                  <td>100 + 20</td>
+                  <td>Rp 10.000 / Rp 12.000</td>
+                  <td>Rp 1.240.000</td>
+                  <td>180</td>
+                  <td>Rp 2.160.000</td>
+                </tr>
+                <tr>
+                  <td>15/1</td>
+                  <td><span class="badge-in">MASUK</span></td>
+                  <td>150</td>
+                  <td>Rp 13.000</td>
+                  <td>Rp 1.950.000</td>
+                  <td>—</td>
+                  <td>—</td>
+                  <td>—</td>
+                  <td>330</td>
+                  <td>Rp 4.110.000</td>
+                </tr>
+                <tr>
+                  <td>20/1</td>
+                  <td><span class="badge-out">JUAL</span></td>
+                  <td>—</td>
+                  <td>—</td>
+                  <td>—</td>
+                  <td>180</td>
+                  <td>Rp 12.000</td>
+                  <td>Rp 2.160.000</td>
+                  <td>150</td>
+                  <td>Rp 1.950.000</td>
+                </tr>
+                <tr class="k-total">
+                  <td colspan="2">RINGKASAN</td>
+                  <td colspan="3">Total Masuk: Rp 4.350.000</td>
+                  <td colspan="3"><strong>Total HPP: Rp 3.400.000</strong></td>
+                  <td colspan="2">
+                    <strong>Persediaan Akhir: Rp 1.950.000</strong>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="calc-box">
+          <span class="calc-eq"
+            >HPP Penjualan 10 Jan = (100 × Rp 10.000) + (20 × Rp 12.000) = Rp
+            1.000.000 + Rp 240.000 = <strong>Rp 1.240.000</strong></span
+          >
+          <span class="calc-eq"
+            >HPP Penjualan 20 Jan = 180 × Rp 12.000 =
+            <strong>Rp 2.160.000</strong></span
+          >
+          <span class="calc-eq"
+            >Total HPP = Rp 1.240.000 + Rp 2.160.000 =
+            <strong>Rp 3.400.000</strong></span
+          >
+          <span class="calc-eq"
+            >Persediaan Akhir = 150 unit × Rp 13.000 =
+            <strong>Rp 1.950.000</strong></span
+          >
+          <span class="calc-note"
+            >✅ Persediaan akhir FIFO mencerminkan harga terbaru — lebih relevan
+            dengan nilai pasar!</span
+          >
+        </div>
+      </div>
+
+      <!-- SECTION 4: AVERAGE -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">📊 4. Metode Rata-rata (Average)</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="cards-2">
+        <div class="card" style="--c: var(--purple)">
+          <div class="card-icon">🔄</div>
+          <div class="card-eyebrow">Untuk Sistem Perpetual</div>
+          <div class="card-title">Moving Average</div>
+          <div class="card-body">
+            Harga rata-rata dihitung
+            <strong>ulang setiap ada pembelian baru</strong>. Digunakan bersama
+            sistem pencatatan perpetual.
+          </div>
+        </div>
+        <div class="card" style="--c: var(--blue)">
+          <div class="card-icon">📅</div>
+          <div class="card-eyebrow">Untuk Sistem Periodik</div>
+          <div class="card-title">Weighted Average</div>
+          <div class="card-body">
+            Harga rata-rata dihitung
+            <strong>satu kali di akhir periode</strong> dari semua persediaan
+            tersedia. Formula sederhana dan cepat.
+          </div>
+        </div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">📊 Moving Average — Sistem Perpetual</div>
+        <div class="example-story">
+          Data sama dengan FIFO di atas (PT Sumber Makmur). Perhatikan rata-rata
+          dihitung ulang setiap ada pembelian baru.
+        </div>
+
+        <div class="kartu-persediaan">
+          <div class="kartu-header">
+            📋 Kartu Persediaan — Metode Moving Average Perpetual
+          </div>
+          <div class="kartu-table-wrap">
+            <table class="kartu-table">
+              <thead>
+                <tr>
+                  <th>Tgl</th>
+                  <th>Keterangan</th>
+                  <th>Masuk Unit</th>
+                  <th>Masuk Total</th>
+                  <th>Keluar Unit</th>
+                  <th>Keluar Total</th>
+                  <th>Saldo Unit</th>
+                  <th>Rata-rata*</th>
+                  <th>Saldo Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1/1</td>
+                  <td>Saldo Awal</td>
+                  <td>—</td>
+                  <td>—</td>
+                  <td>—</td>
+                  <td>—</td>
+                  <td>100</td>
+                  <td>Rp 10.000</td>
+                  <td>Rp 1.000.000</td>
+                </tr>
+                <tr class="k-separator">
+                  <td>8/1</td>
+                  <td><span class="badge-in">MASUK</span></td>
+                  <td>200</td>
+                  <td>Rp 2.400.000</td>
+                  <td>—</td>
+                  <td>—</td>
+                  <td>300</td>
+                  <td>Rp 11.333*</td>
+                  <td>Rp 3.400.000</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td
+                    colspan="7"
+                    style="
+                      font-size: 11.5px;
+                      color: var(--accent);
+                      text-align: left;
+                    "
+                  >
+                    *Rata-rata baru = Rp 3.400.000 / 300 = Rp 11.333/unit
+                  </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>10/1</td>
+                  <td><span class="badge-out">JUAL</span></td>
+                  <td>—</td>
+                  <td>—</td>
+                  <td>120</td>
+                  <td>Rp 1.360.000</td>
+                  <td>180</td>
+                  <td>Rp 11.333</td>
+                  <td>Rp 2.040.000</td>
+                </tr>
+                <tr class="k-separator">
+                  <td>15/1</td>
+                  <td><span class="badge-in">MASUK</span></td>
+                  <td>150</td>
+                  <td>Rp 1.950.000</td>
+                  <td>—</td>
+                  <td>—</td>
+                  <td>330</td>
+                  <td>Rp 12.091*</td>
+                  <td>Rp 3.990.000</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td
+                    colspan="7"
+                    style="
+                      font-size: 11.5px;
+                      color: var(--accent);
+                      text-align: left;
+                    "
+                  >
+                    *Rata-rata baru = Rp 3.990.000 / 330 = Rp 12.091/unit
+                  </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>20/1</td>
+                  <td><span class="badge-out">JUAL</span></td>
+                  <td>—</td>
+                  <td>—</td>
+                  <td>180</td>
+                  <td>Rp 2.176.364</td>
+                  <td>150</td>
+                  <td>Rp 12.091</td>
+                  <td>Rp 1.813.636</td>
+                </tr>
+                <tr class="k-total">
+                  <td colspan="2">RINGKASAN</td>
+                  <td colspan="2"></td>
+                  <td colspan="2"><strong>Total HPP: Rp 3.536.364</strong></td>
+                  <td colspan="3">
+                    <strong>Persediaan Akhir: Rp 1.813.636</strong>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="calc-box">
+          <span class="calc-eq"
+            >HPP 10 Jan = 120 × Rp 11.333 = <strong>Rp 1.360.000</strong></span
+          >
+          <span class="calc-eq"
+            >HPP 20 Jan = 180 × Rp 12.091 = <strong>Rp 2.176.364</strong></span
+          >
+          <span class="calc-eq"
+            >Total HPP = Rp 1.360.000 + Rp 2.176.364 =
+            <strong>Rp 3.536.364</strong></span
+          >
+          <span class="calc-eq"
+            >Persediaan Akhir = 150 × Rp 12.091 =
+            <strong>Rp 1.813.636</strong></span
+          >
+        </div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">📊 Weighted Average — Sistem Periodik</div>
+        <div class="example-story">
+          Rata-rata dihitung <strong>satu kali</strong> dari total semua
+          persediaan yang tersedia selama periode berjalan.
+        </div>
+
+        <div class="calc-box">
+          <span class="calc-eq"
+            >Total tersedia = (100 × Rp10.000) + (200 × Rp12.000) + (150 ×
+            Rp13.000)</span
+          >
+          <span class="calc-eq"
+            >= Rp 1.000.000 + Rp 2.400.000 + Rp 1.950.000 =
+            <strong>Rp 5.350.000 / 450 unit</strong></span
+          >
+          <span class="calc-eq"
+            >Harga rata-rata = Rp 5.350.000 / 450 =
+            <strong>Rp 11.889/unit</strong></span
+          >
+          <span class="calc-eq"
+            >Total terjual = 120 + 180 = 300 unit → HPP = 300 × Rp 11.889 =
+            <strong>Rp 3.566.667</strong></span
+          >
+          <span class="calc-eq"
+            >Persediaan akhir = 150 × Rp 11.889 =
+            <strong>Rp 1.783.333</strong></span
+          >
+        </div>
+      </div>
+
+      <!-- SECTION 5: PERBANDINGAN -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">⚖️ 5. Perbandingan Dampak Metode</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="warning-box">
+        ⚠️ <strong>PSAK 14 melarang metode LIFO!</strong> Di Indonesia hanya
+        boleh FIFO dan Average. LIFO masih diizinkan di US GAAP, tapi tidak di
+        IFRS/PSAK yang berlaku di Indonesia.
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Hasil</th>
+              <th>FIFO</th>
+              <th>Average</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="highlight-row">
+              <td
+                colspan="3"
+                style="
+                  color: var(--accent);
+                  font-family: &quot;Syne&quot;, sans-serif;
+                  font-size: 11px;
+                  letter-spacing: 0.1em;
+                  text-transform: uppercase;
+                "
+              >
+                🔺 Saat Harga NAIK (Inflasi)
+              </td>
+            </tr>
+            <tr>
+              <td>HPP</td>
+              <td>
+                <span class="dampak-positive">Lebih Rendah</span> (pakai harga
+                lama)
+              </td>
+              <td><span class="dampak-mid">Di Tengah</span></td>
+            </tr>
+            <tr>
+              <td>Laba Bruto</td>
+              <td><span class="dampak-positive">Lebih Tinggi</span></td>
+              <td><span class="dampak-mid">Di Tengah</span></td>
+            </tr>
+            <tr>
+              <td>Beban Pajak</td>
+              <td><span class="dampak-negative">Lebih Tinggi</span></td>
+              <td><span class="dampak-mid">Di Tengah</span></td>
+            </tr>
+            <tr>
+              <td>Nilai Persediaan Akhir</td>
+              <td>
+                <span class="dampak-positive">Lebih Tinggi</span> (harga
+                terbaru)
+              </td>
+              <td><span class="dampak-mid">Di Tengah</span></td>
+            </tr>
+            <tr class="highlight-row">
+              <td
+                colspan="3"
+                style="
+                  color: var(--blue);
+                  font-family: &quot;Syne&quot;, sans-serif;
+                  font-size: 11px;
+                  letter-spacing: 0.1em;
+                  text-transform: uppercase;
+                "
+              >
+                🔻 Saat Harga TURUN (Deflasi)
+              </td>
+            </tr>
+            <tr>
+              <td>HPP</td>
+              <td>
+                <span class="dampak-negative">Lebih Tinggi</span> (pakai harga
+                lama yang mahal)
+              </td>
+              <td><span class="dampak-mid">Di Tengah</span></td>
+            </tr>
+            <tr>
+              <td>Laba Bruto</td>
+              <td><span class="dampak-negative">Lebih Rendah</span></td>
+              <td><span class="dampak-mid">Di Tengah</span></td>
+            </tr>
+            <tr>
+              <td>Nilai Persediaan Akhir</td>
+              <td><span class="dampak-negative">Lebih Rendah</span></td>
+              <td><span class="dampak-mid">Di Tengah</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Dari Contoh Kita</th>
+              <th>FIFO</th>
+              <th>Moving Average</th>
+              <th>Weighted Average</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Total HPP</strong></td>
+              <td class="dampak-positive">Rp 3.400.000</td>
+              <td class="dampak-mid">Rp 3.536.364</td>
+              <td class="dampak-mid">Rp 3.566.667</td>
+            </tr>
+            <tr>
+              <td><strong>Persediaan Akhir</strong></td>
+              <td class="dampak-positive">Rp 1.950.000</td>
+              <td class="dampak-mid">Rp 1.813.636</td>
+              <td>Rp 1.783.333</td>
+            </tr>
+            <tr class="total-row">
+              <td><strong>Kesimpulan</strong></td>
+              <td>HPP terendah → Laba tertinggi</td>
+              <td>Di tengah</td>
+              <td>HPP tertinggi → Laba terendah</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="info-box">
+        🏢 <strong>Praktik Nyata:</strong><br />
+        • <strong>PT Unilever Indonesia</strong> → FIFO (produk FMCG perlu
+        rotasi ketat karena kadaluarsa)<br />
+        • <strong>PT Aneka Tambang (Antam)</strong> → Average (logam mulia
+        homogen, cocok rata-rata)<br />
+        • <strong>PT Astra International</strong> → FIFO/Average tergantung
+        jenis persediaan
+      </div>
+
+      <!-- SECTION 6: NRV -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">
+          📉 6. Nilai Realisasi Bersih (NRV) &amp; Penurunan Nilai
+        </div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="formula-block">
+        Prinsip Lower of Cost or NRV (PSAK 14)<br />
+        Persediaan dinilai pada yang LEBIH RENDAH antara Biaya Perolehan vs
+        NRV<br /><br />
+        NRV = Estimasi Harga Jual − Estimasi Biaya Penyelesaian − Estimasi Biaya
+        Penjualan
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          ✏️ Contoh Penurunan Nilai — PT Fashion Trend
+        </div>
+        <div class="example-story">
+          PT Fashion Trend punya persediaan baju musim panas yang sudah masuk
+          musim hujan.<br />
+          Biaya perolehan: <strong>Rp 500.000.000</strong><br />
+          Harga jual estimasi (sudah musim hujan): Rp 420.000.000<br />
+          Estimasi biaya penjualan: Rp 30.000.000
+        </div>
+
+        <div class="calc-box">
+          <span class="calc-eq"
+            >NRV = Rp 420.000.000 − Rp 30.000.000 =
+            <strong>Rp 390.000.000</strong></span
+          >
+          <span class="calc-eq"
+            >Cost (Rp 500 jt) > NRV (Rp 390 jt) → Wajib turunkan ke NRV!</span
+          >
+          <span class="calc-eq"
+            >Kerugian penurunan nilai = Rp 500.000.000 − Rp 390.000.000 =
+            <strong>Rp 110.000.000</strong></span
+          >
+        </div>
+
+        <div class="jurnal-box">
+          <div class="jurnal-title">Jurnal Penurunan Nilai Persediaan</div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun">Kerugian Penurunan Nilai Persediaan</div>
+            <div class="jurnal-d">Rp 110.000.000</div>
+            <div class="jurnal-blank">—</div>
+          </div>
+          <div class="jurnal-row">
+            <div class="jurnal-akun indent">
+              Penyisihan Penurunan Nilai Persediaan
+            </div>
+            <div class="jurnal-blank">—</div>
+            <div class="jurnal-k">Rp 110.000.000</div>
+          </div>
+          <div class="jurnal-note">
+            Penyajian di Neraca:<br />
+            Persediaan (cost)
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Rp 500.000.000<br />
+            Penyisihan penurunan nilai &nbsp;&nbsp; (Rp 110.000.000)<br />
+            <strong
+              >Persediaan — neto
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              Rp 390.000.000</strong
+            >
+          </div>
+        </div>
+
+        <div class="info-box">
+          🏬 <strong>Contoh Nyata:</strong> PT Matahari Department Store sering
+          melakukan penurunan nilai persediaan pakaian out-of-season di akhir
+          musim. Inilah alasan ada sale besar-besaran — sekaligus mencerminkan
+          penurunan NRV di laporan keuangan!
+        </div>
+      </div>
+
+      <!-- SECTION 7: KESALAHAN PERSEDIAAN -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">⚠️ 7. Dampak Kesalahan Pencatatan Persediaan</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="danger-box">
+        🚨 <strong>Ini sering keluar di UTS/UAS!</strong> Kesalahan persediaan
+        akhir berdampak berantai ke HPP → Laba → Neraca. Wajib dikuasai!
+      </div>
+
+      <div class="formula-block">
+        Karena: HPP = Persediaan Awal + Pembelian − Persediaan Akhir<br />
+        Persediaan Akhir ↑ → HPP ↓ → Laba Bruto ↑ → Laba Bersih ↑
+        (Overstated)<br />
+        Persediaan Akhir ↓ → HPP ↑ → Laba Bruto ↓ → Laba Bersih ↓ (Understated)
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Jenis Kesalahan</th>
+              <th>Dampak HPP</th>
+              <th>Dampak Laba Periode Ini</th>
+              <th>Dampak Laba Periode Berikutnya</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <strong>Persediaan akhir Overstated</strong> (terlalu tinggi)
+              </td>
+              <td><span class="dampak-positive">HPP ↓ Understated</span></td>
+              <td><span class="dampak-negative">Laba ↑ Overstated</span></td>
+              <td>
+                <span class="dampak-positive"
+                  >Laba ↓ Understated (self-correcting)</span
+                >
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Persediaan akhir Understated</strong> (terlalu rendah)
+              </td>
+              <td><span class="dampak-negative">HPP ↑ Overstated</span></td>
+              <td><span class="dampak-positive">Laba ↓ Understated</span></td>
+              <td>
+                <span class="dampak-negative"
+                  >Laba ↑ Overstated (self-correcting)</span
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="info-box">
+        🔄 <strong>Self-Correcting:</strong> Kesalahan persediaan otomatis
+        terkoreksi dalam 2 periode karena persediaan akhir periode ini menjadi
+        <strong>persediaan awal</strong> periode berikutnya. Jika satu periode
+        laba overstated, periode berikutnya laba akan understated — saling
+        mengoreksi!
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">✏️ Contoh Soal Kesalahan Persediaan</div>
+        <div class="example-story">
+          PT Abadi mencatat persediaan akhir Rp 200.000.000, padahal seharusnya
+          Rp 160.000.000 (Overstated Rp 40.000.000).<br />
+          Data lain: Persediaan awal Rp 100 jt, Pembelian Rp 500 jt, Penjualan
+          Rp 700 jt.
+        </div>
+        <div class="table-wrap" style="margin-bottom: 0">
+          <table>
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Salah (Overstated)</th>
+                <th>Benar</th>
+                <th>Selisih</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Persediaan akhir</td>
+                <td>Rp 200.000.000</td>
+                <td>Rp 160.000.000</td>
+                <td class="dampak-negative">+Rp 40.000.000</td>
+              </tr>
+              <tr>
+                <td>HPP = 100+500−akhir</td>
+                <td>Rp 400.000.000</td>
+                <td>Rp 440.000.000</td>
+                <td class="dampak-positive">−Rp 40.000.000</td>
+              </tr>
+              <tr>
+                <td>Laba Bruto = 700−HPP</td>
+                <td>Rp 300.000.000</td>
+                <td>Rp 260.000.000</td>
+                <td class="dampak-negative">+Rp 40.000.000</td>
+              </tr>
+              <tr class="total-row">
+                <td>Kesimpulan</td>
+                <td colspan="3">
+                  Laba dilaporkan terlalu tinggi Rp 40 juta (Overstated)
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SECTION 8: ESTIMASI -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">🔥 8. Metode Estimasi Persediaan</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="cards-2">
+        <div class="card" style="--c: var(--orange)">
+          <div class="card-icon">🔥</div>
+          <div class="card-eyebrow">Metode A</div>
+          <div class="card-title">Metode Laba Bruto</div>
+          <div class="card-body">
+            Digunakan saat persediaan musnah/hilang (kebakaran, bencana) atau
+            saat pelaporan interim tanpa stock opname. Menggunakan persentase
+            laba bruto historis.
+          </div>
+        </div>
+        <div class="card" style="--c: var(--purple)">
+          <div class="card-icon">🏬</div>
+          <div class="card-eyebrow">Metode B</div>
+          <div class="card-title">Metode Ritel</div>
+          <div class="card-body">
+            Digunakan perusahaan ritel dengan ribuan SKU. Menggunakan rasio
+            cost-to-retail sebagai konversi dari nilai ritel ke biaya perolehan.
+          </div>
+        </div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">🔥 Metode Laba Bruto — Kasus Kebakaran</div>
+        <div class="example-story">
+          PT Abadi mengalami kebakaran gudang 30 November 2024. Data yang
+          tersedia:<br />
+          Persediaan awal 1 Jan: <strong>Rp 200.000.000</strong><br />
+          Pembelian bersih: <strong>Rp 800.000.000</strong><br />
+          Penjualan s.d. kebakaran: <strong>Rp 1.200.000.000</strong><br />
+          Persentase laba bruto historis: <strong>30% dari penjualan</strong>
+        </div>
+
+        <div class="formula-block" style="font-size: 13px; text-align: left">
+          Persediaan Tersedia = Persediaan Awal + Pembelian Bersih<br />
+          Estimasi HPP = Penjualan × (1 − % Laba Bruto)<br />
+          Estimasi Persediaan Akhir = Persediaan Tersedia − Estimasi HPP
+        </div>
+
+        <div class="calc-box">
+          <span class="calc-eq"
+            >Persediaan tersedia = Rp 200 jt + Rp 800 jt =
+            <strong>Rp 1.000.000.000</strong></span
+          >
+          <span class="calc-eq"
+            >Estimasi HPP = Rp 1.200 jt × (1 − 30%) = Rp 1.200 jt × 70% =
+            <strong>Rp 840.000.000</strong></span
+          >
+          <span class="calc-eq"
+            >Estimasi persediaan yang terbakar = Rp 1.000 jt − Rp 840 jt =
+            <strong>Rp 160.000.000</strong></span
+          >
+          <span class="calc-note"
+            >→ Klaim asuransi kebakaran atas persediaan: Rp 160.000.000</span
+          >
+        </div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">🏬 Metode Ritel</div>
+        <div class="example-story">
+          PT Ritel Nusantara punya ribuan item — tidak praktis hitung biaya per
+          item. Menggunakan rasio cost-to-retail.
+        </div>
+
+        <div class="table-wrap" style="margin-bottom: 16px">
+          <table>
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Biaya (Cost)</th>
+                <th>Harga Ritel (Retail)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Persediaan awal</td>
+                <td>Rp 150.000.000</td>
+                <td>Rp 220.000.000</td>
+              </tr>
+              <tr>
+                <td>Pembelian bersih</td>
+                <td>Rp 350.000.000</td>
+                <td>Rp 520.000.000</td>
+              </tr>
+              <tr class="highlight-row">
+                <td><strong>Total Tersedia</strong></td>
+                <td><strong>Rp 500.000.000</strong></td>
+                <td><strong>Rp 740.000.000</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="calc-box">
+          <span class="calc-eq"
+            >Rasio Cost-to-Retail = Rp 500.000.000 / Rp 740.000.000 =
+            <strong>67,57%</strong></span
+          >
+          <span class="calc-eq"
+            >Penjualan periode ini (ritel) = Rp 600.000.000</span
+          >
+          <span class="calc-eq"
+            >Persediaan akhir (ritel) = Rp 740.000.000 − Rp 600.000.000 =
+            <strong>Rp 140.000.000</strong></span
+          >
+          <span class="calc-eq"
+            >Persediaan akhir (cost) = Rp 140.000.000 × 67,57% =
+            <strong>Rp 94.595.000</strong></span
+          >
+        </div>
+
+        <div class="info-box">
+          🏬 <strong>Contoh Nyata:</strong> PT Matahari Department Store dan PT
+          Ramayana menggunakan metode ritel karena menjual ribuan SKU dari
+          berbagai kategori. Tidak mungkin menghitung biaya tiap item satu per
+          satu setiap bulan!
+        </div>
+      </div>
+
+      <!-- SECTION 9: STUDI KASUS INDOMARET -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">
+          🏪 9. Studi Kasus — PT Indomarco Prismatama (Indomaret)
+        </div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="example-wrap">
+        <div class="example-title">
+          📋 Simulasi Moving Average — Gerai Indomaret
+        </div>
+        <div class="example-story">
+          Indomaret menggunakan sistem <strong>Perpetual</strong> + metode
+          <strong>Moving Average</strong>.<br />
+          Data persediaan Aqua 600ml di Gerai Indomaret Surabaya — Januari
+          2024:<br /><br />
+          1 Jan: Saldo awal 500 unit @ Rp 2.000<br />
+          5 Jan: Terima dari DC 1.000 unit @ Rp 2.100<br />
+          7 Jan: Terjual 800 unit &nbsp; | &nbsp; 12 Jan: Terima dari DC 600
+          unit @ Rp 2.150<br />
+          18 Jan: Terjual 700 unit &nbsp; | &nbsp; 25 Jan: Terima dari DC 400
+          unit @ Rp 2.200<br />
+          28 Jan: Terjual 500 unit &nbsp; | &nbsp; Harga jual ke konsumen: Rp
+          3.000/botol
+        </div>
+
+        <div class="kartu-persediaan">
+          <div class="kartu-header">
+            📋 Kartu Persediaan Moving Average — Aqua 600ml
+          </div>
+          <div class="kartu-table-wrap">
+            <table class="kartu-table">
+              <thead>
+                <tr>
+                  <th>Tgl</th>
+                  <th>Ket</th>
+                  <th>Masuk Unit</th>
+                  <th>Masuk Total</th>
+                  <th>Keluar Unit</th>
+                  <th>Keluar Total</th>
+                  <th>Saldo Unit</th>
+                  <th>Rata-rata*</th>
+                  <th>Saldo Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1/1</td>
+                  <td>Saldo</td>
+                  <td>—</td>
+                  <td>—</td>
+                  <td>—</td>
+                  <td>—</td>
+                  <td>500</td>
+                  <td>Rp 2.000</td>
+                  <td>Rp 1.000.000</td>
+                </tr>
+                <tr class="k-separator">
+                  <td>5/1</td>
+                  <td><span class="badge-in">MASUK</span></td>
+                  <td>1.000</td>
+                  <td>Rp 2.100.000</td>
+                  <td>—</td>
+                  <td>—</td>
+                  <td>1.500</td>
+                  <td>Rp 2.067*</td>
+                  <td>Rp 3.100.000</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td
+                    colspan="7"
+                    style="
+                      font-size: 11px;
+                      color: var(--accent);
+                      text-align: left;
+                    "
+                  >
+                    *Rata-rata = Rp 3.100.000 / 1.500 = Rp 2.067/unit
+                  </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>7/1</td>
+                  <td><span class="badge-out">JUAL</span></td>
+                  <td>—</td>
+                  <td>—</td>
+                  <td>800</td>
+                  <td>Rp 1.653.333</td>
+                  <td>700</td>
+                  <td>Rp 2.067</td>
+                  <td>Rp 1.446.667</td>
+                </tr>
+                <tr class="k-separator">
+                  <td>12/1</td>
+                  <td><span class="badge-in">MASUK</span></td>
+                  <td>600</td>
+                  <td>Rp 1.290.000</td>
+                  <td>—</td>
+                  <td>—</td>
+                  <td>1.300</td>
+                  <td>Rp 2.105*</td>
+                  <td>Rp 2.736.667</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td
+                    colspan="7"
+                    style="
+                      font-size: 11px;
+                      color: var(--accent);
+                      text-align: left;
+                    "
+                  >
+                    *Rata-rata = Rp 2.736.667 / 1.300 = Rp 2.105/unit
+                  </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>18/1</td>
+                  <td><span class="badge-out">JUAL</span></td>
+                  <td>—</td>
+                  <td>—</td>
+                  <td>700</td>
+                  <td>Rp 1.473.077</td>
+                  <td>600</td>
+                  <td>Rp 2.105</td>
+                  <td>Rp 1.263.590</td>
+                </tr>
+                <tr class="k-separator">
+                  <td>25/1</td>
+                  <td><span class="badge-in">MASUK</span></td>
+                  <td>400</td>
+                  <td>Rp 880.000</td>
+                  <td>—</td>
+                  <td>—</td>
+                  <td>1.000</td>
+                  <td>Rp 2.144*</td>
+                  <td>Rp 2.143.590</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td
+                    colspan="7"
+                    style="
+                      font-size: 11px;
+                      color: var(--accent);
+                      text-align: left;
+                    "
+                  >
+                    *Rata-rata = Rp 2.143.590 / 1.000 = Rp 2.144/unit
+                  </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>28/1</td>
+                  <td><span class="badge-out">JUAL</span></td>
+                  <td>—</td>
+                  <td>—</td>
+                  <td>500</td>
+                  <td>Rp 1.071.795</td>
+                  <td>500</td>
+                  <td>Rp 2.144</td>
+                  <td>Rp 1.071.795</td>
+                </tr>
+                <tr class="k-total">
+                  <td colspan="2">RINGKASAN</td>
+                  <td colspan="2">Total Masuk: 2.000 unit</td>
+                  <td colspan="2"><strong>Total HPP: Rp 4.198.205</strong></td>
+                  <td colspan="3">
+                    <strong>Persediaan Akhir: Rp 1.071.795</strong>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <h4 class="sub-heading-accent">
+          Laporan Laba Rugi Gerai — Januari 2024
+        </h4>
+        <div class="calc-box">
+          <span class="calc-eq"
+            >Total unit terjual = 800 + 700 + 500 =
+            <strong>2.000 unit</strong></span
+          >
+          <span class="calc-eq"
+            >Total Pendapatan Penjualan = 2.000 × Rp 3.000 =
+            <strong>Rp 6.000.000</strong></span
+          >
+          <span class="calc-eq"
+            >Total HPP (Moving Average) = <strong>Rp 4.198.205</strong></span
+          >
+          <span class="calc-eq"
+            >Laba Bruto = Rp 6.000.000 − Rp 4.198.205 =
+            <strong>Rp 1.801.795</strong></span
+          >
+          <span class="calc-note"
+            >Margin Laba Bruto = Rp 1.801.795 / Rp 6.000.000 = 30,03%</span
+          >
+        </div>
+      </div>
+
+      <!-- RANGKUMAN -->
+      <div class="section-title">
+        <div class="sec-line"></div>
+        <div class="sec-text">📝 Rangkuman Bab 22</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="rangkuman-table">
+          <thead>
+            <tr>
+              <th>Poin</th>
+              <th>Inti Materi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>✅ Definisi PSAK 14</td>
+              <td>
+                Persediaan = aset untuk dijual, dalam proses, atau bahan baku
+                produksi
+              </td>
+            </tr>
+            <tr>
+              <td>✅ FOB Shipping Point</td>
+              <td>
+                Risiko ke pembeli sejak barang meninggalkan gudang penjual
+              </td>
+            </tr>
+            <tr>
+              <td>✅ FOB Destination</td>
+              <td>Risiko masih di penjual sampai barang tiba di pembeli</td>
+            </tr>
+            <tr>
+              <td>✅ Biaya Persediaan</td>
+              <td>
+                Harga beli + bea masuk + angkut masuk. Angkut keluar &amp; promo
+                = beban
+              </td>
+            </tr>
+            <tr>
+              <td>✅ Sistem Perpetual</td>
+              <td>
+                Update tiap transaksi, 2 jurnal saat penjualan (pendapatan +
+                HPP)
+              </td>
+            </tr>
+            <tr>
+              <td>✅ Sistem Periodik</td>
+              <td>HPP = Saldo Awal + Pembelian Bersih − Saldo Akhir</td>
+            </tr>
+            <tr>
+              <td>✅ FIFO</td>
+              <td>
+                Masuk pertama keluar pertama. Persediaan akhir = harga terbaru
+              </td>
+            </tr>
+            <tr>
+              <td>✅ Moving Average</td>
+              <td>
+                Rata-rata dihitung ulang setiap ada pembelian baru (perpetual)
+              </td>
+            </tr>
+            <tr>
+              <td>✅ Weighted Average</td>
+              <td>Rata-rata dihitung satu kali di akhir periode (periodik)</td>
+            </tr>
+            <tr>
+              <td>✅ LIFO</td>
+              <td>⛔ DILARANG di PSAK 14! Hanya FIFO dan Average yang boleh</td>
+            </tr>
+            <tr>
+              <td>✅ NRV</td>
+              <td>Persediaan dinilai mana yang lebih rendah: cost atau NRV</td>
+            </tr>
+            <tr>
+              <td>✅ Kesalahan Persediaan</td>
+              <td>
+                Overstated → HPP ↓ → Laba ↑. Self-correcting dalam 2 periode
+              </td>
+            </tr>
+            <tr>
+              <td>✅ Estimasi Laba Bruto</td>
+              <td>
+                Untuk kasus kebakaran/bencana. Estimasi HPP = Penjualan × (1 −
+                %LB)
+              </td>
+            </tr>
+            <tr>
+              <td>✅ Estimasi Ritel</td>
+              <td>
+                Untuk ritel dengan ribuan SKU. Gunakan rasio cost-to-retail
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- QUIZ CTA -->
+      <div class="quiz-cta">
+        <h3>🎯 Siap Uji Pemahamanmu?</h3>
+        <p>
+          Sudah menguasai FIFO, Moving Average, NRV, dan estimasi persediaan?
+          Buktikan dengan mengerjakan kuis interaktif di Bank Kuis — cari Bab
+          Persediaan atau Bab 8!
+        </p>
+        <a href="bank-kuis.html" class="quiz-btn">Buka Bank Kuis →</a>
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-name">Annisa Novita Ardana</div>
+      <div class="footer-sub">
+        Belajar Akuntansi &amp; Perpajakan &nbsp;·&nbsp; Dibuat dengan Cinta
+        &amp; Estetika 🌸
+      </div>
+      <div class="footer-dots">
+        <div class="footer-dot" style="background: #ff6b35"></div>
+        <div class="footer-dot" style="background: #ff3d9a"></div>
+        <div class="footer-dot" style="background: #a855f7"></div>
+        <div class="footer-dot" style="background: #3b82f6"></div>
+        <div class="footer-dot" style="background: #10b981"></div>
+        <div class="footer-dot" style="background: #fbbf24"></div>
+      </div>
+    </footer>
+
+    <script>
+      const body = document.body;
+      if (localStorage.getItem("theme") === "light")
+        body.classList.add("light-theme");
+      function toggleTheme() {
+        body.classList.toggle("light-theme");
+        localStorage.setItem(
+          "theme",
+          body.classList.contains("light-theme") ? "light" : "dark",
+        );
+      }
+    </script>
+  </body>
+</html>
